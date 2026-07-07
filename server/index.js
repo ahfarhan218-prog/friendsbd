@@ -156,8 +156,67 @@ const seedIfEmpty = async () => {
   }
 };
 
+// ── Seed channels if empty ────────────────────────────
+const seedChannelsIfEmpty = async () => {
+  try {
+    const Channel = require('./models/Channel');
+    const count = await Channel.countDocuments();
+    if (count > 0) {
+      console.log(`📺 ${count} channels already exist, skipping seed.`);
+      return;
+    }
+    console.log('🌱 Seeding channels from iptv-org...');
+    const https = require('https');
+    const fetchJson = (url) => new Promise((resolve, reject) => {
+      https.get(url, (res) => { let d = ''; res.on('data', c => d += c); res.on('end', () => { try { resolve(JSON.parse(d)); } catch (e) { reject(e); } }); }).on('error', reject);
+    });
+    const [channels, streams] = await Promise.all([
+      fetchJson('https://iptv-org.github.io/api/channels.json'),
+      fetchJson('https://iptv-org.github.io/api/streams.json')
+    ]);
+    const streamMap = new Map();
+    for (const s of streams) {
+      if (s.status !== 'offline' && !streamMap.has(s.channel)) streamMap.set(s.channel, s);
+    }
+    const targetCountries = ['BD', 'IN'];
+    const newDocs = [];
+    let added = 0;
+    for (const c of channels) {
+      if (added >= 200) break;
+      if (c.country !== 'BD' && c.country !== 'IN' && !(c.categories && (c.categories.some(cat => ['sports', 'kids', 'movies'].includes(cat))))) continue;
+      const stream = streamMap.get(c.id);
+      if (!stream) continue;
+      const cats = ['All'];
+      if (c.country === 'BD') cats.push('BD');
+      if (c.country === 'IN') cats.push('Hindi');
+      if (c.categories && c.categories.includes('sports')) cats.push('Sports');
+      if (c.categories && c.categories.includes('movies')) cats.push('Movies');
+      if (c.categories && c.categories.includes('kids')) cats.push('Kids');
+      newDocs.push({
+        channelId: c.id,
+        name: c.name,
+        logoUrl: c.logo || `https://via.placeholder.com/150/1a1a2e/ffffff?text=${encodeURIComponent(c.name.slice(0, 3))}`,
+        category: cats,
+        isPremium: false,
+        streamUrl: stream.url,
+        status: 'active'
+      });
+      added++;
+    }
+    if (newDocs.length > 0) {
+      await Channel.insertMany(newDocs);
+      console.log(`✅ Seeded ${newDocs.length} channels from iptv-org`);
+    } else {
+      console.log('⚠️ No valid streams found from iptv-org');
+    }
+  } catch (err) {
+    console.warn('Channel seed error (non-fatal):', err.message);
+  }
+};
+
 // Run seed after DB connects
 setTimeout(seedIfEmpty, 2000);
+setTimeout(seedChannelsIfEmpty, 5000);
 
 // ── Start Server ────────────────────────────────────
 const PORT = process.env.PORT || 5000;
