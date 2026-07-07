@@ -239,7 +239,7 @@ const Conference: React.FC = () => {
   const pinnedMessages = messages.filter(m => m.isPinned);
 
   return (
-    <div className="h-screen bg-[#0F0F1A] flex flex-col font-inter overflow-hidden text-white" style={{ backgroundImage: 'radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, 0.15) 0%, transparent 70%), linear-gradient(135deg, #110a2a 0%, #1d0d4a 50%, #0d1a6b 100%)' }}>
+    <div className="h-screen bg-[#0F0F1A] flex flex-col font-inter overflow-x-hidden text-white" style={{ backgroundImage: 'radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, 0.15) 0%, transparent 70%), linear-gradient(135deg, #110a2a 0%, #1d0d4a 50%, #0d1a6b 100%)' }}>
       
       {/* HEADER */}
       <header className="relative z-50 bg-[#12122A]/80 backdrop-blur-xl border-b border-purple-500/20 p-4 sm:p-6 pb-6 shadow-[0_4px_30px_rgba(0,0,0,0.5)] shrink-0">

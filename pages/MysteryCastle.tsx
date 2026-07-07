@@ -79,7 +79,7 @@ const MysteryCastle: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent font-inter pb-32">
+    <div className="min-h-screen bg-transparent font-inter pb-32 overflow-x-hidden">
       {/* HEADER SECTION */}
       <header className="relative bg-[#090d16]/80 backdrop-blur-xl border-b border-[#30363d] pt-12 pb-12 px-6 rounded-b-[4rem] shadow-xl overflow-hidden shrink-0">
         <div className="absolute top-0 left-0 p-32 bg-indigo-500/10 rounded-full blur-3xl -ml-16 -mt-16 pointer-events-none" />

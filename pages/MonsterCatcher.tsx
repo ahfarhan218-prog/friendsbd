@@ -323,7 +323,7 @@ const MonsterCatcher: React.FC = () => {
   if (loading) return <div className="text-white text-center mt-20">Loading...</div>;
 
   return (
-    <div className="min-h-screen bg-[#0f172a] text-white font-sans pb-20">
+    <div className="min-h-screen bg-[#0f172a] text-white font-sans pb-20 overflow-x-hidden">
       {/* Header */}
       <div className="bg-slate-900 p-4 sticky top-0 z-10 border-b border-slate-800 flex justify-between items-center shadow-lg">
         <button onClick={() => navigate(-1)} className="p-2 bg-slate-800 rounded-full">

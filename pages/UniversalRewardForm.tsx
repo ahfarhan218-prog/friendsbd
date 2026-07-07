@@ -186,7 +186,7 @@ const UniversalRewardForm: React.FC = () => {
 
 
   return (
-    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased p-6 flex flex-col justify-center items-center relative">
+    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased p-4 sm:p-6 flex flex-col justify-center items-center relative overflow-x-hidden">
       {/* Decorative Orbs */}
       <div className="absolute top-10 left-10 w-64 h-64 bg-indigo-600/5 rounded-full blur-[85px] pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-64 h-64 bg-purple-600/5 rounded-full blur-[85px] pointer-events-none" />

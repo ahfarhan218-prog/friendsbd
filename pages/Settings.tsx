@@ -131,13 +131,13 @@ const Settings: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0B1A] relative pb-20">
+    <div className="min-h-screen bg-[#0B0B1A] relative pb-20 overflow-x-hidden">
       {toast && (
         <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[100] px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white text-sm font-bold shadow-lg shadow-purple-900/50 animate-pulse">
           {toast}
         </div>
       )}
-      <header className="bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white p-6 pb-20 rounded-b-[3rem] flex items-center gap-4 shadow-lg shadow-purple-900/30">
+      <header className="bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white p-4 sm:p-6 pb-16 sm:pb-20 rounded-b-[2rem] sm:rounded-b-[3rem] flex items-center gap-4 shadow-lg shadow-purple-900/30">
         <button onClick={() => navigate(-1)} className="p-2 bg-black/20 rounded-full active:scale-90 transition-transform backdrop-blur-sm">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
         </button>
@@ -187,9 +187,9 @@ const Settings: React.FC = () => {
               { label: 'Level', value: currentUser?.level },
               { label: 'Reputation', value: currentUser?.total_rp ?? currentUser?.reputation_points ?? 0 },
             ].map(item => (
-              <div key={item.label} className="flex justify-between items-center py-1">
-                <span className="text-xs text-gray-400">{item.label}</span>
-                <span className="text-xs font-bold text-gray-100">{item.value || '-'}</span>
+              <div key={item.label} className="flex justify-between items-center py-1 gap-2">
+                <span className="text-xs text-gray-400 shrink-0">{item.label}</span>
+                <span className="text-xs font-bold text-gray-100 text-right truncate max-w-[180px] sm:max-w-none">{item.value || '-'}</span>
               </div>
             ))}
           </div>

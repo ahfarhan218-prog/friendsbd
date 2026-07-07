@@ -373,6 +373,7 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout }) => {
         .layout-root {
           display: flex;
           min-height: 100vh;
+          overflow-x: hidden;
           background: #0F0F1A;
           background-image: radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, 0.15) 0%, transparent 70%), linear-gradient(135deg, #110a2a 0%, #1d0d4a 50%, #0d1a6b 100%);
           font-family: 'Inter', sans-serif;

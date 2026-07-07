@@ -155,7 +155,7 @@ const Premium: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent pb-32">
+    <div className="min-h-screen bg-transparent pb-32 overflow-x-hidden">
       {/* Header */}
       <header className="relative overflow-hidden px-6 pt-8 pb-16">
         {/* Background glow orbs */}

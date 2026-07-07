@@ -290,7 +290,7 @@ const Stories: React.FC = () => {
   if (loading) return <div className="min-h-screen bg-[#0a0a1a] flex items-center justify-center"><div className="w-10 h-10 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" /></div>;
 
   return (
-    <div className="min-h-screen bg-[#0a0a1a] p-6 relative">
+    <div className="min-h-screen bg-[#0a0a1a] p-4 sm:p-6 relative overflow-x-hidden">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-black text-white">📖 Stories</h1>

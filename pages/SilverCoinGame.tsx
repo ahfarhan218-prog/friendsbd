@@ -95,7 +95,7 @@ const SilverCoinGame: React.FC = () => {
         </div>
 
         <div className="relative z-10 flex flex-col items-center">
-           <div className="bg-[#161b22]/80 rounded-3xl p-8 backdrop-blur-xl border border-[#30363d] shadow-2xl shadow-cyan-900/20 text-center min-w-[300px]">
+            <div className="bg-[#161b22]/80 rounded-3xl p-6 sm:p-8 backdrop-blur-xl border border-[#30363d] shadow-2xl shadow-cyan-900/20 text-center w-full max-w-[400px]">
               <AnimatePresence mode="wait">
                 {isActive ? (
                   <motion.div 

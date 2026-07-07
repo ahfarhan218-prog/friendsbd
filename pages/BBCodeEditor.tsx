@@ -62,7 +62,7 @@ const BBCodeEditor: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0B0B1A] pb-32 font-inter flex flex-col">
+    <div className="min-h-screen bg-[#0B0B1A] pb-32 font-inter flex flex-col overflow-x-hidden">
       <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] text-white p-6 pb-20 rounded-b-[3.5rem] shadow-xl shrink-0">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_0%,_#7c3aed33,_transparent_70%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#0B0B1A] to-transparent" />
@@ -79,7 +79,7 @@ const BBCodeEditor: React.FC = () => {
       </header>
 
       <div className="px-5 -mt-10 flex-1 space-y-6">
-        <div className="bg-[#1C1C2E] rounded-[2.5rem] border border-white/5 shadow-lg flex flex-col h-[550px] overflow-hidden">
+        <div className="bg-[#1C1C2E] rounded-[2.5rem] border border-white/5 shadow-lg flex flex-col h-[350px] sm:h-[450px] md:h-[550px] overflow-hidden">
           {/* Title input */}
           <div className="px-6 pt-6 pb-2">
             <input value={title} onChange={e => setTitle(e.target.value)} placeholder="Post title (optional)"

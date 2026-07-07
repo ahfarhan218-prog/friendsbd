@@ -24,7 +24,7 @@ const GameHub: React.FC<GameHubProps> = ({ game, icon, color }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0B0B1A] font-inter">
+    <div className="min-h-screen bg-[#0B0B1A] font-inter overflow-x-hidden">
       <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] text-white p-6 pb-24 rounded-b-[4rem] shadow-2xl">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_0%,_#7c3aed33,_transparent_70%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#0B0B1A] to-transparent" />

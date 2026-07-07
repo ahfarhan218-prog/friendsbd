@@ -111,7 +111,7 @@ const Shop: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-24 relative text-left">
+    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-24 relative text-left overflow-x-hidden">
       {/* Glow effects */}
       <div className="absolute top-0 right-10 w-80 h-80 bg-purple-600/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-20 left-10 w-80 h-80 bg-indigo-600/5 rounded-full blur-[100px] pointer-events-none" />

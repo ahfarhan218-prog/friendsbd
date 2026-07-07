@@ -346,7 +346,7 @@ const Home: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-transparent pb-28 font-inter">
+    <div className="min-h-screen bg-transparent pb-28 font-inter overflow-x-hidden">
 
       <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] pt-12 pb-32 px-5">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_0%,_#7c3aed33,_transparent_70%)]" />

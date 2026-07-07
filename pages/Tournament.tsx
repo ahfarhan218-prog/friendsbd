@@ -104,7 +104,7 @@ const Tournament: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-transparent pb-32">
+    <div className="min-h-screen bg-transparent pb-32 overflow-x-hidden">
       <header className="relative bg-[#090d16]/80 backdrop-blur-xl border-b border-[#30363d] p-6 pt-12 pb-24 rounded-b-[4rem] shadow-xl overflow-hidden shrink-0">
         <div className="absolute top-0 left-0 p-32 bg-purple-600/10 rounded-full blur-3xl -ml-16 -mt-16 pointer-events-none" />
         <div className="absolute bottom-0 right-0 p-24 bg-pink-500/10 rounded-full blur-2xl -mr-16 pointer-events-none" />

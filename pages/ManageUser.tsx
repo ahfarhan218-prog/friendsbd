@@ -47,22 +47,22 @@ const ManageUser: React.FC = () => {
 
   if (loading || !currentUser) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#090d16', color: '#fff', fontFamily: 'Inter, sans-serif' }}>
+      <div className="min-h-screen flex items-center justify-center bg-[#090d16] text-white font-sans">
         <p>Loading Management Interface...</p>
       </div>
     );
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#090d16', padding: '2rem', fontFamily: 'Inter, sans-serif' }}>
-      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+    <div className="min-h-screen bg-[#090d16] p-4 sm:p-6 md:p-8 font-sans overflow-x-hidden">
+      <div className="w-full max-w-[800px] mx-auto">
         <button 
           onClick={() => navigate(-1)}
-          style={{ marginBottom: '1rem', background: 'transparent', border: 'none', color: '#9ca3af', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}
+          className="mb-4 bg-transparent border-none text-gray-400 cursor-pointer flex items-center gap-2 font-semibold hover:text-white transition-colors text-sm"
         >
           ← Back to Profile
         </button>
-        <h1 style={{ color: '#fff', fontSize: '1.5rem', marginBottom: '1rem' }}>Manage User</h1>
+        <h1 className="text-white text-xl md:text-2xl font-bold mb-4">Manage User</h1>
         <AdminPanelContainer currentUser={currentUser} preSelectUser={targetUser} />
       </div>
     </div>

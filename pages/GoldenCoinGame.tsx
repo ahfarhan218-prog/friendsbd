@@ -229,33 +229,33 @@ const GoldenCoinGame: React.FC = () => {
 
         <div className="relative z-10 flex flex-col items-center">
            {(!isOpen && !isActive) ? (
-             <div className="bg-[#161b22]/80 rounded-3xl p-8 backdrop-blur-xl border border-[#30363d] shadow-2xl shadow-purple-900/20 text-center min-w-[300px]">
-                <div className="text-5xl mb-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">🌙</div>
-                <h3 className="text-xl font-black text-white italic tracking-tighter mb-2">EVENT CLOSED</h3>
-                <p className="text-xs text-slate-400 font-medium">Golden Coins drop daily from 5:00 PM to 12:00 AM BDT.</p>
-                
-                <div className="mt-6 p-4 bg-black/40 rounded-2xl border border-white/5">
-                   <p className="text-[10px] font-black uppercase tracking-widest text-amber-400/70 mb-1">Opens In</p>
-                   <p className="text-2xl font-black tracking-widest text-white drop-shadow-md">
-                      {(() => {
-                        const bdNow = getDhakaDate();
-                        const targetTime = new Date(bdNow);
-                        targetTime.setHours(17, 0, 0, 0); // 5:00 PM today
-                        
-                        const diffMs = targetTime.getTime() - bdNow.getTime();
-                        if (diffMs <= 0) return "00:00:00";
-                        
-                        const diffH = Math.floor(diffMs / 3600000);
-                        const diffM = Math.floor((diffMs % 3600000) / 60000);
-                        const diffS = Math.floor((diffMs % 60000) / 1000);
-                        
-                        return `${diffH.toString().padStart(2, '0')}:${diffM.toString().padStart(2, '0')}:${diffS.toString().padStart(2, '0')}`;
-                      })()}
-                    </p>
-                </div>
-             </div>
-           ) : (
-             <div className="bg-[#161b22]/80 rounded-3xl p-6 backdrop-blur-xl border border-[#30363d] shadow-2xl shadow-purple-900/20 text-center min-w-[300px]">
+              <div className="bg-[#161b22]/80 rounded-3xl p-6 sm:p-8 backdrop-blur-xl border border-[#30363d] shadow-2xl shadow-purple-900/20 text-center w-full max-w-[400px]">
+                 <div className="text-5xl mb-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">🌙</div>
+                 <h3 className="text-xl font-black text-white italic tracking-tighter mb-2">EVENT CLOSED</h3>
+                 <p className="text-xs text-slate-400 font-medium">Golden Coins drop daily from 5:00 PM to 12:00 AM BDT.</p>
+                 
+                 <div className="mt-6 p-4 bg-black/40 rounded-2xl border border-white/5">
+                    <p className="text-[10px] font-black uppercase tracking-widest text-amber-400/70 mb-1">Opens In</p>
+                    <p className="text-2xl font-black tracking-widest text-white drop-shadow-md">
+                       {(() => {
+                         const bdNow = getDhakaDate();
+                         const targetTime = new Date(bdNow);
+                         targetTime.setHours(17, 0, 0, 0); // 5:00 PM today
+                         
+                         const diffMs = targetTime.getTime() - bdNow.getTime();
+                         if (diffMs <= 0) return "00:00:00";
+                         
+                         const diffH = Math.floor(diffMs / 3600000);
+                         const diffM = Math.floor((diffMs % 3600000) / 60000);
+                         const diffS = Math.floor((diffMs % 60000) / 1000);
+                         
+                         return `${diffH.toString().padStart(2, '0')}:${diffM.toString().padStart(2, '0')}:${diffS.toString().padStart(2, '0')}`;
+                       })()}
+                     </p>
+                 </div>
+              </div>
+            ) : (
+              <div className="bg-[#161b22]/80 rounded-3xl p-5 sm:p-6 backdrop-blur-xl border border-[#30363d] shadow-2xl shadow-purple-900/20 text-center w-full max-w-[400px]">
               <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">Network Status</p>
               
               {/* Daily Grab Counter */}

@@ -70,7 +70,7 @@ const ConferenceList: React.FC = () => {
   const otherRooms = rooms.filter(r => !r.members.includes(activeUser.id) && !r.invites.includes(activeUser.id));
 
   return (
-    <div className="min-h-screen bg-[#0F0F1A] font-inter text-white relative overflow-hidden" style={{ backgroundImage: 'radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, 0.15) 0%, transparent 70%), linear-gradient(135deg, #110a2a 0%, #1d0d4a 50%, #0d1a6b 100%)' }}>
+    <div className="min-h-screen bg-[#0F0F1A] font-inter text-white relative overflow-x-hidden" style={{ backgroundImage: 'radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, 0.15) 0%, transparent 70%), linear-gradient(135deg, #110a2a 0%, #1d0d4a 50%, #0d1a6b 100%)' }}>
       {/* Background glow */}
       <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-purple-600/30 blur-[100px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-indigo-600/20 blur-[100px] rounded-full pointer-events-none" />

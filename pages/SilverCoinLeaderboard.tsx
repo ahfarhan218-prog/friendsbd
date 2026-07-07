@@ -30,7 +30,7 @@ const SilverCoinLeaderboard: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-transparent font-inter pb-32">
+    <div className="min-h-screen bg-transparent font-inter pb-32 overflow-x-hidden">
       <header className="bg-slate-600 text-white p-6 pb-20 rounded-b-[4rem] shadow-xl text-center relative overflow-hidden">
         <div className="absolute top-0 right-0 p-32 bg-white/5 rounded-full blur-3xl -mr-16 -mt-16" />
         <button onClick={() => navigate('/silver-game')} className="absolute left-6 top-6 p-3 bg-white/10 rounded-2xl active:scale-90 border border-white/10">

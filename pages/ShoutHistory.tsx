@@ -297,9 +297,9 @@ const ShoutHistory: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-transparent flex flex-col pb-24 font-inter text-white">
+    <div className="min-h-screen bg-transparent flex flex-col pb-24 font-inter text-white overflow-x-hidden">
       {/* Premium Hero Header */}
-      <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] pt-10 pb-20 px-5 rounded-b-[3rem] shadow-2xl shrink-0">
+      <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] pt-8 sm:pt-10 pb-16 sm:pb-20 px-4 sm:px-5 rounded-b-[2rem] sm:rounded-b-[3rem] shadow-2xl shrink-0">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_0%,_#7c3aed33,_transparent_70%)]" />
         <div className="absolute top-8 right-4 w-32 h-32 bg-purple-600/10 rounded-full blur-3xl" />
         <div className="absolute bottom-4 left-8 w-24 h-24 bg-indigo-600/10 rounded-full blur-2xl" />
