@@ -18,10 +18,13 @@ const fetchJson = (url) => {
   });
 };
 
+require('dotenv').config({ path: require('path').join(__dirname, '.env') });
+
 const seed = async () => {
   try {
+    const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/friends_bd';
     console.log('Connecting to MongoDB...');
-    await mongoose.connect('mongodb://localhost:27017/friends_bd');
+    await mongoose.connect(uri);
     console.log('Fetching channels from iptv-org...');
     
     const [channels, streams] = await Promise.all([
