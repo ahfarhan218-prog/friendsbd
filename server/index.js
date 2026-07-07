@@ -211,6 +211,49 @@ const STATIC_CHANNELS = [
   { channelId: 'music_vh1',        name: 'VH1',                  category: ['All','Music'], logoUrl: 'https://img.iptv.design/logo/vh1.png' },
   { channelId: 'music_9xm',        name: '9XM',                  category: ['All','Music'], logoUrl: 'https://img.iptv.design/logo/9xm.png' },
   { channelId: 'music_zoom',       name: 'Zoom TV',              category: ['All','Music'], logoUrl: 'https://img.iptv.design/logo/zoom.png' },
+
+  // ── 🇧🇩 MORE BD ──
+  { channelId: 'bd_asian_tv',     name: 'Asian TV',             category: ['All','BD','Entertainment'], logoUrl: 'https://img.iptv.design/logo/asian.png' },
+  { channelId: 'bd_bijoy',        name: 'Bijoy TV',             category: ['All','BD','Entertainment'], logoUrl: 'https://img.iptv.design/logo/bijoy.png' },
+  { channelId: 'bd_satv',         name: 'SA TV',                category: ['All','BD','Entertainment'], logoUrl: 'https://img.iptv.design/logo/satv.png' },
+  { channelId: 'bd_my_tv',        name: 'My TV',                category: ['All','BD','Entertainment'], logoUrl: 'https://img.iptv.design/logo/mytv.png' },
+  { channelId: 'bd_ananda',       name: 'Ananda TV',            category: ['All','BD','Entertainment'], logoUrl: 'https://img.iptv.design/logo/ananda.png' },
+  { channelId: 'bd_bangla_tv',    name: 'Bangla TV',            category: ['All','BD','Entertainment'], logoUrl: 'https://img.iptv.design/logo/bangla.png' },
+  { channelId: 'bd_mohona',       name: 'Mohona TV',            category: ['All','BD','Entertainment'], logoUrl: 'https://img.iptv.design/logo/mohona.png' },
+  { channelId: 'bd_nagorik',      name: 'Nagorik TV',           category: ['All','BD','Entertainment'], logoUrl: 'https://img.iptv.design/logo/nagorik.png' },
+
+  // ── 🏏 MORE SPORTS ──
+  { channelId: 'sports_willow',       name: 'Willow TV',              category: ['All','Sports'], logoUrl: 'https://img.iptv.design/logo/willow.png' },
+  { channelId: 'sports_sports18',     name: 'Sports18',               category: ['All','Sports'], logoUrl: 'https://img.iptv.design/logo/sports18.png' },
+  { channelId: 'sports_dd_sports',    name: 'DD Sports',              category: ['All','Sports'], logoUrl: 'https://img.iptv.design/logo/ddsports.png' },
+  { channelId: 'sports_supersport',   name: 'SuperSport',             category: ['All','Sports'], logoUrl: 'https://img.iptv.design/logo/supersport.png' },
+  { channelId: 'sports_beinsports1',  name: 'beIN Sports 1',          category: ['All','Sports'], logoUrl: 'https://img.iptv.design/logo/beinsports1.png' },
+  { channelId: 'sports_beinsports2',  name: 'beIN Sports 2',          category: ['All','Sports'], logoUrl: 'https://img.iptv.design/logo/beinsports2.png' },
+  { channelId: 'sports_sky_sports',   name: 'Sky Sports',             category: ['All','Sports'], logoUrl: 'https://img.iptv.design/logo/skysports.png' },
+
+  // ── 🇮🇳 MORE INDIAN ──
+  { channelId: 'in_colors_infinity',  name: 'Colors Infinity',        category: ['All','Hindi','Entertainment'], logoUrl: 'https://img.iptv.design/logo/colorsinfinity.png' },
+  { channelId: 'in_mtv_india',        name: 'MTV India',              category: ['All','Hindi','Entertainment','Music'], logoUrl: 'https://img.iptv.design/logo/mtvindia.png' },
+  { channelId: 'in_comedy_central',   name: 'Comedy Central',         category: ['All','Hindi','Entertainment'], logoUrl: 'https://img.iptv.design/logo/comedycentral.png' },
+  { channelId: 'in_sony_bbc_earth',   name: 'Sony BBC Earth',        category: ['All','Hindi','Entertainment'], logoUrl: 'https://img.iptv.design/logo/sonybbcearth.png' },
+  { channelId: 'in_discovery',        name: 'Discovery',              category: ['All','Hindi','Nature'],      logoUrl: 'https://img.iptv.design/logo/discovery.png' },
+  { channelId: 'in_nat_geo',          name: 'National Geographic',    category: ['All','Hindi','Nature'],      logoUrl: 'https://img.iptv.design/logo/natgeo.png' },
+  { channelId: 'in_history_tv',       name: 'History TV18',           category: ['All','Hindi','Nature'],      logoUrl: 'https://img.iptv.design/logo/historytv.png' },
+  { channelId: 'in_b4u_movies',       name: 'B4U Movies',             category: ['All','Hindi','Movies'],      logoUrl: 'https://img.iptv.design/logo/b4umovies.png' },
+  { channelId: 'in_b4u_music',        name: 'B4U Music',              category: ['All','Hindi','Music'],       logoUrl: 'https://img.iptv.design/logo/b4umusic.png' },
+  { channelId: 'in_shemaroo',         name: 'Shemaroo TV',            category: ['All','Hindi','Movies'],      logoUrl: 'https://img.iptv.design/logo/shemaroo.png' },
+
+  // ── 🧒 MORE KIDS ──
+  { channelId: 'kids_hungama',        name: 'Hungama',                category: ['All','Kids'], logoUrl: 'https://img.iptv.design/logo/hungama.png' },
+  { channelId: 'kids_sonic',          name: 'Sonic',                  category: ['All','Kids'], logoUrl: 'https://img.iptv.design/logo/sonic.png' },
+  { channelId: 'kids_discovery_kids', name: 'Discovery Kids',         category: ['All','Kids'], logoUrl: 'https://img.iptv.design/logo/discoverykids.png' },
+
+  // ── 🌍 INTERNATIONAL ──
+  { channelId: 'intl_bbc_world',      name: 'BBC World News',         category: ['All','News'],  logoUrl: 'https://img.iptv.design/logo/bbcworld.png' },
+  { channelId: 'intl_cnn',            name: 'CNN International',      category: ['All','News'],  logoUrl: 'https://img.iptv.design/logo/cnn.png' },
+  { channelId: 'intl_al_jazeera',     name: 'Al Jazeera',             category: ['All','News'],  logoUrl: 'https://img.iptv.design/logo/aljazeera.png' },
+  { channelId: 'intl_france24',       name: 'France 24',              category: ['All','News'],  logoUrl: 'https://img.iptv.design/logo/france24.png' },
+  { channelId: 'intl_dw',             name: 'DW News',                category: ['All','News'],  logoUrl: 'https://img.iptv.design/logo/dw.png' },
 ];
 const FALLBACK_STREAM = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
 

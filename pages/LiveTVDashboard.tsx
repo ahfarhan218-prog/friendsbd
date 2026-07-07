@@ -223,10 +223,9 @@ const LiveTVDashboard: React.FC = () => {
     const handleScroll = () => {
       if (playerContainerRef.current) {
         const rect = playerContainerRef.current.getBoundingClientRect();
-        // If the video container is scrolled out of view upwards
-        if (rect.bottom < 100 && activeChannel) {
+        if (rect.bottom < 80 && activeChannel && streamUrl) {
           setIsFloating(true);
-        } else {
+        } else if (rect.bottom >= 80) {
           setIsFloating(false);
         }
       }
@@ -234,7 +233,7 @@ const LiveTVDashboard: React.FC = () => {
     
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [activeChannel]);
+  }, [activeChannel, streamUrl]);
 
   const toggleFavorite = async (e: React.MouseEvent, channelId: string) => {
     e.stopPropagation();
@@ -388,15 +387,30 @@ const LiveTVDashboard: React.FC = () => {
             }
           `}>
             {isFloating && (
-              <button 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className="absolute top-2 right-2 z-50 w-7 h-7 bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center text-white/70 hover:text-white border border-white/10 hover:bg-black/80 transition-all opacity-0 group-hover:opacity-100"
-              >
-                <i className="fas fa-expand text-[10px]"></i>
-              </button>
+              <div className="absolute top-2 right-2 z-50 flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="w-7 h-7 bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center text-white/70 hover:text-white border border-white/10 hover:bg-black/80 transition-all"
+                >
+                  <i className="fas fa-expand text-[10px]"></i>
+                </button>
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveChannel(null);
+                    setStreamUrl(null);
+                    setStreamError(false);
+                    setIsStreamLoading(false);
+                    setIsFloating(false);
+                  }}
+                  className="w-7 h-7 bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center text-white/70 hover:text-red-400 border border-white/10 hover:bg-black/80 transition-all"
+                >
+                  <i className="fas fa-times text-[10px]"></i>
+                </button>
+              </div>
             )}
 
             {activeChannel && streamUrl ? (
