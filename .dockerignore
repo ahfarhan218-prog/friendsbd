@@ -1,0 +1,9 @@
+**/node_modules
+**/.env
+.git
+*.md
+.gitignore
+.env.example
+dist
+public
+node_modules
