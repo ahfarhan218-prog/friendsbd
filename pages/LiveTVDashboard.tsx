@@ -13,7 +13,7 @@ interface Channel {
   isPremium: boolean;
 }
 
-const CATEGORIES = ['All', 'Favorites', 'Premium', 'BD', 'Hindi', 'Movies', 'Sports', 'Kids', 'News', 'Music', 'Nature'];
+const CATEGORIES = ['All', 'Favorites', 'Premium', 'BD', 'Hindi', 'Movies', 'Sports', 'Kids', 'News', 'Music', 'Nature', 'Entertainment', 'Regional', 'Infotainment', 'International'];
 
 const LiveTVDashboard: React.FC = () => {
   const navigate = useNavigate();
