@@ -295,6 +295,8 @@ const UserProfile: React.FC = () => {
         .pf-btn { padding:8px 20px; border-radius:12px; font-weight:700; font-size:0.75rem; border:none; cursor:pointer; transition:all .3s; }
         .pf-btn-primary { background:linear-gradient(135deg,#7c3aed,#a855f7); color:#fff; }
         .pf-btn-primary:hover { transform:translateY(-1px); box-shadow:0 8px 25px rgba(124,58,237,0.3); }
+        .pf-btn-secondary { background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.8); }
+        .pf-btn-secondary:hover { background:rgba(255,255,255,0.15); color:#fff; }
         .pf-btn-ghost { background:rgba(255,255,255,0.05); color:#a78bfa; border:1px solid rgba(168,85,247,0.2); }
         .pf-btn-ghost:hover { background:rgba(168,85,247,0.1); }
         .pf-btn-follow { background:linear-gradient(135deg,#ec4899,#a855f7); color:#fff; }
@@ -714,7 +716,14 @@ const UserProfile: React.FC = () => {
                 <span className="text-4xl block mb-3">🛡️</span>
                 <h3 className="text-white font-black text-lg mb-1">Admin Control Panel</h3>
                 <p className="text-white/40 text-sm mb-4">Access site management and moderation tools.</p>
-                <Link to="/admin" className="pf-btn pf-btn-primary inline-block">Go to Admin Panel</Link>
+                <div className="flex flex-col gap-2">
+                  <Link to="/admin" className="pf-btn pf-btn-primary inline-block">Go to Admin Panel</Link>
+                  {!isOwnProfile && (
+                    <Link to={`/manage-user/${profile.id}`} className="pf-btn pf-btn-secondary inline-block text-sm">
+                      ✏️ Edit This User
+                    </Link>
+                  )}
+                </div>
               </div>
             )}
 
