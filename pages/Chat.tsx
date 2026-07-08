@@ -170,7 +170,7 @@ const Chat: React.FC = () => {
             senderPublicKey: m.senderPublicKey,
             text: m.text,
             displayText,
-            time: m.time || new Date(m.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            time: m.time || new Date(m.timestamp).toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' }),
             timestamp: m.timestamp,
             isMe,
             isRead: m.isRead,
@@ -225,7 +225,7 @@ const Chat: React.FC = () => {
     if (!textToSend) setInputText('');
 
     const msgId = `${Date.now()}_${Math.random().toString(36).substr(2, 6)}`;
-    const nowTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const nowTime = new Date().toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' });
     const myPubKey = myPublicKey || getStoredPublicKeyJwk();
 
     let ciphertext = text;

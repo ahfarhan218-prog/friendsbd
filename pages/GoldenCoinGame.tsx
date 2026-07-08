@@ -417,7 +417,7 @@ const GoldenCoinGame: React.FC = () => {
                         <div>
                            <p className="text-xs font-black text-white group-hover:text-purple-300 transition-colors">{w.username}</p>
                            <p className="text-xs font-bold text-slate-500 uppercase">
-                              {new Date(w.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                              {new Date(w.timestamp).toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' })}
                            </p>
                         </div>
                      </div>

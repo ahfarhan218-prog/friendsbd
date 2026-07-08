@@ -466,7 +466,7 @@ const Stories: React.FC = () => {
                   <div>
                     <p className="text-white font-semibold text-sm shadow-black drop-shadow-md">{activeGroup.userName}</p>
                     <p className="text-white/70 text-xs drop-shadow-md">
-                      {new Date(activeStory.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      {new Date(activeStory.createdAt).toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' })}
                     </p>
                   </div>
                 </div>

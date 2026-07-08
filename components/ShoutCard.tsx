@@ -200,7 +200,7 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
               </div>
               <p className="text-xs text-white/60 font-bold mt-0.5">
                 {timeLabel}
-                {shout.pinExpiry && <span className="text-amber-400/70 ml-2">· Expires {new Date(shout.pinExpiry).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>}
+                {shout.pinExpiry && <span className="text-amber-400/70 ml-2">· Expires {new Date(shout.pinExpiry).toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' })}</span>}
               </p>
             </div>
           </div>
@@ -374,7 +374,7 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
                                 {reply.userName}
                               </Link>
                               <span className="text-xs text-white/60 font-bold font-mono">
-                                {new Date(reply.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                                {new Date(reply.timestamp).toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' })}
                               </span>
                             </div>
                             <div className="text-xs leading-snug bbcode-render bbcode-render-dark">

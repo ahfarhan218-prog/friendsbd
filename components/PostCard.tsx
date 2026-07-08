@@ -47,7 +47,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, currentUser, index, onOptions
               )}
             </div>
             <p className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest mt-0.5 whitespace-nowrap">
-              {new Date(post.timestamp).toLocaleDateString()} • {new Date(post.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+              {new Date(post.timestamp).toLocaleDateString()} • {new Date(post.timestamp).toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' })}
             </p>
           </div>
         </div>

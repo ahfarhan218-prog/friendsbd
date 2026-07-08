@@ -121,7 +121,7 @@ const AdminPanel: React.FC = () => {
     ];
     const logTimer = setInterval(() => {
       const ev = logEvents[Math.floor(Math.random() * logEvents.length)];
-      setLogs(prev => [...prev.slice(-20), { id: Math.random().toString(36), ...ev, time: new Date().toLocaleTimeString([], { hour12: false }) }]);
+      setLogs(prev => [...prev.slice(-20), { id: Math.random().toString(36), ...ev, time: new Date().toLocaleTimeString([], { hour12: true }) }]);
     }, 3500);
 
     return () => { clearInterval(clockTimer); clearInterval(gameTimer); clearInterval(logTimer); };
@@ -330,7 +330,7 @@ const AdminPanel: React.FC = () => {
                     <p className="text-xs text-purple-400/60 font-bold">FriendsBD • v5.0</p>
                   </div>
                 </div>
-                <p className="text-xs text-white/40 font-mono mt-3">{clock.toLocaleTimeString()}</p>
+                <p className="text-xs text-white/40 font-mono mt-3">{clock.toLocaleTimeString([], { hour12: true })}</p>
               </div>
               <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
                 {TABS.map(tab => (
@@ -382,7 +382,7 @@ const AdminPanel: React.FC = () => {
           <div className="flex flex-wrap items-center gap-2">
             {isLockdown && <span className="text-xs font-black uppercase bg-rose-500/20 text-rose-400 px-2 py-1 rounded-full border border-rose-500/30">🔒 LOCKDOWN</span>}
             {isMaintenance && <span className="text-xs font-black uppercase bg-amber-500/20 text-amber-400 px-2 py-1 rounded-full border border-amber-500/30">🛠️ MAINT</span>}
-            <span className="text-xs font-mono text-white/40 hidden sm:block">{clock.toLocaleTimeString()}</span>
+            <span className="text-xs font-mono text-white/40 hidden sm:block">{clock.toLocaleTimeString([], { hour12: true })}</span>
           </div>
 
           <button onClick={() => navigate('/home')} className="w-10 h-10 bg-white/5 hover:bg-white/10 rounded-xl flex items-center justify-center active:scale-90 transition-all text-white/40 hover:text-white">
@@ -878,7 +878,7 @@ const AdminPanel: React.FC = () => {
                   <div className="space-y-2 max-h-64 overflow-y-auto">
                     {adminLogs.filter(l => l.action === 'SHOUT_DELETED').length > 0 ? adminLogs.filter(l => l.action === 'SHOUT_DELETED').map((log, i) => (
                       <div key={log.id || i} className="flex flex-wrap items-start gap-3 p-3 bg-rose-500/5 rounded-xl hover:bg-rose-500/10 transition-colors border border-rose-500/10">
-                        <span className="text-xs font-mono text-rose-400/60 bg-rose-500/10 px-2 py-1 rounded-lg shrink-0 mt-0.5">{new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        <span className="text-xs font-mono text-rose-400/60 bg-rose-500/10 px-2 py-1 rounded-lg shrink-0 mt-0.5">{new Date(log.timestamp).toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' })}</span>
                         <div className="flex-1 min-w-0">
                           <p className="text-xs text-rose-300/70 leading-relaxed">
                             <span className="font-black text-rose-400">{log.deletedByName}</span> deleted {log.details}

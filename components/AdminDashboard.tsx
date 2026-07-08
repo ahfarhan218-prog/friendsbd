@@ -44,7 +44,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
         id: Math.random().toString(36),
         type: Math.random() > 0.8 ? 'WARN' : 'INFO',
         msg: events[Math.floor(Math.random() * events.length)],
-        time: new Date().toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' })
+        time: new Date().toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' })
       };
       setLogs(prev => [...prev.slice(-15), newLog]);
     }, 4000);

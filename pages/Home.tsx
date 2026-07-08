@@ -201,7 +201,7 @@ const Home: React.FC = () => {
       localStorage.setItem('shout_id_counter', counter.toString());
       mongoService.addActivity({
         id: 'act_' + Date.now(),
-        time: currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        time: currentTime.toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' }),
         username: activeUser.username || activeUser.name,
         msg: 'Posted a shout.', timestamp: Date.now()
       });
@@ -319,7 +319,7 @@ const Home: React.FC = () => {
     return { name, count };
   })();
 
-  const formattedTime = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  const formattedTime = currentTime.toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' });
   const formattedDate = currentTime.toLocaleDateString([], { weekday: 'long', month: 'short', day: 'numeric' });
 
   if (isMaintenance && !isAdmin) return (

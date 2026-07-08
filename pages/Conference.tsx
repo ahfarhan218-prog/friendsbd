@@ -303,7 +303,7 @@ const Conference: React.FC = () => {
                    {/* Name & Time */}
                    <div className={`flex flex-wrap items-center gap-2 mb-1 px-1 ${isMe ? 'flex flex-wrap-row-reverse' : ''}`}>
                       <p className="text-xs sm:text-sm font-black text-purple-300/80 uppercase tracking-widest">{isMe ? 'YOU' : m.senderName}</p>
-                      <p className="text-xs font-bold text-slate-500 uppercase">{new Date(m.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+                      <p className="text-xs font-bold text-slate-500 uppercase">{new Date(m.timestamp).toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' })}</p>
                       {m.isEdited && <span className="text-[7px] font-bold text-slate-400 uppercase">Edited</span>}
                    </div>
                    

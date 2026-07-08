@@ -212,7 +212,7 @@ const Inbox: React.FC = () => {
     setNewMessageText('');
 
     const msgId = `${Date.now()}_${Math.random().toString(36).substr(2, 6)}`;
-    const nowTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const nowTime = new Date().toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' });
     const myPubKey = myPublicKey || getStoredPublicKeyJwk();
     const recipientId = activeChat.isGroup ? null : activeChat.participants[0]?.id;
 

@@ -149,7 +149,7 @@ const ShoutHistory: React.FC = () => {
       
       mongoService.addActivity({
         id: 'act_' + Date.now(),
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        time: new Date().toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' }),
         username: activeUser.username || activeUser.name,
         msg: 'Posted a shout.',
         timestamp: Date.now()
