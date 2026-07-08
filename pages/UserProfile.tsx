@@ -81,7 +81,7 @@ const UserProfile: React.FC = () => {
   const [userThreads, setUserThreads] = useState<any[]>([]);
   const [allForumThreads, setAllForumThreads] = useState<any[]>([]);
   const [userPosts, setUserPosts] = useState<any[]>([]);
-  const [activitySubTab, setActivitySubTab] = useState<'timeline' | 'topics' | 'posts' | 'shouts'>('timeline');
+  const [activitySubTab, setActivitySubTab] = useState<'topics' | 'posts' | 'shouts'>('topics');
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
@@ -589,49 +589,17 @@ const UserProfile: React.FC = () => {
               </div>
 
               <div className="flex flex-wrap gap-1.5 mb-4 overflow-x-auto pb-1">
-                {(['timeline', 'topics', 'posts', 'shouts'] as const).map(tab => (
+                {(['topics', 'posts', 'shouts'] as const).map(tab => (
                   <button key={tab} onClick={() => setActivitySubTab(tab)}
                     className={`px-4 py-2 rounded-xl text-sm font-black transition-all tracking-wider ${activitySubTab === tab
                       ? 'bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white shadow-lg shadow-purple-900/40 scale-105'
                       : 'bg-[#161b22] text-gray-400 border border-[#30363d] hover:border-purple-500/40 hover:text-gray-200'}`}>
-                    {tab === 'timeline' ? '🕒 Timeline' : tab === 'topics' ? '📝 Topics' : tab === 'posts' ? '💬 Posts' : '📢 Shouts'}
+                    {tab === 'topics' ? '📝 Topics' : tab === 'posts' ? '💬 Posts' : '📢 Shouts'}
                   </button>
                 ))}
               </div>
 
-              {activitySubTab === 'timeline' && (
-                <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
-                  {activities.length === 0 ? (
-                    <p className="text-white/60 text-sm text-center py-8">No activities recorded yet.</p>
-                  ) : (
-                    <div className="relative pl-6 border-l-2 border-purple-500/30 space-y-6">
-                      {activities.map((act, idx) => (
-                        <motion.div 
-                          key={act.id || idx}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          className="relative"
-                        >
-                          {/* Glowing Dot */}
-                          <div className="absolute -left-[29px] top-1 w-3 h-3 bg-fuchsia-500 rounded-full border-[3px] border-[#0d1117] shadow-[0_0_10px_rgba(217,70,239,0.8)]" />
-                          
-                          <div className="bg-[#161b22]/80 backdrop-blur-sm border border-[#30363d] p-3 sm:p-4 rounded-2xl shadow-md hover:border-fuchsia-500/30 transition-colors">
-                            <p className="text-sm font-bold text-white mb-1">
-                              <span className="text-purple-400">{act.username}</span> {act.msg}
-                              {act.isTopic && act.topicTitle && (
-                                <span className="text-amber-400 block mt-1 italic text-xs sm:text-sm">"{act.topicTitle}"</span>
-                              )}
-                            </p>
-                            <p className="text-xs font-black uppercase tracking-widest text-slate-500">
-                              {timeAgo(act.timestamp)}
-                            </p>
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
+
 
               {activitySubTab === 'topics' && (
                 userThreads.length === 0 ? <p className="text-white/60 text-sm text-center py-8">No topics created yet.</p>
