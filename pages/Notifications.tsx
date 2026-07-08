@@ -615,26 +615,27 @@ const Notifications: React.FC = () => {
         .notif-reply-btn:active { transform: scale(0.95); }
 
         @media (max-width: 480px) {
-          .notif-header { padding: 0.875rem 0.75rem 0; }
-          .notif-header-top { gap: 0.5rem; flex-wrap: wrap; }
-          .notif-title { font-size: 1.1rem; }
-          .notif-mark-all-btn, .notif-clear-all-btn { padding: 4px 8px; font-size: 0.55rem; }
-          .notif-card { padding: 10px; gap: 10px; }
-          .notif-avatar-wrap, .notif-avatar { width: 40px; height: 40px; }
-          .notif-type-badge { width: 18px; height: 18px; font-size: 0.48rem; bottom: -3px; right: -3px; border-width: 1.5px; }
+          .notif-header { padding: 0.75rem 0.5rem 0; border-radius: 0 0 1.5rem 1.5rem; }
+          .notif-header-top { gap: 0.4rem; flex-wrap: wrap; }
+          .notif-title { font-size: 1rem; }
+          .notif-mark-all-btn, .notif-clear-all-btn { padding: 3px 6px; font-size: 0.5rem; }
+          .notif-list { padding: 0 0.5rem; gap: 6px; }
+          .notif-card { padding: 8px; gap: 8px; border-radius: 14px; }
+          .notif-avatar-wrap, .notif-avatar { width: 34px; height: 34px; border-radius: 10px; }
+          .notif-type-badge { width: 16px; height: 16px; font-size: 0.45rem; bottom: -2px; right: -2px; border-width: 1px; }
           .notif-actions { gap: 2px; }
-          .notif-action-btn { width: 26px; height: 26px; }
-          .notif-action-btn svg { width: 12px; height: 12px; }
-          .notif-body { gap: 3px; }
-          .notif-body-top { gap: 4px; }
-          .notif-type-pill { font-size: 0.5rem; padding: 1px 6px; }
-          .notif-time { font-size: 0.55rem; }
-          .notif-message { font-size: 0.72rem; }
-          .notif-empty { padding: 2.5rem 1.25rem; }
-          .notif-empty-icon { font-size: 2.2rem; }
-          .notif-filters { gap: 5px; padding-bottom: 0.75rem; }
-          .notif-filter-tab { padding: 5px 10px; font-size: 0.6rem; }
-          .notif-reply-btn { padding: 4px 8px; font-size: 0.55rem; }
+          .notif-action-btn { width: 22px; height: 22px; border-radius: 6px; }
+          .notif-action-btn svg { width: 10px; height: 10px; }
+          .notif-body { gap: 2px; }
+          .notif-body-top { gap: 3px; }
+          .notif-type-pill { font-size: 0.45rem; padding: 1px 4px; }
+          .notif-time { font-size: 0.5rem; }
+          .notif-message { font-size: 0.65rem; line-height: 1.35; }
+          .notif-empty { padding: 2rem 1rem; }
+          .notif-empty-icon { font-size: 2rem; }
+          .notif-filters { gap: 4px; padding-bottom: 0.5rem; }
+          .notif-filter-tab { padding: 4px 8px; font-size: 0.55rem; border-radius: 8px; }
+          .notif-reply-btn { padding: 3px 6px; font-size: 0.5rem; border-radius: 6px; }
         }
       `}</style>
     </div>

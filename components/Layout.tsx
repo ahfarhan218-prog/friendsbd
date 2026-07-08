@@ -636,26 +636,24 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout }) => {
         .mobile-nav {
           display: flex; justify-content: center;
           position: fixed; bottom: 0; left: 0; right: 0;
-          padding: 0 1rem 1rem;
+          padding: 0;
           z-index: 50;
         }
         @media (min-width: 768px) { .mobile-nav { display: none; } }
 
         .mobile-nav-inner {
           display: flex; align-items: center;
-          background: rgba(15, 10, 30, 0.92);
+          background: rgba(15, 10, 30, 0.95);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          border: 1px solid rgba(167,139,250,0.15);
-          border-radius: 999px;
-          padding: 8px 12px;
+          border-top: 1px solid rgba(167,139,250,0.15);
+          padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
           gap: 4px;
           box-shadow:
             0 -4px 30px rgba(0,0,0,0.3),
             0 20px 40px rgba(0,0,0,0.4),
             inset 0 1px 0 rgba(255,255,255,0.05);
           width: 100%;
-          max-width: 380px;
         }
 
         .mobile-nav-item {
