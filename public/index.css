@@ -15,6 +15,16 @@ html {
   height: 100%;
 }
 
+/* 
+   Scale up all rem-based sizing (fonts, paddings, margins, widths) on mobile 
+   so elements and text don't look tiny. Default is 16px. 18px increases size by ~12.5%.
+*/
+@media (max-width: 768px) {
+  html {
+    font-size: 19px; 
+  }
+}
+
 body {
   min-height: 100vh;
   overflow-x: hidden;
