@@ -8,7 +8,11 @@ import { forumService } from '../services/forumService';
 import { gameService } from '../services/gameService';
 import { mongoService, API_BASE } from '../services/mongoService';
 
-const ROLES = ['admin', 'moderator', 'premium', 'user'];
+const ROLES = [
+  'user', 'starter', 'trusted_member', 'veteran_member', 'premium', 'elite_vip',
+  'junior_moderator', 'moderator', 'senior_moderator', 'head_moderator',
+  'content_creator', 'event_organizer', 'support_staff', 'system_bot', 'admin'
+];
 
 const TABS = [
   { id: 'dashboard', label: 'Dashboard', icon: '📊' },
@@ -153,9 +157,9 @@ const AdminPanel: React.FC = () => {
   };
 
   const handleUpdateRole = (uid: string, role: string) => {
-    const list = usersList.map(u => u.id === uid ? { ...u, role: role as any } : u);
+    const list = usersList.map(u => u.id === uid ? { ...u, user_role: role as any, role: role as any } : u);
     saveUsersList(list);
-    mongoService.updateUser(uid, { role: role as any }).catch(err => console.warn(err));
+    mongoService.updateUser(uid, { user_role: role as any, role: role as any }).catch(err => console.warn(err));
     toast(`Role updated to ${role}`);
   };
 
@@ -231,7 +235,8 @@ const AdminPanel: React.FC = () => {
       maxStamina: editingUser.maxStamina,
       ap: editingUser.ap,
       totalAp: editingUser.totalAp,
-      role: editingUser.role,
+      role: editingUser.user_role || editingUser.role,
+      user_role: editingUser.user_role || editingUser.role,
       isPremium: editingUser.isPremium,
       isVerified: editingUser.isVerified
     }).catch(err => console.warn('Admin user stats update failed:', err));
@@ -300,7 +305,7 @@ const AdminPanel: React.FC = () => {
     { icon: '🟢', label: 'Online Now',   value: usersList.filter(u => u.isOnline && (!u.lastActiveTime || (Date.now() - u.lastActiveTime) <= 30 * 60 * 1000)).length,     sub: 'Live',              color: 'bg-emerald-500/20 text-emerald-300' },
     { icon: '📢', label: 'Total Shouts', value: shouts.length,                                sub: 'LIVE',              color: 'bg-amber-500/20 text-amber-300' },
     { icon: '👑', label: 'Premium',      value: usersList.filter(u => u.isPremium).length,    sub: 'Members',           color: 'bg-pink-500/20 text-pink-300' },
-    { icon: '🛡️', label: 'Staff',       value: usersList.filter(u => ['admin','moderator'].includes(u.role||'')).length, sub: 'Active',    color: 'bg-blue-500/20 text-blue-300' },
+    { icon: '🛡️', label: 'Staff',       value: usersList.filter(u => ['admin', 'head_moderator', 'senior_moderator', 'moderator', 'junior_moderator', 'support_staff', 'event_organizer', 'system_bot'].includes(u.user_role || u.role || '')).length, sub: 'Active',    color: 'bg-blue-500/20 text-blue-300' },
     { icon: '🚫', label: 'Banned',       value: bannedUsers.length,                           sub: 'Accounts',          color: 'bg-rose-500/20 text-rose-300' },
   ], [shouts.length, usersList, bannedUsers]);
 
@@ -524,12 +529,13 @@ const AdminPanel: React.FC = () => {
                       {/* Actions */}
                       <div className="flex items-center gap-1.5 shrink-0 flex-wrap justify-end">
                         {/* Role selector */}
-                        <select value={u.role || 'user'} onChange={e => handleUpdateRole(u.id, e.target.value)}
+                        <select value={u.user_role || u.role || 'user'} onChange={e => handleUpdateRole(u.id, e.target.value)}
                           className="bg-white/5 border border-white/10 rounded-lg text-sm font-black text-white/60 py-1.5 px-2 outline-none cursor-pointer appearance-none">
-                          {ROLES.map(r => <option key={r} value={r} className="bg-[#1C1C2E]">{r}</option>)}
+                          {ROLES.map(r => <option key={r} value={r} className="bg-[#1C1C2E]">{r.replace('_', ' ')}</option>)}
                         </select>
 
                         {[
+                          { title: 'Advanced Config', icon: '⚙️', action: () => navigate(`/manage-user/${u.id}`), active: false, activeColor: '' },
                           { title: 'Edit Stats', icon: '✏️', action: () => setEditingUser(u), active: false, activeColor: '' },
                           { title: 'Verify', icon: '✔️', action: () => handleToggleVerified(u.id), active: !!u.isVerified, activeColor: 'bg-blue-500/30 border-blue-500/40' },
                           { title: 'Premium', icon: '👑', action: () => handleTogglePremium(u.id), active: !!u.isPremium, activeColor: 'bg-amber-500/30 border-amber-500/40' },
@@ -956,9 +962,9 @@ const AdminPanel: React.FC = () => {
                 ))}
                 <div>
                   <label className="text-sm font-black text-white/60 uppercase tracking-widest block mb-1">Role</label>
-                  <select value={editingUser.role || 'user'} onChange={e => setEditingUser({ ...editingUser, role: e.target.value as any })}
-                    className={inputCls + ' appearance-none cursor-pointer'}>
-                    {ROLES.map(r => <option key={r} value={r} className="bg-[#1C1C2E]">{r}</option>)}
+                  <select value={editingUser.user_role || editingUser.role || 'user'} onChange={e => setEditingUser({ ...editingUser, user_role: e.target.value as any, role: e.target.value as any })}
+                          className={inputCls + " appearance-none cursor-pointer font-bold"}>
+                    {ROLES.map(r => <option key={r} value={r} className="bg-[#1C1C2E] text-white">{r.replace('_', ' ')}</option>)}
                   </select>
                 </div>
                 </div>
