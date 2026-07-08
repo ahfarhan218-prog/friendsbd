@@ -194,11 +194,11 @@ const ForumHome: React.FC = () => {
   const isStaff = isAdmin || currentUser?.role === 'moderator';
 
   return (
-    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative overflow-x-hidden">
+    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative">
       {/* Glow orbs */}
-      <div className="absolute top-0 left-10 w-96 h-96 bg-indigo-600/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-40 right-10 w-96 h-96 bg-purple-600/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-900/3 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-0 left-10 w-full max-w-sm h-96 bg-indigo-600/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-40 right-10 w-full max-w-sm h-96 bg-purple-600/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[600px] h-[600px] bg-blue-900/3 rounded-full blur-[160px] pointer-events-none" />
 
       {/* HEADER */}
       <header className="sticky top-0 z-40 p-4 max-w-5xl mx-auto">
@@ -236,7 +236,7 @@ const ForumHome: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-3"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 sm:grid-cols-4 gap-3"
         >
           {[
             { label: 'Weekly Top', value: stats.weeklyTopPoster, icon: '🏆', color: 'text-amber-400', sub: 'Poster' },
@@ -460,7 +460,7 @@ const ForumHome: React.FC = () => {
         </section>
 
         {/* QUICK LINKS */}
-        <section className="grid grid-cols-2 gap-3">
+        <section className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <button
             onClick={() => navigate('/forum/create')}
             className="bg-gradient-to-br from-indigo-600/20 to-purple-600/10 border border-indigo-500/20 hover:border-indigo-500/40 p-5 rounded-3xl text-left transition-all group"
@@ -521,10 +521,10 @@ const ForumHome: React.FC = () => {
                     className="bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-2xl p-3 w-full text-xs font-semibold transition-colors"
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-1">
                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">Icon Emoji</label>
-                    <div className="grid grid-cols-5 gap-1 bg-[#090d16] border border-[#1f293d] rounded-2xl p-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 sm:grid-cols-5 gap-1 bg-[#090d16] border border-[#1f293d] rounded-2xl p-2">
                       {EMOJI_OPTIONS.map(em => (
                         <button key={em} type="button" onClick={() => setNewCatIcon(em)}
                           className={`w-full aspect-square rounded-xl flex items-center justify-center text-base transition-all ${newCatIcon === em ? 'bg-indigo-500/30 ring-1 ring-indigo-500' : 'hover:bg-slate-800'}`}
@@ -534,7 +534,7 @@ const ForumHome: React.FC = () => {
                   </div>
                   <div className="space-y-1">
                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">Color Theme</label>
-                    <div className="grid grid-cols-2 gap-1">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
                       {Object.entries(colorMap).map(([color, gradient]) => (
                         <button key={color} type="button" onClick={() => setNewCatColor(color)}
                           className={`h-8 rounded-xl bg-gradient-to-r ${gradient} transition-all ${newCatColor === color ? 'ring-2 ring-white scale-105' : 'opacity-60 hover:opacity-90'}`}
@@ -576,3 +576,4 @@ const ForumHome: React.FC = () => {
 };
 
 export default ForumHome;
+

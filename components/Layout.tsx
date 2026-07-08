@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Outlet, useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { User, SiteNotification, UserReminder } from '../types';
+import { PageWrapper } from './PageWrapper';
 import { gameService } from '../services/gameService';
 import { triggerToast } from './NotificationToast';
 import { mongoService } from '../services/mongoService';
@@ -309,7 +310,9 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout }) => {
       ═══════════════════════════════════════════ */}
       <div className={`layout-main ${sidebarCollapsed ? 'main-collapsed' : ''}`}>
         <main className="layout-content">
-          <Outlet context={{ user }} />
+          <PageWrapper>
+            <Outlet context={{ user }} />
+          </PageWrapper>
 
           {/* Coin alerts */}
           <div className="coin-alerts">
@@ -373,7 +376,6 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout }) => {
         .layout-root {
           display: flex;
           min-height: 100vh;
-          overflow-x: hidden;
           background: #0F0F1A;
           background-image: radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, 0.15) 0%, transparent 70%), linear-gradient(135deg, #110a2a 0%, #1d0d4a 50%, #0d1a6b 100%);
           font-family: 'Inter', sans-serif;
@@ -594,10 +596,12 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout }) => {
         .layout-content {
           flex: 1;
           overflow-y: auto;
-          padding-bottom: 90px;
+          overflow-x: hidden;
+          width: 100%;
+          max-width: 100%;
         }
         @media (min-width: 768px) {
-          .layout-content { padding-bottom: 2rem; }
+          .layout-content {  }
         }
 
         /* Coin alerts */
@@ -703,3 +707,4 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout }) => {
 };
 
 export default Layout;
+

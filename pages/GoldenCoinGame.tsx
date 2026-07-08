@@ -477,3 +477,4 @@ const GoldenCoinGame: React.FC = () => {
 };
 
 export default GoldenCoinGame;
+

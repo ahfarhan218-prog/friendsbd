@@ -100,3 +100,4 @@ const ShoutModal: React.FC<ShoutModalProps> = ({ shoutId, onClose, currentUser }
 };
 
 export default ShoutModal;
+

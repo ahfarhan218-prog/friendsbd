@@ -74,11 +74,11 @@ const StatsList: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] font-sans pb-20 pt-6 px-4 overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] font-sans pb-20 pt-6 px-4">
       <div className="max-w-3xl mx-auto">
         
         {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
+        <div className="flex items-center gap-4 mb-8 flex-wrap">
           <button onClick={() => navigate(-1)} className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center text-white/50 hover:bg-white/10 hover:text-white transition-all">
             ←
           </button>
@@ -160,3 +160,4 @@ const StatsList: React.FC = () => {
 };
 
 export default StatsList;
+

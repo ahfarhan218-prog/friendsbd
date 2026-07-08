@@ -19,8 +19,8 @@ const BBCodeGuide: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-transparent pb-24 font-inter overflow-x-hidden">
-      <header className="bg-purple-600 text-white p-6 pb-20 rounded-b-[3.5rem] flex items-center gap-4">
+    <div className="min-h-screen bg-transparent pb-24 font-inter">
+      <header className="bg-purple-600 text-white p-4 sm:p-6 pb-16 sm:pb-20 rounded-b-[2rem] sm:rounded-b-[3.5rem] flex items-center gap-4 flex-wrap">
         <button onClick={() => navigate(-1)} className="p-2 bg-purple-500 rounded-xl">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7"/></svg>
         </button>
@@ -79,3 +79,4 @@ const BBCodeGuide: React.FC = () => {
 };
 
 export default BBCodeGuide;
+

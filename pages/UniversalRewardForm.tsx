@@ -186,7 +186,7 @@ const UniversalRewardForm: React.FC = () => {
 
 
   return (
-    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased p-4 sm:p-6 flex flex-col justify-center items-center relative overflow-x-hidden">
+    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased p-4 sm:p-6 flex flex-col justify-center items-center relative">
       {/* Decorative Orbs */}
       <div className="absolute top-10 left-10 w-64 h-64 bg-indigo-600/5 rounded-full blur-[85px] pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-64 h-64 bg-purple-600/5 rounded-full blur-[85px] pointer-events-none" />
@@ -211,7 +211,7 @@ const UniversalRewardForm: React.FC = () => {
         <form onSubmit={handleSubmit} className="space-y-5">
           
           {/* Target User Details (Disabled/ReadOnly) */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Member ID</label>
               <input
@@ -236,7 +236,7 @@ const UniversalRewardForm: React.FC = () => {
           {/* Operation Toggle Switch */}
           <div className="space-y-1">
             <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Operation Type</label>
-            <div className="grid grid-cols-2 bg-[#090d16] border border-[#1f293d] p-1 rounded-2xl">
+            <div className="grid grid-cols-1 sm:grid-cols-2 bg-[#090d16] border border-[#1f293d] p-1 rounded-2xl">
               <button
                 type="button"
                 onClick={() => setTransactionType('ADD')}
@@ -263,7 +263,7 @@ const UniversalRewardForm: React.FC = () => {
           </div>
 
           {/* Point Fields Grid */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Plusses</label>
               <input
@@ -301,7 +301,7 @@ const UniversalRewardForm: React.FC = () => {
           <div className="p-4 bg-[#090d16]/60 border border-[#1f293d] rounded-2xl space-y-3">
             <span className="text-[9px] font-black uppercase text-slate-400 tracking-widest block">Associated Quiz Attributions</span>
             
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="space-y-1">
                 <label className="text-[9px] font-bold text-slate-500 uppercase">Quiz Topic ID</label>
                 <input
@@ -414,3 +414,4 @@ const UniversalRewardForm: React.FC = () => {
 };
 
 export default UniversalRewardForm;
+

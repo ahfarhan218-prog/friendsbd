@@ -40,7 +40,7 @@ const Gallery: React.FC = () => {
   if (loading) return <div className="min-h-screen bg-[#0a0a1a] flex items-center justify-center"><div className="w-10 h-10 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" /></div>;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6 overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6">
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div>
@@ -85,7 +85,7 @@ const Gallery: React.FC = () => {
                 )}
 
                 {album.photos?.length > 0 && (
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-4 gap-2">
                     {album.photos.map((p: any, i: number) => (
                       <img key={i} src={p.url} className="w-full h-28 object-cover rounded-xl" alt="" onError={e => { (e.target as HTMLImageElement).src = 'https://placehold.co/200x150/1C1C2E/a78bfa?text=Photo'; }} />
                     ))}
@@ -113,3 +113,4 @@ const pfStyles = `
 `;
 
 export default Gallery;
+

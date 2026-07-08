@@ -111,13 +111,13 @@ const Shop: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-24 relative text-left overflow-x-hidden">
+    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-24 relative text-left">
       {/* Glow effects */}
       <div className="absolute top-0 right-10 w-80 h-80 bg-purple-600/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-20 left-10 w-80 h-80 bg-indigo-600/5 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Header */}
-      <header className="p-6 max-w-5xl mx-auto flex items-center justify-between border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md rounded-b-[2rem]">
+      <header className="p-4 sm:p-6 max-w-5xl mx-auto flex items-center justify-between flex-wrap gap-3 border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md rounded-b-[2rem]">
         <div className="flex items-center gap-4">
           <button
             onClick={() => navigate(-1)}
@@ -142,7 +142,7 @@ const Shop: React.FC = () => {
 
       {/* Main Grid */}
       <main className="max-w-5xl mx-auto px-6 mt-8">
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-3 gap-4 mb-12">
           {items.map((item, i) => (
             <div
               key={i}
@@ -177,3 +177,5 @@ const Shop: React.FC = () => {
 };
 
 export default Shop;
+
+

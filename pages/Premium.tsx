@@ -155,7 +155,7 @@ const Premium: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent pb-32 overflow-x-hidden">
+    <div className="min-h-screen bg-transparent pb-32">
       {/* Header */}
       <header className="relative overflow-hidden px-6 pt-8 pb-16">
         {/* Background glow orbs */}
@@ -365,3 +365,4 @@ const Premium: React.FC = () => {
 };
 
 export default Premium;
+

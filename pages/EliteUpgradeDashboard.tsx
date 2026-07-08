@@ -233,7 +233,7 @@ const EliteUpgradeDashboard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent font-sans pb-32 overflow-x-hidden">
+    <div className="min-h-screen bg-transparent font-sans pb-32">
       {/* Top Navbar */}
       <div className="max-w-md mx-auto px-4 pt-6 flex justify-between items-center">
         <button 
@@ -285,7 +285,7 @@ const EliteUpgradeDashboard: React.FC = () => {
         </div>
 
         {/* Current Balances Overview */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="bg-white border border-[#cbd5e1] rounded-2xl p-4 shadow-sm text-center">
             <span className="text-lg block mb-1">🏅</span>
             <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Reputation Points</p>
@@ -308,7 +308,7 @@ const EliteUpgradeDashboard: React.FC = () => {
               <p className="text-xs text-slate-500 font-medium mt-1">Upgrade using your earned reputation points.</p>
             </div>
 
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               {RP_TIERS.map((tier, idx) => (
                 <button
                   key={idx}
@@ -337,7 +337,7 @@ const EliteUpgradeDashboard: React.FC = () => {
               <p className="text-xs text-slate-500 font-medium mt-1">Upgrade instantly using your wallet funds.</p>
             </div>
 
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               {TAKA_TIERS.map((tier, idx) => (
                 <button
                   key={idx}
@@ -367,3 +367,4 @@ const EliteUpgradeDashboard: React.FC = () => {
 };
 
 export default EliteUpgradeDashboard;
+

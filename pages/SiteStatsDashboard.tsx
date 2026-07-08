@@ -104,8 +104,8 @@ const SiteStatsDashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-transparent text-white font-sans antialiased pb-32 relative text-left">
-      <div className="absolute top-0 right-10 w-96 h-96 bg-indigo-600/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-20 left-10 w-96 h-96 bg-purple-600/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 right-10 w-full max-w-sm h-96 bg-indigo-600/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-20 left-10 w-full max-w-sm h-96 bg-purple-600/5 rounded-full blur-[120px] pointer-events-none" />
 
       <header className="p-6 max-w-5xl mx-auto flex items-center justify-between border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md rounded-b-[2rem]">
         <div className="flex items-center gap-4">
@@ -252,3 +252,5 @@ const SiteStatsDashboard: React.FC = () => {
 };
 
 export default SiteStatsDashboard;
+
+

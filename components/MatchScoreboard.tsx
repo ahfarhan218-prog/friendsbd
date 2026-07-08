@@ -31,7 +31,7 @@ export const MatchScoreboard: React.FC<{ matchData: MatchState }> = ({ matchData
           </span>
         </div>
 
-        <div className="grid grid-cols-3 gap-4 items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
           <div className="text-center">
             <h3 className="text-sm font-bold text-slate-300 truncate">{teamA}</h3>
             <div className="text-2xl font-black mt-1">
@@ -72,3 +72,4 @@ export const MatchScoreboard: React.FC<{ matchData: MatchState }> = ({ matchData
     </div>
   );
 };
+

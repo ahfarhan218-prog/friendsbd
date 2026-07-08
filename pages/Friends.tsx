@@ -66,7 +66,7 @@ const Friends: React.FC = () => {
   ) : friends;
 
   return (
-    <div className="min-h-screen bg-[#0B0B1A] pb-20 overflow-x-hidden">
+    <div className="min-h-screen bg-[#0B0B1A] pb-20">
       <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] text-white p-6 pb-20 rounded-b-[3rem] shadow-lg shadow-purple-900/30">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_0%,_#7c3aed33,_transparent_70%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#0B0B1A] to-transparent" />
@@ -85,7 +85,7 @@ const Friends: React.FC = () => {
           <div className="absolute -top-10 -right-10 w-40 h-40 bg-purple-500/5 rounded-full" />
           <div className="relative z-10">
             <h3 className="text-lg font-black text-white mb-4">My Friends</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="bg-[#161b22] rounded-xl p-4 border border-[#30363d]">
                 <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Following</p>
                 <p className="text-3xl font-black text-white mt-1">{friends.length}</p>
@@ -126,7 +126,7 @@ const Friends: React.FC = () => {
                 </div>
                 <svg className="w-5 h-5 text-gray-600 group-hover:text-purple-400 transition-colors shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
               </div>
-              <div className="grid grid-cols-2 gap-3" onClick={e => e.stopPropagation()}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" onClick={e => e.stopPropagation()}>
                 <button onClick={() => navigate(`/chat?userId=${friend.id}`)} className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-3 rounded-xl shadow-lg shadow-purple-900/30 hover:opacity-90 transition-all text-xs flex items-center justify-center gap-2">
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
                   Message
@@ -168,3 +168,4 @@ const Friends: React.FC = () => {
 };
 
 export default Friends;
+

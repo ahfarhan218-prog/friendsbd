@@ -323,7 +323,7 @@ const MonsterCatcher: React.FC = () => {
   if (loading) return <div className="text-white text-center mt-20">Loading...</div>;
 
   return (
-    <div className="min-h-screen bg-[#0f172a] text-white font-sans pb-20 overflow-x-hidden">
+    <div className="min-h-screen bg-[#0f172a] text-white font-sans pb-20">
       {/* Header */}
       <div className="bg-slate-900 p-4 sticky top-0 z-10 border-b border-slate-800 flex justify-between items-center shadow-lg">
         <button onClick={() => navigate(-1)} className="p-2 bg-slate-800 rounded-full">
@@ -440,7 +440,7 @@ const MonsterCatcher: React.FC = () => {
             {collection.length === 0 ? (
               <p className="text-center text-slate-500 py-10 font-bold">You haven't caught any monsters yet.</p>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-3 gap-3">
                 {collection.map((m, i) => (
                   <div key={i} className={`p-3 rounded-xl border flex flex-col items-center justify-center text-center relative ${RARITY_COLORS[m.rarity as keyof typeof RARITY_COLORS] || RARITY_COLORS.Common}`}>
                     <span className="absolute -top-2 -right-2 bg-slate-900 text-white text-xs font-black w-6 h-6 rounded-full flex items-center justify-center border border-slate-700 shadow-lg">x{m.count}</span>
@@ -659,3 +659,5 @@ const MonsterCatcher: React.FC = () => {
 };
 
 export default MonsterCatcher;
+
+

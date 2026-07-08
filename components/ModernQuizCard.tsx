@@ -231,3 +231,4 @@ const ModernQuizCard: React.FC<ModernQuizCardProps> = ({
 };
 
 export default ModernQuizCard;
+

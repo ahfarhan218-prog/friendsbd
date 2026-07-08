@@ -171,7 +171,7 @@ const Highlights: React.FC = () => {
   const shouters = getShouterStats();
 
   return (
-    <div className="min-h-screen bg-transparent flex flex-col pb-24 font-inter text-[#e2e8f0] overflow-x-hidden">
+    <div className="min-h-screen bg-transparent flex flex-col pb-24 font-inter text-[#e2e8f0]">
       {/* Dark Theme Modern Header */}
       <header className="relative bg-[#090d16]/80 backdrop-blur-xl border-b border-[#30363d] p-6 pb-20 shrink-0 overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl" />
@@ -445,7 +445,7 @@ const Highlights: React.FC = () => {
                 {todayPhotos.length === 0 ? (
                   <div className="text-center py-6 text-slate-500 text-sm font-medium italic">No photos uploaded today. Share the first one!</div>
                 ) : (
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 sm:grid-cols-4 gap-4">
                     {todayPhotos.map(p => (
                       <div 
                         key={p.id}
@@ -543,3 +543,4 @@ const Highlights: React.FC = () => {
 };
 
 export default Highlights;
+

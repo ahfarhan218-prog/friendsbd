@@ -54,7 +54,7 @@ const ManageUser: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#090d16] p-4 sm:p-6 md:p-8 font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-[#090d16] p-4 sm:p-6 md:p-8 font-sans">
       <div className="w-full max-w-[800px] mx-auto">
         <button 
           onClick={() => navigate(-1)}
@@ -70,3 +70,4 @@ const ManageUser: React.FC = () => {
 };
 
 export default ManageUser;
+

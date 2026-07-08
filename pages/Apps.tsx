@@ -86,7 +86,7 @@ const Apps: React.FC = () => {
   }).filter((section) => section.apps.length > 0);
 
   return (
-    <div className="min-h-screen bg-transparent font-inter pb-32 overflow-x-hidden">
+    <div className="min-h-screen bg-transparent font-inter pb-32">
       {/* Header Accent */}
       <div className="w-full flex justify-center pt-5 pb-3">
         <div className="w-16 h-1 bg-white/20 rounded-full shadow-[0_0_10px_rgba(255,255,255,0.2)]"></div>
@@ -159,7 +159,7 @@ const Apps: React.FC = () => {
               </div>
 
               {/* Apps Grid Layout */}
-              <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-x-4 gap-y-8 pt-8 relative z-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-x-4 gap-y-8 pt-8 relative z-10">
                 {section.apps.map((app) => (
                   <button
                     key={app.id}
@@ -205,3 +205,4 @@ const Apps: React.FC = () => {
 };
 
 export default Apps;
+

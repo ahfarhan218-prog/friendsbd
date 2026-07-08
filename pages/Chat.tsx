@@ -353,7 +353,7 @@ const Chat: React.FC = () => {
   });
 
   return (
-    <div className="h-[calc(100vh-90px)] md:h-screen bg-[#0F0F1A] flex text-white overflow-hidden font-inter">
+    <div className="h-[calc(100vh-90px)] md:h-screen bg-[#0F0F1A] flex text-white font-inter">
       {/* Sidebar */}
       <div
         className={`${
@@ -652,3 +652,4 @@ const Chat: React.FC = () => {
 };
 
 export default Chat;
+

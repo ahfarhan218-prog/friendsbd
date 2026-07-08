@@ -73,7 +73,7 @@ const DailyMissions: React.FC = () => {
   const progressPercent = Math.round((totalCompleted / totalMissions) * 100);
 
   return (
-    <div className="min-h-screen bg-transparent pb-20 overflow-x-hidden">
+    <div className="min-h-screen bg-transparent pb-20">
       {/* Header Panel */}
       <div className="bg-indigo-600 text-white pt-8 pb-10 px-6 rounded-b-[2rem] shadow-lg relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay pointer-events-none"></div>
@@ -161,3 +161,4 @@ const DailyMissions: React.FC = () => {
 };
 
 export default DailyMissions;
+

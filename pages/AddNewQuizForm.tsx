@@ -171,7 +171,7 @@ const AddNewQuizForm: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent text-[#f8fafc] font-sans antialiased p-4 sm:p-6 flex flex-col justify-center items-center relative overflow-x-hidden">
+    <div className="min-h-screen bg-transparent text-[#f8fafc] font-sans antialiased p-4 sm:p-6 flex flex-col justify-center items-center relative">
       {/* Decorative Glow elements */}
       <div className="absolute top-10 left-10 w-64 h-64 bg-indigo-500/5 rounded-full blur-[80px] pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-64 h-64 bg-purple-500/5 rounded-full blur-[80px] pointer-events-none" />
@@ -311,7 +311,7 @@ const AddNewQuizForm: React.FC = () => {
           </div>
 
           {/* Grid row for Type & Pinned */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             
             {/* Quiz Type */}
             <div className="space-y-1">
@@ -388,3 +388,4 @@ const AddNewQuizForm: React.FC = () => {
 };
 
 export default AddNewQuizForm;
+

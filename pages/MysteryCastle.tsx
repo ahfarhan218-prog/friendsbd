@@ -79,13 +79,13 @@ const MysteryCastle: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent font-inter pb-32 overflow-x-hidden">
+    <div className="min-h-screen bg-transparent font-inter pb-32">
       {/* HEADER SECTION */}
       <header className="relative bg-[#090d16]/80 backdrop-blur-xl border-b border-[#30363d] pt-12 pb-12 px-6 rounded-b-[4rem] shadow-xl overflow-hidden shrink-0">
         <div className="absolute top-0 left-0 p-32 bg-indigo-500/10 rounded-full blur-3xl -ml-16 -mt-16 pointer-events-none" />
         <div className="absolute bottom-0 right-0 p-24 bg-purple-500/10 rounded-full blur-2xl -mr-16 pointer-events-none" />
         
-        <div className="relative z-10 flex justify-between items-center mb-4">
+            <div className="relative z-10 flex justify-between items-center mb-4 flex-wrap gap-3">
            <button onClick={() => navigate('/apps')} className="p-3 bg-white/5 rounded-2xl active:scale-90 border border-white/10 hover:bg-white/10 transition-colors">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7"/></svg>
            </button>
@@ -110,7 +110,7 @@ const MysteryCastle: React.FC = () => {
          </div>
 
          {/* DOORS */}
-         <div className="grid grid-cols-3 gap-4">
+         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[0, 1, 2].map(i => (
               <motion.button 
                 key={i}
@@ -173,3 +173,4 @@ const MysteryCastle: React.FC = () => {
 };
 
 export default MysteryCastle;
+

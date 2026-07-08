@@ -242,3 +242,4 @@ const LottoGiftModule: React.FC<LottoGiftModuleProps> = ({ currentUser, onCoinsU
 };
 
 export default LottoGiftModule;
+

@@ -19,12 +19,12 @@ const BBCodeDashboard: React.FC = () => {
   const filtered = filter === 'All Posts' ? posts : posts.filter(p => (p.tags || []).includes(filter.toLowerCase()));
 
   return (
-    <div className="min-h-screen bg-[#0B0B1A] pb-24 font-inter overflow-x-hidden">
+    <div className="min-h-screen bg-[#0B0B1A] pb-24 font-inter">
       <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] text-white p-6 pb-20 rounded-b-[3.5rem] shadow-2xl">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_0%,_#7c3aed33,_transparent_70%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#0B0B1A] to-transparent" />
         <div className="absolute top-8 right-4 w-24 h-24 bg-purple-600/10 rounded-full blur-3xl" />
-        <div className="relative z-10 flex justify-between items-center">
+        <div className="relative z-10 flex justify-between items-center flex-wrap gap-2">
           <button onClick={() => navigate('/apps')} className="p-3 bg-black/20 rounded-2xl active:scale-90 border border-white/10 backdrop-blur-sm">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7"/></svg>
           </button>
@@ -106,3 +106,4 @@ const BBCodeDashboard: React.FC = () => {
 };
 
 export default BBCodeDashboard;
+

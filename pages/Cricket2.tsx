@@ -283,7 +283,7 @@ Commentary: [clr=F39C12]${comment}[/clr]`;
             {/* Score Actions */}
             <div className="bg-[#161b22]/80 backdrop-blur-xl border border-[#30363d] rounded-[2rem] p-6 shadow-xl">
               <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Log Action</h3>
-              <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 sm:grid-cols-6 gap-3">
                 {[0, 1, 2, 3, 4, 6].map(run => (
                   <button 
                     key={run} 
@@ -386,3 +386,4 @@ const TeamTable: React.FC<{ title: string, data: string[], onChange: (i:number, 
 );
 
 export default Cricket2;
+

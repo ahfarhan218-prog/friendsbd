@@ -145,3 +145,4 @@ const PublicRewardHistoryTab: React.FC<PublicRewardHistoryTabProps> = ({ profile
 };
 
 export default PublicRewardHistoryTab;
+

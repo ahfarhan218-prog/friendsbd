@@ -29,3 +29,4 @@ const FriendsBDLogo: React.FC<Props> = ({ size = 48, className = '' }) => (
 );
 
 export default FriendsBDLogo;
+

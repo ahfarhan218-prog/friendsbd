@@ -187,3 +187,4 @@ const SilverCoinGame: React.FC = () => {
 };
 
 export default SilverCoinGame;
+

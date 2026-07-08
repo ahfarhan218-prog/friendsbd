@@ -415,7 +415,7 @@ const UserProfile: React.FC = () => {
               </div>
 
               {/* Quick Stats */}
-              <div className="grid grid-cols-2 gap-2 mt-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-5">
                 {[
                   { icon: '⚡', label: 'AP', value: profile.ap || 0, color: '#f97316' },
                   { icon: '👥', label: 'Followers', value: profile.followers?.length || 0, color: '#ec4899' },
@@ -512,7 +512,7 @@ const UserProfile: React.FC = () => {
                 <div className="h-1.5 bg-[#161b22] rounded-full overflow-hidden mb-3">
                   <div className="h-full rounded-full bg-gradient-to-r from-amber-500 to-purple-500 transition-all duration-500" style={{ width: `${(earned.length / ACHIEVEMENTS.length) * 100}%` }} />
                 </div>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {ACHIEVEMENTS.map(a => {
                     const unlocked = a.check(profile);
                     return (
@@ -538,7 +538,7 @@ const UserProfile: React.FC = () => {
                 </div>
                 {isPremiumActive && <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-orange-500/10 text-orange-400 border border-orange-500/20">🔥 Rising</span>}
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-4 gap-3">
                 {[
                   { icon: '🧵', label: 'Topics', value: userThreads.length, color: '#a78bfa' },
                   { icon: '💬', label: 'Posts', value: userPosts.length, color: '#60a5fa' },
@@ -560,7 +560,7 @@ const UserProfile: React.FC = () => {
                 <h2 className="text-lg font-black text-white flex items-center gap-2">🔥 Wallet</h2>
                 <span className="text-[10px] font-bold text-purple-400 uppercase tracking-[0.15em]">Live</span>
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5">
                 {walletItems.map((s, i) => (
                   <div key={i} className="bg-[#161b22]/50 rounded-xl p-3 border border-[#30363d] flex items-center gap-3 hover:bg-[#161b22] transition-all">
                     <div className="text-xl shrink-0" style={{ color: s.color }}>{s.icon}</div>
@@ -747,3 +747,4 @@ const UserProfile: React.FC = () => {
 };
 
 export default UserProfile;
+

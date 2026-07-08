@@ -346,7 +346,7 @@ const Home: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-transparent pb-28 font-inter overflow-x-hidden">
+    <div className="min-h-screen bg-transparent pb-28 font-inter">
 
       <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] pt-12 pb-32 px-5">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_0%,_#7c3aed33,_transparent_70%)]" />
@@ -471,7 +471,7 @@ const Home: React.FC = () => {
         </motion.div>
 
         {/* ── QUICK STATS ── */}
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {[
             { icon: '🟢', label: 'Online', value: totalOnline, filter: 'online', color: 'from-emerald-600/20 to-emerald-700/20 border-emerald-500/20 hover:border-emerald-500/40 hover:shadow-emerald-950/20' },
             { icon: '👑', label: 'Premium', value: premiumCount, filter: 'premium', color: 'from-amber-500/20 to-orange-600/20 border-amber-500/20 hover:border-amber-500/40 hover:shadow-amber-950/20' },
@@ -782,3 +782,4 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+

@@ -12,12 +12,12 @@ const Forums: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0B0B1A] font-inter pb-24 overflow-x-hidden">
+    <div className="min-h-screen bg-[#0B0B1A] font-inter pb-24">
       <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] text-white p-6 pb-20 rounded-b-[3rem] shadow-lg shadow-purple-900/30">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_0%,_#7c3aed33,_transparent_70%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#0B0B1A] to-transparent" />
         <div className="absolute top-8 right-4 w-24 h-24 bg-purple-600/10 rounded-full blur-3xl" />
-        <div className="relative z-10 flex items-center justify-between">
+        <div className="relative z-10 flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center gap-4">
             <button onClick={() => navigate(-1)} className="p-2 bg-black/20 rounded-full active:scale-90 backdrop-blur-sm">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
@@ -74,3 +74,4 @@ const Forums: React.FC = () => {
 };
 
 export default Forums;
+

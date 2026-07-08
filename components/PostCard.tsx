@@ -92,3 +92,4 @@ const PostCard: React.FC<PostCardProps> = ({ post, currentUser, index, onOptions
 };
 
 export default PostCard;
+

@@ -104,12 +104,12 @@ const Tournament: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-transparent pb-32 overflow-x-hidden">
+    <div className="min-h-screen bg-transparent pb-32">
       <header className="relative bg-[#090d16]/80 backdrop-blur-xl border-b border-[#30363d] p-6 pt-12 pb-24 rounded-b-[4rem] shadow-xl overflow-hidden shrink-0">
         <div className="absolute top-0 left-0 p-32 bg-purple-600/10 rounded-full blur-3xl -ml-16 -mt-16 pointer-events-none" />
         <div className="absolute bottom-0 right-0 p-24 bg-pink-500/10 rounded-full blur-2xl -mr-16 pointer-events-none" />
         
-        <div className="relative z-10 flex items-center justify-between">
+            <div className="relative z-10 flex items-center justify-between flex-wrap gap-3">
            <div className="flex items-center gap-4">
              <button onClick={() => navigate(-1)} className="p-3 bg-white/5 rounded-2xl active:scale-90 border border-white/10 hover:bg-white/10 transition-colors">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
@@ -145,7 +145,7 @@ const Tournament: React.FC = () => {
         </div>
 
         {/* Tabs */}
-        <div className="bg-[#161b22]/80 backdrop-blur-xl p-2 rounded-[2rem] shadow-xl border border-[#30363d] grid grid-cols-4 gap-2">
+        <div className="bg-[#161b22]/80 backdrop-blur-xl p-2 rounded-[2rem] shadow-xl border border-[#30363d] grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-4 gap-2">
            {(['overview', 'schedule', 'standings', 'bracket'] as const).map((t) => (
              <button
                key={t}
@@ -351,3 +351,4 @@ const Tournament: React.FC = () => {
 };
 
 export default Tournament;
+

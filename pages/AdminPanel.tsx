@@ -409,7 +409,7 @@ const AdminPanel: React.FC = () => {
                 </div>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-3 gap-3">
                   {stats.map(s => <StatCard key={s.label} {...s} />)}
                 </div>
 
@@ -518,7 +518,7 @@ const AdminPanel: React.FC = () => {
                           {bannedUsers.includes(u.id) && <span className="text-[9px] bg-rose-500/20 text-rose-400 px-1.5 py-0.5 rounded-full font-black">🚫 BANNED</span>}
                           {(u as any).isShadowBanned && <span className="text-[9px] bg-purple-500/20 text-purple-400 px-1.5 py-0.5 rounded-full font-black">👻</span>}
                         </div>
-                        <p className="text-[9px] text-white/30 font-bold mt-0.5">@{u.username} · {u.points || 0} pts · Lv.{u.level || 1} · RP: {(u as any).reputation_points || 0} · 🥇: {(u as any).goldenCoins || 0}</p>
+                        <p className="text-[9px] text-white/30 font-bold mt-0.5">#{(u as any).userId} · @{u.username} · {u.points || 0} pts · Lv.{u.level || 1} · RP: {(u as any).reputation_points || 0} · 🥇: {(u as any).goldenCoins || 0}</p>
                       </div>
 
                       {/* Actions */}
@@ -609,11 +609,11 @@ const AdminPanel: React.FC = () => {
                     <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
                       className="bg-[#1C1C2E] border border-purple-500/30 rounded-2xl p-5 space-y-4">
                       <h4 className="text-sm font-black text-white">{editingCategory ? 'Edit Category' : 'New Category'}</h4>
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <input value={catFormData.name} onChange={e => setCatFormData({ ...catFormData, name: e.target.value })} className={inputCls} placeholder="Category Name" />
                         <input value={catFormData.slug} onChange={e => setCatFormData({ ...catFormData, slug: e.target.value })} className={inputCls} placeholder="slug-name" />
                       </div>
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <input value={catFormData.icon} onChange={e => setCatFormData({ ...catFormData, icon: e.target.value })} className={inputCls} placeholder="Icon emoji" />
                         <input value={catFormData.color} onChange={e => setCatFormData({ ...catFormData, color: e.target.value })} className={inputCls} placeholder="bg-purple-600" />
                       </div>
@@ -673,7 +673,7 @@ const AdminPanel: React.FC = () => {
                   <h3 className="text-sm font-black text-white flex items-center gap-2">📡 Global Broadcast</h3>
                   <input value={broadcastTitle} onChange={e => setBroadcastTitle(e.target.value)} className={inputCls} placeholder="Broadcast title..." />
                   <textarea value={broadcastMsg} onChange={e => setBroadcastMsg(e.target.value)} className={inputCls + ' resize-none h-28'} placeholder="Message body..." />
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <p className="text-[9px] font-black text-white/30 uppercase tracking-widest mb-2">Target Audience</p>
                       <select value={broadcastTarget} onChange={e => setBroadcastTarget(e.target.value)}
@@ -724,7 +724,7 @@ const AdminPanel: React.FC = () => {
                       <div className={`text-2xl font-black font-mono text-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-400`}>{g.timer}</div>
                     </div>
                     <div className="space-y-3">
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <button onClick={() => handleDropCoin(g.type)}
                           className={`py-3 bg-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-500/20 border border-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-500/30 text-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-400 font-black text-[10px] uppercase tracking-widest rounded-xl hover:bg-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-500/30 active:scale-95 transition-all`}>
                           🪙 Force Drop
@@ -931,7 +931,7 @@ const AdminPanel: React.FC = () => {
                 </div>
               </div>
               <div className="flex-1 overflow-y-auto pr-2 space-y-4">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 sm:grid-cols-4 gap-4">
                 {[
                   { label: 'Level',        key: 'level',        type: 'number' },
                   { label: 'Points (XP)',  key: 'points',       type: 'number' },
@@ -987,3 +987,6 @@ const AdminPanel: React.FC = () => {
 };
 
 export default AdminPanel;
+
+
+

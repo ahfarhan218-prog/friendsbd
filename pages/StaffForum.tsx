@@ -84,10 +84,10 @@ const StaffForum: React.FC = () => {
   if (!currentUser) return null;
 
   return (
-    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative overflow-x-hidden flex flex-col">
+    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative flex flex-col">
       {/* Background Glow */}
-      <div className="absolute top-0 left-10 w-96 h-96 bg-amber-600/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-40 right-10 w-96 h-96 bg-red-600/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 left-10 w-full max-w-sm h-96 bg-amber-600/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-40 right-10 w-full max-w-sm h-96 bg-red-600/5 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Header */}
       <div className="sticky top-0 z-40 bg-[#090d16]/80 backdrop-blur-xl border-b border-[#30363d] p-4 flex items-center justify-between shadow-2xl">
@@ -212,3 +212,4 @@ const StaffForum: React.FC = () => {
 };
 
 export default StaffForum;
+

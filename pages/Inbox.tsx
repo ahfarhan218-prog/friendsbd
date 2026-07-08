@@ -388,11 +388,11 @@ const Inbox: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#0F0F1A] text-white relative flex flex-col font-inter overflow-x-hidden" style={{ backgroundImage: 'radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, 0.15) 0%, transparent 70%), linear-gradient(135deg, #110a2a 0%, #1d0d4a 50%, #0d1a6b 100%)' }}>
+    <div className="min-h-screen bg-[#0F0F1A] text-white relative flex flex-col font-inter" style={{ backgroundImage: 'radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, 0.15) 0%, transparent 70%), linear-gradient(135deg, #110a2a 0%, #1d0d4a 50%, #0d1a6b 100%)' }}>
       
       {/* Background ambient glows */}
-      <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-purple-600/30 blur-[100px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-indigo-600/20 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute top-[-10%] left-[-10%] w-full max-w-sm h-96 bg-purple-600/30 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-full max-w-sm h-96 bg-indigo-600/20 blur-[100px] rounded-full pointer-events-none" />
 
       {/* 1. Header Banner */}
       <header className="bg-[#12122A]/80 backdrop-blur-xl border-b border-purple-500/20 p-6 pb-20 rounded-b-[3.5rem] shadow-2xl relative shrink-0 z-20">
@@ -791,7 +791,7 @@ const Inbox: React.FC = () => {
               initial={{ y: "100%" }} 
               animate={{ y: 0 }} 
               exit={{ y: "100%" }}
-              className="bg-[#0F0F1A] w-full h-[85vh] rounded-t-[3rem] shadow-[0_-10px_40px_rgba(147,51,234,0.15)] flex flex-col overflow-hidden border-t border-purple-500/30 relative"
+              className="bg-[#0F0F1A] w-full h-[85vh] rounded-t-[3rem] shadow-[0_-10px_40px_rgba(147,51,234,0.15)] flex flex-col border-t border-purple-500/30 relative"
             >
               {/* Background ambient glows for Chat */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/20 blur-[80px] rounded-full pointer-events-none" />
@@ -813,7 +813,7 @@ const Inbox: React.FC = () => {
                       {activeChat.isGroup ? '🦁' : '👤'}
                     </div>
                     <div>
-                      <h4 className="text-sm font-black tracking-tight truncate max-w-[150px] text-white">
+                      <h4 className="text-sm font-black tracking-tight truncate max-w-[200px] text-white">
                         {activeChat.isGroup ? activeChat.groupName : activeChat.participants[0].name}
                       </h4>
                       <p className="text-[8px] text-purple-300/80 font-bold uppercase tracking-widest flex items-center gap-1">
@@ -932,7 +932,7 @@ const Inbox: React.FC = () => {
               initial={{ y: "100%" }} 
               animate={{ y: 0 }} 
               exit={{ y: "100%" }}
-              className="bg-[#0F0F1A] w-full h-[70vh] rounded-t-[3rem] shadow-[0_-10px_40px_rgba(147,51,234,0.15)] flex flex-col overflow-hidden border-t border-purple-500/30 relative"
+              className="bg-[#0F0F1A] w-full h-[70vh] rounded-t-[3rem] shadow-[0_-10px_40px_rgba(147,51,234,0.15)] flex flex-col border-t border-purple-500/30 relative"
             >
               {/* Ambient glow */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/20 blur-[80px] rounded-full pointer-events-none" />
@@ -991,3 +991,5 @@ const Inbox: React.FC = () => {
 };
 
 export default Inbox;
+
+

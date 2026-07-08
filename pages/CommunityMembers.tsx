@@ -245,7 +245,7 @@ const CommunityMembers: React.FC = () => {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-1.5 flex-wrap">
                           <Link to={u.id === activeUser.id ? '/profile' : `/profile/${u.username}`} className="hover:underline shrink-0">
-                            <span className={`text-sm font-black truncate max-w-[150px] ${u.isOnline ? 'text-emerald-400' : 'text-white'}`}>
+                            <span className={`text-sm font-black truncate max-w-[200px] ${u.isOnline ? 'text-emerald-400' : 'text-white'}`}>
                               {u.username.trim() === '' ? '' : u.username}
                             </span>
                           </Link>
@@ -318,3 +318,5 @@ const CommunityMembers: React.FC = () => {
 };
 
 export default CommunityMembers;
+
+

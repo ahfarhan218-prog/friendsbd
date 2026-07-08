@@ -478,9 +478,9 @@ const TopicThreadDetails: React.FC = () => {
   const uniquePosters = Array.from(new Set(posts.map(p => p.authorName)));
 
   return (
-    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative overflow-x-hidden">
+    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative">
       {/* Ambient glows */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-600/4 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-full max-w-sm h-96 bg-indigo-600/4 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-20 left-0 w-80 h-80 bg-purple-600/4 rounded-full blur-[100px] pointer-events-none" />
 
       {/* STICKY HEADER */}
@@ -786,3 +786,4 @@ const TopicThreadDetails: React.FC = () => {
 };
 
 export default TopicThreadDetails;
+

@@ -55,8 +55,8 @@ const Challenges: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent font-inter overflow-x-hidden">
-      <header className="bg-orange-600 text-white p-6 pb-20 rounded-b-[2rem] sm:rounded-b-[3rem] flex items-center justify-between">
+    <div className="min-h-screen bg-transparent font-inter">
+      <header className="bg-orange-600 text-white p-4 sm:p-6 pb-16 sm:pb-20 rounded-b-[2rem] sm:rounded-b-[3rem] flex items-center justify-between flex-wrap gap-2">
         <div className="flex items-center gap-4">
           <button onClick={() => navigate(-1)} className="p-2 bg-orange-500 rounded-full active:scale-90">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
@@ -124,3 +124,4 @@ const Challenges: React.FC = () => {
 };
 
 export default Challenges;
+

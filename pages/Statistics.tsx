@@ -87,7 +87,7 @@ const Statistics: React.FC = () => {
           <CardHeader title="General Stats" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <StatItem label="All Members" value={overview?.totalUsers} icon="👥" color="#8b5cf6" onClick={() => openList('all-members')} />
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <StatItem label="Males" value={overview?.males} icon="👨" color="#3b82f6" onClick={() => openList('males')} />
               <StatItem label="Females" value={overview?.females} icon="👩" color="#ec4899" onClick={() => openList('females')} />
             </div>
@@ -122,7 +122,7 @@ const Statistics: React.FC = () => {
           {/* Other Stats */}
           <section className="bg-[#1C1C2E]/60 border border-purple-500/10 rounded-3xl p-6 shadow-2xl backdrop-blur-md">
             <CardHeader title="Other Stats" />
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <StatItem label="Banned" value={overview?.banned} icon="🔨" color="#ef4444" onClick={() => openList('banned')} />
               <StatItem label="Shout Banned" value={overview?.shoutBanned} icon="🔇" color="#f97316" onClick={() => openList('shout-banned')} />
               <StatItem label="Inbox Banned" value={overview?.inboxBanned} icon="🔕" color="#8b5cf6" onClick={() => openList('inbox-banned')} />
@@ -137,3 +137,4 @@ const Statistics: React.FC = () => {
 };
 
 export default Statistics;
+

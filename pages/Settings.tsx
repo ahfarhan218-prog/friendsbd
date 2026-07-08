@@ -131,7 +131,7 @@ const Settings: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0B1A] relative pb-20 overflow-x-hidden">
+    <div className="min-h-screen bg-[#0B0B1A] relative pb-20">
       {toast && (
         <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[100] px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white text-sm font-bold shadow-lg shadow-purple-900/50 animate-pulse">
           {toast}
@@ -335,7 +335,7 @@ const Settings: React.FC = () => {
             {activeModal === 'appearance' && (
               <div className="p-6">
                 <h3 className="text-lg font-black text-gray-100 mb-4 flex gap-2 items-center">Profile Banner</h3>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {[
                     { id: 'default', name: 'Default', bg: 'bg-gradient-to-r from-purple-600 to-fuchsia-600' },
                     { id: 'sunset', name: 'Sunset', bg: 'bg-gradient-to-br from-orange-400 to-rose-500' },
@@ -428,3 +428,4 @@ const Field: React.FC<{ label: string; value: string; onChange: (v: string) => v
 );
 
 export default Settings;
+

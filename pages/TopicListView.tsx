@@ -191,8 +191,8 @@ const TopicListView: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative overflow-x-hidden">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-600/4 rounded-full blur-[120px] pointer-events-none" />
+    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative">
+      <div className="absolute top-0 right-0 w-full max-w-sm h-96 bg-indigo-600/4 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-20 left-0 w-80 h-80 bg-purple-600/4 rounded-full blur-[100px] pointer-events-none" />
 
       {/* HEADER */}
@@ -452,7 +452,7 @@ const TopicListView: React.FC = () => {
 
                 {/* Staff controls */}
                 {isStaff && (
-                  <div className="grid grid-cols-2 gap-3 bg-[#090d16] border border-amber-500/20 p-4 rounded-2xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-[#090d16] border border-amber-500/20 p-4 rounded-2xl">
                     <label className="flex items-center justify-between cursor-pointer">
                       <span className="text-[10px] font-bold text-amber-400 uppercase flex items-center gap-1.5">📌 Pin Topic</span>
                       <div
@@ -497,3 +497,4 @@ const TopicListView: React.FC = () => {
 };
 
 export default TopicListView;
+

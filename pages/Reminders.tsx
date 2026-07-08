@@ -74,10 +74,10 @@ const Reminders: React.FC = () => {
   const sortedReminders = [...reminders].sort((a, b) => a.dueTime - b.dueTime);
 
   return (
-    <div className="min-h-screen bg-transparent font-inter pb-32 overflow-x-hidden">
+    <div className="min-h-screen bg-transparent font-inter pb-32">
       <header className="bg-indigo-600 text-white p-6 pb-20 rounded-b-[4rem] shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 right-0 p-32 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16" />
-        <div className="relative z-10 flex justify-between items-center mb-8">
+            <div className="relative z-10 flex justify-between items-center mb-8 flex-wrap gap-3">
            <button onClick={() => navigate('/apps')} className="p-3 bg-white/10 rounded-2xl active:scale-90 border border-white/10">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7"/></svg>
            </button>
@@ -186,3 +186,4 @@ const Reminders: React.FC = () => {
 };
 
 export default Reminders;
+

@@ -355,8 +355,8 @@ const ModernQuizDashboard: React.FC = () => {
   const liveArenaCount = quizzes.filter(q => q.type === 'live' && !q.isClosed).length;
 
   return (
-    <div className="min-h-screen bg-transparent text-[#f8fafc] font-sans antialiased pb-24 relative overflow-x-hidden">
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-indigo-600/5 rounded-full blur-[120px] pointer-events-none" />
+    <div className="min-h-screen bg-transparent text-[#f8fafc] font-sans antialiased pb-24 relative">
+      <div className="absolute top-0 right-0 w-full max-w-[400px] h-[400px] bg-indigo-600/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-20 left-10 w-[300px] h-[300px] bg-purple-600/5 rounded-full blur-[100px] pointer-events-none" />
 
       <header className="p-6 border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md">
@@ -407,7 +407,7 @@ const ModernQuizDashboard: React.FC = () => {
       </header>
 
       <section className="p-6 max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             { label: 'Active Modules', value: activeQuizzesCount, icon: '📂', color: 'text-indigo-400', bg: 'from-indigo-500/10 to-transparent' },
             { label: 'My Completions', value: completedCount, icon: '🏆', color: 'text-emerald-400', bg: 'from-emerald-500/10 to-transparent' },
@@ -633,7 +633,7 @@ const ModernQuizDashboard: React.FC = () => {
                       You successfully completed "{activePlayingQuiz.title}".
                     </p>
                   </div>
-                  <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-sm mx-auto">
                     <div className="bg-[#090d16] border border-[#1f293d] p-4 rounded-2xl text-center space-y-1">
                       <span className="text-[10px] text-slate-500 uppercase tracking-wider font-extrabold">Final Score</span>
                       <h4 className="text-lg font-black text-white font-mono">
@@ -702,3 +702,4 @@ const ModernQuizDashboard: React.FC = () => {
 };
 
 export default ModernQuizDashboard;
+

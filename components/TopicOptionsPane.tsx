@@ -256,7 +256,7 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
                 </div>
 
                 {/* Action buttons grid */}
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <ActionBtn
                     icon="✉️" label="Send PM to Author"
                     onClick={() => { navigate('/inbox', { state: { composeTo: thread.authorName } }); onClose(); }}
@@ -295,7 +295,7 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
                     </div>
                   ) : showReportForm ? (
                     <div className="p-5 space-y-3">
-                      <div className="grid grid-cols-2 gap-2">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {['Spam', 'Harassment', 'Misinformation', 'Inappropriate Content', 'Off-topic', 'Other'].map(r => (
                           <button key={r} onClick={() => setReportReason(r)}
                             className={`px-3 py-2 rounded-xl text-[10px] font-bold border transition-all text-left ${
@@ -480,7 +480,7 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
                   <div className="px-5 py-3.5 border-b border-[#1f293d]/50">
                     <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Staff Actions</h3>
                   </div>
-                  <div className="p-5 grid grid-cols-2 gap-3">
+                  <div className="p-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <ActionBtn icon="✉️" label="Message Author"
                       onClick={() => { navigate('/inbox', { state: { composeTo: thread.authorName } }); onClose(); }} />
                     <ActionBtn icon="👤" label="View Author"
@@ -561,7 +561,7 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
                 </div>
 
                 {/* Quick stats visual */}
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {[
                     { icon: '💬', value: thread.replyCount || 0, label: 'Replies' },
                     { icon: '👁️', value: thread.views || 0, label: 'Views' },
@@ -674,3 +674,4 @@ const StaffToggleRow: React.FC<StaffToggleRowProps> = ({ icon, label, desc, isAc
 );
 
 export default TopicOptionsPane;
+

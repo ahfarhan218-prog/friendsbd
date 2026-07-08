@@ -200,7 +200,7 @@ const ExecutiveApprovalDashboard: React.FC = () => {
   return (
     <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-24 relative">
       {/* Decorative Orbs */}
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-indigo-600/5 rounded-full blur-[110px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-full max-w-[400px] h-[400px] bg-indigo-600/5 rounded-full blur-[110px] pointer-events-none" />
       <div className="absolute bottom-20 left-10 w-[300px] h-[300px] bg-purple-600/5 rounded-full blur-[95px] pointer-events-none" />
 
       {/* Header Panel */}
@@ -318,3 +318,4 @@ const ExecutiveApprovalDashboard: React.FC = () => {
 };
 
 export default ExecutiveApprovalDashboard;
+
