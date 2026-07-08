@@ -192,7 +192,7 @@ const Premium: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-gradient-to-r from-amber-400/20 to-orange-400/10 border border-amber-400/30 rounded-3xl p-5 flex items-center gap-4"
+              className="bg-gradient-to-r from-amber-400/20 to-orange-400/10 border border-amber-400/30 rounded-3xl p-5 flex flex-wrap items-center gap-4"
             >
               <div className="text-3xl">✅</div>
               <div className="flex-1">
@@ -250,7 +250,7 @@ const Premium: React.FC = () => {
 
               <div className={`rounded-[1.4rem] p-5 ${selectedPlan === plan.id ? 'bg-black/30' : 'bg-transparent'}`}>
                 <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
+                  <div className="flex flex-wrap items-center gap-3">
                     {/* Radio dot */}
                     <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
                       selectedPlan === plan.id ? 'border-white bg-white' : 'border-white/20'
@@ -272,7 +272,7 @@ const Premium: React.FC = () => {
 
                 <div className="space-y-2">
                   {plan.features.map((f, i) => (
-                    <div key={i} className="flex items-center gap-2">
+                    <div key={i} className="flex flex-wrap items-center gap-2">
                       <span className="text-xs text-green-400">✓</span>
                       <span className="text-[11px] text-white/60 font-medium">{f}</span>
                     </div>
@@ -298,7 +298,7 @@ const Premium: React.FC = () => {
               }`}
             >
               {isProcessing === plan.id ? (
-                <span className="flex items-center justify-center gap-2">
+                <span className="flex flex-wrap items-center justify-center gap-2">
                   <motion.span
                     animate={{ rotate: 360 }}
                     transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
@@ -333,7 +333,7 @@ const Premium: React.FC = () => {
             { icon: '⚡', title: 'Instant Notifications', desc: 'Get real-time push alerts the moment a coin appears so you\'re always first.' },
             { icon: '👑', title: 'Premium Badge', desc: 'Stand out with an exclusive crown badge displayed on your profile.' },
           ].map((item, i) => (
-            <div key={i} className="flex gap-4 items-start">
+            <div key={i} className="flex flex-wrap gap-4 items-start">
               <div className="w-11 h-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-xl shrink-0">
                 {item.icon}
               </div>

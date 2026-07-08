@@ -37,7 +37,7 @@ const BBCodeDashboard: React.FC = () => {
       </header>
 
       <div className="px-5 -mt-10 space-y-6 relative z-10">
-        <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
+        <div className="flex flex-wrap gap-3 overflow-x-auto pb-2 no-scrollbar">
           {['All Posts', 'Shouts', 'Announcements', 'Forum'].map((cat) => (
             <button key={cat} onClick={() => setFilter(cat)}
               className={`whitespace-nowrap px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all ${filter === cat ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-xl shadow-purple-900/30' : 'bg-[#1C1C2E] text-white/40 border border-white/5'}`}>
@@ -57,7 +57,7 @@ const BBCodeDashboard: React.FC = () => {
             filtered.map((post) => (
               <motion.div key={post.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                 className="bg-[#1C1C2E] rounded-[2.5rem] p-6 border border-white/5 shadow-md hover:border-purple-500/30 transition-all">
-                <div className="flex items-center gap-4 mb-5">
+                <div className="flex flex-wrap items-center gap-4 mb-5">
                   <img src={post.authorAvatar || `https://picsum.photos/seed/${post.authorId}/100`} className="w-12 h-12 rounded-2xl border-2 border-purple-500/30 object-cover" alt="" />
                   <div className="flex-1">
                     <div className="flex justify-between items-start">
@@ -79,12 +79,12 @@ const BBCodeDashboard: React.FC = () => {
                 </div>
 
                 <div className="flex justify-between items-center mt-6 pt-4 border-t border-white/5">
-                  <div className="flex gap-4">
-                    <button className="flex items-center gap-1.5 text-white/40 hover:text-purple-400 transition-colors">
+                  <div className="flex flex-wrap gap-4">
+                    <button className="flex flex-wrap items-center gap-1.5 text-white/40 hover:text-purple-400 transition-colors">
                       <span className="text-lg">👍</span>
                       <span className="text-[10px] font-black">{post.likes || 0}</span>
                     </button>
-                    <button className="flex items-center gap-1.5 text-white/40 hover:text-purple-400 transition-colors">
+                    <button className="flex flex-wrap items-center gap-1.5 text-white/40 hover:text-purple-400 transition-colors">
                       <span className="text-lg">💬</span>
                       <span className="text-[10px] font-black">{post.views || 0}</span>
                     </button>

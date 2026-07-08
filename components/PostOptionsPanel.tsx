@@ -67,7 +67,7 @@ const PostOptionsPanel: React.FC<PostOptionsPanelProps> = ({
                 onChange={(e) => setEditContent(e.target.value)}
                 className="w-full h-40 bg-[#090d16] border border-[#1f293d] rounded-2xl p-4 text-xs text-white outline-none focus:border-indigo-500 transition-colors resize-none font-medium leading-relaxed"
               />
-              <div className="flex gap-2.5 mt-1">
+              <div className="flex flex-wrap gap-2.5 mt-1">
                 <button 
                   onClick={() => setIsEditing(false)}
                   className="flex-1 py-3 border border-[#1f293d] hover:bg-slate-800 text-slate-400 hover:text-white font-bold rounded-2xl text-[10px] uppercase tracking-widest active:scale-95 transition-all"
@@ -87,7 +87,7 @@ const PostOptionsPanel: React.FC<PostOptionsPanelProps> = ({
               {/* Quote Reply */}
               <button 
                 onClick={() => { onQuote(post); onClose(); }}
-                className="w-full flex items-center gap-4 p-4 rounded-2xl bg-[#090d16] hover:bg-slate-900 border border-[#1f293d] hover:border-slate-800 transition-all active:scale-[0.99]"
+                className="w-full flex flex-wrap items-center gap-4 p-4 rounded-2xl bg-[#090d16] hover:bg-slate-900 border border-[#1f293d] hover:border-slate-800 transition-all active:scale-[0.99]"
               >
                 <div className="w-10 h-10 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center text-lg font-black shrink-0">❞</div>
                 <div className="min-w-0">
@@ -100,7 +100,7 @@ const PostOptionsPanel: React.FC<PostOptionsPanelProps> = ({
               {canEdit && (
                 <button 
                   onClick={() => setIsEditing(true)}
-                  className="w-full flex items-center gap-4 p-4 rounded-2xl bg-[#090d16] hover:bg-slate-900 border border-[#1f293d] hover:border-slate-800 transition-all active:scale-[0.99]"
+                  className="w-full flex flex-wrap items-center gap-4 p-4 rounded-2xl bg-[#090d16] hover:bg-slate-900 border border-[#1f293d] hover:border-slate-800 transition-all active:scale-[0.99]"
                 >
                   <div className="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center text-lg font-black shrink-0">✎</div>
                   <div className="min-w-0">
@@ -118,7 +118,7 @@ const PostOptionsPanel: React.FC<PostOptionsPanelProps> = ({
                       onDelete(post.id);
                     }
                   }}
-                  className="w-full flex items-center gap-4 p-4 rounded-2xl bg-[#090d16] hover:bg-rose-950/20 border border-[#1f293d] hover:border-rose-900/30 transition-all active:scale-[0.99] group"
+                  className="w-full flex flex-wrap items-center gap-4 p-4 rounded-2xl bg-[#090d16] hover:bg-rose-950/20 border border-[#1f293d] hover:border-rose-900/30 transition-all active:scale-[0.99] group"
                 >
                   <div className="w-10 h-10 rounded-2xl bg-rose-500/10 text-rose-400 border border-rose-500/20 flex items-center justify-center text-lg font-black group-hover:bg-rose-500 group-hover:text-white transition-colors shrink-0">🗑</div>
                   <div className="min-w-0">

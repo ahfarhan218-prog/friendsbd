@@ -41,7 +41,7 @@ const NotificationToast: React.FC = () => {
                 setActiveToast(null);
               }
             }}
-            className="pointer-events-auto cursor-pointer max-w-md w-full bg-white/90 backdrop-blur-xl border border-purple-100 rounded-[2rem] p-4 shadow-[0_20px_40px_rgba(127,0,255,0.15)] flex items-center gap-4 relative overflow-hidden group"
+            className="pointer-events-auto cursor-pointer max-w-md w-full bg-white/90 backdrop-blur-xl border border-purple-100 rounded-[2rem] p-4 shadow-[0_20px_40px_rgba(127,0,255,0.15)] flex flex-wrap items-center gap-4 relative overflow-hidden group"
           >
             {/* Progress Bar Timer */}
             <motion.div 

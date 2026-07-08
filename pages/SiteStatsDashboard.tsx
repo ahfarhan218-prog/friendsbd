@@ -107,8 +107,8 @@ const SiteStatsDashboard: React.FC = () => {
       <div className="absolute top-0 right-10 w-full max-w-sm h-96 bg-indigo-600/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-20 left-10 w-full max-w-sm h-96 bg-purple-600/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <header className="p-6 max-w-5xl mx-auto flex items-center justify-between border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md rounded-b-[2rem]">
-        <div className="flex items-center gap-4">
+      <header className="p-6 max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto flex items-center justify-between border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md rounded-b-[2rem]">
+        <div className="flex flex-wrap items-center gap-4">
           <button
             onClick={() => navigate(-1)}
             className="p-3 bg-[#121824] hover:bg-slate-800 border border-[#1f293d] rounded-2xl text-slate-400 hover:text-white transition-all active:scale-95 shadow-sm"
@@ -129,7 +129,7 @@ const SiteStatsDashboard: React.FC = () => {
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-6 mt-6 space-y-6">
+      <main className="max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto px-6 mt-6 space-y-6">
         {loading ? (
           <div className="flex flex-col items-center justify-center py-32 space-y-3">
             <div className="w-10 h-10 border-4 border-indigo-500/20 border-t-indigo-500 rounded-full animate-spin" />
@@ -156,10 +156,10 @@ const SiteStatsDashboard: React.FC = () => {
                   >
                     <div
                       onClick={() => handleToggleExpand(tier.title)}
-                      className="p-4 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-900/10 transition-colors"
+                      className="p-4 flex flex-wrap items-center justify-between gap-4 cursor-pointer hover:bg-slate-900/10 transition-colors"
                     >
                       <div className="flex-1 min-w-0 text-left">
-                        <div className="flex items-center gap-2">
+                        <div className="flex flex-wrap items-center gap-2">
                           <span className={`text-xs font-black uppercase tracking-wider ${tier.color.split(' ')[0]}`}>
                             {tier.title}
                           </span>
@@ -168,7 +168,7 @@ const SiteStatsDashboard: React.FC = () => {
                           </span>
                         </div>
 
-                        <div className="mt-2.5 flex items-center gap-3">
+                        <div className="mt-2.5 flex flex-wrap items-center gap-3">
                           <div className="flex-1 h-1.5 bg-[#090d16] rounded-full overflow-hidden border border-[#1f293d]/50">
                             <motion.div
                               initial={{ width: 0 }}
@@ -183,7 +183,7 @@ const SiteStatsDashboard: React.FC = () => {
                         </div>
                       </div>
 
-                      <div className="shrink-0 flex items-center gap-2">
+                      <div className="shrink-0 flex flex-wrap items-center gap-2">
                         <div className="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider shrink-0 shadow-sm shadow-indigo-500/5">
                           {count} {count === 1 ? 'Member' : 'Members'}
                         </div>
@@ -211,12 +211,12 @@ const SiteStatsDashboard: React.FC = () => {
                               No members currently in this status tier.
                             </div>
                           ) : (
-                            <div className="p-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+                            <div className="p-3 grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-2">
                               {membersList.map(u => (
                                 <div
                                   key={u.id}
                                   onClick={() => navigate(`/profile/${u.username}`)}
-                                  className="bg-[#090d16] border border-[#1f293d] p-2.5 rounded-xl flex items-center gap-3 cursor-pointer hover:border-indigo-500/30 transition-all hover:scale-[0.99] group text-left"
+                                  className="bg-[#090d16] border border-[#1f293d] p-2.5 rounded-xl flex flex-wrap items-center gap-3 cursor-pointer hover:border-indigo-500/30 transition-all hover:scale-[0.99] group text-left"
                                 >
                                   <img
                                     src={u.avatar}
@@ -224,7 +224,7 @@ const SiteStatsDashboard: React.FC = () => {
                                     alt={u.username}
                                   />
                                   <div className="min-w-0 flex-1">
-                                    <div className="flex items-center gap-1">
+                                    <div className="flex flex-wrap items-center gap-1">
                                       <span className="text-[11px] font-bold text-white group-hover:text-indigo-400 transition-colors truncate">
                                         @{u.username}
                                       </span>

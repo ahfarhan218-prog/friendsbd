@@ -20,7 +20,7 @@ export const MatchScoreboard: React.FC<{ matchData: MatchState }> = ({ matchData
       
       <div className="relative z-10">
         <div className="flex justify-between items-center border-b border-slate-700 pb-3 mb-3">
-          <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+          <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex flex-wrap items-center gap-2">
             {matchData.status === 'LIVE' && <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />}
             {matchData.status === 'WAITING' && <span className="w-2 h-2 rounded-full bg-yellow-500" />}
             {matchData.status === 'COMPLETED' && <span className="w-2 h-2 rounded-full bg-green-500" />}
@@ -31,7 +31,7 @@ export const MatchScoreboard: React.FC<{ matchData: MatchState }> = ({ matchData
           </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-center">
           <div className="text-center">
             <h3 className="text-sm font-bold text-slate-300 truncate">{teamA}</h3>
             <div className="text-2xl font-black mt-1">

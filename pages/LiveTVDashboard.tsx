@@ -268,10 +268,10 @@ const LiveTVDashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] font-sans pb-20 pt-6 px-4">
-      <div className="max-w-4xl mx-auto space-y-6">
+      <div className="max-w-full max-w-4xl mx-auto px-4 sm:px-6 mx-auto space-y-6">
         
         {/* Header */}
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-4">
           <button onClick={() => navigate(-1)} className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center text-white/50 hover:bg-white/10 hover:text-white transition-all">
             +?
           </button>
@@ -288,7 +288,7 @@ const LiveTVDashboard: React.FC = () => {
         {/* Active Channel Info Bar */}
         {activeChannel && streamUrl && (
           <div className="relative z-50 mb-4 bg-[#1C1C2E]/60 border border-white/5 rounded-3xl p-4 shadow-xl backdrop-blur-md flex justify-between items-center transition-all">
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center gap-4">
               <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center overflow-hidden border border-white/10 shadow-lg">
                 {activeChannel.logoUrl ? (
                   <img 
@@ -308,7 +308,7 @@ const LiveTVDashboard: React.FC = () => {
                 )}
               </div>
               <div>
-                <h2 className="text-white font-black text-lg md:text-2xl flex items-center gap-2">
+                <h2 className="text-white font-black text-lg md:text-2xl flex flex-wrap items-center gap-2">
                   {activeChannel.name}
                   {activeChannel.isPremium && (
                     <span className="text-[10px] bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded-md border border-amber-500/30">
@@ -316,8 +316,8 @@ const LiveTVDashboard: React.FC = () => {
                     </span>
                   )}
                 </h2>
-                <div className="flex items-center gap-2 mt-1">
-                  <div className="bg-red-500/10 text-red-500 border border-red-500/30 px-2 py-0.5 rounded-md flex items-center gap-1.5 text-[10px] font-bold">
+                <div className="flex flex-wrap items-center gap-2 mt-1">
+                  <div className="bg-red-500/10 text-red-500 border border-red-500/30 px-2 py-0.5 rounded-md flex flex-wrap items-center gap-1.5 text-[10px] font-bold">
                     <span className="relative flex h-1.5 w-1.5">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
@@ -387,7 +387,7 @@ const LiveTVDashboard: React.FC = () => {
             }
           `}>
             {isFloating && (
-              <div className="absolute top-2 right-2 z-50 flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute top-2 right-2 z-50 flex flex-wrap gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button 
                   onClick={(e) => {
                     e.stopPropagation();
@@ -492,12 +492,12 @@ const LiveTVDashboard: React.FC = () => {
           </div>
 
           {/* Categories */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide -mx-2 px-2">
+          <div className="flex flex-wrap items-center gap-2 overflow-x-auto pb-2 scrollbar-hide -mx-2 px-2">
             {CATEGORIES.map(category => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`whitespace-nowrap px-4 py-2 md:px-5 md:py-2.5 rounded-xl md:rounded-2xl text-xs md:text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
+                className={`whitespace-nowrap px-4 py-2 md:px-5 md:py-2.5 rounded-xl md:rounded-2xl text-xs md:text-sm font-bold transition-all duration-300 flex flex-wrap items-center gap-2 ${
                   selectedCategory === category 
                     ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30' 
                     : 'bg-[#1C1C2E]/60 text-white/60 hover:bg-[#1C1C2E] hover:text-white border border-white/5'
@@ -516,7 +516,7 @@ const LiveTVDashboard: React.FC = () => {
           </div>
 
           {/* Channels Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4">
             {loading ? (
               [...Array(4)].map((_, i) => (
                 <div key={i} className="h-20 bg-white/5 rounded-2xl animate-pulse"></div>
@@ -530,7 +530,7 @@ const LiveTVDashboard: React.FC = () => {
                   <div 
                     key={channel._id}
                     onClick={() => handleChannelClick(channel)}
-                    className={`relative p-3 rounded-2xl border transition-all cursor-pointer flex items-center gap-4 ${isPlaying ? 'bg-indigo-500/10 border-indigo-500/50 shadow-[0_0_15px_rgba(99,102,241,0.2)]' : 'bg-black/20 border-white/5 hover:bg-white/5 hover:border-white/10'}`}
+                    className={`relative p-3 rounded-2xl border transition-all cursor-pointer flex flex-wrap items-center gap-4 ${isPlaying ? 'bg-indigo-500/10 border-indigo-500/50 shadow-[0_0_15px_rgba(99,102,241,0.2)]' : 'bg-black/20 border-white/5 hover:bg-white/5 hover:border-white/10'}`}
                   >
                     {/* Logo */}
                     <div className="w-14 h-14 bg-white/10 rounded-xl flex-shrink-0 flex items-center justify-center overflow-hidden">
@@ -556,7 +556,7 @@ const LiveTVDashboard: React.FC = () => {
                     
                     {/* Info */}
                     <div className="flex-grow overflow-hidden">
-                      <div className="flex items-center gap-2 mb-1">
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
                         <h3 className={`text-sm font-black truncate ${isPlaying ? 'text-indigo-400' : 'text-white'}`}>
                           {channel.name}
                         </h3>
@@ -620,7 +620,7 @@ const LiveTVDashboard: React.FC = () => {
               <p className="text-xs text-white/50 mb-6 font-medium leading-relaxed">
                 This channel requires an active Elite Premium subscription. Upgrade your account to unlock this stream and more exclusive content.
               </p>
-              <div className="w-full flex gap-3">
+              <div className="w-full flex flex-wrap gap-3">
                 <button 
                   onClick={() => setShowPremiumModal(false)}
                   className="flex-1 py-3 rounded-xl bg-white/5 text-white/50 text-xs font-black uppercase hover:bg-white/10 transition-all"

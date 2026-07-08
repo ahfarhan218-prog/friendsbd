@@ -137,7 +137,7 @@ const CommunityMembers: React.FC = () => {
         <div className="absolute top-8 right-4 w-32 h-32 bg-purple-600/10 rounded-full blur-3xl" />
         <div className="absolute bottom-4 left-8 w-24 h-24 bg-indigo-600/10 rounded-full blur-2xl" />
 
-        <div className="relative z-10 flex items-center gap-4">
+        <div className="relative z-10 flex flex-wrap items-center gap-4">
           <button
             onClick={() => navigate('/home')}
             className="p-3 bg-white/10 hover:bg-white/20 rounded-2xl transition-all active:scale-90 border border-white/10 backdrop-blur-md"
@@ -147,7 +147,7 @@ const CommunityMembers: React.FC = () => {
             </svg>
           </button>
           <div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="text-xl">{getHeaderIcon()}</span>
               <h2 className="text-2xl font-black tracking-tight italic bg-gradient-to-r from-white via-purple-200 to-indigo-200 bg-clip-text text-transparent">
                 {getHeaderTitle()}
@@ -182,7 +182,7 @@ const CommunityMembers: React.FC = () => {
         </div>
 
         {/* Filter Pills */}
-        <div className="bg-[#1C1C2E] p-1.5 rounded-[2rem] border border-white/5 flex gap-1.5 shadow-2xl">
+        <div className="bg-[#1C1C2E] p-1.5 rounded-[2rem] border border-white/5 flex flex-wrap gap-1.5 shadow-2xl">
           {[
             { id: 'all', label: 'All', count: null },
             { id: 'online', label: 'Online', count: onlineUsers.length },
@@ -192,7 +192,7 @@ const CommunityMembers: React.FC = () => {
             <button
               key={f.id}
               onClick={() => setFilter(f.id)}
-              className={`flex-1 py-3 rounded-[1.5rem] text-[10px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-1 ${
+              className={`flex flex-wrap-1 py-3 rounded-[1.5rem] text-[10px] font-black uppercase tracking-widest transition-all flex flex-wrap items-center justify-center gap-1 ${
                 filter === f.id
                   ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-600/30'
                   : 'text-white/40 hover:text-white/70 hover:bg-white/5'
@@ -212,7 +212,7 @@ const CommunityMembers: React.FC = () => {
         </div>
 
         {/* Member Grid/List */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4">
           <AnimatePresence mode="popLayout">
             {filteredUsers.length > 0 ? (
               [...filteredUsers]
@@ -231,7 +231,7 @@ const CommunityMembers: React.FC = () => {
                     transition={{ duration: 0.2 }}
                     className="bg-[#1C1C2E] border border-white/5 rounded-[2rem] p-5 flex flex-col justify-between hover:border-purple-500/20 transition-all shadow-xl"
                   >
-                    <div className="flex items-center gap-4">
+                    <div className="flex flex-wrap items-center gap-4">
                       <div className="relative shrink-0">
                         <img
                           src={u.avatar || `https://picsum.photos/seed/${u.id}/100`}

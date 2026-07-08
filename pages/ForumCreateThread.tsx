@@ -178,8 +178,8 @@ const ForumCreateThread: React.FC = () => {
       <div className="absolute bottom-20 left-10 w-80 h-80 bg-purple-600/5 rounded-full blur-[110px] pointer-events-none" />
 
       {/* HEADER SECTION */}
-      <header className="p-6 max-w-5xl mx-auto flex items-center justify-between border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md rounded-b-[2rem]">
-        <div className="flex items-center gap-4">
+      <header className="p-6 max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto flex items-center justify-between border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md rounded-b-[2rem]">
+        <div className="flex flex-wrap items-center gap-4">
           <button
             onClick={() => navigate(-1)}
             className="p-3 bg-[#121824] hover:bg-slate-800 border border-[#1f293d] rounded-2xl text-slate-400 hover:text-white transition-all active:scale-95 shadow-sm"
@@ -196,12 +196,12 @@ const ForumCreateThread: React.FC = () => {
       </header>
 
       {/* EDITOR CONTENT */}
-      <main className="max-w-3xl mx-auto px-6 mt-6 space-y-5 relative z-10 text-left">
+      <main className="max-w-full max-w-3xl mx-auto px-4 sm:px-6 mx-auto px-6 mt-6 space-y-5 relative z-10 text-left">
         {error && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-rose-500/10 border border-rose-500/20 rounded-2xl p-4 flex items-center gap-3"
+            className="bg-rose-500/10 border border-rose-500/20 rounded-2xl p-4 flex flex-wrap items-center gap-3"
           >
             <span className="text-rose-400 text-xl shrink-0">⚠️</span>
             <p className="text-rose-300 text-xs font-bold">{error}</p>
@@ -211,13 +211,13 @@ const ForumCreateThread: React.FC = () => {
         {/* CATEGORY SELECTOR */}
         <div className="bg-[#121824] rounded-3xl border border-[#1f293d] p-5 space-y-3 shadow-lg">
           <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Select category</label>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-2">
             {categories.map(cat => (
               <button
                 key={cat.id}
                 type="button"
                 onClick={() => setCategoryId(cat.id)}
-                className={`p-3.5 rounded-2xl border text-left transition-all active:scale-95 flex items-center gap-3 ${
+                className={`p-3.5 rounded-2xl border text-left transition-all active:scale-95 flex flex-wrap items-center gap-3 ${
                   categoryId === cat.id
                     ? 'bg-indigo-600/10 border-indigo-500/50 shadow-md text-white'
                     : 'bg-[#090d16] border-[#1f293d] text-slate-400 hover:border-slate-800'
@@ -317,7 +317,7 @@ const ForumCreateThread: React.FC = () => {
           type="button"
           onClick={handlePublish}
           disabled={!title.trim() || !content.trim() || loading}
-          className="w-full bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-black py-4 rounded-3xl text-xs uppercase tracking-widest shadow-lg shadow-indigo-600/20 flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
+          className="w-full bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-black py-4 rounded-3xl text-xs uppercase tracking-widest shadow-lg shadow-indigo-600/20 flex flex-wrap items-center justify-center gap-2 transition-all active:scale-[0.98]"
         >
           {loading ? (
             <>

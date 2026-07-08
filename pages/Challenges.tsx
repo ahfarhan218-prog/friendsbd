@@ -57,7 +57,7 @@ const Challenges: React.FC = () => {
   return (
     <div className="min-h-screen bg-transparent font-inter">
       <header className="bg-orange-600 text-white p-4 sm:p-6 pb-16 sm:pb-20 rounded-b-[2rem] sm:rounded-b-[3rem] flex items-center justify-between flex-wrap gap-2">
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-4">
           <button onClick={() => navigate(-1)} className="p-2 bg-orange-500 rounded-full active:scale-90">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
           </button>
@@ -79,7 +79,7 @@ const Challenges: React.FC = () => {
                 <h3 className="font-black text-slate-800 text-sm">{task.title}</h3>
                 <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{task.desc}</p>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <button 
                   onClick={() => setReminder(task)}
                   className="w-8 h-8 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center text-xs shadow-sm hover:bg-indigo-100 transition-colors"

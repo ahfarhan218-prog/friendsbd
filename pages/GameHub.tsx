@@ -43,7 +43,7 @@ const GameHub: React.FC<GameHubProps> = ({ game, icon, color }) => {
           <div className="w-24 h-24 bg-white/10 rounded-[2rem] flex items-center justify-center text-5xl shadow-2xl backdrop-blur-md border border-white/10 mb-4">
             {icon}
           </div>
-          <div className="flex items-center gap-2 bg-black/20 px-4 py-1.5 rounded-full backdrop-blur-sm">
+          <div className="flex flex-wrap items-center gap-2 bg-black/20 px-4 py-1.5 rounded-full backdrop-blur-sm">
             <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
             <span className="text-[10px] font-black text-white uppercase tracking-widest">{onlineCount.toLocaleString()} Players Online</span>
           </div>
@@ -58,7 +58,7 @@ const GameHub: React.FC<GameHubProps> = ({ game, icon, color }) => {
           </div>
           <div className="space-y-4">
             <button className="w-full bg-[#161b22] p-5 rounded-2xl flex items-center justify-between group hover:bg-[#1C1C2E] transition-all border border-white/5 active:scale-[0.99] hover:border-purple-500/30">
-              <div className="flex items-center gap-4">
+              <div className="flex flex-wrap items-center gap-4">
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center text-xl text-white shadow-lg bg-gradient-to-br from-purple-600 to-indigo-600">🎮</div>
                 <div className="text-left">
                   <p className="text-xs font-black text-white">Ranked Match</p>
@@ -68,7 +68,7 @@ const GameHub: React.FC<GameHubProps> = ({ game, icon, color }) => {
               <span className="text-white/20 group-hover:text-purple-400 transition-colors">→</span>
             </button>
             <button className="w-full bg-[#161b22] p-5 rounded-2xl flex items-center justify-between group hover:bg-[#1C1C2E] transition-all border border-white/5 active:scale-[0.99] hover:border-purple-500/30">
-              <div className="flex items-center gap-4">
+              <div className="flex flex-wrap items-center gap-4">
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center text-xl text-white shadow-lg bg-gradient-to-br from-purple-600 to-indigo-600">👥</div>
                 <div className="text-left">
                   <p className="text-xs font-black text-white">Play with Friends</p>
@@ -91,7 +91,7 @@ const GameHub: React.FC<GameHubProps> = ({ game, icon, color }) => {
           <div className="space-y-4">
             {topPlayers.map((p, i) => (
               <div key={i} className="flex items-center justify-between px-2">
-                <div className="flex items-center gap-4">
+                <div className="flex flex-wrap items-center gap-4">
                   <span className="text-xs font-black text-white/30">#0{i + 1}</span>
                   <img src={`https://picsum.photos/seed/p${i + 10}/50`} className="w-8 h-8 rounded-lg border border-purple-500/30" alt="" />
                   <span className="text-xs font-bold text-white/80">{p.name}</span>

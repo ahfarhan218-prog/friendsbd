@@ -125,7 +125,7 @@ const Reminders: React.FC = () => {
                       className="w-full bg-slate-50 border-none rounded-2xl p-4 text-xs font-bold outline-none focus:ring-2 ring-indigo-200"
                     />
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap gap-2">
                     <button onClick={handleAddReminder} className="flex-1 bg-indigo-600 text-white font-black py-4 rounded-2xl uppercase text-[10px] tracking-widest shadow-xl shadow-indigo-100">Establish</button>
                     <button onClick={() => setShowForm(false)} className="px-6 bg-slate-100 text-slate-400 font-black py-4 rounded-2xl uppercase text-[10px] tracking-widest">Abort</button>
                   </div>
@@ -142,7 +142,7 @@ const Reminders: React.FC = () => {
                 key={rem.id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`bg-white p-6 rounded-[2.5rem] shadow-sm border ${isPast ? 'border-slate-100 opacity-60' : 'border-indigo-100'} flex items-center gap-5`}
+                className={`bg-white p-6 rounded-[2.5rem] shadow-sm border ${isPast ? 'border-slate-100 opacity-60' : 'border-indigo-100'} flex flex-wrap items-center gap-5`}
               >
                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shrink-0 ${isPast ? 'bg-slate-100 grayscale' : 'bg-indigo-50 text-indigo-600'}`}>
                     ⏰
@@ -150,7 +150,7 @@ const Reminders: React.FC = () => {
                  <div className="flex-1 min-w-0">
                     <h4 className="text-sm font-black text-slate-800 tracking-tight truncate">{rem.title}</h4>
                     <p className="text-[10px] text-slate-400 font-bold uppercase mt-0.5 truncate">{rem.description || 'No notes added'}</p>
-                    <div className="flex items-center gap-2 mt-2">
+                    <div className="flex flex-wrap items-center gap-2 mt-2">
                        <span className={`text-[8px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest ${isPast ? 'bg-rose-50 text-rose-500' : 'bg-emerald-50 text-emerald-600'}`}>
                           {isPast ? 'EXPIRED' : 'ACTIVE'}
                        </span>

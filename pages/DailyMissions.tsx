@@ -78,7 +78,7 @@ const DailyMissions: React.FC = () => {
       <div className="bg-indigo-600 text-white pt-8 pb-10 px-6 rounded-b-[2rem] shadow-lg relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay pointer-events-none"></div>
         <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-2">
+          <div className="flex flex-wrap items-center gap-3 mb-2">
             <span className="text-3xl">🎯</span>
             <h1 className="text-2xl font-black tracking-tight">Daily Missions</h1>
           </div>
@@ -141,7 +141,7 @@ const DailyMissions: React.FC = () => {
                  </div>
                  
                  <div className="ml-4 flex flex-col items-end">
-                   <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg border ${rewardStyle}`}>
+                   <div className={`flex flex-wrap items-center gap-1.5 px-2.5 py-1 rounded-lg border ${rewardStyle}`}>
                      <span className="text-sm">{getRewardIcon(mission.rewardType)}</span>
                      <span className="font-bold text-sm">+{mission.rewardAmount}</span>
                    </div>

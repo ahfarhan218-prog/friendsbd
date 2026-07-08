@@ -244,19 +244,19 @@ const Conference: React.FC = () => {
       {/* HEADER */}
       <header className="relative z-50 bg-[#12122A]/80 backdrop-blur-xl border-b border-purple-500/20 p-4 sm:p-6 pb-6 shadow-[0_4px_30px_rgba(0,0,0,0.5)] shrink-0">
          <div className="flex justify-between items-center mb-4">
-            <div className="flex items-center gap-3 sm:gap-4">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                <button onClick={() => navigate('/conference')} className="p-2 bg-white/5 hover:bg-white/10 rounded-xl active:scale-90 border border-white/10 transition-colors">
                   <svg className="w-5 h-5 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/></svg>
                </button>
                <div>
                   <h2 className="text-lg sm:text-xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">{room.name}</h2>
-                  <div className="flex items-center gap-2 mt-1">
+                  <div className="flex flex-wrap items-center gap-2 mt-1">
                      <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
                      <p className="text-[8px] sm:text-[10px] font-black uppercase tracking-widest text-emerald-400/80">{room.members.length} Secure Connections</p>
                   </div>
                </div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
                {(isOwner || isAdmin) && (
                  <button onClick={handleDeleteRoom} className="w-10 h-10 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 rounded-xl border border-rose-500/30 flex items-center justify-center transition-colors">🗑️</button>
                )}
@@ -269,7 +269,7 @@ const Conference: React.FC = () => {
             {pinnedMessages.length > 0 && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="space-y-2 mt-2">
                  {pinnedMessages.map(pm => (
-                   <div key={pm.id} className="bg-[#1A1A35]/60 backdrop-blur-md border border-amber-500/20 rounded-2xl p-3 flex items-center gap-3 shadow-[0_0_15px_rgba(245,158,11,0.1)]">
+                   <div key={pm.id} className="bg-[#1A1A35]/60 backdrop-blur-md border border-amber-500/20 rounded-2xl p-3 flex flex-wrap items-center gap-3 shadow-[0_0_15px_rgba(245,158,11,0.1)]">
                       <span className="text-amber-400">📌</span>
                       <div className="flex-1 min-w-0">
                          <p className="text-[10px] font-black text-amber-400 uppercase tracking-widest">{pm.senderName}</p>
@@ -296,12 +296,12 @@ const Conference: React.FC = () => {
          ) : messages.map((m) => {
            const isMe = m.senderId === activeUser.id;
            return (
-             <div key={m.id} className={`flex items-end gap-3 group animate-in fade-in slide-in-from-bottom-2 ${isMe ? 'flex-row-reverse' : ''}`}>
+             <div key={m.id} className={`flex flex-wrap items-end gap-3 group animate-in fade-in slide-in-from-bottom-2 ${isMe ? 'flex flex-wrap-row-reverse' : ''}`}>
                 <img src={m.senderAvatar} className="w-8 h-8 sm:w-10 sm:h-10 rounded-[1rem] shadow-lg border border-white/10" alt="" />
                 
                 <div className={`flex flex-col max-w-[85%] sm:max-w-[75%] ${isMe ? 'items-end' : 'items-start'}`}>
                    {/* Name & Time */}
-                   <div className={`flex items-center gap-2 mb-1 px-1 ${isMe ? 'flex-row-reverse' : ''}`}>
+                   <div className={`flex flex-wrap items-center gap-2 mb-1 px-1 ${isMe ? 'flex flex-wrap-row-reverse' : ''}`}>
                       <p className="text-[10px] font-black text-purple-300/80 uppercase tracking-widest">{isMe ? 'YOU' : m.senderName}</p>
                       <p className="text-[8px] font-bold text-slate-500 uppercase">{new Date(m.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
                       {m.isEdited && <span className="text-[7px] font-bold text-slate-400 uppercase">Edited</span>}
@@ -310,7 +310,7 @@ const Conference: React.FC = () => {
                    {/* Bubble */}
                    <div className="relative group">
                      {/* Actions (Hover) */}
-                     <div className={`absolute -top-8 ${isMe ? 'right-0' : 'left-0'} opacity-0 group-hover:opacity-100 transition-opacity flex gap-1 bg-[#12122A]/90 backdrop-blur-md border border-white/10 p-1 rounded-xl z-20`}>
+                     <div className={`absolute -top-8 ${isMe ? 'right-0' : 'left-0'} opacity-0 group-hover:opacity-100 transition-opacity flex flex-wrap gap-1 bg-[#12122A]/90 backdrop-blur-md border border-white/10 p-1 rounded-xl z-20`}>
                         {(isMe || isAdmin) && (
                           <>
                             <button onClick={() => { setInputText(m.text); setEditingId(m.id); }} className="w-6 h-6 flex items-center justify-center text-[10px] text-slate-400 hover:text-purple-400 transition-colors bg-white/5 rounded-lg">✏️</button>
@@ -341,7 +341,7 @@ const Conference: React.FC = () => {
                                acc[emoji] = (acc[emoji] || 0) + 1;
                                return acc;
                              }, {})).map(([emoji, count]) => (
-                               <button key={emoji} onClick={() => handleReact(m.id, emoji)} className="bg-black/20 border border-white/10 rounded-lg px-2 py-0.5 flex items-center gap-1.5 hover:bg-black/40 transition-colors">
+                               <button key={emoji} onClick={() => handleReact(m.id, emoji)} className="bg-black/20 border border-white/10 rounded-lg px-2 py-0.5 flex flex-wrap items-center gap-1.5 hover:bg-black/40 transition-colors">
                                   <span className="text-[10px]">{emoji}</span>
                                   <span className="text-[8px] font-black text-white/70">{count}</span>
                                </button>
@@ -373,7 +373,7 @@ const Conference: React.FC = () => {
 
       {/* INPUT AREA */}
       <div className="p-4 sm:p-6 bg-[#12122A]/80 backdrop-blur-xl border-t border-purple-500/20 shrink-0 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] z-50">
-         <div className="flex items-center gap-2 sm:gap-3 max-w-4xl mx-auto">
+         <div className="flex flex-wrap items-center gap-2 sm:gap-3 max-w-full max-w-4xl mx-auto px-4 sm:px-6 mx-auto">
             {/* Attachment Placeholders */}
             <button className="w-10 h-10 shrink-0 bg-white/5 hover:bg-white/10 rounded-full flex items-center justify-center text-slate-400 transition-colors" title="Attach File (Simulated)">📎</button>
             <button className="hidden sm:flex w-10 h-10 shrink-0 bg-white/5 hover:bg-white/10 rounded-full items-center justify-center text-slate-400 transition-colors" title="Audio Message (Simulated)">🎤</button>
@@ -421,7 +421,7 @@ const Conference: React.FC = () => {
                        const mUser = [...allUsers, activeUser].find(u => u?.id === mid);
                        return (
                          <div key={mid} className="bg-[#1A1A35]/60 p-3 sm:p-4 rounded-2xl flex items-center justify-between border border-white/5">
-                            <div className="flex items-center gap-3">
+                            <div className="flex flex-wrap items-center gap-3">
                                <img src={mUser?.avatar || `https://picsum.photos/seed/${mid}/50`} className="w-9 h-9 rounded-xl shadow-md border border-white/10" alt="" />
                                <div>
                                   <p className="text-xs font-black text-white">{mUser?.name || 'Unknown'}</p>
@@ -443,7 +443,7 @@ const Conference: React.FC = () => {
                        <div className="space-y-2">
                           {allUsers.filter(f => f.id && !room.members.includes(f.id) && !room.invites.includes(f.id)).map(f => (
                             <button key={f.id} onClick={() => handleInvite(f.id)} className="w-full flex items-center justify-between p-3 sm:p-4 bg-purple-500/10 rounded-2xl border border-purple-500/20 hover:bg-purple-500/20 transition-colors group">
-                               <div className="flex items-center gap-3">
+                               <div className="flex flex-wrap items-center gap-3">
                                   <img src={f.avatar} className="w-8 h-8 rounded-lg border border-white/10" alt="" />
                                   <p className="text-xs font-black text-purple-100">{f.name}</p>
                                </div>
@@ -456,7 +456,7 @@ const Conference: React.FC = () => {
                                {room.invites.map(iid => {
                                  const iUser = allUsers.find(u => u.id === iid);
                                  return (
-                                   <div key={iid} className="flex items-center gap-3 p-3 border border-dashed border-white/10 rounded-xl grayscale opacity-70">
+                                   <div key={iid} className="flex flex-wrap items-center gap-3 p-3 border border-dashed border-white/10 rounded-xl grayscale opacity-70">
                                       <img src={iUser?.avatar || `https://picsum.photos/seed/${iid}/30`} className="w-6 h-6 rounded-lg" alt="" />
                                       <p className="text-[10px] font-bold text-slate-400">{iUser?.name || 'Unknown'}</p>
                                    </div>

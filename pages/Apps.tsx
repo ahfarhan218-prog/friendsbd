@@ -93,7 +93,7 @@ const Apps: React.FC = () => {
       </div>
 
       {/* Header & Description */}
-      <div className="max-w-4xl mx-auto px-6 pt-4 space-y-5">
+      <div className="max-w-full max-w-4xl mx-auto px-4 sm:px-6 mx-auto px-6 pt-4 space-y-5">
         <div className="text-center space-y-2">
           <h2 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400 uppercase tracking-tight drop-shadow-[0_0_15px_rgba(168,85,247,0.4)]">App Center</h2>
           <p className="text-xs text-white/50 font-medium max-w-md mx-auto leading-relaxed">
@@ -125,7 +125,7 @@ const Apps: React.FC = () => {
       </div>
 
       {/* Categories / Grid Lists */}
-      <div className="max-w-4xl mx-auto px-6 mt-10 space-y-8">
+      <div className="max-w-full max-w-4xl mx-auto px-4 sm:px-6 mx-auto px-6 mt-10 space-y-8">
         {filteredSections.length === 0 ? (
           <div className="bg-[#1C1C2E]/60 backdrop-blur-xl border border-white/5 rounded-[2rem] p-12 text-center space-y-3 shadow-xl max-w-md mx-auto">
             <span className="text-5xl block drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">🔍</span>
@@ -144,7 +144,7 @@ const Apps: React.FC = () => {
               
               {/* Category Header */}
               <div className="flex items-center justify-between pb-4 border-b border-white/5 relative z-10">
-                <div className="flex items-center gap-4">
+                <div className="flex flex-wrap items-center gap-4">
                   <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl shadow-inner shadow-white/5">
                     {section.icon || '✨'}
                   </div>
@@ -159,7 +159,7 @@ const Apps: React.FC = () => {
               </div>
 
               {/* Apps Grid Layout */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-x-4 gap-y-8 pt-8 relative z-10">
+              <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 lg:grid-cols-8 gap-x-4 gap-y-8 pt-8 relative z-10">
                 {section.apps.map((app) => (
                   <button
                     key={app.id}

@@ -169,7 +169,7 @@ const LottoGiftModule: React.FC<LottoGiftModuleProps> = ({ currentUser, onCoinsU
           Deduct 15 Golden Coins from your balance to activate 7 days of 3x AP lotto boost for a friend.
         </p>
 
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <input
             type="text"
             value={targetUsername}

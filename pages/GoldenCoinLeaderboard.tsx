@@ -68,7 +68,7 @@ const GoldenCoinLeaderboard: React.FC = () => {
         </div>
 
         {/* Tab Selection */}
-        <div className="relative z-10 bg-white/10 backdrop-blur-md rounded-2xl p-1.5 flex gap-1 border border-white/10">
+        <div className="relative z-10 bg-white/10 backdrop-blur-md rounded-2xl p-1.5 flex flex-wrap gap-1 border border-white/10">
           {(['all', 'weekly', 'daily'] as const).map(f => (
             <button 
               key={f}
@@ -85,7 +85,7 @@ const GoldenCoinLeaderboard: React.FC = () => {
 
       <div className="px-5 -mt-10 space-y-8 relative z-10">
         {/* PODIUM SECTION */}
-        <div className="flex items-end justify-center gap-2 h-72 pb-4">
+        <div className="flex flex-wrap items-end justify-center gap-2 h-72 pb-4">
           {/* 2nd Place */}
           {podium[1] && (
             <motion.div 
@@ -161,14 +161,14 @@ const GoldenCoinLeaderboard: React.FC = () => {
                 animate={{ opacity: 1, x: 0 }}
                 className="flex items-center justify-between p-4 bg-slate-50/50 border border-slate-100 rounded-[2rem] hover:bg-white hover:shadow-lg hover:border-purple-100 transition-all group"
               >
-                <div className="flex items-center gap-4">
+                <div className="flex flex-wrap items-center gap-4">
                   <span className="w-6 text-center text-[10px] font-black text-slate-300 group-hover:text-purple-400">#{idx + 4}</span>
                   <div className="relative">
                     <img src={u.avatar} className="w-10 h-10 rounded-xl border border-white shadow-sm" alt="" />
                     <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white" />
                   </div>
                   <div>
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex flex-wrap items-center gap-1.5">
                       <p className="text-xs font-black text-slate-800">{u.username}</p>
                       {getBadge(u.totalGrabbed) && (
                         <span className="text-[10px]" title={getBadge(u.totalGrabbed)?.label}>
@@ -207,7 +207,7 @@ const GoldenCoinLeaderboard: React.FC = () => {
             className="fixed bottom-28 md:bottom-8 left-0 md:left-72 right-0 max-w-md mx-auto px-6 z-[60]"
           >
             <div className="bg-slate-900 text-white rounded-[2rem] p-5 shadow-2xl border border-white/10 flex items-center justify-between">
-              <div className="flex items-center gap-4">
+              <div className="flex flex-wrap items-center gap-4">
                 <div className="bg-amber-400 text-purple-900 w-10 h-10 rounded-xl flex items-center justify-center font-black text-xs shadow-lg">
                   #{myRank.rank}
                 </div>

@@ -42,7 +42,7 @@ const CricketMatch: React.FC = () => {
          <div className="absolute bottom-0 right-0 p-24 bg-emerald-500/10 rounded-full blur-2xl -mr-16 pointer-events-none" />
          
           <div className="relative z-10 flex items-center justify-between flex-wrap gap-3">
-           <div className="flex items-center gap-4">
+           <div className="flex flex-wrap items-center gap-4">
              <button onClick={() => navigate(-1)} className="p-3 bg-white/5 rounded-2xl active:scale-90 border border-white/10 hover:bg-white/10 transition-colors">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
              </button>
@@ -51,7 +51,7 @@ const CricketMatch: React.FC = () => {
                <p className="text-[8px] font-black uppercase tracking-widest text-slate-400">Dhaka Tigers vs Sylhet</p>
              </div>
            </div>
-           <div className="flex items-center gap-2 bg-rose-600/80 backdrop-blur-md px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest border border-rose-400/50 shadow-[0_0_15px_rgba(225,29,72,0.5)] animate-pulse">
+           <div className="flex flex-wrap items-center gap-2 bg-rose-600/80 backdrop-blur-md px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest border border-rose-400/50 shadow-[0_0_15px_rgba(225,29,72,0.5)] animate-pulse">
               <span className="w-2 h-2 bg-white rounded-full shadow-[0_0_10px_rgba(255,255,255,0.8)]"></span>
               Live
            </div>
@@ -96,7 +96,7 @@ const CricketMatch: React.FC = () => {
               </div>
            </div>
 
-           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
+           <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
              <div className="bg-[#090d16]/60 p-5 rounded-[2rem] border border-[#30363d] shadow-inner hover:border-emerald-500/30 transition-colors">
                 <p className="text-[8px] font-black text-slate-500 uppercase tracking-[0.2em] mb-1">Current Batter</p>
                 <p className="text-xs font-black text-white italic tracking-tight">S. Hasan <span className="text-emerald-400">(34*)</span></p>
@@ -111,21 +111,21 @@ const CricketMatch: React.FC = () => {
         {/* Live Match Feed Simulation */}
         <div className="bg-[#161b22]/80 backdrop-blur-xl rounded-[3rem] p-8 shadow-xl border border-[#30363d]">
            <div className="flex items-center justify-between mb-8">
-              <h3 className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.2em] flex items-center gap-3">
+              <h3 className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.2em] flex flex-wrap items-center gap-3">
                 <span className="text-xl">📢</span> Live Commentary
               </h3>
               <span className="text-[8px] font-black text-slate-400 bg-white/5 px-3 py-1.5 rounded-full border border-white/10 uppercase tracking-widest">Updating...</span>
            </div>
            
            <div className="space-y-4">
-              <div className="flex gap-4 items-start p-4 bg-indigo-900/20 rounded-[2rem] border border-indigo-500/30 shadow-inner group transition-all hover:bg-indigo-900/30">
+              <div className="flex flex-wrap gap-4 items-start p-4 bg-indigo-900/20 rounded-[2rem] border border-indigo-500/30 shadow-inner group transition-all hover:bg-indigo-900/30">
                  <div className="w-10 h-10 shrink-0 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-[11px] font-black shadow-[0_0_15px_rgba(99,102,241,0.4)] border border-indigo-400 group-hover:scale-110 transition-transform">4</div>
                  <div>
                     <p className="text-xs font-bold text-slate-200 leading-relaxed">FOUR! S. Hasan pulls it away beautifully into the deep square leg boundary.</p>
                     <p className="text-[9px] text-indigo-300 mt-2 uppercase font-black tracking-widest opacity-80">Over 5.2 • Ball 2</p>
                  </div>
               </div>
-              <div className="flex gap-4 items-start p-4 bg-[#090d16]/60 rounded-[2rem] border border-[#30363d] shadow-inner group transition-all hover:bg-white/5">
+              <div className="flex flex-wrap gap-4 items-start p-4 bg-[#090d16]/60 rounded-[2rem] border border-[#30363d] shadow-inner group transition-all hover:bg-white/5">
                  <div className="w-10 h-10 shrink-0 rounded-2xl bg-slate-800 flex items-center justify-center text-slate-300 text-[11px] font-black border border-slate-600 group-hover:scale-110 transition-transform">1</div>
                  <div>
                     <p className="text-xs font-medium text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">Single to mid-on, comfortably keeping the strike for the next ball.</p>
@@ -138,13 +138,13 @@ const CricketMatch: React.FC = () => {
         {/* Refresh / Join Button */}
         <button 
           onClick={() => navigate('/chat')}
-          className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-black py-5 rounded-[2rem] shadow-[0_0_20px_rgba(16,185,129,0.3)] flex items-center justify-center gap-3 transition-all hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] active:scale-95 uppercase tracking-[0.2em] text-[10px] border border-emerald-400/50"
+          className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-black py-5 rounded-[2rem] shadow-[0_0_20px_rgba(16,185,129,0.3)] flex flex-wrap items-center justify-center gap-3 transition-all hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] active:scale-95 uppercase tracking-[0.2em] text-[10px] border border-emerald-400/50"
         >
            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
            Join Live Match Chat
         </button>
 
-        <p className="text-center text-[9px] text-slate-500 font-black uppercase tracking-[0.2em] mt-4 flex items-center justify-center gap-2">
+        <p className="text-center text-[9px] text-slate-500 font-black uppercase tracking-[0.2em] mt-4 flex flex-wrap items-center justify-center gap-2">
           <span>Data Stream: <span className="text-emerald-400 drop-shadow-[0_0_5px_rgba(52,211,153,0.5)]">Optimized</span></span>
           <span className="w-1 h-1 bg-slate-600 rounded-full"></span>
           <span>Latency: <span className="text-emerald-400 drop-shadow-[0_0_5px_rgba(52,211,153,0.5)]">24ms</span></span>

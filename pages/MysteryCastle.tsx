@@ -103,14 +103,14 @@ const MysteryCastle: React.FC = () => {
             <div className="absolute top-0 right-0 bg-indigo-500/20 px-4 py-2 rounded-bl-3xl border-b border-l border-indigo-500/30 text-[9px] font-black uppercase text-indigo-300 tracking-widest shadow-[0_0_15px_rgba(99,102,241,0.2)]">Level 1: Outer Wall</div>
             
             <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 mt-2">Attempts Remaining</p>
-            <div className="flex items-center justify-center gap-2">
+            <div className="flex flex-wrap items-center justify-center gap-2">
                <h3 className="text-5xl font-black text-white italic tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">{attempts}</h3>
                <span className="text-xl font-black text-slate-600 self-end mb-2">/ 5</span>
             </div>
          </div>
 
          {/* DOORS */}
-         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+         <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {[0, 1, 2].map(i => (
               <motion.button 
                 key={i}

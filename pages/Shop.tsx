@@ -117,8 +117,8 @@ const Shop: React.FC = () => {
       <div className="absolute bottom-20 left-10 w-80 h-80 bg-indigo-600/5 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Header */}
-      <header className="p-4 sm:p-6 max-w-5xl mx-auto flex items-center justify-between flex-wrap gap-3 border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md rounded-b-[2rem]">
-        <div className="flex items-center gap-4">
+      <header className="p-4 sm:p-6 max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto flex items-center justify-between flex-wrap gap-3 border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md rounded-b-[2rem]">
+        <div className="flex flex-wrap items-center gap-4">
           <button
             onClick={() => navigate(-1)}
             className="p-3 bg-[#121824] hover:bg-slate-800 border border-[#1f293d] rounded-2xl text-slate-400 hover:text-white transition-all active:scale-95 shadow-sm"
@@ -132,7 +132,7 @@ const Shop: React.FC = () => {
             <h1 className="text-lg font-black text-white tracking-tight">Virtual items</h1>
           </div>
         </div>
-        <div className="bg-[#121824] border border-[#1f293d] px-4 py-2 rounded-2xl text-right flex items-center gap-3">
+        <div className="bg-[#121824] border border-[#1f293d] px-4 py-2 rounded-2xl text-right flex flex-wrap items-center gap-3">
           <div>
             <span className="text-[8px] text-slate-500 font-bold uppercase block tracking-wider">Your Points</span>
             <span className="text-sm font-black text-yellow-400 font-mono">{activeUser.points || 0} pts</span>
@@ -141,8 +141,8 @@ const Shop: React.FC = () => {
       </header>
 
       {/* Main Grid */}
-      <main className="max-w-5xl mx-auto px-6 mt-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-3 gap-4 mb-12">
+      <main className="max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto px-6 mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-12">
           {items.map((item, i) => (
             <div
               key={i}
@@ -160,7 +160,7 @@ const Shop: React.FC = () => {
               <button
                 onClick={() => handleBuy(item)}
                 disabled={isBuying !== null}
-                className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-[10px] font-black py-3 rounded-xl transition-all active:scale-95 shadow-md shadow-purple-900/10 flex items-center justify-center gap-1.5 disabled:opacity-50"
+                className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-[10px] font-black py-3 rounded-xl transition-all active:scale-95 shadow-md shadow-purple-900/10 flex flex-wrap items-center justify-center gap-1.5 disabled:opacity-50"
               >
                 {isBuying === item.name ? (
                   <div className="w-3 h-3 border-2 border-white/20 border-t-white rounded-full animate-spin" />

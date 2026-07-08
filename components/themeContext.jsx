@@ -18,19 +18,19 @@ export const LIGHT_THEME_TOKENS = {
 export const LIGHT_THEME_CLASSES = {
   // A. Bidirectional Reward Ledger Capsule Tags
   ledgerTags: {
-    add: 'text-[#0f766e] bg-[#0f766e]/10 border border-[#0f766e]/20 font-bold px-2.5 py-1 rounded-full text-xs inline-flex items-center gap-1',
-    minus: 'text-[#dc2626] bg-[#dc2626]/10 border border-[#dc2626]/20 font-bold px-2.5 py-1 rounded-full text-xs inline-flex items-center gap-1',
-    pending: 'text-[#b45309] bg-[#b45309]/10 border border-[#b45309]/20 font-bold px-2.5 py-1 rounded-full text-xs inline-flex items-center gap-1'
+    add: 'text-[#0f766e] bg-[#0f766e]/10 border border-[#0f766e]/20 font-bold px-2.5 py-1 rounded-full text-xs inline-flex flex-wrap items-center gap-1',
+    minus: 'text-[#dc2626] bg-[#dc2626]/10 border border-[#dc2626]/20 font-bold px-2.5 py-1 rounded-full text-xs inline-flex flex-wrap items-center gap-1',
+    pending: 'text-[#b45309] bg-[#b45309]/10 border border-[#b45309]/20 font-bold px-2.5 py-1 rounded-full text-xs inline-flex flex-wrap items-center gap-1'
   },
   
   // B. User Tiers & Username styles
   userTiers: {
-    admin: 'text-[#6d28d9] font-bold inline-flex items-center gap-1',
-    seniorStaff: 'text-[#6d28d9] font-bold inline-flex items-center gap-1',
-    premium: 'text-[#0f766e] font-semibold inline-flex items-center gap-1',
-    trusted: 'text-[#0f766e] font-semibold inline-flex items-center gap-1',
-    elite: 'text-[#0f766e] font-semibold inline-flex items-center gap-1',
-    basic: 'text-[#000000] font-normal inline-flex items-center gap-1'
+    admin: 'text-[#6d28d9] font-bold inline-flex flex-wrap items-center gap-1',
+    seniorStaff: 'text-[#6d28d9] font-bold inline-flex flex-wrap items-center gap-1',
+    premium: 'text-[#0f766e] font-semibold inline-flex flex-wrap items-center gap-1',
+    trusted: 'text-[#0f766e] font-semibold inline-flex flex-wrap items-center gap-1',
+    elite: 'text-[#0f766e] font-semibold inline-flex flex-wrap items-center gap-1',
+    basic: 'text-[#000000] font-normal inline-flex flex-wrap items-center gap-1'
   },
   
   // C. Smilies Grid Mappings
@@ -42,7 +42,7 @@ export const LIGHT_THEME_CLASSES = {
     pinnedTopic: 'bg-[#ffffff] border-l-4 border-[#6d28d9] shadow-sm rounded-r-xl p-4 transition-all hover:bg-slate-50/50',
     liveTopic: 'bg-[#ffffff] border-l-4 border-[#0f766e] shadow-sm rounded-r-xl p-4 transition-all hover:bg-slate-50/50',
     normalTopic: 'bg-[#ffffff] border border-[#cbd5e1] shadow-sm rounded-xl p-4 transition-all hover:bg-slate-50/50',
-    warningBanner: 'bg-red-50 text-red-700 border border-red-200 rounded-xl p-4 font-semibold text-sm flex items-center gap-2'
+    warningBanner: 'bg-red-50 text-red-700 border border-red-200 rounded-xl p-4 font-semibold text-sm flex flex-wrap items-center gap-2'
   }
 };
 

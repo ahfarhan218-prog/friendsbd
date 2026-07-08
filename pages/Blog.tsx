@@ -22,7 +22,7 @@ const Blog: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-full max-w-4xl mx-auto px-4 sm:px-6 mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-2xl font-black text-white">📝 Blog</h1>
@@ -40,7 +40,7 @@ const Blog: React.FC = () => {
           <div className="space-y-4">
             {posts.map(post => (
               <Link key={post.id} to={`/blog/view/${post.id}`} className="pf-card p-6 block hover:border-purple-500/30 transition-all">
-                <div className="flex items-center gap-3 mb-3">
+                <div className="flex flex-wrap items-center gap-3 mb-3">
                   <img src={post.authorAvatar} className="w-10 h-10 rounded-full object-cover border-2 border-purple-500/30" alt="" />
                   <div>
                     <p className="text-sm font-bold text-white">{post.authorName}</p>
@@ -50,7 +50,7 @@ const Blog: React.FC = () => {
                 <h2 className="text-xl font-black text-white mb-2">{post.title}</h2>
                 <p className="text-sm text-white/50 line-clamp-3">{post.excerpt}</p>
                 {post.tags?.length > 0 && (
-                  <div className="flex gap-2 mt-3">
+                  <div className="flex flex-wrap gap-2 mt-3">
                     {post.tags.map((tag: string) => (
                       <span key={tag} className="text-[10px] text-purple-400 px-2 py-1 rounded-full bg-purple-500/10">#{tag}</span>
                     ))}

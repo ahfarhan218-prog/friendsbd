@@ -201,9 +201,9 @@ const ForumHome: React.FC = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[600px] h-[600px] bg-blue-900/3 rounded-full blur-[160px] pointer-events-none" />
 
       {/* HEADER */}
-      <header className="sticky top-0 z-40 p-4 max-w-5xl mx-auto">
+      <header className="sticky top-0 z-40 p-4 max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto">
         <div className="bg-slate-950/70 backdrop-blur-xl border border-[#1f293d]/60 rounded-3xl px-5 py-4 flex items-center justify-between shadow-2xl">
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <button
               onClick={() => navigate('/apps')}
               className="p-2.5 bg-[#121824] hover:bg-slate-800 border border-[#1f293d] rounded-2xl text-slate-400 hover:text-white transition-all active:scale-95"
@@ -213,7 +213,7 @@ const ForumHome: React.FC = () => {
               </svg>
             </button>
             <div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <span className="text-lg">💬</span>
                 <h1 className="text-base font-black text-white tracking-tight">Discussion Forums</h1>
               </div>
@@ -222,21 +222,21 @@ const ForumHome: React.FC = () => {
           </div>
           <button
             onClick={() => navigate('/forum/create')}
-            className="px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black text-[10px] uppercase tracking-widest rounded-2xl shadow-lg shadow-indigo-600/25 transition-all active:scale-[0.97] flex items-center gap-1.5"
+            className="px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black text-[10px] uppercase tracking-widest rounded-2xl shadow-lg shadow-indigo-600/25 transition-all active:scale-[0.97] flex flex-wrap items-center gap-1.5"
           >
             <span className="text-sm leading-none">+</span> New Topic
           </button>
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-4 mt-4 space-y-6">
+      <main className="max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto px-4 mt-4 space-y-6">
 
         {/* STATS DASHBOARD */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 sm:grid-cols-4 gap-3"
+          className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-1 sm:grid-cols-2 gap-4 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-3"
         >
           {[
             { label: 'Weekly Top', value: stats.weeklyTopPoster, icon: '🏆', color: 'text-amber-400', sub: 'Poster' },
@@ -269,7 +269,7 @@ const ForumHome: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             onClick={() => navigate(`/forum/thread/${stats.lastPostThreadId}`)}
-            className="bg-indigo-600/8 border border-indigo-500/20 rounded-3xl px-5 py-3 flex items-center gap-3 cursor-pointer hover:border-indigo-500/40 transition-all group"
+            className="bg-indigo-600/8 border border-indigo-500/20 rounded-3xl px-5 py-3 flex flex-wrap items-center gap-3 cursor-pointer hover:border-indigo-500/40 transition-all group"
           >
             <span className="text-indigo-400 text-base shrink-0">🕒</span>
             <div className="min-w-0 flex-1">
@@ -285,7 +285,7 @@ const ForumHome: React.FC = () => {
         {/* CATEGORIES SECTION */}
         <section className="space-y-4">
           <div className="flex items-center justify-between px-1">
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <h2 className="text-xs font-black text-slate-400 uppercase tracking-widest">Forum Categories</h2>
               <span className="px-2 py-0.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[9px] font-black rounded-lg">{categories.length}</span>
             </div>
@@ -300,13 +300,13 @@ const ForumHome: React.FC = () => {
           </div>
 
           {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 gap-4">
               {[1,2,3,4].map(i => (
                 <div key={i} className="h-24 bg-[#121824] border border-[#1f293d] rounded-3xl animate-pulse" />
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 gap-4">
               {categories.map((cat, i) => {
                 const gradient = colorMap[cat.color] || 'from-indigo-600 to-purple-600';
                 const topicsCount = getTopicCountForCategory(cat.id);
@@ -322,9 +322,9 @@ const ForumHome: React.FC = () => {
                   >
                     <div
                       onClick={() => navigate(`/forum/cat/${cat.slug}`)}
-                      className={`bg-[#121824] border border-[#1f293d] rounded-3xl p-5 flex items-center justify-between gap-4 cursor-pointer hover:border-slate-700 transition-all active:scale-[0.99] shadow-lg ${isDeleting ? 'opacity-50 pointer-events-none' : ''}`}
+                      className={`bg-[#121824] border border-[#1f293d] rounded-3xl p-5 flex flex-wrap items-center justify-between gap-4 cursor-pointer hover:border-slate-700 transition-all active:scale-[0.99] shadow-lg ${isDeleting ? 'opacity-50 pointer-events-none' : ''}`}
                     >
-                      <div className="flex items-center gap-4 min-w-0">
+                      <div className="flex flex-wrap items-center gap-4 min-w-0">
                         <div className={`w-14 h-14 rounded-2xl bg-gradient-to-tr ${gradient} shadow-lg flex items-center justify-center text-2xl shrink-0 group-hover:scale-105 transition-transform`}>
                           {cat.icon || '📁'}
                         </div>
@@ -336,8 +336,8 @@ const ForumHome: React.FC = () => {
                             )}
                           </div>
                           <p className="text-[10px] text-slate-400 mt-1 truncate">{cat.description}</p>
-                          <div className="flex items-center gap-2 mt-2">
-                            <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[9px] font-black uppercase bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-lg">
+                          <div className="flex flex-wrap items-center gap-2 mt-2">
+                            <span className="inline-flex flex-wrap items-center gap-1 px-2 py-0.5 text-[9px] font-black uppercase bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-lg">
                               🎯 {topicsCount} topics
                             </span>
                           </div>
@@ -368,7 +368,7 @@ const ForumHome: React.FC = () => {
         {/* SEARCH SECTION */}
         <section className="bg-[#121824] border border-[#1f293d] rounded-3xl p-6 shadow-xl">
           <div className="flex items-center justify-between border-b border-[#1f293d]/50 pb-4 mb-5">
-            <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+            <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest flex flex-wrap items-center gap-2">
               🔍 Global Search
             </h3>
             {isSearching && (
@@ -383,7 +383,7 @@ const ForumHome: React.FC = () => {
 
           <form onSubmit={handleSearch} className="space-y-3">
             <div className="flex flex-col sm:flex-row gap-2">
-              <div className="flex-1 bg-[#090d16] border border-[#1f293d] rounded-2xl px-4 py-3 flex items-center gap-3 focus-within:border-indigo-500/60 transition-colors">
+              <div className="flex flex-wrap-1 bg-[#090d16] border border-[#1f293d] rounded-2xl px-4 py-3 flex flex-wrap items-center gap-3 focus-within:border-indigo-500/60 transition-colors">
                 <span className="text-slate-500 text-sm shrink-0">🔍</span>
                 <input
                   type="text"
@@ -393,7 +393,7 @@ const ForumHome: React.FC = () => {
                   className="flex-1 bg-transparent border-none outline-none text-xs text-white placeholder-slate-600 font-medium"
                 />
               </div>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 <select
                   value={searchSort}
                   onChange={e => setSearchSort(e.target.value as any)}
@@ -436,7 +436,7 @@ const ForumHome: React.FC = () => {
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         onClick={() => navigate(`/forum/thread/${t.id}`)}
-                        className="bg-[#090d16] border border-[#1f293d] p-4 rounded-2xl flex items-center gap-3 cursor-pointer hover:border-indigo-500/30 transition-all group"
+                        className="bg-[#090d16] border border-[#1f293d] p-4 rounded-2xl flex flex-wrap items-center gap-3 cursor-pointer hover:border-indigo-500/30 transition-all group"
                       >
                         <span className="w-9 h-9 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center text-sm shrink-0">
                           {t.isPinned ? '📌' : t.isLocked ? '🔒' : '💬'}
@@ -460,7 +460,7 @@ const ForumHome: React.FC = () => {
         </section>
 
         {/* QUICK LINKS */}
-        <section className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <section className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3">
           <button
             onClick={() => navigate('/forum/create')}
             className="bg-gradient-to-br from-indigo-600/20 to-purple-600/10 border border-indigo-500/20 hover:border-indigo-500/40 p-5 rounded-3xl text-left transition-all group"
@@ -498,7 +498,7 @@ const ForumHome: React.FC = () => {
               className="bg-[#121824] rounded-3xl border border-[#1f293d] p-6 max-w-md w-full shadow-2xl relative z-10 space-y-5 text-left"
             >
               <div>
-                <h3 className="text-base font-black text-white flex items-center gap-2">📁 Create New Category</h3>
+                <h3 className="text-base font-black text-white flex flex-wrap items-center gap-2">📁 Create New Category</h3>
                 <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Admin only</p>
               </div>
 
@@ -521,10 +521,10 @@ const ForumHome: React.FC = () => {
                     className="bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-2xl p-3 w-full text-xs font-semibold transition-colors"
                   />
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3">
                   <div className="space-y-1">
                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">Icon Emoji</label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 sm:grid-cols-5 gap-1 bg-[#090d16] border border-[#1f293d] rounded-2xl p-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 gap-1 bg-[#090d16] border border-[#1f293d] rounded-2xl p-2">
                       {EMOJI_OPTIONS.map(em => (
                         <button key={em} type="button" onClick={() => setNewCatIcon(em)}
                           className={`w-full aspect-square rounded-xl flex items-center justify-center text-base transition-all ${newCatIcon === em ? 'bg-indigo-500/30 ring-1 ring-indigo-500' : 'hover:bg-slate-800'}`}
@@ -534,7 +534,7 @@ const ForumHome: React.FC = () => {
                   </div>
                   <div className="space-y-1">
                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">Color Theme</label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
+                    <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-1">
                       {Object.entries(colorMap).map(([color, gradient]) => (
                         <button key={color} type="button" onClick={() => setNewCatColor(color)}
                           className={`h-8 rounded-xl bg-gradient-to-r ${gradient} transition-all ${newCatColor === color ? 'ring-2 ring-white scale-105' : 'opacity-60 hover:opacity-90'}`}
@@ -546,7 +546,7 @@ const ForumHome: React.FC = () => {
                 </div>
 
                 {/* Preview */}
-                <div className="bg-[#090d16] border border-[#1f293d] rounded-2xl p-3 flex items-center gap-3">
+                <div className="bg-[#090d16] border border-[#1f293d] rounded-2xl p-3 flex flex-wrap items-center gap-3">
                   <div className={`w-10 h-10 rounded-xl bg-gradient-to-tr ${colorMap[newCatColor] || colorMap.indigo} flex items-center justify-center text-lg shrink-0`}>
                     {newCatIcon}
                   </div>
@@ -556,7 +556,7 @@ const ForumHome: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="flex gap-3 pt-1">
+                <div className="flex flex-wrap gap-3 pt-1">
                   <button type="button" disabled={isSubmittingCat} onClick={() => setIsAddCatModalOpen(false)}
                     className="w-1/3 py-3 border border-[#1f293d] hover:bg-slate-800 text-slate-400 hover:text-white font-bold text-xs uppercase tracking-widest rounded-2xl transition-all"
                   >Cancel</button>

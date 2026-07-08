@@ -337,15 +337,15 @@ const MonsterCatcher: React.FC = () => {
       <div className="px-4 py-3 bg-slate-800/50 flex justify-around border-b border-slate-700/50">
         <div className="text-center">
           <p className="text-[10px] text-slate-400 font-bold uppercase">Stamina</p>
-          <p className="font-black text-amber-400 flex items-center justify-center gap-1 text-sm">⚡ {stamina}/{maxStamina}</p>
+          <p className="font-black text-amber-400 flex flex-wrap items-center justify-center gap-1 text-sm">⚡ {stamina}/{maxStamina}</p>
         </div>
         <div className="text-center">
           <p className="text-[10px] text-slate-400 font-bold uppercase">Balls</p>
-          <p className="font-black text-emerald-400 flex items-center justify-center gap-1 text-sm">🎨 {colorBalls} | 🌟 {goldenBalls}</p>
+          <p className="font-black text-emerald-400 flex flex-wrap items-center justify-center gap-1 text-sm">🎨 {colorBalls} | 🌟 {goldenBalls}</p>
         </div>
         <div className="text-center">
           <p className="text-[10px] text-slate-400 font-bold uppercase">Plusses</p>
-          <p className="font-black text-cyan-400 flex items-center justify-center gap-1 text-sm">➕ {plusses}</p>
+          <p className="font-black text-cyan-400 flex flex-wrap items-center justify-center gap-1 text-sm">➕ {plusses}</p>
         </div>
       </div>
 
@@ -363,7 +363,7 @@ const MonsterCatcher: React.FC = () => {
       )}
 
       {/* Tabs */}
-      <div className="flex px-2 py-4 gap-2 overflow-x-auto no-scrollbar border-b border-slate-800">
+      <div className="flex flex-wrap px-2 py-4 gap-2 overflow-x-auto no-scrollbar border-b border-slate-800">
         {['hunt', 'collection', 'shop', 'fuse', 'arena', 'market'].map(t => (
           <button
             key={t}
@@ -403,7 +403,7 @@ const MonsterCatcher: React.FC = () => {
                 )}
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 gap-4">
                 {ZONES.map(z => (
                   <div key={z.name} className={`bg-gradient-to-br ${z.color} border border-slate-700 p-4 rounded-2xl relative overflow-hidden group`}>
                     <div className="flex justify-between items-start mb-2 relative z-10">
@@ -418,11 +418,11 @@ const MonsterCatcher: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="flex gap-2 mt-4 relative z-10">
-                      <button onClick={() => handleStartHunt(z.name, false, z.cost, z.stamina)} className="flex-1 py-2 bg-slate-900/80 rounded-lg text-xs font-black text-white hover:bg-slate-900 transition flex items-center justify-center gap-2 border border-slate-700">
+                    <div className="flex flex-wrap gap-2 mt-4 relative z-10">
+                      <button onClick={() => handleStartHunt(z.name, false, z.cost, z.stamina)} className="flex flex-wrap-1 py-2 bg-slate-900/80 rounded-lg text-xs font-black text-white hover:bg-slate-900 transition flex flex-wrap items-center justify-center gap-2 border border-slate-700">
                         <span>🎨 {z.cost}</span> Catch
                       </button>
-                      <button onClick={() => handleStartHunt(z.name, true, z.cost, z.stamina)} className="flex-1 py-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-lg text-xs font-black text-white shadow-lg active:scale-95 transition flex items-center justify-center gap-1">
+                      <button onClick={() => handleStartHunt(z.name, true, z.cost, z.stamina)} className="flex flex-wrap-1 py-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-lg text-xs font-black text-white shadow-lg active:scale-95 transition flex flex-wrap items-center justify-center gap-1">
                         <span>🌟 1</span> Golden Catch
                       </button>
                     </div>
@@ -440,7 +440,7 @@ const MonsterCatcher: React.FC = () => {
             {collection.length === 0 ? (
               <p className="text-center text-slate-500 py-10 font-bold">You haven't caught any monsters yet.</p>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-3">
                 {collection.map((m, i) => (
                   <div key={i} className={`p-3 rounded-xl border flex flex-col items-center justify-center text-center relative ${RARITY_COLORS[m.rarity as keyof typeof RARITY_COLORS] || RARITY_COLORS.Common}`}>
                     <span className="absolute -top-2 -right-2 bg-slate-900 text-white text-xs font-black w-6 h-6 rounded-full flex items-center justify-center border border-slate-700 shadow-lg">x{m.count}</span>
@@ -461,7 +461,7 @@ const MonsterCatcher: React.FC = () => {
               <h3 className="text-xl font-black text-white mb-2">Buy Color Balls 🎨</h3>
               <p className="text-sm text-slate-400 mb-6">Convert your Plusses (➕) into Color Balls to hunt for monsters.</p>
               
-              <div className="flex gap-2 justify-center">
+              <div className="flex flex-wrap gap-2 justify-center">
                 <button onClick={() => handleBuyBalls(1, false)} className="px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl hover:bg-slate-700 transition">
                   <div className="font-black text-emerald-400 text-lg mb-1">+1 Ball</div>
                   <div className="text-xs text-slate-400 font-bold">50 Plusses</div>
@@ -499,7 +499,7 @@ const MonsterCatcher: React.FC = () => {
                ) : (
                  collection.filter(m => m.rarity === 'Common' && m.count >= 3).map((m, i) => (
                    <div key={i} className="flex items-center justify-between bg-slate-800 p-4 rounded-xl border border-slate-700">
-                     <div className="flex items-center gap-3">
+                     <div className="flex flex-wrap items-center gap-3">
                        <img src={`https://robohash.org/${m.monsterName}?set=set2&size=60x60`} alt={m.monsterName} className="w-10 h-10" />
                        <div>
                          <p className="font-black text-white">{m.monsterName}</p>
@@ -564,7 +564,7 @@ const MonsterCatcher: React.FC = () => {
             {/* Sell Box */}
             <div className="bg-slate-800 border border-slate-700 p-4 rounded-xl">
               <h3 className="font-black text-white mb-4 text-sm">Sell a Monster</h3>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 <select id="marketSelect" className="flex-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs font-bold text-white outline-none">
                   <option value="">Select Monster...</option>
                   {collection.map((m, i) => (
@@ -599,14 +599,14 @@ const MonsterCatcher: React.FC = () => {
                 ) : (
                   marketListings.map(item => (
                     <div key={item._id} className="flex items-center justify-between bg-slate-800/50 p-3 rounded-xl border border-slate-700">
-                      <div className="flex items-center gap-3">
+                      <div className="flex flex-wrap items-center gap-3">
                         <img src={`https://robohash.org/${item.monsterName}?set=set2&size=40x40`} alt={item.monsterName} className="w-8 h-8" />
                         <div>
                           <p className="font-black text-white text-sm">{item.monsterName}</p>
                           <p className="text-[10px] text-slate-400 font-bold uppercase">{item.rarity} • {item.element}</p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-3">
+                      <div className="flex flex-wrap items-center gap-3">
                         <span className="font-black text-cyan-400 text-sm">➕ {item.pricePlusses}</span>
                         {item.sellerId !== activeUser?.id && (
                           <button onClick={() => handleBuyMarket(item._id)} className="px-3 py-1.5 bg-cyan-500 text-white font-black text-xs rounded-md shadow-lg active:scale-95 transition">

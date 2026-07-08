@@ -177,7 +177,7 @@ const Highlights: React.FC = () => {
         <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-48 h-48 bg-pink-600/10 rounded-full blur-3xl" />
         
-        <div className="relative z-10 flex items-center gap-4">
+        <div className="relative z-10 flex flex-wrap items-center gap-4">
           <button 
             onClick={() => navigate('/home')} 
             className="w-10 h-10 bg-[#161b22] hover:bg-[#30363d] rounded-xl flex items-center justify-center border border-[#30363d] transition-all active:scale-95"
@@ -194,7 +194,7 @@ const Highlights: React.FC = () => {
 
       {/* Floating Category Navigation */}
       <div className="px-5 -mt-10 relative z-20">
-        <div className="bg-[#161b22]/90 backdrop-blur-md rounded-[2.5rem] p-2 shadow-2xl border border-[#30363d] flex overflow-x-auto no-scrollbar gap-1">
+        <div className="bg-[#161b22]/90 backdrop-blur-md rounded-[2.5rem] p-2 shadow-2xl border border-[#30363d] flex flex-wrap overflow-x-auto no-scrollbar gap-1">
           {[
             { id: 'shouter', label: '📢 Shouter' },
             { id: 'top-member', label: '👑 Top Member' },
@@ -236,8 +236,8 @@ const Highlights: React.FC = () => {
                 ) : (
                   <div className="divide-y divide-[#30363d]">
                     {shouters.map((sh, idx) => (
-                      <div key={sh.user + idx} className="py-3.5 flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-3">
+                      <div key={sh.user + idx} className="py-3.5 flex flex-wrap items-center justify-between gap-3">
+                        <div className="flex flex-wrap items-center gap-3">
                           <span className={`w-6 text-center text-xs font-black ${idx === 0 ? 'text-amber-500' : idx === 1 ? 'text-slate-300' : 'text-[#8b5a2b]'}`}>
                             {idx + 1}
                           </span>
@@ -247,7 +247,7 @@ const Highlights: React.FC = () => {
                             <p className="text-[9px] text-purple-400 font-bold uppercase tracking-wider">Today Rank {idx + 1}</p>
                           </div>
                         </div>
-                        <div className="flex items-center gap-3">
+                        <div className="flex flex-wrap items-center gap-3">
                           <span className="bg-purple-900/30 text-purple-300 font-mono text-xs font-black px-3 py-1 rounded-full uppercase border border-purple-500/20">
                             {sh.count} {sh.count === 1 ? 'shout' : 'shouts'}
                           </span>
@@ -266,10 +266,10 @@ const Highlights: React.FC = () => {
                 ) : (
                   <div className="space-y-4">
                     {todayShouts.slice(0, 10).map(s => (
-                      <div key={s.id} className="p-4 bg-[#090d16] rounded-3xl border border-[#30363d] flex gap-3">
+                      <div key={s.id} className="p-4 bg-[#090d16] rounded-3xl border border-[#30363d] flex flex-wrap gap-3">
                         <img src={s.avatar} className="w-9 h-9 rounded-xl object-cover shrink-0 border border-[#30363d]" alt="" />
                         <div className="min-w-0 flex-1">
-                          <div className="flex items-center gap-1.5 mb-1">
+                          <div className="flex flex-wrap items-center gap-1.5 mb-1">
                             <span className="text-xs font-black text-white truncate">{s.user}</span>
                             {s.isPremium && <span className="text-[10px]" title="Premium">👑</span>}
                             <span className="text-[8px] font-bold font-mono text-slate-500 ml-auto">{s.time}</span>
@@ -309,15 +309,15 @@ const Highlights: React.FC = () => {
                       <div 
                         key={usr.id} 
                         onClick={() => navigate(`/profile/${usr.username}`)}
-                        className="p-4 rounded-3xl bg-[#090d16] hover:bg-[#30363d]/50 border border-[#30363d] transition-all duration-300 flex items-center justify-between gap-3 cursor-pointer group"
+                        className="p-4 rounded-3xl bg-[#090d16] hover:bg-[#30363d]/50 border border-[#30363d] transition-all duration-300 flex flex-wrap items-center justify-between gap-3 cursor-pointer group"
                       >
-                        <div className="flex items-center gap-3 min-w-0">
+                        <div className="flex flex-wrap items-center gap-3 min-w-0">
                           <div className="flex items-center justify-center shrink-0 w-8 h-8 rounded-full bg-[#161b22] font-mono text-xs font-black text-slate-300 border border-[#30363d] shadow-inner group-hover:border-purple-500">
                             {idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : idx + 1}
                           </div>
                           <img src={usr.avatar} className="w-10 h-10 rounded-xl object-cover shrink-0 border border-[#30363d] shadow-md" alt="" />
                           <div className="min-w-0">
-                            <div className="flex items-center gap-1">
+                            <div className="flex flex-wrap items-center gap-1">
                               <p className="text-xs font-black text-white truncate group-hover:text-purple-400 transition-colors">{usr.name}</p>
                               {usr.isVerified && <span className="text-[10px]">✔️</span>}
                               {usr.isPremium && <span className="text-[10px]">👑</span>}
@@ -358,15 +358,15 @@ const Highlights: React.FC = () => {
                     {activeUsersToday.map((usr) => (
                       <div 
                         key={usr.id} 
-                        className="p-3.5 rounded-3xl bg-[#090d16] border border-[#30363d] flex items-center justify-between gap-3"
+                        className="p-3.5 rounded-3xl bg-[#090d16] border border-[#30363d] flex flex-wrap items-center justify-between gap-3"
                       >
-                        <div className="flex items-center gap-3">
+                        <div className="flex flex-wrap items-center gap-3">
                           <div className="relative">
                             <img src={usr.avatar} className="w-10 h-10 rounded-xl object-cover border border-[#30363d]" alt="" />
                             <span className={`absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full border-2 border-[#161b22] ${usr.isOnline ? 'bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]' : 'bg-slate-500'}`} />
                           </div>
                           <div>
-                            <div className="flex items-center gap-1">
+                            <div className="flex flex-wrap items-center gap-1">
                               <span className="text-xs font-black text-white">{usr.name}</span>
                               {usr.isPremium && <span className="text-[10px]">👑</span>}
                             </div>
@@ -376,7 +376,7 @@ const Highlights: React.FC = () => {
                           </div>
                         </div>
                         
-                        <div className="flex items-center gap-1.5">
+                        <div className="flex flex-wrap items-center gap-1.5">
                           <button
                             onClick={() => handleWave(usr.username)}
                             disabled={wavedUsers[usr.username]}
@@ -411,7 +411,7 @@ const Highlights: React.FC = () => {
                 <p className="text-[10px] text-purple-300 font-bold uppercase tracking-wider mb-4">Share a moment from today (resets at midnight!)</p>
 
                 <form onSubmit={handlePhotoUpload} className="space-y-3">
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap gap-2">
                     <input
                       type="url"
                       placeholder="Image URL (optional)"
@@ -420,7 +420,7 @@ const Highlights: React.FC = () => {
                       className="flex-1 bg-[#090d16] p-3 rounded-2xl text-[11px] font-bold text-white placeholder-slate-500 border border-[#30363d] focus:outline-none focus:border-purple-500"
                     />
                   </div>
-                  <div className="flex gap-3">
+                  <div className="flex flex-wrap gap-3">
                     <input
                       type="text"
                       placeholder="Photo caption (e.g. Bangladesh cup win!)"
@@ -445,7 +445,7 @@ const Highlights: React.FC = () => {
                 {todayPhotos.length === 0 ? (
                   <div className="text-center py-6 text-slate-500 text-sm font-medium italic">No photos uploaded today. Share the first one!</div>
                 ) : (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-1 sm:grid-cols-2 gap-4 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {todayPhotos.map(p => (
                       <div 
                         key={p.id}
@@ -459,7 +459,7 @@ const Highlights: React.FC = () => {
                           <p className="text-[9px] font-bold truncate">{p.caption}</p>
                         </div>
 
-                        <div className="absolute top-2 right-2 bg-[#090d16]/60 backdrop-blur-md text-white border border-[#30363d] rounded-full px-2 py-0.5 text-[8px] font-black flex items-center gap-1 uppercase">
+                        <div className="absolute top-2 right-2 bg-[#090d16]/60 backdrop-blur-md text-white border border-[#30363d] rounded-full px-2 py-0.5 text-[8px] font-black flex flex-wrap items-center gap-1 uppercase">
                           ❤️ {p.likes}
                         </div>
                       </div>
@@ -502,14 +502,14 @@ const Highlights: React.FC = () => {
               </div>
               
               <div className="p-6 md:p-8 text-left">
-                <div className="flex items-center justify-between gap-4 mb-3">
-                  <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center justify-between gap-4 mb-3">
+                  <div className="flex flex-wrap items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981] animate-pulse" />
                     <p className="text-[9px] text-purple-400 font-black uppercase tracking-widest leading-none">Shared By @{selectedPhoto.uploadedBy}</p>
                   </div>
                   <button 
                     onClick={(e) => handleLikePhoto(selectedPhoto.id, e)}
-                    className="flex items-center gap-1 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 text-rose-400 px-3.5 py-1.5 rounded-2xl text-[10px] font-black uppercase tracking-wider transition-colors active:scale-95"
+                    className="flex flex-wrap items-center gap-1 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 text-rose-400 px-3.5 py-1.5 rounded-2xl text-[10px] font-black uppercase tracking-wider transition-colors active:scale-95"
                   >
                     ❤️ {selectedPhoto.likes} Likes
                   </button>
@@ -519,7 +519,7 @@ const Highlights: React.FC = () => {
                   {selectedPhoto.caption}
                 </p>
 
-                <div className="border-t border-[#30363d] pt-4 flex gap-2">
+                <div className="border-t border-[#30363d] pt-4 flex flex-wrap gap-2">
                   <input
                     type="text"
                     disabled

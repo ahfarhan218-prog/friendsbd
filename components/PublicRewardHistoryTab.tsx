@@ -126,12 +126,12 @@ const PublicRewardHistoryTab: React.FC<PublicRewardHistoryTabProps> = ({ profile
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pt-3 border-t border-[#1f293d]/30 text-[10px]">
             <a
               href={item.quiz_link}
-              className="text-indigo-400 hover:text-indigo-300 font-bold flex items-center gap-1.5 hover:underline"
+              className="text-indigo-400 hover:text-indigo-300 font-bold flex flex-wrap items-center gap-1.5 hover:underline"
             >
               <span>🎯</span> Target Quiz: {item.quiz_title}
             </a>
 
-            <div className="text-slate-500 font-semibold flex items-center gap-2">
+            <div className="text-slate-500 font-semibold flex flex-wrap items-center gap-2">
               <span>Audited by: @{item.approved_by_username || 'admin'}</span>
               <span>•</span>
               <span>Requested by: @{item.requested_by_username}</span>

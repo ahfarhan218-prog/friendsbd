@@ -28,7 +28,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, currentUser, index, onOptions
       className="bg-white rounded-[2.5rem] p-6 sm:p-8 shadow-sm border border-purple-100 hover:border-purple-200 transition-all group overflow-hidden"
     >
       <div className="flex items-start justify-between mb-6">
-        <div className="flex gap-4 min-w-0">
+        <div className="flex flex-wrap gap-4 min-w-0">
           <Link to={`/profile/${post.authorUsername || post.authorName}`} className="relative shrink-0">
             <img 
               src={post.authorAvatar} 
@@ -67,16 +67,16 @@ const PostCard: React.FC<PostCardProps> = ({ post, currentUser, index, onOptions
       </div>
 
       <div className="mt-8 pt-5 border-t border-slate-50 flex items-center justify-between">
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
            {Object.keys(post.reactions || {}).length > 0 ? (
              Object.entries(post.reactions).map(([emoji, count]) => (
-               <div key={emoji} className="bg-slate-50 border border-slate-100 rounded-xl px-2.5 py-1 flex items-center gap-1.5 shadow-sm">
+               <div key={emoji} className="bg-slate-50 border border-slate-100 rounded-xl px-2.5 py-1 flex flex-wrap items-center gap-1.5 shadow-sm">
                  <span className="text-xs">{emoji}</span>
                  <span className="text-[10px] font-black text-slate-500">{count}</span>
                </div>
              ))
            ) : (
-             <div className="flex gap-1.5">
+             <div className="flex flex-wrap gap-1.5">
                {['❤️', '👍', '🔥'].map(e => (
                  <button key={e} className="w-9 h-9 rounded-xl bg-slate-50 text-sm grayscale hover:grayscale-0 hover:bg-purple-50 hover:shadow-inner transition-all active:scale-125 border border-transparent hover:border-purple-100">{e}</button>
                ))}

@@ -34,7 +34,7 @@ const Requests: React.FC = () => {
         <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#0B0B1A] to-transparent" />
         <div className="absolute top-8 right-4 w-24 h-24 bg-purple-600/10 rounded-full blur-3xl" />
         <div className="relative z-10 flex items-center justify-between">
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <button onClick={() => navigate(-1)} className="p-2 bg-black/20 rounded-full backdrop-blur-sm active:scale-90 transition-transform">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
             </button>
@@ -48,7 +48,7 @@ const Requests: React.FC = () => {
         <AnimatePresence mode="popLayout">
           {reqs.length > 0 ? reqs.map((r) => (
             <motion.div key={r.id} layout initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, x: 50 }}
-              className="bg-[#1C1C2E] p-5 rounded-[2.5rem] border border-white/5 flex items-center gap-4 shadow-md hover:border-purple-500/30 transition-all">
+              className="bg-[#1C1C2E] p-5 rounded-[2.5rem] border border-white/5 flex flex-wrap items-center gap-4 shadow-md hover:border-purple-500/30 transition-all">
               <img src={r.senderAvatar || `https://i.pravatar.cc/100?img=${Math.floor(Math.random() * 70)}`} className="w-14 h-14 rounded-2xl border-2 border-purple-500/30 object-cover" alt="" />
               <div className="flex-1 min-w-0">
                 <p className="text-[10px] font-black text-purple-400 uppercase tracking-widest mb-1">{r.type === 'FRIEND_REQ' ? 'Friend Request' : r.type}</p>

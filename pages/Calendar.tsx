@@ -45,7 +45,7 @@ const Calendar: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-full max-w-4xl mx-auto px-4 sm:px-6 mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-2xl font-black text-white">📅 Events Calendar</h1>
@@ -60,7 +60,7 @@ const Calendar: React.FC = () => {
           <div className="pf-card p-5 mb-6 space-y-3">
             <input className="pf-input w-full" placeholder="Event title" value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} />
             <input className="pf-input w-full" placeholder="Description" value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} />
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
               <select className="pf-input flex-1" value={form.type} onChange={e => setForm({ ...form, type: e.target.value })}>
                 <option value="tournament">🏆 Tournament</option>
                 <option value="quiz">🧠 Quiz</option>
@@ -70,7 +70,7 @@ const Calendar: React.FC = () => {
               </select>
               <input className="pf-input flex-1" placeholder="Prize (optional)" value={form.prize} onChange={e => setForm({ ...form, prize: e.target.value })} />
             </div>
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
               <input className="pf-input flex-1" type="datetime-local" value={form.date} onChange={e => setForm({ ...form, date: e.target.value })} />
               <input className="pf-input w-32" type="number" placeholder="Max participants" value={form.maxParticipants} onChange={e => setForm({ ...form, maxParticipants: e.target.value })} />
             </div>

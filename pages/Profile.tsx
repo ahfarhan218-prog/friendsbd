@@ -272,7 +272,7 @@ const Profile: React.FC = () => {
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-50" />
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 -mt-24 relative z-10">
+      <div className="max-w-full max-w-6xl mx-auto px-4 sm:px-6 mx-auto px-4 -mt-24 relative z-10">
         <div className="flex flex-col lg:flex-row gap-6">
 
           {/* Left Column */}
@@ -294,11 +294,11 @@ const Profile: React.FC = () => {
                 <span className="absolute bottom-1 right-3 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-[#0a0a1a]" />
               </div>
 
-              <h1 className="text-xl font-black text-white mt-4 flex items-center justify-center gap-2">
+              <h1 className="text-xl font-black text-white mt-4 flex flex-wrap items-center justify-center gap-2">
                 {profile.name} {profile.isVerified && <svg className="w-5 h-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>}
               </h1>
 
-              <div className="inline-flex items-center gap-1.5 mt-2 px-3 py-1 rounded-full text-xs font-bold" style={{
+              <div className="inline-flex flex-wrap items-center gap-1.5 mt-2 px-3 py-1 rounded-full text-xs font-bold" style={{
                 background: role === 'admin' ? 'rgba(244,63,94,0.15)' : role === 'moderator' ? 'rgba(249,115,22,0.15)' : 'rgba(124,58,237,0.12)',
                 color: role === 'admin' ? '#fb7185' : role === 'moderator' ? '#fb923c' : '#a78bfa'
               }}>
@@ -306,7 +306,7 @@ const Profile: React.FC = () => {
               </div>
 
               {profile.customStatus && (
-                <p className="text-xs text-purple-300/60 mt-2 flex items-center justify-center gap-1.5">
+                <p className="text-xs text-purple-300/60 mt-2 flex flex-wrap items-center justify-center gap-1.5">
                   <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
                   {profile.customStatus}
                 </p>
@@ -330,7 +330,7 @@ const Profile: React.FC = () => {
                     <textarea className="pf-input w-full resize-none" value={bioText} maxLength={150} rows={3} autoFocus onChange={e => setBioText(e.target.value)} placeholder="Tell people about yourself…" />
                     <div className="flex items-center justify-between">
                       <span className="text-[10px] text-white/30">{bioText.length}/150</span>
-                      <div className="flex gap-2">
+                      <div className="flex flex-wrap gap-2">
                         <button className="pf-btn pf-btn-ghost" onClick={() => setEditingBio(false)}>Cancel</button>
                         <button className="pf-btn pf-btn-primary" onClick={saveBio}>Save Bio</button>
                       </div>
@@ -344,7 +344,7 @@ const Profile: React.FC = () => {
               </div>
 
               {/* Quick Stats */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-5">
+              <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-2 mt-5">
                 {[
                   { icon: '⚡', label: 'AP', value: profile.ap || 0, color: '#f97316' },
                   { icon: '👥', label: 'Followers', value: profile.followers?.length || allUsers.length || 0, color: '#ec4899' },
@@ -361,7 +361,7 @@ const Profile: React.FC = () => {
 
               {/* Total Online Time */}
               <div className="mt-3 bg-[#1C1C2E] border border-emerald-500/30 rounded-2xl p-3 flex items-center justify-between hover:bg-[#161b22] transition-colors cursor-default">
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-xl shadow-inner border border-emerald-500/20">
                     ⏱️
                   </div>
@@ -415,20 +415,20 @@ const Profile: React.FC = () => {
                       { icon: '🎓', label: 'Education', val: profile.education || 'Not specified' },
                       { icon: '💼', label: 'Work', val: profile.work || 'Not specified' },
                     ].map((item, i) => (
-                      <div key={i} className="flex items-center gap-2.5 text-sm">
+                      <div key={i} className="flex flex-wrap items-center gap-2.5 text-sm">
                         <span className="text-base">{item.icon}</span>
                         <span className="text-white/40 text-[11px] font-bold uppercase tracking-wider w-20 shrink-0">{item.label}</span>
                         <span className="text-white/70 font-medium truncate">{item.val}</span>
                       </div>
                     ))}
                     {profile.createdAt && (
-                      <div className="flex items-center gap-2.5 text-sm">
+                      <div className="flex flex-wrap items-center gap-2.5 text-sm">
                         <span className="text-base">📅</span>
                         <span className="text-white/40 text-[11px] font-bold uppercase tracking-wider w-20 shrink-0">Joined</span>
                         <span className="text-white/70 font-medium">{new Date(profile.createdAt).toLocaleDateString()}</span>
                       </div>
                     )}
-                    <div className="flex items-center gap-2.5 text-sm">
+                    <div className="flex flex-wrap items-center gap-2.5 text-sm">
                       <span className="text-base">⏱️</span>
                       <span className="text-white/40 text-[11px] font-bold uppercase tracking-wider w-20 shrink-0">Online Time</span>
                       <span className="text-white/70 font-medium">{formatOnlineTime(profile.totalOnlineTime || 0)}</span>
@@ -446,11 +446,11 @@ const Profile: React.FC = () => {
                 <div className="h-1.5 bg-[#161b22] rounded-full overflow-hidden mb-3">
                   <div className="h-full rounded-full bg-gradient-to-r from-amber-500 to-purple-500 transition-all duration-500" style={{ width: `${(earned.length / ACHIEVEMENTS.length) * 100}%` }} />
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-2">
                   {ACHIEVEMENTS.map(a => {
                     const unlocked = a.check(profile);
                     return (
-                      <div key={a.id} className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold transition-all ${unlocked ? 'bg-purple-500/10 text-purple-300' : 'bg-[#161b22]/50 text-white/20'}`}>
+                      <div key={a.id} className={`flex flex-wrap items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold transition-all ${unlocked ? 'bg-purple-500/10 text-purple-300' : 'bg-[#161b22]/50 text-white/20'}`}>
                         <span className={unlocked ? '' : 'grayscale opacity-30'}>{a.icon}</span>
                         <span>{a.label}</span>
                       </div>
@@ -479,7 +479,7 @@ const Profile: React.FC = () => {
                 </div>
                 {isPremiumActive && <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-orange-500/10 text-orange-400 border border-orange-500/20">🔥 Rising</span>}
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-3">
                 {[
                   { icon: '🧵', label: 'Topics', value: userThreads.length, color: '#a78bfa' },
                   { icon: '💬', label: 'Posts', value: userPosts.length, color: '#60a5fa' },
@@ -498,12 +498,12 @@ const Profile: React.FC = () => {
             {/* Wallet */}
             <div className="pf-card p-5">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-black text-white flex items-center gap-2">🔥 Wallet</h2>
+                <h2 className="text-lg font-black text-white flex flex-wrap items-center gap-2">🔥 Wallet</h2>
                 <span className="text-[10px] font-bold text-purple-400 uppercase tracking-[0.15em]">Live</span>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-2.5">
                 {walletItems.map((s, i) => (
-                  <div key={i} className="bg-[#161b22]/50 rounded-xl p-3 border border-[#30363d] flex items-center gap-3 hover:bg-[#161b22] transition-all">
+                  <div key={i} className="bg-[#161b22]/50 rounded-xl p-3 border border-[#30363d] flex flex-wrap items-center gap-3 hover:bg-[#161b22] transition-all">
                     <div className="text-xl shrink-0" style={{ color: s.color }}>{s.icon}</div>
                     <div className="min-w-0">
                       <div className="text-base font-black text-white truncate" title={String(s.value)}>
@@ -520,14 +520,14 @@ const Profile: React.FC = () => {
             <div className="pf-card p-5">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-black text-white">📋 Activity</h2>
-                <div className="flex gap-1 text-[10px] text-white/30">
+                <div className="flex flex-wrap gap-1 text-[10px] text-white/30">
                   <span className="px-2 py-1 rounded-lg bg-[#161b22] border border-[#30363d]">🧵 {userThreads.length}</span>
                   <span className="px-2 py-1 rounded-lg bg-[#161b22] border border-[#30363d]">💬 {userPosts.length}</span>
                   <span className="px-2 py-1 rounded-lg bg-[#161b22] border border-[#30363d]">📣 {shouts.length}</span>
                 </div>
               </div>
 
-              <div className="flex gap-1.5 mb-4 overflow-x-auto pb-1">
+              <div className="flex flex-wrap gap-1.5 mb-4 overflow-x-auto pb-1">
                 {(['topics', 'posts', 'shouts'] as const).map(tab => (
                   <button key={tab} onClick={() => setActivitySubTab(tab)}
                     className={`px-4 py-2 rounded-xl text-xs font-black transition-all tracking-wider ${activitySubTab === tab
@@ -543,11 +543,11 @@ const Profile: React.FC = () => {
                 userThreads.length === 0 ? <p className="text-white/30 text-sm text-center py-8">No topics created yet.</p>
                   : <div className="space-y-2 max-h-80 overflow-y-auto pr-1 custom-scrollbar">
                     {[...userThreads].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)).map(t => (
-                      <Link key={t.id} to={`/forum/thread/${t.id}`} className="flex items-center gap-3 p-3 rounded-xl bg-[#161b22]/40 border border-[#30363d]/50 hover:bg-[#161b22] hover:border-purple-500/30 transition-all group">
+                      <Link key={t.id} to={`/forum/thread/${t.id}`} className="flex flex-wrap items-center gap-3 p-3 rounded-xl bg-[#161b22]/40 border border-[#30363d]/50 hover:bg-[#161b22] hover:border-purple-500/30 transition-all group">
                         <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-lg shrink-0">🧵</div>
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-bold text-white/80 truncate group-hover:text-purple-300 transition-colors">{t.title}</p>
-                          <p className="text-[10px] text-white/30 flex items-center gap-2 mt-0.5">
+                          <p className="text-[10px] text-white/30 flex flex-wrap items-center gap-2 mt-0.5">
                             <span>{t.createdAt ? new Date(t.createdAt).toLocaleDateString() : '—'}</span>
                             <span className="w-1 h-1 rounded-full bg-white/20"></span>
                             <span>{t.replyCount || 0} replies</span>
@@ -571,12 +571,12 @@ const Profile: React.FC = () => {
                       const reactions = Object.keys(p.userReactions || {}).length;
                       const isLiked = reactions > 0;
                       return (
-                        <Link key={p.id} to={`/forum/thread/${p.threadId}`} className="flex items-start gap-3 p-3 rounded-xl bg-[#161b22]/40 border border-[#30363d]/50 hover:bg-[#161b22] hover:border-purple-500/30 transition-all group">
+                        <Link key={p.id} to={`/forum/thread/${p.threadId}`} className="flex flex-wrap items-start gap-3 p-3 rounded-xl bg-[#161b22]/40 border border-[#30363d]/50 hover:bg-[#161b22] hover:border-purple-500/30 transition-all group">
                           <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-lg shrink-0">💬</div>
                           <div className="flex-1 min-w-0">
                             <p className="text-[11px] font-bold text-purple-300/60 truncate group-hover:text-purple-300 transition-colors">{thread ? thread.title : `Thread #${p.threadId}`}</p>
                             <p className="text-sm text-white/70 truncate mt-0.5">{preview.substring(0, 100)}{preview.length > 100 ? '…' : ''}</p>
-                            <div className="flex items-center gap-2 mt-1">
+                            <div className="flex flex-wrap items-center gap-2 mt-1">
                               <span className="text-[10px] text-white/30">{p.timestamp ? new Date(p.timestamp).toLocaleDateString() : '—'}</span>
                               {isLiked && <span className="text-[10px] text-rose-400/60">❤️ {reactions}</span>}
                               {p.replyTo && <span className="text-[10px] text-white/20">↪️ reply</span>}
@@ -597,22 +597,22 @@ const Profile: React.FC = () => {
                       const reactions = Object.keys(s.userReactions || {}).length;
                       const replies = (s.replies || []).length;
                       return (
-                        <div key={s.id} className={`flex items-start gap-3 p-3 rounded-xl border transition-all ${s.isPinned
+                        <div key={s.id} className={`flex flex-wrap items-start gap-3 p-3 rounded-xl border transition-all ${s.isPinned
                           ? 'bg-amber-500/5 border-amber-500/20'
                           : 'bg-[#161b22]/40 border-[#30363d]/50 hover:bg-[#161b22] hover:border-purple-500/30'}`}>
                           <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg shrink-0 ${s.isPinned ? 'bg-amber-500/10' : 'bg-emerald-500/10'}`}>📣</div>
                           <div className="min-w-0 flex-1">
-                            <div className="flex items-center gap-2">
+                            <div className="flex flex-wrap items-center gap-2">
                               {s.isPinned && <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 font-bold leading-none">📌 Pinned</span>}
                             </div>
                             <p className="text-sm text-white/70 truncate mt-1">{preview.substring(0, 100)}{preview.length > 100 ? '…' : ''}</p>
-                            <div className="flex items-center gap-3 mt-1">
+                            <div className="flex flex-wrap items-center gap-3 mt-1">
                               <span className="text-[10px] text-white/30">{s.timestamp ? new Date(s.timestamp).toLocaleDateString() : '—'}</span>
                               {reactions > 0 && <span className="text-[10px] text-rose-400/60">❤️ {reactions}</span>}
                               {replies > 0 && <span className="text-[10px] text-blue-400/60">💬 {replies}</span>}
                             </div>
                           </div>
-                          <div className="flex gap-1 shrink-0">
+                          <div className="flex flex-wrap gap-1 shrink-0">
                             {reactions > 0 && <span className="text-[10px] px-2 py-1 rounded-lg bg-rose-500/10 text-rose-400 font-bold">❤️{reactions}</span>}
                             {replies > 0 && <span className="text-[10px] px-2 py-1 rounded-lg bg-blue-500/10 text-blue-400 font-bold">💬{replies}</span>}
                           </div>
@@ -628,7 +628,7 @@ const Profile: React.FC = () => {
               <div className="pf-card p-5">
                 <h2 className="text-lg font-black text-white mb-4">💎 Elite Tools</h2>
                 <div className="space-y-3">
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap gap-2">
                     <input type="text" maxLength={30} value={statusInput} onChange={e => setStatusInput(e.target.value)} placeholder="Custom status..." className="pf-input flex-1" />
                     <button onClick={() => updatePremiumSettings({ customStatus: statusInput })} className="pf-btn pf-btn-primary">Set</button>
                   </div>

@@ -38,7 +38,7 @@ const Winners: React.FC = () => {
         )}
         {winners.map((w, i) => (
           <motion.div key={w.id || i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}
-            className="bg-[#1C1C2E] border border-white/5 p-6 rounded-[3rem] flex items-center gap-6 relative group shadow-md hover:border-purple-500/30 transition-all">
+            className="bg-[#1C1C2E] border border-white/5 p-6 rounded-[3rem] flex flex-wrap items-center gap-6 relative group shadow-md hover:border-purple-500/30 transition-all">
             <div className="relative">
               <div className="absolute inset-0 bg-amber-500/10 rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition-opacity" />
               <img src={w.avatar || `https://picsum.photos/seed/${w.username || w.uid}/200`} className="w-20 h-20 rounded-[2.2rem] border-2 border-purple-500/30 relative z-10 object-cover" alt="" />
@@ -49,7 +49,7 @@ const Winners: React.FC = () => {
             <div className="flex-1">
               <h3 className="text-xl font-black tracking-tighter mb-1 text-white">{w.username || 'Anonymous'}</h3>
               <p className="text-[9px] font-black text-amber-400 uppercase tracking-widest mb-3">{w.prize_won || 'Prize Won'}</p>
-              <div className="flex items-center gap-2 text-[10px] font-bold text-white/40 uppercase">
+              <div className="flex flex-wrap items-center gap-2 text-[10px] font-bold text-white/40 uppercase">
                 <span>Won:</span>
                 <span className="text-white text-xs font-black">{w.prize_won || 'N/A'}</span>
               </div>

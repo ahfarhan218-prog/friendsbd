@@ -96,7 +96,7 @@ const BBCodeEditor: React.FC = () => {
 
           {/* Toolbar */}
           {!previewMode && (
-            <div className="px-6 py-3 border-b border-[#30363d] flex gap-2 overflow-x-auto no-scrollbar">
+            <div className="px-6 py-3 border-b border-[#30363d] flex flex-wrap gap-2 overflow-x-auto no-scrollbar">
               {toolbarButtons.map(btn => (
                 <button key={btn.label} onClick={() => insertTag(btn.tag, btn.placeholder)}
                   className="shrink-0 w-9 h-9 flex items-center justify-center rounded-xl bg-[#161b22] border border-white/5 text-white/40 text-[11px] font-black hover:border-purple-500/30 hover:text-purple-400 transition-all active:scale-90" title={btn.label}>
@@ -137,7 +137,7 @@ const BBCodeEditor: React.FC = () => {
 
         {/* Tips */}
         <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] shadow-xl shadow-purple-900/10 rounded-[2.5rem] p-6 relative overflow-hidden">
-          <h4 className="text-[10px] font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+          <h4 className="text-[10px] font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-[0.2em] mb-4 flex flex-wrap items-center gap-2">
             <span className="text-lg">💡</span> Pro Tip
           </h4>
           <p className="text-[11px] text-white/50 font-medium leading-relaxed">

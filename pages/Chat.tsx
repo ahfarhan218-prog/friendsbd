@@ -362,7 +362,7 @@ const Chat: React.FC = () => {
       >
         {/* Sidebar Header */}
         <div className="p-5 flex items-center justify-between border-b border-white/5">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={() => navigate('/home')}
               className="p-2.5 bg-white/5 hover:bg-white/10 rounded-xl transition-all border border-white/5 active:scale-95"
@@ -375,7 +375,7 @@ const Chat: React.FC = () => {
               <h2 className="text-xl font-black italic bg-gradient-to-r from-white via-purple-200 to-indigo-200 bg-clip-text text-transparent">
                 Chats
               </h2>
-              <p className="text-[9px] text-emerald-400 font-black uppercase tracking-widest flex items-center gap-1">
+              <p className="text-[9px] text-emerald-400 font-black uppercase tracking-widest flex flex-wrap items-center gap-1">
                 <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
                 End-to-End Encrypted
               </p>
@@ -420,7 +420,7 @@ const Chat: React.FC = () => {
                   <button
                     key={conv.id}
                     onClick={() => setActiveChat(conv)}
-                    className={`w-full flex items-center gap-4 p-3.5 rounded-2xl transition-all border border-transparent ${
+                    className={`w-full flex flex-wrap items-center gap-4 p-3.5 rounded-2xl transition-all border border-transparent ${
                       isActive
                         ? 'bg-gradient-to-r from-purple-900/40 to-indigo-900/30 border-purple-500/20'
                         : 'hover:bg-white/5'
@@ -455,7 +455,7 @@ const Chat: React.FC = () => {
                         <h4 className="text-xs font-black truncate text-white leading-tight">{chatName}</h4>
                         <span className="text-[8px] font-bold text-white/30 uppercase tracking-widest">{conv.timestamp}</span>
                       </div>
-                      <p className="text-[11px] text-white/50 truncate font-medium flex items-center gap-1">
+                      <p className="text-[11px] text-white/50 truncate font-medium flex flex-wrap items-center gap-1">
                         {conv.lastMessage?.startsWith('🔒') && <span className="text-emerald-400/70">🔒</span>}
                         {conv.lastMessage?.replace('🔒 ', '') || 'No messages yet'}
                       </p>
@@ -482,7 +482,7 @@ const Chat: React.FC = () => {
           <>
             {/* Chat Header */}
             <header className="p-4 bg-[#141424] border-b border-white/5 flex items-center justify-between shrink-0 shadow-xl relative z-10">
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 <button
                   onClick={() => setActiveChat(null)}
                   className="md:hidden p-2.5 bg-white/5 hover:bg-white/10 rounded-xl transition-all active:scale-95 border border-white/5"
@@ -492,7 +492,7 @@ const Chat: React.FC = () => {
                   </svg>
                 </button>
 
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3">
                   <div className="relative">
                     {activeChat.isGroup ? (
                       <div className="w-10 h-10 rounded-lg bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-lg font-bold">
@@ -515,7 +515,7 @@ const Chat: React.FC = () => {
                     <h3 className="text-sm font-black text-white leading-tight">
                       {activeChat.isGroup ? activeChat.groupName : activeChat.participants[0].name}
                     </h3>
-                    <p className="text-[9px] text-emerald-400 font-black uppercase tracking-widest flex items-center gap-1 mt-0.5">
+                    <p className="text-[9px] text-emerald-400 font-black uppercase tracking-widest flex flex-wrap items-center gap-1 mt-0.5">
                       🔒 End-to-End Encrypted
                     </p>
                   </div>
@@ -533,7 +533,7 @@ const Chat: React.FC = () => {
             </header>
 
             {/* E2E Notice Banner */}
-            <div className="px-4 py-2 bg-emerald-500/5 border-b border-emerald-500/10 flex items-center justify-center gap-2">
+            <div className="px-4 py-2 bg-emerald-500/5 border-b border-emerald-500/10 flex flex-wrap items-center justify-center gap-2">
               <span className="text-[10px] text-emerald-400/70 font-bold">
                 🔒 Messages are end-to-end encrypted. Only you and the recipient can read them.
               </span>
@@ -550,7 +550,7 @@ const Chat: React.FC = () => {
               )}
               {messages.map((m, index) => (
                 <div key={`${m.id}-${index}`} className={`flex ${m.isMe ? 'justify-end' : 'justify-start'}`}>
-                  <div className="flex items-end gap-2.5 max-w-[75%]">
+                  <div className="flex flex-wrap items-end gap-2.5 max-w-[75%]">
                     {!m.isMe && (
                       <img
                         src={m.senderAvatar || activeChat.participants[0].avatar}
@@ -568,7 +568,7 @@ const Chat: React.FC = () => {
                       <div className="font-medium leading-relaxed whitespace-pre-wrap">
                         <BBCodeParser rawText={m.displayText || m.text} />
                       </div>
-                      <div className="flex items-center justify-end gap-1 mt-1.5">
+                      <div className="flex flex-wrap items-center justify-end gap-1 mt-1.5">
                         {m.isEncrypted && (
                           <span className="text-[8px] opacity-50" title="End-to-end encrypted">🔒</span>
                         )}
@@ -585,7 +585,7 @@ const Chat: React.FC = () => {
             </div>
 
             {/* Quick Emoji Bar */}
-            <div className="px-5 py-2 bg-[#0F0F1A] border-t border-white/5 flex gap-2 overflow-x-auto no-scrollbar shrink-0">
+            <div className="px-5 py-2 bg-[#0F0F1A] border-t border-white/5 flex flex-wrap gap-2 overflow-x-auto no-scrollbar shrink-0">
               {QUICK_EMOJIS.map(e => (
                 <button
                   key={e}
@@ -599,7 +599,7 @@ const Chat: React.FC = () => {
 
             {/* Input Bar */}
             <div className="p-5 bg-[#141424] border-t border-white/5 shrink-0">
-              <div className="flex gap-3">
+              <div className="flex flex-wrap gap-3">
                 <div className="flex-1 bg-[#1C1C2E] border border-white/5 rounded-[1.8rem] px-5 py-1 flex items-center focus-within:border-purple-500/40 transition-colors">
                   <input
                     value={inputText}

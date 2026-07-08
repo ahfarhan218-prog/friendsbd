@@ -52,7 +52,7 @@ const BlogEditor: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-full max-w-3xl mx-auto px-4 sm:px-6 mx-auto">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-black text-white">{id ? '✏️ Edit Post' : '📝 New Blog Post'}</h1>
           <button onClick={() => navigate('/blog')} className="pf-btn pf-btn-ghost">Back</button>

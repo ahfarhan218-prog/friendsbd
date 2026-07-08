@@ -128,7 +128,7 @@ const Notifications: React.FC = () => {
             )}
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             {unreadCount > 0 && (
               <button className="notif-mark-all-btn" onClick={markAllRead}>
                 ✓ Mark all read

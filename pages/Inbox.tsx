@@ -398,7 +398,7 @@ const Inbox: React.FC = () => {
       <header className="bg-[#12122A]/80 backdrop-blur-xl border-b border-purple-500/20 p-6 pb-20 rounded-b-[3.5rem] shadow-2xl relative shrink-0 z-20">
         
         <div className="flex justify-between items-center relative z-10">
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <button 
               onClick={() => navigate('/home')} 
               className="p-2.5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all active:scale-90"
@@ -408,7 +408,7 @@ const Inbox: React.FC = () => {
               </svg>
             </button>
             <div>
-              <h2 className="text-2xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400 flex items-center gap-2">
+              <h2 className="text-2xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400 flex flex-wrap items-center gap-2">
                 Inbox Hub
               </h2>
               <p className="text-[9px] text-indigo-300/60 font-black uppercase tracking-widest mt-0.5">
@@ -417,8 +417,8 @@ const Inbox: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <div className="bg-amber-500/10 text-amber-300 font-black border border-amber-500/20 text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-[0_0_10px_rgba(251,191,36,0.15)]">
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="bg-amber-500/10 text-amber-300 font-black border border-amber-500/20 text-xs px-3 py-1.5 rounded-full flex flex-wrap items-center gap-1.5 shadow-[0_0_10px_rgba(251,191,36,0.15)]">
               👑 {currentUser.goldenCoins}
             </div>
           </div>
@@ -475,7 +475,7 @@ const Inbox: React.FC = () => {
               <span className="text-xs font-black text-purple-300/60 uppercase tracking-wider">Start a discussion</span>
               <button 
                 onClick={() => setIsComposing(true)}
-                className="bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/30 text-purple-300 font-black px-4 py-2.5 rounded-xl text-[10px] uppercase tracking-widest flex items-center gap-1.5 transition-all active:scale-95 shadow-[0_0_15px_rgba(147,51,234,0.1)]"
+                className="bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/30 text-purple-300 font-black px-4 py-2.5 rounded-xl text-[10px] uppercase tracking-widest flex flex-wrap items-center gap-1.5 transition-all active:scale-95 shadow-[0_0_15px_rgba(147,51,234,0.1)]"
               >
                 <span>➕ New Message</span>
               </button>
@@ -497,7 +497,7 @@ const Inbox: React.FC = () => {
                     <button
                       key={conv.id}
                       onClick={() => setActiveChat(conv)}
-                      className={`w-full flex items-center gap-4 p-3.5 rounded-2.5xl transition-all border-b border-purple-500/10 last:border-none relative group ${
+                      className={`w-full flex flex-wrap items-center gap-4 p-3.5 rounded-2.5xl transition-all border-b border-purple-500/10 last:border-none relative group ${
                         isUnread 
                           ? 'bg-purple-600/10 border-l-4 border-l-purple-500 pl-2.5 hover:bg-purple-600/20' 
                           : 'hover:bg-purple-500/5'
@@ -569,7 +569,7 @@ const Inbox: React.FC = () => {
                   <button
                     key={letter.id}
                     onClick={() => handleOpenLetter(letter)}
-                    className={`w-full text-left p-4 rounded-2.5xl border flex items-start gap-4 transition-all relative group active:scale-[0.99] ${
+                    className={`w-full text-left p-4 rounded-2.5xl border flex flex-wrap items-start gap-4 transition-all relative group active:scale-[0.99] ${
                       !letter.isRead ? 'bg-purple-600/10 border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.15)] hover:bg-purple-600/20' : 'bg-[#12122A]/40 border-purple-500/10 hover:bg-purple-500/10'
                     }`}
                   >
@@ -603,19 +603,19 @@ const Inbox: React.FC = () => {
 
                       {/* Reward indicators */}
                       {(letter.pointsReward || letter.coinsReward) && (
-                        <div className="flex gap-2 pt-1">
+                        <div className="flex flex-wrap gap-2 pt-1">
                           {letter.pointsReward && (
-                            <span className="text-[9px] bg-emerald-500/10 text-emerald-400 font-black px-2 py-0.5 rounded-lg flex items-center gap-0.5 border border-emerald-500/20 shadow-[0_0_10px_rgba(52,211,153,0.1)]">
+                            <span className="text-[9px] bg-emerald-500/10 text-emerald-400 font-black px-2 py-0.5 rounded-lg flex flex-wrap items-center gap-0.5 border border-emerald-500/20 shadow-[0_0_10px_rgba(52,211,153,0.1)]">
                               🎁 +{letter.pointsReward} Points
                             </span>
                           )}
                           {letter.coinsReward && (
-                            <span className="text-[9px] bg-amber-500/10 text-amber-300 font-black px-2 py-0.5 rounded-lg flex items-center gap-0.5 border border-amber-500/20 shadow-[0_0_10px_rgba(251,191,36,0.1)]">
+                            <span className="text-[9px] bg-amber-500/10 text-amber-300 font-black px-2 py-0.5 rounded-lg flex flex-wrap items-center gap-0.5 border border-amber-500/20 shadow-[0_0_10px_rgba(251,191,36,0.1)]">
                               👑 +{letter.coinsReward} Coins
                             </span>
                           )}
                           {letter.isClaimed && (
-                            <span className="text-[9px] text-emerald-400/80 font-black uppercase tracking-wider flex items-center gap-1">
+                            <span className="text-[9px] text-emerald-400/80 font-black uppercase tracking-wider flex flex-wrap items-center gap-1">
                               ✓ Claimed
                             </span>
                           )}
@@ -644,7 +644,7 @@ const Inbox: React.FC = () => {
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, x: -50 }}
-                      className="p-4 rounded-2.5xl bg-[#12122A]/60 border border-purple-500/20 flex items-center gap-4 hover:bg-purple-500/10 transition-all group"
+                      className="p-4 rounded-2.5xl bg-[#12122A]/60 border border-purple-500/20 flex flex-wrap items-center gap-4 hover:bg-purple-500/10 transition-all group"
                     >
                       <img src={req.avatar} className="w-13 h-13 rounded-2xl object-cover shadow-[0_0_15px_rgba(168,85,247,0.2)] border-2 border-purple-500/30 group-hover:border-purple-400 shrink-0 transition-all" alt="" />
                       
@@ -662,7 +662,7 @@ const Inbox: React.FC = () => {
                         </p>
                       </div>
 
-                      <div className="flex gap-1.5 shrink-0">
+                      <div className="flex flex-wrap gap-1.5 shrink-0">
                         <button
                           onClick={() => handleRequestAction(req.id, req.name, true)}
                           className="w-9 h-9 bg-emerald-500/20 hover:bg-emerald-500/40 text-emerald-400 border border-emerald-500/30 rounded-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 text-xs shadow-[0_0_10px_rgba(52,211,153,0.15)]"
@@ -709,7 +709,7 @@ const Inbox: React.FC = () => {
             >
               {/* Header inside modal */}
               <div className="flex items-center justify-between mb-6 pb-4 border-b border-purple-500/10">
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3">
                   <img src={activeLetter.senderAvatar} className="w-11 h-11 rounded-xl object-cover shadow-[0_0_15px_rgba(168,85,247,0.2)] border-2 border-purple-500/30" alt="" />
                   <div>
                     <h4 className="text-sm font-black text-white">{activeLetter.sender}</h4>
@@ -740,7 +740,7 @@ const Inbox: React.FC = () => {
                   <div className="p-4 rounded-2xl bg-gradient-to-tr from-[#1A1A35] to-purple-900/30 border border-purple-500/30 flex items-center justify-between shadow-[0_0_20px_rgba(147,51,234,0.1)]">
                     <div>
                       <p className="text-[10px] font-black uppercase text-purple-400 tracking-widest mb-1">Enclosed Gifts</p>
-                      <div className="flex gap-2">
+                      <div className="flex flex-wrap gap-2">
                         {activeLetter.pointsReward && (
                           <span className="text-xs font-black text-emerald-400">✨ {activeLetter.pointsReward} Points</span>
                         )}
@@ -798,7 +798,7 @@ const Inbox: React.FC = () => {
               
               {/* Thread Header */}
               <header className="bg-[#12122A]/80 backdrop-blur-md text-white p-5 flex items-center justify-between shrink-0 border-b border-purple-500/20 relative z-10">
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3">
                   <button 
                     onClick={() => setActiveChat(null)} 
                     className="p-2 bg-purple-500/10 border border-purple-500/30 rounded-full transition-all hover:bg-purple-500/30 active:scale-90"
@@ -808,7 +808,7 @@ const Inbox: React.FC = () => {
                     </svg>
                   </button>
                   
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex flex-wrap items-center gap-2.5">
                     <div className="w-10 h-10 bg-purple-600/20 rounded-xl flex items-center justify-center text-xl shadow-[0_0_15px_rgba(168,85,247,0.2)] border border-purple-500/40 shrink-0">
                       {activeChat.isGroup ? '🦁' : '👤'}
                     </div>
@@ -816,7 +816,7 @@ const Inbox: React.FC = () => {
                       <h4 className="text-sm font-black tracking-tight truncate max-w-[200px] text-white">
                         {activeChat.isGroup ? activeChat.groupName : activeChat.participants[0].name}
                       </h4>
-                      <p className="text-[8px] text-purple-300/80 font-bold uppercase tracking-widest flex items-center gap-1">
+                      <p className="text-[8px] text-purple-300/80 font-bold uppercase tracking-widest flex flex-wrap items-center gap-1">
                         <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse"></span>
                         Secure PM
                       </p>
@@ -848,12 +848,12 @@ const Inbox: React.FC = () => {
                       </p>
                       <p className="font-bold text-[13px] leading-snug">{msg.displayText || msg.text}</p>
                       
-                      <div className="flex items-center justify-between gap-3 mt-1.5 opacity-70 select-none">
+                      <div className="flex flex-wrap items-center justify-between gap-3 mt-1.5 opacity-70 select-none">
                         <span className="text-[7px] font-black uppercase tracking-widest leading-none">
                           {msg.time}
                         </span>
                         {msg.isMe && (
-                          <span className={`text-[8.5px] font-black uppercase tracking-wider flex items-center gap-0.5 leading-none ${
+                          <span className={`text-[8.5px] font-black uppercase tracking-wider flex flex-wrap items-center gap-0.5 leading-none ${
                             msg.isRead ? 'text-emerald-300' : 'text-purple-200'
                           }`}>
                             {msg.isRead ? (
@@ -882,12 +882,12 @@ const Inbox: React.FC = () => {
 
               {/* Chat Textbar */}
               <div className="p-4 bg-[#12122A]/80 backdrop-blur-md border-t border-purple-500/20 shrink-0 relative z-10">
-                <div className="flex items-center gap-1 mb-2">
-                  <span className="text-[9px] text-emerald-400 font-black flex items-center gap-1 uppercase tracking-widest">
+                <div className="flex flex-wrap items-center gap-1 mb-2">
+                  <span className="text-[9px] text-emerald-400 font-black flex flex-wrap items-center gap-1 uppercase tracking-widest">
                     🔒 End-to-end encrypted
                   </span>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   <div className="flex-1 bg-[#1A1A35]/60 border border-purple-500/30 rounded-2xl px-4 py-1 flex items-center shadow-inner focus-within:border-purple-400 focus-within:bg-[#1A1A35] transition-all">
                     <input
                       type="text"
@@ -968,7 +968,7 @@ const Inbox: React.FC = () => {
                     <button
                       key={friend.id}
                       onClick={() => handleStartComposeChat(friend)}
-                      className="w-full bg-[#12122A]/60 p-3.5 rounded-2xl border border-purple-500/20 flex items-center gap-3.5 hover:bg-purple-500/10 hover:border-purple-500/30 text-left transition-all active:scale-[0.98] group"
+                      className="w-full bg-[#12122A]/60 p-3.5 rounded-2xl border border-purple-500/20 flex flex-wrap items-center gap-3.5 hover:bg-purple-500/10 hover:border-purple-500/30 text-left transition-all active:scale-[0.98] group"
                     >
                       <img src={friend.avatar} className="w-10 h-10 rounded-xl object-cover shadow-[0_0_15px_rgba(168,85,247,0.1)] border border-purple-500/30 group-hover:border-purple-400 shrink-0 transition-all" alt="" />
                       <div className="flex-1 min-w-0">

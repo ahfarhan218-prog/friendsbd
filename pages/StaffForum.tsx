@@ -91,7 +91,7 @@ const StaffForum: React.FC = () => {
 
       {/* Header */}
       <div className="sticky top-0 z-40 bg-[#090d16]/80 backdrop-blur-xl border-b border-[#30363d] p-4 flex items-center justify-between shadow-2xl">
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <button 
             onClick={() => navigate('/forum')}
             className="w-10 h-10 rounded-xl bg-[#161b22] border border-[#30363d] flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-500 transition-colors"
@@ -99,13 +99,13 @@ const StaffForum: React.FC = () => {
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
           </button>
           <div>
-            <h1 className="text-xl font-black text-white tracking-tight flex items-center gap-2">
+            <h1 className="text-xl font-black text-white tracking-tight flex flex-wrap items-center gap-2">
               <span className="text-amber-500">🛡️</span> STAFF FORUM
             </h1>
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Private Discussion Area</p>
           </div>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <div className="hidden md:block text-right">
             <p className="text-xs font-bold text-white">{currentUser.name}</p>
             <p className="text-[10px] text-amber-500 font-bold uppercase">{currentUser.role}</p>
@@ -115,7 +115,7 @@ const StaffForum: React.FC = () => {
       </div>
 
       {/* Chat Area */}
-      <main className="flex-1 max-w-4xl w-full mx-auto p-4 flex flex-col gap-4 mt-4 mb-24">
+      <main className="flex-1 max-w-full max-w-4xl mx-auto px-4 sm:px-6 w-full mx-auto p-4 flex flex-col gap-4 mt-4 mb-24">
         {loading ? (
           <div className="py-20 text-center flex flex-col items-center">
             <div className="w-10 h-10 border-4 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
@@ -129,7 +129,7 @@ const StaffForum: React.FC = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 key={post.id} 
-                className={`flex gap-4 max-w-[85%] ${isMe ? 'self-end flex-row-reverse' : 'self-start'}`}
+                className={`flex flex-wrap gap-4 max-w-[85%] ${isMe ? 'self-end flex flex-wrap-row-reverse' : 'self-start'}`}
               >
                 {/* Avatar */}
                 <div className="shrink-0">
@@ -138,7 +138,7 @@ const StaffForum: React.FC = () => {
                 
                 {/* Message Bubble */}
                 <div className={`flex flex-col ${isMe ? 'items-end' : 'items-start'}`}>
-                  <div className="flex items-center gap-2 mb-1 px-1">
+                  <div className="flex flex-wrap items-center gap-2 mb-1 px-1">
                     <Link to={`/profile/${post.authorName}`} className="text-xs font-bold text-slate-300 hover:text-amber-400 hover:underline transition-colors">
                       {post.authorName}
                     </Link>
@@ -180,8 +180,8 @@ const StaffForum: React.FC = () => {
 
       {/* Fixed Composer Bottom */}
       <div className="fixed bottom-0 left-0 right-0 bg-[#090d16]/90 backdrop-blur-xl border-t border-[#30363d] p-4 z-40 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-[#161b22] border border-[#30363d] rounded-2xl p-2 flex items-end gap-2 focus-within:border-amber-500/50 focus-within:shadow-[0_0_20px_rgba(245,158,11,0.1)] transition-all">
+        <div className="max-w-full max-w-4xl mx-auto px-4 sm:px-6 mx-auto">
+          <div className="bg-[#161b22] border border-[#30363d] rounded-2xl p-2 flex flex-wrap items-end gap-2 focus-within:border-amber-500/50 focus-within:shadow-[0_0_20px_rgba(245,158,11,0.1)] transition-all">
             <textarea
               value={shoutlyText}
               onChange={e => setShoutlyText(e.target.value)}

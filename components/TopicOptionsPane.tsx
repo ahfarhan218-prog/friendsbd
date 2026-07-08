@@ -183,7 +183,7 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-purple-600/5 rounded-full blur-[100px] pointer-events-none" />
 
       {/* ── TOP HEADER ── */}
-      <div className="shrink-0 border-b border-[#1f293d]/60 px-5 py-4 flex items-center gap-4 bg-slate-950/50 backdrop-blur-xl">
+      <div className="shrink-0 border-b border-[#1f293d]/60 px-5 py-4 flex flex-wrap items-center gap-4 bg-slate-950/50 backdrop-blur-xl">
         <button
           onClick={onClose}
           className="p-2.5 bg-[#121824] hover:bg-slate-800 border border-[#1f293d] rounded-2xl text-slate-400 hover:text-white transition-all active:scale-95 shrink-0"
@@ -198,7 +198,7 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
           <h1 className="text-sm font-black text-white truncate">{thread.title}</h1>
         </div>
 
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex flex-wrap items-center gap-2 shrink-0">
           {thread.isPinned  && <span className="text-amber-400 text-base">📌</span>}
           {thread.isLocked  && <span className="text-rose-400 text-base">🔒</span>}
           <span className="px-2 py-0.5 text-[8px] font-black uppercase bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 rounded-lg">#{thread.id}</span>
@@ -206,12 +206,12 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
       </div>
 
       {/* ── TAB NAV ── */}
-      <div className="shrink-0 flex gap-1 px-4 pt-3 pb-0 overflow-x-auto scrollbar-hide">
+      <div className="shrink-0 flex flex-wrap gap-1 px-4 pt-3 pb-0 overflow-x-auto scrollbar-hide">
         {TABS.map(tab => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`flex items-center gap-1.5 px-4 py-2.5 rounded-t-2xl text-[10px] font-black uppercase tracking-widest whitespace-nowrap transition-all border-b-2 ${
+            className={`flex flex-wrap items-center gap-1.5 px-4 py-2.5 rounded-t-2xl text-[10px] font-black uppercase tracking-widest whitespace-nowrap transition-all border-b-2 ${
               activeTab === tab.id
                 ? 'bg-[#121824] border-b-indigo-500 text-white shadow-lg'
                 : 'bg-transparent border-b-transparent text-slate-500 hover:text-slate-300 hover:bg-slate-900/30'
@@ -233,7 +233,7 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
               <motion.div key="general" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-3">
 
                 {/* Author card */}
-                <div className="bg-[#121824] border border-[#1f293d] rounded-3xl p-5 flex items-center gap-4">
+                <div className="bg-[#121824] border border-[#1f293d] rounded-3xl p-5 flex flex-wrap items-center gap-4">
                   <img
                     src={thread.authorAvatar || 'https://picsum.photos/seed/anon/200'}
                     alt={thread.authorName}
@@ -256,7 +256,7 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
                 </div>
 
                 {/* Action buttons grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3">
                   <ActionBtn
                     icon="✉️" label="Send PM to Author"
                     onClick={() => { navigate('/inbox', { state: { composeTo: thread.authorName } }); onClose(); }}
@@ -289,13 +289,13 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
                     <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Report Topic</h3>
                   </div>
                   {reported ? (
-                    <div className="px-5 py-4 flex items-center gap-3">
+                    <div className="px-5 py-4 flex flex-wrap items-center gap-3">
                       <span className="text-emerald-400 text-lg">✅</span>
                       <p className="text-xs font-bold text-emerald-400">Report submitted successfully. Moderators will review it.</p>
                     </div>
                   ) : showReportForm ? (
                     <div className="p-5 space-y-3">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-2">
                         {['Spam', 'Harassment', 'Misinformation', 'Inappropriate Content', 'Off-topic', 'Other'].map(r => (
                           <button key={r} onClick={() => setReportReason(r)}
                             className={`px-3 py-2 rounded-xl text-[10px] font-bold border transition-all text-left ${
@@ -315,7 +315,7 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
                         placeholder="Describe the issue..."
                         className="w-full bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-rose-500/60 rounded-2xl px-4 py-3 text-xs font-medium transition-colors placeholder-slate-600"
                       />
-                      <div className="flex gap-2">
+                      <div className="flex flex-wrap gap-2">
                         <button onClick={() => setShowReportForm(false)}
                           className="flex-1 py-2.5 border border-[#1f293d] hover:bg-slate-800 text-slate-400 font-bold text-xs uppercase tracking-widest rounded-2xl transition-all">
                           Cancel
@@ -332,7 +332,7 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
                   ) : (
                     <button
                       onClick={() => setShowReportForm(true)}
-                      className="w-full px-5 py-4 flex items-center gap-3 text-rose-400 hover:bg-rose-500/5 transition-colors text-left group"
+                      className="w-full px-5 py-4 flex flex-wrap items-center gap-3 text-rose-400 hover:bg-rose-500/5 transition-colors text-left group"
                     >
                       <span className="text-lg group-hover:scale-110 transition-transform">🚨</span>
                       <div>
@@ -377,7 +377,7 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
                   <button
                     onClick={handleSaveMeta}
                     disabled={isSavingMeta || !editedTitle.trim()}
-                    className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-black text-xs uppercase tracking-widest rounded-2xl shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+                    className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-black text-xs uppercase tracking-widest rounded-2xl shadow-lg transition-all active:scale-[0.98] flex flex-wrap items-center justify-center gap-2"
                   >
                     {isSavingMeta ? <><div className="w-3.5 h-3.5 border-2 border-white/20 border-t-white rounded-full animate-spin" /> Saving...</> : '💾 Save Title & Tags'}
                   </button>
@@ -432,7 +432,7 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
                   <button
                     onClick={handleSaveContent}
                     disabled={isSavingContent || !editedContent.trim()}
-                    className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white font-black text-xs uppercase tracking-widest rounded-2xl shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+                    className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white font-black text-xs uppercase tracking-widest rounded-2xl shadow-lg transition-all active:scale-[0.98] flex flex-wrap items-center justify-center gap-2"
                   >
                     {isSavingContent ? <><div className="w-3.5 h-3.5 border-2 border-white/20 border-t-white rounded-full animate-spin" /> Saving...</> : '💾 Update Post Content'}
                   </button>
@@ -480,7 +480,7 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
                   <div className="px-5 py-3.5 border-b border-[#1f293d]/50">
                     <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Staff Actions</h3>
                   </div>
-                  <div className="p-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="p-5 grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3">
                     <ActionBtn icon="✉️" label="Message Author"
                       onClick={() => { navigate('/inbox', { state: { composeTo: thread.authorName } }); onClose(); }} />
                     <ActionBtn icon="👤" label="View Author"
@@ -500,7 +500,7 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
                   {!showDeleteConfirm ? (
                     <button
                       onClick={() => setShowDeleteConfirm(true)}
-                      className="w-full px-5 py-4 flex items-center gap-3 text-rose-400 hover:bg-rose-500/10 transition-colors text-left group"
+                      className="w-full px-5 py-4 flex flex-wrap items-center gap-3 text-rose-400 hover:bg-rose-500/10 transition-colors text-left group"
                     >
                       <span className="text-lg group-hover:scale-110 transition-transform">🗑️</span>
                       <div>
@@ -515,13 +515,13 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
                         <p className="text-xs font-black text-rose-400">Are you absolutely sure?</p>
                         <p className="text-[10px] text-slate-500 font-bold mt-1">This will delete "{thread.title}" and <strong className="text-rose-400">{thread.replyCount} replies</strong> permanently.</p>
                       </div>
-                      <div className="flex gap-2">
+                      <div className="flex flex-wrap gap-2">
                         <button onClick={() => setShowDeleteConfirm(false)} disabled={isDeletingThread}
                           className="flex-1 py-3 border border-[#1f293d] hover:bg-slate-800 text-slate-400 font-bold text-xs uppercase tracking-widest rounded-2xl transition-all">
                           Cancel
                         </button>
                         <button onClick={handleDeleteThread} disabled={isDeletingThread}
-                          className="flex-1 py-3 bg-rose-600 hover:bg-rose-500 disabled:opacity-70 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all flex items-center justify-center gap-2">
+                          className="flex flex-wrap-1 py-3 bg-rose-600 hover:bg-rose-500 disabled:opacity-70 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all flex flex-wrap items-center justify-center gap-2">
                           {isDeletingThread ? <><div className="w-3.5 h-3.5 border-2 border-white/20 border-t-white rounded-full animate-spin" /> Deleting...</> : '🗑️ Yes, Delete'}
                         </button>
                       </div>
@@ -552,7 +552,7 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
                       { label: 'Pinned',          value: thread.isPinned ? 'Yes' : 'No' },
                       { label: 'Tags',            value: (thread.tags || []).length > 0 ? (thread.tags || []).join(', ') : 'None' },
                     ].map(row => (
-                      <div key={row.label} className="px-5 py-3 flex items-center justify-between gap-4">
+                      <div key={row.label} className="px-5 py-3 flex flex-wrap items-center justify-between gap-4">
                         <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest shrink-0">{row.label}</span>
                         <span className="text-[11px] font-bold text-slate-200 text-right truncate">{row.value}</span>
                       </div>
@@ -561,7 +561,7 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
                 </div>
 
                 {/* Quick stats visual */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-3">
                   {[
                     { icon: '💬', value: thread.replyCount || 0, label: 'Replies' },
                     { icon: '👁️', value: thread.views || 0, label: 'Views' },
@@ -578,7 +578,7 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
                 {/* Thread permalink */}
                 <div className="bg-[#121824] border border-[#1f293d] rounded-3xl p-5 space-y-2">
                   <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Permalink</h3>
-                  <div className="flex items-center gap-2 bg-[#090d16] border border-[#1f293d] rounded-2xl px-4 py-3">
+                  <div className="flex flex-wrap items-center gap-2 bg-[#090d16] border border-[#1f293d] rounded-2xl px-4 py-3">
                     <span className="text-slate-500 text-xs shrink-0">🔗</span>
                     <p className="text-[10px] text-slate-400 font-mono truncate flex-1">
                       {window.location.origin}/#/forum/thread/{thread.id}
@@ -599,7 +599,7 @@ const TopicOptionsPane: React.FC<TopicOptionsPaneProps> = ({
       <div className="shrink-0 border-t border-[#1f293d]/60 bg-slate-950/50 backdrop-blur-xl px-4 py-3">
         <button
           onClick={onClose}
-          className="w-full max-w-2xl mx-auto block py-3.5 bg-[#121824] hover:bg-slate-800 border border-[#1f293d] text-slate-300 hover:text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all flex items-center justify-center gap-2"
+          className="w-full max-w-2xl mx-auto block py-3.5 bg-[#121824] hover:bg-slate-800 border border-[#1f293d] text-slate-300 hover:text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all flex flex-wrap items-center justify-center gap-2"
         >
           <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -631,7 +631,7 @@ const COLOR_MAP: Record<string, string> = {
 const ActionBtn: React.FC<ActionBtnProps> = ({ icon, label, color = 'default', onClick }) => (
   <button
     onClick={onClick}
-    className={`flex items-center gap-2.5 p-3.5 rounded-2xl border text-left transition-all active:scale-[0.97] group ${COLOR_MAP[color]}`}
+    className={`flex flex-wrap items-center gap-2.5 p-3.5 rounded-2xl border text-left transition-all active:scale-[0.97] group ${COLOR_MAP[color]}`}
   >
     <span className="text-base shrink-0 group-hover:scale-110 transition-transform">{icon}</span>
     <span className="text-[10px] font-black uppercase tracking-wide leading-snug">{label}</span>
@@ -655,8 +655,8 @@ const TOGGLE_COLORS: Record<string, string> = {
 };
 
 const StaffToggleRow: React.FC<StaffToggleRowProps> = ({ icon, label, desc, isActive, activeColor, onToggle, disabled }) => (
-  <div className={`px-5 py-4 flex items-center justify-between gap-4 ${disabled ? 'opacity-40' : ''}`}>
-    <div className="flex items-center gap-3 min-w-0">
+  <div className={`px-5 py-4 flex flex-wrap items-center justify-between gap-4 ${disabled ? 'opacity-40' : ''}`}>
+    <div className="flex flex-wrap items-center gap-3 min-w-0">
       <span className="text-lg shrink-0">{icon}</span>
       <div className="min-w-0">
         <p className="text-xs font-black text-white">{label}</p>

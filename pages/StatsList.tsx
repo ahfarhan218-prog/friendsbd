@@ -75,7 +75,7 @@ const StatsList: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] font-sans pb-20 pt-6 px-4">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-full max-w-3xl mx-auto px-4 sm:px-6 mx-auto">
         
         {/* Header */}
         <div className="flex items-center gap-4 mb-8 flex-wrap">
@@ -97,7 +97,7 @@ const StatsList: React.FC = () => {
             {loading ? (
               // Skeleton Loader
               [...Array(6)].map((_, i) => (
-                <div key={i} className="flex items-center gap-3 p-4 bg-white/5 rounded-2xl animate-pulse">
+                <div key={i} className="flex flex-wrap items-center gap-3 p-4 bg-white/5 rounded-2xl animate-pulse">
                   <div className="w-6 h-6 bg-white/10 rounded-lg" />
                   <div className="w-10 h-10 bg-white/10 rounded-xl shrink-0" />
                   <div className="flex-1 space-y-2">
@@ -117,7 +117,7 @@ const StatsList: React.FC = () => {
                 <div 
                   key={user.id} 
                   onClick={() => navigate(`/profile/${user.id}`)}
-                  className="flex items-center gap-4 p-4 bg-[#161b22]/50 hover:bg-[#161b22] border border-transparent hover:border-purple-500/20 rounded-2xl cursor-pointer transition-all group"
+                  className="flex flex-wrap items-center gap-4 p-4 bg-[#161b22]/50 hover:bg-[#161b22] border border-transparent hover:border-purple-500/20 rounded-2xl cursor-pointer transition-all group"
                 >
                   {/* Rank Badge */}
                   <div className="w-8 h-8 flex items-center justify-center bg-white/5 text-xs font-black text-white/30 rounded-xl shrink-0 group-hover:text-purple-400 transition-colors">
@@ -133,7 +133,7 @@ const StatsList: React.FC = () => {
                   
                   {/* Name / Info */}
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex flex-wrap items-center gap-1.5">
                       <span className="text-base font-black text-white truncate">{user.name}</span>
                       {user.isVerified && <span className="text-blue-400 text-sm">✅</span>}
                       {user.isPremium && <span className="text-amber-400 text-sm">💎</span>}

@@ -25,7 +25,7 @@ const Inventory: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-full max-w-4xl mx-auto px-4 sm:px-6 mx-auto">
         <h1 className="text-2xl font-black text-white mb-2">🎒 Inventory</h1>
         <p className="text-sm text-white/40 mb-6">{items.length} items owned</p>
 
@@ -36,7 +36,7 @@ const Inventory: React.FC = () => {
             <p className="text-sm mt-1">Visit the shop or marketplace to get items!</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {items.map(item => (
               <div key={item.id} className="pf-card p-5">
                 <div className="flex items-center justify-between mb-3">

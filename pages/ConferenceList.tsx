@@ -76,7 +76,7 @@ const ConferenceList: React.FC = () => {
       <div className="absolute bottom-[-10%] right-[-10%] w-full max-w-sm h-96 bg-indigo-600/20 blur-[100px] rounded-full pointer-events-none" />
 
       <header className="relative z-10 bg-[#12122A]/80 backdrop-blur-xl border-b border-purple-500/20 p-6 pb-20 rounded-b-[3rem] flex items-center justify-between shadow-2xl">
-         <div className="flex items-center gap-4">
+         <div className="flex flex-wrap items-center gap-4">
             <button onClick={() => navigate('/apps')} className="p-2 bg-white/5 border border-white/10 rounded-xl active:scale-90 hover:bg-white/10 transition-colors">
                <svg className="w-6 h-6 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/></svg>
             </button>
@@ -93,7 +93,7 @@ const ConferenceList: React.FC = () => {
          </button>
       </header>
 
-      <div className="relative z-10 px-5 -mt-10 space-y-8 pb-32 max-w-4xl mx-auto">
+      <div className="relative z-10 px-5 -mt-10 space-y-8 pb-32 max-w-full max-w-4xl mx-auto px-4 sm:px-6 mx-auto">
          {/* MY ACTIVE ROOMS */}
          <section className="space-y-4">
             <h3 className="text-[10px] font-black text-purple-400/80 uppercase tracking-widest px-2">My Active Rooms ({myRooms.length})</h3>
@@ -102,7 +102,7 @@ const ConferenceList: React.FC = () => {
                 key={room.id}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => navigate(`/conference/${room.id}`)}
-                className="w-full bg-[#1A1A35]/60 hover:bg-[#1f1f3d]/80 backdrop-blur-md p-5 rounded-[2rem] shadow-xl border border-purple-500/20 flex items-center gap-4 text-left transition-all group"
+                className="w-full bg-[#1A1A35]/60 hover:bg-[#1f1f3d]/80 backdrop-blur-md p-5 rounded-[2rem] shadow-xl border border-purple-500/20 flex flex-wrap items-center gap-4 text-left transition-all group"
               >
                 <div className="w-14 h-14 bg-purple-500/20 group-hover:bg-purple-500/30 rounded-2xl flex items-center justify-center text-2xl border border-purple-500/30 transition-colors">🔒</div>
                 <div className="flex-1 min-w-0">
@@ -124,7 +124,7 @@ const ConferenceList: React.FC = () => {
            <section className="space-y-4">
               <h3 className="text-[10px] font-black text-orange-400/80 uppercase tracking-widest px-2">Incoming Invitations ({invitedRooms.length})</h3>
               {invitedRooms.map(room => (
-                <div key={room.id} className="bg-[#1A1A35]/60 backdrop-blur-md p-5 rounded-[2rem] shadow-xl border border-orange-500/20 flex items-center gap-4">
+                <div key={room.id} className="bg-[#1A1A35]/60 backdrop-blur-md p-5 rounded-[2rem] shadow-xl border border-orange-500/20 flex flex-wrap items-center gap-4">
                   <div className="w-14 h-14 bg-orange-500/20 rounded-2xl flex items-center justify-center text-2xl border border-orange-500/30">📩</div>
                   <div className="flex-1 min-w-0">
                     <h4 className="text-sm font-black text-white truncate">{room.name}</h4>
@@ -144,7 +144,7 @@ const ConferenceList: React.FC = () => {
          {/* ADMIN OVERRIDE PANEL */}
          {isAdmin && otherRooms.length > 0 && (
            <section className="space-y-4">
-              <div className="flex items-center gap-2 px-2">
+              <div className="flex flex-wrap items-center gap-2 px-2">
                  <div className="w-1.5 h-1.5 bg-rose-500 rounded-full animate-pulse"></div>
                  <h3 className="text-[10px] font-black text-rose-500 uppercase tracking-widest">Admin Root Access ({otherRooms.length})</h3>
               </div>
@@ -153,7 +153,7 @@ const ConferenceList: React.FC = () => {
                   key={room.id}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => navigate(`/conference/${room.id}`)}
-                  className="w-full bg-[#120a15]/60 backdrop-blur-md p-5 rounded-[2rem] shadow-xl border border-rose-500/20 flex items-center gap-4 text-left group hover:border-rose-500/40 transition-colors"
+                  className="w-full bg-[#120a15]/60 backdrop-blur-md p-5 rounded-[2rem] shadow-xl border border-rose-500/20 flex flex-wrap items-center gap-4 text-left group hover:border-rose-500/40 transition-colors"
                 >
                   <div className="w-14 h-14 bg-rose-500/10 rounded-2xl flex items-center justify-center text-2xl border border-rose-500/20 group-hover:bg-rose-500/20 transition-colors">⚡</div>
                   <div className="flex-1 min-w-0">
@@ -182,7 +182,7 @@ const ConferenceList: React.FC = () => {
                  placeholder="Enter Room Name..."
                  className="w-full bg-[#0F0F1A] border-2 border-purple-500/20 focus:border-purple-500/60 rounded-2xl p-4 text-sm font-bold text-white outline-none transition-all mb-6 placeholder-slate-600"
                />
-               <div className="flex gap-3">
+               <div className="flex flex-wrap gap-3">
                   <button onClick={() => setShowCreate(false)} className="flex-1 py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 font-black text-[11px] rounded-2xl uppercase tracking-widest transition-colors">Cancel</button>
                   <button onClick={handleCreateRoom} disabled={!newRoomName.trim()} className="flex-2 py-4 bg-purple-600 hover:bg-purple-500 disabled:opacity-50 disabled:hover:bg-purple-600 text-white font-black text-[11px] rounded-2xl uppercase tracking-widest shadow-[0_0_20px_rgba(124,58,237,0.3)] transition-all px-8">Initialize</button>
                </div>

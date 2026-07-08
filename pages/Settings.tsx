@@ -137,11 +137,11 @@ const Settings: React.FC = () => {
           {toast}
         </div>
       )}
-      <header className="bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white p-4 sm:p-6 pb-16 sm:pb-20 rounded-b-[2rem] sm:rounded-b-[3rem] flex items-center gap-4 shadow-lg shadow-purple-900/30">
+      <header className="bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white p-4 sm:p-6 pb-16 sm:pb-20 rounded-b-[2rem] sm:rounded-b-[3rem] flex flex-wrap items-center gap-4 shadow-lg shadow-purple-900/30">
         <button onClick={() => navigate(-1)} className="p-2 bg-black/20 rounded-full active:scale-90 transition-transform backdrop-blur-sm">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
         </button>
-        <h2 className="text-2xl font-bold flex items-center gap-2">Settings</h2>
+        <h2 className="text-2xl font-bold flex flex-wrap items-center gap-2">Settings</h2>
       </header>
 
       <div className="px-4 -mt-16 flex flex-col gap-6 mb-24">
@@ -149,23 +149,23 @@ const Settings: React.FC = () => {
         {/* ── Account ── */}
         <div className="bg-[#1C1C2E] rounded-[2.5rem] shadow-sm overflow-hidden border border-[#30363d]">
           <div className="p-4 px-6 text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-b-[2rem]">
-            <h3 className="text-sm font-black flex items-center gap-2 uppercase tracking-widest">Account</h3>
+            <h3 className="text-sm font-black flex flex-wrap items-center gap-2 uppercase tracking-widest">Account</h3>
             <p className="text-[10px] opacity-70">Manage your account settings</p>
           </div>
           <div className="bg-[#161b22] m-2 rounded-2xl p-1 space-y-1">
-            <button onClick={() => setActiveModal('profile')} className="w-full flex items-center gap-4 p-4 hover:bg-[#1C1C2E] rounded-xl transition-all">
+            <button onClick={() => setActiveModal('profile')} className="w-full flex flex-wrap items-center gap-4 p-4 hover:bg-[#1C1C2E] rounded-xl transition-all">
               <div className="bg-purple-500/20 text-purple-400 w-10 h-10 rounded-xl flex items-center justify-center text-lg">📝</div>
               <div className="text-left"><p className="text-xs font-black text-gray-100">Edit Profile</p><p className="text-[10px] text-gray-400 font-medium">Name, bio, avatar, gender, country & more</p></div>
             </button>
-            <button onClick={() => setActiveModal('username')} className="w-full flex items-center gap-4 p-4 hover:bg-[#1C1C2E] rounded-xl transition-all">
+            <button onClick={() => setActiveModal('username')} className="w-full flex flex-wrap items-center gap-4 p-4 hover:bg-[#1C1C2E] rounded-xl transition-all">
               <div className="bg-purple-500/20 text-purple-400 w-10 h-10 rounded-xl flex items-center justify-center text-lg">👤</div>
               <div className="text-left"><p className="text-xs font-black text-gray-100">Change Username</p><p className="text-[10px] text-gray-400 font-medium">@{currentUser?.username || 'username'}</p></div>
             </button>
-            <button onClick={() => setActiveModal('password')} className="w-full flex items-center gap-4 p-4 hover:bg-[#1C1C2E] rounded-xl transition-all">
+            <button onClick={() => setActiveModal('password')} className="w-full flex flex-wrap items-center gap-4 p-4 hover:bg-[#1C1C2E] rounded-xl transition-all">
               <div className="bg-purple-500/20 text-purple-400 w-10 h-10 rounded-xl flex items-center justify-center text-lg">🔒</div>
               <div className="text-left"><p className="text-xs font-black text-gray-100">Change Password</p><p className="text-[10px] text-gray-400 font-medium">Update your password</p></div>
             </button>
-            <button onClick={() => setActiveModal('appearance')} className="w-full flex items-center gap-4 p-4 hover:bg-[#1C1C2E] rounded-xl transition-all">
+            <button onClick={() => setActiveModal('appearance')} className="w-full flex flex-wrap items-center gap-4 p-4 hover:bg-[#1C1C2E] rounded-xl transition-all">
               <div className="bg-purple-500/20 text-purple-400 w-10 h-10 rounded-xl flex items-center justify-center text-lg">🎨</div>
               <div className="text-left"><p className="text-xs font-black text-gray-100">Appearance</p><p className="text-[10px] text-gray-400 font-medium">Profile banner theme</p></div>
             </button>
@@ -175,7 +175,7 @@ const Settings: React.FC = () => {
         {/* ── Account Info ── */}
         <div className="bg-[#1C1C2E] rounded-[2.5rem] shadow-sm overflow-hidden border border-[#30363d]">
           <div className="p-4 px-6 text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-b-[2rem]">
-            <h3 className="text-sm font-black flex items-center gap-2 uppercase tracking-widest">Account Info</h3>
+            <h3 className="text-sm font-black flex flex-wrap items-center gap-2 uppercase tracking-widest">Account Info</h3>
             <p className="text-[10px] opacity-70">Your account details</p>
           </div>
           <div className="bg-[#161b22] m-2 rounded-2xl p-4 space-y-3">
@@ -187,7 +187,7 @@ const Settings: React.FC = () => {
               { label: 'Level', value: currentUser?.level },
               { label: 'Reputation', value: currentUser?.total_rp ?? currentUser?.reputation_points ?? 0 },
             ].map(item => (
-              <div key={item.label} className="flex justify-between items-center py-1 gap-2">
+              <div key={item.label} className="flex flex-wrap justify-between items-center py-1 gap-2">
                 <span className="text-xs text-gray-400 shrink-0">{item.label}</span>
                 <span className="text-xs font-bold text-gray-100 text-right truncate max-w-[180px] sm:max-w-none">{item.value || '-'}</span>
               </div>
@@ -198,7 +198,7 @@ const Settings: React.FC = () => {
         {/* ── Privacy & Security ── */}
         <div className="bg-[#1C1C2E] rounded-[2.5rem] shadow-sm overflow-hidden border border-[#30363d]">
           <div className="p-4 px-6 text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-b-[2rem]">
-            <h3 className="text-sm font-black flex items-center gap-2 uppercase tracking-widest">Privacy & Security</h3>
+            <h3 className="text-sm font-black flex flex-wrap items-center gap-2 uppercase tracking-widest">Privacy & Security</h3>
             <p className="text-[10px] opacity-70">Control your privacy</p>
           </div>
           <div className="bg-[#161b22] m-2 rounded-2xl p-4 space-y-5">
@@ -216,7 +216,7 @@ const Settings: React.FC = () => {
         {/* ── Notifications ── */}
         <div className="bg-[#1C1C2E] rounded-[2.5rem] shadow-sm overflow-hidden border border-[#30363d]">
           <div className="p-4 px-6 text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-b-[2rem]">
-            <h3 className="text-sm font-black flex items-center gap-2 uppercase tracking-widest">Notifications</h3>
+            <h3 className="text-sm font-black flex flex-wrap items-center gap-2 uppercase tracking-widest">Notifications</h3>
             <p className="text-[10px] opacity-70">Manage notification preferences</p>
           </div>
           <div className="bg-[#161b22] m-2 rounded-2xl p-4 space-y-5">
@@ -229,15 +229,15 @@ const Settings: React.FC = () => {
         {/* ── Help & Support ── */}
         <div className="bg-[#1C1C2E] rounded-[2.5rem] shadow-sm overflow-hidden border border-[#30363d]">
           <div className="p-4 px-6 text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-b-[2rem]">
-            <h3 className="text-sm font-black flex items-center gap-2 uppercase tracking-widest">Help & Support</h3>
+            <h3 className="text-sm font-black flex flex-wrap items-center gap-2 uppercase tracking-widest">Help & Support</h3>
             <p className="text-[10px] opacity-70">Get help when you need it</p>
           </div>
           <div className="bg-[#161b22] m-2 rounded-2xl p-1 space-y-1">
-            <button onClick={() => setActiveModal('support')} className="w-full flex items-center gap-4 p-4 hover:bg-[#1C1C2E] rounded-xl transition-all">
+            <button onClick={() => setActiveModal('support')} className="w-full flex flex-wrap items-center gap-4 p-4 hover:bg-[#1C1C2E] rounded-xl transition-all">
               <div className="bg-purple-500/20 text-purple-400 w-10 h-10 rounded-xl flex items-center justify-center text-lg">💬</div>
               <div className="text-left"><p className="text-xs font-black text-gray-100">Contact Support</p><p className="text-[10px] text-gray-400 font-medium">Get in touch with our team</p></div>
             </button>
-            <button onClick={() => setActiveModal('about')} className="w-full flex items-center gap-4 p-4 hover:bg-[#1C1C2E] rounded-xl transition-all">
+            <button onClick={() => setActiveModal('about')} className="w-full flex flex-wrap items-center gap-4 p-4 hover:bg-[#1C1C2E] rounded-xl transition-all">
               <div className="bg-purple-500/20 text-purple-400 w-10 h-10 rounded-xl flex items-center justify-center text-lg">ℹ️</div>
               <div className="text-left"><p className="text-xs font-black text-gray-100">About</p><p className="text-[10px] text-gray-400 font-medium">Version 1.0.0 - FriendsBD</p></div>
             </button>
@@ -246,18 +246,18 @@ const Settings: React.FC = () => {
 
         {/* ── Danger Zone ── */}
         <div className="bg-[#1C1C2E] rounded-[2.5rem] p-2 shadow-sm border border-red-900/40 space-y-1">
-          <div className="bg-gradient-to-r from-red-700/30 to-red-900/30 text-red-400 py-2 px-6 rounded-xl font-bold text-xs uppercase tracking-widest mb-2 flex items-center gap-2">
+          <div className="bg-gradient-to-r from-red-700/30 to-red-900/30 text-red-400 py-2 px-6 rounded-xl font-bold text-xs uppercase tracking-widest mb-2 flex flex-wrap items-center gap-2">
             Danger Zone
           </div>
           <button onClick={handleLogout} className="w-full flex items-center justify-between p-4 bg-[#161b22] rounded-xl group hover:bg-red-900/20 transition-all border border-[#30363d]">
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center gap-4">
               <div className="w-10 h-10 rounded-xl bg-red-900/30 flex items-center justify-center text-lg">🚪</div>
               <div className="text-left"><p className="text-xs font-black text-red-400">Logout</p><p className="text-[10px] text-red-500/60">Sign out of your account</p></div>
             </div>
             <svg className="w-5 h-5 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
           </button>
           <button onClick={handleDeleteAccount} className="w-full flex items-center justify-between p-4 bg-[#161b22] rounded-xl group hover:bg-red-900/20 transition-all border border-[#30363d]">
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center gap-4">
               <div className="w-10 h-10 rounded-xl bg-red-900/30 flex items-center justify-center text-lg">❌</div>
               <div className="text-left"><p className="text-xs font-black text-red-400">Delete Account</p><p className="text-[10px] text-red-500/60">Permanently delete your account</p></div>
             </div>
@@ -274,7 +274,7 @@ const Settings: React.FC = () => {
             {/* Edit Profile */}
             {activeModal === 'profile' && (
               <div className="p-6">
-                <h3 className="text-lg font-black text-gray-100 mb-4 flex items-center gap-2">Edit Profile</h3>
+                <h3 className="text-lg font-black text-gray-100 mb-4 flex flex-wrap items-center gap-2">Edit Profile</h3>
                 <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-1 custom-scrollbar">
                   <Field label="Display Name" value={editName} onChange={setEditName} placeholder="Your name" />
                   <Field label="Bio" value={editBio} onChange={setEditBio} textarea placeholder="Tell us about yourself" />
@@ -294,7 +294,7 @@ const Settings: React.FC = () => {
                   <Field label="Education" value={editEducation} onChange={setEditEducation} placeholder="School, college, university" />
                   <Field label="Work" value={editWork} onChange={setEditWork} placeholder="Job title / company" />
                 </div>
-                <div className="mt-6 flex gap-3">
+                <div className="mt-6 flex flex-wrap gap-3">
                   <button onClick={() => setActiveModal(null)} className="flex-1 px-4 py-3 rounded-xl font-bold text-gray-400 bg-[#161b22] hover:bg-[#1C1C2E] text-sm border border-[#30363d]">Cancel</button>
                   <button onClick={updateProfile} className="flex-1 px-4 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:opacity-90 text-sm shadow-lg shadow-purple-900/30">Save</button>
                 </div>
@@ -309,7 +309,7 @@ const Settings: React.FC = () => {
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-bold">@</span>
                   <input type="text" value={editUsername} onChange={e => setEditUsername(e.target.value)} className="w-full bg-[#161b22] border border-[#30363d] rounded-2xl pl-10 pr-4 py-3 text-sm text-gray-200 focus:outline-none focus:border-purple-500 transition-colors font-medium" />
                 </div>
-                <div className="mt-6 flex gap-3">
+                <div className="mt-6 flex flex-wrap gap-3">
                   <button onClick={() => setActiveModal(null)} className="flex-1 px-4 py-3 rounded-xl font-bold text-gray-400 bg-[#161b22] hover:bg-[#1C1C2E] text-sm border border-[#30363d]">Cancel</button>
                   <button onClick={updateUsername} disabled={!editUsername.trim()} className="flex-1 px-4 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:opacity-90 disabled:opacity-50 text-sm shadow-lg shadow-purple-900/30">Update</button>
                 </div>
@@ -324,7 +324,7 @@ const Settings: React.FC = () => {
                   <Field label="Current Password" value={editPassword} onChange={setEditPassword} type="password" placeholder="Current password" />
                   <Field label="New Password" value={editPassword} onChange={setEditPassword} type="password" placeholder="New password" />
                 </div>
-                <div className="mt-6 flex gap-3">
+                <div className="mt-6 flex flex-wrap gap-3">
                   <button onClick={() => setActiveModal(null)} className="flex-1 px-4 py-3 rounded-xl font-bold text-gray-400 bg-[#161b22] hover:bg-[#1C1C2E] text-sm border border-[#30363d]">Cancel</button>
                   <button onClick={updatePassword} disabled={!editPassword.trim()} className="flex-1 px-4 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-red-600 to-red-800 hover:opacity-90 disabled:opacity-50 text-sm shadow-lg shadow-red-900/30">Update</button>
                 </div>
@@ -334,8 +334,8 @@ const Settings: React.FC = () => {
             {/* Appearance - Banner */}
             {activeModal === 'appearance' && (
               <div className="p-6">
-                <h3 className="text-lg font-black text-gray-100 mb-4 flex gap-2 items-center">Profile Banner</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <h3 className="text-lg font-black text-gray-100 mb-4 flex flex-wrap gap-2 items-center">Profile Banner</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3">
                   {[
                     { id: 'default', name: 'Default', bg: 'bg-gradient-to-r from-purple-600 to-fuchsia-600' },
                     { id: 'sunset', name: 'Sunset', bg: 'bg-gradient-to-br from-orange-400 to-rose-500' },
@@ -361,7 +361,7 @@ const Settings: React.FC = () => {
               <div className="p-6">
                 <h3 className="text-lg font-black text-gray-100 mb-4">Active Sessions</h3>
                 <div className="space-y-3">
-                  <div className="bg-[#161b22] p-4 rounded-xl border border-[#30363d] flex items-center gap-3">
+                  <div className="bg-[#161b22] p-4 rounded-xl border border-[#30363d] flex flex-wrap items-center gap-3">
                     <div className="w-2 h-2 rounded-full bg-green-400 shadow-sm shadow-green-400/50"></div>
                     <div className="flex-1"><p className="text-xs font-bold text-gray-100">Current session</p><p className="text-[10px] text-gray-400">Windows - Chrome</p></div>
                   </div>
@@ -374,9 +374,9 @@ const Settings: React.FC = () => {
             {/* Support */}
             {activeModal === 'support' && (
               <div className="p-6">
-                <h3 className="text-lg font-black text-gray-100 mb-4 flex gap-2 items-center">Contact Support</h3>
+                <h3 className="text-lg font-black text-gray-100 mb-4 flex flex-wrap gap-2 items-center">Contact Support</h3>
                 <textarea value={supportMessage} onChange={e => setSupportMessage(e.target.value)} rows={4} placeholder="Describe your issue..." className="w-full bg-[#161b22] border border-[#30363d] rounded-2xl px-4 py-3 text-sm text-gray-200 focus:outline-none focus:border-purple-500 transition-colors placeholder-gray-500" />
-                <div className="mt-6 flex gap-3">
+                <div className="mt-6 flex flex-wrap gap-3">
                   <button onClick={() => setActiveModal(null)} className="flex-1 px-4 py-3 rounded-xl font-bold text-gray-400 bg-[#161b22] hover:bg-[#1C1C2E] text-sm border border-[#30363d]">Cancel</button>
                   <button onClick={sendSupport} disabled={!supportMessage.trim()} className="flex-1 px-4 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:opacity-90 disabled:opacity-50 text-sm shadow-lg shadow-purple-900/30">Send</button>
                 </div>

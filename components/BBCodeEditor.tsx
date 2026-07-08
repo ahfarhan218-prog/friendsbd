@@ -55,7 +55,7 @@ const BBCodeEditor: React.FC<BBCodeEditorProps> = ({ initialValue = "", onPublis
     <div className="bg-white rounded-[3rem] shadow-2xl border border-slate-100 flex flex-col ring-1 ring-purple-50">
       {/* TOOLBAR */}
       <div className="bg-slate-50 border-b border-slate-200 p-4 flex items-center justify-between">
-        <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+        <div className="flex flex-wrap gap-2 overflow-x-auto no-scrollbar pb-1">
           {toolbar.map(btn => (
             <button 
               key={btn.label}

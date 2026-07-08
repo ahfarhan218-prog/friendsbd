@@ -71,7 +71,7 @@ const Friends: React.FC = () => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_0%,_#7c3aed33,_transparent_70%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#0B0B1A] to-transparent" />
         <div className="absolute top-8 right-4 w-24 h-24 bg-purple-600/10 rounded-full blur-3xl" />
-        <div className="relative z-10 flex items-center gap-4">
+        <div className="relative z-10 flex flex-wrap items-center gap-4">
           <button onClick={() => navigate(-1)} className="p-2 bg-black/20 rounded-full active:scale-90 transition-transform backdrop-blur-sm">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
           </button>
@@ -85,7 +85,7 @@ const Friends: React.FC = () => {
           <div className="absolute -top-10 -right-10 w-40 h-40 bg-purple-500/5 rounded-full" />
           <div className="relative z-10">
             <h3 className="text-lg font-black text-white mb-4">My Friends</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="bg-[#161b22] rounded-xl p-4 border border-[#30363d]">
                 <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Following</p>
                 <p className="text-3xl font-black text-white mt-1">{friends.length}</p>
@@ -111,13 +111,13 @@ const Friends: React.FC = () => {
           {filtered.length === 0 && !searchQuery && <p className="text-center text-gray-500 text-sm py-8">You're not following anyone yet. Check suggestions below!</p>}
           {filtered.map(friend => (
             <div key={friend.id} className="bg-[#1C1C2E] p-5 rounded-[2rem] border border-[#30363d] hover:border-purple-500/30 transition-all cursor-pointer group" onClick={() => navigate(`/profile/${friend.username}`)}>
-              <div className="flex items-center gap-4 mb-4">
+              <div className="flex flex-wrap items-center gap-4 mb-4">
                 <div className="relative">
                   <img src={friend.avatar || `https://picsum.photos/seed/${friend.id}/100`} className="w-14 h-14 rounded-2xl object-cover border-2 border-[#30363d] group-hover:border-purple-500/40 transition-all" alt="" />
                   {friend.isOnline && <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-[#1C1C2E] rounded-full" />}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <h4 className="text-base font-black text-gray-100 truncate">{friend.name}</h4>
                     {friend.isVerified && <span className="text-blue-400 text-xs">✓</span>}
                     {friend.isPremium && <span className="text-[9px] bg-amber-500/10 text-amber-400 px-1.5 py-0.5 rounded-full font-bold">👑</span>}
@@ -126,8 +126,8 @@ const Friends: React.FC = () => {
                 </div>
                 <svg className="w-5 h-5 text-gray-600 group-hover:text-purple-400 transition-colors shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" onClick={e => e.stopPropagation()}>
-                <button onClick={() => navigate(`/chat?userId=${friend.id}`)} className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-3 rounded-xl shadow-lg shadow-purple-900/30 hover:opacity-90 transition-all text-xs flex items-center justify-center gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3" onClick={e => e.stopPropagation()}>
+                <button onClick={() => navigate(`/chat?userId=${friend.id}`)} className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-3 rounded-xl shadow-lg shadow-purple-900/30 hover:opacity-90 transition-all text-xs flex flex-wrap items-center justify-center gap-2">
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
                   Message
                 </button>
@@ -143,10 +143,10 @@ const Friends: React.FC = () => {
         {suggestions.length > 0 && (
           <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] shadow-xl shadow-purple-900/10 rounded-[2.5rem] p-6 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
-            <h4 className="relative z-10 text-[10px] font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-widest mb-4 flex items-center gap-2">
+            <h4 className="relative z-10 text-[10px] font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-widest mb-4 flex flex-wrap items-center gap-2">
               <span className="text-lg">✨</span> People You May Know
             </h4>
-            <div className="flex gap-4 overflow-x-auto pb-2 no-scrollbar">
+            <div className="flex flex-wrap gap-4 overflow-x-auto pb-2 no-scrollbar">
                 {suggestions.map(sug => (
                   <div key={sug.id} className="min-w-[130px] bg-[#1C1C2E] rounded-3xl p-4 flex flex-col items-center text-center border border-white/5 hover:border-purple-500/30 transition-all">
                     <img src={sug.avatar || `https://picsum.photos/seed/${sug.id}/100`} className="w-14 h-14 rounded-2xl mb-3 object-cover border-2 border-purple-500/30" alt="" />

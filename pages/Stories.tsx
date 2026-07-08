@@ -291,12 +291,12 @@ const Stories: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#0a0a1a] p-4 sm:p-6 relative">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-full max-w-4xl mx-auto px-4 sm:px-6 mx-auto">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-black text-white">📖 Stories</h1>
           <button 
             onClick={() => setCreateModalOpen(true)}
-            className="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg text-white font-bold text-sm hover:opacity-90 transition-opacity flex items-center gap-2 shadow-lg"
+            className="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg text-white font-bold text-sm hover:opacity-90 transition-opacity flex flex-wrap items-center gap-2 shadow-lg"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
             Add Story
@@ -309,7 +309,7 @@ const Stories: React.FC = () => {
             <p className="font-bold">No stories right now</p>
           </div>
         ) : (
-          <div className="flex gap-6 overflow-x-auto pb-4 custom-scrollbar">
+          <div className="flex flex-wrap gap-6 overflow-x-auto pb-4 custom-scrollbar">
             {feed.map((group, idx) => {
               const allViewed = group.stories.every(s => s.isViewed);
               return (
@@ -387,7 +387,7 @@ const Stories: React.FC = () => {
                 {!newStoryFile && (
                   <div>
                     <p className="text-xs text-white/50 mb-2 uppercase tracking-wider font-bold">Background Color</p>
-                    <div className="flex gap-2">
+                    <div className="flex flex-wrap gap-2">
                       {BG_COLORS.map(color => (
                         <button 
                           key={color}
@@ -445,7 +445,7 @@ const Stories: React.FC = () => {
               onPointerLeave={() => setIsPaused(false)}
             >
               {/* Segmented Progress Bars */}
-              <div className="absolute top-0 left-0 right-0 z-30 flex gap-1 p-2 pt-4 px-3 bg-gradient-to-b from-black/60 to-transparent pointer-events-none">
+              <div className="absolute top-0 left-0 right-0 z-30 flex flex-wrap gap-1 p-2 pt-4 px-3 bg-gradient-to-b from-black/60 to-transparent pointer-events-none">
                 {activeGroup.stories.map((s, idx) => {
                   let width = '0%';
                   if (idx < activeStoryIndex) width = '100%';
@@ -461,7 +461,7 @@ const Stories: React.FC = () => {
 
               {/* User Header */}
               <div className="absolute top-6 left-0 right-0 z-30 flex items-center justify-between px-4 pointer-events-none">
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3">
                   <img src={activeGroup.userAvatar} className="w-10 h-10 rounded-full border border-white/20" alt="" />
                   <div>
                     <p className="text-white font-semibold text-sm shadow-black drop-shadow-md">{activeGroup.userName}</p>
@@ -543,7 +543,7 @@ const Stories: React.FC = () => {
                   {activeStory.reactions && activeStory.reactions.length > 0 && (
                     <div className="absolute bottom-full left-0 mb-2 hidden group-hover:flex flex-col bg-black/80 rounded p-2 text-xs text-white whitespace-nowrap z-50">
                       {activeStory.reactions.map(r => (
-                        <div key={r.userId} className="flex items-center gap-2">
+                        <div key={r.userId} className="flex flex-wrap items-center gap-2">
                           <img src={r.userAvatar} className="w-4 h-4 rounded-full" />
                           <span>{r.userName} {r.emoji}</span>
                         </div>
@@ -553,7 +553,7 @@ const Stories: React.FC = () => {
                 </div>
 
                 {/* Send Reaction */}
-                <div className="flex gap-2 pointer-events-auto bg-black/40 backdrop-blur-md rounded-full px-3 py-2 border border-white/10">
+                <div className="flex flex-wrap gap-2 pointer-events-auto bg-black/40 backdrop-blur-md rounded-full px-3 py-2 border border-white/10">
                   {REACTIONS.map(emoji => (
                     <button 
                       key={emoji}

@@ -92,7 +92,7 @@ const GenieCave: React.FC = () => {
             
             <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-center text-slate-400 mb-6 relative z-10">Current Quest</h3>
             
-            <div className="flex gap-4 mb-6 relative z-10">
+            <div className="flex flex-wrap gap-4 mb-6 relative z-10">
                <div className="flex-1 bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col items-center gap-1 shadow-inner">
                   <span className="text-[9px] font-black text-slate-500 tracking-widest uppercase">Current</span>
                   <span className="text-3xl font-black text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.4)]">{magicPoints}</span>

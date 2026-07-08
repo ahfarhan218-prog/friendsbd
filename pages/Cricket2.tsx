@@ -167,12 +167,12 @@ Commentary: [clr=F39C12]${comment}[/clr]`;
   };
 
   return (
-    <div className="min-h-screen bg-transparent p-5 md:p-8 font-sans pb-32 max-w-5xl mx-auto">
+    <div className="min-h-screen bg-transparent p-5 md:p-8 font-sans pb-32 max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto">
       
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 pb-6 border-b border-[#30363d] gap-4">
         <div>
-          <h1 className="text-3xl font-black text-white m-0 tracking-tight flex items-center gap-3 drop-shadow-md">
+          <h1 className="text-3xl font-black text-white m-0 tracking-tight flex flex-wrap items-center gap-3 drop-shadow-md">
             <span className="text-4xl">🏏</span> 
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-400">Match Controller v2</span>
           </h1>
@@ -183,7 +183,7 @@ Commentary: [clr=F39C12]${comment}[/clr]`;
         {phase === 'playing' && (
           <button 
             onClick={() => { setPhase('setup'); saveState({phase: 'setup'}) }} 
-            className="bg-[#161b22]/80 backdrop-blur-md border border-[#30363d] px-5 py-2.5 rounded-xl text-white font-bold cursor-pointer hover:bg-white/10 transition-colors shadow-lg active:scale-95 flex items-center gap-2"
+            className="bg-[#161b22]/80 backdrop-blur-md border border-[#30363d] px-5 py-2.5 rounded-xl text-white font-bold cursor-pointer hover:bg-white/10 transition-colors shadow-lg active:scale-95 flex flex-wrap items-center gap-2"
           >
             <span>⚙️</span> Edit Setup
           </button>
@@ -195,11 +195,11 @@ Commentary: [clr=F39C12]${comment}[/clr]`;
           <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] rounded-[2rem] p-6 md:p-8 mb-8 shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 right-0 p-32 bg-emerald-500/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
             
-            <h3 className="text-sm font-black text-emerald-400 tracking-[0.15em] uppercase mb-6 flex items-center gap-2 relative z-10">
+            <h3 className="text-sm font-black text-emerald-400 tracking-[0.15em] uppercase mb-6 flex flex-wrap items-center gap-2 relative z-10">
               <span className="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.5)] animate-pulse"></span>
               Match Information
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 gap-4 gap-5 relative z-10">
               <InputBox label="Match No." val={setup.matchNo} onChange={v => handleSetupChange('matchNo', v)} />
               <InputBox label="Venue" val={setup.venue} onChange={v => handleSetupChange('venue', v)} />
               <InputBox label="Home Team" val={setup.homeTeam} onChange={v => handleSetupChange('homeTeam', v)} />
@@ -221,7 +221,7 @@ Commentary: [clr=F39C12]${comment}[/clr]`;
           <div className="mt-10 flex justify-center">
             <button 
               onClick={startMatch} 
-              className="bg-gradient-to-r from-emerald-600 to-teal-600 border border-emerald-400/50 px-10 py-4 rounded-2xl text-white font-black text-lg cursor-pointer shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] hover:scale-105 active:scale-95 transition-all flex items-center gap-3 uppercase tracking-widest"
+              className="bg-gradient-to-r from-emerald-600 to-teal-600 border border-emerald-400/50 px-10 py-4 rounded-2xl text-white font-black text-lg cursor-pointer shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] hover:scale-105 active:scale-95 transition-all flex flex-wrap items-center gap-3 uppercase tracking-widest"
             >
               <span className="text-2xl">🚀</span> Start Match
             </button>
@@ -246,10 +246,10 @@ Commentary: [clr=F39C12]${comment}[/clr]`;
             </div>
 
             {/* Current Players */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="bg-[#161b22]/80 backdrop-blur-md border border-[#30363d] rounded-2xl p-5 shadow-lg relative overflow-hidden group hover:border-sky-500/50 transition-colors">
                 <div className="absolute -right-4 -top-4 w-16 h-16 bg-sky-500/10 rounded-full blur-xl pointer-events-none" />
-                <div className="text-xs text-sky-400 font-black uppercase tracking-widest mb-3 flex items-center gap-2">
+                <div className="text-xs text-sky-400 font-black uppercase tracking-widest mb-3 flex flex-wrap items-center gap-2">
                   <span>🏏</span> Current Batter
                 </div>
                 <input 
@@ -265,7 +265,7 @@ Commentary: [clr=F39C12]${comment}[/clr]`;
               
               <div className="bg-[#161b22]/80 backdrop-blur-md border border-[#30363d] rounded-2xl p-5 shadow-lg relative overflow-hidden group hover:border-indigo-500/50 transition-colors">
                 <div className="absolute -right-4 -top-4 w-16 h-16 bg-indigo-500/10 rounded-full blur-xl pointer-events-none" />
-                <div className="text-xs text-indigo-400 font-black uppercase tracking-widest mb-3 flex items-center gap-2">
+                <div className="text-xs text-indigo-400 font-black uppercase tracking-widest mb-3 flex flex-wrap items-center gap-2">
                   <span>🎯</span> Current Bowler
                 </div>
                 <input 
@@ -283,7 +283,7 @@ Commentary: [clr=F39C12]${comment}[/clr]`;
             {/* Score Actions */}
             <div className="bg-[#161b22]/80 backdrop-blur-xl border border-[#30363d] rounded-[2rem] p-6 shadow-xl">
               <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Log Action</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 sm:grid-cols-6 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 gap-3">
                 {[0, 1, 2, 3, 4, 6].map(run => (
                   <button 
                     key={run} 
@@ -311,7 +311,7 @@ Commentary: [clr=F39C12]${comment}[/clr]`;
               <div className="absolute -top-20 -right-20 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
               
               <div className="flex justify-between items-center mb-4 relative z-10">
-                <h3 className="text-sm font-black text-emerald-400 uppercase tracking-widest m-0 flex items-center gap-2">
+                <h3 className="text-sm font-black text-emerald-400 uppercase tracking-widest m-0 flex flex-wrap items-center gap-2">
                   <span className="text-lg">📋</span> BBCode Output
                 </h3>
                 <button 
@@ -360,7 +360,7 @@ const TeamTable: React.FC<{ title: string, data: string[], onChange: (i:number, 
     </div>
     <div className="p-5 space-y-3">
       {data.map((player, i) => (
-        <div key={i} className="flex items-center gap-3">
+        <div key={i} className="flex flex-wrap items-center gap-3">
           <span className="w-6 text-xs text-slate-500 font-black flex items-center justify-center shrink-0">{i + 1}</span>
           <input 
             type="text" 
@@ -372,7 +372,7 @@ const TeamTable: React.FC<{ title: string, data: string[], onChange: (i:number, 
         </div>
       ))}
       {hasBackup && (
-        <div className="flex items-center gap-3 mt-5 pt-5 border-t border-slate-700/50">
+        <div className="flex flex-wrap items-center gap-3 mt-5 pt-5 border-t border-slate-700/50">
           <span className="w-6 text-xs text-amber-500 font-black flex items-center justify-center shrink-0">B</span>
           <input 
             type="text" 

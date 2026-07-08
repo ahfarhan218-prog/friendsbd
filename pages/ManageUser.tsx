@@ -58,7 +58,7 @@ const ManageUser: React.FC = () => {
       <div className="w-full max-w-[800px] mx-auto">
         <button 
           onClick={() => navigate(-1)}
-          className="mb-4 bg-transparent border-none text-gray-400 cursor-pointer flex items-center gap-2 font-semibold hover:text-white transition-colors text-sm"
+          className="mb-4 bg-transparent border-none text-gray-400 cursor-pointer flex flex-wrap items-center gap-2 font-semibold hover:text-white transition-colors text-sm"
         >
           ← Back to Profile
         </button>

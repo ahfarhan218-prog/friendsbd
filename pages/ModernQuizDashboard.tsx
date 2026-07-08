@@ -360,8 +360,8 @@ const ModernQuizDashboard: React.FC = () => {
       <div className="absolute bottom-20 left-10 w-[300px] h-[300px] bg-purple-600/5 rounded-full blur-[100px] pointer-events-none" />
 
       <header className="p-6 border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
+        <div className="max-w-full max-w-7xl mx-auto px-4 sm:px-6 mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="flex flex-wrap items-center gap-4">
             <button
               onClick={() => navigate(-1)}
               className="p-3 text-slate-400 hover:text-white bg-[#121824] hover:bg-slate-800 border border-[#1f293d] rounded-2xl transition-all"
@@ -381,22 +381,22 @@ const ModernQuizDashboard: React.FC = () => {
           </div>
 
           {isStaff && (
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <button
                 onClick={() => navigate('/quiz/new')}
-                className="px-5 py-3 text-xs font-bold bg-[#121824] hover:bg-slate-800 text-amber-400 hover:text-amber-300 border border-amber-500/20 hover:border-amber-500/40 rounded-2xl shadow-lg transition-all flex items-center gap-1.5"
+                className="px-5 py-3 text-xs font-bold bg-[#121824] hover:bg-slate-800 text-amber-400 hover:text-amber-300 border border-amber-500/20 hover:border-amber-500/40 rounded-2xl shadow-lg transition-all flex flex-wrap items-center gap-1.5"
               >
                 <span>📋</span> Classic Form
               </button>
               <button
                 onClick={() => openCreateModal('standard')}
-                className="px-5 py-3 text-xs font-bold bg-[#121824] hover:bg-slate-800 text-indigo-400 hover:text-indigo-300 border border-indigo-500/20 hover:border-indigo-500/40 rounded-2xl shadow-lg transition-all flex items-center gap-1.5"
+                className="px-5 py-3 text-xs font-bold bg-[#121824] hover:bg-slate-800 text-indigo-400 hover:text-indigo-300 border border-indigo-500/20 hover:border-indigo-500/40 rounded-2xl shadow-lg transition-all flex flex-wrap items-center gap-1.5"
               >
                 <span>➕</span> Standard Quiz
               </button>
               <button
                 onClick={() => openCreateModal('live')}
-                className="px-5 py-3 text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white rounded-2xl shadow-lg shadow-rose-600/20 hover:shadow-rose-600/30 transition-all flex items-center gap-1.5 relative overflow-hidden group"
+                className="px-5 py-3 text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white rounded-2xl shadow-lg shadow-rose-600/20 hover:shadow-rose-600/30 transition-all flex flex-wrap items-center gap-1.5 relative overflow-hidden group"
               >
                 <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <span>⚡</span> Launch LIVE Arena
@@ -406,8 +406,8 @@ const ModernQuizDashboard: React.FC = () => {
         </div>
       </header>
 
-      <section className="p-6 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <section className="p-6 max-w-full max-w-7xl mx-auto px-4 sm:px-6 mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {[
             { label: 'Active Modules', value: activeQuizzesCount, icon: '📂', color: 'text-indigo-400', bg: 'from-indigo-500/10 to-transparent' },
             { label: 'My Completions', value: completedCount, icon: '🏆', color: 'text-emerald-400', bg: 'from-emerald-500/10 to-transparent' },
@@ -428,7 +428,7 @@ const ModernQuizDashboard: React.FC = () => {
         </div>
       </section>
 
-      <section className="px-6 max-w-7xl mx-auto">
+      <section className="px-6 max-w-full max-w-7xl mx-auto px-4 sm:px-6 mx-auto">
         <div className="bg-[#121824] border border-[#1f293d] rounded-[2rem] p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-md">
           <div className="flex bg-[#090d16] p-1.5 rounded-2xl border border-[#1f293d] overflow-x-auto">
             {[
@@ -441,7 +441,7 @@ const ModernQuizDashboard: React.FC = () => {
               <button
                 key={tab.id}
                 onClick={() => { setActiveTab(tab.id as any); setCurrentPage(1); }}
-                className={`flex items-center gap-1.5 px-4.5 py-2 text-xs font-bold rounded-xl transition-all whitespace-nowrap ${
+                className={`flex flex-wrap items-center gap-1.5 px-4.5 py-2 text-xs font-bold rounded-xl transition-all whitespace-nowrap ${
                   activeTab === tab.id
                     ? 'bg-[#121824] text-white border border-[#1f293d] shadow-sm'
                     : 'text-slate-400 hover:text-white'
@@ -466,9 +466,9 @@ const ModernQuizDashboard: React.FC = () => {
         </div>
       </section>
 
-      <main className="p-6 max-w-7xl mx-auto">
+      <main className="p-6 max-w-full max-w-7xl mx-auto px-4 sm:px-6 mx-auto">
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-6">
             {[1, 2, 3].map(i => (
               <div key={i} className="bg-[#121824] border border-[#1f293d] rounded-3xl p-5 min-h-[260px] animate-pulse space-y-4">
                 <div className="flex justify-between items-center">
@@ -493,7 +493,7 @@ const ModernQuizDashboard: React.FC = () => {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-6">
             <AnimatePresence mode="popLayout">
               {paginatedQuizzes.map(quiz => (
                 <ModernQuizCard
@@ -514,8 +514,8 @@ const ModernQuizDashboard: React.FC = () => {
       </main>
 
       {totalPages > 1 && (
-        <footer className="mt-8 px-6 max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-1.5 bg-[#121824] border border-[#1f293d] p-1.5 rounded-2xl">
+        <footer className="mt-8 px-6 max-w-full max-w-7xl mx-auto px-4 sm:px-6 mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex flex-wrap items-center gap-1.5 bg-[#121824] border border-[#1f293d] p-1.5 rounded-2xl">
             <button
               disabled={currentPage === 1}
               onClick={() => handlePageChange(currentPage - 1)}
@@ -547,7 +547,7 @@ const ModernQuizDashboard: React.FC = () => {
               ▶
             </button>
           </div>
-          <form onSubmit={handlePageJump} className="flex items-center gap-2">
+          <form onSubmit={handlePageJump} className="flex flex-wrap items-center gap-2">
             <span className="text-xs font-bold text-slate-400">Go to page:</span>
             <input
               type="number"
@@ -633,7 +633,7 @@ const ModernQuizDashboard: React.FC = () => {
                       You successfully completed "{activePlayingQuiz.title}".
                     </p>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-sm mx-auto">
+                  <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 max-w-sm mx-auto">
                     <div className="bg-[#090d16] border border-[#1f293d] p-4 rounded-2xl text-center space-y-1">
                       <span className="text-[10px] text-slate-500 uppercase tracking-wider font-extrabold">Final Score</span>
                       <h4 className="text-lg font-black text-white font-mono">
@@ -662,7 +662,7 @@ const ModernQuizDashboard: React.FC = () => {
                     <button
                       onClick={() => setActivePlayingQuiz(null)}
                       disabled={isSubmittingScore}
-                      className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-2xl shadow-lg shadow-indigo-600/10 hover:shadow-indigo-600/20 text-xs transition-all flex items-center justify-center gap-2"
+                      className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-2xl shadow-lg shadow-indigo-600/10 hover:shadow-indigo-600/20 text-xs transition-all flex flex-wrap items-center justify-center gap-2"
                     >
                       {isSubmittingScore ? (
                         <>

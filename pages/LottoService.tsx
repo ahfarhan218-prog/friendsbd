@@ -162,19 +162,19 @@ const LottoService: React.FC = () => {
           </svg>
         </button>
         <h2 className="text-lg font-black text-black uppercase tracking-tight">Golden Lotto Portal</h2>
-        <div className="flex items-center gap-2 bg-white border border-[#cbd5e1] px-4 py-2 rounded-2xl shadow-sm">
+        <div className="flex flex-wrap items-center gap-2 bg-white border border-[#cbd5e1] px-4 py-2 rounded-2xl shadow-sm">
           <span className="text-amber-500">🪙</span>
           <span className="font-extrabold text-sm text-black">{activeUser.goldenCoins}</span>
         </div>
       </div>
 
       <div className="max-w-md mx-auto px-4 mt-6 space-y-6">
-        <div className="overflow-hidden w-full relative whitespace-nowrap bg-[#0f766e]/10 text-[#0f766e] border border-[#0f766e]/20 py-2.5 px-4 rounded-xl font-bold text-xs flex items-center gap-4">
+        <div className="overflow-hidden w-full relative whitespace-nowrap bg-[#0f766e]/10 text-[#0f766e] border border-[#0f766e]/20 py-2.5 px-4 rounded-xl font-bold text-xs flex flex-wrap items-center gap-4">
           <span className="shrink-0 font-bold bg-[#0f766e] text-white px-2.5 py-1 rounded-lg uppercase tracking-wider text-[8px] z-10">
             Live Winners
           </span>
           <div className="animate-marquee-wrapper overflow-hidden w-full relative flex">
-            <div className="animate-marquee flex gap-8 whitespace-nowrap">
+            <div className="animate-marquee flex flex-wrap gap-8 whitespace-nowrap">
               {marqueeWinners.map((w, index) => (
                 <span key={`${w.id}-${index}`} className="inline-block font-semibold">
                   🎉 @{w.username} won <strong className="text-black">{w.prize_won}</strong>
@@ -194,7 +194,7 @@ const LottoService: React.FC = () => {
           </span>
         </div>
 
-        <div className="flex bg-[#cbd5e1]/40 p-1 rounded-2xl gap-1 border border-[#cbd5e1]/65">
+        <div className="flex flex-wrap bg-[#cbd5e1]/40 p-1 rounded-2xl gap-1 border border-[#cbd5e1]/65">
           <button
             onClick={() => setActiveTab('subscribe')}
             className={`flex-1 py-3 text-xs font-black uppercase tracking-wider rounded-xl transition-all ${activeTab === 'subscribe' ? 'bg-white text-black shadow-sm' : 'text-slate-500 hover:text-black'}`}
@@ -222,21 +222,21 @@ const LottoService: React.FC = () => {
               <div className="bg-white border border-[#cbd5e1] rounded-3xl p-6 shadow-sm space-y-4">
                 <h3 className="font-black text-black uppercase tracking-wider text-sm">✨ Subscription Perks</h3>
                 <ul className="space-y-3.5 text-xs text-slate-600 font-medium">
-                  <li className="flex items-start gap-3">
+                  <li className="flex flex-wrap items-start gap-3">
                     <span className="text-[#0f766e] text-base shrink-0">⚡</span>
                     <div>
                       <strong className="text-black block">3x AP Boost Multiplier</strong>
                       Boost hourly online duration rewards from 5 Plusses to 15 Plusses per hour automatically.
                     </div>
                   </li>
-                  <li className="flex items-start gap-3">
+                  <li className="flex flex-wrap items-start gap-3">
                     <span className="text-[#0f766e] text-base shrink-0">🎁</span>
                     <div>
                       <strong className="text-black block">Instant Magic Box Loot Roll</strong>
                       Unboxing roll executes instantly upon subscribing: win either 7 Days Premium, +5 RP, or +250 Plusses.
                     </div>
                   </li>
-                  <li className="flex items-start gap-3">
+                  <li className="flex flex-wrap items-start gap-3">
                     <span className="text-[#0f766e] text-base shrink-0">🛡️</span>
                     <div>
                       <strong className="text-black block">Secure Server Roll</strong>

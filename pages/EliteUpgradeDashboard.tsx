@@ -269,15 +269,15 @@ const EliteUpgradeDashboard: React.FC = () => {
           <h3 className="font-black text-[#000000] uppercase tracking-wider text-sm">✨ Elite Privileges</h3>
           
           <ul className="space-y-3.5 text-xs text-slate-700 font-semibold">
-            <li className="flex items-start gap-3">
+            <li className="flex flex-wrap items-start gap-3">
               <span className="text-amber-500 text-sm shrink-0">⭐</span>
               <span className="text-[#000000]">Elite members can edit their Forum Topics, Posts, and Shouts.</span>
             </li>
-            <li className="flex items-start gap-3">
+            <li className="flex flex-wrap items-start gap-3">
               <span className="text-amber-500 text-sm shrink-0">⭐</span>
               <span className="text-[#000000]">Elite members can Upload Custom Smilies.</span>
             </li>
-            <li className="flex items-start gap-3">
+            <li className="flex flex-wrap items-start gap-3">
               <span className="text-amber-500 text-sm shrink-0">⭐</span>
               <span className="text-[#000000]">Elite members can change their Nickname Color dynamically.</span>
             </li>
@@ -285,7 +285,7 @@ const EliteUpgradeDashboard: React.FC = () => {
         </div>
 
         {/* Current Balances Overview */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="bg-white border border-[#cbd5e1] rounded-2xl p-4 shadow-sm text-center">
             <span className="text-lg block mb-1">🏅</span>
             <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Reputation Points</p>
@@ -308,7 +308,7 @@ const EliteUpgradeDashboard: React.FC = () => {
               <p className="text-xs text-slate-500 font-medium mt-1">Upgrade using your earned reputation points.</p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-2">
               {RP_TIERS.map((tier, idx) => (
                 <button
                   key={idx}
@@ -337,7 +337,7 @@ const EliteUpgradeDashboard: React.FC = () => {
               <p className="text-xs text-slate-500 font-medium mt-1">Upgrade instantly using your wallet funds.</p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-2">
               {TAKA_TIERS.map((tier, idx) => (
                 <button
                   key={idx}

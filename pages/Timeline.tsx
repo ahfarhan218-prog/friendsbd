@@ -33,7 +33,7 @@ const Timeline: React.FC = () => {
         <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#0B0B1A] to-transparent" />
         <div className="absolute top-8 right-4 w-24 h-24 bg-purple-600/10 rounded-full blur-3xl" />
         <div className="relative z-10 flex items-center justify-between">
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <button onClick={() => navigate(-1)} className="p-2 bg-black/20 rounded-full active:scale-90 backdrop-blur-sm">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
             </button>
@@ -53,7 +53,7 @@ const Timeline: React.FC = () => {
               </div>
             )}
             {events.map((ev, i) => (
-              <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }} className="flex gap-6">
+              <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }} className="flex flex-wrap gap-6">
                 <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-xl text-white shadow-lg shrink-0 ${ev.color}`}>
                   {ev.icon}
                 </div>

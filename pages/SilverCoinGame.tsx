@@ -125,7 +125,7 @@ const SilverCoinGame: React.FC = () => {
                   <div className="py-6">
                      <div className="text-4xl opacity-50 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] mb-4">📡</div>
                      <p className="text-xs font-black text-cyan-400/70 uppercase tracking-widest">Scanning local nodes...</p>
-                     <div className="flex justify-center gap-1.5 mt-4">
+                     <div className="flex flex-wrap justify-center gap-1.5 mt-4">
                         {[1,2,3].map(i => <motion.div key={i} animate={{ opacity: [0.2, 1, 0.2] }} transition={{ repeat: Infinity, duration: 1.5, delay: i*0.2 }} className="w-1.5 h-1.5 bg-cyan-400 rounded-full shadow-[0_0_5px_#22d3ee]" />)}
                      </div>
                   </div>
@@ -150,7 +150,7 @@ const SilverCoinGame: React.FC = () => {
             <div className="space-y-3">
                {winners.length > 0 ? winners.map((w, idx) => (
                   <div key={idx} className="flex items-center justify-between p-3 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-cyan-500/30 transition-all group">
-                     <div className="flex items-center gap-3">
+                     <div className="flex flex-wrap items-center gap-3">
                         <img src={w.avatar} className="w-9 h-9 rounded-xl border border-white/10 shadow-sm group-hover:scale-105 group-hover:border-cyan-500/50 transition-transform object-cover" alt="" />
                         <div>
                            <p className="text-xs font-black text-white group-hover:text-cyan-300 transition-colors">{w.username}</p>

@@ -184,7 +184,7 @@ const AddNewQuizForm: React.FC = () => {
         }`} />
 
         <div className="text-center mb-6">
-          <h2 className="text-xl font-black text-white flex items-center justify-center gap-2">
+          <h2 className="text-xl font-black text-white flex flex-wrap items-center justify-center gap-2">
             🆕 Launch New Quiz
           </h2>
           <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-1">
@@ -220,7 +220,7 @@ const AddNewQuizForm: React.FC = () => {
           </div>
 
           {/* Grid row for Topic ID & Host */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4">
             
             {/* Topic ID */}
             <div className="space-y-1">
@@ -311,7 +311,7 @@ const AddNewQuizForm: React.FC = () => {
           </div>
 
           {/* Grid row for Type & Pinned */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4">
             
             {/* Quiz Type */}
             <div className="space-y-1">
@@ -354,7 +354,7 @@ const AddNewQuizForm: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] text-white font-black py-4 px-6 rounded-2xl shadow-xl shadow-indigo-600/10 hover:shadow-indigo-600/25 w-full text-xs uppercase tracking-widest transition-all duration-150 flex items-center justify-center gap-2 ${
+              className={`bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] text-white font-black py-4 px-6 rounded-2xl shadow-xl shadow-indigo-600/10 hover:shadow-indigo-600/25 w-full text-xs uppercase tracking-widest transition-all duration-150 flex flex-wrap items-center justify-center gap-2 ${
                 isSubmitting ? 'opacity-80 cursor-not-allowed' : ''
               }`}
             >
@@ -376,7 +376,7 @@ const AddNewQuizForm: React.FC = () => {
           <button
             onClick={() => navigate('/quiz')}
             disabled={isSubmitting}
-            className="text-xs font-bold text-slate-400 hover:text-indigo-400 transition-colors inline-flex items-center gap-1 bg-transparent border-none cursor-pointer disabled:opacity-50"
+            className="text-xs font-bold text-slate-400 hover:text-indigo-400 transition-colors inline-flex flex-wrap items-center gap-1 bg-transparent border-none cursor-pointer disabled:opacity-50"
           >
             ← Back to Quiz Menu
           </button>

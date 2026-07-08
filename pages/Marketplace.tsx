@@ -42,7 +42,7 @@ const Marketplace: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-2xl font-black text-white">🏪 Marketplace</h1>
@@ -55,7 +55,7 @@ const Marketplace: React.FC = () => {
           <div className="pf-card p-5 mb-6 space-y-3">
             <input className="pf-input w-full" placeholder="Title" value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} />
             <input className="pf-input w-full" placeholder="Description" value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} />
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
               <input className="pf-input flex-1" type="number" placeholder="Price" value={form.price} onChange={e => setForm({ ...form, price: e.target.value })} />
               <select className="pf-input" value={form.currency} onChange={e => setForm({ ...form, currency: e.target.value })}>
                 <option value="goldenCoins">🪙 Golden Coins</option>
@@ -80,7 +80,7 @@ const Marketplace: React.FC = () => {
             <p className="text-sm mt-1">Be the first to sell something!</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {items.map(item => (
               <div key={item.id} className="pf-card p-5">
                 <div className="flex items-start justify-between mb-3">
@@ -91,7 +91,7 @@ const Marketplace: React.FC = () => {
                 <p className="text-sm text-white/50 mb-4 line-clamp-2">{item.description || 'No description'}</p>
                 <div className="flex items-center justify-between">
                   <span className="text-lg font-black text-purple-400">{item.price} {item.currency === 'goldenCoins' ? '🪙' : item.currency === 'silverPoints' ? '🔘' : '⚡'}</span>
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {item.sellerId === session?.id ? (
                       <button onClick={() => handleCancel(item.id)} className="pf-btn pf-btn-ghost text-xs">Cancel</button>
                     ) : (

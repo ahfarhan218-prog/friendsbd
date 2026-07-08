@@ -23,7 +23,7 @@ const BlogViewer: React.FC = () => {
   if (loading) return <div className="min-h-screen bg-[#0a0a1a] flex items-center justify-center"><div className="w-10 h-10 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" /></div>;
   if (!post) return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6">
-      <div className="max-w-3xl mx-auto text-center py-20 text-white/30">
+      <div className="max-w-full max-w-3xl mx-auto px-4 sm:px-6 mx-auto text-center py-20 text-white/30">
         <p className="text-5xl mb-4">📝</p>
         <p className="font-bold">Post not found</p>
         <button onClick={() => navigate('/blog')} className="pf-btn pf-btn-primary mt-4">Back to Blog</button>
@@ -34,11 +34,11 @@ const BlogViewer: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-full max-w-3xl mx-auto px-4 sm:px-6 mx-auto">
         <button onClick={() => navigate('/blog')} className="pf-btn pf-btn-ghost mb-4">← Back to Blog</button>
 
         <div className="pf-card p-6">
-          <div className="flex items-center gap-3 mb-4">
+          <div className="flex flex-wrap items-center gap-3 mb-4">
             <img src={post.authorAvatar} className="w-12 h-12 rounded-full object-cover border-2 border-purple-500/30" alt="" />
             <div>
               <p className="text-sm font-bold text-white">{post.authorName}</p>
@@ -49,7 +49,7 @@ const BlogViewer: React.FC = () => {
           <h1 className="text-3xl font-black text-white mb-4">{post.title}</h1>
 
           {post.tags?.length > 0 && (
-            <div className="flex gap-2 mb-4">
+            <div className="flex flex-wrap gap-2 mb-4">
               {post.tags.map((tag: string) => (
                 <span key={tag} className="text-[10px] text-purple-400 px-2 py-1 rounded-full bg-purple-500/10">#{tag}</span>
               ))}
@@ -60,7 +60,7 @@ const BlogViewer: React.FC = () => {
             {post.content}
           </div>
 
-          <div className="flex items-center gap-3 mt-6 pt-4 border-t border-white/5">
+          <div className="flex flex-wrap items-center gap-3 mt-6 pt-4 border-t border-white/5">
             {session?.id === post.authorId && (
               <Link to={`/blog/edit/${post.id}`} className="pf-btn pf-btn-ghost">✏️ Edit</Link>
             )}

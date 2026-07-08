@@ -200,7 +200,7 @@ const UniversalRewardForm: React.FC = () => {
         }`} />
 
         <div className="text-center mb-6">
-          <h2 className="text-xl font-black text-white flex items-center justify-center gap-2">
+          <h2 className="text-xl font-black text-white flex flex-wrap items-center justify-center gap-2">
             🏆 Point Allocation Form
           </h2>
           <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-1">
@@ -211,7 +211,7 @@ const UniversalRewardForm: React.FC = () => {
         <form onSubmit={handleSubmit} className="space-y-5">
           
           {/* Target User Details (Disabled/ReadOnly) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Member ID</label>
               <input
@@ -236,7 +236,7 @@ const UniversalRewardForm: React.FC = () => {
           {/* Operation Toggle Switch */}
           <div className="space-y-1">
             <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Operation Type</label>
-            <div className="grid grid-cols-1 sm:grid-cols-2 bg-[#090d16] border border-[#1f293d] p-1 rounded-2xl">
+            <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 bg-[#090d16] border border-[#1f293d] p-1 rounded-2xl">
               <button
                 type="button"
                 onClick={() => setTransactionType('ADD')}
@@ -263,7 +263,7 @@ const UniversalRewardForm: React.FC = () => {
           </div>
 
           {/* Point Fields Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Plusses</label>
               <input
@@ -301,7 +301,7 @@ const UniversalRewardForm: React.FC = () => {
           <div className="p-4 bg-[#090d16]/60 border border-[#1f293d] rounded-2xl space-y-3">
             <span className="text-[9px] font-black uppercase text-slate-400 tracking-widest block">Associated Quiz Attributions</span>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3">
               <div className="space-y-1">
                 <label className="text-[9px] font-bold text-slate-500 uppercase">Quiz Topic ID</label>
                 <input
@@ -378,7 +378,7 @@ const UniversalRewardForm: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`py-4 px-6 text-xs font-black uppercase tracking-widest rounded-2xl shadow-xl w-full transition-all duration-150 flex items-center justify-center gap-2 ${
+              className={`py-4 px-6 text-xs font-black uppercase tracking-widest rounded-2xl shadow-xl w-full transition-all duration-150 flex flex-wrap items-center justify-center gap-2 ${
                 transactionType === 'ADD'
                   ? 'bg-green-600 hover:bg-green-500 text-white shadow-green-600/10 hover:shadow-green-600/20'
                   : 'bg-rose-600 hover:bg-rose-500 text-white shadow-rose-600/10 hover:shadow-rose-600/20'

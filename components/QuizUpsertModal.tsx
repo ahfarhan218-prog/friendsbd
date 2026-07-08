@@ -173,7 +173,7 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.3, ease: 'easeOut' }}
-          className="relative w-full max-w-3xl bg-[#121824] border border-[#1f293d] rounded-[2.5rem] shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
+          className="relative w-full max-w-full max-w-3xl mx-auto px-4 sm:px-6 bg-[#121824] border border-[#1f293d] rounded-[2.5rem] shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
         >
           {/* Decorative glows */}
           <div className="absolute top-0 left-1/4 w-48 h-48 bg-indigo-500/10 rounded-full blur-[80px] pointer-events-none" />
@@ -182,7 +182,7 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
           {/* Modal Header */}
           <div className="p-6 border-b border-[#1f293d] flex items-center justify-between bg-slate-900/40">
             <div>
-              <h3 className="text-xl font-black text-white flex items-center gap-2">
+              <h3 className="text-xl font-black text-white flex flex-wrap items-center gap-2">
                 {quizToEdit ? '✏️ Edit Quiz' : '➕ Create New Quiz'}
                 <span className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full ${
                   type === 'live'
@@ -215,7 +215,7 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
             )}
 
             {/* Basic Info Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">Quiz Title</label>
                 <input
@@ -313,7 +313,7 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
               <button
                 type="button"
                 onClick={handleAddQuestion}
-                className="flex items-center gap-1.5 text-xs font-bold px-4 py-2 bg-indigo-600/10 hover:bg-indigo-600 text-indigo-400 hover:text-white border border-indigo-500/20 rounded-xl transition-all"
+                className="flex flex-wrap items-center gap-1.5 text-xs font-bold px-4 py-2 bg-indigo-600/10 hover:bg-indigo-600 text-indigo-400 hover:text-white border border-indigo-500/20 rounded-xl transition-all"
               >
                 <span>➕</span> Add Question
               </button>
@@ -340,7 +340,7 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
                     </button>
                   )}
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <span className="w-6 h-6 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-[10px] font-black text-indigo-400">
                       {qIdx + 1}
                     </span>
@@ -360,9 +360,9 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
                   </div>
 
                   {/* Options List */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 gap-4 gap-3">
                     {q.options.map((opt, optIdx) => (
-                      <div key={optIdx} className="flex items-center gap-2">
+                      <div key={optIdx} className="flex flex-wrap items-center gap-2">
                         {/* Radio select for correct answer */}
                         <button
                           type="button"
@@ -393,7 +393,7 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
           </form>
 
           {/* Modal Footer */}
-          <div className="p-6 border-t border-[#1f293d] bg-slate-900/40 flex items-center justify-end gap-3">
+          <div className="p-6 border-t border-[#1f293d] bg-slate-900/40 flex flex-wrap items-center justify-end gap-3">
             <button
               type="button"
               onClick={onClose}
@@ -404,7 +404,7 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
             <button
               onClick={handleSubmit}
               disabled={isSubmitting}
-              className="px-6 py-3 text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl shadow-lg shadow-indigo-600/20 transition-all flex items-center gap-2"
+              className="px-6 py-3 text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl shadow-lg shadow-indigo-600/20 transition-all flex flex-wrap items-center gap-2"
             >
               {isSubmitting ? (
                 <>

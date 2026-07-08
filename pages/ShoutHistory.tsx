@@ -305,7 +305,7 @@ const ShoutHistory: React.FC = () => {
         <div className="absolute bottom-4 left-8 w-24 h-24 bg-indigo-600/10 rounded-full blur-2xl" />
 
         <div className="relative z-10 flex items-center justify-between">
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <button
               onClick={() => navigate('/home')}
               className="p-3 bg-white/10 hover:bg-white/20 rounded-2xl transition-all active:scale-90 border border-white/10 backdrop-blur-md"
@@ -323,7 +323,7 @@ const ShoutHistory: React.FC = () => {
               </p>
             </div>
           </div>
-          <div className="bg-white/5 border border-white/10 rounded-2xl px-3 py-1.5 flex items-center gap-2">
+          <div className="bg-white/5 border border-white/10 rounded-2xl px-3 py-1.5 flex flex-wrap items-center gap-2">
             <span className="text-lg">📢</span>
             <span className="text-xs font-black font-mono text-purple-300">{shouts.length}</span>
           </div>
@@ -372,7 +372,7 @@ const ShoutHistory: React.FC = () => {
           )}
 
           {/* Composer Header */}
-          <div className="flex items-center gap-3 px-4 pt-4">
+          <div className="flex flex-wrap items-center gap-3 px-4 pt-4">
             <img src={activeUser.avatar} className="w-9 h-9 rounded-xl object-cover border-2 border-white/10 shrink-0" alt="" />
             <div className="flex-1 min-w-0">
               <p className="text-xs font-black text-white">{activeUser.name}</p>
@@ -383,11 +383,11 @@ const ShoutHistory: React.FC = () => {
 
           {/* Admin Shout Mode Selector */}
           {['admin', 'moderator'].includes(activeUser.role || '') && (
-            <div className="flex gap-2 px-4 pt-3 pb-1 border-t border-white/5 bg-white/[0.02]">
+            <div className="flex flex-wrap gap-2 px-4 pt-3 pb-1 border-t border-white/5 bg-white/[0.02]">
               <button
                 type="button"
                 onClick={() => setShoutType('normal')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all ${
+                className={`flex flex-wrap items-center gap-1.5 px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all ${
                   shoutType === 'normal'
                     ? 'bg-purple-600 text-white shadow-lg shadow-purple-900/30'
                     : 'bg-white/5 text-white/40 hover:text-white hover:bg-white/10'
@@ -398,7 +398,7 @@ const ShoutHistory: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShoutType('quiz')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all ${
+                className={`flex flex-wrap items-center gap-1.5 px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all ${
                   shoutType === 'quiz'
                     ? 'bg-rose-600 text-white shadow-lg shadow-rose-900/30'
                     : 'bg-white/5 text-white/40 hover:text-white hover:bg-white/10'
@@ -439,7 +439,7 @@ const ShoutHistory: React.FC = () => {
             <button
               onClick={handleAddShout}
               disabled={!shoutText.trim() || isLockdown}
-              className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 disabled:opacity-30 disabled:cursor-not-allowed text-white font-black text-xs uppercase tracking-widest px-5 py-2.5 rounded-2xl shadow-lg shadow-purple-900/40 active:scale-95 transition-all"
+              className="flex flex-wrap items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 disabled:opacity-30 disabled:cursor-not-allowed text-white font-black text-xs uppercase tracking-widest px-5 py-2.5 rounded-2xl shadow-lg shadow-purple-900/40 active:scale-95 transition-all"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
@@ -451,7 +451,7 @@ const ShoutHistory: React.FC = () => {
 
         {/* Sticky Filter Bar */}
         <div className="sticky top-0 z-40 bg-[#0F0F1A]/80 backdrop-blur-xl py-2">
-          <div className="bg-[#1C1C2E] p-1.5 rounded-[2rem] border border-white/5 flex gap-1.5 shadow-2xl">
+          <div className="bg-[#1C1C2E] p-1.5 rounded-[2rem] border border-white/5 flex flex-wrap gap-1.5 shadow-2xl">
             {[
               { id: 'all', label: 'All Shouts' },
               { id: 'mine', label: 'My Shouts' },

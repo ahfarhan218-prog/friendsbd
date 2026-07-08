@@ -31,7 +31,7 @@ const Toggle: React.FC<{ value: boolean; onChange: () => void; color?: string }>
 );
 
 const StatCard: React.FC<{ icon: string; label: string; value: string | number; sub?: string; color: string }> = ({ icon, label, value, sub, color }) => (
-  <div className={`bg-[#1C1C2E] border border-white/5 rounded-2xl p-4 flex items-center gap-4`}>
+  <div className={`bg-[#1C1C2E] border border-white/5 rounded-2xl p-4 flex flex-wrap items-center gap-4`}>
     <div className={`w-12 h-12 rounded-2xl ${color} flex items-center justify-center text-2xl shrink-0`}>{icon}</div>
     <div className="min-w-0">
       <p className="text-[9px] font-black text-white/30 uppercase tracking-widest">{label}</p>
@@ -323,7 +323,7 @@ const AdminPanel: React.FC = () => {
             <motion.aside initial={{ x: -280 }} animate={{ x: 0 }} exit={{ x: -280 }} transition={{ type: 'spring', damping: 25 }}
               className="fixed inset-y-0 left-0 w-72 bg-[#12122A] z-[201] flex flex-col border-r border-white/5 shadow-2xl">
               <div className="p-6 border-b border-white/5">
-                <div className="flex items-center gap-3 mb-1">
+                <div className="flex flex-wrap items-center gap-3 mb-1">
                   <div className="w-9 h-9 bg-purple-600 rounded-xl flex items-center justify-center text-lg">🛡️</div>
                   <div>
                     <h2 className="text-sm font-black text-white">Admin Console</h2>
@@ -335,7 +335,7 @@ const AdminPanel: React.FC = () => {
               <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
                 {TABS.map(tab => (
                   <button key={tab.id} onClick={() => { setActiveTab(tab.id); setSidebarOpen(false); }}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-black transition-all ${activeTab === tab.id
+                    className={`w-full flex flex-wrap items-center gap-3 px-4 py-3 rounded-2xl text-sm font-black transition-all ${activeTab === tab.id
                       ? 'bg-purple-600 text-white shadow-lg shadow-purple-900/50'
                       : 'text-white/40 hover:text-white hover:bg-white/5'}`}>
                     <span className="text-lg">{tab.icon}</span>
@@ -365,7 +365,7 @@ const AdminPanel: React.FC = () => {
       <div className="flex-1 flex flex-col min-w-0">
 
         {/* Top Bar */}
-        <header className="sticky top-0 z-[100] bg-[#0F0F1A]/95 backdrop-blur-2xl border-b border-white/5 px-4 py-3 flex items-center gap-3">
+        <header className="sticky top-0 z-[100] bg-[#0F0F1A]/95 backdrop-blur-2xl border-b border-white/5 px-4 py-3 flex flex-wrap items-center gap-3">
           <button onClick={() => setSidebarOpen(true)} className="w-10 h-10 bg-white/5 hover:bg-white/10 rounded-xl flex items-center justify-center border border-white/5 active:scale-90 transition-all">
             <svg className="w-5 h-5 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16m-7 6h7" />
@@ -373,13 +373,13 @@ const AdminPanel: React.FC = () => {
           </button>
 
           <div className="flex-1 min-w-0">
-            <h1 className="text-sm font-black text-white flex items-center gap-2">
+            <h1 className="text-sm font-black text-white flex flex-wrap items-center gap-2">
               {TABS.find(t => t.id === activeTab)?.icon} {TABS.find(t => t.id === activeTab)?.label}
             </h1>
           </div>
 
           {/* Quick status pills */}
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             {isLockdown && <span className="text-[8px] font-black uppercase bg-rose-500/20 text-rose-400 px-2 py-1 rounded-full border border-rose-500/30">🔒 LOCKDOWN</span>}
             {isMaintenance && <span className="text-[8px] font-black uppercase bg-amber-500/20 text-amber-400 px-2 py-1 rounded-full border border-amber-500/30">🛠️ MAINT</span>}
             <span className="text-[9px] font-mono text-white/20 hidden sm:block">{clock.toLocaleTimeString()}</span>
@@ -409,14 +409,14 @@ const AdminPanel: React.FC = () => {
                 </div>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-3">
                   {stats.map(s => <StatCard key={s.label} {...s} />)}
                 </div>
 
                 {/* Game Timers */}
                 <div className="bg-[#1C1C2E] border border-white/5 rounded-2xl p-4">
                   <h3 className="text-[9px] font-black text-white/30 uppercase tracking-[0.3em] mb-3">🎮 Game Coin Timers</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-3">
                     {[
                       { label: 'Gold Coin', value: goldTimeLeft, color: 'text-amber-400', bg: 'border-amber-500/20', type: 'gold' as const, inputVal: goldInput, setInputVal: setGoldInput },
                       { label: 'Silver Coin', value: silverTimeLeft, color: 'text-slate-300', bg: 'border-slate-500/20', type: 'silver' as const, inputVal: silverInput, setInputVal: setSilverInput },
@@ -432,7 +432,7 @@ const AdminPanel: React.FC = () => {
                             className="w-full text-[9px] font-black uppercase tracking-widest bg-white/10 hover:bg-white/20 py-2 rounded-xl transition-all active:scale-90 border border-white/5">
                             Force Drop
                           </button>
-                          <div className="flex gap-1">
+                          <div className="flex flex-wrap gap-1">
                             <input type="number" step="any" placeholder="Mins" value={coin.inputVal} onChange={e => coin.setInputVal(e.target.value)}
                               className="w-[45%] bg-[#0f0f1a]/80 border border-white/10 rounded-lg text-[10px] text-center font-bold outline-none text-white focus:border-purple-500/50" />
                             <button onClick={() => handleSetSpawnTimer(coin.type, coin.inputVal)}
@@ -452,7 +452,7 @@ const AdminPanel: React.FC = () => {
                     <h3 className="text-[9px] font-black text-white/30 uppercase tracking-[0.3em]">📈 Platform Traffic</h3>
                     <span className="text-[8px] text-white/20 font-bold uppercase">Last 12 hours</span>
                   </div>
-                  <div className="h-32 flex items-end gap-1.5 border-b border-white/5 px-2 pb-0">
+                  <div className="h-32 flex flex-wrap items-end gap-1.5 border-b border-white/5 px-2 pb-0">
                     {[20,35,28,60,45,72,55,80,68,92,84,100].map((v, i) => (
                       <div key={i} className="group relative flex-1">
                         <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-purple-600 text-white text-[8px] font-bold px-1 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">{v}%</div>
@@ -472,7 +472,7 @@ const AdminPanel: React.FC = () => {
                   <h3 className="text-[9px] font-black text-white/30 uppercase tracking-[0.3em] mb-3">🕒 Recent Activity</h3>
                   <div className="space-y-2 max-h-48 overflow-y-auto">
                     {activities.slice(0, 8).map((act, i) => (
-                      <div key={i} className="flex items-start gap-3 p-2.5 bg-white/5 rounded-xl">
+                      <div key={i} className="flex flex-wrap items-start gap-3 p-2.5 bg-white/5 rounded-xl">
                         <span className="text-[9px] font-mono text-white/20 bg-white/5 px-2 py-1 rounded-lg shrink-0">{act.time}</span>
                         <p className="text-xs text-white/50"><span className="font-black text-white/70">@{act.username}</span> {act.msg}</p>
                       </div>
@@ -488,8 +488,8 @@ const AdminPanel: React.FC = () => {
               <motion.div key="users" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-4">
 
                 {/* Search + stats row */}
-                <div className="flex gap-3">
-                  <div className="flex-1 bg-[#1C1C2E] border border-white/5 rounded-2xl px-4 flex items-center gap-2 focus-within:border-purple-500/40 transition-colors">
+                <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap-1 bg-[#1C1C2E] border border-white/5 rounded-2xl px-4 flex flex-wrap items-center gap-2 focus-within:border-purple-500/40 transition-colors">
                     <span className="text-white/30 text-sm">🔍</span>
                     <input placeholder="Search users..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
                       className="flex-1 bg-transparent border-none text-sm text-white placeholder-white/20 py-3 outline-none font-medium" />
@@ -502,7 +502,7 @@ const AdminPanel: React.FC = () => {
                 {/* User list */}
                 <div className="space-y-2">
                   {filteredUsers.map(u => (
-                    <div key={u.id} className="bg-[#1C1C2E] border border-white/5 rounded-2xl p-3 flex items-center gap-3 hover:border-purple-500/20 transition-colors">
+                    <div key={u.id} className="bg-[#1C1C2E] border border-white/5 rounded-2xl p-3 flex flex-wrap items-center gap-3 hover:border-purple-500/20 transition-colors">
                       {/* Avatar */}
                       <div className="relative shrink-0">
                         <img src={u.avatar} className="w-11 h-11 rounded-xl object-cover border-2 border-white/5" alt="" />
@@ -565,14 +565,14 @@ const AdminPanel: React.FC = () => {
                 <div className="space-y-2">
                   {shouts.map(shout => (
                     <div key={shout.id} className={`bg-[#1C1C2E] border rounded-2xl p-4 ${shout.isPinned ? 'border-amber-500/30' : 'border-white/5'}`}>
-                      <div className="flex items-center gap-3 mb-2">
+                      <div className="flex flex-wrap items-center gap-3 mb-2">
                         <img src={shout.avatar} className="w-8 h-8 rounded-xl object-cover shrink-0" alt="" />
                         <div className="flex-1 min-w-0">
                           <p className="text-xs font-black text-white">{shout.user}</p>
                           <p className="text-[9px] text-white/30 font-bold">{shout.time}</p>
                         </div>
                         {shout.isPinned && <span className="text-[8px] font-black text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded-full border border-amber-400/20">📌 Pinned</span>}
-                        <div className="flex gap-1.5 shrink-0">
+                        <div className="flex flex-wrap gap-1.5 shrink-0">
                           <button onClick={() => handleTogglePinShout(shout.id)}
                             className={`px-3 py-1.5 rounded-xl text-[9px] font-black uppercase transition-all active:scale-90 ${shout.isPinned ? 'bg-amber-400/20 text-amber-400 border border-amber-400/30' : 'bg-white/5 text-white/40 hover:bg-white/10'}`}>
                             {shout.isPinned ? 'Unpin' : 'Pin'}
@@ -598,7 +598,7 @@ const AdminPanel: React.FC = () => {
                 <div className="flex items-center justify-between">
                   <p className="text-[10px] text-white/30 font-bold uppercase tracking-widest">{categories.length} categories</p>
                   <button onClick={() => { setShowCatForm(true); setEditingCategory(null); setCatFormData({ name: '', slug: '', description: '', icon: '💬', color: 'bg-purple-600', isHidden: false, allowedRoles: ROLES }); }}
-                    className="flex items-center gap-2 bg-purple-600 hover:bg-purple-500 text-white text-[10px] font-black uppercase tracking-widest px-4 py-2.5 rounded-xl active:scale-90 transition-all">
+                    className="flex flex-wrap items-center gap-2 bg-purple-600 hover:bg-purple-500 text-white text-[10px] font-black uppercase tracking-widest px-4 py-2.5 rounded-xl active:scale-90 transition-all">
                     + New Category
                   </button>
                 </div>
@@ -609,11 +609,11 @@ const AdminPanel: React.FC = () => {
                     <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
                       className="bg-[#1C1C2E] border border-purple-500/30 rounded-2xl p-5 space-y-4">
                       <h4 className="text-sm font-black text-white">{editingCategory ? 'Edit Category' : 'New Category'}</h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3">
                         <input value={catFormData.name} onChange={e => setCatFormData({ ...catFormData, name: e.target.value })} className={inputCls} placeholder="Category Name" />
                         <input value={catFormData.slug} onChange={e => setCatFormData({ ...catFormData, slug: e.target.value })} className={inputCls} placeholder="slug-name" />
                       </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3">
                         <input value={catFormData.icon} onChange={e => setCatFormData({ ...catFormData, icon: e.target.value })} className={inputCls} placeholder="Icon emoji" />
                         <input value={catFormData.color} onChange={e => setCatFormData({ ...catFormData, color: e.target.value })} className={inputCls} placeholder="bg-purple-600" />
                       </div>
@@ -633,7 +633,7 @@ const AdminPanel: React.FC = () => {
                           ))}
                         </div>
                       </div>
-                      <div className="flex gap-2">
+                      <div className="flex flex-wrap gap-2">
                         <button onClick={handleSaveCategory} className="flex-1 bg-purple-600 hover:bg-purple-500 text-white py-3 rounded-xl text-[10px] font-black uppercase tracking-widest active:scale-95 transition-all">Save</button>
                         <button onClick={() => setShowCatForm(false)} className="px-6 bg-white/5 text-white/40 py-3 rounded-xl text-[10px] font-black uppercase hover:bg-white/10 transition-all">Cancel</button>
                       </div>
@@ -644,7 +644,7 @@ const AdminPanel: React.FC = () => {
                 {/* Category list */}
                 <div className="space-y-2">
                   {categories.map(cat => (
-                    <div key={cat.id} className="bg-[#1C1C2E] border border-white/5 rounded-2xl p-4 flex items-center gap-4 hover:border-white/10 transition-colors">
+                    <div key={cat.id} className="bg-[#1C1C2E] border border-white/5 rounded-2xl p-4 flex flex-wrap items-center gap-4 hover:border-white/10 transition-colors">
                       <div className={`w-12 h-12 rounded-2xl ${cat.color} flex items-center justify-center text-2xl shrink-0`}>{cat.icon}</div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
@@ -653,7 +653,7 @@ const AdminPanel: React.FC = () => {
                         </div>
                         <p className="text-[9px] text-white/30 font-bold">{cat.allowedRoles?.join(', ') || 'Public'}</p>
                       </div>
-                      <div className="flex gap-2 shrink-0">
+                      <div className="flex flex-wrap gap-2 shrink-0">
                         <button onClick={() => { setEditingCategory(cat); setCatFormData({ name: cat.name, slug: cat.slug, description: cat.description, icon: cat.icon, color: cat.color, isHidden: cat.isHidden, allowedRoles: cat.allowedRoles || [] }); setShowCatForm(true); }}
                           className="w-9 h-9 bg-white/5 hover:bg-white/10 rounded-xl flex items-center justify-center text-sm active:scale-90 transition-all">✏️</button>
                         <button onClick={() => handleDeleteCategory(cat.id)}
@@ -670,10 +670,10 @@ const AdminPanel: React.FC = () => {
             {activeTab === 'broadcast' && (
               <motion.div key="broadcast" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-4">
                 <div className="bg-[#1C1C2E] border border-white/5 rounded-2xl p-5 space-y-4">
-                  <h3 className="text-sm font-black text-white flex items-center gap-2">📡 Global Broadcast</h3>
+                  <h3 className="text-sm font-black text-white flex flex-wrap items-center gap-2">📡 Global Broadcast</h3>
                   <input value={broadcastTitle} onChange={e => setBroadcastTitle(e.target.value)} className={inputCls} placeholder="Broadcast title..." />
                   <textarea value={broadcastMsg} onChange={e => setBroadcastMsg(e.target.value)} className={inputCls + ' resize-none h-28'} placeholder="Message body..." />
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3">
                     <div>
                       <p className="text-[9px] font-black text-white/30 uppercase tracking-widest mb-2">Target Audience</p>
                       <select value={broadcastTarget} onChange={e => setBroadcastTarget(e.target.value)}
@@ -686,7 +686,7 @@ const AdminPanel: React.FC = () => {
                     </div>
                     <div className="flex items-end">
                       <button onClick={handleSendBroadcast} disabled={!broadcastTitle.trim() || !broadcastMsg.trim()}
-                        className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 disabled:opacity-30 text-white font-black text-[10px] uppercase tracking-widest py-3 rounded-xl shadow-lg shadow-purple-900/30 active:scale-95 transition-all">
+                        className="w-full flex flex-wrap items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 disabled:opacity-30 text-white font-black text-[10px] uppercase tracking-widest py-3 rounded-xl shadow-lg shadow-purple-900/30 active:scale-95 transition-all">
                         📡 Send Broadcast
                       </button>
                     </div>
@@ -714,7 +714,7 @@ const AdminPanel: React.FC = () => {
                 ].map(g => (
                   <div key={g.type} className={`bg-[#1C1C2E] border border-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-500/20 rounded-2xl p-5`}>
                     <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-3">
+                      <div className="flex flex-wrap items-center gap-3">
                         <span className="text-3xl">{g.icon}</span>
                         <div>
                           <h4 className="text-sm font-black text-white">{g.label} Game</h4>
@@ -724,7 +724,7 @@ const AdminPanel: React.FC = () => {
                       <div className={`text-2xl font-black font-mono text-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-400`}>{g.timer}</div>
                     </div>
                     <div className="space-y-3">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3">
                         <button onClick={() => handleDropCoin(g.type)}
                           className={`py-3 bg-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-500/20 border border-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-500/30 text-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-400 font-black text-[10px] uppercase tracking-widest rounded-xl hover:bg-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-500/30 active:scale-95 transition-all`}>
                           🪙 Force Drop
@@ -734,7 +734,7 @@ const AdminPanel: React.FC = () => {
                           🛑 End Game
                         </button>
                       </div>
-                      <div className="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5">
+                      <div className="flex flex-wrap items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5">
                         <span className="text-xs font-bold text-white/50 shrink-0">Set Next Drop:</span>
                         <input type="number" step="any" placeholder="Enter minutes (e.g. 0.5)" value={g.inputVal} onChange={e => g.setInputVal(e.target.value)}
                           className="flex-1 bg-white/5 border border-white/10 rounded-lg text-xs py-1.5 px-3 outline-none text-white focus:border-purple-500/50" />
@@ -752,7 +752,7 @@ const AdminPanel: React.FC = () => {
                   <h4 className="text-sm font-black text-white mb-3">🏆 Top Coin Holders</h4>
                   <div className="space-y-2">
                     {[...usersList].sort((a, b) => ((b as any).goldenCoins || 0) - ((a as any).goldenCoins || 0)).slice(0, 5).map((u, i) => (
-                      <div key={u.id} className="flex items-center gap-3 p-2.5 bg-white/5 rounded-xl">
+                      <div key={u.id} className="flex flex-wrap items-center gap-3 p-2.5 bg-white/5 rounded-xl">
                         <span className="text-sm font-black text-white/40 w-5">#{i + 1}</span>
                         <img src={u.avatar} className="w-7 h-7 rounded-lg object-cover shrink-0" alt="" />
                         <span className="text-xs font-black text-white flex-1">{u.name}</span>
@@ -808,7 +808,7 @@ const AdminPanel: React.FC = () => {
                           <p className="text-xs font-bold text-white truncate">Report: {r.reason}</p>
                           <p className="text-[9px] text-white/30">Target: {r.targetName || r.targetId} · by {r.reporterName}</p>
                         </div>
-                        <div className="flex gap-1 shrink-0">
+                        <div className="flex flex-wrap gap-1 shrink-0">
                           <button onClick={async () => { try { await fetch(`${API_BASE}/reports/${r.id}`, { method:'PATCH', headers:{'Content-Type':'application/json'}, body:JSON.stringify({status:'resolved', resolvedBy:'admin'}) }); const s=JSON.parse(localStorage.getItem('friends_bd_reports')||'[]'); localStorage.setItem('friends_bd_reports', JSON.stringify(s.filter((x:any)=>x.id!==r.id))); toast('✅ Resolved'); } catch{} }} className="px-2 py-1 bg-emerald-500/20 text-emerald-400 text-[8px] font-black rounded-lg">✅</button>
                           <button onClick={async () => { try { await fetch(`${API_BASE}/reports/${r.id}`, { method:'PATCH', headers:{'Content-Type':'application/json'}, body:JSON.stringify({status:'dismissed', resolvedBy:'admin'}) }); const s=JSON.parse(localStorage.getItem('friends_bd_reports')||'[]'); localStorage.setItem('friends_bd_reports', JSON.stringify(s.filter((x:any)=>x.id!==r.id))); toast('⛔ Dismissed'); } catch{} }} className="px-2 py-1 bg-rose-500/20 text-rose-400 text-[8px] font-black rounded-lg">⛔</button>
                         </div>
@@ -845,20 +845,20 @@ const AdminPanel: React.FC = () => {
                 {/* Live system logs */}
                 <div className="bg-[#0a0a1a] border border-white/5 rounded-2xl overflow-hidden">
                   <div className="flex items-center justify-between px-4 py-3 border-b border-white/5">
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
                       <span className="relative flex h-2.5 w-2.5">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                         <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
                       </span>
                       <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Live System Logs</span>
                     </div>
-                    <div className="flex gap-1.5">
+                    <div className="flex flex-wrap gap-1.5">
                       {['bg-rose-500', 'bg-amber-500', 'bg-emerald-500'].map(c => <div key={c} className={`w-2 h-2 rounded-full ${c}`} />)}
                     </div>
                   </div>
                   <div className="p-4 space-y-1.5 h-52 overflow-y-auto font-mono">
                     {logs.map(log => (
-                      <div key={log.id} className="text-[10px] flex items-start gap-2">
+                      <div key={log.id} className="text-[10px] flex flex-wrap items-start gap-2">
                         <span className="text-white/20 shrink-0">[{log.time}]</span>
                         <span className={`font-black shrink-0 ${log.type === 'WARN' ? 'text-amber-400' : log.type === 'DANGER' ? 'text-rose-400' : log.type === 'SUCCESS' ? 'text-emerald-400' : 'text-purple-400'}`}>{log.type}:</span>
                         <span className="text-white/50">{log.msg}</span>
@@ -877,7 +877,7 @@ const AdminPanel: React.FC = () => {
                   </div>
                   <div className="space-y-2 max-h-64 overflow-y-auto">
                     {adminLogs.filter(l => l.action === 'SHOUT_DELETED').length > 0 ? adminLogs.filter(l => l.action === 'SHOUT_DELETED').map((log, i) => (
-                      <div key={log.id || i} className="flex items-start gap-3 p-3 bg-rose-500/5 rounded-xl hover:bg-rose-500/10 transition-colors border border-rose-500/10">
+                      <div key={log.id || i} className="flex flex-wrap items-start gap-3 p-3 bg-rose-500/5 rounded-xl hover:bg-rose-500/10 transition-colors border border-rose-500/10">
                         <span className="text-[9px] font-mono text-rose-400/60 bg-rose-500/10 px-2 py-1 rounded-lg shrink-0 mt-0.5">{new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                         <div className="flex-1 min-w-0">
                           <p className="text-xs text-rose-300/70 leading-relaxed">
@@ -896,7 +896,7 @@ const AdminPanel: React.FC = () => {
                   <h3 className="text-[9px] font-black text-white/30 uppercase tracking-[0.3em] mb-3">👤 User Activity</h3>
                   <div className="space-y-2 max-h-64 overflow-y-auto">
                     {activities.length > 0 ? activities.map((act, i) => (
-                      <div key={i} className="flex items-start gap-3 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
+                      <div key={i} className="flex flex-wrap items-start gap-3 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
                         <span className="text-[9px] font-mono text-white/20 bg-white/5 px-2 py-1 rounded-lg shrink-0 mt-0.5">{act.time}</span>
                         <p className="text-xs text-white/50 leading-relaxed">
                           <span className="font-black text-white/70">@{act.username}</span> {act.msg}
@@ -922,8 +922,8 @@ const AdminPanel: React.FC = () => {
               onClick={() => setEditingUser(null)} className="fixed inset-0 bg-black/80 z-[300] backdrop-blur-sm" />
             <div className="fixed inset-0 flex items-center justify-center z-[301] pointer-events-none p-4">
               <motion.div initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                className="bg-[#1C1C2E] border border-purple-500/20 rounded-[2rem] shadow-2xl p-6 w-full max-w-4xl max-h-[95vh] flex flex-col pointer-events-auto">
-              <div className="flex items-center gap-3 mb-5 pb-4 border-b border-white/5">
+                className="bg-[#1C1C2E] border border-purple-500/20 rounded-[2rem] shadow-2xl p-6 w-full max-w-full max-w-4xl mx-auto px-4 sm:px-6 max-h-[95vh] flex flex-col pointer-events-auto">
+              <div className="flex flex-wrap items-center gap-3 mb-5 pb-4 border-b border-white/5">
                 <img src={editingUser.avatar} className="w-12 h-12 rounded-2xl object-cover border-2 border-purple-500/30" alt="" />
                 <div>
                   <h3 className="text-sm font-black text-white">{editingUser.name}</h3>
@@ -931,7 +931,7 @@ const AdminPanel: React.FC = () => {
                 </div>
               </div>
               <div className="flex-1 overflow-y-auto pr-2 space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 sm:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-1 sm:grid-cols-2 gap-4 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {[
                   { label: 'Level',        key: 'level',        type: 'number' },
                   { label: 'Points (XP)',  key: 'points',       type: 'number' },
@@ -962,7 +962,7 @@ const AdminPanel: React.FC = () => {
                   </select>
                 </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                   <div className="flex items-center justify-between p-3 bg-white/5 rounded-xl">
                     <span className="text-xs font-black text-white/50">Verified Badge</span>
                     <Toggle value={!!editingUser.isVerified} onChange={() => setEditingUser({ ...editingUser, isVerified: !editingUser.isVerified })} />
@@ -973,7 +973,7 @@ const AdminPanel: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex gap-2 mt-5 pt-4 border-t border-white/5 shrink-0">
+              <div className="flex flex-wrap gap-2 mt-5 pt-4 border-t border-white/5 shrink-0">
                 <button onClick={handleSaveUserStats} className="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-xl text-[10px] font-black uppercase tracking-widest active:scale-95 transition-all">Save Changes</button>
                 <button onClick={() => setEditingUser(null)} className="px-6 bg-white/5 text-white/40 py-3 rounded-xl text-[10px] font-black uppercase hover:bg-white/10 transition-all">Cancel</button>
               </div>

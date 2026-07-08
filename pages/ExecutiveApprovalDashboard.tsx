@@ -205,8 +205,8 @@ const ExecutiveApprovalDashboard: React.FC = () => {
 
       {/* Header Panel */}
       <header className="p-6 border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md">
-        <div className="max-w-5xl mx-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
+        <div className="max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto flex flex-wrap items-center justify-between gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <button
               onClick={() => navigate(-1)}
               className="p-3 text-slate-400 hover:text-white bg-[#121824] hover:bg-slate-800 border border-[#1f293d] rounded-2xl transition-all"
@@ -224,7 +224,7 @@ const ExecutiveApprovalDashboard: React.FC = () => {
       </header>
 
       {/* Main Review Section */}
-      <main className="p-6 max-w-5xl mx-auto mt-6">
+      <main className="p-6 max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto mt-6">
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 space-y-3">
             <div className="w-8 h-8 border-2 border-indigo-500/20 border-t-indigo-500 rounded-full animate-spin" />
@@ -252,7 +252,7 @@ const ExecutiveApprovalDashboard: React.FC = () => {
 
                 {/* Left block - type signature & core metrics */}
                 <div className="space-y-3 text-left">
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex flex-wrap items-center gap-2.5">
                     {req.transaction_type === 'ADD' ? (
                       <span className="px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider bg-green-500/10 text-green-400 border border-green-500/20 rounded-md">
                         + ADD REQUEST
@@ -274,7 +274,7 @@ const ExecutiveApprovalDashboard: React.FC = () => {
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-4 text-[10px] font-bold text-slate-400">
+                  <div className="flex flex-wrap items-center gap-4 text-[10px] font-bold text-slate-400">
                     <span>Initiated by: @{req.requested_by_username}</span>
                     <span className="text-slate-600">•</span>
                     <span>🎯 Quiz: <a href={req.quiz_link} className="text-indigo-400 hover:underline">{req.quiz_title}</a></span>
@@ -293,7 +293,7 @@ const ExecutiveApprovalDashboard: React.FC = () => {
                   </div>
 
                   {/* Actions buttons */}
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <button
                       onClick={() => handleReject(req)}
                       className="px-4 py-2 bg-rose-500/10 hover:bg-rose-500 text-rose-400 hover:text-white border border-rose-500/20 rounded-xl text-xs font-bold transition-all"

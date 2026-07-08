@@ -363,7 +363,7 @@ const Home: React.FC = () => {
                 friends <span className="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">bd</span>
               </h1>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               {isAdmin && (
                 <button onClick={() => navigate('/admin')}
                   className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-2xl flex items-center justify-center border border-white/10 active:scale-90 transition-all">
@@ -393,7 +393,7 @@ const Home: React.FC = () => {
               <div className={`relative mb-4 rounded-2xl bg-gradient-to-br ${g.bg} border ${g.border} backdrop-blur-sm overflow-hidden`}>
                 {/* shimmer line */}
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                <div className="px-4 py-3.5 flex items-center justify-between gap-3">
+                <div className="px-4 py-3.5 flex flex-wrap items-center justify-between gap-3">
                   <div className="flex-1 min-w-0">
                     <p className="text-[10px] font-bold text-white/40 uppercase tracking-[0.15em] mb-0.5 truncate">{displayName}</p>
                     <p className="text-xl font-black text-white leading-tight tracking-tight">
@@ -404,7 +404,7 @@ const Home: React.FC = () => {
                   <div className="text-right shrink-0">
                     <p className="text-lg font-black text-white font-mono tabular-nums tracking-tight">{formattedTime}</p>
                     <p className="text-[9px] text-white/35 font-bold mt-0.5">{formattedDate}</p>
-                    <span className={`inline-flex items-center gap-1 mt-1 text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full bg-white/10`}>
+                    <span className={`inline-flex flex-wrap items-center gap-1 mt-1 text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full bg-white/10`}>
                       <span className={`inline-block w-1.5 h-1.5 rounded-full ${g.dot} animate-pulse`} />
                       Live
                     </span>
@@ -416,7 +416,7 @@ const Home: React.FC = () => {
 
           {/* Announcement ticker */}
           {announcement && (
-            <div className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl px-4 py-2.5 flex items-center gap-3 overflow-hidden">
+            <div className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl px-4 py-2.5 flex flex-wrap items-center gap-3 overflow-hidden">
               <span className="text-[8px] font-black uppercase tracking-widest text-purple-300 bg-purple-500/30 px-2 py-1 rounded-lg shrink-0">📢 News</span>
               <div className="flex-1 overflow-hidden">
                 <div className="whitespace-nowrap animate-marquee text-[11px] text-white/70 font-medium">{announcement}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{announcement}</div>
@@ -425,7 +425,7 @@ const Home: React.FC = () => {
           )}
 
           {/* Online pulse */}
-          <div className="flex items-center gap-2 mt-4">
+          <div className="flex flex-wrap items-center gap-2 mt-4">
             <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
@@ -441,7 +441,7 @@ const Home: React.FC = () => {
         {/* ── PROFILE CARD ── */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           onClick={() => navigate('/profile/' + activeUser.username)}
-          className="bg-[#1C1C2E] border border-white/5 rounded-[2rem] p-4 flex items-center gap-4 cursor-pointer hover:border-purple-500/30 active:scale-[0.98] transition-all shadow-xl">
+          className="bg-[#1C1C2E] border border-white/5 rounded-[2rem] p-4 flex flex-wrap items-center gap-4 cursor-pointer hover:border-purple-500/30 active:scale-[0.98] transition-all shadow-xl">
           <div className="relative shrink-0">
             <img src={activeUser.avatar} className="w-14 h-14 rounded-2xl object-cover border-2 border-purple-500/30" alt="" />
             <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-400 border-2 border-[#1C1C2E] rounded-full" />
@@ -453,11 +453,11 @@ const Home: React.FC = () => {
               {activeUser.isPremium && <span className="text-[8px] bg-amber-400/20 text-amber-400 px-1.5 py-0.5 rounded-full font-black">👑 Premium</span>}
             </div>
             <p className="text-[10px] text-purple-400/70 font-bold mt-0.5">@{activeUser.username}</p>
-            <p className="text-[9px] text-emerald-400 font-black flex items-center gap-1 mt-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-2.5 py-0.5 w-fit">
+            <p className="text-[9px] text-emerald-400 font-black flex flex-wrap items-center gap-1 mt-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-2.5 py-0.5 w-fit">
               🟢 Today: {formatOnlineTime(activeUser.todayOnlineTime)}
             </p>
           </div>
-          <div className="flex gap-4 text-center shrink-0">
+          <div className="flex flex-wrap gap-4 text-center shrink-0">
             <div>
               <p className="text-lg font-black text-white">{activeUser.points || 0}</p>
               <p className="text-[8px] text-white/30 font-bold uppercase tracking-widest">XP</p>
@@ -471,7 +471,7 @@ const Home: React.FC = () => {
         </motion.div>
 
         {/* ── QUICK STATS ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-3">
           {[
             { icon: '🟢', label: 'Online', value: totalOnline, filter: 'online', color: 'from-emerald-600/20 to-emerald-700/20 border-emerald-500/20 hover:border-emerald-500/40 hover:shadow-emerald-950/20' },
             { icon: '👑', label: 'Premium', value: premiumCount, filter: 'premium', color: 'from-amber-500/20 to-orange-600/20 border-amber-500/20 hover:border-amber-500/40 hover:shadow-amber-950/20' },
@@ -512,7 +512,7 @@ const Home: React.FC = () => {
           )}
 
           {/* Composer header */}
-          <div className="flex items-center gap-3 px-4 pt-4">
+          <div className="flex flex-wrap items-center gap-3 px-4 pt-4">
             <img src={activeUser.avatar} className="w-9 h-9 rounded-xl object-cover border-2 border-white/10 shrink-0" alt="" />
             <div className="flex-1 min-w-0">
               <p className="text-xs font-black text-white">{activeUser.name}</p>
@@ -523,11 +523,11 @@ const Home: React.FC = () => {
 
           {/* Admin Shout Mode Selector */}
           {['admin', 'moderator'].includes(activeUser.role || '') && (
-            <div className="flex gap-2 px-4 pt-3 pb-1 border-t border-white/5 bg-white/[0.02]">
+            <div className="flex flex-wrap gap-2 px-4 pt-3 pb-1 border-t border-white/5 bg-white/[0.02]">
               <button
                 type="button"
                 onClick={() => setShoutType('normal')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all ${
+                className={`flex flex-wrap items-center gap-1.5 px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all ${
                   shoutType === 'normal'
                     ? 'bg-purple-600 text-white shadow-lg shadow-purple-900/30'
                     : 'bg-white/5 text-white/40 hover:text-white hover:bg-white/10'
@@ -538,7 +538,7 @@ const Home: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShoutType('quiz')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all ${
+                className={`flex flex-wrap items-center gap-1.5 px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all ${
                   shoutType === 'quiz'
                     ? 'bg-rose-600 text-white shadow-lg shadow-rose-900/30'
                     : 'bg-white/5 text-white/40 hover:text-white hover:bg-white/10'
@@ -574,7 +574,7 @@ const Home: React.FC = () => {
               ))}
             </div>
             <button onClick={handleAddShout} disabled={!shoutText.trim() || isLockdown}
-              className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 disabled:opacity-30 disabled:cursor-not-allowed text-white font-black text-xs uppercase tracking-widest px-5 py-2.5 rounded-2xl shadow-lg shadow-purple-900/40 active:scale-95 transition-all">
+              className="flex flex-wrap items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 disabled:opacity-30 disabled:cursor-not-allowed text-white font-black text-xs uppercase tracking-widest px-5 py-2.5 rounded-2xl shadow-lg shadow-purple-900/40 active:scale-95 transition-all">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
               </svg>
@@ -586,7 +586,7 @@ const Home: React.FC = () => {
 
         {/* ── SHOUT STREAM ── */}
         <div>
-          <div className="flex items-center gap-2 mb-3 px-1">
+          <div className="flex flex-wrap items-center gap-2 mb-3 px-1">
             <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-purple-600" />
@@ -650,7 +650,7 @@ const Home: React.FC = () => {
                   onClick={() => navigate('/shouts')}
                   className="w-full flex items-center justify-between bg-[#1C1C2E] border border-white/8 hover:border-purple-500/40 rounded-[2rem] px-5 py-4 group active:scale-[0.98] transition-all"
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex flex-wrap items-center gap-3">
                     <div className="w-9 h-9 rounded-xl bg-purple-500/20 flex items-center justify-center text-lg">
                       📣
                     </div>
@@ -661,7 +661,7 @@ const Home: React.FC = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-1 text-purple-400 group-hover:translate-x-1 transition-transform">
+                  <div className="flex flex-wrap items-center gap-1 text-purple-400 group-hover:translate-x-1 transition-transform">
                     <span className="text-[10px] font-black uppercase tracking-widest">History</span>
                     <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7"/>
@@ -688,7 +688,7 @@ const Home: React.FC = () => {
             </div>
             <div className="space-y-3">
               {activities.slice(0, 5).map((act, i) => (
-                <div key={act.id || i} className="flex items-start gap-3">
+                <div key={act.id || i} className="flex flex-wrap items-start gap-3">
                   <span className="text-[9px] font-mono text-white/20 bg-white/5 px-2 py-1 rounded-lg shrink-0 mt-0.5">{act.time}</span>
                   <p className="text-xs text-white/50 leading-relaxed">
                     <span onClick={() => navigate(`/profile/${act.username}`)} className="font-black text-white/70 cursor-pointer hover:text-purple-300 transition-colors">{act.username}</span>{' '}
@@ -707,14 +707,14 @@ const Home: React.FC = () => {
         <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] shadow-xl shadow-purple-900/10 rounded-[2rem] p-5 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
           <div className="flex items-center justify-between mb-4 relative z-10">
-            <h3 className="text-[10px] font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-[0.2em] flex items-center gap-1.5">
+            <h3 className="text-[10px] font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-[0.2em] flex flex-wrap items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]" />
               Today's Highlights
             </h3>
             <span className="text-[8px] font-bold text-slate-500 uppercase tracking-widest bg-[#161b22] px-2 py-0.5 rounded-full border border-[#30363d]">Live 24H</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 relative z-10">
+          <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-3 relative z-10">
             {[
               { 
                 icon: '🏆', label: 'Top Shouter', value: topShouter.name, 
@@ -733,7 +733,7 @@ const Home: React.FC = () => {
               },
             ].map(item => (
               <button key={item.label} onClick={item.onClick}
-                className={`w-full flex items-center gap-3 p-3.5 rounded-2xl bg-[#161b22]/50 border border-[#30363d] transition-all duration-300 ${item.bg} text-left group`}>
+                className={`w-full flex flex-wrap items-center gap-3 p-3.5 rounded-2xl bg-[#161b22]/50 border border-[#30363d] transition-all duration-300 ${item.bg} text-left group`}>
                 <span className="text-2xl shrink-0 group-hover:scale-110 transition-transform">{item.icon}</span>
                 <div className="flex-1 min-w-0">
                   <p className="text-[8px] text-slate-400 font-bold uppercase tracking-widest mb-0.5">{item.label}</p>
@@ -757,7 +757,7 @@ const Home: React.FC = () => {
           return (
             <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] rounded-[2rem] p-5">
               <h3 className="text-[10px] font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-[0.2em] mb-4">👥 Suggested Users</h3>
-              <div className="flex gap-3 overflow-x-auto pb-2">
+              <div className="flex flex-wrap gap-3 overflow-x-auto pb-2">
                 {suggested.map(u => (
                   <button key={u.id} onClick={() => navigate(`/profile/${u.username}`)} className="w-28 p-3 text-center shrink-0 bg-[#1C1C2E] border border-white/5 rounded-2xl hover:border-purple-500/30 transition-all">
                     <img src={u.avatar} className="w-12 h-12 rounded-full mx-auto border-2 border-purple-500/30 mb-2 object-cover" alt="" />

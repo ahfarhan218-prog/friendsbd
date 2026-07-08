@@ -77,12 +77,12 @@ const ModernQuizCard: React.FC<ModernQuizCardProps> = ({
       {/* ── CARD HEADER ── */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="text-[10px] font-black font-mono px-2 py-0.5 bg-[#090d16] text-[#6366f1] border border-[#1f293d] rounded-lg">
               ID: {quiz.id?.substring(0, 5).toUpperCase() || 'NEW'}
             </span>
             {quiz.type === 'live' ? (
-              <span className="flex items-center gap-1 text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-md animate-pulse">
+              <span className="flex flex-wrap items-center gap-1 text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-md animate-pulse">
                 <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
                 Live Deck
               </span>
@@ -93,7 +93,7 @@ const ModernQuizCard: React.FC<ModernQuizCardProps> = ({
             )}
           </div>
 
-          <div className="flex items-center gap-1.5">
+          <div className="flex flex-wrap items-center gap-1.5">
             {quiz.isPinned && (
               <span className="text-amber-400 text-sm" title="Pinned to top">
                 📌
@@ -120,21 +120,21 @@ const ModernQuizCard: React.FC<ModernQuizCardProps> = ({
                       <button
                         type="button"
                         onClick={() => handleAction(() => onTogglePin(quiz))}
-                        className="px-3.5 py-2 text-left text-slate-300 hover:text-white hover:bg-[#1e293b] font-bold transition-all flex items-center gap-1.5"
+                        className="px-3.5 py-2 text-left text-slate-300 hover:text-white hover:bg-[#1e293b] font-bold transition-all flex flex-wrap items-center gap-1.5"
                       >
                         📍 {quiz.isPinned ? 'Unpin Quiz' : 'Pin Quiz'}
                       </button>
                       <button
                         type="button"
                         onClick={() => handleAction(() => onToggleStatus(quiz))}
-                        className="px-3.5 py-2 text-left text-slate-300 hover:text-white hover:bg-[#1e293b] font-bold transition-all flex items-center gap-1.5"
+                        className="px-3.5 py-2 text-left text-slate-300 hover:text-white hover:bg-[#1e293b] font-bold transition-all flex flex-wrap items-center gap-1.5"
                       >
                         {quiz.isClosed ? '🟢 Activate' : '🔴 Close Quiz'}
                       </button>
                       <button
                         type="button"
                         onClick={() => { setShowMenu(false); onEdit(quiz); }}
-                        className="px-3.5 py-2 text-left text-slate-300 hover:text-white hover:bg-[#1e293b] font-bold transition-all flex items-center gap-1.5"
+                        className="px-3.5 py-2 text-left text-slate-300 hover:text-white hover:bg-[#1e293b] font-bold transition-all flex flex-wrap items-center gap-1.5"
                       >
                         ✏️ Edit Config
                       </button>
@@ -142,7 +142,7 @@ const ModernQuizCard: React.FC<ModernQuizCardProps> = ({
                       <button
                         type="button"
                         onClick={() => handleAction(() => onDelete(quiz))}
-                        className="px-3.5 py-2 text-left text-rose-400 hover:text-rose-300 hover:bg-[#1e293b] font-bold transition-all flex items-center gap-1.5"
+                        className="px-3.5 py-2 text-left text-rose-400 hover:text-rose-300 hover:bg-[#1e293b] font-bold transition-all flex flex-wrap items-center gap-1.5"
                       >
                         🗑️ Delete Quiz
                       </button>
@@ -169,7 +169,7 @@ const ModernQuizCard: React.FC<ModernQuizCardProps> = ({
       <div className="mt-5 space-y-4 pt-3 border-t border-[#1f293d]/50">
         <div className="flex items-center justify-between text-[10px]">
           {/* Creator Profile */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex flex-wrap items-center gap-1.5">
             <img
               src={quiz.creatorAvatar}
               alt={quiz.creatorName}
@@ -184,9 +184,9 @@ const ModernQuizCard: React.FC<ModernQuizCardProps> = ({
           </span>
         </div>
 
-        <div className="flex items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           {/* Status Badges */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex flex-wrap items-center gap-1.5">
             {quiz.isClosed ? (
               <span className="px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-lg">
                 Closed
@@ -198,7 +198,7 @@ const ModernQuizCard: React.FC<ModernQuizCardProps> = ({
             )}
 
             {isCompleted && (
-              <span className="px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-lg flex items-center gap-0.5">
+              <span className="px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-lg flex flex-wrap items-center gap-0.5">
                 ✓ Passed
               </span>
             )}

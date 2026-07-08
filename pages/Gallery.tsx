@@ -41,7 +41,7 @@ const Gallery: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-2xl font-black text-white">📸 Gallery</h1>
@@ -78,14 +78,14 @@ const Gallery: React.FC = () => {
                 </div>
 
                 {selectedAlbum === album.id && (
-                  <div className="flex gap-2 mb-3">
+                  <div className="flex flex-wrap gap-2 mb-3">
                     <input className="pf-input flex-1" placeholder="Image URL..." value={photoUrl} onChange={e => setPhotoUrl(e.target.value)} />
                     <button onClick={handleAddPhoto} className="pf-btn pf-btn-primary shrink-0">Add</button>
                   </div>
                 )}
 
                 {album.photos?.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-4 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-2">
                     {album.photos.map((p: any, i: number) => (
                       <img key={i} src={p.url} className="w-full h-28 object-cover rounded-xl" alt="" onError={e => { (e.target as HTMLImageElement).src = 'https://placehold.co/200x150/1C1C2E/a78bfa?text=Photo'; }} />
                     ))}

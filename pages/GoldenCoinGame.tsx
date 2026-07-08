@@ -259,7 +259,7 @@ const GoldenCoinGame: React.FC = () => {
               <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">Network Status</p>
               
               {/* Daily Grab Counter */}
-              <div className="flex items-center justify-center gap-2 mb-5">
+              <div className="flex flex-wrap items-center justify-center gap-2 mb-5">
                 {Array.from({ length: DAILY_LIMIT }).map((_, i) => (
                   <motion.div
                     key={i}
@@ -364,7 +364,7 @@ const GoldenCoinGame: React.FC = () => {
          {/* PREMIUM RADAR TOOL */}
          {isOpen && (
            <div className="bg-[#161b22]/80 backdrop-blur-xl p-6 rounded-[2.5rem] shadow-xl border border-[#30363d]">
-              <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+              <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 flex flex-wrap items-center gap-2">
                  <span className="text-lg drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">📡</span> Premium Radar
               </h4>
               {isPremium ? (
@@ -412,7 +412,7 @@ const GoldenCoinGame: React.FC = () => {
                     animate={{ opacity: 1, x: 0 }}
                     className="flex items-center justify-between p-3 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-purple-500/30 transition-all group"
                   >
-                     <div className="flex items-center gap-3">
+                     <div className="flex flex-wrap items-center gap-3">
                         <img src={w.avatar} className="w-9 h-9 rounded-xl border border-white/10 shadow-sm group-hover:scale-105 group-hover:border-purple-500/50 transition-transform object-cover" alt="" />
                         <div>
                            <p className="text-xs font-black text-white group-hover:text-purple-300 transition-colors">{w.username}</p>
@@ -436,7 +436,7 @@ const GoldenCoinGame: React.FC = () => {
             <div className="pt-4 border-t border-white/5">
                 <button 
                 onClick={() => navigate('/coin-leaderboard')}
-                className="w-full py-2 text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-purple-400 transition-colors flex items-center justify-center gap-2 group"
+                className="w-full py-2 text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-purple-400 transition-colors flex flex-wrap items-center justify-center gap-2 group"
                 >
                 <span>View All-Time Rankings</span>
                 <span className="group-hover:translate-x-1 group-hover:drop-shadow-[0_0_10px_rgba(251,191,36,0.8)] transition-all">🏆</span>
@@ -457,7 +457,7 @@ const GoldenCoinGame: React.FC = () => {
                    { icon: '🔒', text: 'Max 5 grabs per user per day' },
                    { icon: '👑', text: 'Premium users see the countdown timer' },
                  ].map((item, i) => (
-                   <div key={i} className="flex items-start gap-3">
+                   <div key={i} className="flex flex-wrap items-start gap-3">
                      <span className="text-lg shrink-0 drop-shadow-md">{item.icon}</span>
                      <p className="text-[11px] text-slate-300 leading-relaxed font-medium">{item.text}</p>
                    </div>

@@ -47,7 +47,7 @@ const SilverCoinLeaderboard: React.FC = () => {
                   key={u.userId} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: idx * 0.05 }}
                   className="flex items-center justify-between p-4 bg-slate-50/50 rounded-[2rem] mb-2 border border-slate-100"
                >
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-wrap items-center gap-4">
                      <span className="w-6 text-[10px] font-black text-slate-400">#{idx + 1}</span>
                      <img src={u.avatar} className="w-10 h-10 rounded-xl shadow-sm border border-white" alt="" />
                      <div>

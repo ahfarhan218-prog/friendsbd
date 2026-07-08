@@ -47,14 +47,14 @@ const Support: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-120px)] md:h-[calc(100vh-64px)] bg-slate-50 w-full max-w-5xl mx-auto md:rounded-3xl md:border md:border-slate-100 md:shadow-sm">
-      <header className="bg-purple-700 text-white p-6 pb-12 rounded-b-[3rem] flex items-center gap-4 shrink-0">
+    <div className="flex flex-col h-[calc(100vh-120px)] md:h-[calc(100vh-64px)] bg-slate-50 w-full max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto md:rounded-3xl md:border md:border-slate-100 md:shadow-sm">
+      <header className="bg-purple-700 text-white p-6 pb-12 rounded-b-[3rem] flex flex-wrap items-center gap-4 shrink-0">
         <button onClick={() => navigate(-1)} className="p-2 bg-purple-600 rounded-full">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
         </button>
         <div>
           <h2 className="text-xl font-bold">Help & Support</h2>
-          <div className="flex items-center gap-1">
+          <div className="flex flex-wrap items-center gap-1">
             <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
             <p className="text-[10px] opacity-70">AI Assistant Online</p>
           </div>
@@ -75,7 +75,7 @@ const Support: React.FC = () => {
         ))}
         {loading && (
           <div className="flex justify-start">
-            <div className="bg-white p-4 rounded-3xl shadow-sm border border-slate-100 flex gap-2">
+            <div className="bg-white p-4 rounded-3xl shadow-sm border border-slate-100 flex flex-wrap gap-2">
               <span className="w-2 h-2 bg-purple-300 rounded-full animate-bounce"></span>
               <span className="w-2 h-2 bg-purple-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
               <span className="w-2 h-2 bg-purple-600 rounded-full animate-bounce [animation-delay:0.4s]"></span>
@@ -86,7 +86,7 @@ const Support: React.FC = () => {
       </div>
 
       <div className="p-4 bg-white border-t border-slate-100 shrink-0">
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <input 
             value={input}
             onChange={e => setInput(e.target.value)}

@@ -89,7 +89,7 @@ export const BBCodeParser: React.FC<BBCodeParserProps> = ({ rawText }) => {
           <Link
             key={index}
             to={linkUrl}
-            className="text-indigo-400 font-bold hover:underline transition-all inline-flex items-center gap-1 bg-[#121824]/30 px-2 py-0.5 rounded-lg border border-[#1f293d]"
+            className="text-indigo-400 font-bold hover:underline transition-all inline-flex flex-wrap items-center gap-1 bg-[#121824]/30 px-2 py-0.5 rounded-lg border border-[#1f293d]"
           >
             🔗 {linkText}
           </Link>
@@ -168,7 +168,7 @@ export const BBCodeParser: React.FC<BBCodeParserProps> = ({ rawText }) => {
         <Link
           key={index}
           to="/settings"
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#121824] hover:bg-slate-800 border border-[#1f293d] rounded-xl text-[10px] font-black uppercase tracking-wider text-slate-300 hover:text-white transition-all active:scale-95 mx-0.5 shadow-sm"
+          className="inline-flex flex-wrap items-center gap-1.5 px-3 py-1.5 bg-[#121824] hover:bg-slate-800 border border-[#1f293d] rounded-xl text-[10px] font-black uppercase tracking-wider text-slate-300 hover:text-white transition-all active:scale-95 mx-0.5 shadow-sm"
           title="Mood Status"
         >
           🎭 Mood
@@ -181,7 +181,7 @@ export const BBCodeParser: React.FC<BBCodeParserProps> = ({ rawText }) => {
         <Link
           key={index}
           to="/friends"
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#121824] hover:bg-slate-800 border border-[#1f293d] rounded-xl text-[10px] font-black uppercase tracking-wider text-slate-300 hover:text-white transition-all active:scale-95 mx-0.5 shadow-sm"
+          className="inline-flex flex-wrap items-center gap-1.5 px-3 py-1.5 bg-[#121824] hover:bg-slate-800 border border-[#1f293d] rounded-xl text-[10px] font-black uppercase tracking-wider text-slate-300 hover:text-white transition-all active:scale-95 mx-0.5 shadow-sm"
           title="Relationship"
         >
           💍 Relationship
@@ -194,7 +194,7 @@ export const BBCodeParser: React.FC<BBCodeParserProps> = ({ rawText }) => {
         <Link
           key={index}
           to="/shop"
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#121824] hover:bg-slate-800 border border-[#1f293d] rounded-xl text-[10px] font-black uppercase tracking-wider text-slate-300 hover:text-white transition-all active:scale-95 mx-0.5 shadow-sm"
+          className="inline-flex flex-wrap items-center gap-1.5 px-3 py-1.5 bg-[#121824] hover:bg-slate-800 border border-[#1f293d] rounded-xl text-[10px] font-black uppercase tracking-wider text-slate-300 hover:text-white transition-all active:scale-95 mx-0.5 shadow-sm"
           title="My Inventory"
         >
           🎒 Inventory
@@ -207,7 +207,7 @@ export const BBCodeParser: React.FC<BBCodeParserProps> = ({ rawText }) => {
         <Link
           key={index}
           to="/shop"
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#121824] hover:bg-slate-800 border border-[#1f293d] rounded-xl text-[10px] font-black uppercase tracking-wider text-slate-300 hover:text-white transition-all active:scale-95 mx-0.5 shadow-sm"
+          className="inline-flex flex-wrap items-center gap-1.5 px-3 py-1.5 bg-[#121824] hover:bg-slate-800 border border-[#1f293d] rounded-xl text-[10px] font-black uppercase tracking-wider text-slate-300 hover:text-white transition-all active:scale-95 mx-0.5 shadow-sm"
           title="Member Shop"
         >
           🏪 Shop
@@ -220,7 +220,7 @@ export const BBCodeParser: React.FC<BBCodeParserProps> = ({ rawText }) => {
         <Link
           key={index}
           to="/settings"
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#121824] hover:bg-slate-800 border border-[#1f293d] rounded-xl text-[10px] font-black uppercase tracking-wider text-slate-300 hover:text-white transition-all active:scale-95 mx-0.5 shadow-sm"
+          className="inline-flex flex-wrap items-center gap-1.5 px-3 py-1.5 bg-[#121824] hover:bg-slate-800 border border-[#1f293d] rounded-xl text-[10px] font-black uppercase tracking-wider text-slate-300 hover:text-white transition-all active:scale-95 mx-0.5 shadow-sm"
           title="Extended Settings"
         >
           ⚙️ Settings
@@ -233,7 +233,7 @@ export const BBCodeParser: React.FC<BBCodeParserProps> = ({ rawText }) => {
         <Link
           key={index}
           to="/support"
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#121824] hover:bg-slate-800 border border-[#1f293d] rounded-xl text-[10px] font-black uppercase tracking-wider text-slate-300 hover:text-white transition-all active:scale-95 mx-0.5 shadow-sm"
+          className="inline-flex flex-wrap items-center gap-1.5 px-3 py-1.5 bg-[#121824] hover:bg-slate-800 border border-[#1f293d] rounded-xl text-[10px] font-black uppercase tracking-wider text-slate-300 hover:text-white transition-all active:scale-95 mx-0.5 shadow-sm"
           title="Help Support"
         >
           🎧 Support
@@ -338,7 +338,7 @@ export const BBCodeParser: React.FC<BBCodeParserProps> = ({ rawText }) => {
         );
       }
       return (
-        <a key={index} href={url} target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:underline font-bold transition-all inline-flex items-center gap-1">
+        <a key={index} href={url} target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:underline font-bold transition-all inline-flex flex-wrap items-center gap-1">
           {renderRecursive(text)} 🔗
         </a>
       );

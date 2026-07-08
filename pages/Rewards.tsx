@@ -71,7 +71,7 @@ const Rewards: React.FC = () => {
         <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#0B0B1A] to-transparent" />
         <div className="absolute top-8 right-4 w-24 h-24 bg-purple-600/10 rounded-full blur-3xl" />
         <div className="relative z-10 flex items-center justify-between">
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <button onClick={() => navigate(-1)} className="p-2 bg-black/20 rounded-full backdrop-blur-sm active:scale-90 transition-transform">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
             </button>
@@ -80,8 +80,8 @@ const Rewards: React.FC = () => {
               <p className="text-[10px] opacity-70 uppercase tracking-widest font-bold">Earn & Redeem Points</p>
             </div>
           </div>
-          <div className="flex gap-2">
-            <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-2xl flex items-center gap-2 border border-white/10">
+          <div className="flex flex-wrap gap-2">
+            <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-2xl flex flex-wrap items-center gap-2 border border-white/10">
               <span className="text-yellow-400 text-sm">💰</span>
               <span className="font-black text-sm">{user.points}</span>
             </div>
@@ -100,20 +100,20 @@ const Rewards: React.FC = () => {
             <div className="w-12 h-12 bg-amber-500/10 rounded-2xl flex items-center justify-center text-2xl">🎁</div>
           </div>
           <button onClick={handleCheckIn} disabled={checkedIn}
-            className={`w-full py-4 rounded-2xl font-black text-sm flex items-center justify-center gap-2 transition-all shadow-lg ${
+            className={`w-full py-4 rounded-2xl font-black text-sm flex flex-wrap items-center justify-center gap-2 transition-all shadow-lg ${
               checkedIn ? 'bg-[#161b22] text-white/30 shadow-none cursor-not-allowed border border-white/5' : 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-900/30 hover:opacity-90 active:scale-[0.98]'}`}>
             {checkedIn ? 'CHECKED IN TODAY' : 'CLAIM DAILY +20 COINS'}
           </button>
         </div>
 
         {/* Tabs */}
-        <div className="bg-[#1C1C2E] p-2 rounded-[2rem] border border-white/5 grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <div className="bg-[#1C1C2E] p-2 rounded-[2rem] border border-white/5 grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-2">
           <button onClick={() => setActiveTab('earn')}
-            className={`py-3 rounded-2xl text-xs font-black transition-all flex items-center justify-center gap-2 ${activeTab === 'earn' ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-900/30' : 'text-white/40 hover:bg-[#161b22]'}`}>
+            className={`py-3 rounded-2xl text-xs font-black transition-all flex flex-wrap items-center justify-center gap-2 ${activeTab === 'earn' ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-900/30' : 'text-white/40 hover:bg-[#161b22]'}`}>
             <span>⭐</span> EARN POINTS
           </button>
           <button onClick={() => setActiveTab('redeem')}
-            className={`py-3 rounded-2xl text-xs font-black transition-all flex items-center justify-center gap-2 ${activeTab === 'redeem' ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-900/30' : 'text-white/40 hover:bg-[#161b22]'}`}>
+            className={`py-3 rounded-2xl text-xs font-black transition-all flex flex-wrap items-center justify-center gap-2 ${activeTab === 'redeem' ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-900/30' : 'text-white/40 hover:bg-[#161b22]'}`}>
             <span>🎁</span> REDEEM SHOP
           </button>
         </div>
@@ -129,7 +129,7 @@ const Rewards: React.FC = () => {
               <div className="space-y-5">
                 {earnTasks.map((task) => (
                   <div key={task.id} className="flex items-center justify-between group">
-                    <div className="flex items-center gap-4">
+                    <div className="flex flex-wrap items-center gap-4">
                       <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-xl ${task.color} shadow-sm group-hover:scale-110 transition-transform`}>
                         {task.icon}
                       </div>
@@ -149,7 +149,7 @@ const Rewards: React.FC = () => {
             <div className="space-y-6">
               <div className="flex items-center justify-between mb-2">
                 <h4 className="text-xs font-black text-white/50 uppercase tracking-widest">Redeem Rewards</h4>
-                <div className="flex items-center gap-1">
+                <div className="flex flex-wrap items-center gap-1">
                   <span className="text-[10px] text-white/40">Balance:</span>
                   <span className="text-[10px] font-black text-amber-500">💰 {user.points}</span>
                 </div>
@@ -160,7 +160,7 @@ const Rewards: React.FC = () => {
                   const canAfford = user.points >= item.cost;
                   return (
                     <div key={item.id} className={`p-4 rounded-3xl border transition-all flex items-center justify-between ${isOwned ? 'bg-[#161b22] border-white/5 opacity-60' : 'bg-[#1C1C2E] border-white/5 hover:border-purple-500/30'}`}>
-                      <div className="flex items-center gap-4">
+                      <div className="flex flex-wrap items-center gap-4">
                         <div className="w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center text-2xl">
                           {item.icon}
                         </div>

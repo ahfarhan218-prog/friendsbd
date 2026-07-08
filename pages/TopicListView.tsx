@@ -196,9 +196,9 @@ const TopicListView: React.FC = () => {
       <div className="absolute bottom-20 left-0 w-80 h-80 bg-purple-600/4 rounded-full blur-[100px] pointer-events-none" />
 
       {/* HEADER */}
-      <header className="sticky top-0 z-40 p-4 max-w-5xl mx-auto">
+      <header className="sticky top-0 z-40 p-4 max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto">
         <div className="bg-slate-950/70 backdrop-blur-xl border border-[#1f293d]/60 rounded-3xl px-5 py-4 flex items-center justify-between shadow-2xl">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={() => navigate('/forum')}
               className="p-2.5 bg-[#121824] hover:bg-slate-800 border border-[#1f293d] rounded-2xl text-slate-400 hover:text-white transition-all active:scale-95"
@@ -208,7 +208,7 @@ const TopicListView: React.FC = () => {
               </svg>
             </button>
             <div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 {category && (
                   <span className={`w-7 h-7 rounded-lg bg-gradient-to-tr ${catGradient} flex items-center justify-center text-sm shrink-0`}>
                     {category.icon || '📁'}
@@ -223,18 +223,18 @@ const TopicListView: React.FC = () => {
           </div>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black text-[10px] uppercase tracking-widest rounded-2xl shadow-lg shadow-indigo-600/25 transition-all active:scale-[0.97] flex items-center gap-1.5"
+            className="px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black text-[10px] uppercase tracking-widest rounded-2xl shadow-lg shadow-indigo-600/25 transition-all active:scale-[0.97] flex flex-wrap items-center gap-1.5"
           >
             <span className="text-sm leading-none">+</span> New Topic
           </button>
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-4 mt-4 space-y-4">
+      <main className="max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto px-4 mt-4 space-y-4">
 
         {/* Category description */}
         {category?.description && (
-          <div className="bg-[#121824]/60 border border-[#1f293d]/40 rounded-2xl px-4 py-3 flex items-center gap-3">
+          <div className="bg-[#121824]/60 border border-[#1f293d]/40 rounded-2xl px-4 py-3 flex flex-wrap items-center gap-3">
             <span className="text-indigo-400 text-sm shrink-0">ℹ️</span>
             <p className="text-[11px] text-slate-400 font-medium">{category.description}</p>
           </div>
@@ -242,14 +242,14 @@ const TopicListView: React.FC = () => {
 
         {/* Controls bar */}
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="text-[10px] text-slate-500 font-bold">
               {loading ? '...' : `${sortedThreads.length} topic${sortedThreads.length !== 1 ? 's' : ''}`}
             </span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="text-[10px] text-slate-500 font-bold uppercase">Sort:</span>
-            <div className="flex gap-1">
+            <div className="flex flex-wrap gap-1">
               {(['newest', 'oldest', 'mostReplies', 'pinned'] as SortMode[]).map(mode => (
                 <button
                   key={mode}
@@ -273,7 +273,7 @@ const TopicListView: React.FC = () => {
           {loading ? (
             <div className="p-8 space-y-4">
               {[1,2,3,4].map(i => (
-                <div key={i} className="flex items-center gap-4">
+                <div key={i} className="flex flex-wrap items-center gap-4">
                   <div className="w-11 h-11 bg-slate-800 rounded-2xl animate-pulse shrink-0" />
                   <div className="flex-1 space-y-2">
                     <div className="h-3 bg-slate-800 rounded-full animate-pulse w-3/4" />
@@ -303,9 +303,9 @@ const TopicListView: React.FC = () => {
                   animate={{ opacity: 1 }}
                   transition={{ delay: i * 0.03 }}
                   onClick={() => navigate(`/forum/thread/${thread.id}`)}
-                  className="px-5 py-4 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-900/40 transition-colors group"
+                  className="px-5 py-4 flex flex-wrap items-center justify-between gap-4 cursor-pointer hover:bg-slate-900/40 transition-colors group"
                 >
-                  <div className="flex items-center gap-4 min-w-0">
+                  <div className="flex flex-wrap items-center gap-4 min-w-0">
                     {/* Status icon */}
                     <div className={`w-10 h-10 rounded-2xl flex items-center justify-center text-base shrink-0 transition-transform group-hover:scale-105 ${
                       thread.isLocked ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20' :
@@ -332,7 +332,7 @@ const TopicListView: React.FC = () => {
                       <h4 className="text-sm font-black text-white group-hover:text-indigo-400 transition-colors truncate leading-snug">
                         {thread.title}
                       </h4>
-                      <div className="flex items-center gap-2 mt-1">
+                      <div className="flex flex-wrap items-center gap-2 mt-1">
                         <p className="text-[10px] text-slate-500 font-semibold">
                           by <span className="text-slate-400">@{thread.authorName}</span>
                         </p>
@@ -349,7 +349,7 @@ const TopicListView: React.FC = () => {
                   </div>
 
                   {/* Stats */}
-                  <div className="flex items-center gap-4 shrink-0">
+                  <div className="flex flex-wrap items-center gap-4 shrink-0">
                     <div className="text-center hidden sm:block">
                       <span className="text-xs font-black text-white block">{thread.views || 0}</span>
                       <span className="text-[8px] font-bold text-slate-600 uppercase tracking-wider">Views</span>
@@ -452,9 +452,9 @@ const TopicListView: React.FC = () => {
 
                 {/* Staff controls */}
                 {isStaff && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-[#090d16] border border-amber-500/20 p-4 rounded-2xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3 bg-[#090d16] border border-amber-500/20 p-4 rounded-2xl">
                     <label className="flex items-center justify-between cursor-pointer">
-                      <span className="text-[10px] font-bold text-amber-400 uppercase flex items-center gap-1.5">📌 Pin Topic</span>
+                      <span className="text-[10px] font-bold text-amber-400 uppercase flex flex-wrap items-center gap-1.5">📌 Pin Topic</span>
                       <div
                         onClick={() => setIsPinned(!isPinned)}
                         className={`w-10 h-6 rounded-full transition-all cursor-pointer relative ${isPinned ? 'bg-amber-500' : 'bg-slate-700'}`}
@@ -463,7 +463,7 @@ const TopicListView: React.FC = () => {
                       </div>
                     </label>
                     <label className="flex items-center justify-between cursor-pointer">
-                      <span className="text-[10px] font-bold text-rose-400 uppercase flex items-center gap-1.5">🔒 Lock Topic</span>
+                      <span className="text-[10px] font-bold text-rose-400 uppercase flex flex-wrap items-center gap-1.5">🔒 Lock Topic</span>
                       <div
                         onClick={() => setIsLocked(!isLocked)}
                         className={`w-10 h-6 rounded-full transition-all cursor-pointer relative ${isLocked ? 'bg-rose-500' : 'bg-slate-700'}`}
@@ -475,12 +475,12 @@ const TopicListView: React.FC = () => {
                 )}
 
                 {/* Actions */}
-                <div className="flex gap-3 pt-1">
+                <div className="flex flex-wrap gap-3 pt-1">
                   <button type="button" disabled={isSubmitting} onClick={() => setIsModalOpen(false)}
                     className="w-1/3 py-3.5 border border-[#1f293d] hover:bg-slate-800 text-slate-400 hover:text-white font-bold text-xs uppercase tracking-widest rounded-2xl transition-all"
                   >Cancel</button>
                   <button type="submit" disabled={isSubmitting || !newTitle.trim() || !newContent.trim()}
-                    className="flex-1 py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 disabled:opacity-50 text-white font-black text-xs uppercase tracking-widest rounded-2xl shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+                    className="flex flex-wrap-1 py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 disabled:opacity-50 text-white font-black text-xs uppercase tracking-widest rounded-2xl shadow-lg transition-all active:scale-[0.98] flex flex-wrap items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <><div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" /> Publishing...</>
