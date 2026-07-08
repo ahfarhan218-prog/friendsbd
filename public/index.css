@@ -1,48 +1,87 @@
 /* ═══════════════════════════════════════════════════════
-   GLOBAL VIEWPORT SAFETY — LAYER 0
+   GLOBAL VIEWPORT SAFETY — LAYER 0 (FIXED)
    ═══════════════════════════════════════════════════════ */
-html {
+html, body, #root {
   width: 100%;
-  max-width: 100vw;
-  overflow-x: hidden;
-  -webkit-text-size-adjust: 100%;
-}
-body {
-  width: 100%;
-  max-width: 100vw;
-  overflow-x: hidden;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
-#root {
-  width: 100%;
-  max-width: 100vw;
+
+html {
+  /* overflow-x hidden করা হয়েছে যাতে ডানদিকের অতিরিক্ত অংশ পেজকে না কাঁপায় */
   overflow-x: hidden;
-  min-height: 100vh;
+  -webkit-text-size-adjust: 100%;
+  height: 100%;
 }
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  background-color: #f8fafc;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ইমেজের মডার্ন রেসপন্সিভনেস */
 img {
   max-width: 100%;
   height: auto;
+  object-fit: contain;
 }
+
+/* ইনপুট এলিমেন্টগুলো যেন স্ক্রিনের বাইরে না যায় */
 button, input, textarea, select {
   max-width: 100%;
+  box-sizing: border-box;
 }
+
+/* গ্লোবাল টেবিল ফিক্স (রিসেট করা হয়েছে যাতে ড্যাশবোর্ড না ভাঙে) */
 table {
-  display: block;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* ওভারফ্লো আটকাতে কন্টেইনার ক্লাস */
+.table-responsive {
+  width: 100%;
   overflow-x: auto;
-  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ═══════════════════════════════════════════════════════
-   RESPONSIVE UTILITY CLASSES — LAYER 1
+   RESPONSIVE UTILITY CLASSES — LAYER 1 (ENHANCED)
    ═══════════════════════════════════════════════════════ */
-@media (max-width: 480px) {
-  .responsive-pad { padding-left: 0.75rem; padding-right: 0.75rem; }
-  .responsive-gap { gap: 0.375rem; }
-  .responsive-text-xs { font-size: 0.625rem; }
-  .responsive-stack { flex-direction: column; }
-  .scroll-x-mobile { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+@media (max-width: 640px) {
+  .responsive-pad { 
+    padding-left: 1rem !important; 
+    padding-right: 1rem !important; 
+  }
+  .responsive-gap { 
+    gap: 0.5rem !important; 
+  }
+  .responsive-text-xs { 
+    font-size: 0.75rem !important; 
+  }
+  /* ফ্লেক্সবক্সকে মোবাইলে নিচে নিচে নিয়ে আসার জন্য */
+  .responsive-stack { 
+    flex-direction: column !important; 
+  }
+  .scroll-x-mobile { 
+    overflow-x: auto !important; 
+    -webkit-overflow-scrolling: touch; 
+    white-space: nowrap;
+  }
 }
-@media (min-width: 481px) {
-  .responsive-pad { padding-left: 1.5rem; padding-right: 1.5rem; }
+
+@media (min-width: 641px) {
+  .responsive-pad { 
+    padding-left: 1.5rem !important; 
+    padding-right: 1.5rem !important; 
+  }
 }
