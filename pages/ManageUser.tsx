@@ -19,6 +19,7 @@ const AdminUserManagement: React.FC = () => {
   const [silverCoins, setSilverCoins] = useState('0');
   const [takaBalance, setTakaBalance] = useState('0');
   const [selectedRole, setSelectedRole] = useState('user');
+  const [badges, setBadges] = useState<string[]>([]);
 
   // Restrictions States
   const [banStates, setBanStates] = useState({
@@ -65,6 +66,7 @@ const AdminUserManagement: React.FC = () => {
           setSilverCoins(userData.silverPoints?.toString() || '0');
           setTakaBalance(userData.balance_taka?.toString() || '0');
           setSelectedRole(userData.user_role || userData.role || 'user');
+          setBadges(userData.badges || []);
           setStrikes(userData.strikes || 0);
           setBanStates({
             fullBan: !!userData.isBanned,
@@ -123,6 +125,20 @@ const AdminUserManagement: React.FC = () => {
     const newState = !isActive;
     setBanStates(prev => ({ ...prev, [key]: newState }));
     await handleAdminUpdate({ [dbField]: newState });
+  };
+
+  const handleToggleBadge = async (badgeId: string) => {
+    if (!reason.trim()) {
+      triggerToast({ id: 'err-reason', type: 'SYSTEM', message: 'Action Reason is required!', senderId: 'sys', senderName: 'System', timestamp: Date.now(), isRead: true });
+      return;
+    }
+    const hasBadge = badges.includes(badgeId);
+    const updatedBadges = hasBadge 
+      ? badges.filter(b => b !== badgeId)
+      : [...badges, badgeId];
+    
+    setBadges(updatedBadges);
+    await handleAdminUpdate({ badges: updatedBadges });
   };
 
   const issueStrike = async () => {
@@ -479,26 +495,123 @@ const AdminUserManagement: React.FC = () => {
                 </div>
               </div>
 
-              {/* SYSTEM ROLE SHIFT */}
+              {/* 🌟 GROUP 1: GENERAL & VIP TIERS */}
               <div className="bg-[#1C1C2E] border border-white/5 rounded-2xl p-4 sm:p-5 space-y-4">
                 <h4 className="text-sm sm:text-base font-black text-white/60 uppercase tracking-widest flex items-center gap-2">
-                  🛡️ System Role Shift
+                  👥 General & VIP Tiers
                 </h4>
-                <div className="flex flex-wrap gap-2.5">
-                  {['starter', 'user', 'trusted_member', 'premium', 'moderator', 'admin'].map((role) => (
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                  {[
+                    { id: 'starter', label: 'Starter' },
+                    { id: 'user', label: 'User' },
+                    { id: 'trusted_member', label: 'Trusted Member' },
+                    { id: 'veteran_member', label: 'Veteran Member' },
+                    { id: 'premium', label: 'Premium' },
+                    { id: 'elite_vip', label: 'Elite VIP' }
+                  ].map((role) => (
                     <button
-                      key={role}
-                      type="button"
-                      onClick={() => setSelectedRole(role)}
-                      className={`px-4 py-3 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider transition-all flex-1 min-w-[120px] ${selectedRole === role ? 'bg-indigo-600 text-white border border-indigo-400/30 shadow-[0_0_15px_rgba(79,70,229,0.3)]' : 'bg-[#11111E] text-white/40 border border-white/5 hover:border-white/10'}`}
+                      key={role.id}
+                      onClick={() => handleAdminUpdate({ user_role: role.id })}
+                      className={`min-h-[44px] py-2.5 px-3 rounded-xl text-sm font-black uppercase tracking-wider transition-all border ${
+                        selectedRole === role.id 
+                          ? 'bg-white/10 text-white border-white/30 shadow-inner' 
+                          : 'bg-[#11111E] text-white/40 border-white/5 hover:bg-white/5'
+                      }`}
                     >
-                      {role.replace('_', ' ')}
+                      {role.label}
                     </button>
                   ))}
                 </div>
-                <button onClick={() => handleAdminUpdate({ user_role: selectedRole })} className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-black text-sm sm:text-base uppercase tracking-wider py-3.5 rounded-xl active:scale-[0.98] transition-all mt-4">
-                  Apply Role Shift
-                </button>
+              </div>
+
+              {/* 🛡️ GROUP 2: MODERATION TEAM */}
+              <div className="bg-[#1C1C2E] border border-indigo-500/20 rounded-2xl p-4 sm:p-5 space-y-4 shadow-[0_0_20px_rgba(79,70,229,0.05)]">
+                <h4 className="text-sm sm:text-base font-black text-indigo-400 uppercase tracking-widest flex items-center gap-2">
+                  🛡️ Moderation Team
+                </h4>
+                <div className="grid grid-cols-2 gap-2.5">
+                  {[
+                    { id: 'junior_moderator', label: '🟢 Jr. Moderator' },
+                    { id: 'moderator', label: '🔵 Moderator' },
+                    { id: 'senior_moderator', label: '🟡 Sr. Moderator' },
+                    { id: 'head_moderator', label: '🔥 Head Moderator' },
+                    { id: 'admin', label: '👑 Admin' }
+                  ].map((role) => (
+                    <button
+                      key={role.id}
+                      onClick={() => handleAdminUpdate({ user_role: role.id })}
+                      className={`min-h-[44px] py-2.5 px-3 rounded-xl text-sm font-black uppercase tracking-wider transition-all border ${
+                        selectedRole === role.id 
+                          ? 'bg-indigo-600/20 text-indigo-300 border-indigo-500/50 shadow-[0_0_15px_rgba(99,102,241,0.3)]' 
+                          : 'bg-[#11111E] text-indigo-200/40 border-indigo-500/10 hover:border-indigo-500/30'
+                      }`}
+                    >
+                      {role.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* ⚡ GROUP 3: FUNCTIONAL STAFF */}
+              <div className="bg-[#1C1C2E] border border-amber-500/20 rounded-2xl p-4 sm:p-5 space-y-4 shadow-[0_0_20px_rgba(245,158,11,0.05)]">
+                <h4 className="text-sm sm:text-base font-black text-amber-400 uppercase tracking-widest flex items-center gap-2">
+                  ⚡ Functional Staff
+                </h4>
+                <div className="grid grid-cols-2 gap-2.5">
+                  {[
+                    { id: 'content_creator', label: '✍️ Content Creator' },
+                    { id: 'event_organizer', label: '🏏 Event Organizer' },
+                    { id: 'support_staff', label: '🛠️ Support Staff' },
+                    { id: 'system_bot', label: '🤖 System Bot' }
+                  ].map((role) => (
+                    <button
+                      key={role.id}
+                      onClick={() => handleAdminUpdate({ user_role: role.id })}
+                      className={`min-h-[44px] py-2.5 px-3 rounded-xl text-sm font-black uppercase tracking-wider transition-all border ${
+                        selectedRole === role.id 
+                          ? 'bg-amber-600/20 text-amber-300 border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.3)]' 
+                          : 'bg-[#11111E] text-amber-200/40 border-amber-500/10 hover:border-amber-500/30'
+                      }`}
+                    >
+                      {role.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* 🎮 GROUP 4: GAMIFIED BADGES */}
+              <div className="bg-[#1C1C2E] border border-emerald-500/20 rounded-2xl p-4 sm:p-5 space-y-4 shadow-[0_0_20px_rgba(16,185,129,0.05)]">
+                <h4 className="text-sm sm:text-base font-black text-emerald-400 uppercase tracking-widest flex items-center gap-2">
+                  🎮 Gamified Badges
+                </h4>
+                <div className="grid grid-cols-2 gap-2.5">
+                  {[
+                    { id: 'prediction_master', label: '🔮 Prediction Master' },
+                    { id: 'league_champion', label: '🥇 League Champion' },
+                    { id: 'shout_king', label: '💥 Shout King' },
+                    { id: 'night_owl', label: '🌙 Night Owl' },
+                    { id: 'coin_tycoon', label: '💎 Coin Tycoon' },
+                    { id: 'verified_merchant', label: '🛡️ Verified Merchant' }
+                  ].map((badge) => {
+                    const isActive = badges.includes(badge.id);
+                    return (
+                      <button
+                        key={badge.id}
+                        onClick={() => handleToggleBadge(badge.id)}
+                        className={`min-h-[44px] py-2.5 px-3 rounded-xl text-sm font-black transition-all border flex flex-col items-center justify-center gap-1 ${
+                          isActive 
+                            ? 'bg-emerald-600/20 text-emerald-300 border-emerald-500/50 shadow-[0_0_10px_rgba(16,185,129,0.2)]' 
+                            : 'bg-[#11111E] text-white/40 border-white/5 hover:border-emerald-500/30 hover:text-emerald-400/60'
+                        }`}
+                      >
+                        <span>{badge.label}</span>
+                        <span className={`text-[10px] sm:text-xs uppercase tracking-widest px-2 py-0.5 rounded-full ${isActive ? 'bg-emerald-500 text-[#090d16]' : 'bg-white/10'}`}>
+                          {isActive ? 'ENABLED' : 'DISABLED'}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </motion.div>
           )}

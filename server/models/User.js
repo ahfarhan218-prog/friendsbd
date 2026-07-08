@@ -31,7 +31,16 @@ const userSchema = new mongoose.Schema({
   strikes: { type: Number, default: 0 },
   isBot: { type: Boolean, default: false },
   role: { type: String, enum: ['admin', 'moderator', 'user'], default: 'user' },
-  user_role: { type: String, enum: ['staff', 'admin', 'user', 'trusted_member', 'starter', 'premium', 'moderator'], default: 'user' },
+  user_role: { 
+    type: String, 
+    enum: [
+      'staff', 'admin', 'user', 'trusted_member', 'starter', 'veteran_member', 'premium', 'elite_vip',
+      'junior_moderator', 'moderator', 'senior_moderator', 'head_moderator',
+      'content_creator', 'event_organizer', 'support_staff', 'system_bot'
+    ], 
+    default: 'user' 
+  },
+  badges: [{ type: String }],
   profile_url: String,
   total_rp: { type: Number, default: 0 },
   total_plusses: { type: Number, default: 0 },
