@@ -1,7 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { mongoService, API_BASE } from '../services/mongoService';
+import { triggerToast } from '../components/NotificationToast';
 
 const AdminUserManagement: React.FC = () => {
+  const { userId } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [targetUser, setTargetUser] = useState<any>(null);
+
   const [reason, setReason] = useState('');
   const [plusses, setPlusses] = useState('0');
   const [goldCoins, setGoldCoins] = useState('0');
@@ -19,7 +26,7 @@ const AdminUserManagement: React.FC = () => {
   });
 
   // Automated Strike System
-  const [strikes, setStrikes] = useState(1);
+  const [strikes, setStrikes] = useState(0);
 
   // 2FA Security
   const [disable2FAConfirm, setDisable2FAConfirm] = useState(false);
@@ -27,19 +34,140 @@ const AdminUserManagement: React.FC = () => {
   // Direct System Notice
   const [systemNotice, setSystemNotice] = useState('');
 
-  // Mock Active Devices
-  const activeDevices = [
-    { id: 1, os: 'Windows 11', browser: 'Chrome', ip: '192.168.1.45', loc: 'Dhaka, BD', time: 'Active now' },
-    { id: 2, os: 'iOS 17', browser: 'Safari', ip: '103.45.67.12', loc: 'Chittagong, BD', time: 'Last seen 2h ago' }
-  ];
+  // Active Devices
+  const [activeSession, setActiveSession] = useState(false);
 
-  // Mock Activity Timeline
-  const activityTimeline = [
-    { id: 101, time: '10:24 AM', desc: 'Reacted ❤️ to shout #142' },
-    { id: 102, time: '09:15 AM', desc: 'Sent PM to @himu' },
-    { id: 103, time: '08:45 AM', desc: 'Purchased Elite Badge (30 days)' },
-    { id: 104, time: 'Yesterday', desc: 'Logged in via Chrome (Windows 11)' },
-  ];
+  // Activity Timeline
+  const [activityTimeline, setActivityTimeline] = useState<any[]>([]);
+
+  useEffect(() => {
+    let active = true;
+    const loadUser = async () => {
+      if (!userId) return;
+      try {
+        const res = await fetch(`${API_BASE}/users/${userId}`);
+        if (!res.ok) throw new Error('User not found');
+        const userData = await res.json();
+        
+        if (active) {
+          setTargetUser(userData);
+          setPlusses(userData.plusses?.toString() || '0');
+          setGoldCoins(userData.goldenCoins?.toString() || '0');
+          setSilverCoins(userData.silverPoints?.toString() || '0');
+          setTakaBalance(userData.balance_taka?.toString() || '0');
+          setSelectedRole(userData.user_role || userData.role || 'user');
+          setStrikes(userData.strikes || 0);
+          setBanStates({
+            fullBan: !!userData.isBanned,
+            pmBan: !!userData.pmBan,
+            shoutBan: !!userData.shoutBan,
+            chatBan: !!userData.chatBan,
+            shadowBan: !!userData.isShadowBanned,
+          });
+          setActiveSession(!!userData.sessionToken);
+
+          // Fetch activities
+          const username = userData.username || userData.name;
+          if (username) {
+             const acts = await mongoService.getUserActivities(username);
+             setActivityTimeline(acts);
+          }
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error(err);
+        if (active) setLoading(false);
+      }
+    };
+    loadUser();
+    return () => { active = false; };
+  }, [userId]);
+
+  const handleAdminUpdate = async (updates: any) => {
+    if (!reason.trim()) {
+      triggerToast({ id: 'err-reason', type: 'SYSTEM', message: 'Action Reason is required!', senderId: 'sys', senderName: 'System', timestamp: Date.now(), isRead: true });
+      return;
+    }
+    const res = await mongoService.adminUpdateUser(targetUser.id, updates);
+    if (res) {
+      setTargetUser(res);
+      triggerToast({ id: `ok-${Date.now()}`, type: 'SYSTEM', message: 'User updated successfully.', senderId: 'sys', senderName: 'System', timestamp: Date.now(), isRead: true });
+    } else {
+      triggerToast({ id: `err-${Date.now()}`, type: 'SYSTEM', message: 'Failed to update user.', senderId: 'sys', senderName: 'System', timestamp: Date.now(), isRead: true });
+    }
+  };
+
+  const handleToggleBan = async (key: string, dbField: string) => {
+    if (!reason.trim()) {
+      triggerToast({ id: 'err-reason', type: 'SYSTEM', message: 'Action Reason is required!', senderId: 'sys', senderName: 'System', timestamp: Date.now(), isRead: true });
+      return;
+    }
+    const isActive = (banStates as any)[key];
+    const newState = !isActive;
+    setBanStates(prev => ({ ...prev, [key]: newState }));
+    await handleAdminUpdate({ [dbField]: newState });
+  };
+
+  const issueStrike = async () => {
+    if (!reason.trim()) {
+      triggerToast({ id: 'err-reason', type: 'SYSTEM', message: 'Action Reason is required!', senderId: 'sys', senderName: 'System', timestamp: Date.now(), isRead: true });
+      return;
+    }
+    const newStrikes = Math.min(strikes + 1, 3);
+    setStrikes(newStrikes);
+    await handleAdminUpdate({ strikes: newStrikes });
+  };
+
+  const forceLogout = async () => {
+    if (!reason.trim()) {
+      triggerToast({ id: 'err-reason', type: 'SYSTEM', message: 'Action Reason is required!', senderId: 'sys', senderName: 'System', timestamp: Date.now(), isRead: true });
+      return;
+    }
+    const success = await mongoService.forceLogoutUser(targetUser.id);
+    if (success) {
+      setActiveSession(false);
+      triggerToast({ id: 'logout', type: 'SYSTEM', message: 'User forcefully logged out.', senderId: 'sys', senderName: 'System', timestamp: Date.now(), isRead: true });
+    }
+  };
+
+  const injectAlert = async () => {
+    if (!systemNotice.trim()) return;
+    const success = await mongoService.sendSystemNotice(targetUser.id, systemNotice);
+    if (success) {
+      setSystemNotice('');
+      triggerToast({ id: 'alert', type: 'SYSTEM', message: 'System alert injected successfully.', senderId: 'sys', senderName: 'System', timestamp: Date.now(), isRead: true });
+    }
+  };
+
+  function timeAgo(ts: number) {
+    if (!ts) return 'Unknown';
+    const s = Math.floor((Date.now() - ts) / 1000);
+    if (s < 60) return 'Just now';
+    if (s < 3600) return `${Math.floor(s / 60)}m ago`;
+    if (s < 86400) return `${Math.floor(s / 3600)}h ago`;
+    return `${Math.floor(s / 86400)}d ago`;
+  }
+
+  function formatTime(seconds: number) {
+    if (!seconds) return '0m';
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    if (h > 0) return `${h}h ${m}m`;
+    return `${m}m`;
+  }
+
+  if (loading) {
+    return <div className="min-h-screen bg-[#0F0F1A] flex items-center justify-center text-white font-black animate-pulse">LOADING USER DATA...</div>;
+  }
+
+  if (!targetUser) {
+    return (
+      <div className="min-h-screen bg-[#0F0F1A] flex flex-col items-center justify-center text-white gap-4">
+        <h2 className="text-xl font-black text-red-500">USER NOT FOUND</h2>
+        <Link to="/admin" className="px-4 py-2 bg-white/10 rounded-xl hover:bg-white/20 transition-all">Go Back</Link>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#0F0F1A] text-white pb-12 font-inter w-full overflow-x-hidden text-sm sm:text-base">
@@ -53,7 +181,7 @@ const AdminUserManagement: React.FC = () => {
             <h1 className="text-xl sm:text-2xl font-black tracking-tight uppercase">Admin Control Panel</h1>
           </div>
           <div className="flex flex-wrap items-center gap-2 text-sm text-white/70 bg-white/5 border border-white/10 px-3 py-2 rounded-xl w-fit">
-            <span>Logged in as <span className="text-purple-400 font-bold">@himu</span></span>
+            <span>Managing <span className="text-purple-400 font-bold">@{targetUser.username || targetUser.name}</span></span>
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-[11px] bg-red-500/20 text-red-400 font-black px-2 py-0.5 rounded uppercase tracking-wider">RBAC Active</span>
           </div>
@@ -65,11 +193,15 @@ const AdminUserManagement: React.FC = () => {
 
         {/* TOP SUB-NAV BAR */}
         <div className="grid grid-cols-3 gap-2 bg-[#1C1C2E] border border-white/5 p-1.5 rounded-2xl">
-          {['📊 Dashboard', '🔧 User Tools', '📋 Audit Log'].map((tab, idx) => (
-            <button key={tab} className={`py-2.5 text-sm sm:text-base font-black rounded-xl text-center transition-all ${idx === 1 ? 'bg-purple-600 text-white' : 'text-white/40 hover:text-white/70'}`}>
-              {tab.split(' ')[1] || tab}
-            </button>
-          ))}
+          <Link to="/admin" className="py-2.5 text-sm sm:text-base font-black rounded-xl text-center transition-all text-white/40 hover:text-white/70">
+            📊 Dashboard
+          </Link>
+          <button className="py-2.5 text-sm sm:text-base font-black rounded-xl text-center transition-all bg-purple-600 text-white">
+            🔧 User Tools
+          </button>
+          <button className="py-2.5 text-sm sm:text-base font-black rounded-xl text-center transition-all text-white/40 hover:text-white/70">
+            📋 Audit Log
+          </button>
         </div>
 
         {/* SECTION TITLE */}
@@ -77,20 +209,27 @@ const AdminUserManagement: React.FC = () => {
           <span className="text-2xl">🔧</span>
           <div>
             <h2 className="text-base sm:text-lg font-black text-white uppercase tracking-wider">User Management Tools</h2>
-            <p className="text-sm text-white/50 font-medium mt-0.5">Search → Select → Act · All actions are logged.</p>
+            <p className="text-sm text-white/50 font-medium mt-0.5">Target: {targetUser.username || targetUser.name} · All actions are logged.</p>
           </div>
         </div>
 
         {/* TARGET USER PROFILE CARD */}
         <div className="bg-[#1C1C2E] border border-purple-500/30 rounded-2xl p-4 sm:p-5 flex items-center justify-between gap-4 shadow-lg shadow-purple-900/10">
-          <div className="min-w-0">
-            <h3 className="text-lg sm:text-xl font-black text-white flex items-center gap-2">
-              @farhan
-              <span className="text-xs bg-emerald-500/20 text-emerald-400 font-black px-2.5 py-1 rounded-full uppercase">Clean</span>
-            </h3>
-            <p className="text-sm text-white/50 font-mono mt-1 truncate">ID: user_1783448468998 · Role: user</p>
+          <div className="flex items-center gap-3 min-w-0">
+            <img src={targetUser.avatar} alt="avatar" className="w-12 h-12 rounded-full object-cover border border-white/10" />
+            <div>
+              <h3 className="text-lg sm:text-xl font-black text-white flex items-center gap-2">
+                @{targetUser.username || targetUser.name}
+                {targetUser.isBanned || targetUser.strikes >= 3 ? (
+                  <span className="text-xs bg-red-500/20 text-red-400 font-black px-2.5 py-1 rounded-full uppercase">Banned</span>
+                ) : (
+                  <span className="text-xs bg-emerald-500/20 text-emerald-400 font-black px-2.5 py-1 rounded-full uppercase">Clean</span>
+                )}
+              </h3>
+              <p className="text-sm text-white/50 font-mono mt-1 truncate">ID: {targetUser.id} · Role: {targetUser.user_role || targetUser.role}</p>
+            </div>
           </div>
-          <button className="w-11 h-11 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-lg font-bold text-white/60">✕</button>
+          <Link to="/admin" className="w-11 h-11 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-lg font-bold text-white/60 shrink-0">✕</Link>
         </div>
 
         {/* 5. USER ENGAGEMENT STATS ANALYTICS MINI-DASHBOARD */}
@@ -101,15 +240,15 @@ const AdminUserManagement: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div className="bg-[#161626] border border-white/5 rounded-xl p-4">
               <p className="text-xs sm:text-sm font-bold text-white/40 uppercase tracking-wider mb-1">Avg Online/Day</p>
-              <p className="text-xl sm:text-2xl font-black text-white">4h 12m</p>
+              <p className="text-xl sm:text-2xl font-black text-white">{formatTime(targetUser.todayOnlineTime || 0)}</p>
             </div>
             <div className="bg-[#161626] border border-white/5 rounded-xl p-4">
-              <p className="text-xs sm:text-sm font-bold text-white/40 uppercase tracking-wider mb-1">Total Points Spent</p>
-              <p className="text-xl sm:text-2xl font-black text-amber-400">12,450</p>
+              <p className="text-xs sm:text-sm font-bold text-white/40 uppercase tracking-wider mb-1">Total Points</p>
+              <p className="text-xl sm:text-2xl font-black text-amber-400">{targetUser.points?.toLocaleString() || 0}</p>
             </div>
             <div className="bg-[#161626] border border-white/5 rounded-xl p-4">
-              <p className="text-xs sm:text-sm font-bold text-white/40 uppercase tracking-wider mb-1">Top Interaction</p>
-              <p className="text-xl sm:text-2xl font-black text-purple-400 truncate">@himu</p>
+              <p className="text-xs sm:text-sm font-bold text-white/40 uppercase tracking-wider mb-1">Level</p>
+              <p className="text-xl sm:text-2xl font-black text-purple-400 truncate">Lvl {targetUser.level || 1}</p>
             </div>
           </div>
         </div>
@@ -120,13 +259,15 @@ const AdminUserManagement: React.FC = () => {
             🕒 24h Activity Timeline
           </h4>
           <div className="bg-[#161626] border border-white/5 rounded-xl p-4 max-h-[250px] overflow-y-auto custom-scrollbar space-y-4">
-            {activityTimeline.map(act => (
-              <div key={act.id} className="flex gap-4 relative">
+            {activityTimeline.length === 0 ? (
+              <p className="text-sm text-white/40 font-bold text-center py-4">No recent activity found.</p>
+            ) : activityTimeline.map((act, idx) => (
+              <div key={act.id || idx} className="flex gap-4 relative">
                 <div className="absolute top-2.5 left-2 w-0.5 h-full bg-white/5 -z-10" />
                 <div className="w-4 h-4 rounded-full bg-purple-500 border-4 border-[#161626] shrink-0 mt-1" />
                 <div>
-                  <p className="text-sm sm:text-base font-bold text-white/90">{act.desc}</p>
-                  <p className="text-xs sm:text-sm font-bold text-white/40 mt-0.5">{act.time}</p>
+                  <p className="text-sm sm:text-base font-bold text-white/90">{act.msg || (act.isTopic ? 'Created a new topic' : 'Activity logged')}</p>
+                  <p className="text-xs sm:text-sm font-bold text-white/40 mt-0.5">{timeAgo(act.timestamp)}</p>
                 </div>
               </div>
             ))}
@@ -139,25 +280,27 @@ const AdminUserManagement: React.FC = () => {
             <h4 className="text-sm sm:text-base font-black text-white/60 uppercase tracking-widest flex items-center gap-2">
               📱 Active Sessions
             </h4>
-            <button className="bg-red-500/10 hover:bg-red-500/20 border border-red-500/50 text-red-400 font-black text-sm uppercase tracking-wider py-2.5 px-4 rounded-xl active:scale-95 transition-all w-full sm:w-auto">
+            <button onClick={forceLogout} className="bg-red-500/10 hover:bg-red-500/20 border border-red-500/50 text-red-400 font-black text-sm uppercase tracking-wider py-2.5 px-4 rounded-xl active:scale-95 transition-all w-full sm:w-auto">
               Force Logout All
             </button>
           </div>
           <div className="space-y-2">
-            {activeDevices.map(dev => (
-              <div key={dev.id} className="bg-[#161626] border border-white/5 rounded-xl p-3.5 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            {activeSession ? (
+              <div className="bg-[#161626] border border-white/5 rounded-xl p-3.5 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
                   <p className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
-                    {dev.browser} on {dev.os}
-                    {dev.time === 'Active now' && <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />}
+                    Primary Session
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                   </p>
-                  <p className="text-xs sm:text-sm font-medium text-white/40 mt-1">IP: {dev.ip} · {dev.loc}</p>
+                  <p className="text-xs sm:text-sm font-medium text-white/40 mt-1">Logged in via Auth Token</p>
                 </div>
                 <div className="text-xs sm:text-sm font-bold text-white/30 uppercase tracking-wider bg-white/5 px-3 py-1.5 rounded-lg w-fit">
-                  {dev.time}
+                  Active
                 </div>
               </div>
-            ))}
+            ) : (
+              <p className="text-sm text-white/40 font-bold p-2">No active sessions found.</p>
+            )}
           </div>
         </div>
 
@@ -198,7 +341,7 @@ const AdminUserManagement: React.FC = () => {
             </p>
             
             <button 
-              onClick={() => setStrikes(s => Math.min(s + 1, 3))}
+              onClick={issueStrike}
               className="w-full bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/50 text-amber-400 font-black text-sm sm:text-base uppercase tracking-wider py-3 px-4 rounded-xl active:scale-[0.98] transition-all flex items-center justify-center gap-2"
             >
               <span className="text-lg">⚠️</span> Issue +1 Strike
@@ -213,17 +356,17 @@ const AdminUserManagement: React.FC = () => {
           </h4>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {[
-              { key: 'fullBan', label: 'Full Ban' },
-              { key: 'pmBan', label: 'PM Ban' },
-              { key: 'shoutBan', label: 'Shout Ban' },
-              { key: 'chatBan', label: 'Chat Ban' },
-              { key: 'shadowBan', label: 'Shadow Ban' },
+              { key: 'fullBan', label: 'Full Ban', dbField: 'isBanned' },
+              { key: 'pmBan', label: 'PM Ban', dbField: 'pmBan' },
+              { key: 'shoutBan', label: 'Shout Ban', dbField: 'shoutBan' },
+              { key: 'chatBan', label: 'Chat Ban', dbField: 'chatBan' },
+              { key: 'shadowBan', label: 'Shadow Ban', dbField: 'isShadowBanned' },
             ].map((toggle) => {
               const isActive = (banStates as any)[toggle.key];
               return (
                 <button
                   key={toggle.key}
-                  onClick={() => setBanStates(prev => ({ ...prev, [toggle.key]: !isActive }))}
+                  onClick={() => handleToggleBan(toggle.key, toggle.dbField)}
                   className={`p-3.5 sm:p-4 rounded-xl border text-center transition-all flex flex-col items-center justify-center min-w-0 active:scale-[0.95] ${isActive ? (toggle.key === 'shadowBan' ? 'bg-indigo-900/40 border-indigo-500 text-indigo-300 font-black shadow-[0_0_15px_rgba(99,102,241,0.2)]' : 'bg-red-600/30 border-red-500 text-white font-black') : 'bg-[#11111E] border-white/5 text-white/60 font-medium hover:bg-white/5'}`}
                 >
                   <span className="text-sm sm:text-base font-bold truncate w-full mb-1.5">{toggle.label}</span>
@@ -257,7 +400,7 @@ const AdminUserManagement: React.FC = () => {
               placeholder="e.g., Please avoid using bad words..."
               className="w-full bg-[#11111E] border border-white/10 focus:border-cyan-500/50 rounded-xl px-4 py-3.5 text-sm sm:text-base text-white placeholder-white/20 outline-none min-h-[100px] resize-y"
             />
-            <button className="w-full bg-cyan-500 hover:bg-cyan-600 text-[#090d16] font-black text-sm sm:text-base uppercase tracking-wider py-3.5 rounded-xl active:scale-[0.98] transition-all">
+            <button onClick={injectAlert} className="w-full bg-cyan-500 hover:bg-cyan-600 text-[#090d16] font-black text-sm sm:text-base uppercase tracking-wider py-3.5 rounded-xl active:scale-[0.98] transition-all">
               Inject Alert Now
             </button>
           </div>
@@ -279,7 +422,7 @@ const AdminUserManagement: React.FC = () => {
                 <button onClick={() => setDisable2FAConfirm(false)} className="flex-1 sm:flex-none px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-sm font-bold transition-all">
                   Cancel
                 </button>
-                <button className="flex-1 sm:flex-none px-4 py-2.5 bg-red-500 hover:bg-red-600 text-white rounded-xl text-sm font-black transition-all">
+                <button onClick={() => setDisable2FAConfirm(false)} className="flex-1 sm:flex-none px-4 py-2.5 bg-red-500 hover:bg-red-600 text-white rounded-xl text-sm font-black transition-all">
                   Confirm Reset
                 </button>
               </div>
@@ -299,10 +442,10 @@ const AdminUserManagement: React.FC = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
-              { label: '👍 Plusses', val: plusses, set: setPlusses, placeholder: '0' },
-              { label: '🪙 Gold Coins', val: goldCoins, set: setGoldCoins, placeholder: '0' },
-              { label: '🔘 Silver Coins', val: silverCoins, set: setSilverCoins, placeholder: '0' },
-              { label: '💵 Taka Balance', val: takaBalance, set: setTakaBalance, placeholder: '0' },
+              { label: '👍 Plusses', val: plusses, set: setPlusses, dbField: 'plusses' },
+              { label: '🪙 Gold Coins', val: goldCoins, set: setGoldCoins, dbField: 'goldenCoins' },
+              { label: '🔘 Silver Coins', val: silverCoins, set: setSilverCoins, dbField: 'silverPoints' },
+              { label: '💵 Taka Balance', val: takaBalance, set: setTakaBalance, dbField: 'balance_taka' },
             ].map((inputItem) => (
               <div key={inputItem.label} className="flex flex-col gap-2">
                 <label className="text-xs sm:text-sm font-bold text-white/60 uppercase tracking-wider">{inputItem.label}</label>
@@ -311,10 +454,9 @@ const AdminUserManagement: React.FC = () => {
                     type="number"
                     value={inputItem.val}
                     onChange={(e) => inputItem.set(e.target.value)}
-                    placeholder={inputItem.placeholder}
                     className="flex-1 bg-[#11111E] border border-white/10 rounded-xl px-4 py-3 text-base text-white font-mono outline-none"
                   />
-                  <button className="bg-purple-600 hover:bg-purple-700 active:scale-95 text-white font-black text-sm uppercase tracking-wider px-5 rounded-xl shrink-0 transition-all">
+                  <button onClick={() => handleAdminUpdate({ [inputItem.dbField]: Number(inputItem.val) })} className="bg-purple-600 hover:bg-purple-700 active:scale-95 text-white font-black text-sm uppercase tracking-wider px-5 rounded-xl shrink-0 transition-all">
                     Set
                   </button>
                 </div>
@@ -340,7 +482,7 @@ const AdminUserManagement: React.FC = () => {
               </button>
             ))}
           </div>
-          <button className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-black text-sm sm:text-base uppercase tracking-wider py-3.5 rounded-xl active:scale-[0.98] transition-all mt-4">
+          <button onClick={() => handleAdminUpdate({ user_role: selectedRole })} className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-black text-sm sm:text-base uppercase tracking-wider py-3.5 rounded-xl active:scale-[0.98] transition-all mt-4">
             Apply Role Shift
           </button>
         </div>

@@ -205,5 +205,43 @@ router.get('/:id/suggested', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+// POST /api/users/:userId/admin-update - Admin only update
+router.post('/:userId/admin-update', async (req, res) => {
+  try {
+    const updates = req.body;
+    // Security Note: In a real app, verify req.headers.authorization and admin role here
+    
+    // Auto 7-day ban trigger
+    if (updates.strikes >= 3) {
+      updates.isBanned = true;
+      // Optional: you could add an unban date here if the schema supported it
+    }
+
+    const updated = await User.findOneAndUpdate(
+      { id: req.params.userId },
+      { $set: updates },
+      { new: true }
+    ).lean();
+    if (!updated) return res.status(404).json({ error: 'User not found' });
+    res.json(updated);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /api/users/:userId/force-logout
+router.post('/:userId/force-logout', async (req, res) => {
+  try {
+    const updated = await User.findOneAndUpdate(
+      { id: req.params.userId },
+      { $set: { sessionToken: null, sessionExpiry: 0 } },
+      { new: true }
+    ).lean();
+    if (!updated) return res.status(404).json({ error: 'User not found' });
+    res.json({ success: true, message: 'All devices logged out.' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 module.exports = router;

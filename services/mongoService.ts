@@ -325,7 +325,59 @@ export const mongoService = {
   // --- Live TV ---
   getChannels: () => get<any>('/channels'),
   getChannelStream: (channelId: string) => get<{streamUrl: string}>(`/channels/${channelId}/stream`),
-  toggleFavoriteChannel: (channelId: string) => post<any>(`/channels/${channelId}/favorite`, {})
+  toggleFavoriteChannel: (channelId: string) => post<any>(`/channels/${channelId}/favorite`, {}),
+  adminUpdateUser: async (targetId: string, updates: any): Promise<any> => {
+    try {
+      const res = await fetch(`${API_BASE}/users/${targetId}/admin-update`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updates)
+      });
+      if (!res.ok) throw new Error('Failed to update user');
+      return await res.json();
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  },
+
+  forceLogoutUser: async (targetId: string): Promise<boolean> => {
+    try {
+      const res = await fetch(`${API_BASE}/users/${targetId}/force-logout`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      return res.ok;
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  },
+
+  sendSystemNotice: async (targetId: string, message: string): Promise<boolean> => {
+    try {
+      const payload = {
+        id: `sys_${Date.now()}_${Math.floor(Math.random()*1000)}`,
+        userId: targetId,
+        senderId: 'system',
+        senderName: 'System Admin',
+        senderAvatar: 'https://picsum.photos/seed/admin/200',
+        type: 'SYSTEM',
+        message: message,
+        timestamp: Date.now(),
+        isRead: false
+      };
+      const res = await fetch(`${API_BASE}/notifications`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      return res.ok;
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  }
 };
 
 // ── Backward-compatibility alias removed — use mongoService directly ─────────
