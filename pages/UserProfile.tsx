@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { User, ShoutEntry } from '../types';
 import { API_BASE, mongoService } from '../services/mongoService';
 import { gameService } from '../services/gameService';
