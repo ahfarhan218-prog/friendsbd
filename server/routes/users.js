@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const Activity = require('../models/Activity');
+const AdminLog = require('../models/AdminLog');
 const { Meta } = require('../models/ApTransaction');
 
 // GET all users
@@ -208,13 +210,12 @@ router.get('/:id/suggested', async (req, res) => {
 // POST /api/users/:userId/admin-update - Admin only update
 router.post('/:userId/admin-update', async (req, res) => {
   try {
-    const updates = req.body;
-    // Security Note: In a real app, verify req.headers.authorization and admin role here
+    const { reason, adminId, adminName, updates } = req.body;
+    if (!reason || !adminId) return res.status(400).json({ error: 'Missing reason or admin info' });
     
     // Auto 7-day ban trigger
     if (updates.strikes >= 3) {
       updates.isBanned = true;
-      // Optional: you could add an unban date here if the schema supported it
     }
 
     const updated = await User.findOneAndUpdate(
@@ -223,6 +224,19 @@ router.post('/:userId/admin-update', async (req, res) => {
       { new: true }
     ).lean();
     if (!updated) return res.status(404).json({ error: 'User not found' });
+
+    // Create Audit Log
+    const actionDesc = Object.keys(updates).map(k => `${k} -> ${updates[k]}`).join(', ');
+    await AdminLog.create({
+      id: `audit_${Date.now()}_${Math.floor(Math.random()*1000)}`,
+      action: `Admin Update: ${actionDesc}`,
+      targetId: req.params.userId,
+      targetType: 'user',
+      deletedBy: adminId,
+      deletedByName: adminName || 'System Admin',
+      details: reason
+    });
+
     res.json(updated);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -232,13 +246,40 @@ router.post('/:userId/admin-update', async (req, res) => {
 // POST /api/users/:userId/force-logout
 router.post('/:userId/force-logout', async (req, res) => {
   try {
+    const { reason, adminId, adminName } = req.body;
+    if (!reason || !adminId) return res.status(400).json({ error: 'Missing reason or admin info' });
+
     const updated = await User.findOneAndUpdate(
       { id: req.params.userId },
       { $set: { sessionToken: null, sessionExpiry: 0 } },
       { new: true }
     ).lean();
     if (!updated) return res.status(404).json({ error: 'User not found' });
+
+    // Create Audit Log
+    await AdminLog.create({
+      id: `audit_${Date.now()}_${Math.floor(Math.random()*1000)}`,
+      action: 'Force Logout All Devices',
+      targetId: req.params.userId,
+      targetType: 'user',
+      deletedBy: adminId,
+      deletedByName: adminName || 'System Admin',
+      details: reason
+    });
+
     res.json({ success: true, message: 'All devices logged out.' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/users/:userId/audit
+router.get('/:userId/audit', async (req, res) => {
+  try {
+    const logs = await AdminLog.find({ targetId: req.params.userId, targetType: 'user' })
+      .sort({ timestamp: -1 })
+      .lean();
+    res.json(logs);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

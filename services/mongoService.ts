@@ -326,12 +326,12 @@ export const mongoService = {
   getChannels: () => get<any>('/channels'),
   getChannelStream: (channelId: string) => get<{streamUrl: string}>(`/channels/${channelId}/stream`),
   toggleFavoriteChannel: (channelId: string) => post<any>(`/channels/${channelId}/favorite`, {}),
-  adminUpdateUser: async (targetId: string, updates: any): Promise<any> => {
+  adminUpdateUser: async (targetId: string, updates: any, reason: string, adminId: string, adminName: string): Promise<any> => {
     try {
       const res = await fetch(`${API_BASE}/users/${targetId}/admin-update`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updates)
+        body: JSON.stringify({ reason, adminId, adminName, updates })
       });
       if (!res.ok) throw new Error('Failed to update user');
       return await res.json();
@@ -341,16 +341,28 @@ export const mongoService = {
     }
   },
 
-  forceLogoutUser: async (targetId: string): Promise<boolean> => {
+  forceLogoutUser: async (targetId: string, reason: string, adminId: string, adminName: string): Promise<boolean> => {
     try {
       const res = await fetch(`${API_BASE}/users/${targetId}/force-logout`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reason, adminId, adminName })
       });
       return res.ok;
     } catch (err) {
       console.error(err);
       return false;
+    }
+  },
+
+  getUserAuditLogs: async (targetId: string): Promise<any[]> => {
+    try {
+      const res = await fetch(`${API_BASE}/users/${targetId}/audit`);
+      if (!res.ok) throw new Error('Failed to fetch audit logs');
+      return await res.json();
+    } catch (err) {
+      console.error(err);
+      return [];
     }
   },
 
