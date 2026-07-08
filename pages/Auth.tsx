@@ -145,10 +145,10 @@ const Auth: React.FC<AuthProps> = ({ mode, onAuth }) => {
         <h1 className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mb-1 drop-shadow-lg">friends bd</h1>
       </div>
 
-      <div className="bg-[#090d16]/80 backdrop-blur-xl rounded-[3rem] p-8 w-full shadow-2xl border border-purple-500/20">
+      <div className="bg-[#090d16]/80 backdrop-blur-xl rounded-[3rem] p-4 sm:p-8 w-full shadow-2xl border border-purple-500/20">
         <div className="text-center mb-6">
            <h2 className="text-2xl font-bold text-white">{mode === 'login' ? 'Welcome Back!' : 'Create Account'}</h2>
-           <p className="text-xs text-purple-200 mt-1">
+           <p className="text-sm text-purple-200 mt-1">
              {mode === 'login' ? 'Login via Email' : 'Join FriendsBD community today'}
            </p>
         </div>
@@ -247,7 +247,7 @@ const Auth: React.FC<AuthProps> = ({ mode, onAuth }) => {
            </button>
         </form>
 
-        <div className="text-center mt-6 text-xs font-medium text-purple-300">
+        <div className="text-center mt-6 text-sm font-medium text-purple-300">
           {mode === 'login' ? (
             <>Don't have an account? <Link to="/signup" className="text-pink-400 font-bold ml-1 hover:text-pink-300">Sign Up</Link></>
           ) : (

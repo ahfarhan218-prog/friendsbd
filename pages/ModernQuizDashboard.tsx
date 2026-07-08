@@ -359,7 +359,7 @@ const ModernQuizDashboard: React.FC = () => {
       <div className="absolute top-0 right-0 w-full max-w-[400px] h-[400px] bg-indigo-600/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-20 left-10 w-[300px] h-[300px] bg-purple-600/5 rounded-full blur-[100px] pointer-events-none" />
 
-      <header className="p-6 border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md">
+      <header className="p-4 sm:p-6 border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md">
         <div className="max-w-full max-w-7xl mx-auto px-4 sm:px-6 mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex flex-wrap items-center gap-4">
             <button
@@ -374,7 +374,7 @@ const ModernQuizDashboard: React.FC = () => {
               <h1 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-indigo-400 tracking-tight">
                 Executive Quiz Deck
               </h1>
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-sm text-slate-400 mt-1">
                 Participate in community trivia events, complete modules, and claim active points.
               </p>
             </div>
@@ -384,19 +384,19 @@ const ModernQuizDashboard: React.FC = () => {
             <div className="flex flex-wrap items-center gap-3">
               <button
                 onClick={() => navigate('/quiz/new')}
-                className="px-5 py-3 text-xs font-bold bg-[#121824] hover:bg-slate-800 text-amber-400 hover:text-amber-300 border border-amber-500/20 hover:border-amber-500/40 rounded-2xl shadow-lg transition-all flex flex-wrap items-center gap-1.5"
+                className="px-5 py-3 text-sm font-bold bg-[#121824] hover:bg-slate-800 text-amber-400 hover:text-amber-300 border border-amber-500/20 hover:border-amber-500/40 rounded-2xl shadow-lg transition-all flex flex-wrap items-center gap-1.5"
               >
                 <span>📋</span> Classic Form
               </button>
               <button
                 onClick={() => openCreateModal('standard')}
-                className="px-5 py-3 text-xs font-bold bg-[#121824] hover:bg-slate-800 text-indigo-400 hover:text-indigo-300 border border-indigo-500/20 hover:border-indigo-500/40 rounded-2xl shadow-lg transition-all flex flex-wrap items-center gap-1.5"
+                className="px-5 py-3 text-sm font-bold bg-[#121824] hover:bg-slate-800 text-indigo-400 hover:text-indigo-300 border border-indigo-500/20 hover:border-indigo-500/40 rounded-2xl shadow-lg transition-all flex flex-wrap items-center gap-1.5"
               >
                 <span>➕</span> Standard Quiz
               </button>
               <button
                 onClick={() => openCreateModal('live')}
-                className="px-5 py-3 text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white rounded-2xl shadow-lg shadow-rose-600/20 hover:shadow-rose-600/30 transition-all flex flex-wrap items-center gap-1.5 relative overflow-hidden group"
+                className="px-5 py-3 text-sm font-bold bg-rose-600 hover:bg-rose-500 text-white rounded-2xl shadow-lg shadow-rose-600/20 hover:shadow-rose-600/30 transition-all flex flex-wrap items-center gap-1.5 relative overflow-hidden group"
               >
                 <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <span>⚡</span> Launch LIVE Arena
@@ -406,7 +406,7 @@ const ModernQuizDashboard: React.FC = () => {
         </div>
       </header>
 
-      <section className="p-6 max-w-full max-w-7xl mx-auto px-4 sm:px-6 mx-auto">
+      <section className="p-4 sm:p-6 max-w-full max-w-7xl mx-auto px-4 sm:px-6 mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {[
             { label: 'Active Modules', value: activeQuizzesCount, icon: '📂', color: 'text-indigo-400', bg: 'from-indigo-500/10 to-transparent' },
@@ -428,7 +428,7 @@ const ModernQuizDashboard: React.FC = () => {
         </div>
       </section>
 
-      <section className="px-6 max-w-full max-w-7xl mx-auto px-4 sm:px-6 mx-auto">
+      <section className="px-3 sm:px-6 max-w-full max-w-7xl mx-auto px-4 sm:px-6 mx-auto">
         <div className="bg-[#121824] border border-[#1f293d] rounded-[2rem] p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-md">
           <div className="flex bg-[#090d16] p-1.5 rounded-2xl border border-[#1f293d] overflow-x-auto">
             {[
@@ -441,7 +441,7 @@ const ModernQuizDashboard: React.FC = () => {
               <button
                 key={tab.id}
                 onClick={() => { setActiveTab(tab.id as any); setCurrentPage(1); }}
-                className={`flex flex-wrap items-center gap-1.5 px-4.5 py-2 text-xs font-bold rounded-xl transition-all whitespace-nowrap ${
+                className={`flex flex-wrap items-center gap-1.5 px-4.5 py-2 text-sm font-bold rounded-xl transition-all whitespace-nowrap ${
                   activeTab === tab.id
                     ? 'bg-[#121824] text-white border border-[#1f293d] shadow-sm'
                     : 'text-slate-400 hover:text-white'
@@ -459,14 +459,14 @@ const ModernQuizDashboard: React.FC = () => {
               value={searchQuery}
               onChange={e => { setSearchQuery(e.target.value); setCurrentPage(1); }}
               placeholder="Search by title or host..."
-              className="w-full bg-[#090d16] border border-[#1f293d] rounded-2xl py-3 pl-10 pr-4 text-xs text-white placeholder-slate-500 focus:border-indigo-500 outline-none transition-all"
+              className="w-full bg-[#090d16] border border-[#1f293d] rounded-2xl py-3 pl-10 pr-4 text-sm text-white placeholder-slate-500 focus:border-indigo-500 outline-none transition-all"
             />
             <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm">🔍</span>
           </div>
         </div>
       </section>
 
-      <main className="p-6 max-w-full max-w-7xl mx-auto px-4 sm:px-6 mx-auto">
+      <main className="p-4 sm:p-6 max-w-full max-w-7xl mx-auto px-4 sm:px-6 mx-auto">
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-6">
             {[1, 2, 3].map(i => (
@@ -488,7 +488,7 @@ const ModernQuizDashboard: React.FC = () => {
           <div className="py-20 bg-[#121824]/40 border border-[#1f293d]/50 rounded-[2.5rem] text-center space-y-3">
             <span className="text-4xl block">🔍</span>
             <h3 className="text-base font-black text-white">No Quiz Modules Found</h3>
-            <p className="text-xs text-slate-400 max-w-xs mx-auto">
+            <p className="text-sm text-slate-400 max-w-xs mx-auto">
               We couldn't find any quizzes matching your filter or query. Create a new one to populate the database.
             </p>
           </div>
@@ -514,7 +514,7 @@ const ModernQuizDashboard: React.FC = () => {
       </main>
 
       {totalPages > 1 && (
-        <footer className="mt-8 px-6 max-w-full max-w-7xl mx-auto px-4 sm:px-6 mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <footer className="mt-8 px-3 sm:px-6 max-w-full max-w-7xl mx-auto px-4 sm:px-6 mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-1.5 bg-[#121824] border border-[#1f293d] p-1.5 rounded-2xl">
             <button
               disabled={currentPage === 1}
@@ -529,7 +529,7 @@ const ModernQuizDashboard: React.FC = () => {
                 <button
                   key={pNum}
                   onClick={() => handlePageChange(pNum)}
-                  className={`w-9 h-9 text-xs font-bold rounded-xl transition-all ${
+                  className={`w-9 h-9 text-sm font-bold rounded-xl transition-all ${
                     currentPage === pNum
                       ? 'bg-indigo-600 text-white'
                       : 'text-slate-400 hover:text-white hover:bg-slate-850'
@@ -548,7 +548,7 @@ const ModernQuizDashboard: React.FC = () => {
             </button>
           </div>
           <form onSubmit={handlePageJump} className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-bold text-slate-400">Go to page:</span>
+            <span className="text-sm font-bold text-slate-400">Go to page:</span>
             <input
               type="number"
               min={1}
@@ -556,11 +556,11 @@ const ModernQuizDashboard: React.FC = () => {
               value={pageJumpInput}
               onChange={e => setPageJumpInput(e.target.value)}
               placeholder={currentPage.toString()}
-              className="w-16 bg-[#121824] border border-[#1f293d] focus:border-indigo-500 text-center text-xs text-white rounded-xl py-2 outline-none transition-all font-mono font-bold"
+              className="w-16 bg-[#121824] border border-[#1f293d] focus:border-indigo-500 text-center text-sm text-white rounded-xl py-2 outline-none transition-all font-mono font-bold"
             />
             <button
               type="submit"
-              className="px-4 py-2 bg-indigo-600/10 hover:bg-indigo-600 text-indigo-400 hover:text-white border border-indigo-500/20 rounded-xl text-xs font-bold transition-all"
+              className="px-4 py-2 bg-indigo-600/10 hover:bg-indigo-600 text-indigo-400 hover:text-white border border-indigo-500/20 rounded-xl text-sm font-bold transition-all"
             >
               Jump
             </button>
@@ -575,7 +575,7 @@ const ModernQuizDashboard: React.FC = () => {
               initial={{ opacity: 0, scale: 0.95, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 30 }}
-              className="w-full max-w-xl bg-[#121824] border border-[#1f293d] rounded-[2.5rem] p-6 shadow-2xl relative overflow-hidden"
+              className="w-full max-w-xl bg-[#121824] border border-[#1f293d] rounded-[2.5rem] p-4 sm:p-6 shadow-2xl relative overflow-hidden"
             >
               <div className="absolute top-0 left-0 w-32 h-32 bg-indigo-500/5 rounded-full blur-[80px]" />
               <div className="absolute bottom-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-[80px]" />
@@ -606,10 +606,10 @@ const ModernQuizDashboard: React.FC = () => {
                       <button
                         key={oIdx}
                         onClick={() => selectAnswer(oIdx === activePlayingQuiz.questions[currentQuestionStep].correct)}
-                        className="w-full text-left p-4 bg-[#090d16] hover:bg-slate-900 border border-[#1f293d] hover:border-indigo-500/50 rounded-2xl text-xs font-bold text-slate-200 hover:text-white transition-all flex justify-between items-center group shadow-sm"
+                        className="w-full text-left p-4 bg-[#090d16] hover:bg-slate-900 border border-[#1f293d] hover:border-indigo-500/50 rounded-2xl text-sm font-bold text-slate-200 hover:text-white transition-all flex justify-between items-center group shadow-sm"
                       >
                         <span>{opt}</span>
-                        <span className="w-5 h-5 rounded-lg border-2 border-slate-700 group-hover:border-indigo-500 group-hover:bg-indigo-500/10 flex items-center justify-center font-mono text-xs text-slate-500 group-hover:text-indigo-400 font-bold transition-all">
+                        <span className="w-5 h-5 rounded-lg border-2 border-slate-700 group-hover:border-indigo-500 group-hover:bg-indigo-500/10 flex items-center justify-center font-mono text-sm text-slate-500 group-hover:text-indigo-400 font-bold transition-all">
                           {String.fromCharCode(65 + oIdx)}
                         </span>
                       </button>
@@ -618,7 +618,7 @@ const ModernQuizDashboard: React.FC = () => {
                   <div className="pt-2 flex justify-end">
                     <button
                       onClick={() => setActivePlayingQuiz(null)}
-                      className="px-4 py-2 text-slate-400 hover:text-rose-400 text-xs font-bold transition-all"
+                      className="px-4 py-2 text-slate-400 hover:text-rose-400 text-sm font-bold transition-all"
                     >
                       Quit Quiz
                     </button>
@@ -629,7 +629,7 @@ const ModernQuizDashboard: React.FC = () => {
                   <span className="text-5xl block animate-bounce">🏆</span>
                   <div className="space-y-2">
                     <h3 className="text-xl font-black text-white">Arena Finished!</h3>
-                    <p className="text-xs text-slate-400">
+                    <p className="text-sm text-slate-400">
                       You successfully completed "{activePlayingQuiz.title}".
                     </p>
                   </div>
@@ -647,7 +647,7 @@ const ModernQuizDashboard: React.FC = () => {
                       </h4>
                     </div>
                   </div>
-                  <div className="p-4 bg-slate-950/50 rounded-2xl text-xs max-w-md mx-auto text-slate-400 leading-relaxed">
+                  <div className="p-4 bg-slate-950/50 rounded-2xl text-sm max-w-md mx-auto text-slate-400 leading-relaxed">
                     {quizScore === activePlayingQuiz.questions.length ? (
                       <span className="text-green-400 font-semibold">
                         🎉 Perfect score! Reward claimed and successfully added to your Active Points (AP) log.
@@ -662,7 +662,7 @@ const ModernQuizDashboard: React.FC = () => {
                     <button
                       onClick={() => setActivePlayingQuiz(null)}
                       disabled={isSubmittingScore}
-                      className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-2xl shadow-lg shadow-indigo-600/10 hover:shadow-indigo-600/20 text-xs transition-all flex flex-wrap items-center justify-center gap-2"
+                      className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-2xl shadow-lg shadow-indigo-600/10 hover:shadow-indigo-600/20 text-sm transition-all flex flex-wrap items-center justify-center gap-2"
                     >
                       {isSubmittingScore ? (
                         <>
@@ -676,7 +676,7 @@ const ModernQuizDashboard: React.FC = () => {
                     {quizScore < activePlayingQuiz.questions.length && (
                       <button
                         onClick={() => startPlayingQuiz(activePlayingQuiz)}
-                        className="w-full bg-[#090d16] hover:bg-slate-900 text-slate-300 hover:text-white font-bold py-3.5 rounded-2xl border border-[#1f293d] hover:border-indigo-500/50 text-xs transition-all"
+                        className="w-full bg-[#090d16] hover:bg-slate-900 text-slate-300 hover:text-white font-bold py-3.5 rounded-2xl border border-[#1f293d] hover:border-indigo-500/50 text-sm transition-all"
                       >
                         Try Again
                       </button>

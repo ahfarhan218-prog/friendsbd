@@ -319,14 +319,14 @@ const ShoutHistory: React.FC = () => {
               <h2 className="text-2xl font-black tracking-tight italic bg-gradient-to-r from-white via-purple-200 to-indigo-200 bg-clip-text text-transparent">
                 Feed History
               </h2>
-              <p className="text-xs font-black uppercase opacity-50 tracking-[0.2em] text-purple-300">
+              <p className="text-sm font-black uppercase opacity-50 tracking-[0.2em] text-purple-300">
                 Community Archive
               </p>
             </div>
           </div>
           <div className="bg-white/5 border border-white/10 rounded-2xl px-3 py-1.5 flex flex-wrap items-center gap-2">
             <span className="text-lg">📢</span>
-            <span className="text-xs font-black font-mono text-purple-300">{shouts.length}</span>
+            <span className="text-sm font-black font-mono text-purple-300">{shouts.length}</span>
           </div>
         </div>
       </header>
@@ -344,13 +344,13 @@ const ShoutHistory: React.FC = () => {
         >
           {editingShout && (
             <div className="bg-amber-500/10 border-b border-amber-500/20 px-4 py-2 flex items-center justify-between">
-              <span className="text-xs font-black uppercase tracking-widest text-amber-400">✏️ Editing Shout</span>
+              <span className="text-sm font-black uppercase tracking-widest text-amber-400">✏️ Editing Shout</span>
               <button
                 onClick={() => {
                   setEditingShout(null);
                   setShoutText('');
                 }}
-                className="text-xs font-black text-white/60 hover:text-white uppercase tracking-widest"
+                className="text-sm font-black text-white/60 hover:text-white uppercase tracking-widest"
               >
                 Cancel
               </button>
@@ -360,8 +360,8 @@ const ShoutHistory: React.FC = () => {
           {replyingTo && (
             <div className="bg-purple-950/40 border-b border-purple-500/20 px-4 py-2.5 flex items-center justify-between">
               <div className="min-w-0">
-                <span className="text-xs font-black uppercase tracking-widest text-purple-400">↩️ Replying to @{replyingTo.username || replyingTo.user.toLowerCase().replace(/\s+/g, '')}</span>
-                <p className="text-xs text-white/50 truncate mt-0.5">{replyingTo.content}</p>
+                <span className="text-sm font-black uppercase tracking-widest text-purple-400">↩️ Replying to @{replyingTo.username || replyingTo.user.toLowerCase().replace(/\s+/g, '')}</span>
+                <p className="text-sm text-white/50 truncate mt-0.5">{replyingTo.content}</p>
               </div>
               <button
                 onClick={() => setReplyingTo(null)}
@@ -376,10 +376,10 @@ const ShoutHistory: React.FC = () => {
           <div className="flex flex-wrap items-center gap-3 px-4 pt-4">
             <img src={activeUser.avatar} className="w-9 h-9 rounded-xl object-cover border-2 border-white/10 shrink-0" alt="" />
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-black text-white">{activeUser.name}</p>
-              <p className="text-xs text-white/60 font-bold">Broadcasting to archive stream</p>
+              <p className="text-sm font-black text-white">{activeUser.name}</p>
+              <p className="text-sm text-white/60 font-bold">Broadcasting to archive stream</p>
             </div>
-            <span className="text-xs font-black text-white/40 font-mono">{shoutText.length} characters</span>
+            <span className="text-sm font-black text-white/40 font-mono">{shoutText.length} characters</span>
           </div>
 
           {/* Admin Shout Mode Selector */}
@@ -388,7 +388,7 @@ const ShoutHistory: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShoutType('normal')}
-                className={`flex flex-wrap items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${
+                className={`flex flex-wrap items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm font-black uppercase tracking-widest transition-all ${
                   shoutType === 'normal'
                     ? 'bg-purple-600 text-white shadow-lg shadow-purple-900/30'
                     : 'bg-white/5 text-white/40 hover:text-white hover:bg-white/10'
@@ -399,7 +399,7 @@ const ShoutHistory: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShoutType('quiz')}
-                className={`flex flex-wrap items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${
+                className={`flex flex-wrap items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm font-black uppercase tracking-widest transition-all ${
                   shoutType === 'quiz'
                     ? 'bg-rose-600 text-white shadow-lg shadow-rose-900/30'
                     : 'bg-white/5 text-white/40 hover:text-white hover:bg-white/10'
@@ -440,7 +440,7 @@ const ShoutHistory: React.FC = () => {
             <button
               onClick={handleAddShout}
               disabled={!shoutText.trim() || isLockdown}
-              className="flex flex-wrap items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 disabled:opacity-30 disabled:cursor-not-allowed text-white font-black text-xs uppercase tracking-widest px-5 py-2.5 rounded-2xl shadow-lg shadow-purple-900/40 active:scale-95 transition-all"
+              className="flex flex-wrap items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 disabled:opacity-30 disabled:cursor-not-allowed text-white font-black text-sm uppercase tracking-widest px-5 py-2.5 rounded-2xl shadow-lg shadow-purple-900/40 active:scale-95 transition-all"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />

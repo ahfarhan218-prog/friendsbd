@@ -131,7 +131,7 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
 
       {/* Pinned badge */}
       {shout.isPinned && (
-        <div className="absolute -top-3 -right-2 z-20 bg-gradient-to-r from-amber-400 to-orange-500 text-white text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg shadow-amber-500/30 flex flex-wrap items-center gap-1">
+        <div className="absolute -top-3 -right-2 z-20 bg-gradient-to-r from-amber-400 to-orange-500 text-white text-sm font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg shadow-amber-500/30 flex flex-wrap items-center gap-1">
           📌 Pinned
         </div>
       )}
@@ -192,13 +192,13 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
                   {shout.user}
                 </Link>
                 {(shout.userId === 'bot_chatgirl' || shout.username === 'chatgirl' || shout.userId === 1) && (
-                  <span className="text-xs bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest border border-purple-500/30">🤖 Bot</span>
+                  <span className="text-sm bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest border border-purple-500/30">🤖 Bot</span>
                 )}
                 {shout.isPremium && <span title="Premium" className="text-xs sm:text-sm bg-amber-400/20 text-amber-400 px-1.5 py-0.5 rounded-full font-black">👑</span>}
-                {shout.isQuiz && <span className="text-xs bg-rose-500/20 text-rose-400 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest">❓ Quiz</span>}
-                {shout.isClosed && <span className="text-xs bg-rose-400/20 text-rose-400 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest">{shout.isQuiz ? 'Comments Hidden' : 'Locked'}</span>}
+                {shout.isQuiz && <span className="text-sm bg-rose-500/20 text-rose-400 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest">❓ Quiz</span>}
+                {shout.isClosed && <span className="text-sm bg-rose-400/20 text-rose-400 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest">{shout.isQuiz ? 'Comments Hidden' : 'Locked'}</span>}
               </div>
-              <p className="text-xs text-white/60 font-bold mt-0.5">
+              <p className="text-sm text-white/60 font-bold mt-0.5">
                 {timeLabel}
                 {shout.pinExpiry && <span className="text-amber-400/70 ml-2">· Expires {new Date(shout.pinExpiry).toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' })}</span>}
               </p>
@@ -238,7 +238,7 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
                               className="absolute right-full top-0 mr-2 w-36 bg-[#252540] border border-white/10 rounded-xl shadow-2xl p-1.5 z-50">
                               {PIN_DURATIONS.map(d => (
                                 <button key={d.label} onClick={() => { onPin?.(shout.id, d.value); setShowPinMenu(false); setShowMenu(false); }}
-                                  className="w-full text-left px-3 py-2 text-xs font-black uppercase text-white/50 hover:bg-white/10 hover:text-white rounded-lg transition-all">
+                                  className="w-full text-left px-3 py-2 text-sm font-black uppercase text-white/50 hover:bg-white/10 hover:text-white rounded-lg transition-all">
                                   {d.label}
                                 </button>
                               ))}
@@ -283,8 +283,8 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
           >
             {Object.entries(reactionCounts).map(([type, count]) => (
               <div key={type} className="flex flex-wrap items-center gap-1 bg-white/5 border border-white/5 px-2 py-0.5 rounded-full">
-                <span className="text-xs">{REACTIONS.find(r => r.type === type)?.icon || '👍'}</span>
-                <span className="text-xs font-black text-white/40">{count}</span>
+                <span className="text-sm">{REACTIONS.find(r => r.type === type)?.icon || '👍'}</span>
+                <span className="text-sm font-black text-white/40">{count}</span>
               </div>
             ))}
           </div>
@@ -347,7 +347,7 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
               <div className="p-4 space-y-3">
                 {/* Quiz/Hidden Comments Banner */}
                 {shout.isClosed && (
-                  <div className="text-center py-2 px-3 text-xs font-black text-rose-400/80 uppercase tracking-widest bg-rose-500/5 rounded-xl border border-rose-500/10">
+                  <div className="text-center py-2 px-3 text-sm font-black text-rose-400/80 uppercase tracking-widest bg-rose-500/5 rounded-xl border border-rose-500/10">
                     {isSuperAdmin 
                       ? '🔒 Quiz/Private Mode Active (Showing all replies to Admins)' 
                       : '🔒 Quiz Active: Your answers are hidden from other members.'}
@@ -373,11 +373,11 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
                               >
                                 {reply.userName}
                               </Link>
-                              <span className="text-xs text-white/60 font-bold font-mono">
+                              <span className="text-sm text-white/60 font-bold font-mono">
                                 {new Date(reply.timestamp).toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' })}
                               </span>
                             </div>
-                            <div className="text-xs leading-snug bbcode-render bbcode-render-dark">
+                            <div className="text-sm leading-snug bbcode-render bbcode-render-dark">
                               <BBCodeParser rawText={reply.content} />
                             </div>
                           </div>
@@ -426,13 +426,13 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#1C1C2E] border border-purple-500/20 rounded-[2rem] shadow-2xl p-6 w-[90%] max-w-sm max-h-[70vh] overflow-y-auto z-[301] font-inter text-white"
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#1C1C2E] border border-purple-500/20 rounded-[2rem] shadow-2xl p-4 sm:p-6 w-[90%] max-w-sm max-h-[70vh] overflow-y-auto z-[301] font-inter text-white"
             >
               <div className="flex items-center justify-between pb-4 border-b border-white/5 mb-4">
-                <h3 className="text-xs font-black uppercase tracking-wider text-purple-300">👍 Reactions ({totalReactions})</h3>
+                <h3 className="text-sm font-black uppercase tracking-wider text-purple-300">👍 Reactions ({totalReactions})</h3>
                 <button
                   onClick={() => setShowReactionsModal(false)}
-                  className="text-white/40 hover:text-white bg-white/5 w-6 h-6 rounded-full flex items-center justify-center transition-all text-xs"
+                  className="text-white/40 hover:text-white bg-white/5 w-6 h-6 rounded-full flex items-center justify-center transition-all text-sm"
                 >
                   ✕
                 </button>
@@ -456,8 +456,8 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
                       >
                         <img src={u.avatar} className="w-9 h-9 rounded-xl object-cover border border-white/10 shrink-0" alt="" />
                         <div className="min-w-0">
-                          <p className="text-xs font-black text-white truncate">{u.name}</p>
-                          <p className="text-xs text-purple-400 font-bold">@{u.username}</p>
+                          <p className="text-sm font-black text-white truncate">{u.name}</p>
+                          <p className="text-sm text-purple-400 font-bold">@{u.username}</p>
                         </div>
                       </Link>
                       <span className="text-xl bg-white/5 w-8 h-8 rounded-full flex items-center justify-center border border-white/5 shadow-md">

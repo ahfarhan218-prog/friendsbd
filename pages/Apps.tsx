@@ -93,10 +93,10 @@ const Apps: React.FC = () => {
       </div>
 
       {/* Header & Description */}
-      <div className="max-w-full max-w-4xl mx-auto px-4 sm:px-6 mx-auto px-6 pt-4 space-y-5">
+      <div className="max-w-full max-w-4xl mx-auto px-4 sm:px-6 mx-auto px-3 sm:px-6 pt-4 space-y-5">
         <div className="text-center space-y-2">
           <h2 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400 uppercase tracking-tight drop-shadow-[0_0_15px_rgba(168,85,247,0.4)]">App Center</h2>
-          <p className="text-xs text-white/50 font-medium max-w-md mx-auto leading-relaxed">
+          <p className="text-sm text-white/50 font-medium max-w-md mx-auto leading-relaxed">
             Browse and launch all community modules, interactive games, and social tools.
           </p>
         </div>
@@ -125,9 +125,9 @@ const Apps: React.FC = () => {
       </div>
 
       {/* Categories / Grid Lists */}
-      <div className="max-w-full max-w-4xl mx-auto px-4 sm:px-6 mx-auto px-6 mt-10 space-y-8">
+      <div className="max-w-full max-w-4xl mx-auto px-4 sm:px-6 mx-auto px-3 sm:px-6 mt-10 space-y-8">
         {filteredSections.length === 0 ? (
-          <div className="bg-[#1C1C2E]/60 backdrop-blur-xl border border-white/5 rounded-[2rem] p-12 text-center space-y-3 shadow-xl max-w-md mx-auto">
+          <div className="bg-[#1C1C2E]/60 backdrop-blur-xl border border-white/5 rounded-[2rem] p-4 sm:p-6 sm:p-12 text-center space-y-3 shadow-xl max-w-md mx-auto">
             <span className="text-5xl block drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">🔍</span>
             <h4 className="font-black text-sm text-white">No Apps Match Your Search</h4>
             <p className="text-xs sm:text-sm text-white/40 font-medium leading-relaxed max-w-xs mx-auto">
@@ -138,7 +138,7 @@ const Apps: React.FC = () => {
           filteredSections.map((section) => (
             <div
               key={section.id}
-              className="bg-[#1C1C2E]/40 backdrop-blur-xl border border-white/10 rounded-[2rem] p-6 shadow-2xl hover:border-purple-500/30 transition-all duration-500 animate-fade-in relative overflow-hidden group"
+              className="bg-[#1C1C2E]/40 backdrop-blur-xl border border-white/10 rounded-[2rem] p-4 sm:p-6 shadow-2xl hover:border-purple-500/30 transition-all duration-500 animate-fade-in relative overflow-hidden group"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-3xl group-hover:bg-purple-500/10 transition-colors pointer-events-none" />
               
@@ -159,7 +159,7 @@ const Apps: React.FC = () => {
               </div>
 
               {/* Apps Grid Layout */}
-              <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 lg:grid-cols-8 gap-x-4 gap-y-8 pt-8 relative z-10">
+              <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-x-2 gap-y-6 sm:gap-x-4 sm:gap-y-8 pt-8 relative z-10">
                 {section.apps.map((app) => (
                   <button
                     key={app.id}
@@ -174,7 +174,7 @@ const Apps: React.FC = () => {
 
                       {/* Pill Badge */}
                       {app.badge && (
-                        <span className="absolute -top-2 -right-2 bg-gradient-to-r from-rose-500 to-pink-500 text-white text-xs font-black px-2 py-0.5 rounded-full border border-rose-400 shadow-[0_0_10px_rgba(244,63,94,0.5)] z-10">
+                        <span className="absolute -top-2 -right-2 bg-gradient-to-r from-rose-500 to-pink-500 text-white text-sm font-black px-2 py-0.5 rounded-full border border-rose-400 shadow-[0_0_10px_rgba(244,63,94,0.5)] z-10">
                           {app.badge}
                         </span>
                       )}

@@ -44,7 +44,7 @@ const ShoutModal: React.FC<ShoutModalProps> = ({ shoutId, onClose, currentUser }
           className="relative w-full max-w-2xl bg-[#090d16] rounded-[2rem] border border-white/5 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
         >
           {/* Header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-white/5 bg-white/[0.02]">
+          <div className="flex items-center justify-between px-3 sm:px-6 py-4 border-b border-white/5 bg-white/[0.02]">
             <h3 className="text-sm font-black text-white uppercase tracking-widest">Avatar Post</h3>
             <button 
               onClick={onClose}
@@ -59,7 +59,7 @@ const ShoutModal: React.FC<ShoutModalProps> = ({ shoutId, onClose, currentUser }
           {/* Content */}
           <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
             {loading ? (
-              <div className="flex items-center justify-center py-20 text-white/50 text-xs font-bold">
+              <div className="flex items-center justify-center py-20 text-white/50 text-sm font-bold">
                 Loading...
               </div>
             ) : shout ? (
@@ -88,7 +88,7 @@ const ShoutModal: React.FC<ShoutModalProps> = ({ shoutId, onClose, currentUser }
                 onClose={() => {}}
               />
             ) : (
-              <div className="flex items-center justify-center py-20 text-white/50 text-xs font-bold">
+              <div className="flex items-center justify-center py-20 text-white/50 text-sm font-bold">
                 Post not found.
               </div>
             )}

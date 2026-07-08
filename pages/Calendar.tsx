@@ -99,11 +99,11 @@ const Calendar: React.FC = () => {
                       </div>
                       <h3 className="text-lg font-black text-white">{e.title}</h3>
                       <p className="text-sm text-white/50 mt-1">{e.description}</p>
-                      {e.prize && <p className="text-xs text-amber-400 mt-2">🎁 Prize: {e.prize}</p>}
+                      {e.prize && <p className="text-sm text-amber-400 mt-2">🎁 Prize: {e.prize}</p>}
                       <div className="flex items-center justify-between mt-3">
-                        <span className="text-xs text-white/60">👥 {e.participants?.length || 0}{e.maxParticipants ? ` / ${e.maxParticipants}` : ''}</span>
+                        <span className="text-sm text-white/60">👥 {e.participants?.length || 0}{e.maxParticipants ? ` / ${e.maxParticipants}` : ''}</span>
                         {e.status === 'upcoming' && session && (
-                          <button onClick={() => handleRegister(e.id)} className="pf-btn pf-btn-primary text-xs">Register</button>
+                          <button onClick={() => handleRegister(e.id)} className="pf-btn pf-btn-primary text-sm">Register</button>
                         )}
                       </div>
                     </div>

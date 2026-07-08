@@ -7,7 +7,11 @@
 import { User, ShoutEntry, HighlightPhoto } from '../types';
 
 // ── Configuration ──────────────────────────────────────────────────────────────
-export const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
+let apiBase = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
+if (apiBase.includes('localhost') && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+  apiBase = apiBase.replace('localhost', window.location.hostname);
+}
+export const API_BASE = apiBase;
 
 // ── HTTP Helpers ──────────────────────────────────────────────────────────────
 
@@ -142,6 +146,15 @@ export const mongoService = {
       5000
     );
   },
+
+  getUserActivities: async (username: string): Promise<any[]> => {
+    try {
+      return await get<any[]>(`/activities/user/${encodeURIComponent(username)}`);
+    } catch {
+      return [];
+    }
+  },
+
 
   // ── Write Actions ─────────────────────────────────────────────────────────
 

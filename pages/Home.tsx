@@ -328,7 +328,7 @@ const Home: React.FC = () => {
     <div className="min-h-screen bg-transparent flex flex-col items-center justify-center p-4 text-center text-white">
       <div className="text-5xl mb-4 animate-bounce">🛠️</div>
       <h1 className="text-2xl font-black uppercase tracking-tight mb-2">Maintenance Mode</h1>
-      <p className="text-white/60 text-xs max-w-xs">We are performing server updates. Check back soon!</p>
+      <p className="text-white/60 text-sm max-w-xs">We are performing server updates. Check back soon!</p>
     </div>
   );
 
@@ -374,7 +374,7 @@ const Home: React.FC = () => {
               <div className={`relative mb-4 rounded-2xl bg-gradient-to-br ${g.bg} border ${g.border} backdrop-blur-sm overflow-hidden`}>
                 <div className="px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-bold text-white/40 uppercase tracking-[0.15em] mb-0.5 truncate">{displayName}</p>
+                    <p className="text-sm font-bold text-white/40 uppercase tracking-[0.15em] mb-0.5 truncate">{displayName}</p>
                     <p className="text-lg sm:text-xl font-black text-white leading-tight tracking-tight">
                       {g.msg} <span className="inline-block">{g.emoji}</span>
                     </p>
@@ -383,8 +383,8 @@ const Home: React.FC = () => {
                   <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center border-t border-white/5 sm:border-none pt-2 sm:pt-0 shrink-0">
                     <p className="text-base sm:text-lg font-black text-white font-mono tabular-nums tracking-tight">{formattedTime}</p>
                     <div className="text-right sm:mt-0.5">
-                      <p className="text-xs text-white/60 font-bold hidden sm:block">{formattedDate}</p>
-                      <span className="inline-flex items-center gap-1 text-xs font-black uppercase tracking-widest px-2 py-0.5 rounded-full bg-white/10">
+                      <p className="text-sm text-white/60 font-bold hidden sm:block">{formattedDate}</p>
+                      <span className="inline-flex items-center gap-1 text-sm font-black uppercase tracking-widest px-2 py-0.5 rounded-full bg-white/10">
                         <span className={`inline-block w-1.5 h-1.5 rounded-full ${g.dot} animate-pulse`} />
                         Live
                       </span>
@@ -397,7 +397,7 @@ const Home: React.FC = () => {
 
           {announcement && (
             <div className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl px-3 py-2 flex items-center gap-3 overflow-hidden">
-              <span className="text-xs font-black uppercase tracking-widest text-purple-300 bg-purple-500/30 px-2 py-0.5 rounded shrink-0">📢 News</span>
+              <span className="text-sm font-black uppercase tracking-widest text-purple-300 bg-purple-500/30 px-2 py-0.5 rounded shrink-0">📢 News</span>
               <div className="flex-1 overflow-hidden">
                 <div className="whitespace-nowrap animate-marquee text-xs sm:text-sm text-white/70 font-medium">{announcement}</div>
               </div>
@@ -409,7 +409,7 @@ const Home: React.FC = () => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
             </span>
-            <span className="text-xs text-white/40 font-bold uppercase tracking-widest">{totalOnline} online now</span>
+            <span className="text-sm text-white/40 font-bold uppercase tracking-widest">{totalOnline} online now</span>
           </div>
         </div>
       </header>
@@ -427,10 +427,10 @@ const Home: React.FC = () => {
               <div className="flex items-center gap-1.5 flex-wrap">
                 <span className="text-sm font-black text-white truncate break-all">{activeUser.name}</span>
                 {activeUser.isVerified && <span className="text-xs sm:text-sm">✔️</span>}
-                {activeUser.isPremium && <span className="text-xs bg-amber-400/20 text-amber-400 px-1.5 py-0.5 rounded-full font-black">👑</span>}
+                {activeUser.isPremium && <span className="text-sm bg-amber-400/20 text-amber-400 px-1.5 py-0.5 rounded-full font-black">👑</span>}
               </div>
               <p className="text-xs sm:text-sm text-purple-400/70 font-bold">@{activeUser.username}</p>
-              <p className="text-xs text-emerald-400 font-black flex items-center gap-1 mt-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-2 py-0.5 w-fit">
+              <p className="text-sm text-emerald-400 font-black flex items-center gap-1 mt-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-2 py-0.5 w-fit">
                 🟢 {formatOnlineTime(activeUser.todayOnlineTime)}
               </p>
             </div>
@@ -438,12 +438,12 @@ const Home: React.FC = () => {
           <div className="flex items-center justify-around sm:justify-end gap-6 border-t border-white/5 sm:border-none pt-3 sm:pt-0 w-full sm:w-auto shrink-0">
             <div className="text-center">
               <p className="text-base sm:text-lg font-black text-white">{activeUser.points || 0}</p>
-              <p className="text-xs text-white/60 font-bold uppercase tracking-widest">XP</p>
+              <p className="text-sm text-white/60 font-bold uppercase tracking-widest">XP</p>
             </div>
             <div className="w-px h-6 bg-white/10" />
             <div className="text-center">
               <p className="text-base sm:text-lg font-black text-white">Lv.{activeUser.level || 1}</p>
-              <p className="text-xs text-white/60 font-bold uppercase tracking-widest">Level</p>
+              <p className="text-sm text-white/60 font-bold uppercase tracking-widest">Level</p>
             </div>
           </div>
         </motion.div>
@@ -458,7 +458,7 @@ const Home: React.FC = () => {
               className={`bg-gradient-to-br ${s.color} border rounded-xl sm:rounded-2xl p-2 sm:p-3 text-center active:scale-[0.95] transition-all cursor-pointer outline-none min-w-0`}>
               <span className="text-lg sm:text-xl block mb-0.5">{s.icon}</span>
               <p className="text-sm sm:text-lg font-black text-white truncate">{s.value}</p>
-              <p className="text-xs sm:text-xs text-white/60 font-bold uppercase tracking-wider truncate">{s.label}</p>
+              <p className="text-sm sm:text-xs text-white/60 font-bold uppercase tracking-wider truncate">{s.label}</p>
             </button>
           ))}
         </div>
@@ -467,16 +467,16 @@ const Home: React.FC = () => {
           className={`bg-[#1C1C2E] border rounded-2xl sm:rounded-[2rem] overflow-hidden transition-colors ${editingShout ? 'border-amber-500/30' : 'border-white/5 focus-within:border-purple-500/30'} w-full`}>
           {editingShout && (
             <div className="bg-amber-500/10 border-b border-amber-500/20 px-3 py-1.5 flex items-center justify-between">
-              <span className="text-xs font-black uppercase tracking-widest text-amber-400">✏️ Editing</span>
-              <button onClick={() => { setEditingShout(null); setShoutText(''); }} className="text-xs font-black text-white/60 hover:text-white uppercase">Cancel</button>
+              <span className="text-sm font-black uppercase tracking-widest text-amber-400">✏️ Editing</span>
+              <button onClick={() => { setEditingShout(null); setShoutText(''); }} className="text-sm font-black text-white/60 hover:text-white uppercase">Cancel</button>
             </div>
           )}
 
           {replyingTo && (
             <div className="bg-purple-950/40 border-b border-purple-500/20 px-3 py-2 flex items-center justify-between">
               <div className="min-w-0 flex-1 mr-2">
-                <span className="text-xs font-black uppercase tracking-widest text-purple-400">↩️ Reply to @{replyingTo.username || replyingTo.user.toLowerCase().replace(/\s+/g, '')}</span>
-                <p className="text-xs text-white/50 truncate mt-0.5">{replyingTo.content}</p>
+                <span className="text-sm font-black uppercase tracking-widest text-purple-400">↩️ Reply to @{replyingTo.username || replyingTo.user.toLowerCase().replace(/\s+/g, '')}</span>
+                <p className="text-sm text-white/50 truncate mt-0.5">{replyingTo.content}</p>
               </div>
               <button onClick={() => setReplyingTo(null)} className="text-xs sm:text-sm font-black text-white/60 bg-white/5 w-5 h-5 rounded-full flex items-center justify-center shrink-0">✕</button>
             </div>
@@ -485,19 +485,19 @@ const Home: React.FC = () => {
           <div className="flex items-center gap-2.5 px-3 pt-3.5">
             <img src={activeUser.avatar} className="w-8 h-8 rounded-lg object-cover border border-white/10 shrink-0" alt="" />
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-black text-white truncate">{activeUser.name}</p>
+              <p className="text-sm font-black text-white truncate">{activeUser.name}</p>
             </div>
-            <span className="text-xs font-black text-white/50 font-mono">{shoutText.length} ch</span>
+            <span className="text-sm font-black text-white/50 font-mono">{shoutText.length} ch</span>
           </div>
 
           {['admin', 'moderator'].includes(activeUser.role || '') && (
             <div className="flex gap-1.5 px-3 pt-2.5 pb-1 overflow-x-auto no-scrollbar">
               <button type="button" onClick={() => setShoutType('normal')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-black uppercase tracking-wider shrink-0 transition-all ${shoutType === 'normal' ? 'bg-purple-600 text-white' : 'bg-white/5 text-white/40'}`}>
+                className={`px-2.5 py-1 rounded-lg text-sm font-black uppercase tracking-wider shrink-0 transition-all ${shoutType === 'normal' ? 'bg-purple-600 text-white' : 'bg-white/5 text-white/40'}`}>
                 📢 Normal
               </button>
               <button type="button" onClick={() => setShoutType('quiz')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-black uppercase tracking-wider shrink-0 transition-all ${shoutType === 'quiz' ? 'bg-rose-600 text-white' : 'bg-white/5 text-white/40'}`}>
+                className={`px-2.5 py-1 rounded-lg text-sm font-black uppercase tracking-wider shrink-0 transition-all ${shoutType === 'quiz' ? 'bg-rose-600 text-white' : 'bg-white/5 text-white/40'}`}>
                 ❓ Quiz (3m)
               </button>
             </div>
@@ -514,7 +514,7 @@ const Home: React.FC = () => {
               <div className="flex gap-1 overflow-x-auto py-0.5 no-scrollbar flex-1 max-w-[70%] sm:max-w-none">
                 {QUICK_EMOJIS.map(e => (
                   <button key={e} onClick={() => !isLockdown && setShoutText(prev => prev + e)} disabled={isLockdown}
-                    className="w-7 h-7 shrink-0 rounded-lg bg-white/5 flex items-center justify-center text-xs active:scale-90 transition-all">
+                    className="w-7 h-7 shrink-0 rounded-lg bg-white/5 flex items-center justify-center text-sm active:scale-90 transition-all">
                     {e}
                   </button>
                 ))}
@@ -533,7 +533,7 @@ const Home: React.FC = () => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-purple-600" />
             </span>
-            <h3 className="text-xs font-black text-white/40 uppercase tracking-[0.2em]">Live Shout Stream</h3>
+            <h3 className="text-sm font-black text-white/40 uppercase tracking-[0.2em]">Live Shout Stream</h3>
           </div>
 
           <AnimatePresence mode="popLayout">
@@ -564,19 +564,19 @@ const Home: React.FC = () => {
                   <div className="flex items-center gap-2.5 min-w-0">
                     <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center text-sm shrink-0">📣</div>
                     <div className="text-left min-w-0">
-                      <p className="text-xs font-black text-white">See All Shouts</p>
-                      <p className="text-xs text-white/60 font-bold truncate mt-0.5">
+                      <p className="text-sm font-black text-white">See All Shouts</p>
+                      <p className="text-sm text-white/60 font-bold truncate mt-0.5">
                         {shouts.length > 3 ? `${shouts.length - 3} more shouts in history` : 'View history'}
                       </p>
                     </div>
                   </div>
-                  <span className="text-purple-400 text-xs font-black uppercase tracking-wider shrink-0">→</span>
+                  <span className="text-purple-400 text-sm font-black uppercase tracking-wider shrink-0">→</span>
                 </motion.button>
               </div>
             ) : (
               <div className="py-12 text-center bg-[#1C1C2E] rounded-2xl border border-white/5 w-full">
                 <span className="text-3xl block mb-2">📣</span>
-                <p className="text-xs font-black text-white/40 uppercase tracking-widest">No shouts yet</p>
+                <p className="text-sm font-black text-white/40 uppercase tracking-widest">No shouts yet</p>
               </div>
             )}
           </AnimatePresence>
@@ -585,14 +585,14 @@ const Home: React.FC = () => {
         {activities.length > 0 && (
           <div className="bg-[#1C1C2E] border border-white/5 rounded-2xl p-4 w-full">
             <div className="flex items-center justify-between mb-3.5">
-              <h3 className="text-xs font-black text-purple-400/70 uppercase tracking-[0.2em]">🕒 Recent Activity</h3>
-              <button onClick={() => navigate('/timeline')} className="text-xs font-black text-white/60 hover:text-white uppercase tracking-wider">All →</button>
+              <h3 className="text-sm font-black text-purple-400/70 uppercase tracking-[0.2em]">🕒 Recent Activity</h3>
+              <button onClick={() => navigate('/timeline')} className="text-sm font-black text-white/60 hover:text-white uppercase tracking-wider">All →</button>
             </div>
             <div className="space-y-2.5">
               {activities.slice(0, 5).map((act, i) => (
                 <div key={act.id || i} className="flex items-start gap-2 min-w-0">
-                  <span className="text-xs font-mono text-white/40 bg-white/5 px-1.5 py-0.5 rounded shrink-0 mt-0.5">{act.time}</span>
-                  <p className="text-xs text-white/50 leading-normal truncate flex-1 min-w-0 break-all">
+                  <span className="text-sm font-mono text-white/40 bg-white/5 px-1.5 py-0.5 rounded shrink-0 mt-0.5">{act.time}</span>
+                  <p className="text-sm text-white/50 leading-normal truncate flex-1 min-w-0 break-all">
                     <span onClick={() => navigate(`/profile/${act.username}`)} className="font-black text-white/70 cursor-pointer">{act.username}</span>{' '}
                     {act.link ? (
                       <span onClick={() => navigate(act.link)} className="cursor-pointer hover:underline text-cyan-400">
@@ -610,11 +610,11 @@ const Home: React.FC = () => {
 
         <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] shadow-xl rounded-2xl p-4 w-full relative overflow-hidden">
           <div className="flex items-center justify-between mb-3.5">
-            <h3 className="text-xs font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-[0.2em] flex items-center gap-1.5">
+            <h3 className="text-sm font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-[0.2em] flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               Highlights
             </h3>
-            <span className="text-xs font-bold text-slate-500 bg-[#161b22] px-2 py-0.5 rounded-full border border-[#30363d]">24H</span>
+            <span className="text-sm font-bold text-slate-500 bg-[#161b22] px-2 py-0.5 rounded-full border border-[#30363d]">24H</span>
           </div>
 
           <div className="flex flex-col gap-2 w-full">
@@ -627,11 +627,11 @@ const Home: React.FC = () => {
                 className="w-full flex items-center gap-3 p-3 rounded-xl bg-[#161b22]/50 border border-[#30363d] text-left min-w-0 active:bg-white/[0.02]">
                 <span className="text-xl shrink-0">{item.icon}</span>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">{item.label}</p>
-                  <p className="text-xs font-black text-white truncate break-all">{item.value}</p>
-                  <p className="text-xs text-slate-500 font-medium truncate">{item.sub}</p>
+                  <p className="text-sm text-slate-400 font-bold uppercase tracking-wider">{item.label}</p>
+                  <p className="text-sm font-black text-white truncate break-all">{item.value}</p>
+                  <p className="text-sm text-slate-500 font-medium truncate">{item.sub}</p>
                 </div>
-                <span className="text-slate-600 text-xs shrink-0">→</span>
+                <span className="text-slate-600 text-sm shrink-0">→</span>
               </button>
             ))}
           </div>
@@ -644,13 +644,13 @@ const Home: React.FC = () => {
           if (suggested.length === 0) return null;
           return (
             <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] rounded-2xl p-4 w-full">
-              <h3 className="text-xs font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-[0.2em] mb-3">👥 Suggested</h3>
+              <h3 className="text-sm font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-[0.2em] mb-3">👥 Suggested</h3>
               <div className="flex gap-2.5 overflow-x-auto pb-1.5 no-scrollbar w-full">
                 {suggested.map(u => (
                   <button key={u.id} onClick={() => navigate(`/profile/${u.username}`)} className="w-24 p-2.5 text-center shrink-0 bg-[#1C1C2E] border border-white/5 rounded-xl min-w-0">
                     <img src={u.avatar} className="w-10 h-10 rounded-full mx-auto border border-purple-500/30 mb-1.5 object-cover" alt="" />
                     <p className="text-xs sm:text-sm font-bold text-white truncate">{u.name}</p>
-                    <p className="text-xs text-white/60 truncate">@{u.username}</p>
+                    <p className="text-sm text-white/60 truncate">@{u.username}</p>
                   </button>
                 ))}
               </div>

@@ -59,6 +59,7 @@ const userSchema = new mongoose.Schema({
     date: String,
     completed: [String]
   },
+  dailyGrabs: mongoose.Schema.Types.Mixed,
   createdAt: { type: Number, default: () => Date.now() },
   lastClaimId: String,
   mutualFriends: Number,

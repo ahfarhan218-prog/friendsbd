@@ -39,7 +39,7 @@ const Blog: React.FC = () => {
         ) : (
           <div className="space-y-4">
             {posts.map(post => (
-              <Link key={post.id} to={`/blog/view/${post.id}`} className="pf-card p-6 block hover:border-purple-500/30 transition-all">
+              <Link key={post.id} to={`/blog/view/${post.id}`} className="pf-card p-4 sm:p-6 block hover:border-purple-500/30 transition-all">
                 <div className="flex flex-wrap items-center gap-3 mb-3">
                   <img src={post.authorAvatar} className="w-10 h-10 rounded-full object-cover border-2 border-purple-500/30" alt="" />
                   <div>

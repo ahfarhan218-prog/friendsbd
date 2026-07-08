@@ -93,9 +93,9 @@ const Marketplace: React.FC = () => {
                   <span className="text-lg font-black text-purple-400">{item.price} {item.currency === 'goldenCoins' ? '🪙' : item.currency === 'silverPoints' ? '🔘' : '⚡'}</span>
                   <div className="flex flex-wrap gap-2">
                     {item.sellerId === session?.id ? (
-                      <button onClick={() => handleCancel(item.id)} className="pf-btn pf-btn-ghost text-xs">Cancel</button>
+                      <button onClick={() => handleCancel(item.id)} className="pf-btn pf-btn-ghost text-sm">Cancel</button>
                     ) : (
-                      <button onClick={() => handleBuy(item.id)} className="pf-btn pf-btn-primary text-xs">Buy</button>
+                      <button onClick={() => handleBuy(item.id)} className="pf-btn pf-btn-primary text-sm">Buy</button>
                     )}
                   </div>
                 </div>

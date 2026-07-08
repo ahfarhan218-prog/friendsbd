@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ForumThread, ForumPost, User, ForumCategory } from '../types';
 import { forumService } from '../services/forumService';
+import { mongoService } from '../services/mongoService';
 import { apService } from '../services/apService';
 import { unlockAchievement } from '../utils/achievements';
 import { triggerToast } from '../components/NotificationToast';
@@ -162,6 +163,15 @@ const ForumCreateThread: React.FC = () => {
         isRead: false
       } as any);
 
+      mongoService.addActivity({
+        id: 'act_' + Date.now(),
+        time: new Date().toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' }),
+        username: activeUser.username || activeUser.name,
+        msg: `created a new forum topic "${title}"`,
+        timestamp: Date.now(),
+        link: `/forum/thread/${threadId}`
+      });
+
       navigate(`/forum/thread/${resp.threadId || threadId}`);
     } catch (err: any) {
       console.error('Failed to create topic:', err);
@@ -174,11 +184,11 @@ const ForumCreateThread: React.FC = () => {
   return (
     <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative">
       {/* Decorative Orbs */}
-      <div className="absolute top-0 right-10 w-80 h-80 bg-indigo-600/5 rounded-full blur-[110px] pointer-events-none" />
-      <div className="absolute bottom-20 left-10 w-80 h-80 bg-purple-600/5 rounded-full blur-[110px] pointer-events-none" />
+      <div className="absolute top-0 right-10 w-full max-w-[20rem] sm:w-80 h-80 bg-indigo-600/5 rounded-full blur-[110px] pointer-events-none" />
+      <div className="absolute bottom-20 left-10 w-full max-w-[20rem] sm:w-80 h-80 bg-purple-600/5 rounded-full blur-[110px] pointer-events-none" />
 
       {/* HEADER SECTION */}
-      <header className="p-6 max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto flex items-center justify-between border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md rounded-b-[2rem]">
+      <header className="p-4 sm:p-6 max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto flex items-center justify-between border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md rounded-b-[2rem]">
         <div className="flex flex-wrap items-center gap-4">
           <button
             onClick={() => navigate(-1)}
@@ -189,14 +199,14 @@ const ForumCreateThread: React.FC = () => {
             </svg>
           </button>
           <div className="text-left">
-            <span className="text-xs font-black text-indigo-400 uppercase tracking-[0.3em] block mb-0.5">Forums › Editor</span>
+            <span className="text-sm font-black text-indigo-400 uppercase tracking-[0.3em] block mb-0.5">Forums › Editor</span>
             <h1 className="text-lg font-black text-white tracking-tight">Create Discussion Topic</h1>
           </div>
         </div>
       </header>
 
       {/* EDITOR CONTENT */}
-      <main className="max-w-full max-w-3xl mx-auto px-4 sm:px-6 mx-auto px-6 mt-6 space-y-5 relative z-10 text-left">
+      <main className="max-w-full max-w-3xl mx-auto px-4 sm:px-6 mx-auto px-3 sm:px-6 mt-6 space-y-5 relative z-10 text-left">
         {error && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -204,7 +214,7 @@ const ForumCreateThread: React.FC = () => {
             className="bg-rose-500/10 border border-rose-500/20 rounded-2xl p-4 flex flex-wrap items-center gap-3"
           >
             <span className="text-rose-400 text-xl shrink-0">⚠️</span>
-            <p className="text-rose-300 text-xs font-bold">{error}</p>
+            <p className="text-rose-300 text-sm font-bold">{error}</p>
           </motion.div>
         )}
 
@@ -226,7 +236,7 @@ const ForumCreateThread: React.FC = () => {
                 <span className="text-xl shrink-0">{cat.icon || '📁'}</span>
                 <div className="min-w-0">
                   <p className="text-xs sm:text-sm font-black uppercase tracking-wide truncate">{cat.name}</p>
-                  <p className="text-xs text-slate-500 truncate mt-0.5">{cat.description}</p>
+                  <p className="text-sm text-slate-500 truncate mt-0.5">{cat.description}</p>
                 </div>
               </button>
             ))}
@@ -243,11 +253,11 @@ const ForumCreateThread: React.FC = () => {
             value={title}
             onChange={e => setTitle(e.target.value)}
             placeholder="Enter a descriptive topic title..."
-            className="w-full bg-[#090d16] border border-[#1f293d] rounded-2xl px-4 py-3 text-xs text-white placeholder-slate-600 font-semibold outline-none focus:border-indigo-500 transition-colors"
+            className="w-full bg-[#090d16] border border-[#1f293d] rounded-2xl px-4 py-3 text-sm text-white placeholder-slate-600 font-semibold outline-none focus:border-indigo-500 transition-colors"
           />
           <div className="flex justify-between items-center px-1">
-            <span className="text-xs text-slate-500 font-semibold">Make it clear and helpful.</span>
-            <span className="text-xs text-slate-500 font-bold font-mono">{title.length}/100</span>
+            <span className="text-sm text-slate-500 font-semibold">Make it clear and helpful.</span>
+            <span className="text-sm text-slate-500 font-bold font-mono">{title.length}/100</span>
           </div>
         </div>
 
@@ -271,7 +281,7 @@ const ForumCreateThread: React.FC = () => {
                 type="button"
                 onClick={() => insertMarkdown(t.syntax)}
                 title={t.title}
-                className="h-8 px-3 rounded-xl bg-[#121824] border border-[#1f293d] text-slate-400 hover:text-indigo-400 hover:border-indigo-500/40 active:scale-95 transition-all text-xs font-black uppercase tracking-wider"
+                className="h-8 px-3 rounded-xl bg-[#121824] border border-[#1f293d] text-slate-400 hover:text-indigo-400 hover:border-indigo-500/40 active:scale-95 transition-all text-sm font-black uppercase tracking-wider"
               >
                 {t.label}
               </button>
@@ -285,11 +295,11 @@ const ForumCreateThread: React.FC = () => {
             onChange={e => setContent(e.target.value)}
             placeholder="Write your topic introduction... Markdown bold, italics, links, blockquotes, code, and glowing highlights (==text==) are fully supported."
             rows={8}
-            className="w-full bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-2xl px-4 py-3.5 text-xs font-medium resize-y leading-relaxed transition-colors placeholder-slate-600"
+            className="w-full bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-2xl px-4 py-3.5 text-sm font-medium resize-y leading-relaxed transition-colors placeholder-slate-600"
           />
           <div className="flex justify-between items-center px-1">
-            <span className="text-xs text-slate-500 font-semibold">Write an informative description for other members.</span>
-            <span className="text-xs text-slate-500 font-bold font-mono">{content.length} characters</span>
+            <span className="text-sm text-slate-500 font-semibold">Write an informative description for other members.</span>
+            <span className="text-sm text-slate-500 font-bold font-mono">{content.length} characters</span>
           </div>
         </div>
 
@@ -301,12 +311,12 @@ const ForumCreateThread: React.FC = () => {
             value={tags}
             onChange={e => setTags(e.target.value)}
             placeholder="e.g. cricket, news, question"
-            className="w-full bg-[#090d16] border border-[#1f293d] rounded-2xl px-4 py-3 text-xs text-white placeholder-slate-600 font-medium outline-none focus:border-indigo-500 transition-colors"
+            className="w-full bg-[#090d16] border border-[#1f293d] rounded-2xl px-4 py-3 text-sm text-white placeholder-slate-600 font-medium outline-none focus:border-indigo-500 transition-colors"
           />
           {tags && (
             <div className="flex flex-wrap gap-1 px-1">
               {tags.split(',').map(t => t.trim()).filter(Boolean).map(tag => (
-                <span key={tag} className="px-2 py-0.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-black rounded-lg">#{tag}</span>
+                <span key={tag} className="px-2 py-0.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-black rounded-lg">#{tag}</span>
               ))}
             </div>
           )}
@@ -317,7 +327,7 @@ const ForumCreateThread: React.FC = () => {
           type="button"
           onClick={handlePublish}
           disabled={!title.trim() || !content.trim() || loading}
-          className="w-full bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-black py-4 rounded-3xl text-xs uppercase tracking-widest shadow-lg shadow-indigo-600/20 flex flex-wrap items-center justify-center gap-2 transition-all active:scale-[0.98]"
+          className="w-full bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-black py-4 rounded-3xl text-sm uppercase tracking-widest shadow-lg shadow-indigo-600/20 flex flex-wrap items-center justify-center gap-2 transition-all active:scale-[0.98]"
         >
           {loading ? (
             <>

@@ -25,7 +25,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, currentUser, index, onOptions
     <motion.div 
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-[2.5rem] p-6 sm:p-8 shadow-sm border border-purple-100 hover:border-purple-200 transition-all group overflow-hidden"
+      className="bg-white rounded-[2.5rem] p-4 sm:p-6 sm:p-8 shadow-sm border border-purple-100 hover:border-purple-200 transition-all group overflow-hidden"
     >
       <div className="flex items-start justify-between mb-6">
         <div className="flex flex-wrap gap-4 min-w-0">
@@ -71,7 +71,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, currentUser, index, onOptions
            {Object.keys(post.reactions || {}).length > 0 ? (
              Object.entries(post.reactions).map(([emoji, count]) => (
                <div key={emoji} className="bg-slate-50 border border-slate-100 rounded-xl px-2.5 py-1 flex flex-wrap items-center gap-1.5 shadow-sm">
-                 <span className="text-xs">{emoji}</span>
+                 <span className="text-sm">{emoji}</span>
                  <span className="text-xs sm:text-sm font-black text-slate-500">{count}</span>
                </div>
              ))

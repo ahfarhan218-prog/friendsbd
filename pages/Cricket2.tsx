@@ -192,7 +192,7 @@ Commentary: [clr=F39C12]${comment}[/clr]`;
 
       {phase === 'setup' && (
         <div className="setup-phase animate-in fade-in zoom-in-95 duration-300">
-          <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] rounded-[2rem] p-6 md:p-8 mb-8 shadow-2xl relative overflow-hidden">
+          <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] rounded-[2rem] p-4 sm:p-6 md:p-8 mb-8 shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 right-0 p-32 bg-emerald-500/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
             
             <h3 className="text-sm font-black text-emerald-400 tracking-[0.15em] uppercase mb-6 flex flex-wrap items-center gap-2 relative z-10">
@@ -233,13 +233,13 @@ Commentary: [clr=F39C12]${comment}[/clr]`;
         <div className="playing-phase grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8 animate-in fade-in slide-in-from-bottom-8 duration-500">
           {/* Main Controls */}
           <div className="flex flex-col gap-6">
-            <div className="bg-[#090d16]/90 backdrop-blur-xl border border-[#30363d] rounded-[2.5rem] p-8 text-center shadow-2xl relative overflow-hidden">
+            <div className="bg-[#090d16]/90 backdrop-blur-xl border border-[#30363d] rounded-[2.5rem] p-4 sm:p-8 text-center shadow-2xl relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
               <p className="text-xs sm:text-sm uppercase font-black tracking-[0.3em] text-slate-500 mb-2">CURRENT SCORE</p>
               <h2 className="text-6xl md:text-7xl font-black text-white m-0 mb-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                 {gameState.runs} <span className="text-slate-600 text-5xl font-light mx-2">/</span> <span className="text-rose-500 drop-shadow-[0_0_15px_rgba(244,63,94,0.3)]">{gameState.wickets}</span>
               </h2>
-              <div className="inline-block bg-slate-800/80 px-6 py-2 rounded-full border border-slate-700 shadow-inner">
+              <div className="inline-block bg-slate-800/80 px-3 sm:px-6 py-2 rounded-full border border-slate-700 shadow-inner">
                 <span className="text-sm text-slate-400 font-bold uppercase tracking-widest mr-2">Overs</span>
                 <span className="text-lg text-white font-black">{formatOvers(gameState.balls)}</span>
               </div>
@@ -249,7 +249,7 @@ Commentary: [clr=F39C12]${comment}[/clr]`;
             <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="bg-[#161b22]/80 backdrop-blur-md border border-[#30363d] rounded-2xl p-5 shadow-lg relative overflow-hidden group hover:border-sky-500/50 transition-colors">
                 <div className="absolute -right-4 -top-4 w-16 h-16 bg-sky-500/10 rounded-full blur-xl pointer-events-none" />
-                <div className="text-xs text-sky-400 font-black uppercase tracking-widest mb-3 flex flex-wrap items-center gap-2">
+                <div className="text-sm text-sky-400 font-black uppercase tracking-widest mb-3 flex flex-wrap items-center gap-2">
                   <span>🏏</span> Current Batter
                 </div>
                 <input 
@@ -265,7 +265,7 @@ Commentary: [clr=F39C12]${comment}[/clr]`;
               
               <div className="bg-[#161b22]/80 backdrop-blur-md border border-[#30363d] rounded-2xl p-5 shadow-lg relative overflow-hidden group hover:border-indigo-500/50 transition-colors">
                 <div className="absolute -right-4 -top-4 w-16 h-16 bg-indigo-500/10 rounded-full blur-xl pointer-events-none" />
-                <div className="text-xs text-indigo-400 font-black uppercase tracking-widest mb-3 flex flex-wrap items-center gap-2">
+                <div className="text-sm text-indigo-400 font-black uppercase tracking-widest mb-3 flex flex-wrap items-center gap-2">
                   <span>🎯</span> Current Bowler
                 </div>
                 <input 
@@ -281,8 +281,8 @@ Commentary: [clr=F39C12]${comment}[/clr]`;
             </div>
 
             {/* Score Actions */}
-            <div className="bg-[#161b22]/80 backdrop-blur-xl border border-[#30363d] rounded-[2rem] p-6 shadow-xl">
-              <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Log Action</h3>
+            <div className="bg-[#161b22]/80 backdrop-blur-xl border border-[#30363d] rounded-[2rem] p-4 sm:p-6 shadow-xl">
+              <h3 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Log Action</h3>
               <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 gap-3">
                 {[0, 1, 2, 3, 4, 6].map(run => (
                   <button 
@@ -307,7 +307,7 @@ Commentary: [clr=F39C12]${comment}[/clr]`;
 
           {/* BBCode Output */}
           <div className="h-full">
-            <div className="bg-[#161b22]/90 backdrop-blur-xl border border-[#30363d] rounded-[2rem] p-6 h-full flex flex-col shadow-2xl relative overflow-hidden">
+            <div className="bg-[#161b22]/90 backdrop-blur-xl border border-[#30363d] rounded-[2rem] p-4 sm:p-6 h-full flex flex-col shadow-2xl relative overflow-hidden">
               <div className="absolute -top-20 -right-20 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
               
               <div className="flex justify-between items-center mb-4 relative z-10">
@@ -316,7 +316,7 @@ Commentary: [clr=F39C12]${comment}[/clr]`;
                 </h3>
                 <button 
                   onClick={copyBBCode} 
-                  className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 px-4 py-2 rounded-lg font-bold text-xs cursor-pointer hover:bg-emerald-500 hover:text-white transition-all active:scale-95 uppercase tracking-wider"
+                  className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 px-4 py-2 rounded-lg font-bold text-sm cursor-pointer hover:bg-emerald-500 hover:text-white transition-all active:scale-95 uppercase tracking-wider"
                 >
                   Copy
                 </button>
@@ -324,10 +324,10 @@ Commentary: [clr=F39C12]${comment}[/clr]`;
               <textarea 
                 readOnly 
                 value={gameState.bbcode}
-                className="flex-1 bg-[#090d16] border border-slate-700/80 rounded-xl p-4 text-sky-300 text-xs font-mono resize-none outline-none focus:border-emerald-500/50 transition-colors shadow-inner relative z-10 w-full min-h-[300px] leading-relaxed"
+                className="flex-1 bg-[#090d16] border border-slate-700/80 rounded-xl p-4 text-sky-300 text-sm font-mono resize-none outline-none focus:border-emerald-500/50 transition-colors shadow-inner relative z-10 w-full min-h-[300px] leading-relaxed"
               />
               {gameState.latestCommentary && (
-                <div className="mt-4 p-4 bg-amber-900/20 border border-amber-500/30 rounded-xl text-xs text-amber-400 italic font-medium shadow-inner relative z-10 leading-relaxed">
+                <div className="mt-4 p-4 bg-amber-900/20 border border-amber-500/30 rounded-xl text-sm text-amber-400 italic font-medium shadow-inner relative z-10 leading-relaxed">
                   <span className="text-sm not-italic mr-2">💬</span> {gameState.latestCommentary}
                 </div>
               )}
@@ -343,7 +343,7 @@ Commentary: [clr=F39C12]${comment}[/clr]`;
 // --- Sub Components ---
 const InputBox: React.FC<{label: string, val: string, onChange: (v:string)=>void}> = ({label, val, onChange}) => (
   <div className="flex flex-col gap-2">
-    <label className="text-xs font-bold text-slate-400 uppercase tracking-wider pl-1">{label}</label>
+    <label className="text-sm font-bold text-slate-400 uppercase tracking-wider pl-1">{label}</label>
     <input 
       type="text" 
       value={val} 
@@ -361,7 +361,7 @@ const TeamTable: React.FC<{ title: string, data: string[], onChange: (i:number, 
     <div className="p-5 space-y-3">
       {data.map((player, i) => (
         <div key={i} className="flex flex-wrap items-center gap-3">
-          <span className="w-6 text-xs text-slate-500 font-black flex items-center justify-center shrink-0">{i + 1}</span>
+          <span className="w-6 text-sm text-slate-500 font-black flex items-center justify-center shrink-0">{i + 1}</span>
           <input 
             type="text" 
             value={player} 
@@ -373,7 +373,7 @@ const TeamTable: React.FC<{ title: string, data: string[], onChange: (i:number, 
       ))}
       {hasBackup && (
         <div className="flex flex-wrap items-center gap-3 mt-5 pt-5 border-t border-slate-700/50">
-          <span className="w-6 text-xs text-amber-500 font-black flex items-center justify-center shrink-0">B</span>
+          <span className="w-6 text-sm text-amber-500 font-black flex items-center justify-center shrink-0">B</span>
           <input 
             type="text" 
             placeholder="Backup Player" 

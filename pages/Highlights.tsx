@@ -169,7 +169,7 @@ const Highlights: React.FC = () => {
   return (
     <div className="min-h-screen bg-transparent flex flex-col pb-24 font-inter text-[#e2e8f0]">
       {/* Dark Theme Modern Header */}
-      <header className="relative bg-[#090d16]/80 backdrop-blur-xl border-b border-[#30363d] p-6 pb-20 shrink-0 overflow-hidden">
+      <header className="relative bg-[#090d16]/80 backdrop-blur-xl border-b border-[#30363d] p-4 sm:p-6 pb-20 shrink-0 overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-48 h-48 bg-pink-600/10 rounded-full blur-3xl" />
         
@@ -223,7 +223,7 @@ const Highlights: React.FC = () => {
               exit={{ opacity: 0, y: -15 }}
               className="space-y-4"
             >
-              <div className="bg-[#161b22]/80 backdrop-blur-md rounded-[2.5rem] p-6 border border-[#30363d] shadow-xl text-left">
+              <div className="bg-[#161b22]/80 backdrop-blur-md rounded-[2.5rem] p-4 sm:p-6 border border-[#30363d] shadow-xl text-left">
                 <h3 className="text-base font-black text-white leading-none">📢 Today's Shouter Stats</h3>
                 <p className="text-xs sm:text-sm text-purple-300 font-bold uppercase tracking-wider mt-1 mb-5">Members who shouted most today</p>
 
@@ -234,17 +234,17 @@ const Highlights: React.FC = () => {
                     {shouters.map((sh, idx) => (
                       <div key={sh.user + idx} className="py-3.5 flex flex-wrap items-center justify-between gap-3">
                         <div className="flex flex-wrap items-center gap-3">
-                          <span className={`w-6 text-center text-xs font-black ${idx === 0 ? 'text-amber-500' : idx === 1 ? 'text-slate-300' : 'text-[#8b5a2b]'}`}>
+                          <span className={`w-6 text-center text-sm font-black ${idx === 0 ? 'text-amber-500' : idx === 1 ? 'text-slate-300' : 'text-[#8b5a2b]'}`}>
                             {idx + 1}
                           </span>
                           <img src={sh.avatar} className="w-10 h-10 rounded-xl object-cover shrink-0 border border-[#30363d]" alt="" />
                           <div>
-                            <p className="text-xs font-black text-white">{sh.user}</p>
-                            <p className="text-xs text-purple-400 font-bold uppercase tracking-wider">Today Rank {idx + 1}</p>
+                            <p className="text-sm font-black text-white">{sh.user}</p>
+                            <p className="text-sm text-purple-400 font-bold uppercase tracking-wider">Today Rank {idx + 1}</p>
                           </div>
                         </div>
                         <div className="flex flex-wrap items-center gap-3">
-                          <span className="bg-purple-900/30 text-purple-300 font-mono text-xs font-black px-3 py-1 rounded-full uppercase border border-purple-500/20">
+                          <span className="bg-purple-900/30 text-purple-300 font-mono text-sm font-black px-3 py-1 rounded-full uppercase border border-purple-500/20">
                             {sh.count} {sh.count === 1 ? 'shout' : 'shouts'}
                           </span>
                         </div>
@@ -255,8 +255,8 @@ const Highlights: React.FC = () => {
               </div>
 
               {/* Recent Shouts */}
-              <div className="bg-[#161b22]/80 backdrop-blur-md rounded-[2.5rem] p-6 border border-[#30363d] shadow-xl text-left">
-                <h4 className="text-xs font-black text-purple-300 uppercase tracking-widest mb-4">Today's Shared Broadcasts</h4>
+              <div className="bg-[#161b22]/80 backdrop-blur-md rounded-[2.5rem] p-4 sm:p-6 border border-[#30363d] shadow-xl text-left">
+                <h4 className="text-sm font-black text-purple-300 uppercase tracking-widest mb-4">Today's Shared Broadcasts</h4>
                 {todayShouts.length === 0 ? (
                   <div className="text-center py-6 text-slate-500 text-sm font-medium italic">No broadcasts today.</div>
                 ) : (
@@ -266,11 +266,11 @@ const Highlights: React.FC = () => {
                         <img src={s.avatar} className="w-9 h-9 rounded-xl object-cover shrink-0 border border-[#30363d]" alt="" />
                         <div className="min-w-0 flex-1">
                           <div className="flex flex-wrap items-center gap-1.5 mb-1">
-                            <span className="text-xs font-black text-white truncate">{s.user}</span>
+                            <span className="text-sm font-black text-white truncate">{s.user}</span>
                             {s.isPremium && <span className="text-xs sm:text-sm" title="Premium">👑</span>}
-                            <span className="text-xs font-bold font-mono text-slate-500 ml-auto">{s.time}</span>
+                            <span className="text-sm font-bold font-mono text-slate-500 ml-auto">{s.time}</span>
                           </div>
-                          <p className="text-xs text-slate-300 leading-relaxed font-bold">{s.content}</p>
+                          <p className="text-sm text-slate-300 leading-relaxed font-bold">{s.content}</p>
                         </div>
                       </div>
                     ))}
@@ -288,7 +288,7 @@ const Highlights: React.FC = () => {
               exit={{ opacity: 0, y: -15 }}
               className="space-y-4"
             >
-              <div className="bg-[#161b22]/80 backdrop-blur-md rounded-[2.5rem] p-6 border border-[#30363d] shadow-xl text-left">
+              <div className="bg-[#161b22]/80 backdrop-blur-md rounded-[2.5rem] p-4 sm:p-6 border border-[#30363d] shadow-xl text-left">
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <h3 className="text-base font-black text-white leading-none">👑 Today's Elite Leaderboard</h3>
@@ -308,22 +308,22 @@ const Highlights: React.FC = () => {
                         className="p-4 rounded-3xl bg-[#090d16] hover:bg-[#30363d]/50 border border-[#30363d] transition-all duration-300 flex flex-wrap items-center justify-between gap-3 cursor-pointer group"
                       >
                         <div className="flex flex-wrap items-center gap-3 min-w-0">
-                          <div className="flex items-center justify-center shrink-0 w-8 h-8 rounded-full bg-[#161b22] font-mono text-xs font-black text-slate-300 border border-[#30363d] shadow-inner group-hover:border-purple-500">
+                          <div className="flex items-center justify-center shrink-0 w-8 h-8 rounded-full bg-[#161b22] font-mono text-sm font-black text-slate-300 border border-[#30363d] shadow-inner group-hover:border-purple-500">
                             {idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : idx + 1}
                           </div>
                           <img src={usr.avatar} className="w-10 h-10 rounded-xl object-cover shrink-0 border border-[#30363d] shadow-md" alt="" />
                           <div className="min-w-0">
                             <div className="flex flex-wrap items-center gap-1">
-                              <p className="text-xs font-black text-white truncate group-hover:text-purple-400 transition-colors">{usr.name}</p>
+                              <p className="text-sm font-black text-white truncate group-hover:text-purple-400 transition-colors">{usr.name}</p>
                               {usr.isVerified && <span className="text-xs sm:text-sm">✔️</span>}
                               {usr.isPremium && <span className="text-xs sm:text-sm">👑</span>}
                             </div>
-                            <p className="text-xs font-black text-pink-400 uppercase tracking-widest mt-0.5">Today's XP: {getTodayXP(usr)}</p>
+                            <p className="text-sm font-black text-pink-400 uppercase tracking-widest mt-0.5">Today's XP: {getTodayXP(usr)}</p>
                           </div>
                         </div>
 
                         <div className="text-right shrink-0">
-                          <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block">
+                          <span className="text-sm font-bold text-slate-400 uppercase tracking-widest block">
                             Global Lv. {usr.level || 1}
                           </span>
                         </div>
@@ -343,7 +343,7 @@ const Highlights: React.FC = () => {
               exit={{ opacity: 0, y: -15 }}
               className="space-y-4"
             >
-              <div className="bg-[#161b22]/80 backdrop-blur-md rounded-[2.5rem] p-6 border border-[#30363d] shadow-xl text-left">
+              <div className="bg-[#161b22]/80 backdrop-blur-md rounded-[2.5rem] p-4 sm:p-6 border border-[#30363d] shadow-xl text-left">
                 <h3 className="text-base font-black text-white leading-none">⚡ Today's Online Status</h3>
                 <p className="text-xs sm:text-sm text-purple-300 font-bold uppercase tracking-wider mt-1 mb-5">Members active on FriendsBD today</p>
 
@@ -363,10 +363,10 @@ const Highlights: React.FC = () => {
                           </div>
                           <div>
                             <div className="flex flex-wrap items-center gap-1">
-                              <span className="text-xs font-black text-white">{usr.name}</span>
+                              <span className="text-sm font-black text-white">{usr.name}</span>
                               {usr.isPremium && <span className="text-xs sm:text-sm">👑</span>}
                             </div>
-                            <p className="text-xs text-slate-400 font-bold">
+                            <p className="text-sm text-slate-400 font-bold">
                               {usr.isOnline ? 'Active now' : 'Active earlier today'}
                             </p>
                           </div>
@@ -402,7 +402,7 @@ const Highlights: React.FC = () => {
               className="space-y-6"
             >
               {/* Image Upload Box */}
-              <div className="bg-[#161b22]/80 backdrop-blur-md rounded-[2.5rem] p-6 border border-[#30363d] shadow-xl text-left">
+              <div className="bg-[#161b22]/80 backdrop-blur-md rounded-[2.5rem] p-4 sm:p-6 border border-[#30363d] shadow-xl text-left">
                 <h3 className="text-base font-black text-white leading-none mb-1">📸 Upload Today's Photo</h3>
                 <p className="text-xs sm:text-sm text-purple-300 font-bold uppercase tracking-wider mb-4">Share a moment from today (resets at midnight!)</p>
 
@@ -436,7 +436,7 @@ const Highlights: React.FC = () => {
               </div>
 
               {/* Photo grid */}
-              <div className="bg-[#161b22]/80 backdrop-blur-md rounded-[2.5rem] p-6 border border-[#30363d] shadow-xl text-left">
+              <div className="bg-[#161b22]/80 backdrop-blur-md rounded-[2.5rem] p-4 sm:p-6 border border-[#30363d] shadow-xl text-left">
                 <p className="text-xs sm:text-sm font-black text-purple-300 uppercase tracking-wider mb-4">Today's Gallery (Resets at midnight)</p>
                 {todayPhotos.length === 0 ? (
                   <div className="text-center py-6 text-slate-500 text-sm font-medium italic">No photos uploaded today. Share the first one!</div>
@@ -451,11 +451,11 @@ const Highlights: React.FC = () => {
                         <img referrerPolicy="no-referrer" src={p.url} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" alt="" />
                         
                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3 text-white">
-                          <p className="text-xs font-black uppercase tracking-wide text-purple-300">📸 @{p.uploadedBy}</p>
-                          <p className="text-xs font-bold truncate">{p.caption}</p>
+                          <p className="text-sm font-black uppercase tracking-wide text-purple-300">📸 @{p.uploadedBy}</p>
+                          <p className="text-sm font-bold truncate">{p.caption}</p>
                         </div>
 
-                        <div className="absolute top-2 right-2 bg-[#090d16]/60 backdrop-blur-md text-white border border-[#30363d] rounded-full px-2 py-0.5 text-xs font-black flex flex-wrap items-center gap-1 uppercase">
+                        <div className="absolute top-2 right-2 bg-[#090d16]/60 backdrop-blur-md text-white border border-[#30363d] rounded-full px-2 py-0.5 text-sm font-black flex flex-wrap items-center gap-1 uppercase">
                           ❤️ {p.likes}
                         </div>
                       </div>
@@ -475,7 +475,7 @@ const Highlights: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-[#0F0F1A]/95 z-[300] flex items-center justify-center p-6 backdrop-blur-sm"
+            className="fixed inset-0 bg-[#0F0F1A]/95 z-[300] flex items-center justify-center p-4 sm:p-6 backdrop-blur-sm"
             onClick={() => setSelectedPhoto(null)}
           >
             <motion.div 
@@ -497,11 +497,11 @@ const Highlights: React.FC = () => {
                 <img referrerPolicy="no-referrer" src={selectedPhoto.url} className="w-full text-center h-64 md:h-80 object-cover rounded-[2.5rem] shadow-inner" alt="" />
               </div>
               
-              <div className="p-6 md:p-8 text-left">
+              <div className="p-4 sm:p-6 md:p-8 text-left">
                 <div className="flex flex-wrap items-center justify-between gap-4 mb-3">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981] animate-pulse" />
-                    <p className="text-xs text-purple-400 font-black uppercase tracking-widest leading-none">Shared By @{selectedPhoto.uploadedBy}</p>
+                    <p className="text-sm text-purple-400 font-black uppercase tracking-widest leading-none">Shared By @{selectedPhoto.uploadedBy}</p>
                   </div>
                   <button 
                     onClick={(e) => handleLikePhoto(selectedPhoto.id, e)}
@@ -511,7 +511,7 @@ const Highlights: React.FC = () => {
                   </button>
                 </div>
 
-                <p className="text-xs font-bold text-slate-300 leading-relaxed mb-6">
+                <p className="text-sm font-bold text-slate-300 leading-relaxed mb-6">
                   {selectedPhoto.caption}
                 </p>
 
@@ -524,7 +524,7 @@ const Highlights: React.FC = () => {
                   />
                   <button
                     disabled
-                    className="bg-[#30363d] text-slate-500 text-xs font-black uppercase tracking-wider px-4 rounded-2xl transition-all"
+                    className="bg-[#30363d] text-slate-500 text-sm font-black uppercase tracking-wider px-4 rounded-2xl transition-all"
                   >
                     Post
                   </button>

@@ -46,7 +46,7 @@ const GenieCave: React.FC = () => {
   return (
     <div className="min-h-screen bg-transparent font-inter pb-32">
       {/* HEADER SECTION */}
-      <header className="relative bg-[#090d16]/80 backdrop-blur-xl border-b border-[#30363d] pt-12 pb-24 px-6 rounded-b-[4rem] shadow-xl overflow-hidden shrink-0">
+      <header className="relative bg-[#090d16]/80 backdrop-blur-xl border-b border-[#30363d] pt-12 pb-24 px-3 sm:px-6 rounded-b-[4rem] shadow-xl overflow-hidden shrink-0">
         <div className="absolute top-0 left-0 p-32 bg-purple-500/10 rounded-full blur-3xl -ml-16 -mt-16 pointer-events-none" />
         <div className="absolute bottom-0 right-0 p-24 bg-pink-500/10 rounded-full blur-2xl -mr-16 pointer-events-none" />
         
@@ -56,7 +56,7 @@ const GenieCave: React.FC = () => {
            </button>
            <div className="text-center">
              <h2 className="text-2xl font-black uppercase tracking-tighter italic text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 drop-shadow-[0_0_10px_rgba(192,38,211,0.3)]">Genie Cave</h2>
-             <p className="text-xs font-black uppercase tracking-widest text-slate-400">Magic Cave Game</p>
+             <p className="text-sm font-black uppercase tracking-widest text-slate-400">Magic Cave Game</p>
            </div>
            <div className="p-3 bg-white/5 text-purple-300 rounded-2xl border border-white/10 shadow-lg">
               <span className="text-sm font-black">🧞‍♂️</span>
@@ -66,8 +66,8 @@ const GenieCave: React.FC = () => {
 
       <div className="px-5 -mt-16 space-y-6 relative z-10 max-w-lg mx-auto">
          {/* GENIE STATUS */}
-         <div className="bg-[#161b22]/80 backdrop-blur-xl p-8 rounded-[3rem] shadow-xl border border-[#30363d] text-center relative overflow-hidden">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-purple-500/20 text-purple-300 border border-purple-500/30 px-6 py-1 rounded-full text-xs sm:text-sm font-black tracking-widest uppercase backdrop-blur-sm shadow-[0_0_15px_rgba(168,85,247,0.2)]">
+         <div className="bg-[#161b22]/80 backdrop-blur-xl p-4 sm:p-8 rounded-[3rem] shadow-xl border border-[#30363d] text-center relative overflow-hidden">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-purple-500/20 text-purple-300 border border-purple-500/30 px-3 sm:px-6 py-1 rounded-full text-xs sm:text-sm font-black tracking-widest uppercase backdrop-blur-sm shadow-[0_0_15px_rgba(168,85,247,0.2)]">
                Phase: Requirement
             </div>
 
@@ -80,25 +80,25 @@ const GenieCave: React.FC = () => {
                <div className="relative z-10 text-6xl leading-[6rem] drop-shadow-[0_0_20px_rgba(168,85,247,0.6)]">🧞‍♂️</div>
             </div>
             <h2 className="text-xl font-black text-white tracking-tighter italic mb-3 drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]">AWAKENED GENIE</h2>
-            <p className="text-xs text-slate-400 font-medium leading-relaxed px-4">
+            <p className="text-sm text-slate-400 font-medium leading-relaxed px-4">
               The genie is awake and judging your points.<br/>
               Collect enough magic points and he will open the cave with <strong className="text-purple-300">maximum drama</strong>.
             </p>
          </div>
 
          {/* QUEST CARD */}
-         <div className="bg-gradient-to-br from-[#1C1C2E] to-[#110a2a] p-8 rounded-[3rem] shadow-2xl border border-white/5 relative overflow-hidden">
+         <div className="bg-gradient-to-br from-[#1C1C2E] to-[#110a2a] p-4 sm:p-8 rounded-[3rem] shadow-2xl border border-white/5 relative overflow-hidden">
             <div className="absolute -top-10 -right-10 w-48 h-48 bg-pink-600/10 rounded-full blur-3xl pointer-events-none" />
             
             <h3 className="text-xs sm:text-sm font-black uppercase tracking-[0.2em] text-center text-slate-400 mb-6 relative z-10">Current Quest</h3>
             
             <div className="flex flex-wrap gap-4 mb-6 relative z-10">
                <div className="flex-1 bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col items-center gap-1 shadow-inner">
-                  <span className="text-xs font-black text-slate-500 tracking-widest uppercase">Current</span>
+                  <span className="text-sm font-black text-slate-500 tracking-widest uppercase">Current</span>
                   <span className="text-3xl font-black text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.4)]">{magicPoints}</span>
                </div>
                <div className="flex-1 bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col items-center gap-1 shadow-inner">
-                  <span className="text-xs font-black text-slate-500 tracking-widest uppercase">Required</span>
+                  <span className="text-sm font-black text-slate-500 tracking-widest uppercase">Required</span>
                   <span className="text-3xl font-black text-purple-400 drop-shadow-[0_0_10px_rgba(168,85,247,0.4)]">{REQUIRED_POINTS}</span>
                </div>
             </div>
@@ -106,7 +106,7 @@ const GenieCave: React.FC = () => {
             <div className="bg-black/30 rounded-2xl p-5 border border-white/5 relative z-10">
                <div className="flex justify-between items-center mb-3">
                   <span className="text-xs sm:text-sm font-black text-slate-400 uppercase tracking-widest">Magic Progress</span>
-                  <span className="text-xs font-black text-cyan-400">{Math.floor(progress)}%</span>
+                  <span className="text-sm font-black text-cyan-400">{Math.floor(progress)}%</span>
                </div>
                
                <div className="h-3 bg-white/5 rounded-full overflow-hidden mb-4 shadow-inner border border-white/5">
@@ -129,7 +129,7 @@ const GenieCave: React.FC = () => {
          {/* ACTION BUTTONS */}
          {!caveOpened && (
            <motion.button 
-             className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-black py-5 rounded-3xl shadow-[0_0_20px_rgba(219,39,119,0.3)] uppercase tracking-[0.2em] text-xs hover:shadow-[0_0_30px_rgba(219,39,119,0.5)] disabled:opacity-50 transition-all border border-pink-400/50"
+             className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-black py-5 rounded-3xl shadow-[0_0_20px_rgba(219,39,119,0.3)] uppercase tracking-[0.2em] text-sm hover:shadow-[0_0_30px_rgba(219,39,119,0.5)] disabled:opacity-50 transition-all border border-pink-400/50"
              whileHover={{ scale: 1.02 }}
              whileTap={{ scale: 0.98 }}
              onClick={simulateEarn}
@@ -169,7 +169,7 @@ const GenieCave: React.FC = () => {
 
            {caveOpened && (
              <motion.div 
-               className="bg-gradient-to-br from-emerald-500 to-teal-700 p-8 rounded-[3rem] shadow-[0_0_30px_rgba(16,185,129,0.4)] text-center border border-emerald-400 mt-6 relative overflow-hidden"
+               className="bg-gradient-to-br from-emerald-500 to-teal-700 p-4 sm:p-8 rounded-[3rem] shadow-[0_0_30px_rgba(16,185,129,0.4)] text-center border border-emerald-400 mt-6 relative overflow-hidden"
                initial={{ opacity: 0, y: 50 }}
                animate={{ opacity: 1, y: 0 }}
                transition={{ delay: 0.2 }}
@@ -177,9 +177,9 @@ const GenieCave: React.FC = () => {
                <div className="absolute inset-0 bg-white/10 w-full h-full animate-pulse pointer-events-none"></div>
                <div className="text-6xl mb-4 drop-shadow-[0_0_20px_rgba(255,255,255,0.6)]">💎</div>
                <h2 className="text-2xl font-black text-white italic tracking-tighter mb-2 drop-shadow-md">THE CAVE IS OPEN!</h2>
-               <p className="text-emerald-100 text-xs font-medium mb-6">You have proved your worth to the Awakened Genie.</p>
+               <p className="text-emerald-100 text-sm font-medium mb-6">You have proved your worth to the Awakened Genie.</p>
                <motion.button 
-                 className="bg-white text-teal-800 font-black py-4 px-8 rounded-2xl shadow-xl uppercase tracking-widest text-xs hover:bg-emerald-50 transition-colors"
+                 className="bg-white text-teal-800 font-black py-4 px-4 sm:px-8 rounded-2xl shadow-xl uppercase tracking-widest text-sm hover:bg-emerald-50 transition-colors"
                  whileHover={{ scale: 1.05 }}
                  whileTap={{ scale: 0.95 }}
                  onClick={() => alert('Treasure claimed!')}

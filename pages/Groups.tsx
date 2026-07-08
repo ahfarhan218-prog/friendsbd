@@ -63,11 +63,11 @@ const Groups: React.FC = () => {
                 </div>
                 <p className="text-sm text-white/50 mb-3">{g.description || 'No description'}</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-white/60">👥 {g.members?.length || 0} members</span>
+                  <span className="text-sm text-white/60">👥 {g.members?.length || 0} members</span>
                   {session && g.isPublic && !isMember(g) && (
-                    <button onClick={() => handleJoin(g.id)} className="pf-btn pf-btn-primary text-xs">Join</button>
+                    <button onClick={() => handleJoin(g.id)} className="pf-btn pf-btn-primary text-sm">Join</button>
                   )}
-                  {isMember(g) && <span className="text-xs text-emerald-400">✅ Member</span>}
+                  {isMember(g) && <span className="text-sm text-emerald-400">✅ Member</span>}
                 </div>
               </div>
             ))}

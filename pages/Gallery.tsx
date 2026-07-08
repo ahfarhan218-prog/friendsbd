@@ -69,10 +69,10 @@ const Gallery: React.FC = () => {
                 <div className="flex items-center justify-between mb-3">
                   <div>
                     <h3 className="text-lg font-black text-white">{album.title}</h3>
-                    <p className="text-xs text-white/50">{album.description}</p>
+                    <p className="text-sm text-white/50">{album.description}</p>
                     <p className="text-xs sm:text-sm text-white/60 mt-1">{album.photos?.length || 0} photos</p>
                   </div>
-                  <button onClick={() => setSelectedAlbum(selectedAlbum === album.id ? null : album.id)} className="pf-btn pf-btn-ghost text-xs">
+                  <button onClick={() => setSelectedAlbum(selectedAlbum === album.id ? null : album.id)} className="pf-btn pf-btn-ghost text-sm">
                     {selectedAlbum === album.id ? 'Close' : '+ Add Photo'}
                   </button>
                 </div>

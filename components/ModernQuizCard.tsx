@@ -82,12 +82,12 @@ const ModernQuizCard: React.FC<ModernQuizCardProps> = ({
               ID: {quiz.id?.substring(0, 5).toUpperCase() || 'NEW'}
             </span>
             {quiz.type === 'live' ? (
-              <span className="flex flex-wrap items-center gap-1 text-xs font-extrabold uppercase tracking-wider px-2 py-0.5 bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-md animate-pulse">
+              <span className="flex flex-wrap items-center gap-1 text-sm font-extrabold uppercase tracking-wider px-2 py-0.5 bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-md animate-pulse">
                 <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
                 Live Deck
               </span>
             ) : (
-              <span className="text-xs font-extrabold uppercase tracking-wider px-2 py-0.5 bg-slate-800 text-slate-400 rounded-md">
+              <span className="text-sm font-extrabold uppercase tracking-wider px-2 py-0.5 bg-slate-800 text-slate-400 rounded-md">
                 Standard
               </span>
             )}
@@ -116,7 +116,7 @@ const ModernQuizCard: React.FC<ModernQuizCardProps> = ({
                 {showMenu && (
                   <>
                     <div className="fixed inset-0 z-20" onClick={() => setShowMenu(false)} />
-                    <div className="absolute right-0 mt-1.5 w-36 bg-[#161f30] border border-[#2a374e] rounded-2xl shadow-xl py-2 z-30 text-xs flex flex-col">
+                    <div className="absolute right-0 mt-1.5 w-36 bg-[#161f30] border border-[#2a374e] rounded-2xl shadow-xl py-2 z-30 text-sm flex flex-col">
                       <button
                         type="button"
                         onClick={() => handleAction(() => onTogglePin(quiz))}
@@ -160,7 +160,7 @@ const ModernQuizCard: React.FC<ModernQuizCardProps> = ({
         </h4>
 
         {/* Description */}
-        <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+        <p className="text-sm text-slate-400 line-clamp-2 leading-relaxed">
           {quiz.description || 'Test your knowledge and claim free AP points.'}
         </p>
       </div>
@@ -188,17 +188,17 @@ const ModernQuizCard: React.FC<ModernQuizCardProps> = ({
           {/* Status Badges */}
           <div className="flex flex-wrap items-center gap-1.5">
             {quiz.isClosed ? (
-              <span className="px-2.5 py-0.5 text-xs font-black uppercase tracking-wider bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-lg">
+              <span className="px-2.5 py-0.5 text-sm font-black uppercase tracking-wider bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-lg">
                 Closed
               </span>
             ) : (
-              <span className="px-2.5 py-0.5 text-xs font-black uppercase tracking-wider bg-green-500/10 text-green-400 border border-green-500/20 rounded-lg">
+              <span className="px-2.5 py-0.5 text-sm font-black uppercase tracking-wider bg-green-500/10 text-green-400 border border-green-500/20 rounded-lg">
                 Open
               </span>
             )}
 
             {isCompleted && (
-              <span className="px-2.5 py-0.5 text-xs font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-lg flex flex-wrap items-center gap-0.5">
+              <span className="px-2.5 py-0.5 text-sm font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-lg flex flex-wrap items-center gap-0.5">
                 ✓ Passed
               </span>
             )}
@@ -208,14 +208,14 @@ const ModernQuizCard: React.FC<ModernQuizCardProps> = ({
           {quiz.isClosed ? (
             <button
               disabled
-              className="px-4 py-2 bg-slate-800 text-slate-500 text-xs font-black rounded-xl border border-[#1f293d] cursor-not-allowed transition-all"
+              className="px-4 py-2 bg-slate-800 text-slate-500 text-sm font-black rounded-xl border border-[#1f293d] cursor-not-allowed transition-all"
             >
               Locked
             </button>
           ) : (
             <button
               onClick={() => onPlay(quiz)}
-              className={`px-4 py-2 text-xs font-black rounded-xl border transition-all ${
+              className={`px-4 py-2 text-sm font-black rounded-xl border transition-all ${
                 isCompleted
                   ? 'bg-slate-800/40 text-slate-400 hover:text-white border-[#1f293d] hover:bg-indigo-600 hover:border-indigo-500'
                   : 'bg-indigo-600 hover:bg-indigo-500 text-white border-transparent shadow-md hover:shadow-indigo-600/15'

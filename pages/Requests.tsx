@@ -29,7 +29,7 @@ const Requests: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#0B0B1A] font-inter pb-24">
-      <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] text-white p-6 pb-20 rounded-b-[2rem] sm:rounded-b-[3rem] shadow-lg shadow-purple-900/30">
+      <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] text-white p-4 sm:p-6 pb-20 rounded-b-[2rem] sm:rounded-b-[3rem] shadow-lg shadow-purple-900/30">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_0%,_#7c3aed33,_transparent_70%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#0B0B1A] to-transparent" />
         <div className="absolute top-8 right-4 w-24 h-24 bg-purple-600/10 rounded-full blur-3xl" />
@@ -53,7 +53,7 @@ const Requests: React.FC = () => {
               <div className="flex-1 min-w-0">
                 <p className="text-xs sm:text-sm font-black text-purple-400 uppercase tracking-widest mb-1">{r.type === 'FRIEND_REQ' ? 'Friend Request' : r.type}</p>
                 <h3 className="text-sm font-black text-white truncate">{r.senderName}</h3>
-                <p className="text-xs text-white/40 font-bold uppercase truncate">{r.message}</p>
+                <p className="text-sm text-white/40 font-bold uppercase truncate">{r.message}</p>
               </div>
               <div className="flex flex-col gap-2">
                 <button onClick={() => handleAction(r.id)} className="w-9 h-9 bg-emerald-600 text-white rounded-xl shadow-lg shadow-emerald-900/30 flex items-center justify-center hover:bg-emerald-500 transition-all active:scale-90">✓</button>
@@ -63,7 +63,7 @@ const Requests: React.FC = () => {
           )) : (
             <div className="bg-[#1C1C2E] rounded-[3rem] p-16 text-center border border-white/5 shadow-md">
               <div className="text-5xl mb-4 opacity-30">📭</div>
-              <p className="text-xs font-black text-white/40 uppercase tracking-widest">No pending requests</p>
+              <p className="text-sm font-black text-white/40 uppercase tracking-widest">No pending requests</p>
             </div>
           )}
         </AnimatePresence>

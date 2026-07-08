@@ -86,15 +86,15 @@ const SiteStatsDashboard: React.FC = () => {
 
   if (!isAdminOrStaff && !loading) {
     return (
-      <div className="min-h-screen bg-transparent text-[#e1e1e1] flex flex-col items-center justify-center p-8">
+      <div className="min-h-screen bg-transparent text-[#e1e1e1] flex flex-col items-center justify-center p-4 sm:p-8">
         <span className="text-6xl mb-6">🔒</span>
         <h2 className="text-lg font-black uppercase tracking-wider text-rose-500">Access Restricted</h2>
-        <p className="text-slate-500 text-xs font-bold uppercase tracking-widest mt-2 max-w-sm text-center">
+        <p className="text-slate-500 text-sm font-bold uppercase tracking-widest mt-2 max-w-sm text-center">
           You do not have the administrator permissions required to view the Plusses tier statistics.
         </p>
         <button
           onClick={() => navigate('/home')}
-          className="mt-6 px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all active:scale-95 shadow-md shadow-indigo-600/20"
+          className="mt-6 px-3 sm:px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-sm uppercase tracking-widest rounded-2xl transition-all active:scale-95 shadow-md shadow-indigo-600/20"
         >
           Return Home
         </button>
@@ -107,7 +107,7 @@ const SiteStatsDashboard: React.FC = () => {
       <div className="absolute top-0 right-10 w-full max-w-sm h-96 bg-indigo-600/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-20 left-10 w-full max-w-sm h-96 bg-purple-600/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <header className="p-6 max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto flex items-center justify-between border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md rounded-b-[2rem]">
+      <header className="p-4 sm:p-6 max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto flex items-center justify-between border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md rounded-b-[2rem]">
         <div className="flex flex-wrap items-center gap-4">
           <button
             onClick={() => navigate(-1)}
@@ -118,28 +118,28 @@ const SiteStatsDashboard: React.FC = () => {
             </svg>
           </button>
           <div>
-            <span className="text-xs font-black text-indigo-400 uppercase tracking-[0.3em] block mb-0.5">Admin Analytics</span>
+            <span className="text-sm font-black text-indigo-400 uppercase tracking-[0.3em] block mb-0.5">Admin Analytics</span>
             <h1 className="text-lg font-black text-white tracking-tight">Member Status Engine</h1>
           </div>
         </div>
 
         <div className="bg-[#121824] border border-[#1f293d] px-4 py-2 rounded-2xl text-right">
-          <span className="text-xs text-slate-500 font-bold uppercase block tracking-wider">Total Members</span>
+          <span className="text-sm text-slate-500 font-bold uppercase block tracking-wider">Total Members</span>
           <span className="text-sm font-black text-indigo-400">{totalMembers} users</span>
         </div>
       </header>
 
-      <main className="max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto px-6 mt-6 space-y-6">
+      <main className="max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto px-3 sm:px-6 mt-6 space-y-6">
         {loading ? (
           <div className="flex flex-col items-center justify-center py-32 space-y-3">
             <div className="w-10 h-10 border-4 border-indigo-500/20 border-t-indigo-500 rounded-full animate-spin" />
-            <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">Aggregating user plusses data...</span>
+            <span className="text-sm text-slate-500 font-bold uppercase tracking-wider">Aggregating user plusses data...</span>
           </div>
         ) : (
           <div className="space-y-4">
             <div className="flex items-center justify-between border-b border-[#1f293d]/50 pb-2">
-              <h2 className="text-xs font-black text-slate-400 uppercase tracking-widest">Plusses Status Tiers List</h2>
-              <span className="text-xs text-slate-600 font-bold uppercase">Dynamic Aggregation</span>
+              <h2 className="text-sm font-black text-slate-400 uppercase tracking-widest">Plusses Status Tiers List</h2>
+              <span className="text-sm text-slate-600 font-bold uppercase">Dynamic Aggregation</span>
             </div>
 
             <div className="space-y-3">
@@ -160,10 +160,10 @@ const SiteStatsDashboard: React.FC = () => {
                     >
                       <div className="flex-1 min-w-0 text-left">
                         <div className="flex flex-wrap items-center gap-2">
-                          <span className={`text-xs font-black uppercase tracking-wider ${tier.color.split(' ')[0]}`}>
+                          <span className={`text-sm font-black uppercase tracking-wider ${tier.color.split(' ')[0]}`}>
                             {tier.title}
                           </span>
-                          <span className="px-1.5 py-0.5 text-xs font-bold font-mono bg-[#090d16] border border-[#1f293d] rounded-md text-slate-500">
+                          <span className="px-1.5 py-0.5 text-sm font-bold font-mono bg-[#090d16] border border-[#1f293d] rounded-md text-slate-500">
                             {tier.min} - {tier.max === Infinity ? '∞' : tier.max} Plusses
                           </span>
                         </div>
@@ -229,7 +229,7 @@ const SiteStatsDashboard: React.FC = () => {
                                         @{u.username}
                                       </span>
                                     </div>
-                                    <p className="text-xs font-mono text-slate-500 mt-0.5">
+                                    <p className="text-sm font-mono text-slate-500 mt-0.5">
                                       {u.plusses} plusses
                                     </p>
                                   </div>

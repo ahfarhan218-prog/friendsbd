@@ -13,7 +13,7 @@ const Forums: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#0B0B1A] font-inter pb-24">
-      <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] text-white p-6 pb-20 rounded-b-[3rem] shadow-lg shadow-purple-900/30">
+      <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] text-white p-4 sm:p-6 pb-20 rounded-b-[3rem] shadow-lg shadow-purple-900/30">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_0%,_#7c3aed33,_transparent_70%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#0B0B1A] to-transparent" />
         <div className="absolute top-8 right-4 w-24 h-24 bg-purple-600/10 rounded-full blur-3xl" />
@@ -31,12 +31,12 @@ const Forums: React.FC = () => {
       <div className="px-5 -mt-12 space-y-4 pb-24">
         <div className="bg-[#1C1C2E] p-4 rounded-2xl flex flex-wrap items-center gap-3 border border-white/5 focus-within:border-purple-500/30 transition-colors">
           <span className="text-white/60">🔍</span>
-          <input placeholder="Search topics..." className="w-full bg-transparent border-none text-xs font-bold outline-none text-white/80 placeholder-white/20" />
+          <input placeholder="Search topics..." className="w-full bg-transparent border-none text-sm font-bold outline-none text-white/80 placeholder-white/20" />
         </div>
 
         {categories.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-xs font-black text-gray-500 uppercase tracking-widest">Loading forums...</p>
+            <p className="text-sm font-black text-gray-500 uppercase tracking-widest">Loading forums...</p>
           </div>
         )}
 
@@ -53,8 +53,8 @@ const Forums: React.FC = () => {
                 <h3 className="text-sm font-black text-white">{cat.name}</h3>
                 <p className="text-xs sm:text-sm text-white/50 font-bold truncate">{cat.description}</p>
                 <div className="mt-2 flex flex-wrap items-center gap-2">
-                  <span className="text-xs font-black bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full uppercase tracking-widest">Active</span>
-                  <span className="text-xs font-black text-white/40 uppercase tracking-widest">• OPEN</span>
+                  <span className="text-sm font-black bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full uppercase tracking-widest">Active</span>
+                  <span className="text-sm font-black text-white/40 uppercase tracking-widest">• OPEN</span>
                 </div>
               </div>
               <span className="text-white/40 group-hover:text-purple-400 transition-colors">→</span>
@@ -62,9 +62,9 @@ const Forums: React.FC = () => {
           );
         })}
 
-        <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] shadow-xl shadow-purple-900/10 rounded-[2.5rem] p-8 text-white relative overflow-hidden">
+        <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] shadow-xl shadow-purple-900/10 rounded-[2.5rem] p-4 sm:p-8 text-white relative overflow-hidden">
           <div className="absolute top-0 right-0 p-16 bg-purple-500/10 rounded-full blur-3xl" />
-          <h4 className="text-xs font-black uppercase tracking-widest mb-2 relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Start a Thread</h4>
+          <h4 className="text-sm font-black uppercase tracking-widest mb-2 relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Start a Thread</h4>
           <p className="text-xs sm:text-sm text-white/50 leading-relaxed mb-6 relative z-10">Have something interesting to share with the whole community? Create your own public thread now.</p>
           <button onClick={() => navigate('/forum/create')} className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-black py-4 rounded-2xl text-xs sm:text-sm uppercase tracking-widest shadow-xl shadow-purple-900/40 relative z-10 hover:opacity-90 transition-all active:scale-[0.98]">New Discussion 🚀</button>
         </div>

@@ -153,7 +153,7 @@ const CommunityMembers: React.FC = () => {
                 {getHeaderTitle()}
               </h2>
             </div>
-            <p className="text-xs font-black uppercase opacity-50 tracking-[0.2em] text-purple-300">
+            <p className="text-sm font-black uppercase opacity-50 tracking-[0.2em] text-purple-300">
               Community Directory
             </p>
           </div>
@@ -203,7 +203,7 @@ const CommunityMembers: React.FC = () => {
               )}
               {f.label}
               {f.count !== null && (
-                <span className={`text-xs font-black px-1 py-0 rounded-full ml-0.5 ${filter === f.id ? 'bg-white/20' : 'bg-emerald-500/20 text-emerald-400'}`}>
+                <span className={`text-sm font-black px-1 py-0 rounded-full ml-0.5 ${filter === f.id ? 'bg-white/20' : 'bg-emerald-500/20 text-emerald-400'}`}>
                   {f.count}
                 </span>
               )}
@@ -256,17 +256,17 @@ const CommunityMembers: React.FC = () => {
                           )}
                           {u.isVerified && <span className="text-xs sm:text-sm">✔️</span>}
                           {(u.id === 'bot_chatgirl' || u.username === 'chatgirl' || u.userId === 1) && (
-                            <span className="text-xs bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest border border-purple-500/30">
+                            <span className="text-sm bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest border border-purple-500/30">
                               🤖 Bot
                             </span>
                           )}
                           {u.role === 'admin' && (
-                            <span className="text-xs bg-red-500/20 text-red-400 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest">
+                            <span className="text-sm bg-red-500/20 text-red-400 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest">
                               🛡️ Admin
                             </span>
                           )}
                           {u.role === 'moderator' && (
-                            <span className="text-xs bg-blue-500/20 text-blue-400 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest">
+                            <span className="text-sm bg-blue-500/20 text-blue-400 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest">
                               🛡️ Mod
                             </span>
                           )}
@@ -281,7 +281,7 @@ const CommunityMembers: React.FC = () => {
                         ) : (
                           <>
                             <p className="text-xs sm:text-sm text-purple-400/70 font-bold mt-0.5">@{u.username}</p>
-                            <p className="text-xs text-white/60 font-bold mt-1 uppercase tracking-wider">
+                            <p className="text-sm text-white/60 font-bold mt-1 uppercase tracking-wider">
                               Level {u.level} • {u.points} XP
                             </p>
                           </>
@@ -292,7 +292,7 @@ const CommunityMembers: React.FC = () => {
                     <div className="mt-5">
                       <button
                         onClick={() => navigate(`/chat?userId=${u.id}`)}
-                        className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-black py-3 rounded-xl transition-all text-xs text-center shadow-lg shadow-purple-900/20"
+                        className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-black py-3 rounded-xl transition-all text-sm text-center shadow-lg shadow-purple-900/20"
                       >
                         Message
                       </button>

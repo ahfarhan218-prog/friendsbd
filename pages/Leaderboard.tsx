@@ -46,7 +46,7 @@ const Leaderboard: React.FC = () => {
 
       <div className="px-4 -mt-16 flex flex-col gap-6 mb-24">
         {/* Top 3 Podium */}
-        <div className="bg-white rounded-[3rem] p-8 shadow-sm border border-slate-50 flex flex-col items-center">
+        <div className="bg-white rounded-[3rem] p-4 sm:p-8 shadow-sm border border-slate-50 flex flex-col items-center">
            <div className="text-3xl mb-4">👑</div>
            <div className="flex flex-wrap items-end justify-center gap-4 w-full h-48">
               {/* 2nd */}
@@ -57,7 +57,7 @@ const Leaderboard: React.FC = () => {
                       <span className="absolute -top-2 -right-2 text-xl">🥈</span>
                    </div>
                    <div className="w-full bg-purple-300 rounded-t-3xl h-24 flex flex-col items-center justify-center text-white p-2 text-center">
-                      <p className="text-xs font-black uppercase">2nd</p>
+                      <p className="text-sm font-black uppercase">2nd</p>
                       <p className="text-xs sm:text-sm font-bold truncate w-full px-1">{podium[1].name.split(' ')[0]}</p>
                       <p className="text-xs sm:text-sm font-medium opacity-80">{podium[1].points}</p>
                    </div>
@@ -72,8 +72,8 @@ const Leaderboard: React.FC = () => {
                    </div>
                    <div className="w-full bg-purple-600 rounded-t-3xl h-32 flex flex-col items-center justify-center text-white p-2 text-center">
                       <p className="text-sm font-black uppercase">1st</p>
-                      <p className="text-xs font-bold truncate w-full px-1">{podium[0].name.split(' ')[0]}</p>
-                      <p className="text-xs font-medium opacity-80">{podium[0].points}</p>
+                      <p className="text-sm font-bold truncate w-full px-1">{podium[0].name.split(' ')[0]}</p>
+                      <p className="text-sm font-medium opacity-80">{podium[0].points}</p>
                    </div>
                 </div>
               )}
@@ -85,7 +85,7 @@ const Leaderboard: React.FC = () => {
                       <span className="absolute -top-2 -right-2 text-xl">🥉</span>
                    </div>
                    <div className="w-full bg-purple-200 rounded-t-3xl h-20 flex flex-col items-center justify-center text-purple-700 p-2 text-center">
-                      <p className="text-xs font-black uppercase">3rd</p>
+                      <p className="text-sm font-black uppercase">3rd</p>
                       <p className="text-xs sm:text-sm font-bold truncate w-full px-1">{podium[2].name.split(' ')[0]}</p>
                       <p className="text-xs sm:text-sm font-medium opacity-80">{podium[2].points}</p>
                    </div>
@@ -112,7 +112,7 @@ const Leaderboard: React.FC = () => {
                    key={rank.id} 
                    className={`flex flex-wrap items-center gap-4 p-3 rounded-2xl ${isSelf ? 'bg-purple-50 border-2 border-purple-200 shadow-md scale-105 z-10' : 'bg-slate-50 border border-transparent'}`}
                  >
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center font-black text-white bg-slate-300 text-xs`}>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center font-black text-white bg-slate-300 text-sm`}>
                       {globalIndex}
                     </div>
                     <div className="flex flex-wrap-1 flex flex-wrap items-center gap-3">
@@ -120,18 +120,18 @@ const Leaderboard: React.FC = () => {
                          <img src={rank.avatar} alt="" className="w-full h-full object-cover" />
                       </div>
                       <div className="min-w-0">
-                        <h4 className="font-bold text-slate-800 text-xs truncate">{rank.name} {isSelf && '(You)'}</h4>
+                        <h4 className="font-bold text-slate-800 text-sm truncate">{rank.name} {isSelf && '(You)'}</h4>
                         <p className="text-xs sm:text-sm text-slate-500 font-medium">{rank.points} points</p>
                       </div>
                     </div>
                     <div className="flex flex-col items-end gap-1">
-                      <span className="text-xs text-slate-400">—</span>
+                      <span className="text-sm text-slate-400">—</span>
                     </div>
                  </motion.div>
                );
              })}
              {users.length === 0 && !loading && (
-               <p className="text-center text-xs text-slate-400 py-6">No users found.</p>
+               <p className="text-center text-sm text-slate-400 py-6">No users found.</p>
              )}
            </div>
         </div>

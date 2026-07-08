@@ -42,7 +42,7 @@ const Statistics: React.FC = () => {
         <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl shadow-lg" style={{ backgroundColor: `${color}15`, color }}>
           {icon}
         </div>
-        <span className="text-xs font-bold text-white/70 uppercase tracking-widest">{label}</span>
+        <span className="text-sm font-bold text-white/70 uppercase tracking-widest">{label}</span>
       </div>
       <div className="flex flex-wrap items-center gap-3">
         <span className="text-lg font-black text-white">{typeof value === 'number' ? formatLargeNumber(value) : value}</span>
@@ -83,7 +83,7 @@ const Statistics: React.FC = () => {
         </div>
 
         {/* General Stats */}
-        <section className="bg-[#1C1C2E]/60 border border-purple-500/10 rounded-3xl p-6 shadow-2xl backdrop-blur-md">
+        <section className="bg-[#1C1C2E]/60 border border-purple-500/10 rounded-3xl p-4 sm:p-6 shadow-2xl backdrop-blur-md">
           <CardHeader title="General Stats" />
           <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 gap-4">
             <StatItem label="All Members" value={overview?.totalUsers} icon="👥" color="#8b5cf6" onClick={() => openList('all-members')} />
@@ -95,7 +95,7 @@ const Statistics: React.FC = () => {
         </section>
 
         {/* Members Toplist */}
-        <section className="bg-[#1C1C2E]/60 border border-purple-500/10 rounded-3xl p-6 shadow-2xl backdrop-blur-md">
+        <section className="bg-[#1C1C2E]/60 border border-purple-500/10 rounded-3xl p-4 sm:p-6 shadow-2xl backdrop-blur-md">
           <CardHeader title="Members Toplist" />
           <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <StatItem label="Top Posters" icon="📝" color="#f59e0b" onClick={() => openList('top-posters')} />
@@ -110,7 +110,7 @@ const Statistics: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-1 sm:grid-cols-2 gap-4 gap-8">
           {/* Permission Stats */}
-          <section className="bg-[#1C1C2E]/60 border border-purple-500/10 rounded-3xl p-6 shadow-2xl backdrop-blur-md">
+          <section className="bg-[#1C1C2E]/60 border border-purple-500/10 rounded-3xl p-4 sm:p-6 shadow-2xl backdrop-blur-md">
             <CardHeader title="Permission Stats" />
             <div className="space-y-4">
               <StatItem label="Staff List" value={overview?.staff} icon="🛡️" color="#ef4444" onClick={() => openList('staff')} />
@@ -120,7 +120,7 @@ const Statistics: React.FC = () => {
           </section>
 
           {/* Other Stats */}
-          <section className="bg-[#1C1C2E]/60 border border-purple-500/10 rounded-3xl p-6 shadow-2xl backdrop-blur-md">
+          <section className="bg-[#1C1C2E]/60 border border-purple-500/10 rounded-3xl p-4 sm:p-6 shadow-2xl backdrop-blur-md">
             <CardHeader title="Other Stats" />
             <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4">
               <StatItem label="Banned" value={overview?.banned} icon="🔨" color="#ef4444" onClick={() => openList('banned')} />

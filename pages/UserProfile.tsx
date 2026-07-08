@@ -80,7 +80,7 @@ const UserProfile: React.FC = () => {
   const [userThreads, setUserThreads] = useState<any[]>([]);
   const [allForumThreads, setAllForumThreads] = useState<any[]>([]);
   const [userPosts, setUserPosts] = useState<any[]>([]);
-  const [activitySubTab, setActivitySubTab] = useState<'topics' | 'posts' | 'shouts'>('topics');
+  const [activitySubTab, setActivitySubTab] = useState<'timeline' | 'topics' | 'posts' | 'shouts'>('timeline');
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
@@ -198,7 +198,8 @@ const UserProfile: React.FC = () => {
               ]);
               if (shoutsRes.ok) { const shoutsData = await shoutsRes.json(); setShouts(shoutsData.filter((s: any) => s.userId === userData.id || s.username === userData.username)); }
               if (usersRes.ok) { const usersData = await usersRes.json(); setAllUsers(usersData); }
-              if (actRes.ok) { const actData = await actRes.json(); setActivities(actData.filter((a: any) => a.userId === userData.id || a.username === userData.username).slice(0, 20)); }
+              const userActs = await mongoService.getUserActivities(userData.username || userData.name);
+              setActivities(userActs);
               if (threadsRes.ok) { const threadsData = await threadsRes.json(); setAllForumThreads(threadsData); setUserThreads(threadsData.filter((t: any) => t.authorId === userData.id)); }
               if (postsRes.ok) { const postsData = await postsRes.json(); setUserPosts(postsData.filter((p: any) => p.authorId === userData.id && !p.is_deleted)); }
             } catch (e) { console.warn('Failed related fetches'); }
@@ -241,15 +242,15 @@ const UserProfile: React.FC = () => {
     </div>
   );
   if (notFound) return (
-    <div className="min-h-screen bg-[#0a0a1a] flex flex-col items-center justify-center gap-4 p-8">
+    <div className="min-h-screen bg-[#0a0a1a] flex flex-col items-center justify-center gap-4 p-4 sm:p-8">
       <p className="text-red-400 font-bold text-sm">User not found.</p>
-      <button onClick={() => navigate('/')} className="bg-purple-600 text-white font-bold text-xs px-6 py-3 rounded-xl hover:bg-purple-500">Go Home</button>
+      <button onClick={() => navigate('/')} className="bg-purple-600 text-white font-bold text-sm px-3 sm:px-6 py-3 rounded-xl hover:bg-purple-500">Go Home</button>
     </div>
   );
   if (authErr || !profile) return (
-    <div className="min-h-screen bg-[#0a0a1a] flex flex-col items-center justify-center gap-4 p-8">
+    <div className="min-h-screen bg-[#0a0a1a] flex flex-col items-center justify-center gap-4 p-4 sm:p-8">
       <p className="text-red-400 font-bold text-sm">{authErr || 'Profile not found.'}</p>
-      <button onClick={() => navigate('/login')} className="bg-purple-600 text-white font-bold text-xs px-6 py-3 rounded-xl hover:bg-purple-500">Go to Login</button>
+      <button onClick={() => navigate('/login')} className="bg-purple-600 text-white font-bold text-sm px-3 sm:px-6 py-3 rounded-xl hover:bg-purple-500">Go to Login</button>
     </div>
   );
 
@@ -326,7 +327,7 @@ const UserProfile: React.FC = () => {
           {/* Left Column */}
           <div className="lg:w-80 shrink-0">
             {/* Profile Card */}
-            <div className="pf-card p-6 text-center">
+            <div className="pf-card p-4 sm:p-6 text-center">
               <input type="file" accept="image/*" ref={fileInputRef} onChange={handleAvatarUpload} hidden />
               <div className="relative inline-block" onClick={() => { if (isOwnProfile) { fileInputRef.current?.click(); } else if (avatarShoutId) { setShowShoutModal(avatarShoutId); } }} style={{ cursor: isOwnProfile || avatarShoutId ? 'pointer' : 'default' }}>
                 <div className="relative">
@@ -346,7 +347,7 @@ const UserProfile: React.FC = () => {
                 {profile.name} {profile.isVerified && <svg className="w-5 h-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>}
               </h1>
 
-              <div className="inline-flex flex-wrap items-center gap-1.5 mt-2 px-3 py-1 rounded-full text-xs font-bold" style={{
+              <div className="inline-flex flex-wrap items-center gap-1.5 mt-2 px-3 py-1 rounded-full text-sm font-bold" style={{
                 background: roleMeta.bg,
                 color: roleMeta.color
               }}>
@@ -354,7 +355,7 @@ const UserProfile: React.FC = () => {
               </div>
 
               {profile.customStatus && (
-                <p className="text-xs text-purple-300/60 mt-2 flex flex-wrap items-center justify-center gap-1.5">
+                <p className="text-sm text-purple-300/60 mt-2 flex flex-wrap items-center justify-center gap-1.5">
                   <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
                   {profile.customStatus}
                 </p>
@@ -425,7 +426,7 @@ const UserProfile: React.FC = () => {
                   <div key={i} className="pf-mini-stat">
                     <div className="text-lg mb-1" style={{ color: s.color }}>{s.icon}</div>
                     <div className="text-lg font-black text-white">{s.value}</div>
-                    <div className="text-xs font-bold text-white/60 uppercase tracking-wider mt-0.5">{s.label}</div>
+                    <div className="text-sm font-bold text-white/60 uppercase tracking-wider mt-0.5">{s.label}</div>
                   </div>
                 ))}
               </div>
@@ -449,7 +450,7 @@ const UserProfile: React.FC = () => {
               {/* About Me */}
               <div className="mt-5 pt-5 border-t border-[#30363d]">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xs font-bold text-white/50 uppercase tracking-wider">About Me</h3>
+                  <h3 className="text-sm font-bold text-white/50 uppercase tracking-wider">About Me</h3>
                   {isOwnProfile && (
                     <button onClick={() => setEditingAbout(!editingAbout)} className="text-xs sm:text-sm font-bold text-purple-400 hover:text-purple-300 transition-colors">
                       {editingAbout ? 'Cancel' : 'Edit'}
@@ -506,7 +507,7 @@ const UserProfile: React.FC = () => {
               {/* Achievements */}
               <div className="mt-5 pt-5 border-t border-[#30363d]">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-xs font-bold text-white/50 uppercase tracking-wider">Achievements</h3>
+                  <h3 className="text-sm font-bold text-white/50 uppercase tracking-wider">Achievements</h3>
                   <span className="text-xs sm:text-sm font-bold text-purple-400">{earned.length}/{ACHIEVEMENTS.length}</span>
                 </div>
                 <div className="h-1.5 bg-[#161b22] rounded-full overflow-hidden mb-3">
@@ -516,7 +517,7 @@ const UserProfile: React.FC = () => {
                   {ACHIEVEMENTS.map(a => {
                     const unlocked = a.check(profile);
                     return (
-                      <div key={a.id} className={`flex flex-wrap items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold transition-all ${unlocked ? 'bg-purple-500/10 text-purple-300' : 'bg-[#161b22]/50 text-white/40'}`}>
+                      <div key={a.id} className={`flex flex-wrap items-center gap-2 px-3 py-2 rounded-xl text-sm font-bold transition-all ${unlocked ? 'bg-purple-500/10 text-purple-300' : 'bg-[#161b22]/50 text-white/40'}`}>
                         <span className={unlocked ? '' : 'grayscale opacity-30'}>{a.icon}</span>
                         <span>{a.label}</span>
                       </div>
@@ -548,7 +549,7 @@ const UserProfile: React.FC = () => {
                   <div key={i} className="bg-[#161b22]/50 rounded-xl p-4 border border-[#30363d] hover:border-purple-500/30 transition-all">
                     <div className="text-lg mb-1">{s.icon}</div>
                     <div className="text-xl font-black text-white">{s.value}</div>
-                    <div className="text-xs font-bold text-white/60 uppercase tracking-wider mt-1">{s.label}</div>
+                    <div className="text-sm font-bold text-white/60 uppercase tracking-wider mt-1">{s.label}</div>
                   </div>
                 ))}
               </div>
@@ -568,7 +569,7 @@ const UserProfile: React.FC = () => {
                       <div className="text-base font-black text-white truncate" title={String(s.value)}>
                         {typeof s.value === 'number' ? formatLargeNumber(s.value) : s.value}
                       </div>
-                      <div className="text-xs font-bold text-white/60 uppercase tracking-wider truncate">{s.label}</div>
+                      <div className="text-sm font-bold text-white/60 uppercase tracking-wider truncate">{s.label}</div>
                     </div>
                   </div>
                 ))}
@@ -587,16 +588,49 @@ const UserProfile: React.FC = () => {
               </div>
 
               <div className="flex flex-wrap gap-1.5 mb-4 overflow-x-auto pb-1">
-                {(['topics', 'posts', 'shouts'] as const).map(tab => (
+                {(['timeline', 'topics', 'posts', 'shouts'] as const).map(tab => (
                   <button key={tab} onClick={() => setActivitySubTab(tab)}
-                    className={`px-4 py-2 rounded-xl text-xs font-black transition-all tracking-wider ${activitySubTab === tab
+                    className={`px-4 py-2 rounded-xl text-sm font-black transition-all tracking-wider ${activitySubTab === tab
                       ? 'bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white shadow-lg shadow-purple-900/40 scale-105'
                       : 'bg-[#161b22] text-gray-400 border border-[#30363d] hover:border-purple-500/40 hover:text-gray-200'}`}>
-                    {tab === 'topics' ? '🧵 Topics' : tab === 'posts' ? '💬 Posts' : '📣 Shouts'}
-                    <span className="ml-1.5 text-xs sm:text-sm opacity-70">{tab === 'topics' ? userThreads.length : tab === 'posts' ? userPosts.length : shouts.length}</span>
+                    {tab === 'timeline' ? '🕒 Timeline' : tab === 'topics' ? '📝 Topics' : tab === 'posts' ? '💬 Posts' : '📢 Shouts'}
                   </button>
                 ))}
               </div>
+
+              {activitySubTab === 'timeline' && (
+                <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+                  {activities.length === 0 ? (
+                    <p className="text-white/60 text-sm text-center py-8">No activities recorded yet.</p>
+                  ) : (
+                    <div className="relative pl-6 border-l-2 border-purple-500/30 space-y-6">
+                      {activities.map((act, idx) => (
+                        <motion.div 
+                          key={act.id || idx}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          className="relative"
+                        >
+                          {/* Glowing Dot */}
+                          <div className="absolute -left-[29px] top-1 w-3 h-3 bg-fuchsia-500 rounded-full border-[3px] border-[#0d1117] shadow-[0_0_10px_rgba(217,70,239,0.8)]" />
+                          
+                          <div className="bg-[#161b22]/80 backdrop-blur-sm border border-[#30363d] p-3 sm:p-4 rounded-2xl shadow-md hover:border-fuchsia-500/30 transition-colors">
+                            <p className="text-sm font-bold text-white mb-1">
+                              <span className="text-purple-400">{act.username}</span> {act.msg}
+                              {act.isTopic && act.topicTitle && (
+                                <span className="text-amber-400 block mt-1 italic text-xs sm:text-sm">"{act.topicTitle}"</span>
+                              )}
+                            </p>
+                            <p className="text-xs font-black uppercase tracking-widest text-slate-500">
+                              {timeAgo(act.timestamp)}
+                            </p>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
 
               {activitySubTab === 'topics' && (
                 userThreads.length === 0 ? <p className="text-white/60 text-sm text-center py-8">No topics created yet.</p>
@@ -712,7 +746,7 @@ const UserProfile: React.FC = () => {
 
             {/* Admin Panel */}
             {isStaff && (
-              <div className="pf-card p-6 text-center">
+              <div className="pf-card p-4 sm:p-6 text-center">
                 <span className="text-4xl block mb-3">🛡️</span>
                 <h3 className="text-white font-black text-lg mb-1">Admin Control Panel</h3>
                 <p className="text-white/40 text-sm mb-4">Access site management and moderation tools.</p>

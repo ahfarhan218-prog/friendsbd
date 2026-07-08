@@ -264,8 +264,8 @@ export const BBCodeParser: React.FC<BBCodeParserProps> = ({ rawText }) => {
           </div>
           {label && (
             <div className="p-3 bg-[#121824]/50 border-t border-[#1f293d]/50 text-left">
-              <span className="text-xs font-black text-indigo-400 uppercase tracking-wider block mb-0.5">YouTube Video</span>
-              <span className="text-xs font-bold text-slate-300">{label}</span>
+              <span className="text-sm font-black text-indigo-400 uppercase tracking-wider block mb-0.5">YouTube Video</span>
+              <span className="text-sm font-bold text-slate-300">{label}</span>
             </div>
           )}
         </div>
@@ -294,7 +294,7 @@ export const BBCodeParser: React.FC<BBCodeParserProps> = ({ rawText }) => {
 
     const smallMatch = token.match(/^\[small\]([\s\S]*?)\[\/small\]$/i);
     if (smallMatch) {
-      return <span key={index} className="text-xs text-slate-400 font-medium">{renderRecursive(smallMatch[1])}</span>;
+      return <span key={index} className="text-sm text-slate-400 font-medium">{renderRecursive(smallMatch[1])}</span>;
     }
 
     const centerMatch = token.match(/^\[center\]([\s\S]*?)\[\/center\]$/i);

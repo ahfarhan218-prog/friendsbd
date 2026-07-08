@@ -110,7 +110,7 @@ export const MatchGameControls: React.FC<{ matchData: MatchState, currentUser: U
       <div className="flex justify-between items-center mb-4">
         <div>
           <h3 className="text-white font-bold text-lg">Your Turn: {roleLabel}</h3>
-          <p className="text-slate-400 text-xs">Enter your 6 deliveries (1, 2, 3, 4, 6)</p>
+          <p className="text-slate-400 text-sm">Enter your 6 deliveries (1, 2, 3, 4, 6)</p>
         </div>
         <div className={`text-2xl font-black ${timeLeft < 30 ? 'text-red-500 animate-pulse' : 'text-indigo-400'}`}>
           {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}

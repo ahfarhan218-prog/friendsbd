@@ -252,7 +252,7 @@ const Conference: React.FC = () => {
                   <h2 className="text-lg sm:text-xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">{room.name}</h2>
                   <div className="flex flex-wrap items-center gap-2 mt-1">
                      <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
-                     <p className="text-xs sm:text-xs sm:text-sm font-black uppercase tracking-widest text-emerald-400/80">{room.members.length} Secure Connections</p>
+                     <p className="text-sm sm:text-xs sm:text-sm font-black uppercase tracking-widest text-emerald-400/80">{room.members.length} Secure Connections</p>
                   </div>
                </div>
             </div>
@@ -276,7 +276,7 @@ const Conference: React.FC = () => {
                          <p className="text-xs sm:text-sm font-medium text-slate-300 truncate">{pm.text}</p>
                       </div>
                       {(isOwner || isAdmin) && (
-                        <button onClick={() => handlePinMessage(pm.id)} className="text-xs font-black text-slate-500 hover:text-white uppercase transition-colors">Unpin</button>
+                        <button onClick={() => handlePinMessage(pm.id)} className="text-sm font-black text-slate-500 hover:text-white uppercase transition-colors">Unpin</button>
                       )}
                    </div>
                  ))}
@@ -288,7 +288,7 @@ const Conference: React.FC = () => {
       {/* CHAT AREA */}
       <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-6 custom-scrollbar relative z-10">
          {messages.length === 0 ? (
-           <div className="h-full flex flex-col items-center justify-center text-center p-12 opacity-50">
+           <div className="h-full flex flex-col items-center justify-center text-center p-4 sm:p-6 sm:p-12 opacity-50">
               <div className="text-6xl mb-6 drop-shadow-[0_0_20px_rgba(167,139,250,0.5)]">🛡️</div>
               <h3 className="text-sm font-black uppercase tracking-[0.2em] text-purple-300">Encrypted Tunnel Active</h3>
               <p className="text-xs sm:text-sm font-bold text-slate-400 mt-2">All data is ephemeral and secured locally.</p>
@@ -303,7 +303,7 @@ const Conference: React.FC = () => {
                    {/* Name & Time */}
                    <div className={`flex flex-wrap items-center gap-2 mb-1 px-1 ${isMe ? 'flex flex-wrap-row-reverse' : ''}`}>
                       <p className="text-xs sm:text-sm font-black text-purple-300/80 uppercase tracking-widest">{isMe ? 'YOU' : m.senderName}</p>
-                      <p className="text-xs font-bold text-slate-500 uppercase">{new Date(m.timestamp).toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' })}</p>
+                      <p className="text-sm font-bold text-slate-500 uppercase">{new Date(m.timestamp).toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' })}</p>
                       {m.isEdited && <span className="text-[7px] font-bold text-slate-400 uppercase">Edited</span>}
                    </div>
                    
@@ -343,7 +343,7 @@ const Conference: React.FC = () => {
                              }, {})).map(([emoji, count]) => (
                                <button key={emoji} onClick={() => handleReact(m.id, emoji)} className="bg-black/20 border border-white/10 rounded-lg px-2 py-0.5 flex flex-wrap items-center gap-1.5 hover:bg-black/40 transition-colors">
                                   <span className="text-xs sm:text-sm">{emoji}</span>
-                                  <span className="text-xs font-black text-white/70">{count}</span>
+                                  <span className="text-sm font-black text-white/70">{count}</span>
                                </button>
                              ))}
                           </div>
@@ -404,7 +404,7 @@ const Conference: React.FC = () => {
         {showMembers && (
           <>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setShowMembers(false)} className="fixed inset-0 bg-[#07070F]/80 backdrop-blur-md z-[200]" />
-            <motion.aside initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 25 }} className="fixed inset-y-0 right-0 w-80 bg-[#12122A] border-l border-purple-500/20 z-[201] p-6 sm:p-8 flex flex-col rounded-l-[2rem] sm:rounded-l-[3rem] shadow-[0_0_50px_rgba(0,0,0,0.8)]">
+            <motion.aside initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 25 }} className="fixed inset-y-0 right-0 w-full max-w-[20rem] sm:w-80 bg-[#12122A] border-l border-purple-500/20 z-[201] p-4 sm:p-6 sm:p-8 flex flex-col rounded-l-[2rem] sm:rounded-l-[3rem] shadow-[0_0_50px_rgba(0,0,0,0.8)]">
                <div className="flex items-center justify-between mb-8 sm:mb-10">
                   <div>
                     <h2 className="text-xl font-black italic tracking-tighter text-white">Personnel</h2>
@@ -416,7 +416,7 @@ const Conference: React.FC = () => {
                <div className="flex-1 overflow-y-auto space-y-6 custom-scrollbar pr-2">
                   {/* CURRENT MEMBERS */}
                   <div className="space-y-3">
-                     <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] px-2">Members ({room.members.length})</h3>
+                     <h3 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em] px-2">Members ({room.members.length})</h3>
                      {room.members.map(mid => {
                        const mUser = [...allUsers, activeUser].find(u => u?.id === mid);
                        return (
@@ -424,8 +424,8 @@ const Conference: React.FC = () => {
                             <div className="flex flex-wrap items-center gap-3">
                                <img src={mUser?.avatar || `https://picsum.photos/seed/${mid}/50`} className="w-9 h-9 rounded-xl shadow-md border border-white/10" alt="" />
                                <div>
-                                  <p className="text-xs font-black text-white">{mUser?.name || 'Unknown'}</p>
-                                  <p className={`text-xs font-bold uppercase ${mid === room.creatorId ? 'text-amber-400' : 'text-indigo-400'}`}>{mid === room.creatorId ? 'Owner' : 'Operative'}</p>
+                                  <p className="text-sm font-black text-white">{mUser?.name || 'Unknown'}</p>
+                                  <p className={`text-sm font-bold uppercase ${mid === room.creatorId ? 'text-amber-400' : 'text-indigo-400'}`}>{mid === room.creatorId ? 'Owner' : 'Operative'}</p>
                                </div>
                             </div>
                             {(isOwner || isAdmin) && mid !== room.creatorId && (
@@ -439,20 +439,20 @@ const Conference: React.FC = () => {
                   {/* INVITE SECTION */}
                   {(isOwner || isAdmin) && (
                     <div className="space-y-3">
-                       <h3 className="text-xs font-black text-purple-400 uppercase tracking-[0.2em] px-2">Secure Invite</h3>
+                       <h3 className="text-sm font-black text-purple-400 uppercase tracking-[0.2em] px-2">Secure Invite</h3>
                        <div className="space-y-2">
                           {allUsers.filter(f => f.id && !room.members.includes(f.id) && !room.invites.includes(f.id)).map(f => (
                             <button key={f.id} onClick={() => handleInvite(f.id)} className="w-full flex items-center justify-between p-3 sm:p-4 bg-purple-500/10 rounded-2xl border border-purple-500/20 hover:bg-purple-500/20 transition-colors group">
                                <div className="flex flex-wrap items-center gap-3">
                                   <img src={f.avatar} className="w-8 h-8 rounded-lg border border-white/10" alt="" />
-                                  <p className="text-xs font-black text-purple-100">{f.name}</p>
+                                  <p className="text-sm font-black text-purple-100">{f.name}</p>
                                </div>
-                               <span className="text-xs font-black text-purple-400 group-hover:scale-125 transition-transform">➕</span>
+                               <span className="text-sm font-black text-purple-400 group-hover:scale-125 transition-transform">➕</span>
                             </button>
                           ))}
                           {room.invites.length > 0 && (
                             <div className="pt-4 space-y-2 opacity-60">
-                               <p className="text-xs font-black uppercase text-slate-400 px-2 tracking-widest">Pending Invites</p>
+                               <p className="text-sm font-black uppercase text-slate-400 px-2 tracking-widest">Pending Invites</p>
                                {room.invites.map(iid => {
                                  const iUser = allUsers.find(u => u.id === iid);
                                  return (

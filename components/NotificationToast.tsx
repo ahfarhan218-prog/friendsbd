@@ -72,7 +72,7 @@ const NotificationToast: React.FC = () => {
               <p className="text-[12px] text-slate-700 leading-tight">
                 <span className="font-black text-slate-900">{activeToast.senderName}</span> {activeToast.message.replace(/🏆|💎|🥇|✨/g, '')}
               </p>
-              {activeToast.shoutId && <p className="text-xs font-black text-[#7F00FF] uppercase tracking-[0.2em] mt-1">Tap to View</p>}
+              {activeToast.shoutId && <p className="text-sm font-black text-[#7F00FF] uppercase tracking-[0.2em] mt-1">Tap to View</p>}
             </div>
 
             <button 

@@ -217,7 +217,7 @@ const ForumHome: React.FC = () => {
                 <span className="text-lg">💬</span>
                 <h1 className="text-base font-black text-white tracking-tight">Discussion Forums</h1>
               </div>
-              <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-0.5">Explore topics & discussions</p>
+              <p className="text-sm font-bold text-slate-500 uppercase tracking-widest mt-0.5">Explore topics & discussions</p>
             </div>
           </div>
           <button
@@ -253,9 +253,9 @@ const ForumHome: React.FC = () => {
             >
               <div className="flex items-start justify-between">
                 <div className="min-w-0 flex-1">
-                  <span className="text-xs font-black text-slate-500 uppercase tracking-widest block">{stat.label}</span>
+                  <span className="text-sm font-black text-slate-500 uppercase tracking-widest block">{stat.label}</span>
                   <p className={`text-sm font-black mt-1 truncate ${stat.color}`}>{loading ? '...' : stat.value}</p>
-                  <span className="text-xs text-slate-600 font-bold">{stat.sub}</span>
+                  <span className="text-sm text-slate-600 font-bold">{stat.sub}</span>
                 </div>
                 <span className="text-2xl opacity-20 select-none group-hover:opacity-30 transition-opacity">{stat.icon}</span>
               </div>
@@ -273,8 +273,8 @@ const ForumHome: React.FC = () => {
           >
             <span className="text-indigo-400 text-base shrink-0">🕒</span>
             <div className="min-w-0 flex-1">
-              <span className="text-xs font-black text-indigo-500 uppercase tracking-widest">Last Activity</span>
-              <p className="text-xs font-bold text-indigo-300 group-hover:text-indigo-200 truncate transition-colors">{stats.lastPost}</p>
+              <span className="text-sm font-black text-indigo-500 uppercase tracking-widest">Last Activity</span>
+              <p className="text-sm font-bold text-indigo-300 group-hover:text-indigo-200 truncate transition-colors">{stats.lastPost}</p>
             </div>
             <svg className="w-4 h-4 text-indigo-500 group-hover:text-indigo-300 group-hover:translate-x-1 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
@@ -286,13 +286,13 @@ const ForumHome: React.FC = () => {
         <section className="space-y-4">
           <div className="flex items-center justify-between px-1">
             <div className="flex flex-wrap items-center gap-3">
-              <h2 className="text-xs font-black text-slate-400 uppercase tracking-widest">Forum Categories</h2>
-              <span className="px-2 py-0.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-black rounded-lg">{categories.length}</span>
+              <h2 className="text-sm font-black text-slate-400 uppercase tracking-widest">Forum Categories</h2>
+              <span className="px-2 py-0.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-black rounded-lg">{categories.length}</span>
             </div>
             {isAdmin && (
               <button
                 onClick={() => setIsAddCatModalOpen(true)}
-                className="px-3 py-1.5 bg-indigo-600/20 hover:bg-indigo-600/40 border border-indigo-500/30 text-indigo-400 text-xs font-black uppercase tracking-widest rounded-xl transition-all"
+                className="px-3 py-1.5 bg-indigo-600/20 hover:bg-indigo-600/40 border border-indigo-500/30 text-indigo-400 text-sm font-black uppercase tracking-widest rounded-xl transition-all"
               >
                 + Add Category
               </button>
@@ -337,7 +337,7 @@ const ForumHome: React.FC = () => {
                           </div>
                           <p className="text-xs sm:text-sm text-slate-400 mt-1 truncate">{cat.description}</p>
                           <div className="flex flex-wrap items-center gap-2 mt-2">
-                            <span className="inline-flex flex-wrap items-center gap-1 px-2 py-0.5 text-xs font-black uppercase bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-lg">
+                            <span className="inline-flex flex-wrap items-center gap-1 px-2 py-0.5 text-sm font-black uppercase bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-lg">
                               🎯 {topicsCount} topics
                             </span>
                           </div>
@@ -352,7 +352,7 @@ const ForumHome: React.FC = () => {
                     {isAdmin && (
                       <button
                         onClick={(e) => { e.stopPropagation(); handleDeleteCategory(cat.id, cat.name); }}
-                        className="absolute top-3 right-10 w-6 h-6 rounded-lg bg-rose-500/0 hover:bg-rose-500/20 text-rose-400 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center text-xs"
+                        className="absolute top-3 right-10 w-6 h-6 rounded-lg bg-rose-500/0 hover:bg-rose-500/20 text-rose-400 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center text-sm"
                         title="Delete category"
                       >
                         🗑️
@@ -366,9 +366,9 @@ const ForumHome: React.FC = () => {
         </section>
 
         {/* SEARCH SECTION */}
-        <section className="bg-[#121824] border border-[#1f293d] rounded-3xl p-6 shadow-xl">
+        <section className="bg-[#121824] border border-[#1f293d] rounded-3xl p-4 sm:p-6 shadow-xl">
           <div className="flex items-center justify-between border-b border-[#1f293d]/50 pb-4 mb-5">
-            <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest flex flex-wrap items-center gap-2">
+            <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest flex flex-wrap items-center gap-2">
               🔍 Global Search
             </h3>
             {isSearching && (
@@ -390,7 +390,7 @@ const ForumHome: React.FC = () => {
                   value={searchText}
                   onChange={e => { setSearchText(e.target.value); if (!e.target.value.trim()) { setIsSearching(false); setSearchResults([]); } }}
                   placeholder="Search by title, author, tag, or content..."
-                  className="flex-1 bg-transparent border-none outline-none text-xs text-white placeholder-slate-600 font-medium"
+                  className="flex-1 bg-transparent border-none outline-none text-sm text-white placeholder-slate-600 font-medium"
                 />
               </div>
               <div className="flex flex-wrap gap-2">
@@ -426,7 +426,7 @@ const ForumHome: React.FC = () => {
                     <div className="w-6 h-6 border-2 border-indigo-500/20 border-t-indigo-500 rounded-full animate-spin" />
                   </div>
                 ) : sortedSearchResults.length === 0 ? (
-                  <div className="py-10 text-center text-slate-500 text-xs font-bold">No results found for "{searchText}"</div>
+                  <div className="py-10 text-center text-slate-500 text-sm font-bold">No results found for "{searchText}"</div>
                 ) : (
                   <div className="space-y-2">
                     <p className="text-xs sm:text-sm text-slate-500 font-bold mb-3">{sortedSearchResults.length} result(s) found</p>
@@ -442,8 +442,8 @@ const ForumHome: React.FC = () => {
                           {t.isPinned ? '📌' : t.isLocked ? '🔒' : '💬'}
                         </span>
                         <div className="min-w-0 flex-1">
-                          <h4 className="text-xs font-black text-white group-hover:text-indigo-400 transition-colors truncate">{t.title}</h4>
-                          <p className="text-xs text-slate-500 font-bold mt-0.5">
+                          <h4 className="text-sm font-black text-white group-hover:text-indigo-400 transition-colors truncate">{t.title}</h4>
+                          <p className="text-sm text-slate-500 font-bold mt-0.5">
                             by @{t.authorName} · {t.replyCount || 0} replies · {new Date(t.lastActivity || t.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: '2-digit' })}
                           </p>
                         </div>
@@ -466,16 +466,16 @@ const ForumHome: React.FC = () => {
             className="bg-gradient-to-br from-indigo-600/20 to-purple-600/10 border border-indigo-500/20 hover:border-indigo-500/40 p-5 rounded-3xl text-left transition-all group"
           >
             <span className="text-2xl block mb-2">✍️</span>
-            <h4 className="text-xs font-black text-white group-hover:text-indigo-400 transition-colors">Create Topic</h4>
-            <p className="text-xs text-slate-500 font-bold mt-1">Start a new discussion</p>
+            <h4 className="text-sm font-black text-white group-hover:text-indigo-400 transition-colors">Create Topic</h4>
+            <p className="text-sm text-slate-500 font-bold mt-1">Start a new discussion</p>
           </button>
           <div
             onClick={() => navigate('/staff')}
             className="bg-gradient-to-br from-amber-600/10 to-orange-600/5 border border-amber-500/15 hover:border-amber-500/30 p-5 rounded-3xl text-left transition-all group"
           >
             <span className="text-2xl block mb-2">🛡️</span>
-            <h4 className="text-xs font-black text-white group-hover:text-amber-400 transition-colors">Staff Forum</h4>
-            <p className="text-xs text-slate-500 font-bold mt-1">Moderator discussions</p>
+            <h4 className="text-sm font-black text-white group-hover:text-amber-400 transition-colors">Staff Forum</h4>
+            <p className="text-sm text-slate-500 font-bold mt-1">Moderator discussions</p>
           </div>
         </section>
       </main>
@@ -495,7 +495,7 @@ const ForumHome: React.FC = () => {
               initial={{ scale: 0.95, y: 20, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.95, y: 20, opacity: 0 }}
-              className="bg-[#121824] rounded-3xl border border-[#1f293d] p-6 max-w-md w-full shadow-2xl relative z-10 space-y-5 text-left"
+              className="bg-[#121824] rounded-3xl border border-[#1f293d] p-4 sm:p-6 max-w-md w-full shadow-2xl relative z-10 space-y-5 text-left"
             >
               <div>
                 <h3 className="text-base font-black text-white flex flex-wrap items-center gap-2">📁 Create New Category</h3>
@@ -509,7 +509,7 @@ const ForumHome: React.FC = () => {
                     type="text" required maxLength={30} disabled={isSubmittingCat}
                     value={newCatName} onChange={e => setNewCatName(e.target.value)}
                     placeholder="Enter category name..."
-                    className="bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-2xl p-3 w-full text-xs font-semibold transition-colors"
+                    className="bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-2xl p-3 w-full text-sm font-semibold transition-colors"
                   />
                 </div>
                 <div className="space-y-1">
@@ -518,7 +518,7 @@ const ForumHome: React.FC = () => {
                     type="text" required maxLength={100} disabled={isSubmittingCat}
                     value={newCatDesc} onChange={e => setNewCatDesc(e.target.value)}
                     placeholder="Short description..."
-                    className="bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-2xl p-3 w-full text-xs font-semibold transition-colors"
+                    className="bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-2xl p-3 w-full text-sm font-semibold transition-colors"
                   />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3">
@@ -541,7 +541,7 @@ const ForumHome: React.FC = () => {
                         />
                       ))}
                     </div>
-                    <p className="text-xs text-slate-500 text-center pt-1 capitalize">{newCatColor}</p>
+                    <p className="text-sm text-slate-500 text-center pt-1 capitalize">{newCatColor}</p>
                   </div>
                 </div>
 
@@ -551,17 +551,17 @@ const ForumHome: React.FC = () => {
                     {newCatIcon}
                   </div>
                   <div>
-                    <p className="text-xs font-black text-white">{newCatName || 'Category Name'}</p>
-                    <p className="text-xs text-slate-500">{newCatDesc || 'Description...'}</p>
+                    <p className="text-sm font-black text-white">{newCatName || 'Category Name'}</p>
+                    <p className="text-sm text-slate-500">{newCatDesc || 'Description...'}</p>
                   </div>
                 </div>
 
                 <div className="flex flex-wrap gap-3 pt-1">
                   <button type="button" disabled={isSubmittingCat} onClick={() => setIsAddCatModalOpen(false)}
-                    className="w-1/3 py-3 border border-[#1f293d] hover:bg-slate-800 text-slate-400 hover:text-white font-bold text-xs uppercase tracking-widest rounded-2xl transition-all"
+                    className="w-1/3 py-3 border border-[#1f293d] hover:bg-slate-800 text-slate-400 hover:text-white font-bold text-sm uppercase tracking-widest rounded-2xl transition-all"
                   >Cancel</button>
                   <button type="submit" disabled={isSubmittingCat || !newCatName.trim() || !newCatDesc.trim()}
-                    className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-black text-xs uppercase tracking-widest rounded-2xl shadow-lg transition-all active:scale-[0.98]"
+                    className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-black text-sm uppercase tracking-widest rounded-2xl shadow-lg transition-all active:scale-[0.98]"
                   >
                     {isSubmittingCat ? 'Creating...' : 'Create Category'}
                   </button>

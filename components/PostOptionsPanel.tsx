@@ -42,14 +42,14 @@ const PostOptionsPanel: React.FC<PostOptionsPanelProps> = ({
         className="bg-[#121824] w-full max-w-md rounded-[2rem] border border-[#1f293d] shadow-2xl overflow-hidden flex flex-col"
       >
         {/* Header */}
-        <div className="p-6 bg-[#0c1017] border-b border-[#1f293d]/50 flex items-center justify-between">
+        <div className="p-4 sm:p-6 bg-[#0c1017] border-b border-[#1f293d]/50 flex items-center justify-between">
           <div className="text-left">
             <h3 className="font-black text-white tracking-tighter uppercase text-base">Post Options</h3>
-            <p className="text-xs text-slate-500 font-bold tracking-widest uppercase mt-0.5">Select an action for this reply</p>
+            <p className="text-sm text-slate-500 font-bold tracking-widest uppercase mt-0.5">Select an action for this reply</p>
           </div>
           <button 
             onClick={onClose} 
-            className="w-8 h-8 bg-[#090d16] hover:bg-slate-800 border border-[#1f293d] rounded-full flex items-center justify-center text-slate-400 hover:text-white active:scale-90 transition-all text-xs font-black"
+            className="w-8 h-8 bg-[#090d16] hover:bg-slate-800 border border-[#1f293d] rounded-full flex items-center justify-center text-slate-400 hover:text-white active:scale-90 transition-all text-sm font-black"
           >
             ✕
           </button>
@@ -65,7 +65,7 @@ const PostOptionsPanel: React.FC<PostOptionsPanelProps> = ({
               <textarea 
                 value={editContent}
                 onChange={(e) => setEditContent(e.target.value)}
-                className="w-full h-40 bg-[#090d16] border border-[#1f293d] rounded-2xl p-4 text-xs text-white outline-none focus:border-indigo-500 transition-colors resize-none font-medium leading-relaxed"
+                className="w-full h-40 bg-[#090d16] border border-[#1f293d] rounded-2xl p-4 text-sm text-white outline-none focus:border-indigo-500 transition-colors resize-none font-medium leading-relaxed"
               />
               <div className="flex flex-wrap gap-2.5 mt-1">
                 <button 
@@ -91,8 +91,8 @@ const PostOptionsPanel: React.FC<PostOptionsPanelProps> = ({
               >
                 <div className="w-10 h-10 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center text-lg font-black shrink-0">❞</div>
                 <div className="min-w-0">
-                  <div className="font-black text-white text-xs">Quote Reply</div>
-                  <div className="text-xs text-slate-500 uppercase tracking-widest font-bold mt-0.5">Insert this message into input box</div>
+                  <div className="font-black text-white text-sm">Quote Reply</div>
+                  <div className="text-sm text-slate-500 uppercase tracking-widest font-bold mt-0.5">Insert this message into input box</div>
                 </div>
               </button>
 
@@ -104,8 +104,8 @@ const PostOptionsPanel: React.FC<PostOptionsPanelProps> = ({
                 >
                   <div className="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center text-lg font-black shrink-0">✎</div>
                   <div className="min-w-0">
-                    <div className="font-black text-white text-xs">Edit Message</div>
-                    <div className="text-xs text-slate-500 uppercase tracking-widest font-bold mt-0.5">Modify the text content</div>
+                    <div className="font-black text-white text-sm">Edit Message</div>
+                    <div className="text-sm text-slate-500 uppercase tracking-widest font-bold mt-0.5">Modify the text content</div>
                   </div>
                 </button>
               )}
@@ -122,8 +122,8 @@ const PostOptionsPanel: React.FC<PostOptionsPanelProps> = ({
                 >
                   <div className="w-10 h-10 rounded-2xl bg-rose-500/10 text-rose-400 border border-rose-500/20 flex items-center justify-center text-lg font-black group-hover:bg-rose-500 group-hover:text-white transition-colors shrink-0">🗑</div>
                   <div className="min-w-0">
-                    <div className="font-black text-white text-xs group-hover:text-rose-400 transition-colors">Delete Reply</div>
-                    <div className="text-xs text-slate-500 uppercase tracking-widest font-bold mt-0.5">Permanently remove from thread</div>
+                    <div className="font-black text-white text-sm group-hover:text-rose-400 transition-colors">Delete Reply</div>
+                    <div className="text-sm text-slate-500 uppercase tracking-widest font-bold mt-0.5">Permanently remove from thread</div>
                   </div>
                 </button>
               )}

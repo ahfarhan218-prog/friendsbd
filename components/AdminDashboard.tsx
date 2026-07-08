@@ -64,7 +64,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
       className="mt-12 bg-slate-950 rounded-[3rem] border border-slate-900 overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)]"
     >
       {/* Top Header */}
-      <div className="bg-slate-900/50 p-8 border-b border-slate-900 flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="bg-slate-900/50 p-4 sm:p-8 border-b border-slate-900 flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <div className="flex flex-wrap items-center gap-3 mb-1">
             <span className="w-3 h-3 bg-purple-500 rounded-full animate-pulse shadow-[0_0_15px_rgba(168,85,247,0.5)]"></span>
@@ -76,7 +76,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
         <div className="flex flex-wrap items-center gap-3">
           <button 
             onClick={() => onLockdownToggle(!isLockdown)}
-            className={`px-6 py-3 rounded-2xl text-xs sm:text-sm font-black uppercase tracking-widest transition-all border ${
+            className={`px-3 sm:px-6 py-3 rounded-2xl text-xs sm:text-sm font-black uppercase tracking-widest transition-all border ${
               isLockdown 
                 ? 'bg-red-500/10 border-red-500 text-red-500 shadow-[0_0_20px_rgba(239,68,68,0.2)]' 
                 : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-white'
@@ -86,7 +86,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </button>
           <button 
             onClick={() => onMaintenanceToggle(!isMaintenance)}
-            className={`px-6 py-3 rounded-2xl text-xs sm:text-sm font-black uppercase tracking-widest transition-all border ${
+            className={`px-3 sm:px-6 py-3 rounded-2xl text-xs sm:text-sm font-black uppercase tracking-widest transition-all border ${
               isMaintenance 
                 ? 'bg-amber-500 border-amber-600 text-slate-950 shadow-lg' 
                 : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-white'
@@ -99,7 +99,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
       <div className="flex flex-col lg:flex-row h-[600px]">
         {/* Main Content Area */}
-        <div className="flex-1 p-8 overflow-y-auto admin-scroll bg-slate-950">
+        <div className="flex-1 p-4 sm:p-8 overflow-y-auto admin-scroll bg-slate-950">
           
           {/* Tabs */}
           <div className="flex flex-wrap gap-4 mb-8">
@@ -130,7 +130,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   { l: 'Daily Shouts', v: '892', t: '-3%', c: 'text-red-400' },
                   { l: 'Revenue', v: '৳12.5k', t: '+44%', c: 'text-purple-400' }
                 ].map((s, i) => (
-                  <div key={i} className="bg-slate-900/30 border border-slate-900 p-6 rounded-[2rem]">
+                  <div key={i} className="bg-slate-900/30 border border-slate-900 p-4 sm:p-6 rounded-[2rem]">
                     <p className="text-xs sm:text-sm font-black text-slate-500 uppercase tracking-widest mb-2">{s.l}</p>
                     <div className="flex flex-wrap items-end gap-3">
                       <p className="text-3xl font-black text-white">{s.v}</p>
@@ -147,15 +147,15 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   </div>
                 ))}
 
-                <div className="col-span-full bg-slate-900/30 border border-slate-900 p-8 rounded-[2.5rem]">
+                <div className="col-span-full bg-slate-900/30 border border-slate-900 p-4 sm:p-8 rounded-[2.5rem]">
                   <div className="flex justify-between items-center mb-6">
-                    <h4 className="text-xs font-black text-white uppercase tracking-widest">Platform Traffic Flow</h4>
+                    <h4 className="text-sm font-black text-white uppercase tracking-widest">Platform Traffic Flow</h4>
                     <span className="text-xs sm:text-sm font-black text-slate-500">LAST 24 HOURS</span>
                   </div>
                   <div className="h-48 flex flex-wrap items-end gap-2 px-4 border-b border-slate-800">
                      {[20, 35, 25, 60, 45, 75, 55, 80, 70, 95, 85, 100].map((v, i) => (
                        <div key={i} className="group relative flex-1">
-                          <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-purple-600 text-white text-xs font-bold px-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">{v}%</div>
+                          <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-purple-600 text-white text-sm font-bold px-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">{v}%</div>
                           <div className="w-full bg-gradient-to-t from-purple-900/50 to-purple-500 rounded-t-lg transition-all duration-700" style={{ height: `${v}%` }}></div>
                        </div>
                      ))}
@@ -172,7 +172,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 className="space-y-4"
               >
                 <div className="bg-slate-900/50 p-4 rounded-2xl flex flex-wrap gap-3 border border-slate-800">
-                  <input placeholder="Search UID, Device ID, or Username..." className="flex-1 bg-transparent border-none text-xs text-white outline-none" />
+                  <input placeholder="Search UID, Device ID, or Username..." className="flex-1 bg-transparent border-none text-sm text-white outline-none" />
                   <button className="bg-purple-600 text-white px-4 py-2 rounded-xl text-xs sm:text-sm font-bold uppercase">Search</button>
                 </div>
                 
@@ -197,7 +197,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                 </div>
                             </td>
                             <td className="p-4">
-                               <span className="bg-purple-600/20 text-purple-400 px-3 py-1 rounded-full border border-purple-500/20 uppercase font-black text-xs">{u.role || 'USER'}</span>
+                               <span className="bg-purple-600/20 text-purple-400 px-3 py-1 rounded-full border border-purple-500/20 uppercase font-black text-sm">{u.role || 'USER'}</span>
                             </td>
                             <td className="p-4 font-mono">{u.points} PTS</td>
                             <td className="p-4 text-right space-x-2">
@@ -215,11 +215,11 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
             {activeTab === 'broadcast' && (
               <motion.div key="broadcast" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
-                 <div className="bg-slate-900/30 p-8 rounded-[2.5rem] border border-slate-900">
-                    <h4 className="text-xs font-black text-white uppercase tracking-widest mb-6">Global Signal Dispatch</h4>
+                 <div className="bg-slate-900/30 p-4 sm:p-8 rounded-[2.5rem] border border-slate-900">
+                    <h4 className="text-sm font-black text-white uppercase tracking-widest mb-6">Global Signal Dispatch</h4>
                     <div className="space-y-4">
-                       <input placeholder="Broadcast Title (e.g. Server Maintenance)" className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-xs text-white outline-none focus:ring-1 ring-purple-500" />
-                       <textarea placeholder="Message body..." className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-xs text-white h-32 outline-none focus:ring-1 ring-purple-50" />
+                       <input placeholder="Broadcast Title (e.g. Server Maintenance)" className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-sm text-white outline-none focus:ring-1 ring-purple-500" />
+                       <textarea placeholder="Message body..." className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-sm text-white h-32 outline-none focus:ring-1 ring-purple-50" />
                        <div className="flex flex-wrap gap-4">
                           <select className="flex-1 bg-slate-950 border border-slate-800 text-slate-400 text-xs sm:text-sm p-3 rounded-2xl outline-none">
                              <option>ALL USERS</option>
@@ -247,7 +247,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
            </div>
            <div className="flex-1 overflow-y-auto p-4 space-y-3 admin-scroll bg-[#05080f]">
               {logs.map(log => (
-                <div key={log.id} className="font-mono text-xs group animate-in slide-in-from-right-2">
+                <div key={log.id} className="font-mono text-sm group animate-in slide-in-from-right-2">
                    <span className="text-slate-600">[{log.time}]</span>{' '}
                    <span className={log.type === 'WARN' ? 'text-amber-500' : 'text-purple-400'}>{log.type}:</span>{' '}
                    <span className="text-slate-400 group-hover:text-slate-200 transition-colors">{log.msg}</span>
@@ -256,7 +256,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
               <div ref={logEndRef} />
            </div>
            <div className="p-4 bg-slate-950/80 border-t border-slate-900">
-              <p className="text-xs font-bold text-slate-600 uppercase tracking-widest text-center">Connected to Cluster-BD01</p>
+              <p className="text-sm font-bold text-slate-600 uppercase tracking-widest text-center">Connected to Cluster-BD01</p>
            </div>
         </div>
       </div>

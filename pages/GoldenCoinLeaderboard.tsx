@@ -54,7 +54,7 @@ const GoldenCoinLeaderboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-transparent font-inter pb-40">
-      <header className="bg-gradient-to-br from-[#7F00FF] to-[#4F0099] text-white p-6 pb-20 rounded-b-[4rem] shadow-2xl relative overflow-hidden">
+      <header className="bg-gradient-to-br from-[#7F00FF] to-[#4F0099] text-white p-4 sm:p-6 pb-20 rounded-b-[4rem] shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 right-0 p-32 bg-amber-400/10 rounded-full blur-3xl -mr-16 -mt-16" />
         <div className="relative z-10 flex justify-between items-center mb-8 flex-wrap gap-3">
           <button onClick={() => navigate('/coin-game')} className="p-3 bg-white/10 rounded-2xl active:scale-90 border border-white/10">
@@ -62,7 +62,7 @@ const GoldenCoinLeaderboard: React.FC = () => {
           </button>
           <div className="text-center">
             <h2 className="text-2xl font-black uppercase tracking-tighter italic text-amber-400">Coin Rankings</h2>
-            <p className="text-xs font-black uppercase tracking-widest opacity-60">Global Grab Statistics</p>
+            <p className="text-sm font-black uppercase tracking-widest opacity-60">Global Grab Statistics</p>
           </div>
           <div className="w-12" />
         </div>
@@ -99,7 +99,7 @@ const GoldenCoinLeaderboard: React.FC = () => {
               </div>
               <div className="w-full bg-slate-100 rounded-t-3xl h-24 flex flex-col items-center justify-center p-2 border-x border-t border-slate-200">
                 <p className="text-xs sm:text-sm font-black text-slate-800 truncate w-full text-center">{podium[1].username}</p>
-                <p className="text-xs font-black text-slate-500">{podium[1].totalGrabbed}</p>
+                <p className="text-sm font-black text-slate-500">{podium[1].totalGrabbed}</p>
                 <p className="text-[7px] font-bold text-slate-400 uppercase">Grabs</p>
               </div>
             </motion.div>
@@ -118,10 +118,10 @@ const GoldenCoinLeaderboard: React.FC = () => {
                 <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-4xl animate-bounce" title="Coin King">👑</div>
               </div>
               <div className="w-full bg-gradient-to-t from-amber-50 to-white rounded-t-[2.5rem] h-36 flex flex-col items-center justify-center p-3 border-x border-t border-amber-200 shadow-[0_-15px_30px_rgba(251,191,36,0.1)]">
-                <p className="text-xs font-black text-amber-600 uppercase tracking-tighter mb-1">Coin King</p>
-                <p className="text-xs font-black text-slate-900 truncate w-full text-center">{podium[0].username}</p>
+                <p className="text-sm font-black text-amber-600 uppercase tracking-tighter mb-1">Coin King</p>
+                <p className="text-sm font-black text-slate-900 truncate w-full text-center">{podium[0].username}</p>
                 <p className="text-xl font-black text-amber-500">{podium[0].totalGrabbed}</p>
-                <p className="text-xs font-black text-amber-600/50 uppercase tracking-widest">Grand Total</p>
+                <p className="text-sm font-black text-amber-600/50 uppercase tracking-widest">Grand Total</p>
               </div>
             </motion.div>
           )}
@@ -139,7 +139,7 @@ const GoldenCoinLeaderboard: React.FC = () => {
               </div>
               <div className="w-full bg-orange-50/30 rounded-t-3xl h-20 flex flex-col items-center justify-center p-2 border-x border-t border-orange-100">
                 <p className="text-xs sm:text-sm font-black text-slate-800 truncate w-full text-center">{podium[2].username}</p>
-                <p className="text-xs font-black text-orange-400">{podium[2].totalGrabbed}</p>
+                <p className="text-sm font-black text-orange-400">{podium[2].totalGrabbed}</p>
                 <p className="text-[7px] font-bold text-orange-300 uppercase">Grabs</p>
               </div>
             </motion.div>
@@ -147,10 +147,10 @@ const GoldenCoinLeaderboard: React.FC = () => {
         </div>
 
         {/* LIST SECTION */}
-        <div className="bg-white rounded-[3rem] p-6 shadow-xl border border-slate-100">
+        <div className="bg-white rounded-[3rem] p-4 sm:p-6 shadow-xl border border-slate-100">
           <div className="flex items-center justify-between mb-6 px-2">
             <h3 className="text-xs sm:text-sm font-black text-slate-400 uppercase tracking-[0.3em]">Global Ranking</h3>
-            <span className="text-xs font-black bg-slate-50 text-slate-400 px-3 py-1 rounded-full">{stats.length} Active Players</span>
+            <span className="text-sm font-black bg-slate-50 text-slate-400 px-3 py-1 rounded-full">{stats.length} Active Players</span>
           </div>
 
           <div className="space-y-3">
@@ -169,27 +169,27 @@ const GoldenCoinLeaderboard: React.FC = () => {
                   </div>
                   <div>
                     <div className="flex flex-wrap items-center gap-1.5">
-                      <p className="text-xs font-black text-slate-800">{u.username}</p>
+                      <p className="text-sm font-black text-slate-800">{u.username}</p>
                       {getBadge(u.totalGrabbed) && (
                         <span className="text-xs sm:text-sm" title={getBadge(u.totalGrabbed)?.label}>
                           {getBadge(u.totalGrabbed)?.icon}
                         </span>
                       )}
                     </div>
-                    <p className="text-xs font-bold text-slate-400 uppercase">
+                    <p className="text-sm font-bold text-slate-400 uppercase">
                       Fastest: {(u.fastestGrab / 1000).toFixed(2)}s
                     </p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs font-black text-purple-600">{u.totalGrabbed} Grabs</p>
-                  <p className="text-xs font-black text-amber-500 uppercase">+{u.totalValue} Pts</p>
+                  <p className="text-sm font-black text-purple-600">{u.totalGrabbed} Grabs</p>
+                  <p className="text-sm font-black text-amber-500 uppercase">+{u.totalValue} Pts</p>
                 </div>
               </motion.div>
             )) : !loading && podium.length === 0 && (
               <div className="py-20 text-center opacity-30">
                 <div className="text-5xl mb-4">🏆</div>
-                <p className="text-xs font-black uppercase tracking-widest leading-relaxed">
+                <p className="text-sm font-black uppercase tracking-widest leading-relaxed">
                   No records yet.<br/>Be the first to claim a coin!
                 </p>
               </div>
@@ -204,11 +204,11 @@ const GoldenCoinLeaderboard: React.FC = () => {
           <motion.div 
             initial={{ y: 100 }}
             animate={{ y: 0 }}
-            className="fixed bottom-28 md:bottom-8 left-0 md:left-72 right-0 max-w-md mx-auto px-6 z-[60]"
+            className="fixed bottom-28 md:bottom-8 left-0 md:left-72 right-0 max-w-md mx-auto px-3 sm:px-6 z-[60]"
           >
             <div className="bg-slate-900 text-white rounded-[2rem] p-5 shadow-2xl border border-white/10 flex items-center justify-between">
               <div className="flex flex-wrap items-center gap-4">
-                <div className="bg-amber-400 text-purple-900 w-10 h-10 rounded-xl flex items-center justify-center font-black text-xs shadow-lg">
+                <div className="bg-amber-400 text-purple-900 w-10 h-10 rounded-xl flex items-center justify-center font-black text-sm shadow-lg">
                   #{myRank.rank}
                 </div>
                 <div>
@@ -218,7 +218,7 @@ const GoldenCoinLeaderboard: React.FC = () => {
               </div>
               <div className="text-right">
                 <p className="text-sm font-black text-amber-400">{myRank.data.totalGrabbed} Coins</p>
-                <p className="text-xs font-bold text-slate-500 uppercase">Top {((myRank.rank / stats.length) * 100).toFixed(0)}% of players</p>
+                <p className="text-sm font-bold text-slate-500 uppercase">Top {((myRank.rank / stats.length) * 100).toFixed(0)}% of players</p>
               </div>
             </div>
           </motion.div>

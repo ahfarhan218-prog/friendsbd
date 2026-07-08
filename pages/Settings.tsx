@@ -133,7 +133,7 @@ const Settings: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#0B0B1A] relative pb-20">
       {toast && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[100] px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white text-sm font-bold shadow-lg shadow-purple-900/50 animate-pulse">
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[100] px-3 sm:px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white text-sm font-bold shadow-lg shadow-purple-900/50 animate-pulse">
           {toast}
         </div>
       )}
@@ -148,33 +148,33 @@ const Settings: React.FC = () => {
 
         {/* ── Account ── */}
         <div className="bg-[#1C1C2E] rounded-[2.5rem] shadow-sm overflow-hidden border border-[#30363d]">
-          <div className="p-4 px-6 text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-b-[2rem]">
+          <div className="p-4 px-3 sm:px-6 text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-b-[2rem]">
             <h3 className="text-sm font-black flex flex-wrap items-center gap-2 uppercase tracking-widest">Account</h3>
             <p className="text-xs sm:text-sm opacity-70">Manage your account settings</p>
           </div>
           <div className="bg-[#161b22] m-2 rounded-2xl p-1 space-y-1">
             <button onClick={() => setActiveModal('profile')} className="w-full flex flex-wrap items-center gap-4 p-4 hover:bg-[#1C1C2E] rounded-xl transition-all">
               <div className="bg-purple-500/20 text-purple-400 w-10 h-10 rounded-xl flex items-center justify-center text-lg">📝</div>
-              <div className="text-left"><p className="text-xs font-black text-gray-100">Edit Profile</p><p className="text-xs sm:text-sm text-gray-400 font-medium">Name, bio, avatar, gender, country & more</p></div>
+              <div className="text-left"><p className="text-sm font-black text-gray-100">Edit Profile</p><p className="text-xs sm:text-sm text-gray-400 font-medium">Name, bio, avatar, gender, country & more</p></div>
             </button>
             <button onClick={() => setActiveModal('username')} className="w-full flex flex-wrap items-center gap-4 p-4 hover:bg-[#1C1C2E] rounded-xl transition-all">
               <div className="bg-purple-500/20 text-purple-400 w-10 h-10 rounded-xl flex items-center justify-center text-lg">👤</div>
-              <div className="text-left"><p className="text-xs font-black text-gray-100">Change Username</p><p className="text-xs sm:text-sm text-gray-400 font-medium">@{currentUser?.username || 'username'}</p></div>
+              <div className="text-left"><p className="text-sm font-black text-gray-100">Change Username</p><p className="text-xs sm:text-sm text-gray-400 font-medium">@{currentUser?.username || 'username'}</p></div>
             </button>
             <button onClick={() => setActiveModal('password')} className="w-full flex flex-wrap items-center gap-4 p-4 hover:bg-[#1C1C2E] rounded-xl transition-all">
               <div className="bg-purple-500/20 text-purple-400 w-10 h-10 rounded-xl flex items-center justify-center text-lg">🔒</div>
-              <div className="text-left"><p className="text-xs font-black text-gray-100">Change Password</p><p className="text-xs sm:text-sm text-gray-400 font-medium">Update your password</p></div>
+              <div className="text-left"><p className="text-sm font-black text-gray-100">Change Password</p><p className="text-xs sm:text-sm text-gray-400 font-medium">Update your password</p></div>
             </button>
             <button onClick={() => setActiveModal('appearance')} className="w-full flex flex-wrap items-center gap-4 p-4 hover:bg-[#1C1C2E] rounded-xl transition-all">
               <div className="bg-purple-500/20 text-purple-400 w-10 h-10 rounded-xl flex items-center justify-center text-lg">🎨</div>
-              <div className="text-left"><p className="text-xs font-black text-gray-100">Appearance</p><p className="text-xs sm:text-sm text-gray-400 font-medium">Profile banner theme</p></div>
+              <div className="text-left"><p className="text-sm font-black text-gray-100">Appearance</p><p className="text-xs sm:text-sm text-gray-400 font-medium">Profile banner theme</p></div>
             </button>
           </div>
         </div>
 
         {/* ── Account Info ── */}
         <div className="bg-[#1C1C2E] rounded-[2.5rem] shadow-sm overflow-hidden border border-[#30363d]">
-          <div className="p-4 px-6 text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-b-[2rem]">
+          <div className="p-4 px-3 sm:px-6 text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-b-[2rem]">
             <h3 className="text-sm font-black flex flex-wrap items-center gap-2 uppercase tracking-widest">Account Info</h3>
             <p className="text-xs sm:text-sm opacity-70">Your account details</p>
           </div>
@@ -188,8 +188,8 @@ const Settings: React.FC = () => {
               { label: 'Reputation', value: currentUser?.total_rp ?? currentUser?.reputation_points ?? 0 },
             ].map(item => (
               <div key={item.label} className="flex flex-wrap justify-between items-center py-1 gap-2">
-                <span className="text-xs text-gray-400 shrink-0">{item.label}</span>
-                <span className="text-xs font-bold text-gray-100 text-right truncate max-w-[180px] sm:max-w-none">{item.value || '-'}</span>
+                <span className="text-sm text-gray-400 shrink-0">{item.label}</span>
+                <span className="text-sm font-bold text-gray-100 text-right truncate max-w-[180px] sm:max-w-none">{item.value || '-'}</span>
               </div>
             ))}
           </div>
@@ -197,7 +197,7 @@ const Settings: React.FC = () => {
 
         {/* ── Privacy & Security ── */}
         <div className="bg-[#1C1C2E] rounded-[2.5rem] shadow-sm overflow-hidden border border-[#30363d]">
-          <div className="p-4 px-6 text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-b-[2rem]">
+          <div className="p-4 px-3 sm:px-6 text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-b-[2rem]">
             <h3 className="text-sm font-black flex flex-wrap items-center gap-2 uppercase tracking-widest">Privacy & Security</h3>
             <p className="text-xs sm:text-sm opacity-70">Control your privacy</p>
           </div>
@@ -207,7 +207,7 @@ const Settings: React.FC = () => {
             <ToggleRow label="Ghost Mode" desc="Appear offline to others" value={ghostMode} onChange={(v) => { setGhostMode(v); }} />
             <ToggleRow label="Hidden Visits" desc="Don't show profile visits" value={hiddenVisit} onChange={(v) => { setHiddenVisit(v); }} />
             <button onClick={() => setActiveModal('sessions')} className="w-full bg-[#161b22] p-4 rounded-xl flex justify-between items-center border border-[#30363d] hover:bg-[#1C1C2E] transition-colors">
-              <div className="text-left"><p className="text-xs font-black text-gray-100">Sessions</p><p className="text-xs sm:text-sm text-gray-400">Manage active sessions</p></div>
+              <div className="text-left"><p className="text-sm font-black text-gray-100">Sessions</p><p className="text-xs sm:text-sm text-gray-400">Manage active sessions</p></div>
               <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
             </button>
           </div>
@@ -215,7 +215,7 @@ const Settings: React.FC = () => {
 
         {/* ── Notifications ── */}
         <div className="bg-[#1C1C2E] rounded-[2.5rem] shadow-sm overflow-hidden border border-[#30363d]">
-          <div className="p-4 px-6 text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-b-[2rem]">
+          <div className="p-4 px-3 sm:px-6 text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-b-[2rem]">
             <h3 className="text-sm font-black flex flex-wrap items-center gap-2 uppercase tracking-widest">Notifications</h3>
             <p className="text-xs sm:text-sm opacity-70">Manage notification preferences</p>
           </div>
@@ -228,38 +228,38 @@ const Settings: React.FC = () => {
 
         {/* ── Help & Support ── */}
         <div className="bg-[#1C1C2E] rounded-[2.5rem] shadow-sm overflow-hidden border border-[#30363d]">
-          <div className="p-4 px-6 text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-b-[2rem]">
+          <div className="p-4 px-3 sm:px-6 text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-b-[2rem]">
             <h3 className="text-sm font-black flex flex-wrap items-center gap-2 uppercase tracking-widest">Help & Support</h3>
             <p className="text-xs sm:text-sm opacity-70">Get help when you need it</p>
           </div>
           <div className="bg-[#161b22] m-2 rounded-2xl p-1 space-y-1">
             <button onClick={() => setActiveModal('support')} className="w-full flex flex-wrap items-center gap-4 p-4 hover:bg-[#1C1C2E] rounded-xl transition-all">
               <div className="bg-purple-500/20 text-purple-400 w-10 h-10 rounded-xl flex items-center justify-center text-lg">💬</div>
-              <div className="text-left"><p className="text-xs font-black text-gray-100">Contact Support</p><p className="text-xs sm:text-sm text-gray-400 font-medium">Get in touch with our team</p></div>
+              <div className="text-left"><p className="text-sm font-black text-gray-100">Contact Support</p><p className="text-xs sm:text-sm text-gray-400 font-medium">Get in touch with our team</p></div>
             </button>
             <button onClick={() => setActiveModal('about')} className="w-full flex flex-wrap items-center gap-4 p-4 hover:bg-[#1C1C2E] rounded-xl transition-all">
               <div className="bg-purple-500/20 text-purple-400 w-10 h-10 rounded-xl flex items-center justify-center text-lg">ℹ️</div>
-              <div className="text-left"><p className="text-xs font-black text-gray-100">About</p><p className="text-xs sm:text-sm text-gray-400 font-medium">Version 1.0.0 - FriendsBD</p></div>
+              <div className="text-left"><p className="text-sm font-black text-gray-100">About</p><p className="text-xs sm:text-sm text-gray-400 font-medium">Version 1.0.0 - FriendsBD</p></div>
             </button>
           </div>
         </div>
 
         {/* ── Danger Zone ── */}
         <div className="bg-[#1C1C2E] rounded-[2.5rem] p-2 shadow-sm border border-red-900/40 space-y-1">
-          <div className="bg-gradient-to-r from-red-700/30 to-red-900/30 text-red-400 py-2 px-6 rounded-xl font-bold text-xs uppercase tracking-widest mb-2 flex flex-wrap items-center gap-2">
+          <div className="bg-gradient-to-r from-red-700/30 to-red-900/30 text-red-400 py-2 px-3 sm:px-6 rounded-xl font-bold text-sm uppercase tracking-widest mb-2 flex flex-wrap items-center gap-2">
             Danger Zone
           </div>
           <button onClick={handleLogout} className="w-full flex items-center justify-between p-4 bg-[#161b22] rounded-xl group hover:bg-red-900/20 transition-all border border-[#30363d]">
             <div className="flex flex-wrap items-center gap-4">
               <div className="w-10 h-10 rounded-xl bg-red-900/30 flex items-center justify-center text-lg">🚪</div>
-              <div className="text-left"><p className="text-xs font-black text-red-400">Logout</p><p className="text-xs sm:text-sm text-red-500/60">Sign out of your account</p></div>
+              <div className="text-left"><p className="text-sm font-black text-red-400">Logout</p><p className="text-xs sm:text-sm text-red-500/60">Sign out of your account</p></div>
             </div>
             <svg className="w-5 h-5 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
           </button>
           <button onClick={handleDeleteAccount} className="w-full flex items-center justify-between p-4 bg-[#161b22] rounded-xl group hover:bg-red-900/20 transition-all border border-[#30363d]">
             <div className="flex flex-wrap items-center gap-4">
               <div className="w-10 h-10 rounded-xl bg-red-900/30 flex items-center justify-center text-lg">❌</div>
-              <div className="text-left"><p className="text-xs font-black text-red-400">Delete Account</p><p className="text-xs sm:text-sm text-red-500/60">Permanently delete your account</p></div>
+              <div className="text-left"><p className="text-sm font-black text-red-400">Delete Account</p><p className="text-xs sm:text-sm text-red-500/60">Permanently delete your account</p></div>
             </div>
             <svg className="w-5 h-5 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
           </button>
@@ -273,7 +273,7 @@ const Settings: React.FC = () => {
 
             {/* Edit Profile */}
             {activeModal === 'profile' && (
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <h3 className="text-lg font-black text-gray-100 mb-4 flex flex-wrap items-center gap-2">Edit Profile</h3>
                 <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-1 custom-scrollbar">
                   <Field label="Display Name" value={editName} onChange={setEditName} placeholder="Your name" />
@@ -303,7 +303,7 @@ const Settings: React.FC = () => {
 
             {/* Change Username */}
             {activeModal === 'username' && (
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <h3 className="text-lg font-black text-gray-100 mb-4">Change Username</h3>
                 <div className="relative">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-bold">@</span>
@@ -318,7 +318,7 @@ const Settings: React.FC = () => {
 
             {/* Change Password */}
             {activeModal === 'password' && (
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <h3 className="text-lg font-black text-gray-100 mb-4">Change Password</h3>
                 <div className="space-y-4">
                   <Field label="Current Password" value={editPassword} onChange={setEditPassword} type="password" placeholder="Current password" />
@@ -333,7 +333,7 @@ const Settings: React.FC = () => {
 
             {/* Appearance - Banner */}
             {activeModal === 'appearance' && (
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <h3 className="text-lg font-black text-gray-100 mb-4 flex flex-wrap gap-2 items-center">Profile Banner</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3">
                   {[
@@ -358,12 +358,12 @@ const Settings: React.FC = () => {
 
             {/* Sessions */}
             {activeModal === 'sessions' && (
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <h3 className="text-lg font-black text-gray-100 mb-4">Active Sessions</h3>
                 <div className="space-y-3">
                   <div className="bg-[#161b22] p-4 rounded-xl border border-[#30363d] flex flex-wrap items-center gap-3">
                     <div className="w-2 h-2 rounded-full bg-green-400 shadow-sm shadow-green-400/50"></div>
-                    <div className="flex-1"><p className="text-xs font-bold text-gray-100">Current session</p><p className="text-xs sm:text-sm text-gray-400">Windows - Chrome</p></div>
+                    <div className="flex-1"><p className="text-sm font-bold text-gray-100">Current session</p><p className="text-xs sm:text-sm text-gray-400">Windows - Chrome</p></div>
                   </div>
                 </div>
                 <div className="mt-6"><button className="w-full px-4 py-3 rounded-xl font-bold text-orange-400 bg-[#161b22] hover:bg-[#1C1C2E] text-sm border border-[#30363d]">Logout all sessions</button></div>
@@ -373,7 +373,7 @@ const Settings: React.FC = () => {
 
             {/* Support */}
             {activeModal === 'support' && (
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <h3 className="text-lg font-black text-gray-100 mb-4 flex flex-wrap gap-2 items-center">Contact Support</h3>
                 <textarea value={supportMessage} onChange={e => setSupportMessage(e.target.value)} rows={4} placeholder="Describe your issue..." className="w-full bg-[#161b22] border border-[#30363d] rounded-2xl px-4 py-3 text-sm text-gray-200 focus:outline-none focus:border-purple-500 transition-colors placeholder-gray-500" />
                 <div className="mt-6 flex flex-wrap gap-3">
@@ -385,10 +385,10 @@ const Settings: React.FC = () => {
 
             {/* About */}
             {activeModal === 'about' && (
-              <div className="p-6 text-center">
+              <div className="p-4 sm:p-6 text-center">
                 <div className="w-16 h-16 mx-auto mb-3 rounded-2xl bg-gradient-to-r from-purple-600 to-fuchsia-600 flex items-center justify-center text-2xl text-white font-black">FBD</div>
                 <h3 className="text-lg font-black text-gray-100">FriendsBD</h3>
-                <p className="text-xs text-gray-400 mt-1">Version 1.0.0</p>
+                <p className="text-sm text-gray-400 mt-1">Version 1.0.0</p>
                 <p className="text-xs sm:text-sm text-gray-400 mt-4 leading-relaxed">A social platform built for everyone.<br/>Stay connected, share moments, and have fun!</p>
                 <div className="mt-6"><button onClick={() => setActiveModal(null)} className="w-full px-4 py-3 rounded-xl font-bold text-gray-400 bg-[#161b22] hover:bg-[#1C1C2E] text-sm border border-[#30363d]">Close</button></div>
               </div>
@@ -409,7 +409,7 @@ const Settings: React.FC = () => {
 
 const ToggleRow: React.FC<{ label: string; desc: string; value: boolean; onChange: (v: boolean) => void }> = ({ label, desc, value, onChange }) => (
   <div className="flex justify-between items-center cursor-pointer" onClick={() => onChange(!value)}>
-    <div><p className="text-xs font-black text-gray-100">{label}</p><p className="text-xs sm:text-sm text-gray-400">{desc}</p></div>
+    <div><p className="text-sm font-black text-gray-100">{label}</p><p className="text-xs sm:text-sm text-gray-400">{desc}</p></div>
     <div className={`w-12 h-6 rounded-full p-1 flex items-center transition-colors ${value ? 'bg-gradient-to-r from-purple-600 to-fuchsia-600 justify-end' : 'bg-[#30363d] justify-start'}`}>
       <div className="w-4 h-4 bg-white rounded-full shadow-sm"></div>
     </div>

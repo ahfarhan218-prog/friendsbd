@@ -66,7 +66,7 @@ const Rewards: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#0B0B1A] pb-24">
-      <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] text-white p-6 pb-20 rounded-b-[2rem] sm:rounded-b-[3rem] shadow-lg shadow-purple-900/30">
+      <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] text-white p-4 sm:p-6 pb-20 rounded-b-[2rem] sm:rounded-b-[3rem] shadow-lg shadow-purple-900/30">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_0%,_#7c3aed33,_transparent_70%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#0B0B1A] to-transparent" />
         <div className="absolute top-8 right-4 w-24 h-24 bg-purple-600/10 rounded-full blur-3xl" />
@@ -91,11 +91,11 @@ const Rewards: React.FC = () => {
 
       <div className="px-4 -mt-16 flex flex-col gap-6 mb-24">
         {/* Daily Check-in */}
-        <div className="bg-[#1C1C2E] rounded-[2.5rem] p-6 border border-white/5 shadow-lg">
+        <div className="bg-[#1C1C2E] rounded-[2.5rem] p-4 sm:p-6 border border-white/5 shadow-lg">
           <div className="flex items-center justify-between mb-6">
             <div className="flex flex-col">
               <h3 className="text-lg font-black text-white">Daily Bonus</h3>
-              <p className="text-xs text-white/50">Come back tomorrow for more!</p>
+              <p className="text-sm text-white/50">Come back tomorrow for more!</p>
             </div>
             <div className="w-12 h-12 bg-amber-500/10 rounded-2xl flex items-center justify-center text-2xl">🎁</div>
           </div>
@@ -109,21 +109,21 @@ const Rewards: React.FC = () => {
         {/* Tabs */}
         <div className="bg-[#1C1C2E] p-2 rounded-[2rem] border border-white/5 grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-2">
           <button onClick={() => setActiveTab('earn')}
-            className={`py-3 rounded-2xl text-xs font-black transition-all flex flex-wrap items-center justify-center gap-2 ${activeTab === 'earn' ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-900/30' : 'text-white/40 hover:bg-[#161b22]'}`}>
+            className={`py-3 rounded-2xl text-sm font-black transition-all flex flex-wrap items-center justify-center gap-2 ${activeTab === 'earn' ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-900/30' : 'text-white/40 hover:bg-[#161b22]'}`}>
             <span>⭐</span> EARN POINTS
           </button>
           <button onClick={() => setActiveTab('redeem')}
-            className={`py-3 rounded-2xl text-xs font-black transition-all flex flex-wrap items-center justify-center gap-2 ${activeTab === 'redeem' ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-900/30' : 'text-white/40 hover:bg-[#161b22]'}`}>
+            className={`py-3 rounded-2xl text-sm font-black transition-all flex flex-wrap items-center justify-center gap-2 ${activeTab === 'redeem' ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-900/30' : 'text-white/40 hover:bg-[#161b22]'}`}>
             <span>🎁</span> REDEEM SHOP
           </button>
         </div>
 
         {/* Content */}
-        <div className="bg-[#1C1C2E] rounded-[2.5rem] p-6 border border-white/5 shadow-md">
+        <div className="bg-[#1C1C2E] rounded-[2.5rem] p-4 sm:p-6 border border-white/5 shadow-md">
           {activeTab === 'earn' ? (
             <div className="space-y-6">
               <div className="flex items-center justify-between mb-2">
-                <h4 className="text-xs font-black text-white/50 uppercase tracking-widest">Available Tasks</h4>
+                <h4 className="text-sm font-black text-white/50 uppercase tracking-widest">Available Tasks</h4>
                 <span className="text-xs sm:text-sm text-white/60">Refreshes Daily</span>
               </div>
               <div className="space-y-5">
@@ -139,7 +139,7 @@ const Rewards: React.FC = () => {
                       </div>
                     </div>
                     <div className="bg-[#161b22] px-3 py-1 rounded-full border border-white/5">
-                      <span className="text-xs font-black text-purple-400">+{task.pts}</span>
+                      <span className="text-sm font-black text-purple-400">+{task.pts}</span>
                     </div>
                   </div>
                 ))}
@@ -148,7 +148,7 @@ const Rewards: React.FC = () => {
           ) : (
             <div className="space-y-6">
               <div className="flex items-center justify-between mb-2">
-                <h4 className="text-xs font-black text-white/50 uppercase tracking-widest">Redeem Rewards</h4>
+                <h4 className="text-sm font-black text-white/50 uppercase tracking-widest">Redeem Rewards</h4>
                 <div className="flex flex-wrap items-center gap-1">
                   <span className="text-xs sm:text-sm text-white/40">Balance:</span>
                   <span className="text-xs sm:text-sm font-black text-amber-500">💰 {user.points}</span>
@@ -183,7 +183,7 @@ const Rewards: React.FC = () => {
         </div>
 
         {/* Level Progress */}
-        <div className="bg-gradient-to-br from-indigo-700 to-purple-900 rounded-[2.5rem] p-6 text-white shadow-xl mb-6 overflow-hidden relative border border-purple-500/10">
+        <div className="bg-gradient-to-br from-indigo-700 to-purple-900 rounded-[2.5rem] p-4 sm:p-6 text-white shadow-xl mb-6 overflow-hidden relative border border-purple-500/10">
           <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-white/5 rounded-full blur-2xl" />
           <div className="relative z-10">
             <div className="flex justify-between items-end mb-4">
@@ -191,7 +191,7 @@ const Rewards: React.FC = () => {
                 <p className="text-xs sm:text-sm font-black uppercase tracking-widest opacity-60">Level Progress</p>
                 <h4 className="text-xl font-black">Level {user.level} <span className="text-sm opacity-50 ml-1">→ Level {(user.level || 1) + 1}</span></h4>
               </div>
-              <p className="text-xs font-bold">{user.points}/5000 XP</p>
+              <p className="text-sm font-bold">{user.points}/5000 XP</p>
             </div>
             <div className="h-2.5 bg-black/20 rounded-full overflow-hidden">
               <div className="h-full bg-gradient-to-r from-cyan-400 to-blue-400 transition-all duration-1000" style={{ width: `${Math.min((user.points / 5000) * 100, 100)}%` }} />

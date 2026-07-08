@@ -157,9 +157,9 @@ const Premium: React.FC = () => {
   return (
     <div className="min-h-screen bg-transparent pb-32">
       {/* Header */}
-      <header className="relative overflow-hidden px-6 pt-8 pb-16">
+      <header className="relative overflow-hidden px-3 sm:px-6 pt-8 pb-16">
         {/* Background glow orbs */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-80 bg-purple-600/20 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[20rem] sm:w-80 h-80 bg-purple-600/20 rounded-full blur-3xl" />
         <div className="absolute top-10 right-0 w-40 h-40 bg-amber-400/10 rounded-full blur-2xl" />
 
         <div className="relative z-10">
@@ -197,7 +197,7 @@ const Premium: React.FC = () => {
               <div className="text-3xl">✅</div>
               <div className="flex-1">
                 <p className="text-sm font-black text-amber-300">Premium Active</p>
-                <p className="text-xs text-white/50 mt-0.5">
+                <p className="text-sm text-white/50 mt-0.5">
                   Expires {formatExpiry(premiumExpiry)} &nbsp;·&nbsp; {getDaysLeft(premiumExpiry)} days left
                 </p>
               </div>
@@ -218,11 +218,11 @@ const Premium: React.FC = () => {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-              className="bg-gradient-to-r from-green-500/20 to-emerald-500/10 border border-green-500/30 rounded-3xl p-6 text-center"
+              className="bg-gradient-to-r from-green-500/20 to-emerald-500/10 border border-green-500/30 rounded-3xl p-4 sm:p-6 text-center"
             >
               <div className="text-4xl mb-2">🎉</div>
               <p className="text-sm font-black text-green-400">Premium Activated!</p>
-              <p className="text-xs text-white/50 mt-1">Golden Coin radar is now unlocked</p>
+              <p className="text-sm text-white/50 mt-1">Golden Coin radar is now unlocked</p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -243,7 +243,7 @@ const Premium: React.FC = () => {
               }`}
             >
               {plan.badge && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-black text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-black text-sm font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">
                   {plan.badge}
                 </div>
               )}
@@ -261,19 +261,19 @@ const Premium: React.FC = () => {
                     </div>
                     <div>
                       <p className="text-sm font-black text-white">{plan.emoji} {plan.label}</p>
-                      <p className="text-xs text-white/40 uppercase font-bold">Premium Access</p>
+                      <p className="text-sm text-white/40 uppercase font-bold">Premium Access</p>
                     </div>
                   </div>
                   <div className="text-right">
                     <p className="text-2xl font-black text-white">৳{plan.price}</p>
-                    <p className="text-xs text-white/40 font-bold uppercase">for {plan.days} days</p>
+                    <p className="text-sm text-white/40 font-bold uppercase">for {plan.days} days</p>
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   {plan.features.map((f, i) => (
                     <div key={i} className="flex flex-wrap items-center gap-2">
-                      <span className="text-xs text-green-400">✓</span>
+                      <span className="text-sm text-green-400">✓</span>
                       <span className="text-xs sm:text-sm text-white/60 font-medium">{f}</span>
                     </div>
                   ))}
@@ -325,7 +325,7 @@ const Premium: React.FC = () => {
         </p>
 
         {/* Feature Highlights */}
-        <div className="bg-white/5 border border-white/10 rounded-3xl p-6 space-y-5">
+        <div className="bg-white/5 border border-white/10 rounded-3xl p-4 sm:p-6 space-y-5">
           <h3 className="text-xs sm:text-sm font-black uppercase tracking-widest text-white/60 text-center">Why Premium?</h3>
           {[
             { icon: '🎯', title: 'Golden Coin Radar', desc: 'See exactly when the next Golden Coin will drop — 13 to 18 minute countdown timer.' },
@@ -354,7 +354,7 @@ const Premium: React.FC = () => {
             { q: 'Can I grab coins without premium?', a: 'Yes! The 5-grabs-per-day limit applies to all users. Premium just gives you the radar to not miss any drop.' },
           ].map((item, i) => (
             <div key={i} className="bg-white/5 border border-white/5 rounded-2xl p-4">
-              <p className="text-xs font-black text-white/60">{item.q}</p>
+              <p className="text-sm font-black text-white/60">{item.q}</p>
               <p className="text-xs sm:text-sm text-white/60 mt-1 leading-relaxed">{item.a}</p>
             </div>
           ))}

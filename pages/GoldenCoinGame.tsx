@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gameService } from '../services/gameService';
 import { triggerToast } from '../components/NotificationToast';
+import { mongoService } from '../services/mongoService';
 import { checkMissionCompletion } from '../utils/missions';
 import { unlockAchievement } from '../utils/achievements';
 import { apService } from '../services/apService';
@@ -178,6 +179,15 @@ const GoldenCoinGame: React.FC = () => {
         timestamp: Date.now(),
         isRead: false
       });
+
+      mongoService.addActivity({
+        id: 'act_' + Date.now(),
+        time: new Date().toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' }),
+        username: claimer.username || claimer.name,
+        msg: `grabbed a Golden Coin!`,
+        timestamp: Date.now(),
+        link: `/coin-game`
+      });
     } else {
       if (result.dailyGrabs !== undefined) setTodayGrabs(result.dailyGrabs);
       triggerToast({
@@ -209,7 +219,7 @@ const GoldenCoinGame: React.FC = () => {
   return (
     <div className="min-h-screen bg-transparent font-inter pb-32">
       {/* HEADER SECTION */}
-      <header className="relative bg-[#090d16]/80 backdrop-blur-xl border-b border-[#30363d] pt-12 pb-24 px-6 rounded-b-[4rem] shadow-xl overflow-hidden shrink-0">
+      <header className="relative bg-[#090d16]/80 backdrop-blur-xl border-b border-[#30363d] pt-12 pb-24 px-3 sm:px-6 rounded-b-[4rem] shadow-xl overflow-hidden shrink-0">
         <div className="absolute top-0 right-0 p-32 bg-amber-500/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
         <div className="absolute bottom-0 left-0 p-24 bg-purple-500/10 rounded-full blur-2xl -ml-16 pointer-events-none" />
         
@@ -219,7 +229,7 @@ const GoldenCoinGame: React.FC = () => {
            </button>
            <div className="text-center">
              <h2 className="text-2xl font-black uppercase tracking-tighter italic text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.3)]">Golden Coin</h2>
-             <p className="text-xs font-black uppercase tracking-widest text-slate-400">Real-Time Event Hub</p>
+             <p className="text-sm font-black uppercase tracking-widest text-slate-400">Real-Time Event Hub</p>
            </div>
            <Link to="/coin-leaderboard" className="p-3 bg-white/5 text-amber-400 rounded-2xl active:scale-90 border border-white/10 hover:bg-white/10 hover:border-amber-400/30 transition-all shadow-lg group relative">
               <span className="text-sm font-black">🏆</span>
@@ -229,10 +239,10 @@ const GoldenCoinGame: React.FC = () => {
 
         <div className="relative z-10 flex flex-col items-center">
            {(!isOpen && !isActive) ? (
-              <div className="bg-[#161b22]/80 rounded-3xl p-6 sm:p-8 backdrop-blur-xl border border-[#30363d] shadow-2xl shadow-purple-900/20 text-center w-full max-w-[400px]">
+              <div className="bg-[#161b22]/80 rounded-3xl p-4 sm:p-6 sm:p-8 backdrop-blur-xl border border-[#30363d] shadow-2xl shadow-purple-900/20 text-center w-full max-w-[400px]">
                  <div className="text-5xl mb-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">🌙</div>
                  <h3 className="text-xl font-black text-white italic tracking-tighter mb-2">EVENT CLOSED</h3>
-                 <p className="text-xs text-slate-400 font-medium">Golden Coins drop daily from 5:00 PM to 12:00 AM BDT.</p>
+                 <p className="text-sm text-slate-400 font-medium">Golden Coins drop daily from 5:00 PM to 12:00 AM BDT.</p>
                  
                  <div className="mt-6 p-4 bg-black/40 rounded-2xl border border-white/5">
                     <p className="text-xs sm:text-sm font-black uppercase tracking-widest text-amber-400/70 mb-1">Opens In</p>
@@ -275,7 +285,7 @@ const GoldenCoinGame: React.FC = () => {
                   </motion.div>
                 ))}
               </div>
-              <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-5">
+              <p className="text-sm font-black uppercase tracking-widest text-slate-400 mb-5">
                 {limitReached ? '⛔ Daily Limit Reached' : `${remaining} grab${remaining !== 1 ? 's' : ''} remaining today`}
               </p>
               
@@ -291,7 +301,7 @@ const GoldenCoinGame: React.FC = () => {
                     <div className="text-5xl drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">🔒</div>
                     <h3 className="text-lg font-black text-amber-400 italic tracking-tighter drop-shadow-lg">LIMIT REACHED</h3>
                     <p className="text-xs sm:text-sm font-bold text-slate-400 leading-relaxed">You've grabbed 5 coins today.<br/>Come back tomorrow for more!</p>
-                    <p className="text-xs font-black text-slate-500 uppercase tracking-widest">Resets at 12:00 AM BDT</p>
+                    <p className="text-sm font-black text-slate-500 uppercase tracking-widest">Resets at 12:00 AM BDT</p>
                   </motion.div>
                 ) : isActive ? (
                   <motion.div 
@@ -324,7 +334,7 @@ const GoldenCoinGame: React.FC = () => {
                      <button 
                        onClick={handleGrab}
                        disabled={isClaiming}
-                       className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white font-black py-4 rounded-2xl shadow-[0_0_20px_rgba(245,158,11,0.4)] uppercase tracking-[0.2em] text-xs hover:scale-105 hover:shadow-[0_0_30px_rgba(245,158,11,0.6)] active:scale-95 transition-all relative overflow-hidden disabled:opacity-60 border border-amber-400"
+                       className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white font-black py-4 rounded-2xl shadow-[0_0_20px_rgba(245,158,11,0.4)] uppercase tracking-[0.2em] text-sm hover:scale-105 hover:shadow-[0_0_30px_rgba(245,158,11,0.6)] active:scale-95 transition-all relative overflow-hidden disabled:opacity-60 border border-amber-400"
                      >
                        {isClaiming ? 'GRABBING...' : 'GRAB YOUR COIN NOW'}
                        <motion.div 
@@ -342,7 +352,7 @@ const GoldenCoinGame: React.FC = () => {
                     className="space-y-4 py-4"
                   >
                      <div className="text-4xl opacity-50 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">📡</div>
-                     <p className="text-xs font-black text-white/50 uppercase leading-relaxed">
+                     <p className="text-sm font-black text-white/50 uppercase leading-relaxed">
                         {status === 'SEARCHING' ? 'Scanning community nodes...' : "No coin available right now."}
                      </p>
                      <button 
@@ -363,7 +373,7 @@ const GoldenCoinGame: React.FC = () => {
       <div className="px-5 -mt-8 space-y-6 relative z-10 max-w-lg mx-auto">
          {/* PREMIUM RADAR TOOL */}
          {isOpen && (
-           <div className="bg-[#161b22]/80 backdrop-blur-xl p-6 rounded-[2.5rem] shadow-xl border border-[#30363d]">
+           <div className="bg-[#161b22]/80 backdrop-blur-xl p-4 sm:p-6 rounded-[2.5rem] shadow-xl border border-[#30363d]">
               <h4 className="text-xs sm:text-sm font-black text-slate-400 uppercase tracking-widest mb-4 flex flex-wrap items-center gap-2">
                  <span className="text-lg drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">📡</span> Premium Radar
               </h4>
@@ -381,14 +391,14 @@ const GoldenCoinGame: React.FC = () => {
                             return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
                           })() : 'Calculating...'}
                         </p>
-                        <p className="text-xs text-purple-300/70 mt-1">Drops every 13–18 min</p>
+                        <p className="text-sm text-purple-300/70 mt-1">Drops every 13–18 min</p>
                     </div>
                     <div className="text-3xl animate-pulse drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]">🎯</div>
                  </div>
               ) : (
                  <div className="p-5 bg-black/30 rounded-2xl border border-white/5 text-center space-y-3">
                     <div className="text-2xl drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">🔒</div>
-                    <p className="text-xs font-bold text-slate-400">Upgrade to Premium to see exactly when the next coin drops!</p>
+                    <p className="text-sm font-bold text-slate-400">Upgrade to Premium to see exactly when the next coin drops!</p>
                     <button onClick={() => navigate('/premium')} className="text-xs sm:text-sm font-black uppercase tracking-widest text-white bg-purple-600 px-5 py-2.5 rounded-xl hover:bg-purple-500 transition-colors shadow-[0_0_15px_rgba(147,51,234,0.4)] border border-purple-400">
                        Unlock Radar Now
                     </button>
@@ -398,10 +408,10 @@ const GoldenCoinGame: React.FC = () => {
          )}
 
          {/* RECENT WINNERS */}
-         <div className="bg-[#161b22]/80 backdrop-blur-xl p-8 rounded-[3rem] shadow-xl border border-[#30363d] space-y-6">
+         <div className="bg-[#161b22]/80 backdrop-blur-xl p-4 sm:p-8 rounded-[3rem] shadow-xl border border-[#30363d] space-y-6">
             <div className="flex justify-between items-center px-2">
                <h4 className="text-sm font-black text-white uppercase tracking-tighter italic">Last Coin Gainers</h4>
-               <Link to="/coin-leaderboard" className="text-xs font-black text-purple-400 uppercase tracking-widest bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20 hover:bg-purple-500/20 transition-colors">Full Ranks →</Link>
+               <Link to="/coin-leaderboard" className="text-sm font-black text-purple-400 uppercase tracking-widest bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20 hover:bg-purple-500/20 transition-colors">Full Ranks →</Link>
             </div>
 
             <div className="space-y-3">
@@ -415,15 +425,15 @@ const GoldenCoinGame: React.FC = () => {
                      <div className="flex flex-wrap items-center gap-3">
                         <img src={w.avatar} className="w-9 h-9 rounded-xl border border-white/10 shadow-sm group-hover:scale-105 group-hover:border-purple-500/50 transition-transform object-cover" alt="" />
                         <div>
-                           <p className="text-xs font-black text-white group-hover:text-purple-300 transition-colors">{w.username}</p>
-                           <p className="text-xs font-bold text-slate-500 uppercase">
+                           <p className="text-sm font-black text-white group-hover:text-purple-300 transition-colors">{w.username}</p>
+                           <p className="text-sm font-bold text-slate-500 uppercase">
                               {new Date(w.timestamp).toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' })}
                            </p>
                         </div>
                      </div>
                      <div className="flex flex-col items-end gap-1">
                        <span className="text-xs sm:text-sm font-black text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-lg shadow-[0_0_10px_rgba(251,191,36,0.1)]">+1 Coin</span>
-                       <span className="text-xs font-black text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2 py-0.5 rounded-lg">+10 AP</span>
+                       <span className="text-sm font-black text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2 py-0.5 rounded-lg">+10 AP</span>
                      </div>
                   </motion.div>
                )) : (
@@ -445,10 +455,10 @@ const GoldenCoinGame: React.FC = () => {
          </div>
 
          {/* HOW IT WORKS */}
-         <div className="bg-gradient-to-br from-[#1C1C2E] to-[#110a2a] rounded-[3rem] p-8 text-white relative overflow-hidden shadow-2xl border border-white/5">
+         <div className="bg-gradient-to-br from-[#1C1C2E] to-[#110a2a] rounded-[3rem] p-4 sm:p-8 text-white relative overflow-hidden shadow-2xl border border-white/5">
             <div className="absolute -top-10 -right-10 w-48 h-48 bg-purple-600/20 rounded-full blur-3xl pointer-events-none" />
             <div className="relative z-10 space-y-4">
-               <h3 className="text-xs font-black uppercase tracking-[0.3em] text-purple-400 drop-shadow-md">How It Works</h3>
+               <h3 className="text-sm font-black uppercase tracking-[0.3em] text-purple-400 drop-shadow-md">How It Works</h3>
                <div className="space-y-4 pt-2">
                  {[
                    { icon: '⏰', text: 'Opens daily 5:00 PM – 12:00 AM BDT' },

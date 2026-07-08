@@ -75,14 +75,14 @@ const ConferenceList: React.FC = () => {
       <div className="absolute top-[-10%] left-[-10%] w-full max-w-sm h-96 bg-purple-600/30 blur-[100px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-full max-w-sm h-96 bg-indigo-600/20 blur-[100px] rounded-full pointer-events-none" />
 
-      <header className="relative z-10 bg-[#12122A]/80 backdrop-blur-xl border-b border-purple-500/20 p-6 pb-20 rounded-b-[3rem] flex items-center justify-between shadow-2xl">
+      <header className="relative z-10 bg-[#12122A]/80 backdrop-blur-xl border-b border-purple-500/20 p-4 sm:p-6 pb-20 rounded-b-[3rem] flex items-center justify-between shadow-2xl">
          <div className="flex flex-wrap items-center gap-4">
             <button onClick={() => navigate('/apps')} className="p-2 bg-white/5 border border-white/10 rounded-xl active:scale-90 hover:bg-white/10 transition-colors">
                <svg className="w-6 h-6 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/></svg>
             </button>
             <div>
                <h2 className="text-2xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">Conference Hub</h2>
-               <p className="text-xs font-black uppercase tracking-widest text-indigo-300/60">Secure Collaboration</p>
+               <p className="text-sm font-black uppercase tracking-widest text-indigo-300/60">Secure Collaboration</p>
             </div>
          </div>
          <button 
@@ -107,13 +107,13 @@ const ConferenceList: React.FC = () => {
                 <div className="w-14 h-14 bg-purple-500/20 group-hover:bg-purple-500/30 rounded-2xl flex items-center justify-center text-2xl border border-purple-500/30 transition-colors">🔒</div>
                 <div className="flex-1 min-w-0">
                   <h4 className="text-sm font-black text-white truncate">{room.name}</h4>
-                  <p className="text-xs text-purple-300/60 font-bold uppercase tracking-widest mt-1">Creator: {room.creatorId === activeUser.id ? 'YOU' : room.creatorName}</p>
+                  <p className="text-sm text-purple-300/60 font-bold uppercase tracking-widest mt-1">Creator: {room.creatorId === activeUser.id ? 'YOU' : room.creatorName}</p>
                 </div>
-                <div className="bg-emerald-500/10 text-emerald-400 text-xs font-black px-3 py-1 rounded-full border border-emerald-500/20 uppercase shadow-[0_0_10px_rgba(52,211,153,0.2)]">Active</div>
+                <div className="bg-emerald-500/10 text-emerald-400 text-sm font-black px-3 py-1 rounded-full border border-emerald-500/20 uppercase shadow-[0_0_10px_rgba(52,211,153,0.2)]">Active</div>
               </motion.button>
             ))}
             {myRooms.length === 0 && (
-              <div className="bg-[#1A1A35]/30 border border-dashed border-purple-500/20 rounded-[2rem] p-8 text-center backdrop-blur-sm">
+              <div className="bg-[#1A1A35]/30 border border-dashed border-purple-500/20 rounded-[2rem] p-4 sm:p-8 text-center backdrop-blur-sm">
                  <p className="text-xs sm:text-sm font-black text-purple-300/50 uppercase tracking-widest">No active sessions</p>
               </div>
             )}
@@ -128,11 +128,11 @@ const ConferenceList: React.FC = () => {
                   <div className="w-14 h-14 bg-orange-500/20 rounded-2xl flex items-center justify-center text-2xl border border-orange-500/30">📩</div>
                   <div className="flex-1 min-w-0">
                     <h4 className="text-sm font-black text-white truncate">{room.name}</h4>
-                    <p className="text-xs text-orange-300/60 font-bold uppercase mt-1">From: {room.creatorName}</p>
+                    <p className="text-sm text-orange-300/60 font-bold uppercase mt-1">From: {room.creatorName}</p>
                   </div>
                   <button 
                     onClick={() => navigate(`/conference/${room.id}`)}
-                    className="bg-orange-500 text-white text-xs font-black px-4 py-2 rounded-xl shadow-[0_0_15px_rgba(249,115,22,0.4)] hover:bg-orange-600 transition-colors"
+                    className="bg-orange-500 text-white text-sm font-black px-4 py-2 rounded-xl shadow-[0_0_15px_rgba(249,115,22,0.4)] hover:bg-orange-600 transition-colors"
                   >
                     JOIN
                   </button>
@@ -158,9 +158,9 @@ const ConferenceList: React.FC = () => {
                   <div className="w-14 h-14 bg-rose-500/10 rounded-2xl flex items-center justify-center text-2xl border border-rose-500/20 group-hover:bg-rose-500/20 transition-colors">⚡</div>
                   <div className="flex-1 min-w-0">
                     <h4 className="text-sm font-black text-white truncate">{room.name}</h4>
-                    <p className="text-xs text-rose-300/50 font-bold uppercase mt-1">Creator ID: {room.creatorId}</p>
+                    <p className="text-sm text-rose-300/50 font-bold uppercase mt-1">Creator ID: {room.creatorId}</p>
                   </div>
-                  <div className="bg-rose-500/10 text-rose-400 text-xs font-black px-3 py-1 rounded-full border border-rose-500/20 uppercase shadow-[0_0_10px_rgba(244,63,94,0.2)]">Override</div>
+                  <div className="bg-rose-500/10 text-rose-400 text-sm font-black px-3 py-1 rounded-full border border-rose-500/20 uppercase shadow-[0_0_10px_rgba(244,63,94,0.2)]">Override</div>
                 </motion.button>
               ))}
            </section>
@@ -169,9 +169,9 @@ const ConferenceList: React.FC = () => {
 
       <AnimatePresence>
         {showCreate && (
-          <div className="fixed inset-0 z-[1000] flex items-center justify-center p-6">
+          <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-6">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setShowCreate(false)} className="fixed inset-0 bg-[#07070F]/80 backdrop-blur-md" />
-            <motion.div initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }} className="relative bg-[#12122A] border border-purple-500/20 w-full max-w-sm rounded-[3rem] p-8 shadow-[0_0_50px_rgba(124,58,237,0.15)]">
+            <motion.div initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }} className="relative bg-[#12122A] border border-purple-500/20 w-full max-w-sm rounded-[3rem] p-4 sm:p-8 shadow-[0_0_50px_rgba(124,58,237,0.15)]">
                <h3 className="text-xl font-black text-white tracking-tighter mb-2">Create Conference</h3>
                <p className="text-xs sm:text-sm text-purple-300/60 font-bold uppercase tracking-widest mb-6">Initialize secure workspace</p>
                <input 
@@ -184,7 +184,7 @@ const ConferenceList: React.FC = () => {
                />
                <div className="flex flex-wrap gap-3">
                   <button onClick={() => setShowCreate(false)} className="flex-1 py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 font-black text-xs sm:text-sm rounded-2xl uppercase tracking-widest transition-colors">Cancel</button>
-                  <button onClick={handleCreateRoom} disabled={!newRoomName.trim()} className="flex-2 py-4 bg-purple-600 hover:bg-purple-500 disabled:opacity-50 disabled:hover:bg-purple-600 text-white font-black text-xs sm:text-sm rounded-2xl uppercase tracking-widest shadow-[0_0_20px_rgba(124,58,237,0.3)] transition-all px-8">Initialize</button>
+                  <button onClick={handleCreateRoom} disabled={!newRoomName.trim()} className="flex-2 py-4 bg-purple-600 hover:bg-purple-500 disabled:opacity-50 disabled:hover:bg-purple-600 text-white font-black text-xs sm:text-sm rounded-2xl uppercase tracking-widest shadow-[0_0_20px_rgba(124,58,237,0.3)] transition-all px-4 sm:px-8">Initialize</button>
                </div>
             </motion.div>
           </div>

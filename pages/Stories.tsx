@@ -327,7 +327,7 @@ const Stories: React.FC = () => {
                       />
                     </div>
                   </div>
-                  <p className="text-xs font-medium text-white/80 truncate w-full text-center">
+                  <p className="text-sm font-medium text-white/80 truncate w-full text-center">
                     {group.userName}
                   </p>
                 </button>
@@ -361,7 +361,7 @@ const Stories: React.FC = () => {
 
                   {/* Text Overlay in Preview */}
                   {newStoryText && (
-                    <div className="absolute inset-0 flex items-center justify-center p-6">
+                    <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6">
                       <p className={`text-white text-2xl font-bold text-center leading-snug drop-shadow-lg ${newStoryFile ? 'bg-black/40 px-4 py-2 rounded-xl backdrop-blur-sm' : ''}`}>
                         {newStoryText}
                       </p>
@@ -386,7 +386,7 @@ const Stories: React.FC = () => {
 
                 {!newStoryFile && (
                   <div>
-                    <p className="text-xs text-white/50 mb-2 uppercase tracking-wider font-bold">Background Color</p>
+                    <p className="text-sm text-white/50 mb-2 uppercase tracking-wider font-bold">Background Color</p>
                     <div className="flex flex-wrap gap-2">
                       {BG_COLORS.map(color => (
                         <button 
@@ -425,7 +425,7 @@ const Stories: React.FC = () => {
                   <button 
                     onClick={handlePostStory}
                     disabled={uploading || (!newStoryFile && !newStoryText.trim())}
-                    className="px-6 py-2 bg-purple-600 hover:bg-purple-500 disabled:bg-purple-600/50 rounded-lg text-white font-bold transition-colors"
+                    className="px-3 sm:px-6 py-2 bg-purple-600 hover:bg-purple-500 disabled:bg-purple-600/50 rounded-lg text-white font-bold transition-colors"
                   >
                     {uploading ? 'Posting...' : 'Post'}
                   </button>
@@ -465,7 +465,7 @@ const Stories: React.FC = () => {
                   <img src={activeGroup.userAvatar} className="w-10 h-10 rounded-full border border-white/20" alt="" />
                   <div>
                     <p className="text-white font-semibold text-sm shadow-black drop-shadow-md">{activeGroup.userName}</p>
-                    <p className="text-white/70 text-xs drop-shadow-md">
+                    <p className="text-white/70 text-sm drop-shadow-md">
                       {new Date(activeStory.createdAt).toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' })}
                     </p>
                   </div>
@@ -482,7 +482,7 @@ const Stories: React.FC = () => {
               <div className="flex-1 flex items-center justify-center bg-black relative">
                 {activeStory.mediaType === 'text' ? (
                   <div 
-                    className="w-full h-full flex items-center justify-center p-8"
+                    className="w-full h-full flex items-center justify-center p-4 sm:p-8"
                     style={{ backgroundColor: activeStory.backgroundColor || '#0a0a1a' }}
                   >
                     <p className="text-white text-3xl font-bold text-center leading-snug drop-shadow-lg">
@@ -541,7 +541,7 @@ const Stories: React.FC = () => {
                     </div>
                   )}
                   {activeStory.reactions && activeStory.reactions.length > 0 && (
-                    <div className="absolute bottom-full left-0 mb-2 hidden group-hover:flex flex-col bg-black/80 rounded p-2 text-xs text-white whitespace-nowrap z-50">
+                    <div className="absolute bottom-full left-0 mb-2 hidden group-hover:flex flex-col bg-black/80 rounded p-2 text-sm text-white whitespace-nowrap z-50">
                       {activeStory.reactions.map(r => (
                         <div key={r.userId} className="flex flex-wrap items-center gap-2">
                           <img src={r.userAvatar} className="w-4 h-4 rounded-full" />

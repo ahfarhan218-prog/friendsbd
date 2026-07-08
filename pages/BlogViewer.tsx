@@ -37,7 +37,7 @@ const BlogViewer: React.FC = () => {
       <div className="max-w-full max-w-3xl mx-auto px-4 sm:px-6 mx-auto">
         <button onClick={() => navigate('/blog')} className="pf-btn pf-btn-ghost mb-4">← Back to Blog</button>
 
-        <div className="pf-card p-6">
+        <div className="pf-card p-4 sm:p-6">
           <div className="flex flex-wrap items-center gap-3 mb-4">
             <img src={post.authorAvatar} className="w-12 h-12 rounded-full object-cover border-2 border-purple-500/30" alt="" />
             <div>

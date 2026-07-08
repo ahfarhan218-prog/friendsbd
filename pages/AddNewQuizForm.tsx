@@ -177,7 +177,7 @@ const AddNewQuizForm: React.FC = () => {
       <div className="absolute bottom-10 right-10 w-64 h-64 bg-purple-500/5 rounded-full blur-[80px] pointer-events-none" />
 
       {/* Main Form Container */}
-      <div className="bg-[#121824] rounded-3xl border border-[#1f293d] p-8 max-w-lg w-full shadow-2xl mx-auto my-10 relative overflow-hidden">
+      <div className="bg-[#121824] rounded-3xl border border-[#1f293d] p-4 sm:p-8 max-w-lg w-full shadow-2xl mx-auto my-10 relative overflow-hidden">
         {/* Glow accent matching status */}
         <div className={`absolute top-0 inset-x-0 h-1 transition-all duration-300 ${
           status === 'Open' ? 'bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.4)]' : 'bg-rose-500 shadow-[0_0_12px_rgba(244,63,94,0.4)]'
@@ -304,7 +304,7 @@ const AddNewQuizForm: React.FC = () => {
                 <option value="Open" className="bg-[#121824] text-white font-semibold">🟢 Open (Available to play)</option>
                 <option value="Closed" className="bg-[#121824] text-white font-semibold">🔴 Closed (Locked/Disabled)</option>
               </select>
-              <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-xs text-slate-400 font-bold">
+              <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-sm text-slate-400 font-bold">
                 ▼
               </div>
             </div>
@@ -320,7 +320,7 @@ const AddNewQuizForm: React.FC = () => {
                 disabled={isSubmitting}
                 value={quizType}
                 onChange={e => setQuizType(e.target.value as 'Standard' | 'Live')}
-                className="bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-2xl p-3.5 w-full text-xs cursor-pointer"
+                className="bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-2xl p-3.5 w-full text-sm cursor-pointer"
               >
                 <option value="Standard" className="bg-[#121824] text-white font-semibold">Standard</option>
                 <option value="Live" className="bg-[#121824] text-white font-semibold">Live Tournament</option>
@@ -344,7 +344,7 @@ const AddNewQuizForm: React.FC = () => {
                   }`} />
                 </button>
               </div>
-              <span className="text-xs font-bold text-slate-500 uppercase">Featured at top</span>
+              <span className="text-sm font-bold text-slate-500 uppercase">Featured at top</span>
             </div>
 
           </div>
@@ -354,7 +354,7 @@ const AddNewQuizForm: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] text-white font-black py-4 px-6 rounded-2xl shadow-xl shadow-indigo-600/10 hover:shadow-indigo-600/25 w-full text-xs uppercase tracking-widest transition-all duration-150 flex flex-wrap items-center justify-center gap-2 ${
+              className={`bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] text-white font-black py-4 px-3 sm:px-6 rounded-2xl shadow-xl shadow-indigo-600/10 hover:shadow-indigo-600/25 w-full text-sm uppercase tracking-widest transition-all duration-150 flex flex-wrap items-center justify-center gap-2 ${
                 isSubmitting ? 'opacity-80 cursor-not-allowed' : ''
               }`}
             >
@@ -376,7 +376,7 @@ const AddNewQuizForm: React.FC = () => {
           <button
             onClick={() => navigate('/quiz')}
             disabled={isSubmitting}
-            className="text-xs font-bold text-slate-400 hover:text-indigo-400 transition-colors inline-flex flex-wrap items-center gap-1 bg-transparent border-none cursor-pointer disabled:opacity-50"
+            className="text-sm font-bold text-slate-400 hover:text-indigo-400 transition-colors inline-flex flex-wrap items-center gap-1 bg-transparent border-none cursor-pointer disabled:opacity-50"
           >
             ← Back to Quiz Menu
           </button>

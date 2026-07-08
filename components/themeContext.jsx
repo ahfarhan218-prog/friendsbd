@@ -18,9 +18,9 @@ export const LIGHT_THEME_TOKENS = {
 export const LIGHT_THEME_CLASSES = {
   // A. Bidirectional Reward Ledger Capsule Tags
   ledgerTags: {
-    add: 'text-[#0f766e] bg-[#0f766e]/10 border border-[#0f766e]/20 font-bold px-2.5 py-1 rounded-full text-xs inline-flex flex-wrap items-center gap-1',
-    minus: 'text-[#dc2626] bg-[#dc2626]/10 border border-[#dc2626]/20 font-bold px-2.5 py-1 rounded-full text-xs inline-flex flex-wrap items-center gap-1',
-    pending: 'text-[#b45309] bg-[#b45309]/10 border border-[#b45309]/20 font-bold px-2.5 py-1 rounded-full text-xs inline-flex flex-wrap items-center gap-1'
+    add: 'text-[#0f766e] bg-[#0f766e]/10 border border-[#0f766e]/20 font-bold px-2.5 py-1 rounded-full text-sm inline-flex flex-wrap items-center gap-1',
+    minus: 'text-[#dc2626] bg-[#dc2626]/10 border border-[#dc2626]/20 font-bold px-2.5 py-1 rounded-full text-sm inline-flex flex-wrap items-center gap-1',
+    pending: 'text-[#b45309] bg-[#b45309]/10 border border-[#b45309]/20 font-bold px-2.5 py-1 rounded-full text-sm inline-flex flex-wrap items-center gap-1'
   },
   
   // B. User Tiers & Username styles
@@ -35,7 +35,7 @@ export const LIGHT_THEME_CLASSES = {
   
   // C. Smilies Grid Mappings
   smilieCard: 'bg-[#ffffff] border border-[#cbd5e1] rounded-xl p-3 flex flex-col items-center justify-center gap-2 hover:shadow-sm transition-shadow',
-  smilieShortcut: 'font-mono text-xs text-[#0f766e] bg-[#0f766e]/10 px-1.5 py-0.5 rounded border border-[#0f766e]/20',
+  smilieShortcut: 'font-mono text-sm text-[#0f766e] bg-[#0f766e]/10 px-1.5 py-0.5 rounded border border-[#0f766e]/20',
   
   // D. Forum Architecture Mappings
   forumLayout: {

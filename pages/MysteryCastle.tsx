@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { triggerToast } from '../components/NotificationToast';
+import { mongoService } from '../services/mongoService';
 import { apTransactionService } from '../services/apTransactionService';
 
 const MysteryCastle: React.FC = () => {
@@ -61,6 +62,15 @@ const MysteryCastle: React.FC = () => {
           id: 'castle-win', senderId: 'castle', senderName: 'Mystery Castle', senderAvatar: '',
           type: 'REWARD', message: 'TREASURE FOUND! +25 Silver Points! 🏺', timestamp: Date.now(), isRead: false
         });
+
+        mongoService.addActivity({
+          id: 'act_' + Date.now(),
+          time: new Date().toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' }),
+          username: activeUser.username || activeUser.name,
+          msg: `found treasure in Mystery Castle!`,
+          timestamp: Date.now(),
+          link: `/castle`
+        });
       } else if (type === 'trap') {
          triggerToast({
           id: 'castle-trap', senderId: 'castle', senderName: 'Mystery Castle', senderAvatar: '',
@@ -81,7 +91,7 @@ const MysteryCastle: React.FC = () => {
   return (
     <div className="min-h-screen bg-transparent font-inter pb-32">
       {/* HEADER SECTION */}
-      <header className="relative bg-[#090d16]/80 backdrop-blur-xl border-b border-[#30363d] pt-12 pb-12 px-6 rounded-b-[4rem] shadow-xl overflow-hidden shrink-0">
+      <header className="relative bg-[#090d16]/80 backdrop-blur-xl border-b border-[#30363d] pt-12 pb-12 px-3 sm:px-6 rounded-b-[4rem] shadow-xl overflow-hidden shrink-0">
         <div className="absolute top-0 left-0 p-32 bg-indigo-500/10 rounded-full blur-3xl -ml-16 -mt-16 pointer-events-none" />
         <div className="absolute bottom-0 right-0 p-24 bg-purple-500/10 rounded-full blur-2xl -mr-16 pointer-events-none" />
         
@@ -91,7 +101,7 @@ const MysteryCastle: React.FC = () => {
            </button>
            <div className="text-center">
              <h2 className="text-2xl font-black uppercase tracking-tighter italic text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 drop-shadow-[0_0_10px_rgba(129,140,248,0.3)]">Mystery Castle</h2>
-             <p className="text-xs font-black uppercase tracking-widest text-slate-400">Daily Exploration Protocol</p>
+             <p className="text-sm font-black uppercase tracking-widest text-slate-400">Daily Exploration Protocol</p>
            </div>
            <div className="w-12" />
         </div>
@@ -99,8 +109,8 @@ const MysteryCastle: React.FC = () => {
 
       <div className="px-5 mt-8 space-y-12 max-w-lg mx-auto">
          {/* ATTEMPTS CARD */}
-         <div className="bg-[#161b22]/80 backdrop-blur-xl border border-[#30363d] p-8 rounded-[3rem] text-center shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 bg-indigo-500/20 px-4 py-2 rounded-bl-3xl border-b border-l border-indigo-500/30 text-xs font-black uppercase text-indigo-300 tracking-widest shadow-[0_0_15px_rgba(99,102,241,0.2)]">Level 1: Outer Wall</div>
+         <div className="bg-[#161b22]/80 backdrop-blur-xl border border-[#30363d] p-4 sm:p-8 rounded-[3rem] text-center shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 bg-indigo-500/20 px-4 py-2 rounded-bl-3xl border-b border-l border-indigo-500/30 text-sm font-black uppercase text-indigo-300 tracking-widest shadow-[0_0_15px_rgba(99,102,241,0.2)]">Level 1: Outer Wall</div>
             
             <p className="text-xs sm:text-sm font-black text-slate-400 uppercase tracking-widest mb-3 mt-2">Attempts Remaining</p>
             <div className="flex flex-wrap items-center justify-center gap-2">
@@ -160,10 +170,10 @@ const MysteryCastle: React.FC = () => {
          </div>
 
          {/* LEGEND */}
-         <div className="bg-gradient-to-br from-[#1C1C2E] to-[#110a2a] border border-white/5 p-8 rounded-[3rem] text-center shadow-xl relative overflow-hidden">
+         <div className="bg-gradient-to-br from-[#1C1C2E] to-[#110a2a] border border-white/5 p-4 sm:p-8 rounded-[3rem] text-center shadow-xl relative overflow-hidden">
             <div className="absolute -top-10 -left-10 w-48 h-48 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
             <h4 className="text-xs sm:text-sm font-black text-indigo-400 uppercase tracking-[0.2em] mb-4 relative z-10 drop-shadow-md">Legend of the Vault</h4>
-            <p className="text-xs font-medium text-slate-300 leading-relaxed italic px-4 relative z-10">
+            <p className="text-sm font-medium text-slate-300 leading-relaxed italic px-4 relative z-10">
                "Three doors stand between you and the ancient silver vaults. One holds <span className="text-amber-400 font-bold">fortune</span>, one holds wind, and one... a <span className="text-rose-400 font-bold">deadly trap</span> for the unwary."
             </p>
          </div>

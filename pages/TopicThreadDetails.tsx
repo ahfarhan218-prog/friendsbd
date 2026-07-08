@@ -3,6 +3,7 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ForumThread, ForumPost, User } from '../types';
 import { forumService } from '../services/forumService';
+import { mongoService } from '../services/mongoService';
 import { triggerToast } from '../components/NotificationToast';
 import { BBCodeParser } from '../components/BBCodeParser';
 import TopicOptionsPane from '../components/TopicOptionsPane';
@@ -113,7 +114,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, index, isMainPost, currentUse
       }`}
     >
       {isMainPost && <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500" />}
-      <div className={`${isMainPost ? 'p-6 md:p-8' : 'p-5'}`}>
+      <div className={`${isMainPost ? 'p-4 sm:p-6 md:p-8' : 'p-5'}`}>
         {/* Post header */}
         <div className="flex flex-wrap items-start gap-4 mb-4">
           {/* Avatar */}
@@ -149,7 +150,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, index, isMainPost, currentUse
             <div className="flex flex-wrap items-center gap-2 mt-0.5">
               <span className="text-xs sm:text-sm text-slate-500 font-medium">{timeAgo(post.timestamp)}</span>
               {post.updated_at && post.updated_at > post.timestamp && (
-                <span className="text-xs text-emerald-500/70 font-bold italic">· edited {timeAgo(post.updated_at)}</span>
+                <span className="text-sm text-emerald-500/70 font-bold italic">· edited {timeAgo(post.updated_at)}</span>
               )}
               <span className="text-xs sm:text-sm text-slate-600">#{index + 1}</span>
             </div>
@@ -159,13 +160,13 @@ const PostCard: React.FC<PostCardProps> = ({ post, index, isMainPost, currentUse
           <div className="flex flex-wrap items-center gap-1 shrink-0">
             {canEdit && (
               <button onClick={() => onEdit(post)}
-                className="w-7 h-7 rounded-lg hover:bg-slate-800 text-slate-500 hover:text-slate-300 flex items-center justify-center text-xs transition-all"
+                className="w-7 h-7 rounded-lg hover:bg-slate-800 text-slate-500 hover:text-slate-300 flex items-center justify-center text-sm transition-all"
                 title="Edit post"
               >✏️</button>
             )}
             {canDelete && (
               <button onClick={() => onDelete(post)}
-                className="w-7 h-7 rounded-lg hover:bg-rose-500/10 text-slate-500 hover:text-rose-400 flex items-center justify-center text-xs transition-all"
+                className="w-7 h-7 rounded-lg hover:bg-rose-500/10 text-slate-500 hover:text-rose-400 flex items-center justify-center text-sm transition-all"
                 title="Delete post"
               >🗑️</button>
             )}
@@ -194,7 +195,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, index, isMainPost, currentUse
                 <button
                   key={emoji}
                   onClick={() => currentUser && onReact(post.id, emoji)}
-                  className={`flex flex-wrap items-center gap-1 px-2.5 py-1 rounded-xl text-xs font-bold transition-all active:scale-95 border ${
+                  className={`flex flex-wrap items-center gap-1 px-2.5 py-1 rounded-xl text-sm font-bold transition-all active:scale-95 border ${
                     userReacted === emoji
                       ? 'bg-indigo-500/20 border-indigo-500/40 text-indigo-300'
                       : 'bg-slate-800/60 border-slate-700/50 text-slate-300 hover:border-slate-600'
@@ -209,9 +210,9 @@ const PostCard: React.FC<PostCardProps> = ({ post, index, isMainPost, currentUse
               <div className="relative" ref={reactionRef}>
                 <button
                   onClick={() => setShowReactions(!showReactions)}
-                  className="flex flex-wrap items-center gap-1 px-2.5 py-1 rounded-xl text-xs bg-slate-800/40 border border-slate-700/40 text-slate-500 hover:text-slate-300 hover:border-slate-600 transition-all"
+                  className="flex flex-wrap items-center gap-1 px-2.5 py-1 rounded-xl text-sm bg-slate-800/40 border border-slate-700/40 text-slate-500 hover:text-slate-300 hover:border-slate-600 transition-all"
                 >
-                  {userReacted || '😊'} <span className="text-xs">+</span>
+                  {userReacted || '😊'} <span className="text-sm">+</span>
                 </button>
 
                 <AnimatePresence>
@@ -372,6 +373,30 @@ const TopicThreadDetails: React.FC = () => {
       await forumService.createPost(threadId, currentUser, replyContent, currentUser.ap || 0, currentUser.totalAp || 0);
       setReplyContent('');
       triggerToast({ id: 'reply-ok-' + Date.now(), senderId: 'system', senderName: 'Forums', senderAvatar: '', type: 'SYSTEM', message: '💬 Reply posted! +5 AP', timestamp: Date.now(), isRead: false } as any);
+      
+      mongoService.addActivity({
+        id: 'act_' + Date.now(),
+        time: new Date().toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' }),
+        username: currentUser.username || currentUser.name,
+        msg: `replied to the forum topic "${thread?.title || 'Unknown'}"`,
+        timestamp: Date.now(),
+        link: `/forum/thread/${threadId}`
+      });
+
+      if (thread?.authorId && thread.authorId !== currentUser.id) {
+        mongoService.addNotification(thread.authorId, {
+          id: 'reply-' + Date.now(),
+          type: 'SYSTEM',
+          senderId: currentUser.id,
+          senderName: currentUser.username || currentUser.name,
+          senderAvatar: currentUser.avatar,
+          message: `${currentUser.username || currentUser.name} replied to your topic: ${thread.title}`,
+          link: `/forum/thread/${threadId}`,
+          timestamp: Date.now(),
+          isRead: false
+        });
+      }
+
       await loadData(true);
       setTimeout(() => replyRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
     } catch (err) {
@@ -459,17 +484,17 @@ const TopicThreadDetails: React.FC = () => {
   if (loading) return (
     <div className="min-h-screen bg-transparent flex flex-col items-center justify-center gap-4">
       <div className="w-10 h-10 border-2 border-indigo-500/20 border-t-indigo-500 rounded-full animate-spin" />
-      <span className="text-xs text-slate-500 font-bold uppercase tracking-widest">Loading thread...</span>
+      <span className="text-sm text-slate-500 font-bold uppercase tracking-widest">Loading thread...</span>
     </div>
   );
 
   if (error || !thread) return (
-    <div className="min-h-screen bg-transparent flex flex-col items-center justify-center gap-4 text-center px-8">
+    <div className="min-h-screen bg-transparent flex flex-col items-center justify-center gap-4 text-center px-4 sm:px-8">
       <span className="text-4xl">💬</span>
       <h2 className="text-base font-black text-white">{error || 'Topic Not Found'}</h2>
-      <p className="text-xs text-slate-500">This topic may have been deleted or moved.</p>
+      <p className="text-sm text-slate-500">This topic may have been deleted or moved.</p>
       <button onClick={() => navigate('/forum')}
-        className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all">
+        className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-sm uppercase tracking-widest rounded-2xl transition-all">
         Back to Forums
       </button>
     </div>
@@ -481,7 +506,7 @@ const TopicThreadDetails: React.FC = () => {
     <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative">
       {/* Ambient glows */}
       <div className="absolute top-0 right-0 w-full max-w-sm h-96 bg-indigo-600/4 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-20 left-0 w-80 h-80 bg-purple-600/4 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-20 left-0 w-full max-w-[20rem] sm:w-80 h-80 bg-purple-600/4 rounded-full blur-[100px] pointer-events-none" />
 
       {/* STICKY HEADER */}
       <header className="sticky top-0 z-40 p-4 max-w-full max-w-4xl mx-auto px-4 sm:px-6 mx-auto">
@@ -497,9 +522,9 @@ const TopicThreadDetails: React.FC = () => {
 
           <div className="flex-1 min-w-0">
             <div className="flex flex-wrap items-center gap-1.5 mb-0.5">
-              <span className="text-xs text-indigo-400 font-black uppercase tracking-widest cursor-pointer hover:text-indigo-300" onClick={() => navigate('/forum')}>Forums</span>
-              <span className="text-slate-700 text-xs">›</span>
-              <span className="text-xs text-slate-500 font-bold truncate">{thread.title}</span>
+              <span className="text-sm text-indigo-400 font-black uppercase tracking-widest cursor-pointer hover:text-indigo-300" onClick={() => navigate('/forum')}>Forums</span>
+              <span className="text-slate-700 text-sm">›</span>
+              <span className="text-sm text-slate-500 font-bold truncate">{thread.title}</span>
             </div>
             <h1 className="text-sm font-black text-white truncate leading-snug">{thread.title}</h1>
           </div>
@@ -514,14 +539,14 @@ const TopicThreadDetails: React.FC = () => {
               <div className="flex flex-wrap items-center gap-1">
                 <button
                   onClick={() => handleUpdateThread({ isPinned: !thread.isPinned })}
-                  className={`px-2.5 py-1.5 rounded-xl text-xs font-black uppercase border transition-all ${thread.isPinned ? 'bg-amber-500/20 border-amber-500/40 text-amber-400 hover:bg-amber-500/10' : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-amber-400 hover:border-amber-500/30'}`}
+                  className={`px-2.5 py-1.5 rounded-xl text-sm font-black uppercase border transition-all ${thread.isPinned ? 'bg-amber-500/20 border-amber-500/40 text-amber-400 hover:bg-amber-500/10' : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-amber-400 hover:border-amber-500/30'}`}
                   title={thread.isPinned ? 'Unpin' : 'Pin'}
                 >
                   {thread.isPinned ? '📌 Pinned' : '📌 Pin'}
                 </button>
                 <button
                   onClick={() => handleUpdateThread({ isLocked: !thread.isLocked })}
-                  className={`px-2.5 py-1.5 rounded-xl text-xs font-black uppercase border transition-all ${thread.isLocked ? 'bg-rose-500/20 border-rose-500/40 text-rose-400' : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-rose-400 hover:border-rose-500/30'}`}
+                  className={`px-2.5 py-1.5 rounded-xl text-sm font-black uppercase border transition-all ${thread.isLocked ? 'bg-rose-500/20 border-rose-500/40 text-rose-400' : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-rose-400 hover:border-rose-500/30'}`}
                   title={thread.isLocked ? 'Unlock' : 'Lock'}
                 >
                   {thread.isLocked ? '🔒 Locked' : '🔒 Lock'}
@@ -546,24 +571,24 @@ const TopicThreadDetails: React.FC = () => {
         {/* Thread meta info bar */}
         <div className="bg-[#121824] border border-[#1f293d] rounded-2xl px-5 py-3 flex flex-wrap items-center gap-4">
           <div className="flex flex-wrap items-center gap-1.5">
-            <span className="text-slate-500 text-xs">💬</span>
-            <span className="text-xs font-bold text-white">{replies.length}</span>
+            <span className="text-slate-500 text-sm">💬</span>
+            <span className="text-sm font-bold text-white">{replies.length}</span>
             <span className="text-xs sm:text-sm text-slate-500 font-bold">replies</span>
           </div>
           <div className="flex flex-wrap items-center gap-1.5">
-            <span className="text-slate-500 text-xs">👁️</span>
-            <span className="text-xs font-bold text-white">{thread.views || 0}</span>
+            <span className="text-slate-500 text-sm">👁️</span>
+            <span className="text-sm font-bold text-white">{thread.views || 0}</span>
             <span className="text-xs sm:text-sm text-slate-500 font-bold">views</span>
           </div>
           <div className="flex flex-wrap items-center gap-1.5">
-            <span className="text-slate-500 text-xs">👤</span>
-            <span className="text-xs font-bold text-white">{uniquePosters.length}</span>
+            <span className="text-slate-500 text-sm">👤</span>
+            <span className="text-sm font-bold text-white">{uniquePosters.length}</span>
             <span className="text-xs sm:text-sm text-slate-500 font-bold">unique posters</span>
           </div>
           {(thread.tags || []).length > 0 && (
             <div className="flex items-center gap-1.5 flex-wrap ml-auto">
               {thread.tags!.map(tag => (
-                <span key={tag} className="px-2 py-0.5 bg-slate-800 border border-slate-700 text-slate-400 text-xs font-black rounded-lg">#{tag}</span>
+                <span key={tag} className="px-2 py-0.5 bg-slate-800 border border-slate-700 text-slate-400 text-sm font-black rounded-lg">#{tag}</span>
               ))}
             </div>
           )}
@@ -574,7 +599,7 @@ const TopicThreadDetails: React.FC = () => {
           <div className="bg-rose-500/8 border border-rose-500/20 rounded-2xl px-5 py-3 flex flex-wrap items-center gap-3">
             <span className="text-rose-400 text-lg shrink-0">🔒</span>
             <div>
-              <p className="text-xs font-black text-rose-400">Topic Locked</p>
+              <p className="text-sm font-black text-rose-400">Topic Locked</p>
               <p className="text-xs sm:text-sm text-slate-500 font-medium">New replies are disabled. Only staff can reply.</p>
             </div>
           </div>
@@ -588,10 +613,10 @@ const TopicThreadDetails: React.FC = () => {
             <span className="text-xs sm:text-sm text-slate-500 font-bold">{posts.length} post{posts.length !== 1 ? 's' : ''}</span>
             <div className="flex flex-wrap gap-2">
               <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="text-xs font-black text-indigo-400 hover:text-indigo-300 uppercase tracking-widest transition-colors">↑ First</button>
+                className="text-sm font-black text-indigo-400 hover:text-indigo-300 uppercase tracking-widest transition-colors">↑ First</button>
               <span className="text-slate-700">·</span>
               <button onClick={() => replyRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })}
-                className="text-xs font-black text-indigo-400 hover:text-indigo-300 uppercase tracking-widest transition-colors">↓ Reply</button>
+                className="text-sm font-black text-indigo-400 hover:text-indigo-300 uppercase tracking-widest transition-colors">↓ Reply</button>
             </div>
           </div>
 
@@ -619,11 +644,11 @@ const TopicThreadDetails: React.FC = () => {
           ))}
 
           {/* Reply box */}
-          <div ref={replyRef} className="bg-[#121824] border border-[#1f293d] rounded-3xl p-6 shadow-xl relative overflow-hidden">
+          <div ref={replyRef} className="bg-[#121824] border border-[#1f293d] rounded-3xl p-4 sm:p-6 shadow-xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-40 h-40 bg-indigo-500/5 blur-[50px] pointer-events-none" />
             {thread.isLocked && !isStaff ? (
               <div className="text-center py-4">
-                <p className="text-xs text-slate-500 font-bold">🔒 This topic is locked. New replies are disabled.</p>
+                <p className="text-sm text-slate-500 font-bold">🔒 This topic is locked. New replies are disabled.</p>
               </div>
             ) : currentUser ? (
               <div className="space-y-3">
@@ -634,8 +659,8 @@ const TopicThreadDetails: React.FC = () => {
                     className="w-8 h-8 rounded-xl object-cover border border-[#1f293d] shrink-0"
                   />
                   <div>
-                    <span className="text-xs font-black text-white">{currentUser.username}</span>
-                    <p className="text-xs text-slate-500 font-bold">Leave a reply</p>
+                    <span className="text-sm font-black text-white">{currentUser.username}</span>
+                    <p className="text-sm text-slate-500 font-bold">Leave a reply</p>
                   </div>
                 </div>
                 <textarea
@@ -652,7 +677,7 @@ const TopicThreadDetails: React.FC = () => {
                   <button
                     onClick={handleSendReply}
                     disabled={sending || !replyContent.trim()}
-                    className="px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 disabled:opacity-50 text-white font-black text-xs uppercase tracking-widest rounded-2xl shadow-lg transition-all active:scale-[0.97] flex flex-wrap items-center gap-2"
+                    className="px-3 sm:px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 disabled:opacity-50 text-white font-black text-sm uppercase tracking-widest rounded-2xl shadow-lg transition-all active:scale-[0.97] flex flex-wrap items-center gap-2"
                   >
                     {sending ? (
                       <><div className="w-3.5 h-3.5 border-2 border-white/20 border-t-white rounded-full animate-spin" /> Posting...</>
@@ -662,9 +687,9 @@ const TopicThreadDetails: React.FC = () => {
               </div>
             ) : (
               <div className="text-center py-6 space-y-2">
-                <p className="text-xs text-slate-400 font-bold">Login to join the discussion</p>
+                <p className="text-sm text-slate-400 font-bold">Login to join the discussion</p>
                 <button onClick={() => navigate('/login')}
-                  className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all">
+                  className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-sm uppercase tracking-widest rounded-2xl transition-all">
                   Sign In
                 </button>
               </div>
@@ -675,7 +700,7 @@ const TopicThreadDetails: React.FC = () => {
         {/* Related threads */}
         {relatedThreads.length > 0 && (
           <section className="space-y-3">
-            <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">Related Topics</h3>
+            <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest px-1">Related Topics</h3>
             <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3">
               {relatedThreads.map(t => (
                 <div
@@ -685,8 +710,8 @@ const TopicThreadDetails: React.FC = () => {
                 >
                   <span className="text-lg shrink-0">{t.isLocked ? '🔒' : t.isPinned ? '📌' : '💬'}</span>
                   <div className="min-w-0">
-                    <h4 className="text-xs font-black text-white group-hover:text-indigo-400 transition-colors truncate">{t.title}</h4>
-                    <p className="text-xs text-slate-500 font-bold mt-0.5">{t.replyCount || 0} replies</p>
+                    <h4 className="text-sm font-black text-white group-hover:text-indigo-400 transition-colors truncate">{t.title}</h4>
+                    <p className="text-sm text-slate-500 font-bold mt-0.5">{t.replyCount || 0} replies</p>
                   </div>
                 </div>
               ))}
@@ -718,12 +743,12 @@ const TopicThreadDetails: React.FC = () => {
               transition={{ type: 'spring', damping: 30, stiffness: 400 }}
               className="bg-[#121824] rounded-t-3xl sm:rounded-3xl border border-[#1f293d] w-full max-w-2xl shadow-2xl relative z-10"
             >
-              <div className="border-b border-[#1f293d]/60 px-6 py-4 flex items-center justify-between">
+              <div className="border-b border-[#1f293d]/60 px-3 sm:px-6 py-4 flex items-center justify-between">
                 <h3 className="text-sm font-black text-white">✏️ Edit Post</h3>
                 <button onClick={() => !savingEdit && setEditingPost(null)}
                   className="w-7 h-7 rounded-xl bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-400 hover:text-white transition-all text-sm">✕</button>
               </div>
-              <div className="p-6 space-y-4">
+              <div className="p-4 sm:p-6 space-y-4">
                 <textarea
                   value={editContent} onChange={e => setEditContent(e.target.value)}
                   disabled={savingEdit} rows={8}
@@ -731,9 +756,9 @@ const TopicThreadDetails: React.FC = () => {
                 />
                 <div className="flex flex-wrap gap-3">
                   <button disabled={savingEdit} onClick={() => setEditingPost(null)}
-                    className="w-1/3 py-3 border border-[#1f293d] hover:bg-slate-800 text-slate-400 font-bold text-xs uppercase tracking-widest rounded-2xl transition-all">Cancel</button>
+                    className="w-1/3 py-3 border border-[#1f293d] hover:bg-slate-800 text-slate-400 font-bold text-sm uppercase tracking-widest rounded-2xl transition-all">Cancel</button>
                   <button disabled={savingEdit || !editContent.trim()} onClick={handleSaveEdit}
-                    className="flex flex-wrap-1 py-3 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all flex flex-wrap items-center justify-center gap-2">
+                    className="flex flex-wrap-1 py-3 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-black text-sm uppercase tracking-widest rounded-2xl transition-all flex flex-wrap items-center justify-center gap-2">
                     {savingEdit ? <><div className="w-3.5 h-3.5 border-2 border-white/20 border-t-white rounded-full animate-spin" /> Saving...</> : '💾 Save Changes'}
                   </button>
                 </div>
@@ -752,16 +777,16 @@ const TopicThreadDetails: React.FC = () => {
               className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm" />
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-[#121824] rounded-3xl border border-rose-500/30 p-6 max-w-sm w-full shadow-2xl relative z-10 text-center space-y-4"
+              className="bg-[#121824] rounded-3xl border border-rose-500/30 p-4 sm:p-6 max-w-sm w-full shadow-2xl relative z-10 text-center space-y-4"
             >
               <span className="text-4xl block">🗑️</span>
               <h3 className="text-sm font-black text-white">Delete This Post?</h3>
-              <p className="text-xs text-slate-400">This action cannot be undone. The post will be marked as deleted.</p>
+              <p className="text-sm text-slate-400">This action cannot be undone. The post will be marked as deleted.</p>
               <div className="flex flex-wrap gap-3">
                 <button onClick={() => setDeletingPost(null)}
-                  className="flex-1 py-3 border border-[#1f293d] hover:bg-slate-800 text-slate-400 font-bold text-xs uppercase tracking-widest rounded-2xl transition-all">Cancel</button>
+                  className="flex-1 py-3 border border-[#1f293d] hover:bg-slate-800 text-slate-400 font-bold text-sm uppercase tracking-widest rounded-2xl transition-all">Cancel</button>
                 <button onClick={() => handleDeletePost(deletingPost)}
-                  className="flex-1 py-3 bg-rose-600 hover:bg-rose-500 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all">Delete</button>
+                  className="flex-1 py-3 bg-rose-600 hover:bg-rose-500 text-white font-black text-sm uppercase tracking-widest rounded-2xl transition-all">Delete</button>
               </div>
             </motion.div>
           </div>

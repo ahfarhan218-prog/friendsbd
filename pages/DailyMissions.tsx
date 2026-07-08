@@ -75,7 +75,7 @@ const DailyMissions: React.FC = () => {
   return (
     <div className="min-h-screen bg-transparent pb-20">
       {/* Header Panel */}
-      <div className="bg-indigo-600 text-white pt-8 pb-10 px-6 rounded-b-[2rem] shadow-lg relative overflow-hidden">
+      <div className="bg-indigo-600 text-white pt-8 pb-10 px-3 sm:px-6 rounded-b-[2rem] shadow-lg relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay pointer-events-none"></div>
         <div className="relative z-10">
           <div className="flex flex-wrap items-center gap-3 mb-2">
@@ -86,7 +86,7 @@ const DailyMissions: React.FC = () => {
 
           {/* Progress Bar */}
           <div className="bg-indigo-800/40 rounded-xl p-4 backdrop-blur-sm border border-indigo-500/30">
-            <div className="flex justify-between text-xs font-bold uppercase tracking-wider mb-2 text-indigo-100">
+            <div className="flex justify-between text-sm font-bold uppercase tracking-wider mb-2 text-indigo-100">
                <span>Your Progress</span>
                <span>{totalCompleted} / {totalMissions}</span>
             </div>
@@ -120,7 +120,7 @@ const DailyMissions: React.FC = () => {
                      {mission.title}
                      {isCompleted && <span className="ml-2 text-emerald-500 text-sm">✓</span>}
                    </h3>
-                   <p className="text-slate-500 text-xs mt-1 leading-relaxed">
+                   <p className="text-slate-500 text-sm mt-1 leading-relaxed">
                      {mission.description}
                    </p>
                    

@@ -26,7 +26,7 @@ const BBCodeGuide: React.FC = () => {
         </button>
         <div>
           <h2 className="text-xl font-black italic tracking-tighter">BBCODE GUIDE</h2>
-          <p className="text-xs font-black uppercase opacity-60">Master the formatting</p>
+          <p className="text-sm font-black uppercase opacity-60">Master the formatting</p>
         </div>
       </header>
 
@@ -34,7 +34,7 @@ const BBCodeGuide: React.FC = () => {
         <div className="bg-white rounded-[2.5rem] shadow-xl border border-slate-100 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left">
-              <thead className="bg-slate-50 text-xs font-black uppercase tracking-widest text-slate-400">
+              <thead className="bg-slate-50 text-sm font-black uppercase tracking-widest text-slate-400">
                 <tr>
                   <th className="p-5">BBCode Tag</th>
                   <th className="p-5">Result</th>
@@ -45,7 +45,7 @@ const BBCodeGuide: React.FC = () => {
                   <tr key={idx}>
                     <td className="p-5">
                       <code className="text-xs sm:text-sm font-bold text-purple-600 bg-purple-50 px-2 py-1 rounded-md">{item.tag}</code>
-                      <p className="text-xs text-slate-400 mt-1 uppercase font-bold">{item.desc}</p>
+                      <p className="text-sm text-slate-400 mt-1 uppercase font-bold">{item.desc}</p>
                     </td>
                     <td className="p-5">
                       <div className="text-xs sm:text-sm font-medium text-slate-700">
@@ -59,9 +59,9 @@ const BBCodeGuide: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-slate-900 rounded-[2.5rem] p-8 text-white relative overflow-hidden">
+        <div className="bg-slate-900 rounded-[2.5rem] p-4 sm:p-8 text-white relative overflow-hidden">
            <div className="absolute -top-10 -right-10 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl" />
-           <h4 className="text-xs font-black uppercase tracking-widest mb-2 relative z-10">Complex Example</h4>
+           <h4 className="text-sm font-black uppercase tracking-widest mb-2 relative z-10">Complex Example</h4>
            <div className="bg-white/5 border border-white/10 rounded-2xl p-4 mb-6 relative z-10">
               <p className="text-xs sm:text-sm font-mono text-purple-300 mb-4 whitespace-pre-wrap">
                 [center][b][size=20px]GRAND TOURNAMENT![/size][/b][/center]

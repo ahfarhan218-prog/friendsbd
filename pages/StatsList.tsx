@@ -60,7 +60,7 @@ const StatsList: React.FC = () => {
     if (user.metricValue !== null && user.metricValue !== undefined) return formatLargeNumber(user.metricValue);
     
     // For roles/booleans where metric is purely presence
-    if (type === 'staff') return <span className="px-2 py-0.5 bg-red-500/10 text-red-400 rounded-md uppercase text-xs font-black">{user.role}</span>;
+    if (type === 'staff') return <span className="px-2 py-0.5 bg-red-500/10 text-red-400 rounded-md uppercase text-sm font-black">{user.role}</span>;
     if (type === 'verified') return '✅';
     if (type === 'premium') return '💎';
     if (type === 'banned') return '🔨';
@@ -92,7 +92,7 @@ const StatsList: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-[#1C1C2E]/60 border border-purple-500/10 rounded-3xl p-6 shadow-2xl backdrop-blur-md">
+        <div className="bg-[#1C1C2E]/60 border border-purple-500/10 rounded-3xl p-4 sm:p-6 shadow-2xl backdrop-blur-md">
           <div className="space-y-3">
             {loading ? (
               // Skeleton Loader
@@ -110,7 +110,7 @@ const StatsList: React.FC = () => {
             ) : data.length === 0 ? (
               <div className="text-center py-20">
                 <span className="text-4xl opacity-20">📭</span>
-                <p className="text-xs font-bold text-white/60 uppercase mt-4">No Data Available</p>
+                <p className="text-sm font-bold text-white/60 uppercase mt-4">No Data Available</p>
               </div>
             ) : (
               data.map((user, index) => (
@@ -120,7 +120,7 @@ const StatsList: React.FC = () => {
                   className="flex flex-wrap items-center gap-4 p-4 bg-[#161b22]/50 hover:bg-[#161b22] border border-transparent hover:border-purple-500/20 rounded-2xl cursor-pointer transition-all group"
                 >
                   {/* Rank Badge */}
-                  <div className="w-8 h-8 flex items-center justify-center bg-white/5 text-xs font-black text-white/60 rounded-xl shrink-0 group-hover:text-purple-400 transition-colors">
+                  <div className="w-8 h-8 flex items-center justify-center bg-white/5 text-sm font-black text-white/60 rounded-xl shrink-0 group-hover:text-purple-400 transition-colors">
                     #{index + 1}
                   </div>
                   
@@ -138,7 +138,7 @@ const StatsList: React.FC = () => {
                       {user.isVerified && <span className="text-blue-400 text-sm">✅</span>}
                       {user.isPremium && <span className="text-amber-400 text-sm">💎</span>}
                     </div>
-                    <span className="text-xs font-bold text-white/60 uppercase tracking-widest truncate">@{user.username}</span>
+                    <span className="text-sm font-bold text-white/60 uppercase tracking-widest truncate">@{user.username}</span>
                   </div>
                   
                   {/* Metric */}

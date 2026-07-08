@@ -72,7 +72,7 @@ const Challenges: React.FC = () => {
             key={task.id} 
             initial={{ opacity: 0, y: 10 }} 
             animate={{ opacity: 1, y: 0 }}
-            className={`bg-white p-6 rounded-[2rem] shadow-sm border ${task.claimed ? 'border-emerald-100 opacity-70' : 'border-slate-100'}`}
+            className={`bg-white p-4 sm:p-6 rounded-[2rem] shadow-sm border ${task.claimed ? 'border-emerald-100 opacity-70' : 'border-slate-100'}`}
           >
             <div className="flex justify-between items-start mb-4">
               <div>
@@ -82,12 +82,12 @@ const Challenges: React.FC = () => {
               <div className="flex flex-wrap items-center gap-2">
                 <button 
                   onClick={() => setReminder(task)}
-                  className="w-8 h-8 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center text-xs shadow-sm hover:bg-indigo-100 transition-colors"
+                  className="w-8 h-8 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center text-sm shadow-sm hover:bg-indigo-100 transition-colors"
                   title="Set Reminder"
                 >
                   ⏰
                 </button>
-                <span className="text-xs font-black text-orange-600 bg-orange-50 px-3 py-1 rounded-full">+{task.reward} Pts</span>
+                <span className="text-sm font-black text-orange-600 bg-orange-50 px-3 py-1 rounded-full">+{task.reward} Pts</span>
               </div>
             </div>
 

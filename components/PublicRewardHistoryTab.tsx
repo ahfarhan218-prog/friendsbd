@@ -82,7 +82,7 @@ const PublicRewardHistoryTab: React.FC<PublicRewardHistoryTabProps> = ({ profile
     return (
       <div className="py-12 bg-slate-900/10 border border-[#1f293d]/50 rounded-[2rem] text-center space-y-2 max-w-sm mx-auto">
         <span className="text-2xl block">🏅</span>
-        <h4 className="text-xs font-black text-white">No Point Modifications</h4>
+        <h4 className="text-sm font-black text-white">No Point Modifications</h4>
         <p className="text-xs sm:text-sm text-slate-400">This member has no recorded point award/deduction history.</p>
       </div>
     );
@@ -99,11 +99,11 @@ const PublicRewardHistoryTab: React.FC<PublicRewardHistoryTabProps> = ({ profile
           <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[#1f293d]/50">
             <div>
               {item.transaction_type === 'ADD' ? (
-                <span className="bg-green-500/10 text-green-400 border border-green-500/20 px-3 py-1 rounded-xl text-xs font-black font-mono">
+                <span className="bg-green-500/10 text-green-400 border border-green-500/20 px-3 py-1 rounded-xl text-sm font-black font-mono">
                   +{item.plusses_amount} Plusses / +{item.rp_amount} RP
                 </span>
               ) : (
-                <span className="bg-red-500/10 text-red-400 border border-red-500/20 px-3 py-1 rounded-xl text-xs font-black font-mono">
+                <span className="bg-red-500/10 text-red-400 border border-red-500/20 px-3 py-1 rounded-xl text-sm font-black font-mono">
                   -{item.plusses_amount} Plusses / -{item.rp_amount} RP
                 </span>
               )}
@@ -116,8 +116,8 @@ const PublicRewardHistoryTab: React.FC<PublicRewardHistoryTabProps> = ({ profile
 
           {/* Body block - reason */}
           <div className="py-3">
-            <span className="text-xs font-extrabold text-slate-500 uppercase block tracking-widest mb-1.5">Audit Justification</span>
-            <blockquote className="text-xs text-slate-300 bg-[#090d16]/40 border-l-2 border-indigo-500/60 pl-3 py-1.5 rounded-r-xl italic leading-relaxed">
+            <span className="text-sm font-extrabold text-slate-500 uppercase block tracking-widest mb-1.5">Audit Justification</span>
+            <blockquote className="text-sm text-slate-300 bg-[#090d16]/40 border-l-2 border-indigo-500/60 pl-3 py-1.5 rounded-r-xl italic leading-relaxed">
               "{item.reason}"
             </blockquote>
           </div>

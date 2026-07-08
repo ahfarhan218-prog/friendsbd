@@ -58,7 +58,7 @@ const BlogEditor: React.FC = () => {
           <button onClick={() => navigate('/blog')} className="pf-btn pf-btn-ghost">Back</button>
         </div>
         {msg && <div className="text-sm text-center mb-4 font-bold text-white/80">{msg}</div>}
-        <div className="pf-card p-6 space-y-4">
+        <div className="pf-card p-4 sm:p-6 space-y-4">
           <input className="pf-input w-full text-lg" placeholder="Post title..." value={title} onChange={e => setTitle(e.target.value)} />
           <textarea className="pf-input w-full min-h-[300px] resize-y" placeholder="Write your content here (BBCode supported)..." value={content} onChange={e => setContent(e.target.value)} />
           <input className="pf-input w-full" placeholder="Tags (comma separated: tech, gaming, news)" value={tags} onChange={e => setTags(e.target.value)} />

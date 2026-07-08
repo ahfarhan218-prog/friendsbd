@@ -181,15 +181,15 @@ const ExecutiveApprovalDashboard: React.FC = () => {
 
   if (!isAuthorized && !loading) {
     return (
-      <div className="min-h-screen bg-transparent flex flex-col items-center justify-center p-6 text-center">
+      <div className="min-h-screen bg-transparent flex flex-col items-center justify-center p-4 sm:p-6 text-center">
         <span className="text-4xl">🛡️</span>
         <h2 className="text-lg font-black text-rose-400 mt-2">Access Restrained</h2>
-        <p className="text-xs text-slate-400 max-w-xs mt-1">
+        <p className="text-sm text-slate-400 max-w-xs mt-1">
           Only admins or senior staff members are authorized to access this ledger approval panel.
         </p>
         <button
           onClick={() => navigate('/home')}
-          className="mt-6 px-5 py-3 bg-slate-800 hover:bg-slate-700 text-xs font-bold rounded-2xl transition-all"
+          className="mt-6 px-5 py-3 bg-slate-800 hover:bg-slate-700 text-sm font-bold rounded-2xl transition-all"
         >
           Return Home
         </button>
@@ -204,7 +204,7 @@ const ExecutiveApprovalDashboard: React.FC = () => {
       <div className="absolute bottom-20 left-10 w-[300px] h-[300px] bg-purple-600/5 rounded-full blur-[95px] pointer-events-none" />
 
       {/* Header Panel */}
-      <header className="p-6 border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md">
+      <header className="p-4 sm:p-6 border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md">
         <div className="max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-4">
             <button
@@ -217,24 +217,24 @@ const ExecutiveApprovalDashboard: React.FC = () => {
             </button>
             <div>
               <h1 className="text-xl font-black text-white tracking-tight">Executive Approval Dashboard</h1>
-              <p className="text-xs text-slate-400 mt-1">Review pending point modifications and execute atomic approvals.</p>
+              <p className="text-sm text-slate-400 mt-1">Review pending point modifications and execute atomic approvals.</p>
             </div>
           </div>
         </div>
       </header>
 
       {/* Main Review Section */}
-      <main className="p-6 max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto mt-6">
+      <main className="p-4 sm:p-6 max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto mt-6">
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 space-y-3">
             <div className="w-8 h-8 border-2 border-indigo-500/20 border-t-indigo-500 rounded-full animate-spin" />
-            <span className="text-xs text-slate-500 font-bold">Streaming Pending approvals...</span>
+            <span className="text-sm text-slate-500 font-bold">Streaming Pending approvals...</span>
           </div>
         ) : requests.length === 0 ? (
           <div className="py-20 bg-[#121824]/40 border border-[#1f293d]/50 rounded-[2.5rem] text-center space-y-2 max-w-md mx-auto">
             <span className="text-3xl block">📋</span>
             <h3 className="text-sm font-black text-white">All Caught Up!</h3>
-            <p className="text-xs text-slate-400">There are no pending point modification requests to action.</p>
+            <p className="text-sm text-slate-400">There are no pending point modification requests to action.</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -254,11 +254,11 @@ const ExecutiveApprovalDashboard: React.FC = () => {
                 <div className="space-y-3 text-left">
                   <div className="flex flex-wrap items-center gap-2.5">
                     {req.transaction_type === 'ADD' ? (
-                      <span className="px-2.5 py-0.5 text-xs font-black uppercase tracking-wider bg-green-500/10 text-green-400 border border-green-500/20 rounded-md">
+                      <span className="px-2.5 py-0.5 text-sm font-black uppercase tracking-wider bg-green-500/10 text-green-400 border border-green-500/20 rounded-md">
                         + ADD REQUEST
                       </span>
                     ) : (
-                      <span className="px-2.5 py-0.5 text-xs font-black uppercase tracking-wider bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-md">
+                      <span className="px-2.5 py-0.5 text-sm font-black uppercase tracking-wider bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-md">
                         - DEDUCTION REQUEST
                       </span>
                     )}
@@ -269,7 +269,7 @@ const ExecutiveApprovalDashboard: React.FC = () => {
                     <h4 className="text-sm font-black text-white">
                       Target User: <span className="text-indigo-400">@{req.target_username}</span>
                     </h4>
-                    <p className="text-xs text-slate-400 mt-1 max-w-xl">
+                    <p className="text-sm text-slate-400 mt-1 max-w-xl">
                       Audit Reason: <span className="italic">"{req.reason}"</span>
                     </p>
                   </div>
@@ -284,7 +284,7 @@ const ExecutiveApprovalDashboard: React.FC = () => {
                 {/* Right block - adjustment values & action buttons */}
                 <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center gap-4 min-w-[200px] border-t md:border-t-0 border-[#1f293d]/50 pt-4 md:pt-0">
                   <div className="text-left md:text-right space-y-1">
-                    <span className="text-xs font-extrabold text-slate-500 uppercase block tracking-wider">Requested Delta</span>
+                    <span className="text-sm font-extrabold text-slate-500 uppercase block tracking-wider">Requested Delta</span>
                     <h4 className={`text-sm font-black font-mono ${
                       req.transaction_type === 'ADD' ? 'text-green-400' : 'text-rose-400'
                     }`}>
@@ -296,13 +296,13 @@ const ExecutiveApprovalDashboard: React.FC = () => {
                   <div className="flex flex-wrap items-center gap-2">
                     <button
                       onClick={() => handleReject(req)}
-                      className="px-4 py-2 bg-rose-500/10 hover:bg-rose-500 text-rose-400 hover:text-white border border-rose-500/20 rounded-xl text-xs font-bold transition-all"
+                      className="px-4 py-2 bg-rose-500/10 hover:bg-rose-500 text-rose-400 hover:text-white border border-rose-500/20 rounded-xl text-sm font-bold transition-all"
                     >
                       Reject
                     </button>
                     <button
                       onClick={() => handleApprove(req)}
-                      className="px-4 py-2 bg-green-500 hover:bg-green-400 text-white rounded-xl text-xs font-bold shadow-lg shadow-green-500/10 transition-all"
+                      className="px-4 py-2 bg-green-500 hover:bg-green-400 text-white rounded-xl text-sm font-bold shadow-lg shadow-green-500/10 transition-all"
                     >
                       Approve
                     </button>

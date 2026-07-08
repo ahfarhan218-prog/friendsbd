@@ -20,7 +20,7 @@ const BBCodeDashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#0B0B1A] pb-24 font-inter">
-      <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] text-white p-6 pb-20 rounded-b-[3.5rem] shadow-2xl">
+      <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] text-white p-4 sm:p-6 pb-20 rounded-b-[3.5rem] shadow-2xl">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_0%,_#7c3aed33,_transparent_70%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#0B0B1A] to-transparent" />
         <div className="absolute top-8 right-4 w-24 h-24 bg-purple-600/10 rounded-full blur-3xl" />
@@ -30,7 +30,7 @@ const BBCodeDashboard: React.FC = () => {
           </button>
           <div className="text-center">
             <h1 className="text-2xl font-black italic tracking-tighter">BB DASHBOARD</h1>
-            <p className="text-xs font-black uppercase tracking-widest text-white/50">Formatted Social Feed</p>
+            <p className="text-sm font-black uppercase tracking-widest text-white/50">Formatted Social Feed</p>
           </div>
           <button onClick={() => navigate('/bb-editor')} className="p-3 bg-black/20 rounded-2xl border border-white/10 backdrop-blur-sm active:scale-90 transition-all">✍️</button>
         </div>
@@ -40,7 +40,7 @@ const BBCodeDashboard: React.FC = () => {
         <div className="flex flex-wrap gap-3 overflow-x-auto pb-2 no-scrollbar">
           {['All Posts', 'Shouts', 'Announcements', 'Forum'].map((cat) => (
             <button key={cat} onClick={() => setFilter(cat)}
-              className={`whitespace-nowrap px-6 py-3 rounded-2xl text-xs sm:text-sm font-black uppercase tracking-widest transition-all ${filter === cat ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-xl shadow-purple-900/30' : 'bg-[#1C1C2E] text-white/40 border border-white/5'}`}>
+              className={`whitespace-nowrap px-3 sm:px-6 py-3 rounded-2xl text-xs sm:text-sm font-black uppercase tracking-widest transition-all ${filter === cat ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-xl shadow-purple-900/30' : 'bg-[#1C1C2E] text-white/40 border border-white/5'}`}>
               {cat}
             </button>
           ))}
@@ -50,23 +50,23 @@ const BBCodeDashboard: React.FC = () => {
           {loading ? (
             <div className="py-20 text-center"><div className="w-10 h-10 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto"></div></div>
           ) : filtered.length === 0 ? (
-            <div className="bg-[#1C1C2E] rounded-[2.5rem] p-12 text-center border border-white/5">
+            <div className="bg-[#1C1C2E] rounded-[2.5rem] p-4 sm:p-6 sm:p-12 text-center border border-white/5">
               <p className="text-xs sm:text-sm font-black text-white/40 uppercase tracking-widest">No posts yet. Create one!</p>
             </div>
           ) : (
             filtered.map((post) => (
               <motion.div key={post.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                className="bg-[#1C1C2E] rounded-[2.5rem] p-6 border border-white/5 shadow-md hover:border-purple-500/30 transition-all">
+                className="bg-[#1C1C2E] rounded-[2.5rem] p-4 sm:p-6 border border-white/5 shadow-md hover:border-purple-500/30 transition-all">
                 <div className="flex flex-wrap items-center gap-4 mb-5">
                   <img src={post.authorAvatar || `https://picsum.photos/seed/${post.authorId}/100`} className="w-12 h-12 rounded-2xl border-2 border-purple-500/30 object-cover" alt="" />
                   <div className="flex-1">
                     <div className="flex justify-between items-start">
                       <h3 className="text-sm font-black text-white">{post.authorName || post.author}</h3>
-                      <span className={`text-xs font-black px-2 py-0.5 rounded-full uppercase tracking-widest ${(post.tags || []).includes('announcement') ? 'bg-amber-500/10 text-amber-400' : 'bg-blue-500/10 text-blue-400'}`}>
+                      <span className={`text-sm font-black px-2 py-0.5 rounded-full uppercase tracking-widest ${(post.tags || []).includes('announcement') ? 'bg-amber-500/10 text-amber-400' : 'bg-blue-500/10 text-blue-400'}`}>
                         {post.tags?.[0] || 'post'}
                       </span>
                     </div>
-                    <p className="text-xs font-bold text-gray-500 uppercase tracking-tighter">
+                    <p className="text-sm font-bold text-gray-500 uppercase tracking-tighter">
                       {new Date(post.publishedAt || post.createdAt || post.timestamp).toLocaleString([], { hour: '2-digit', minute: '2-digit', day: 'numeric', month: 'short' })}
                     </p>
                   </div>

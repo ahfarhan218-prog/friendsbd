@@ -192,7 +192,7 @@ const UniversalRewardForm: React.FC = () => {
       <div className="absolute bottom-10 right-10 w-64 h-64 bg-purple-600/5 rounded-full blur-[85px] pointer-events-none" />
 
       {/* Form Card Container */}
-      <div className="bg-[#121824] rounded-3xl border border-[#1f293d] p-8 max-w-lg w-full shadow-2xl mx-auto my-10 relative overflow-hidden">
+      <div className="bg-[#121824] rounded-3xl border border-[#1f293d] p-4 sm:p-8 max-w-lg w-full shadow-2xl mx-auto my-10 relative overflow-hidden">
         
         {/* Glow indicator aligned with transaction type */}
         <div className={`absolute top-0 inset-x-0 h-1 transition-all duration-300 ${
@@ -219,7 +219,7 @@ const UniversalRewardForm: React.FC = () => {
                 readOnly
                 value={targetUserId}
                 onChange={e => setTargetUserId(e.target.value)}
-                className="bg-[#090d16] border border-[#1f293d] text-slate-400 rounded-2xl p-3.5 w-full text-xs outline-none cursor-not-allowed"
+                className="bg-[#090d16] border border-[#1f293d] text-slate-400 rounded-2xl p-3.5 w-full text-sm outline-none cursor-not-allowed"
               />
             </div>
             <div className="space-y-1">
@@ -228,7 +228,7 @@ const UniversalRewardForm: React.FC = () => {
                 type="text"
                 readOnly
                 value={targetUsername ? `@${targetUsername}` : ''}
-                className="bg-[#090d16] border border-[#1f293d] text-slate-400 rounded-2xl p-3.5 w-full text-xs outline-none cursor-not-allowed"
+                className="bg-[#090d16] border border-[#1f293d] text-slate-400 rounded-2xl p-3.5 w-full text-sm outline-none cursor-not-allowed"
               />
             </div>
           </div>
@@ -240,7 +240,7 @@ const UniversalRewardForm: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setTransactionType('ADD')}
-                className={`py-3.5 text-xs font-black uppercase rounded-xl transition-all ${
+                className={`py-3.5 text-sm font-black uppercase rounded-xl transition-all ${
                   transactionType === 'ADD'
                     ? 'bg-green-500/10 text-green-400 border border-green-500/20 shadow-sm'
                     : 'text-slate-500 hover:text-slate-300'
@@ -251,7 +251,7 @@ const UniversalRewardForm: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setTransactionType('MINUS')}
-                className={`py-3.5 text-xs font-black uppercase rounded-xl transition-all ${
+                className={`py-3.5 text-sm font-black uppercase rounded-xl transition-all ${
                   transactionType === 'MINUS'
                     ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20 shadow-sm'
                     : 'text-slate-500 hover:text-slate-300'
@@ -299,11 +299,11 @@ const UniversalRewardForm: React.FC = () => {
 
           {/* Associated Quiz Fields */}
           <div className="p-4 bg-[#090d16]/60 border border-[#1f293d] rounded-2xl space-y-3">
-            <span className="text-xs font-black uppercase text-slate-400 tracking-widest block">Associated Quiz Attributions</span>
+            <span className="text-sm font-black uppercase text-slate-400 tracking-widest block">Associated Quiz Attributions</span>
             
             <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3">
               <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-500 uppercase">Quiz Topic ID</label>
+                <label className="text-sm font-bold text-slate-500 uppercase">Quiz Topic ID</label>
                 <input
                   type="text"
                   required
@@ -311,11 +311,11 @@ const UniversalRewardForm: React.FC = () => {
                   disabled={isSubmitting}
                   value={quizId}
                   onChange={e => setQuizId(e.target.value)}
-                  className="bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-xl p-2.5 w-full text-xs"
+                  className="bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-xl p-2.5 w-full text-sm"
                 />
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-500 uppercase">Quiz Title</label>
+                <label className="text-sm font-bold text-slate-500 uppercase">Quiz Title</label>
                 <input
                   type="text"
                   required
@@ -323,13 +323,13 @@ const UniversalRewardForm: React.FC = () => {
                   disabled={isSubmitting}
                   value={quizTitle}
                   onChange={e => setQuizTitle(e.target.value)}
-                  className="bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-xl p-2.5 w-full text-xs"
+                  className="bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-xl p-2.5 w-full text-sm"
                 />
               </div>
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-bold text-slate-500 uppercase">Quiz Link</label>
+              <label className="text-sm font-bold text-slate-500 uppercase">Quiz Link</label>
               <input
                 type="text"
                 required
@@ -337,7 +337,7 @@ const UniversalRewardForm: React.FC = () => {
                 disabled={isSubmitting}
                 value={quizLink}
                 onChange={e => setQuizLink(e.target.value)}
-                className="bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-xl p-2.5 w-full text-xs font-mono"
+                className="bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-xl p-2.5 w-full text-sm font-mono"
               />
             </div>
             {validationErrors.quizId && (
@@ -362,7 +362,7 @@ const UniversalRewardForm: React.FC = () => {
               }}
               placeholder="State the detailed reason for this point audit ledger entry..."
               rows={3}
-              className={`bg-[#090d16] border text-white focus:outline-none focus:border-indigo-500 rounded-2xl p-3.5 w-full text-xs resize-none transition-all ${
+              className={`bg-[#090d16] border text-white focus:outline-none focus:border-indigo-500 rounded-2xl p-3.5 w-full text-sm resize-none transition-all ${
                 validationErrors.reason ? 'border-rose-500/50 focus:border-rose-500' : 'border-[#1f293d]'
               }`}
             />
@@ -378,7 +378,7 @@ const UniversalRewardForm: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`py-4 px-6 text-xs font-black uppercase tracking-widest rounded-2xl shadow-xl w-full transition-all duration-150 flex flex-wrap items-center justify-center gap-2 ${
+              className={`py-4 px-3 sm:px-6 text-sm font-black uppercase tracking-widest rounded-2xl shadow-xl w-full transition-all duration-150 flex flex-wrap items-center justify-center gap-2 ${
                 transactionType === 'ADD'
                   ? 'bg-green-600 hover:bg-green-500 text-white shadow-green-600/10 hover:shadow-green-600/20'
                   : 'bg-rose-600 hover:bg-rose-500 text-white shadow-rose-600/10 hover:shadow-rose-600/20'
@@ -402,7 +402,7 @@ const UniversalRewardForm: React.FC = () => {
           <button
             onClick={() => navigate(`/profile/${targetUserId}`)}
             disabled={isSubmitting}
-            className="text-xs font-bold text-slate-400 hover:text-indigo-400 transition-colors bg-transparent border-none cursor-pointer disabled:opacity-50"
+            className="text-sm font-bold text-slate-400 hover:text-indigo-400 transition-colors bg-transparent border-none cursor-pointer disabled:opacity-50"
           >
             ← Back to User Profile
           </button>

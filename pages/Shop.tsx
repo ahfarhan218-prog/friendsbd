@@ -93,6 +93,15 @@ const Shop: React.FC = () => {
         timestamp: Date.now(),
         isRead: false
       } as any);
+
+      mongoService.addActivity({
+        id: 'act_' + Date.now(),
+        time: new Date().toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' }),
+        username: activeUser.username || activeUser.name,
+        msg: `purchased ${item.name} from the shop`,
+        timestamp: Date.now(),
+        link: `/shop`
+      });
     } catch (err) {
       console.error('Failed to buy item:', err);
       triggerToast({
@@ -113,8 +122,8 @@ const Shop: React.FC = () => {
   return (
     <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-24 relative text-left">
       {/* Glow effects */}
-      <div className="absolute top-0 right-10 w-80 h-80 bg-purple-600/5 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-20 left-10 w-80 h-80 bg-indigo-600/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 right-10 w-full max-w-[20rem] sm:w-80 h-80 bg-purple-600/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-20 left-10 w-full max-w-[20rem] sm:w-80 h-80 bg-indigo-600/5 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Header */}
       <header className="p-4 sm:p-6 max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto flex items-center justify-between flex-wrap gap-3 border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md rounded-b-[2rem]">
@@ -128,20 +137,20 @@ const Shop: React.FC = () => {
             </svg>
           </button>
           <div>
-            <span className="text-xs font-black text-purple-400 uppercase tracking-[0.3em] block mb-0.5">Gift Shop</span>
+            <span className="text-sm font-black text-purple-400 uppercase tracking-[0.3em] block mb-0.5">Gift Shop</span>
             <h1 className="text-lg font-black text-white tracking-tight">Virtual items</h1>
           </div>
         </div>
         <div className="bg-[#121824] border border-[#1f293d] px-4 py-2 rounded-2xl text-right flex flex-wrap items-center gap-3">
           <div>
-            <span className="text-xs text-slate-500 font-bold uppercase block tracking-wider">Your Points</span>
+            <span className="text-sm text-slate-500 font-bold uppercase block tracking-wider">Your Points</span>
             <span className="text-sm font-black text-yellow-400 font-mono">{activeUser.points || 0} pts</span>
           </div>
         </div>
       </header>
 
       {/* Main Grid */}
-      <main className="max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto px-6 mt-8">
+      <main className="max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto px-3 sm:px-6 mt-8">
         <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-12">
           {items.map((item, i) => (
             <div
@@ -151,10 +160,10 @@ const Shop: React.FC = () => {
               <div className="w-16 h-16 rounded-2xl bg-[#090d16] border border-[#1f293d] flex items-center justify-center text-4xl mb-4 group-hover:scale-110 transition-transform">
                 {item.icon}
               </div>
-              <p className="text-xs font-black text-purple-400 uppercase tracking-widest mb-1">
+              <p className="text-sm font-black text-purple-400 uppercase tracking-widest mb-1">
                 {item.type}
               </p>
-              <h4 className="font-black text-white text-xs mb-4">
+              <h4 className="font-black text-white text-sm mb-4">
                 {item.name}
               </h4>
               <button

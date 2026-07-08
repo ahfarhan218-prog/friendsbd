@@ -71,10 +71,10 @@ const Clan: React.FC = () => {
                     <h3 className="text-lg font-black text-white">{c.name}</h3>
                     <span className="text-xs sm:text-sm font-bold text-purple-400 px-2 py-1 rounded-full bg-purple-500/10">[{c.tag}]</span>
                   </div>
-                  <span className="text-xs text-white/60">Lv.{c.level}</span>
+                  <span className="text-sm text-white/60">Lv.{c.level}</span>
                 </div>
                 <p className="text-sm text-white/50 mb-3">{c.description || 'No description'}</p>
-                <div className="flex items-center justify-between text-xs text-white/60 mb-3">
+                <div className="flex items-center justify-between text-sm text-white/60 mb-3">
                   <span>👥 {c.members?.length || 0} members</span>
                   <span>👑 {c.leaderName}</span>
                 </div>

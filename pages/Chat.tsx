@@ -375,7 +375,7 @@ const Chat: React.FC = () => {
               <h2 className="text-xl font-black italic bg-gradient-to-r from-white via-purple-200 to-indigo-200 bg-clip-text text-transparent">
                 Chats
               </h2>
-              <p className="text-xs text-emerald-400 font-black uppercase tracking-widest flex flex-wrap items-center gap-1">
+              <p className="text-sm text-emerald-400 font-black uppercase tracking-widest flex flex-wrap items-center gap-1">
                 <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
                 End-to-End Encrypted
               </p>
@@ -399,7 +399,7 @@ const Chat: React.FC = () => {
               placeholder="Search chats..."
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              className="w-full bg-transparent border-none text-xs text-white/80 placeholder-white/20 py-3 outline-none font-medium"
+              className="w-full bg-transparent border-none text-sm text-white/80 placeholder-white/20 py-3 outline-none font-medium"
             />
           </div>
         </div>
@@ -444,7 +444,7 @@ const Chat: React.FC = () => {
                         </>
                       )}
                       {isUnread && (
-                        <span className="absolute -top-1 -right-1 bg-purple-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center border border-white font-black shadow-md">
+                        <span className="absolute -top-1 -right-1 bg-purple-600 text-white text-sm w-5 h-5 rounded-full flex items-center justify-center border border-white font-black shadow-md">
                           {conv.unreadCount}
                         </span>
                       )}
@@ -452,8 +452,8 @@ const Chat: React.FC = () => {
 
                     <div className="flex-1 min-w-0">
                       <div className="flex justify-between items-baseline mb-0.5">
-                        <h4 className="text-xs font-black truncate text-white leading-tight">{chatName}</h4>
-                        <span className="text-xs font-bold text-white/60 uppercase tracking-widest">{conv.timestamp}</span>
+                        <h4 className="text-sm font-black truncate text-white leading-tight">{chatName}</h4>
+                        <span className="text-sm font-bold text-white/60 uppercase tracking-widest">{conv.timestamp}</span>
                       </div>
                       <p className="text-xs sm:text-sm text-white/50 truncate font-medium flex flex-wrap items-center gap-1">
                         {conv.lastMessage?.startsWith('🔒') && <span className="text-emerald-400/70">🔒</span>}
@@ -466,7 +466,7 @@ const Chat: React.FC = () => {
           ) : (
             <div className="py-12 text-center opacity-30">
               <span className="text-3xl block mb-2">💬</span>
-              <p className="text-xs font-bold uppercase tracking-wider">No chats found</p>
+              <p className="text-sm font-bold uppercase tracking-wider">No chats found</p>
             </div>
           )}
         </div>
@@ -515,7 +515,7 @@ const Chat: React.FC = () => {
                     <h3 className="text-sm font-black text-white leading-tight">
                       {activeChat.isGroup ? activeChat.groupName : activeChat.participants[0].name}
                     </h3>
-                    <p className="text-xs text-emerald-400 font-black uppercase tracking-widest flex flex-wrap items-center gap-1 mt-0.5">
+                    <p className="text-sm text-emerald-400 font-black uppercase tracking-widest flex flex-wrap items-center gap-1 mt-0.5">
                       🔒 End-to-End Encrypted
                     </p>
                   </div>
@@ -544,7 +544,7 @@ const Chat: React.FC = () => {
               {messages.length === 0 && (
                 <div className="flex flex-col items-center justify-center h-full opacity-30 gap-3">
                   <span className="text-4xl">🔒</span>
-                  <p className="text-xs font-bold uppercase tracking-widest">No messages yet</p>
+                  <p className="text-sm font-bold uppercase tracking-widest">No messages yet</p>
                   <p className="text-xs sm:text-sm text-center">Send a message to start an encrypted conversation</p>
                 </div>
               )}
@@ -570,9 +570,9 @@ const Chat: React.FC = () => {
                       </div>
                       <div className="flex flex-wrap items-center justify-end gap-1 mt-1.5">
                         {m.isEncrypted && (
-                          <span className="text-xs opacity-50" title="End-to-end encrypted">🔒</span>
+                          <span className="text-sm opacity-50" title="End-to-end encrypted">🔒</span>
                         )}
-                        <span className="text-xs font-black opacity-30 uppercase tracking-widest">
+                        <span className="text-sm font-black opacity-30 uppercase tracking-widest">
                           {m.time}
                           {m.isMe && (m.isRead ? ' · Read ✓✓' : ' · Sent ✓')}
                         </span>
@@ -637,10 +637,10 @@ const Chat: React.FC = () => {
             </div>
           </>
         ) : (
-          <div className="flex-1 flex flex-col items-center justify-center p-8 text-center opacity-30">
+          <div className="flex-1 flex flex-col items-center justify-center p-4 sm:p-8 text-center opacity-30">
             <span className="text-6xl mb-4">🔒</span>
             <h3 className="text-lg font-black uppercase tracking-widest">Secure Messaging</h3>
-            <p className="text-xs font-medium mt-2">
+            <p className="text-sm font-medium mt-2">
               Choose a conversation or start a new one.<br/>
               All messages are end-to-end encrypted.
             </p>

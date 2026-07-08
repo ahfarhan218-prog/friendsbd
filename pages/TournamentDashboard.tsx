@@ -49,7 +49,7 @@ const TournamentDashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32">
-      <header className="pt-10 pb-6 px-6 border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md relative overflow-hidden">
+      <header className="pt-10 pb-6 px-3 sm:px-6 border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md relative overflow-hidden">
         <div className="max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto flex justify-between items-center relative z-10">
           <div>
             <span className="text-xs sm:text-sm font-black text-indigo-400 uppercase tracking-[0.3em] block mb-1">Official Game</span>
@@ -57,7 +57,7 @@ const TournamentDashboard: React.FC = () => {
           </div>
           <button 
             onClick={handleCreateMatch}
-            className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-xl text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg"
+            className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-xl text-white font-bold text-sm uppercase tracking-wider transition-all shadow-lg"
           >
             + New Match
           </button>
@@ -65,7 +65,7 @@ const TournamentDashboard: React.FC = () => {
         <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-[80px] pointer-events-none" />
       </header>
 
-      <main className="max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto px-6 py-8">
+      <main className="max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto px-3 sm:px-6 py-8">
         {loading ? (
           <div className="flex items-center justify-center py-20">
             <div className="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin" />
@@ -87,7 +87,7 @@ const TournamentDashboard: React.FC = () => {
                     <MatchGameControls matchData={match} currentUser={currentUser} />
                   </div>
                   <div className="absolute bottom-4 right-4 flex flex-wrap gap-2">
-                    <a href={`/forum/topic/${match.topicId}`} className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white uppercase tracking-wider rounded-lg transition-colors border border-slate-600">
+                    <a href={`/forum/topic/${match.topicId}`} className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-sm font-bold text-white uppercase tracking-wider rounded-lg transition-colors border border-slate-600">
                       Go to Topic ➜
                     </a>
                   </div>

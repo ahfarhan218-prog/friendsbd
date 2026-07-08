@@ -107,7 +107,7 @@ const StaffForum: React.FC = () => {
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <div className="hidden md:block text-right">
-            <p className="text-xs font-bold text-white">{currentUser.name}</p>
+            <p className="text-sm font-bold text-white">{currentUser.name}</p>
             <p className="text-xs sm:text-sm text-amber-500 font-bold uppercase">{currentUser.role}</p>
           </div>
           <img src={currentUser.avatar} alt="You" className="w-10 h-10 rounded-xl border border-[#30363d] shadow-lg" />
@@ -119,7 +119,7 @@ const StaffForum: React.FC = () => {
         {loading ? (
           <div className="py-20 text-center flex flex-col items-center">
             <div className="w-10 h-10 border-4 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
-            <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-4">Decrypting Channel...</p>
+            <p className="text-sm font-bold text-slate-500 uppercase tracking-widest mt-4">Decrypting Channel...</p>
           </div>
         ) : (
           posts.map((post) => {
@@ -139,10 +139,10 @@ const StaffForum: React.FC = () => {
                 {/* Message Bubble */}
                 <div className={`flex flex-col ${isMe ? 'items-end' : 'items-start'}`}>
                   <div className="flex flex-wrap items-center gap-2 mb-1 px-1">
-                    <Link to={`/profile/${post.authorName}`} className="text-xs font-bold text-slate-300 hover:text-amber-400 hover:underline transition-colors">
+                    <Link to={`/profile/${post.authorName}`} className="text-sm font-bold text-slate-300 hover:text-amber-400 hover:underline transition-colors">
                       {post.authorName}
                     </Link>
-                    <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">
+                    <span className="text-sm font-medium text-slate-500 uppercase tracking-wider">
                       {new Date(post.timestamp).toLocaleString([], { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' })}
                     </span>
                   </div>

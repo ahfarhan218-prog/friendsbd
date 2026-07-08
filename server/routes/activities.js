@@ -12,6 +12,19 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET activities for a specific user
+router.get('/user/:username', async (req, res) => {
+  try {
+    const activities = await Activity.find({ username: req.params.username })
+      .sort({ timestamp: -1 })
+      .limit(50)
+      .lean();
+    res.json(activities);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // POST create/upsert activity
 router.post('/', async (req, res) => {
   try {

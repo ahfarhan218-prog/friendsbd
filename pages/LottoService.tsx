@@ -131,6 +131,15 @@ const LottoService: React.FC = () => {
         isRead: false
       } as any);
 
+      mongoService.addActivity({
+        id: 'act_' + Date.now(),
+        time: new Date().toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' }),
+        username: activeUser.username || activeUser.name,
+        msg: `subscribed to the weekly Lotto!`,
+        timestamp: Date.now(),
+        link: `/lotto`
+      });
+
     } catch (e: any) {
       alert(`Subscription failed: ${e.message}`);
     } finally {
@@ -169,8 +178,8 @@ const LottoService: React.FC = () => {
       </div>
 
       <div className="max-w-md mx-auto px-4 mt-6 space-y-6">
-        <div className="overflow-hidden w-full relative whitespace-nowrap bg-[#0f766e]/10 text-[#0f766e] border border-[#0f766e]/20 py-2.5 px-4 rounded-xl font-bold text-xs flex flex-wrap items-center gap-4">
-          <span className="shrink-0 font-bold bg-[#0f766e] text-white px-2.5 py-1 rounded-lg uppercase tracking-wider text-xs z-10">
+        <div className="overflow-hidden w-full relative whitespace-nowrap bg-[#0f766e]/10 text-[#0f766e] border border-[#0f766e]/20 py-2.5 px-4 rounded-xl font-bold text-sm flex flex-wrap items-center gap-4">
+          <span className="shrink-0 font-bold bg-[#0f766e] text-white px-2.5 py-1 rounded-lg uppercase tracking-wider text-sm z-10">
             Live Winners
           </span>
           <div className="animate-marquee-wrapper overflow-hidden w-full relative flex">
@@ -189,7 +198,7 @@ const LottoService: React.FC = () => {
             <p className="text-xs sm:text-sm text-slate-400 font-bold uppercase tracking-wider">Subscription Status</p>
             <h3 className="font-extrabold text-base text-black">Golden Lotto</h3>
           </div>
-          <span className={`font-black text-xs px-3.5 py-1 rounded-full uppercase tracking-wider ${getLottoStatusText().startsWith('Active') ? 'text-[#0f766e] bg-[#0f766e]/10 border border-[#0f766e]/20' : 'text-slate-500 bg-slate-100 border border-slate-200'}`}>
+          <span className={`font-black text-sm px-3.5 py-1 rounded-full uppercase tracking-wider ${getLottoStatusText().startsWith('Active') ? 'text-[#0f766e] bg-[#0f766e]/10 border border-[#0f766e]/20' : 'text-slate-500 bg-slate-100 border border-slate-200'}`}>
             {getLottoStatusText()}
           </span>
         </div>
@@ -197,13 +206,13 @@ const LottoService: React.FC = () => {
         <div className="flex flex-wrap bg-[#cbd5e1]/40 p-1 rounded-2xl gap-1 border border-[#cbd5e1]/65">
           <button
             onClick={() => setActiveTab('subscribe')}
-            className={`flex-1 py-3 text-xs font-black uppercase tracking-wider rounded-xl transition-all ${activeTab === 'subscribe' ? 'bg-white text-black shadow-sm' : 'text-slate-500 hover:text-black'}`}
+            className={`flex-1 py-3 text-sm font-black uppercase tracking-wider rounded-xl transition-all ${activeTab === 'subscribe' ? 'bg-white text-black shadow-sm' : 'text-slate-500 hover:text-black'}`}
           >
             🎫 Subscribe Portal
           </button>
           <button
             onClick={() => setActiveTab('gift')}
-            className={`flex-1 py-3 text-xs font-black uppercase tracking-wider rounded-xl transition-all ${activeTab === 'gift' ? 'bg-white text-black shadow-sm' : 'text-slate-500 hover:text-black'}`}
+            className={`flex-1 py-3 text-sm font-black uppercase tracking-wider rounded-xl transition-all ${activeTab === 'gift' ? 'bg-white text-black shadow-sm' : 'text-slate-500 hover:text-black'}`}
           >
             🎁 Lotto Gifting Hub
           </button>
@@ -219,9 +228,9 @@ const LottoService: React.FC = () => {
               transition={{ duration: 0.2 }}
               className="space-y-6"
             >
-              <div className="bg-white border border-[#cbd5e1] rounded-3xl p-6 shadow-sm space-y-4">
+              <div className="bg-white border border-[#cbd5e1] rounded-3xl p-4 sm:p-6 shadow-sm space-y-4">
                 <h3 className="font-black text-black uppercase tracking-wider text-sm">✨ Subscription Perks</h3>
-                <ul className="space-y-3.5 text-xs text-slate-600 font-medium">
+                <ul className="space-y-3.5 text-sm text-slate-600 font-medium">
                   <li className="flex flex-wrap items-start gap-3">
                     <span className="text-[#0f766e] text-base shrink-0">⚡</span>
                     <div>
@@ -246,15 +255,15 @@ const LottoService: React.FC = () => {
                 </ul>
               </div>
 
-              <div className="bg-white border border-[#cbd5e1] rounded-3xl p-6 shadow-sm space-y-6">
+              <div className="bg-white border border-[#cbd5e1] rounded-3xl p-4 sm:p-6 shadow-sm space-y-6">
                 <div>
                   <h3 className="font-black text-black uppercase tracking-wider text-sm">🎫 Select Package</h3>
-                  <p className="text-xs text-slate-500 font-medium mt-1">Confirm subscription to start your boost.</p>
+                  <p className="text-sm text-slate-500 font-medium mt-1">Confirm subscription to start your boost.</p>
                 </div>
 
                 <div className="border border-[#cbd5e1] bg-[#f8fafc] rounded-2xl p-5 flex justify-between items-center">
                   <div className="space-y-1">
-                    <p className="text-xs font-extrabold text-black">Package 1 (Standard)</p>
+                    <p className="text-sm font-extrabold text-black">Package 1 (Standard)</p>
                     <p className="text-xs sm:text-sm text-slate-400 font-bold uppercase">7 Days Boost Subscription</p>
                   </div>
                   <div className="text-right">
@@ -265,7 +274,7 @@ const LottoService: React.FC = () => {
                 <button
                   onClick={handleSubscribe}
                   disabled={subLoading || activeUser.goldenCoins < 15}
-                  className="w-full bg-[#6d28d9] hover:bg-[#6d28d9]/90 active:scale-95 text-[#f4f5f6] font-bold py-4 px-6 rounded-2xl shadow-md transition-all uppercase tracking-widest text-xs disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-full bg-[#6d28d9] hover:bg-[#6d28d9]/90 active:scale-95 text-[#f4f5f6] font-bold py-4 px-3 sm:px-6 rounded-2xl shadow-md transition-all uppercase tracking-widest text-sm disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   {subLoading ? 'PROCESSING...' : activeUser.goldenCoins < 15 ? 'INSUFFICIENT GOLDEN COINS' : 'SUBSCRIBE & OPEN MAGIC BOX'}
                 </button>

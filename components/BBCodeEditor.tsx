@@ -67,8 +67,8 @@ const BBCodeEditor: React.FC<BBCodeEditorProps> = ({ initialValue = "", onPublis
           ))}
         </div>
         <div className="flex bg-white rounded-xl p-1 border border-slate-200 shadow-inner ml-4 shrink-0">
-          <button onClick={() => setView('write')} className={`px-4 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${view === 'write' ? 'bg-slate-900 text-white' : 'text-slate-400'}`}>Write</button>
-          <button onClick={() => setView('preview')} className={`px-4 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${view === 'preview' ? 'bg-slate-900 text-white' : 'text-slate-400'}`}>Preview</button>
+          <button onClick={() => setView('write')} className={`px-4 py-2 rounded-lg text-sm font-black uppercase tracking-widest transition-all ${view === 'write' ? 'bg-slate-900 text-white' : 'text-slate-400'}`}>Write</button>
+          <button onClick={() => setView('preview')} className={`px-4 py-2 rounded-lg text-sm font-black uppercase tracking-widest transition-all ${view === 'preview' ? 'bg-slate-900 text-white' : 'text-slate-400'}`}>Preview</button>
         </div>
       </div>
 
@@ -83,13 +83,13 @@ const BBCodeEditor: React.FC<BBCodeEditorProps> = ({ initialValue = "", onPublis
               value={content}
               onChange={e => setContent(e.target.value)}
               placeholder="Construct your thoughts with BBCode..."
-              className="w-full h-full p-8 text-sm font-bold text-slate-700 bg-transparent outline-none resize-none leading-relaxed no-scrollbar"
+              className="w-full h-full p-4 sm:p-8 text-sm font-bold text-slate-700 bg-transparent outline-none resize-none leading-relaxed no-scrollbar"
             />
           ) : (
             <motion.div
               key="preview"
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              className="w-full h-full p-8 overflow-y-auto bg-slate-50/30"
+              className="w-full h-full p-4 sm:p-8 overflow-y-auto bg-slate-50/30"
             >
               <div className="bbcode-render prose prose-purple max-w-none">
                 <BBCodeParser rawText={content || "[i]Visualizing content...[/i]"} />
@@ -100,10 +100,10 @@ const BBCodeEditor: React.FC<BBCodeEditorProps> = ({ initialValue = "", onPublis
       </div>
 
       {/* FOOTER */}
-      <div className="p-6 bg-slate-900 border-t border-white/5 flex items-center justify-between">
+      <div className="p-4 sm:p-6 bg-slate-900 border-t border-white/5 flex items-center justify-between">
         <div>
           <p className="text-xs sm:text-sm font-black text-slate-500 uppercase tracking-widest">Character Metrics</p>
-          <p className="text-xs font-mono text-purple-400 font-black">{content.length} chars</p>
+          <p className="text-sm font-mono text-purple-400 font-black">{content.length} chars</p>
         </div>
         <button 
           onClick={() => onPublish(content)}

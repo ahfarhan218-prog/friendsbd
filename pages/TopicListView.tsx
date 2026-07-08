@@ -193,7 +193,7 @@ const TopicListView: React.FC = () => {
   return (
     <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative">
       <div className="absolute top-0 right-0 w-full max-w-sm h-96 bg-indigo-600/4 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-20 left-0 w-80 h-80 bg-purple-600/4 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-20 left-0 w-full max-w-[20rem] sm:w-80 h-80 bg-purple-600/4 rounded-full blur-[100px] pointer-events-none" />
 
       {/* HEADER */}
       <header className="sticky top-0 z-40 p-4 max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto">
@@ -215,7 +215,7 @@ const TopicListView: React.FC = () => {
                   </span>
                 )}
                 <div>
-                  <span className="text-xs font-black text-indigo-400 uppercase tracking-[0.3em] block">Forums › Category</span>
+                  <span className="text-sm font-black text-indigo-400 uppercase tracking-[0.3em] block">Forums › Category</span>
                   <h1 className="text-base font-black text-white tracking-tight leading-tight">{categoryName}</h1>
                 </div>
               </div>
@@ -254,7 +254,7 @@ const TopicListView: React.FC = () => {
                 <button
                   key={mode}
                   onClick={() => setSortMode(mode)}
-                  className={`px-3 py-1.5 text-xs font-black uppercase tracking-widest rounded-xl transition-all ${
+                  className={`px-3 py-1.5 text-sm font-black uppercase tracking-widest rounded-xl transition-all ${
                     sortMode === mode
                       ? 'bg-indigo-600/30 border border-indigo-500/40 text-indigo-400'
                       : 'bg-[#121824] border border-[#1f293d] text-slate-500 hover:text-slate-300'
@@ -271,7 +271,7 @@ const TopicListView: React.FC = () => {
         {/* Thread list */}
         <div className="bg-[#121824] border border-[#1f293d] rounded-3xl overflow-hidden shadow-xl">
           {loading ? (
-            <div className="p-8 space-y-4">
+            <div className="p-4 sm:p-8 space-y-4">
               {[1,2,3,4].map(i => (
                 <div key={i} className="flex flex-wrap items-center gap-4">
                   <div className="w-11 h-11 bg-slate-800 rounded-2xl animate-pulse shrink-0" />
@@ -286,10 +286,10 @@ const TopicListView: React.FC = () => {
             <div className="py-20 text-center space-y-4 max-w-xs mx-auto">
               <span className="text-5xl block">💬</span>
               <h3 className="text-sm font-black text-white">No Topics Yet</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">Be the first to start a discussion in this category!</p>
+              <p className="text-sm text-slate-400 leading-relaxed">Be the first to start a discussion in this category!</p>
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="mx-auto px-6 py-3 bg-indigo-600/20 border border-indigo-500/30 text-indigo-400 hover:bg-indigo-600/40 text-xs font-black uppercase tracking-widest rounded-2xl transition-all block"
+                className="mx-auto px-3 sm:px-6 py-3 bg-indigo-600/20 border border-indigo-500/30 text-indigo-400 hover:bg-indigo-600/40 text-sm font-black uppercase tracking-widest rounded-2xl transition-all block"
               >
                 Start First Topic
               </button>
@@ -351,12 +351,12 @@ const TopicListView: React.FC = () => {
                   {/* Stats */}
                   <div className="flex flex-wrap items-center gap-4 shrink-0">
                     <div className="text-center hidden sm:block">
-                      <span className="text-xs font-black text-white block">{thread.views || 0}</span>
-                      <span className="text-xs font-bold text-slate-600 uppercase tracking-wider">Views</span>
+                      <span className="text-sm font-black text-white block">{thread.views || 0}</span>
+                      <span className="text-sm font-bold text-slate-600 uppercase tracking-wider">Views</span>
                     </div>
                     <div className="text-center min-w-[40px]">
-                      <span className="text-xs font-black text-indigo-400 block">{thread.replyCount || 0}</span>
-                      <span className="text-xs font-bold text-slate-600 uppercase tracking-wider">Replies</span>
+                      <span className="text-sm font-black text-indigo-400 block">{thread.replyCount || 0}</span>
+                      <span className="text-sm font-bold text-slate-600 uppercase tracking-wider">Replies</span>
                     </div>
                     <svg className="w-4 h-4 text-slate-700 group-hover:text-indigo-400 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
@@ -388,7 +388,7 @@ const TopicListView: React.FC = () => {
               className="bg-[#121824] rounded-t-3xl sm:rounded-3xl border border-[#1f293d] w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative z-10"
             >
               {/* Modal Header */}
-              <div className="sticky top-0 bg-[#121824] border-b border-[#1f293d]/60 px-6 py-4 flex items-center justify-between">
+              <div className="sticky top-0 bg-[#121824] border-b border-[#1f293d]/60 px-3 sm:px-6 py-4 flex items-center justify-between">
                 <div>
                   <h3 className="text-base font-black text-white">🚀 New Discussion Topic</h3>
                   <p className="text-xs sm:text-sm text-indigo-400 font-bold mt-0.5">in {categoryName}</p>
@@ -397,7 +397,7 @@ const TopicListView: React.FC = () => {
                   className="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-400 hover:text-white transition-all text-sm">✕</button>
               </div>
 
-              <form onSubmit={handleCreateTopic} className="p-6 space-y-4">
+              <form onSubmit={handleCreateTopic} className="p-4 sm:p-6 space-y-4">
                 {/* Title */}
                 <div className="space-y-1.5">
                   <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest">Topic Title *</label>
@@ -407,7 +407,7 @@ const TopicListView: React.FC = () => {
                     placeholder="Enter a clear and descriptive topic title..."
                     className="bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-2xl p-3.5 w-full text-sm font-semibold transition-colors placeholder-slate-600"
                   />
-                  <div className="text-right text-xs text-slate-600 font-bold pr-1">{newTitle.length}/100</div>
+                  <div className="text-right text-sm text-slate-600 font-bold pr-1">{newTitle.length}/100</div>
                 </div>
 
                 {/* Markdown toolbar + content */}
@@ -427,9 +427,9 @@ const TopicListView: React.FC = () => {
                     required rows={7} disabled={isSubmitting}
                     value={newContent} onChange={e => setNewContent(e.target.value)}
                     placeholder="Write your post content here... Markdown formatting supported: **bold**, *italic*, > quote, `code`, [link](url)"
-                    className="w-full bg-[#090d16] border border-[#1f293d] rounded-b-2xl text-white focus:outline-none focus:border-indigo-500 px-4 py-3 text-xs font-medium resize-none leading-relaxed transition-colors placeholder-slate-600"
+                    className="w-full bg-[#090d16] border border-[#1f293d] rounded-b-2xl text-white focus:outline-none focus:border-indigo-500 px-4 py-3 text-sm font-medium resize-none leading-relaxed transition-colors placeholder-slate-600"
                   />
-                  <div className="text-right text-xs text-slate-600 font-bold pr-1">{newContent.length} chars</div>
+                  <div className="text-right text-sm text-slate-600 font-bold pr-1">{newContent.length} chars</div>
                 </div>
 
                 {/* Tags */}
@@ -439,12 +439,12 @@ const TopicListView: React.FC = () => {
                     type="text" disabled={isSubmitting}
                     value={newTags} onChange={e => setNewTags(e.target.value)}
                     placeholder="e.g. cricket, news, discussion"
-                    className="bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-2xl p-3 w-full text-xs font-medium transition-colors placeholder-slate-600"
+                    className="bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-2xl p-3 w-full text-sm font-medium transition-colors placeholder-slate-600"
                   />
                   {newTags && (
                     <div className="flex flex-wrap gap-1 px-1">
                       {newTags.split(',').map(t => t.trim()).filter(Boolean).map(tag => (
-                        <span key={tag} className="px-2 py-0.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-black rounded-lg">#{tag}</span>
+                        <span key={tag} className="px-2 py-0.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-black rounded-lg">#{tag}</span>
                       ))}
                     </div>
                   )}
@@ -477,10 +477,10 @@ const TopicListView: React.FC = () => {
                 {/* Actions */}
                 <div className="flex flex-wrap gap-3 pt-1">
                   <button type="button" disabled={isSubmitting} onClick={() => setIsModalOpen(false)}
-                    className="w-1/3 py-3.5 border border-[#1f293d] hover:bg-slate-800 text-slate-400 hover:text-white font-bold text-xs uppercase tracking-widest rounded-2xl transition-all"
+                    className="w-1/3 py-3.5 border border-[#1f293d] hover:bg-slate-800 text-slate-400 hover:text-white font-bold text-sm uppercase tracking-widest rounded-2xl transition-all"
                   >Cancel</button>
                   <button type="submit" disabled={isSubmitting || !newTitle.trim() || !newContent.trim()}
-                    className="flex flex-wrap-1 py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 disabled:opacity-50 text-white font-black text-xs uppercase tracking-widest rounded-2xl shadow-lg transition-all active:scale-[0.98] flex flex-wrap items-center justify-center gap-2"
+                    className="flex flex-wrap-1 py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 disabled:opacity-50 text-white font-black text-sm uppercase tracking-widest rounded-2xl shadow-lg transition-all active:scale-[0.98] flex flex-wrap items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <><div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" /> Publishing...</>

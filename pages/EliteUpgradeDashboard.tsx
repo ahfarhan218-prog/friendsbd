@@ -259,16 +259,16 @@ const EliteUpgradeDashboard: React.FC = () => {
             <p className="text-xs sm:text-sm text-slate-400 font-bold uppercase tracking-wider">Membership Tier</p>
             <h3 className="font-extrabold text-base text-black">FriendsBD Elite Status</h3>
           </div>
-          <span className={`font-black text-xs px-3.5 py-1 rounded-full uppercase tracking-wider ${getEliteExpiryText().startsWith('Active') ? 'text-[#0f766e] bg-[#0f766e]/10 border border-[#0f766e]/20' : 'text-slate-500 bg-slate-100 border border-slate-200'}`}>
+          <span className={`font-black text-sm px-3.5 py-1 rounded-full uppercase tracking-wider ${getEliteExpiryText().startsWith('Active') ? 'text-[#0f766e] bg-[#0f766e]/10 border border-[#0f766e]/20' : 'text-slate-500 bg-slate-100 border border-slate-200'}`}>
             {getEliteExpiryText()}
           </span>
         </div>
 
         {/* Perks Benefit Card */}
-        <div className="bg-[#ffffff] border border-[#cbd5e1] rounded-2xl p-6 shadow-sm space-y-4">
+        <div className="bg-[#ffffff] border border-[#cbd5e1] rounded-2xl p-4 sm:p-6 shadow-sm space-y-4">
           <h3 className="font-black text-[#000000] uppercase tracking-wider text-sm">✨ Elite Privileges</h3>
           
-          <ul className="space-y-3.5 text-xs text-slate-700 font-semibold">
+          <ul className="space-y-3.5 text-sm text-slate-700 font-semibold">
             <li className="flex flex-wrap items-start gap-3">
               <span className="text-amber-500 text-sm shrink-0">⭐</span>
               <span className="text-[#000000]">Elite members can edit their Forum Topics, Posts, and Shouts.</span>
@@ -302,10 +302,10 @@ const EliteUpgradeDashboard: React.FC = () => {
         <div className="space-y-6">
           
           {/* Purchase via RP Tiers */}
-          <div className="bg-white border border-[#cbd5e1] rounded-3xl p-6 shadow-sm space-y-6">
+          <div className="bg-white border border-[#cbd5e1] rounded-3xl p-4 sm:p-6 shadow-sm space-y-6">
             <div>
               <h3 className="font-black text-black uppercase tracking-wider text-sm">🏅 Purchase via RP Tiers</h3>
-              <p className="text-xs text-slate-500 font-medium mt-1">Upgrade using your earned reputation points.</p>
+              <p className="text-sm text-slate-500 font-medium mt-1">Upgrade using your earned reputation points.</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-2">
@@ -315,7 +315,7 @@ const EliteUpgradeDashboard: React.FC = () => {
                   onClick={() => setSelectedRpTier(idx)}
                   className={`border-2 rounded-xl p-3 text-center transition-all flex flex-col items-center justify-center ${selectedRpTier === idx ? 'bg-[#6d28d9]/5 border-[#6d28d9] text-[#6d28d9]' : 'border-[#cbd5e1] hover:border-slate-400 text-slate-600'}`}
                 >
-                  <span className="text-xs font-black">{tier.days} Days</span>
+                  <span className="text-sm font-black">{tier.days} Days</span>
                   <span className="text-xs sm:text-sm font-bold mt-1 text-slate-400">{tier.cost} RP</span>
                 </button>
               ))}
@@ -324,17 +324,17 @@ const EliteUpgradeDashboard: React.FC = () => {
             <button
               onClick={handleUpgradeViaRp}
               disabled={rpLoading || getRpBalance(user) < RP_TIERS[selectedRpTier].cost}
-              className="w-full bg-[#6d28d9] hover:bg-[#6d28d9]/90 active:scale-95 text-[#f4f5f6] font-bold py-3.5 px-6 rounded-xl shadow-sm transition-all uppercase tracking-wider text-xs disabled:opacity-40 disabled:cursor-not-allowed"
+              className="w-full bg-[#6d28d9] hover:bg-[#6d28d9]/90 active:scale-95 text-[#f4f5f6] font-bold py-3.5 px-3 sm:px-6 rounded-xl shadow-sm transition-all uppercase tracking-wider text-sm disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {rpLoading ? 'PROCESSING...' : getRpBalance(user) < RP_TIERS[selectedRpTier].cost ? 'INSUFFICIENT RP' : `UPGRADE FOR ${RP_TIERS[selectedRpTier].cost} RP`}
             </button>
           </div>
 
           {/* Purchase via Taka Tiers */}
-          <div className="bg-white border border-[#cbd5e1] rounded-3xl p-6 shadow-sm space-y-6">
+          <div className="bg-white border border-[#cbd5e1] rounded-3xl p-4 sm:p-6 shadow-sm space-y-6">
             <div>
               <h3 className="font-black text-black uppercase tracking-wider text-sm">৳ Purchase via Taka Tiers</h3>
-              <p className="text-xs text-slate-500 font-medium mt-1">Upgrade instantly using your wallet funds.</p>
+              <p className="text-sm text-slate-500 font-medium mt-1">Upgrade instantly using your wallet funds.</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-2">
@@ -344,7 +344,7 @@ const EliteUpgradeDashboard: React.FC = () => {
                   onClick={() => setSelectedTakaTier(idx)}
                   className={`border-2 rounded-xl p-3 text-center transition-all flex flex-col items-center justify-center ${selectedTakaTier === idx ? 'bg-[#6d28d9]/5 border-[#6d28d9] text-[#6d28d9]' : 'border-[#cbd5e1] hover:border-slate-400 text-slate-600'}`}
                 >
-                  <span className="text-xs font-black">{tier.days} Days</span>
+                  <span className="text-sm font-black">{tier.days} Days</span>
                   <span className="text-xs sm:text-sm font-bold mt-1 text-slate-400">৳{tier.cost}</span>
                 </button>
               ))}
@@ -353,7 +353,7 @@ const EliteUpgradeDashboard: React.FC = () => {
             <button
               onClick={handleUpgradeViaTaka}
               disabled={takaLoading || getTakaBalance(user) < TAKA_TIERS[selectedTakaTier].cost}
-              className="w-full bg-[#6d28d9] hover:bg-[#6d28d9]/90 active:scale-95 text-[#f4f5f6] font-bold py-3.5 px-6 rounded-xl shadow-sm transition-all uppercase tracking-wider text-xs disabled:opacity-40 disabled:cursor-not-allowed"
+              className="w-full bg-[#6d28d9] hover:bg-[#6d28d9]/90 active:scale-95 text-[#f4f5f6] font-bold py-3.5 px-3 sm:px-6 rounded-xl shadow-sm transition-all uppercase tracking-wider text-sm disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {takaLoading ? 'PROCESSING...' : getTakaBalance(user) < TAKA_TIERS[selectedTakaTier].cost ? 'INSUFFICIENT WALLET BALANCE' : `UPGRADE FOR ৳${TAKA_TIERS[selectedTakaTier].cost}`}
             </button>

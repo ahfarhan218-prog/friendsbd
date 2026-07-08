@@ -180,7 +180,7 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
           <div className="absolute bottom-0 right-1/4 w-48 h-48 bg-purple-500/10 rounded-full blur-[80px] pointer-events-none" />
 
           {/* Modal Header */}
-          <div className="p-6 border-b border-[#1f293d] flex items-center justify-between bg-slate-900/40">
+          <div className="p-4 sm:p-6 border-b border-[#1f293d] flex items-center justify-between bg-slate-900/40">
             <div>
               <h3 className="text-xl font-black text-white flex flex-wrap items-center gap-2">
                 {quizToEdit ? '✏️ Edit Quiz' : '➕ Create New Quiz'}
@@ -192,7 +192,7 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
                   {type === 'live' ? 'LIVE QUIZ' : 'STANDARD'}
                 </span>
               </h3>
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-sm text-slate-400 mt-1">
                 Configure rewards, details, and dynamic questions.
               </p>
             </div>
@@ -207,9 +207,9 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
           </div>
 
           {/* Form Content */}
-          <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-6 space-y-6">
+          <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
             {errorMsg && (
-              <div className="p-4 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded-2xl text-xs font-bold text-center">
+              <div className="p-4 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded-2xl text-sm font-bold text-center">
                 ⚠️ {errorMsg}
               </div>
             )}
@@ -256,7 +256,7 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
               {/* Toggles */}
               <div className="flex items-center justify-between p-4 bg-slate-900/40 border border-[#1f293d] rounded-2xl">
                 <div className="text-left">
-                  <h4 className="text-xs font-bold text-white">📌 Pin to Top</h4>
+                  <h4 className="text-sm font-bold text-white">📌 Pin to Top</h4>
                   <p className="text-xs sm:text-sm text-slate-400">Featured quiz prioritised in search deck.</p>
                 </div>
                 <button
@@ -274,7 +274,7 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
 
               <div className="flex items-center justify-between p-4 bg-slate-900/40 border border-[#1f293d] rounded-2xl">
                 <div className="text-left">
-                  <h4 className="text-xs font-bold text-white">⚡ Launch Type</h4>
+                  <h4 className="text-sm font-bold text-white">⚡ Launch Type</h4>
                   <p className="text-xs sm:text-sm text-slate-400">Live tournaments trigger glows & notifications.</p>
                 </div>
                 <div className="flex bg-[#090d16] border border-[#1f293d] p-1 rounded-xl">
@@ -313,7 +313,7 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
               <button
                 type="button"
                 onClick={handleAddQuestion}
-                className="flex flex-wrap items-center gap-1.5 text-xs font-bold px-4 py-2 bg-indigo-600/10 hover:bg-indigo-600 text-indigo-400 hover:text-white border border-indigo-500/20 rounded-xl transition-all"
+                className="flex flex-wrap items-center gap-1.5 text-sm font-bold px-4 py-2 bg-indigo-600/10 hover:bg-indigo-600 text-indigo-400 hover:text-white border border-indigo-500/20 rounded-xl transition-all"
               >
                 <span>➕</span> Add Question
               </button>
@@ -382,7 +382,7 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
                           value={opt}
                           onChange={e => handleOptionChange(qIdx, optIdx, e.target.value)}
                           placeholder={`Option ${optIdx + 1}...`}
-                          className="flex-1 bg-[#090d16] border border-[#1f293d] rounded-xl py-2 px-3.5 focus:border-indigo-500 text-xs text-white outline-none transition-all"
+                          className="flex-1 bg-[#090d16] border border-[#1f293d] rounded-xl py-2 px-3.5 focus:border-indigo-500 text-sm text-white outline-none transition-all"
                         />
                       </div>
                     ))}
@@ -393,18 +393,18 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
           </form>
 
           {/* Modal Footer */}
-          <div className="p-6 border-t border-[#1f293d] bg-slate-900/40 flex flex-wrap items-center justify-end gap-3">
+          <div className="p-4 sm:p-6 border-t border-[#1f293d] bg-slate-900/40 flex flex-wrap items-center justify-end gap-3">
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-3 text-xs font-bold text-slate-400 hover:text-white bg-slate-800/40 hover:bg-slate-800 border border-[#1f293d] rounded-2xl transition-all"
+              className="px-5 py-3 text-sm font-bold text-slate-400 hover:text-white bg-slate-800/40 hover:bg-slate-800 border border-[#1f293d] rounded-2xl transition-all"
             >
               Cancel
             </button>
             <button
               onClick={handleSubmit}
               disabled={isSubmitting}
-              className="px-6 py-3 text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl shadow-lg shadow-indigo-600/20 transition-all flex flex-wrap items-center gap-2"
+              className="px-3 sm:px-6 py-3 text-sm font-bold bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl shadow-lg shadow-indigo-600/20 transition-all flex flex-wrap items-center gap-2"
             >
               {isSubmitting ? (
                 <>

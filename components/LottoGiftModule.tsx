@@ -163,9 +163,9 @@ const LottoGiftModule: React.FC<LottoGiftModuleProps> = ({ currentUser, onCoinsU
   return (
     <div className="space-y-6">
       {/* Gift Input Card */}
-      <div className="bg-white border border-[#cbd5e1] rounded-2xl p-6 shadow-sm">
+      <div className="bg-white border border-[#cbd5e1] rounded-2xl p-4 sm:p-6 shadow-sm">
         <h4 className="text-sm font-black text-black uppercase tracking-wider mb-2">🎁 Gift Lotto to Friend</h4>
-        <p className="text-xs text-slate-500 font-medium mb-4">
+        <p className="text-sm text-slate-500 font-medium mb-4">
           Deduct 15 Golden Coins from your balance to activate 7 days of 3x AP lotto boost for a friend.
         </p>
 
@@ -181,14 +181,14 @@ const LottoGiftModule: React.FC<LottoGiftModuleProps> = ({ currentUser, onCoinsU
           <button
             onClick={handleValidateUsername}
             disabled={isValidating || giftLoading || !targetUsername.trim()}
-            className="px-4 bg-slate-900 text-white font-bold text-xs rounded-xl hover:bg-slate-800 transition-colors uppercase tracking-wider active:scale-95 disabled:opacity-30"
+            className="px-4 bg-slate-900 text-white font-bold text-sm rounded-xl hover:bg-slate-800 transition-colors uppercase tracking-wider active:scale-95 disabled:opacity-30"
           >
             {isValidating ? 'Checking...' : 'Verify'}
           </button>
         </div>
 
         {validationMsg && (
-          <p className={`text-xs font-bold mt-2 ${validationMsg.isError ? 'text-[#dc2626]' : 'text-[#0f766e]'}`}>
+          <p className={`text-sm font-bold mt-2 ${validationMsg.isError ? 'text-[#dc2626]' : 'text-[#0f766e]'}`}>
             {validationMsg.text}
           </p>
         )}
@@ -196,14 +196,14 @@ const LottoGiftModule: React.FC<LottoGiftModuleProps> = ({ currentUser, onCoinsU
         <button
           onClick={handleGiftLotto}
           disabled={giftLoading || !targetUsername.trim() || !!(validationMsg && validationMsg.isError)}
-          className="w-full mt-4 bg-[#6d28d9] hover:bg-[#6d28d9]/90 active:scale-95 text-white font-bold py-3 px-6 rounded-xl shadow-sm transition-all uppercase tracking-wider text-xs disabled:opacity-30"
+          className="w-full mt-4 bg-[#6d28d9] hover:bg-[#6d28d9]/90 active:scale-95 text-white font-bold py-3 px-3 sm:px-6 rounded-xl shadow-sm transition-all uppercase tracking-wider text-sm disabled:opacity-30"
         >
           {giftLoading ? 'SENDING GIFT...' : 'SEND 7-DAY SUBSCRIPTION GIFT'}
         </button>
       </div>
 
       {/* Gift History Card */}
-      <div className="bg-white border border-[#cbd5e1] rounded-2xl p-6 shadow-sm">
+      <div className="bg-white border border-[#cbd5e1] rounded-2xl p-4 sm:p-6 shadow-sm">
         <h4 className="text-sm font-black text-black uppercase tracking-wider mb-4">📜 Gift Transaction History</h4>
         
         {historyLoading ? (
@@ -211,13 +211,13 @@ const LottoGiftModule: React.FC<LottoGiftModuleProps> = ({ currentUser, onCoinsU
             <div className="w-5 h-5 border-2 border-slate-200 border-t-purple-600 rounded-full animate-spin" />
           </div>
         ) : giftHistory.length === 0 ? (
-          <p className="text-xs text-slate-500 font-bold text-center py-4">No gifting history logged yet.</p>
+          <p className="text-sm text-slate-500 font-bold text-center py-4">No gifting history logged yet.</p>
         ) : (
           <div className="space-y-3 max-h-60 overflow-y-auto no-scrollbar pr-1">
             {giftHistory.map((log) => {
               const isOutgoing = log.sender_uid === currentUser.id;
               return (
-                <div key={log.id} className="flex items-center justify-between p-3 bg-[#f8fafc] border border-slate-100 rounded-xl text-xs">
+                <div key={log.id} className="flex items-center justify-between p-3 bg-[#f8fafc] border border-slate-100 rounded-xl text-sm">
                   <div className="space-y-1">
                     <p className="font-bold text-black">
                       {isOutgoing ? (
