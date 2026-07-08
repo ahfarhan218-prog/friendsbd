@@ -43,17 +43,14 @@ const Highlights: React.FC = () => {
   useEffect(() => {
     const unsubscribeUsers = mongoService.listenUsers((loadedUsers) => {
       setUsers(loadedUsers);
-      localStorage.setItem('friends_bd_users', JSON.stringify(loadedUsers));
     });
 
     const unsubscribeShouts = mongoService.listenShouts((loadedShouts) => {
       setShouts(loadedShouts);
-      localStorage.setItem('friends_bd_shouts', JSON.stringify(loadedShouts));
     });
 
     const unsubscribePhotos = mongoService.listenPhotos((loadedPhotos) => {
       setPhotos(loadedPhotos);
-      localStorage.setItem('friends_bd_recent_photos', JSON.stringify(loadedPhotos));
     });
 
     return () => {
@@ -140,7 +137,6 @@ const Highlights: React.FC = () => {
       return p;
     });
     setPhotos(updated);
-    localStorage.setItem('friends_bd_recent_photos', JSON.stringify(updated));
 
     if (selectedPhoto?.id === id) {
       setSelectedPhoto(prev => prev ? { ...prev, likes: prev.likes + 1 } : null);

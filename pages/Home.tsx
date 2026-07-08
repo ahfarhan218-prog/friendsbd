@@ -62,19 +62,15 @@ const Home: React.FC = () => {
 
     const unsubUsers = mongoService.listenUsers(users => {
       setUsersList(users);
-      localStorage.setItem('friends_bd_users', JSON.stringify(users));
     });
     const unsubShouts = mongoService.listenShouts(s => {
       setShouts(s);
-      localStorage.setItem('friends_bd_shouts', JSON.stringify(s));
     });
     const unsubPhotos = mongoService.listenPhotos(p => {
       setPhotos(p);
-      localStorage.setItem('friends_bd_recent_photos', JSON.stringify(p));
     });
     const unsubActs = mongoService.listenActivities(a => {
       setActivities(a);
-      localStorage.setItem('friends_bd_activities', JSON.stringify(a));
     });
 
     const handleStorage = () => {
@@ -147,19 +143,15 @@ const Home: React.FC = () => {
     };
   }, []);
 
-  const saveShouts = (newShouts: ShoutEntry[]) => {
-    setShouts(newShouts);
-    localStorage.setItem('friends_bd_shouts', JSON.stringify(newShouts));
-    newShouts.forEach(sh => {
-      const cleanSh = JSON.parse(JSON.stringify(sh));
-      mongoService.addShout(cleanSh);
-    });
+  const pushShoutUpdate = (updatedShout: ShoutEntry) => {
+    setShouts(prev => prev.map(s => s.id === updatedShout.id ? updatedShout : s));
+    mongoService.addShout(JSON.parse(JSON.stringify(updatedShout)));
   };
 
   const handleAddShout = () => {
     if (!shoutText.trim() || isLockdown || !activeUser) return;
     if (editingShout) {
-      saveShouts(shouts.map(s => s.id === editingShout.id ? { ...s, content: shoutText, time: 'Edited' } : s));
+      pushShoutUpdate({ ...editingShout, content: shoutText, time: 'Edited' });
       setEditingShout(null);
     } else {
       const counter = parseInt(localStorage.getItem('shout_id_counter') || '100') + 1;
@@ -190,7 +182,8 @@ const Home: React.FC = () => {
         pinExpiry: isQuiz ? Date.now() + 3 * 60 * 1000 : undefined,
         isQuiz: isQuiz
       };
-      saveShouts([newShout, ...shouts]);
+      setShouts(prev => [newShout, ...prev]);
+      mongoService.addShout(JSON.parse(JSON.stringify(newShout)));
       
       apTransactionService.adjustUserAP(activeUser.id, 'SHOUT_POSTED')
         .then(({ newBalance }) => {
@@ -253,8 +246,8 @@ const Home: React.FC = () => {
           `/shouts?id=${shout.id}`
         );
       }).catch(err => console.warn('Reaction notification error:', err));
+      pushShoutUpdate({ ...shout, userReactions: { ...shout.userReactions, [activeUser.id]: type } });
     }
-    saveShouts(shouts.map(s => s.id === id ? { ...s, userReactions: { ...s.userReactions, [activeUser.id]: type } } : s));
   };
 
   const handleReply = (id: string, content: string) => {
@@ -280,17 +273,17 @@ const Home: React.FC = () => {
           `reply to shout`
         );
       }).catch(err => console.warn('Reply mentions error:', err));
+      pushShoutUpdate({ ...shout, replies: [...(shout.replies||[]), { id: Math.random().toString(), userId: activeUser.id, userName: activeUser.name, userAvatar: activeUser.avatar, content, timestamp: Date.now() }] });
     }
-    saveShouts(shouts.map(s => s.id === id ? { ...s, replies: [...(s.replies||[]), { id: Math.random().toString(), userId: activeUser.id, userName: activeUser.name, userAvatar: activeUser.avatar, content, timestamp: Date.now() }] } : s));
   };
 
   const handlePin = (id: string, minutes?: number) => {
     if (!activeUser || (!['admin','moderator'].includes(activeUser.role || '') && !activeUser.isPremium)) return;
-    saveShouts(shouts.map(s => {
-      if (s.id !== id) return s;
-      const pinning = !s.isPinned;
-      return { ...s, isPinned: pinning, pinExpiry: pinning && minutes && minutes !== -1 ? Date.now() + minutes * 60000 : undefined };
-    }));
+    const shout = shouts.find(s => s.id === id);
+    if (shout) {
+      const pinning = !shout.isPinned;
+      pushShoutUpdate({ ...shout, isPinned: pinning, pinExpiry: pinning && minutes && minutes !== -1 ? Date.now() + minutes * 60000 : undefined });
+    }
   };
 
   if (!activeUser) return (
@@ -555,7 +548,10 @@ const Home: React.FC = () => {
                       setShouts(shouts.filter(x => x.id !== id));
                     }}
                     onPin={handlePin}
-                    onToggleLock={id => saveShouts(shouts.map(x => x.id === id ? { ...x, isClosed: !x.isClosed } : x))}
+                    onToggleLock={id => {
+                      const shout = shouts.find(x => x.id === id);
+                      if (shout) pushShoutUpdate({ ...shout, isClosed: !shout.isClosed });
+                    }}
                     onEdit={shout => { setEditingShout(shout); setShoutText(shout.content); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                     onSwipeReply={setReplyingTo}
                   />

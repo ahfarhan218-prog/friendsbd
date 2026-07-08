@@ -100,42 +100,50 @@ const Profile: React.FC = () => {
 
   useEffect(() => {
     let active = true;
+    let unsubUser = () => {};
+    let unsubUsers = () => {};
+    let unsubShouts = () => {};
+
     const loadData = async () => {
       try {
         const raw = localStorage.getItem('user_session');
         const session = raw ? JSON.parse(raw) : null;
         if (!targetUid) { setAuthErr('You must be logged in.'); setLoading(false); return; }
-        try {
-          const res = await fetch(`${API_BASE}/users/${targetUid}`);
-          if (res.ok) {
-            const userData = await res.json();
+        
+        // Listen to active user profile
+        unsubUser = mongoService.listenUser(targetUid, (userData) => {
+          if (!active) return;
+          if (userData) {
             const profileData = isOwnProfile ? { ...session, ...userData } : userData;
-            if (active) {
-              setProfile(profileData);
-              setBioText(profileData.bio || '');
-              if (profileData.customStatus) setStatusInput(profileData.customStatus);
-              if (isOwnProfile) localStorage.setItem('user_session', JSON.stringify(profileData));
-            }
-          } else if (active) {
-            if (isOwnProfile) { setProfile(session); setBioText(session.bio || ''); }
+            setProfile(profileData);
+            setBioText(profileData.bio || '');
+            if (profileData.customStatus) setStatusInput(profileData.customStatus);
+            if (isOwnProfile) localStorage.setItem('user_session', JSON.stringify(profileData));
+          } else {
+            if (isOwnProfile) { setProfile(session); setBioText(session?.bio || ''); }
             else setAuthErr('User not found.');
           }
-        } catch (e) {
-          if (active && isOwnProfile) { setProfile(session); setBioText(session.bio || ''); }
-          else if (active) setAuthErr('Failed to load profile.');
-        }
+          setLoading(false);
+        });
+
         if (active) setTodayGrabs(gameService.getTodayGrabCount(targetUid));
+        
+        // Listen to all users
+        unsubUsers = mongoService.listenUsers((usersData) => {
+          if (active) setAllUsers(usersData.filter((u: any) => session && u.id !== session.id));
+        });
+
+        // Listen to shouts
+        unsubShouts = mongoService.listenShouts((shoutsData) => {
+          if (active) setShouts(shoutsData.filter((s: any) => s.userId === targetUid || s.username === targetUid));
+        });
+
+        // One-off fetch for forum data (no listeners in mongoService)
         if (active) {
           try {
-            const [shoutsRes, usersRes, threadsRes, postsRes] = await Promise.all([
-              fetch(`${API_BASE}/shouts`), fetch(`${API_BASE}/users`), fetch(`${API_BASE}/forum/threads`), fetch(`${API_BASE}/forum/posts`)
+            const [threadsRes, postsRes] = await Promise.all([
+              fetch(`${API_BASE}/forum/threads`), fetch(`${API_BASE}/forum/posts`)
             ]);
-            const shoutsData = await shoutsRes.json();
-            if (active) {
-              setShouts(shoutsData.filter((s: any) => s.userId === targetUid || s.username === targetUid));
-              const usersData = await usersRes.json();
-              setAllUsers(usersData.filter((u: any) => session && u.id !== session.id));
-            }
             if (threadsRes.ok) {
               const threadsData = await threadsRes.json();
               if (active) { setAllForumThreads(threadsData); setUserThreads(threadsData.filter((t: any) => t.authorId === targetUid)); }
@@ -146,12 +154,21 @@ const Profile: React.FC = () => {
             }
           } catch (e) { }
         }
-      } catch (err) { console.warn('Profile load error', err); }
-      finally { if (active) setLoading(false); }
+      } catch (err) { 
+        console.warn('Profile load error', err); 
+        if (active) setLoading(false);
+      }
     };
-    setLoading(true); setAuthErr(''); loadData();
-    return () => { active = false; };
-  }, [id]);
+    
+    setAuthErr(''); loadData();
+    
+    return () => { 
+      active = false; 
+      unsubUser();
+      unsubUsers();
+      unsubShouts();
+    };
+  }, [id, targetUid, isOwnProfile]);
 
   useEffect(() => {
     if (!profile) return;
