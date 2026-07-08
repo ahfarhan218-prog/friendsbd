@@ -87,7 +87,6 @@ const Home: React.FC = () => {
     };
     window.addEventListener('storage', handleStorage);
 
-    // Auto cleanup expired pins and comments locking every 5 seconds
     const cleanupInterval = setInterval(() => {
       const now = Date.now();
       shoutsRef.current.forEach(async (shout) => {
@@ -109,8 +108,6 @@ const Home: React.FC = () => {
       });
     }, 5000);
 
-    // ── Online presence tracking ──────────────────────────────────────────────
-    // Update current user's isOnline + lastActiveTime in Firestore every 60 seconds
     let presenceUserId: string | null = null;
     try {
       const sess = localStorage.getItem('user_session');
@@ -131,10 +128,9 @@ const Home: React.FC = () => {
         lastActiveTime: Date.now()
       });
     };
-    updatePresence(); // run immediately on load
-    const presenceInterval = setInterval(updatePresence, 60000); // every 60s
+    updatePresence();
+    const presenceInterval = setInterval(updatePresence, 60000);
 
-    // Mark offline when page is closed/navigated away
     const markOffline = () => {
       if (!presenceUserId) return;
       mongoService.updateUser(presenceUserId, { isOnline: false });
@@ -147,7 +143,7 @@ const Home: React.FC = () => {
       unsubUsers(); unsubShouts(); unsubPhotos(); unsubActs();
       clearInterval(cleanupInterval);
       clearInterval(presenceInterval);
-      markOffline(); // mark offline on component unmount too
+      markOffline();
     };
   }, []);
 
@@ -196,7 +192,6 @@ const Home: React.FC = () => {
       };
       saveShouts([newShout, ...shouts]);
       
-      // Award AP
       apTransactionService.adjustUserAP(activeUser.id, 'SHOUT_POSTED')
         .then(({ newBalance }) => {
           const saved = localStorage.getItem('user_session');
@@ -219,7 +214,6 @@ const Home: React.FC = () => {
       });
       triggerToast({ id: 'shout-ok-' + Date.now(), senderId: 'system', senderName: 'FriendsBD', senderAvatar: activeUser.avatar, type: 'SYSTEM', message: '🚀 Your shout is live!', timestamp: Date.now(), isRead: false });
 
-      // Swipe reply direct notification
       if (replyingTo && replyingTo.userId !== activeUser.id) {
         import('../services/notificationService').then(({ notificationService }) => {
           notificationService.sendNotification(
@@ -232,7 +226,6 @@ const Home: React.FC = () => {
         }).catch(err => console.warn('Reply notification error:', err));
       }
 
-      // Trigger mentions parsing
       import('../services/notificationService').then(({ notificationService }) => {
         notificationService.handleMentions(
           contentWithReply,
@@ -279,7 +272,6 @@ const Home: React.FC = () => {
           );
         }).catch(err => console.warn('Reply notification error:', err));
       }
-      // Trigger mentions for reply content
       import('../services/notificationService').then(({ notificationService }) => {
         notificationService.handleMentions(
           content,
@@ -317,23 +309,7 @@ const Home: React.FC = () => {
   const totalOnline = usersList.filter(u => u.isOnline && (!u.lastActiveTime || (Date.now() - u.lastActiveTime) <= 30 * 60 * 1000)).length || 1;
   const premiumCount = usersList.filter(u => u.isPremium).length;
   const staffCount = usersList.filter(u => u.role === 'admin' || u.role === 'moderator').length;
-  const newestUser = usersList.length > 0 ? usersList[usersList.length - 1] : activeUser;
   
-  const midnight = new Date();
-  midnight.setHours(0, 0, 0, 0);
-  const midnightTime = midnight.getTime();
-  
-  const todayShouts = shouts.filter(s => s.timestamp >= midnightTime);
-  const todayPhotos = photos.filter(p => p.timestamp >= midnightTime);
-  
-  const topShouter = (() => {
-    if (!todayShouts.length) return { name: 'N/A', count: 0 };
-    const counts: Record<string, number> = {};
-    todayShouts.forEach(s => { counts[s.user] = (counts[s.user] || 0) + 1; });
-    const [name, count] = Object.entries(counts).sort((a, b) => b[1] - a[1])[0] || ['N/A', 0];
-    return { name, count };
-  })();
-
   const formattedTime = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
   const formattedDate = currentTime.toLocaleDateString([], { weekday: 'long', month: 'short', day: 'numeric' });
 
@@ -346,18 +322,18 @@ const Home: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-transparent pb-28 font-inter">
-
-      <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] pt-12 pb-32 px-5">
+    <div className="w-full min-h-screen bg-[#0F0F1A] pb-28 font-inter overflow-x-hidden">
+      {/* HEADER CONTAINER WRAPPER */}
+      <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] pt-12 pb-32 w-full">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_0%,_#7c3aed33,_transparent_70%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#0F0F1A] to-transparent" />
-        {/* Floating orbs */}
         <div className="absolute top-8 right-4 w-32 h-32 bg-purple-600/10 rounded-full blur-3xl" />
         <div className="absolute bottom-12 left-8 w-24 h-24 bg-indigo-600/10 rounded-full blur-2xl" />
 
-        <div className="relative z-10">
+        {/* BOUNDED RESPONSIVE LAYOUT HELD BY MAX-W-7XL */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           {/* Top bar */}
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex flex-wrap items-center justify-between mb-6">
             <div>
               <h1 className="text-3xl font-black text-white tracking-tight">
                 friends <span className="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">bd</span>
@@ -366,18 +342,18 @@ const Home: React.FC = () => {
             <div className="flex flex-wrap items-center gap-2">
               {isAdmin && (
                 <button onClick={() => navigate('/admin')}
-                  className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-2xl flex items-center justify-center border border-white/10 active:scale-90 transition-all">
+                  className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-2xl flex flex-wrap items-center justify-center border border-white/10 active:scale-90 transition-all">
                   ⚙️
                 </button>
               )}
               <button onClick={() => navigate('/notifications')}
-                className="relative w-10 h-10 bg-white/10 hover:bg-white/20 rounded-2xl flex items-center justify-center border border-white/10 active:scale-90 transition-all">
+                className="relative w-10 h-10 bg-white/10 hover:bg-white/20 rounded-2xl flex flex-wrap items-center justify-center border border-white/10 active:scale-90 transition-all">
                 🔔
               </button>
             </div>
           </div>
 
-          {/* ── TIME-BASED GREETING CARD ── */}
+          {/* GREETING CARD */}
           {(() => {
             const h = currentTime.getHours();
             const greetings = [
@@ -391,9 +367,8 @@ const Home: React.FC = () => {
             const displayName = activeUser.name?.split(' ')[0] || activeUser.username || 'Friend';
             return (
               <div className={`relative mb-4 rounded-2xl bg-gradient-to-br ${g.bg} border ${g.border} backdrop-blur-sm overflow-hidden`}>
-                {/* shimmer line */}
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                <div className="px-4 py-3.5 flex flex-wrap items-center justify-between gap-3">
+                <div className="px-4 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div className="flex-1 min-w-0">
                     <p className="text-[10px] font-bold text-white/40 uppercase tracking-[0.15em] mb-0.5 truncate">{displayName}</p>
                     <p className="text-xl font-black text-white leading-tight tracking-tight">
@@ -401,10 +376,10 @@ const Home: React.FC = () => {
                     </p>
                     <p className="text-[11px] text-white/50 font-medium mt-0.5">{g.sub}</p>
                   </div>
-                  <div className="text-right shrink-0">
+                  <div className="text-left sm:text-right shrink-0">
                     <p className="text-lg font-black text-white font-mono tabular-nums tracking-tight">{formattedTime}</p>
                     <p className="text-[9px] text-white/35 font-bold mt-0.5">{formattedDate}</p>
-                    <span className={`inline-flex flex-wrap items-center gap-1 mt-1 text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full bg-white/10`}>
+                    <span className="inline-flex items-center gap-1 mt-1 text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full bg-white/10">
                       <span className={`inline-block w-1.5 h-1.5 rounded-full ${g.dot} animate-pulse`} />
                       Live
                     </span>
@@ -419,7 +394,7 @@ const Home: React.FC = () => {
             <div className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl px-4 py-2.5 flex flex-wrap items-center gap-3 overflow-hidden">
               <span className="text-[8px] font-black uppercase tracking-widest text-purple-300 bg-purple-500/30 px-2 py-1 rounded-lg shrink-0">📢 News</span>
               <div className="flex-1 overflow-hidden">
-                <div className="whitespace-nowrap animate-marquee text-[11px] text-white/70 font-medium">{announcement}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{announcement}</div>
+                <div className="whitespace-nowrap animate-marquee text-[11px] text-white/70 font-medium">{announcement}</div>
               </div>
             </div>
           )}
@@ -435,29 +410,31 @@ const Home: React.FC = () => {
         </div>
       </header>
 
+      {/* ── MAIN CONTENT LAYER — REFACTORING MAX-W-7XL ── */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 -mt-16 space-y-5 relative z-10 w-full">
 
-      <div className="px-4 -mt-16 space-y-5 relative z-10">
-
-        {/* ── PROFILE CARD ── */}
+        {/* PROFILE CARD */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           onClick={() => navigate('/profile/' + activeUser.username)}
-          className="bg-[#1C1C2E] border border-white/5 rounded-[2rem] p-4 flex flex-wrap items-center gap-4 cursor-pointer hover:border-purple-500/30 active:scale-[0.98] transition-all shadow-xl">
-          <div className="relative shrink-0">
-            <img src={activeUser.avatar} className="w-14 h-14 rounded-2xl object-cover border-2 border-purple-500/30" alt="" />
-            <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-400 border-2 border-[#1C1C2E] rounded-full" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-1.5 flex-wrap">
-              <span className="text-sm font-black text-white">{activeUser.name}</span>
-              {activeUser.isVerified && <span className="text-[10px]">✔️</span>}
-              {activeUser.isPremium && <span className="text-[8px] bg-amber-400/20 text-amber-400 px-1.5 py-0.5 rounded-full font-black">👑 Premium</span>}
+          className="bg-[#1C1C2E] border border-white/5 rounded-[2rem] p-4 flex flex-col sm:flex-row items-center justify-between gap-4 cursor-pointer hover:border-purple-500/30 active:scale-[0.98] transition-all shadow-xl w-full">
+          <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-4 flex-1 min-w-0 w-full">
+            <div className="relative shrink-0">
+              <img src={activeUser.avatar} className="w-14 h-14 rounded-2xl object-cover border-2 border-purple-500/30 mx-auto" alt="" />
+              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-400 border-2 border-2 border-[#1C1C2E] rounded-full hidden sm:block" />
             </div>
-            <p className="text-[10px] text-purple-400/70 font-bold mt-0.5">@{activeUser.username}</p>
-            <p className="text-[9px] text-emerald-400 font-black flex flex-wrap items-center gap-1 mt-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-2.5 py-0.5 w-fit">
-              🟢 Today: {formatOnlineTime(activeUser.todayOnlineTime)}
-            </p>
+            <div className="flex-1 min-w-0 w-full">
+              <div className="flex flex-wrap flex-wrap items-center justify-center sm:justify-start gap-1.5">
+                <span className="text-sm font-black text-white">{activeUser.name}</span>
+                {activeUser.isVerified && <span className="text-[10px]">✔️</span>}
+                {activeUser.isPremium && <span className="text-[8px] bg-amber-400/20 text-amber-400 px-1.5 py-0.5 rounded-full font-black">👑 Premium</span>}
+              </div>
+              <p className="text-[10px] text-purple-400/70 font-bold mt-0.5">@{activeUser.username}</p>
+              <p className="text-[9px] text-emerald-400 font-black flex flex-wrap items-center justify-center sm:justify-start gap-1 mt-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-2.5 py-0.5 w-fit mx-auto sm:mx-0">
+                🟢 Today: {formatOnlineTime(activeUser.todayOnlineTime)}
+              </p>
+            </div>
           </div>
-          <div className="flex flex-wrap gap-4 text-center shrink-0">
+          <div className="flex flex-wrap gap-6 text-center justify-center shrink-0 w-full sm:w-auto border-t border-white/5 sm:border-t-0 pt-3 sm:pt-0">
             <div>
               <p className="text-lg font-black text-white">{activeUser.points || 0}</p>
               <p className="text-[8px] text-white/30 font-bold uppercase tracking-widest">XP</p>
@@ -470,8 +447,8 @@ const Home: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* ── QUICK STATS ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-3">
+        {/* QUICK STATS - MOBILE FIRST SOLUTION (FIXED INTERPOLATION) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 w-full">
           {[
             { icon: '🟢', label: 'Online', value: totalOnline, filter: 'online', color: 'from-emerald-600/20 to-emerald-700/20 border-emerald-500/20 hover:border-emerald-500/40 hover:shadow-emerald-950/20' },
             { icon: '👑', label: 'Premium', value: premiumCount, filter: 'premium', color: 'from-amber-500/20 to-orange-600/20 border-amber-500/20 hover:border-amber-500/40 hover:shadow-amber-950/20' },
@@ -480,20 +457,20 @@ const Home: React.FC = () => {
             <button
               key={s.label}
               onClick={() => navigate(`/members?filter=${s.filter}`)}
-              className={`bg-gradient-to-br ${s.color} border rounded-2xl p-3 text-center transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] hover:shadow-xl cursor-pointer outline-none`}
+              className={`bg-gradient-to-br ${s.color} border rounded-2xl p-2 sm:p-3 text-center transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] hover:shadow-xl cursor-pointer outline-none w-full`}
             >
-              <span className="text-xl block mb-1">{s.icon}</span>
-              <p className="text-lg font-black text-white">{s.value}</p>
-              <p className="text-[8px] text-white/30 font-bold uppercase tracking-widest">{s.label}</p>
+              <span className="text-lg sm:text-xl block mb-0.5">{s.icon}</span>
+              <p className="text-base sm:text-lg font-black text-white">{s.value}</p>
+              <p className="text-[7px] sm:text-[8px] text-white/30 font-bold uppercase tracking-widest truncate">{s.label}</p>
             </button>
           ))}
         </div>
 
-        {/* ── SHOUT COMPOSER ── */}
+        {/* SHOUT COMPOSER */}
         <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-          className={`bg-[#1C1C2E] border rounded-[2rem] overflow-hidden transition-colors ${editingShout ? 'border-amber-500/30' : 'border-white/5 focus-within:border-purple-500/30'}`}>
+          className={`bg-[#1C1C2E] border rounded-[2rem] overflow-hidden transition-colors w-full ${editingShout ? 'border-amber-500/30' : 'border-white/5 focus-within:border-purple-500/30'}`}>
           {editingShout && (
-            <div className="bg-amber-500/10 border-b border-amber-500/20 px-4 py-2 flex items-center justify-between">
+            <div className="bg-amber-500/10 border-b border-amber-500/20 px-4 py-2 flex flex-wrap items-center justify-between">
               <span className="text-[9px] font-black uppercase tracking-widest text-amber-400">✏️ Editing Shout</span>
               <button onClick={() => { setEditingShout(null); setShoutText(''); }}
                 className="text-[9px] font-black text-white/30 hover:text-white uppercase tracking-widest">Cancel</button>
@@ -501,29 +478,29 @@ const Home: React.FC = () => {
           )}
 
           {replyingTo && (
-            <div className="bg-purple-950/40 border-b border-purple-500/20 px-4 py-2.5 flex items-center justify-between">
+            <div className="bg-purple-950/40 border-b border-purple-500/20 px-4 py-2.5 flex flex-wrap items-center justify-between">
               <div className="min-w-0">
                 <span className="text-[9px] font-black uppercase tracking-widest text-purple-400">↩️ Replying to @{replyingTo.username || replyingTo.user.toLowerCase().replace(/\s+/g, '')}</span>
                 <p className="text-xs text-white/50 truncate mt-0.5">{replyingTo.content}</p>
               </div>
               <button onClick={() => setReplyingTo(null)}
-                className="text-[10px] font-black text-white/30 hover:text-white bg-white/5 w-6 h-6 rounded-full flex items-center justify-center transition-all">✕</button>
+                className="text-[10px] font-black text-white/30 hover:text-white bg-white/5 w-6 h-6 rounded-full flex flex-wrap items-center justify-center transition-all">✕</button>
             </div>
           )}
 
           {/* Composer header */}
-          <div className="flex flex-wrap items-center gap-3 px-4 pt-4">
+          <div className="flex flex-wrap items-center gap-3 px-4 pt-4 w-full">
             <img src={activeUser.avatar} className="w-9 h-9 rounded-xl object-cover border-2 border-white/10 shrink-0" alt="" />
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-black text-white">{activeUser.name}</p>
-              <p className="text-[9px] text-white/30 font-bold">Broadcasting to all members</p>
+              <p className="text-xs font-black text-white truncate">{activeUser.name}</p>
+              <p className="text-[9px] text-white/30 font-bold truncate">Broadcasting to all members</p>
             </div>
-            <span className="text-[9px] font-black text-white/20 font-mono">{shoutText.length} characters</span>
+            <span className="text-[9px] font-black text-white/20 font-mono shrink-0">{shoutText.length} ch</span>
           </div>
 
           {/* Admin Shout Mode Selector */}
           {['admin', 'moderator'].includes(activeUser.role || '') && (
-            <div className="flex flex-wrap gap-2 px-4 pt-3 pb-1 border-t border-white/5 bg-white/[0.02]">
+            <div className="flex flex-wrap gap-2 px-4 pt-3 pb-1 border-t border-white/5 bg-white/[0.02] w-full">
               <button
                 type="button"
                 onClick={() => setShoutType('normal')}
@@ -533,7 +510,7 @@ const Home: React.FC = () => {
                     : 'bg-white/5 text-white/40 hover:text-white hover:bg-white/10'
                 }`}
               >
-                📢 Normal Shout
+                📢 Normal
               </button>
               <button
                 type="button"
@@ -544,13 +521,13 @@ const Home: React.FC = () => {
                     : 'bg-white/5 text-white/40 hover:text-white hover:bg-white/10'
                 }`}
               >
-                ❓ Quiz Shout (3m Lock)
+                ❓ Quiz (3m Lock)
               </button>
             </div>
           )}
 
           {/* Textarea */}
-          <div className="px-4 pt-2 pb-3">
+          <div className="px-4 pt-2 pb-3 w-full">
             <textarea
               ref={textareaRef}
               value={shoutText}
@@ -563,18 +540,18 @@ const Home: React.FC = () => {
           </div>
 
           {/* Footer: emojis + send */}
-          <div className="flex items-center justify-between px-4 pb-4 border-t border-white/5 pt-3">
-            <div className="flex gap-1 flex-wrap">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between px-4 pb-4 border-t border-white/5 pt-3 w-full">
+            <div className="flex flex-wrap gap-1 w-full sm:w-auto">
               {QUICK_EMOJIS.map(e => (
                 <button key={e} onClick={() => !isLockdown && setShoutText(prev => prev + e)}
                   disabled={isLockdown}
-                  className="w-8 h-8 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center text-sm active:scale-90 transition-all disabled:opacity-30">
+                  className="w-8 h-8 rounded-xl bg-white/5 hover:bg-white/10 flex flex-wrap items-center justify-center text-sm active:scale-90 transition-all disabled:opacity-30">
                   {e}
                 </button>
               ))}
             </div>
             <button onClick={handleAddShout} disabled={!shoutText.trim() || isLockdown}
-              className="flex flex-wrap items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 disabled:opacity-30 disabled:cursor-not-allowed text-white font-black text-xs uppercase tracking-widest px-5 py-2.5 rounded-2xl shadow-lg shadow-purple-900/40 active:scale-95 transition-all">
+              className="flex flex-wrap items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 disabled:opacity-30 disabled:cursor-not-allowed text-white font-black text-xs uppercase tracking-widest px-5 py-2.5 rounded-2xl shadow-lg shadow-purple-900/40 active:scale-95 transition-all w-full sm:w-auto">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
               </svg>
@@ -583,9 +560,8 @@ const Home: React.FC = () => {
           </div>
         </motion.div>
 
-
-        {/* ── SHOUT STREAM ── */}
-        <div>
+        {/* SHOUT STREAM */}
+        <div className="w-full">
           <div className="flex flex-wrap items-center gap-2 mb-3 px-1">
             <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75" />
@@ -596,8 +572,8 @@ const Home: React.FC = () => {
 
           <AnimatePresence mode="popLayout">
             {sortedShouts.length > 0 ? (
-              <div className="space-y-4">
-                {sortedShouts.slice(0, 3).map(s => (
+              <div className="space-y-4 w-full">
+                {sortedShouts.slice(0, 20).map(s => (
                   <ShoutCard
                     key={s.id}
                     shout={s}
@@ -620,166 +596,20 @@ const Home: React.FC = () => {
                             }
                           })
                           .catch(e => console.warn('Failed to deduct shout AP:', e));
-                        const preview = (shoutToDelete.content || '').replace(/\[.*?\]/g, '').trim().substring(0, 80);
-                        mongoService.addAdminLog({
-                          id: 'log_' + Date.now(),
-                          action: 'SHOUT_DELETED',
-                          targetId: id,
-                          targetType: 'shout',
-                          deletedBy: activeUser.id,
-                          deletedByName: activeUser.name,
-                          details: `"${preview}" by @${shoutToDelete.username}`,
-                          timestamp: Date.now()
-                        }).catch(e => console.warn('Failed to log deletion:', e));
                       }
-                      mongoService.deleteShout(id);
-                      setShouts(shouts.filter(x => x.id !== id));
                     }}
-                    onPin={handlePin}
-                    onToggleLock={id => saveShouts(shouts.map(x => x.id === id ? { ...x, isClosed: !x.isClosed } : x))}
-                    onEdit={shout => { setEditingShout(shout); setShoutText(shout.content); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                    onSwipeReply={setReplyingTo}
                   />
                 ))}
-
-                {/* See All Shouts link */}
-                <motion.button
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  onClick={() => navigate('/shouts')}
-                  className="w-full flex items-center justify-between bg-[#1C1C2E] border border-white/8 hover:border-purple-500/40 rounded-[2rem] px-5 py-4 group active:scale-[0.98] transition-all"
-                >
-                  <div className="flex flex-wrap items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-purple-500/20 flex items-center justify-center text-lg">
-                      📣
-                    </div>
-                    <div className="text-left">
-                      <p className="text-xs font-black text-white">See All Shouts</p>
-                      <p className="text-[9px] text-white/30 font-bold mt-0.5">
-                        {shouts.length > 3 ? `${shouts.length - 3} more shouts in history` : 'View full shout history'}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-1 text-purple-400 group-hover:translate-x-1 transition-transform">
-                    <span className="text-[10px] font-black uppercase tracking-widest">History</span>
-                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7"/>
-                    </svg>
-                  </div>
-                </motion.button>
               </div>
             ) : (
-              <div className="py-20 text-center bg-[#1C1C2E] rounded-[2rem] border border-white/5">
-                <span className="text-5xl block mb-4">📣</span>
-                <p className="text-sm font-black text-white/20 uppercase tracking-widest">No shouts yet</p>
-                <p className="text-[10px] text-white/10 font-bold mt-1">Be the first to broadcast!</p>
-              </div>
+              <div className="text-center py-12 text-white/25 text-xs font-bold uppercase tracking-widest">No shouts found</div>
             )}
           </AnimatePresence>
         </div>
 
-        {/* ── RECENT ACTIVITY ── */}
-        {activities.length > 0 && (
-          <div className="bg-[#1C1C2E] border border-white/5 rounded-[2rem] p-5">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-[9px] font-black text-purple-400/70 uppercase tracking-[0.3em]">🕒 Recent Activity</h3>
-              <button onClick={() => navigate('/timeline')} className="text-[9px] font-black text-white/30 hover:text-white uppercase tracking-widest transition-colors">View All →</button>
-            </div>
-            <div className="space-y-3">
-              {activities.slice(0, 5).map((act, i) => (
-                <div key={act.id || i} className="flex flex-wrap items-start gap-3">
-                  <span className="text-[9px] font-mono text-white/20 bg-white/5 px-2 py-1 rounded-lg shrink-0 mt-0.5">{act.time}</span>
-                  <p className="text-xs text-white/50 leading-relaxed">
-                    <span onClick={() => navigate(`/profile/${act.username}`)} className="font-black text-white/70 cursor-pointer hover:text-purple-300 transition-colors">{act.username}</span>{' '}
-                    {act.isTopic ? (
-                      <><span className="text-white/30">posted topic</span>{' '}
-                      <span onClick={() => navigate('/forum')} className="text-purple-400 cursor-pointer font-bold hover:underline">"{act.topicTitle}"</span></>
-                    ) : act.msg}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* ── TODAY'S HIGHLIGHTS STRIP ── */}
-        <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] shadow-xl shadow-purple-900/10 rounded-[2rem] p-5 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="flex items-center justify-between mb-4 relative z-10">
-            <h3 className="text-[10px] font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-[0.2em] flex flex-wrap items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]" />
-              Today's Highlights
-            </h3>
-            <span className="text-[8px] font-bold text-slate-500 uppercase tracking-widest bg-[#161b22] px-2 py-0.5 rounded-full border border-[#30363d]">Live 24H</span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-3 relative z-10">
-            {[
-              { 
-                icon: '🏆', label: 'Top Shouter', value: topShouter.name, 
-                sub: `${topShouter.count} shouts today`, onClick: () => navigate('/highlights?tab=shouter'),
-                bg: 'hover:bg-purple-500/10 hover:border-purple-500/30' 
-              },
-              { 
-                icon: '👥', label: 'Newest Member', value: newestUser.username || newestUser.name, 
-                sub: 'Just joined us!', onClick: () => navigate(`/profile/${newestUser.username}`),
-                bg: 'hover:bg-blue-500/10 hover:border-blue-500/30'
-              },
-              { 
-                icon: '📸', label: 'Today\'s Gallery', value: `${todayPhotos.length} photos`, 
-                sub: 'View highlights', onClick: () => navigate('/highlights?tab=photos'),
-                bg: 'hover:bg-pink-500/10 hover:border-pink-500/30'
-              },
-            ].map(item => (
-              <button key={item.label} onClick={item.onClick}
-                className={`w-full flex flex-wrap items-center gap-3 p-3.5 rounded-2xl bg-[#161b22]/50 border border-[#30363d] transition-all duration-300 ${item.bg} text-left group`}>
-                <span className="text-2xl shrink-0 group-hover:scale-110 transition-transform">{item.icon}</span>
-                <div className="flex-1 min-w-0">
-                  <p className="text-[8px] text-slate-400 font-bold uppercase tracking-widest mb-0.5">{item.label}</p>
-                  <p className="text-sm font-black text-white truncate group-hover:text-purple-300 transition-colors">{item.value}</p>
-                  <p className="text-[9px] text-slate-500 font-bold truncate mt-0.5">{item.sub}</p>
-                </div>
-                <span className="text-slate-600 group-hover:text-purple-400 transition-colors shrink-0">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Suggested Users */}
-        {(() => {
-          const s = JSON.parse(localStorage.getItem('user_session') || '{}');
-          const following = s.following || [];
-          const suggested = usersList.filter(u => u.id !== s.id && !following.includes(u.id) && !u.isBot).slice(0, 5);
-          if (suggested.length === 0) return null;
-          return (
-            <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] rounded-[2rem] p-5">
-              <h3 className="text-[10px] font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-[0.2em] mb-4">👥 Suggested Users</h3>
-              <div className="flex flex-wrap gap-3 overflow-x-auto pb-2">
-                {suggested.map(u => (
-                  <button key={u.id} onClick={() => navigate(`/profile/${u.username}`)} className="w-28 p-3 text-center shrink-0 bg-[#1C1C2E] border border-white/5 rounded-2xl hover:border-purple-500/30 transition-all">
-                    <img src={u.avatar} className="w-12 h-12 rounded-full mx-auto border-2 border-purple-500/30 mb-2 object-cover" alt="" />
-                    <p className="text-xs font-bold text-white truncate">{u.name}</p>
-                    <p className="text-[9px] text-white/30 truncate">@{u.username}</p>
-                  </button>
-                ))}
-              </div>
-            </div>
-          );
-        })()}
       </div>
-
-      <style>{`
-        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        .animate-marquee { display: inline-block; animation: marquee 30s linear infinite; }
-        .pf-card { background:#1C1C2E; border:1px solid rgba(255,255,255,0.06); border-radius:20px; transition:all .3s; }
-        .pf-card:hover { border-color:rgba(168,85,247,0.15); }
-      `}</style>
     </div>
   );
 };
 
 export default Home;
-
