@@ -20,7 +20,7 @@ const Timeline: React.FC = () => {
       const mapped = data.map((a: any) => {
         const type = a.isTopic ? 'EVENT' : a.msg?.includes('tournament') || a.msg?.includes('Tournament') ? 'TOURNAMENT' : a.msg?.includes('quiz') || a.msg?.includes('Quiz') ? 'QUIZ' : 'MILESTONE';
         const cfg = typeConfig[type] || { icon: '📌', color: 'bg-slate-700' };
-        return { time: a.time || new Date(a.timestamp).toLocaleString(), type, msg: a.msg, icon: cfg.icon, color: cfg.color };
+        return { time: a.time || new Date(a.timestamp).toLocaleString(), type, msg: a.msg, icon: cfg.icon, color: cfg.color, link: a.link };
       });
       setEvents(mapped);
     }).catch(() => {});
@@ -62,7 +62,13 @@ const Timeline: React.FC = () => {
                     <span className="text-xs font-black text-cyan-400 uppercase tracking-widest">{ev.type}</span>
                     <span className="text-xs font-black text-gray-500 uppercase tracking-widest">{ev.time}</span>
                   </div>
-                  <p className="text-xs font-bold text-gray-200 leading-relaxed">{ev.msg}</p>
+                  <p className="text-xs font-bold text-gray-200 leading-relaxed">
+                    {ev.link ? (
+                      <span onClick={() => navigate(ev.link)} className="cursor-pointer hover:underline text-cyan-400">{ev.msg}</span>
+                    ) : (
+                      <span>{ev.msg}</span>
+                    )}
+                  </p>
                 </div>
               </motion.div>
             ))}

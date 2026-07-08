@@ -152,7 +152,8 @@ const ShoutHistory: React.FC = () => {
         time: new Date().toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' }),
         username: activeUser.username || activeUser.name,
         msg: 'Posted a shout.',
-        timestamp: Date.now()
+        timestamp: Date.now(),
+        link: '/shouts'
       });
 
       triggerToast({

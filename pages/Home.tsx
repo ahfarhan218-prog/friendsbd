@@ -203,7 +203,9 @@ const Home: React.FC = () => {
         id: 'act_' + Date.now(),
         time: currentTime.toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' }),
         username: activeUser.username || activeUser.name,
-        msg: 'Posted a shout.', timestamp: Date.now()
+        msg: 'Posted a shout.', 
+        timestamp: Date.now(),
+        link: '/shouts'
       });
       triggerToast({ id: 'shout-ok-' + Date.now(), senderId: 'system', senderName: 'FriendsBD', senderAvatar: activeUser.avatar, type: 'SYSTEM', message: '🚀 Your shout is live!', timestamp: Date.now(), isRead: false });
 
@@ -592,7 +594,13 @@ const Home: React.FC = () => {
                   <span className="text-xs font-mono text-white/40 bg-white/5 px-1.5 py-0.5 rounded shrink-0 mt-0.5">{act.time}</span>
                   <p className="text-xs text-white/50 leading-normal truncate flex-1 min-w-0 break-all">
                     <span onClick={() => navigate(`/profile/${act.username}`)} className="font-black text-white/70 cursor-pointer">{act.username}</span>{' '}
-                    {act.isTopic ? `posted "${act.topicTitle}"` : act.msg}
+                    {act.link ? (
+                      <span onClick={() => navigate(act.link)} className="cursor-pointer hover:underline text-cyan-400">
+                        {act.isTopic ? `posted "${act.topicTitle}"` : act.msg}
+                      </span>
+                    ) : (
+                      <span>{act.isTopic ? `posted "${act.topicTitle}"` : act.msg}</span>
+                    )}
                   </p>
                 </div>
               ))}
