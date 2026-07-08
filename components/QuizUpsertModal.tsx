@@ -184,7 +184,7 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
             <div>
               <h3 className="text-xl font-black text-white flex flex-wrap items-center gap-2">
                 {quizToEdit ? '✏️ Edit Quiz' : '➕ Create New Quiz'}
-                <span className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full ${
+                <span className={`text-xs sm:text-sm font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full ${
                   type === 'live'
                     ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
                     : 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20'
@@ -217,7 +217,7 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
             {/* Basic Info Grid */}
             <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">Quiz Title</label>
+                <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-1">Quiz Title</label>
                 <input
                   type="text"
                   required
@@ -229,7 +229,7 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">AP Reward Points</label>
+                <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-1">AP Reward Points</label>
                 <input
                   type="number"
                   min={5}
@@ -243,7 +243,7 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
               </div>
 
               <div className="col-span-1 md:col-span-2 space-y-1.5">
-                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">Short Description</label>
+                <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-1">Short Description</label>
                 <textarea
                   value={description}
                   onChange={e => setDescription(e.target.value)}
@@ -257,7 +257,7 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
               <div className="flex items-center justify-between p-4 bg-slate-900/40 border border-[#1f293d] rounded-2xl">
                 <div className="text-left">
                   <h4 className="text-xs font-bold text-white">📌 Pin to Top</h4>
-                  <p className="text-[10px] text-slate-400">Featured quiz prioritised in search deck.</p>
+                  <p className="text-xs sm:text-sm text-slate-400">Featured quiz prioritised in search deck.</p>
                 </div>
                 <button
                   type="button"
@@ -275,13 +275,13 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
               <div className="flex items-center justify-between p-4 bg-slate-900/40 border border-[#1f293d] rounded-2xl">
                 <div className="text-left">
                   <h4 className="text-xs font-bold text-white">⚡ Launch Type</h4>
-                  <p className="text-[10px] text-slate-400">Live tournaments trigger glows & notifications.</p>
+                  <p className="text-xs sm:text-sm text-slate-400">Live tournaments trigger glows & notifications.</p>
                 </div>
                 <div className="flex bg-[#090d16] border border-[#1f293d] p-1 rounded-xl">
                   <button
                     type="button"
                     onClick={() => setType('standard')}
-                    className={`px-3 py-1 text-[10px] font-bold rounded-lg transition-all ${
+                    className={`px-3 py-1 text-xs sm:text-sm font-bold rounded-lg transition-all ${
                       type === 'standard'
                         ? 'bg-indigo-600 text-white'
                         : 'text-slate-400'
@@ -292,7 +292,7 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
                   <button
                     type="button"
                     onClick={() => setType('live')}
-                    className={`px-3 py-1 text-[10px] font-bold rounded-lg transition-all ${
+                    className={`px-3 py-1 text-xs sm:text-sm font-bold rounded-lg transition-all ${
                       type === 'live'
                         ? 'bg-rose-600 text-white'
                         : 'text-slate-400'
@@ -308,7 +308,7 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
             <div className="border-t border-[#1f293d] pt-6 flex items-center justify-between">
               <div>
                 <h4 className="text-sm font-black text-white">📝 Quiz Questions ({questions.length})</h4>
-                <p className="text-[10px] text-slate-400">Compose questions, option arrays, and mark correct indices.</p>
+                <p className="text-xs sm:text-sm text-slate-400">Compose questions, option arrays, and mark correct indices.</p>
               </div>
               <button
                 type="button"
@@ -341,10 +341,10 @@ const QuizUpsertModal: React.FC<QuizUpsertModalProps> = ({
                   )}
 
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="w-6 h-6 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-[10px] font-black text-indigo-400">
+                    <span className="w-6 h-6 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-xs sm:text-sm font-black text-indigo-400">
                       {qIdx + 1}
                     </span>
-                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Question Details</span>
+                    <span className="text-xs sm:text-sm font-black text-slate-400 uppercase tracking-widest">Question Details</span>
                   </div>
 
                   {/* Question Text */}

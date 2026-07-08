@@ -56,7 +56,7 @@ const GenieCave: React.FC = () => {
            </button>
            <div className="text-center">
              <h2 className="text-2xl font-black uppercase tracking-tighter italic text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 drop-shadow-[0_0_10px_rgba(192,38,211,0.3)]">Genie Cave</h2>
-             <p className="text-[8px] font-black uppercase tracking-widest text-slate-400">Magic Cave Game</p>
+             <p className="text-xs font-black uppercase tracking-widest text-slate-400">Magic Cave Game</p>
            </div>
            <div className="p-3 bg-white/5 text-purple-300 rounded-2xl border border-white/10 shadow-lg">
               <span className="text-sm font-black">🧞‍♂️</span>
@@ -67,7 +67,7 @@ const GenieCave: React.FC = () => {
       <div className="px-5 -mt-16 space-y-6 relative z-10 max-w-lg mx-auto">
          {/* GENIE STATUS */}
          <div className="bg-[#161b22]/80 backdrop-blur-xl p-8 rounded-[3rem] shadow-xl border border-[#30363d] text-center relative overflow-hidden">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-purple-500/20 text-purple-300 border border-purple-500/30 px-6 py-1 rounded-full text-[10px] font-black tracking-widest uppercase backdrop-blur-sm shadow-[0_0_15px_rgba(168,85,247,0.2)]">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-purple-500/20 text-purple-300 border border-purple-500/30 px-6 py-1 rounded-full text-xs sm:text-sm font-black tracking-widest uppercase backdrop-blur-sm shadow-[0_0_15px_rgba(168,85,247,0.2)]">
                Phase: Requirement
             </div>
 
@@ -90,22 +90,22 @@ const GenieCave: React.FC = () => {
          <div className="bg-gradient-to-br from-[#1C1C2E] to-[#110a2a] p-8 rounded-[3rem] shadow-2xl border border-white/5 relative overflow-hidden">
             <div className="absolute -top-10 -right-10 w-48 h-48 bg-pink-600/10 rounded-full blur-3xl pointer-events-none" />
             
-            <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-center text-slate-400 mb-6 relative z-10">Current Quest</h3>
+            <h3 className="text-xs sm:text-sm font-black uppercase tracking-[0.2em] text-center text-slate-400 mb-6 relative z-10">Current Quest</h3>
             
             <div className="flex flex-wrap gap-4 mb-6 relative z-10">
                <div className="flex-1 bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col items-center gap-1 shadow-inner">
-                  <span className="text-[9px] font-black text-slate-500 tracking-widest uppercase">Current</span>
+                  <span className="text-xs font-black text-slate-500 tracking-widest uppercase">Current</span>
                   <span className="text-3xl font-black text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.4)]">{magicPoints}</span>
                </div>
                <div className="flex-1 bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col items-center gap-1 shadow-inner">
-                  <span className="text-[9px] font-black text-slate-500 tracking-widest uppercase">Required</span>
+                  <span className="text-xs font-black text-slate-500 tracking-widest uppercase">Required</span>
                   <span className="text-3xl font-black text-purple-400 drop-shadow-[0_0_10px_rgba(168,85,247,0.4)]">{REQUIRED_POINTS}</span>
                </div>
             </div>
 
             <div className="bg-black/30 rounded-2xl p-5 border border-white/5 relative z-10">
                <div className="flex justify-between items-center mb-3">
-                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Magic Progress</span>
+                  <span className="text-xs sm:text-sm font-black text-slate-400 uppercase tracking-widest">Magic Progress</span>
                   <span className="text-xs font-black text-cyan-400">{Math.floor(progress)}%</span>
                </div>
                
@@ -120,7 +120,7 @@ const GenieCave: React.FC = () => {
                   </motion.div>
                </div>
                
-               <div className="text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+               <div className="text-center text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest">
                  {caveOpened ? <span className="text-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]">✨ Cave Opened! ✨</span> : 'Need More Magic Points'}
                </div>
             </div>

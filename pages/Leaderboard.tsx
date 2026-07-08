@@ -35,7 +35,7 @@ const Leaderboard: React.FC = () => {
             </button>
             <div>
               <h2 className="text-2xl font-bold">Leaderboard 👑</h2>
-              <p className="text-[10px] opacity-70">Top performers this month</p>
+              <p className="text-xs sm:text-sm opacity-70">Top performers this month</p>
             </div>
          </div>
          <div className="flex flex-wrap gap-3">
@@ -58,8 +58,8 @@ const Leaderboard: React.FC = () => {
                    </div>
                    <div className="w-full bg-purple-300 rounded-t-3xl h-24 flex flex-col items-center justify-center text-white p-2 text-center">
                       <p className="text-xs font-black uppercase">2nd</p>
-                      <p className="text-[10px] font-bold truncate w-full px-1">{podium[1].name.split(' ')[0]}</p>
-                      <p className="text-[10px] font-medium opacity-80">{podium[1].points}</p>
+                      <p className="text-xs sm:text-sm font-bold truncate w-full px-1">{podium[1].name.split(' ')[0]}</p>
+                      <p className="text-xs sm:text-sm font-medium opacity-80">{podium[1].points}</p>
                    </div>
                 </div>
               )}
@@ -86,8 +86,8 @@ const Leaderboard: React.FC = () => {
                    </div>
                    <div className="w-full bg-purple-200 rounded-t-3xl h-20 flex flex-col items-center justify-center text-purple-700 p-2 text-center">
                       <p className="text-xs font-black uppercase">3rd</p>
-                      <p className="text-[10px] font-bold truncate w-full px-1">{podium[2].name.split(' ')[0]}</p>
-                      <p className="text-[10px] font-medium opacity-80">{podium[2].points}</p>
+                      <p className="text-xs sm:text-sm font-bold truncate w-full px-1">{podium[2].name.split(' ')[0]}</p>
+                      <p className="text-xs sm:text-sm font-medium opacity-80">{podium[2].points}</p>
                    </div>
                 </div>
               )}
@@ -96,7 +96,7 @@ const Leaderboard: React.FC = () => {
 
         {/* List Rankings */}
         <div className="bg-white rounded-[2.5rem] p-4 shadow-sm border border-slate-50">
-           <div className="flex flex-wrap items-center gap-2 px-4 mb-4 text-purple-700 font-bold uppercase text-[10px] tracking-widest bg-purple-50 py-2 rounded-xl">
+           <div className="flex flex-wrap items-center gap-2 px-4 mb-4 text-purple-700 font-bold uppercase text-xs sm:text-sm tracking-widest bg-purple-50 py-2 rounded-xl">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
               Rankings
            </div>
@@ -121,7 +121,7 @@ const Leaderboard: React.FC = () => {
                       </div>
                       <div className="min-w-0">
                         <h4 className="font-bold text-slate-800 text-xs truncate">{rank.name} {isSelf && '(You)'}</h4>
-                        <p className="text-[10px] text-slate-500 font-medium">{rank.points} points</p>
+                        <p className="text-xs sm:text-sm text-slate-500 font-medium">{rank.points} points</p>
                       </div>
                     </div>
                     <div className="flex flex-col items-end gap-1">

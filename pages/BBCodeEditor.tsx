@@ -73,7 +73,7 @@ const BBCodeEditor: React.FC = () => {
           </button>
           <div>
             <h2 className="text-xl font-black italic tracking-tighter">BB EDITOR</h2>
-            <p className="text-[8px] font-black uppercase tracking-[0.2em] text-white/50">Creative Workspace</p>
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-white/50">Creative Workspace</p>
           </div>
         </div>
       </header>
@@ -89,9 +89,9 @@ const BBCodeEditor: React.FC = () => {
           {/* Tab selector */}
           <div className="flex bg-[#161b22] p-2 mx-6 border border-white/5 rounded-xl">
             <button onClick={() => setPreviewMode(false)}
-              className={`flex-1 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${!previewMode ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg' : 'text-white/40'}`}>Write</button>
+              className={`flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-black uppercase tracking-widest transition-all ${!previewMode ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg' : 'text-white/40'}`}>Write</button>
             <button onClick={() => setPreviewMode(true)}
-              className={`flex-1 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${previewMode ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg' : 'text-white/40'}`}>Preview</button>
+              className={`flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-black uppercase tracking-widest transition-all ${previewMode ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg' : 'text-white/40'}`}>Preview</button>
           </div>
 
           {/* Toolbar */}
@@ -99,12 +99,12 @@ const BBCodeEditor: React.FC = () => {
             <div className="px-6 py-3 border-b border-[#30363d] flex flex-wrap gap-2 overflow-x-auto no-scrollbar">
               {toolbarButtons.map(btn => (
                 <button key={btn.label} onClick={() => insertTag(btn.tag, btn.placeholder)}
-                  className="shrink-0 w-9 h-9 flex items-center justify-center rounded-xl bg-[#161b22] border border-white/5 text-white/40 text-[11px] font-black hover:border-purple-500/30 hover:text-purple-400 transition-all active:scale-90" title={btn.label}>
+                  className="shrink-0 w-9 h-9 flex items-center justify-center rounded-xl bg-[#161b22] border border-white/5 text-white/40 text-xs sm:text-sm font-black hover:border-purple-500/30 hover:text-purple-400 transition-all active:scale-90" title={btn.label}>
                   {btn.icon}
                 </button>
               ))}
               <button onClick={insertColor}
-                className="shrink-0 w-9 h-9 flex items-center justify-center rounded-xl bg-[#161b22] border border-white/5 text-[11px] font-black hover:border-purple-500/30 transition-all active:scale-90">🎨</button>
+                className="shrink-0 w-9 h-9 flex items-center justify-center rounded-xl bg-[#161b22] border border-white/5 text-xs sm:text-sm font-black hover:border-purple-500/30 transition-all active:scale-90">🎨</button>
             </div>
           )}
 
@@ -127,9 +127,9 @@ const BBCodeEditor: React.FC = () => {
           {/* Bottom actions */}
           <div className="p-6 bg-[#161b22] border-t border-white/5 flex items-center justify-between">
             <button onClick={() => navigate('/bb-guide')}
-              className="text-[9px] font-black text-white/40 uppercase tracking-widest hover:text-purple-400 transition-colors">📖 BBCode Guide</button>
+              className="text-xs font-black text-white/40 uppercase tracking-widest hover:text-purple-400 transition-colors">📖 BBCode Guide</button>
             <button onClick={handlePublish} disabled={!content.trim() || publishing}
-              className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-8 py-3.5 rounded-2xl shadow-xl shadow-purple-900/30 font-black text-[10px] uppercase tracking-widest active:scale-95 transition-all disabled:opacity-50 hover:opacity-90">
+              className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-8 py-3.5 rounded-2xl shadow-xl shadow-purple-900/30 font-black text-xs sm:text-sm uppercase tracking-widest active:scale-95 transition-all disabled:opacity-50 hover:opacity-90">
               {publishing ? 'Publishing...' : 'Publish Post 🚀'}
             </button>
           </div>
@@ -137,10 +137,10 @@ const BBCodeEditor: React.FC = () => {
 
         {/* Tips */}
         <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] shadow-xl shadow-purple-900/10 rounded-[2.5rem] p-6 relative overflow-hidden">
-          <h4 className="text-[10px] font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-[0.2em] mb-4 flex flex-wrap items-center gap-2">
+          <h4 className="text-xs sm:text-sm font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-[0.2em] mb-4 flex flex-wrap items-center gap-2">
             <span className="text-lg">💡</span> Pro Tip
           </h4>
-          <p className="text-[11px] text-white/50 font-medium leading-relaxed">
+          <p className="text-xs sm:text-sm text-white/50 font-medium leading-relaxed">
             You can use the [color] tag to make your posts stand out! Try combinations like
             [b][color=#FF0000]RED TEXT[/color][/b] to grab attention in the feed.
           </p>

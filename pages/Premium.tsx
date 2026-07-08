@@ -203,7 +203,7 @@ const Premium: React.FC = () => {
               </div>
               <button
                 onClick={() => navigate('/coin-game')}
-                className="text-[10px] font-black uppercase tracking-widest text-amber-400 bg-amber-400/10 border border-amber-400/20 px-3 py-2 rounded-xl hover:bg-amber-400/20 transition-colors"
+                className="text-xs sm:text-sm font-black uppercase tracking-widest text-amber-400 bg-amber-400/10 border border-amber-400/20 px-3 py-2 rounded-xl hover:bg-amber-400/20 transition-colors"
               >
                 Open Radar
               </button>
@@ -229,7 +229,7 @@ const Premium: React.FC = () => {
 
         {/* Plan Selector */}
         <div className="space-y-4">
-          <h2 className="text-[10px] font-black uppercase tracking-widest text-white/30 text-center">Choose Your Plan</h2>
+          <h2 className="text-xs sm:text-sm font-black uppercase tracking-widest text-white/60 text-center">Choose Your Plan</h2>
 
           {PLANS.map((plan) => (
             <motion.div
@@ -243,7 +243,7 @@ const Premium: React.FC = () => {
               }`}
             >
               {plan.badge && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-black text-[9px] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-black text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">
                   {plan.badge}
                 </div>
               )}
@@ -261,12 +261,12 @@ const Premium: React.FC = () => {
                     </div>
                     <div>
                       <p className="text-sm font-black text-white">{plan.emoji} {plan.label}</p>
-                      <p className="text-[9px] text-white/40 uppercase font-bold">Premium Access</p>
+                      <p className="text-xs text-white/40 uppercase font-bold">Premium Access</p>
                     </div>
                   </div>
                   <div className="text-right">
                     <p className="text-2xl font-black text-white">৳{plan.price}</p>
-                    <p className="text-[9px] text-white/40 font-bold uppercase">for {plan.days} days</p>
+                    <p className="text-xs text-white/40 font-bold uppercase">for {plan.days} days</p>
                   </div>
                 </div>
 
@@ -274,7 +274,7 @@ const Premium: React.FC = () => {
                   {plan.features.map((f, i) => (
                     <div key={i} className="flex flex-wrap items-center gap-2">
                       <span className="text-xs text-green-400">✓</span>
-                      <span className="text-[11px] text-white/60 font-medium">{f}</span>
+                      <span className="text-xs sm:text-sm text-white/60 font-medium">{f}</span>
                     </div>
                   ))}
                 </div>
@@ -320,13 +320,13 @@ const Premium: React.FC = () => {
           );
         })()}
 
-        <p className="text-[10px] text-white/20 text-center font-medium">
+        <p className="text-xs sm:text-sm text-white/40 text-center font-medium">
           Payment is simulated. Plans auto-renew via bKash / Nagad. Cancel anytime.
         </p>
 
         {/* Feature Highlights */}
         <div className="bg-white/5 border border-white/10 rounded-3xl p-6 space-y-5">
-          <h3 className="text-[10px] font-black uppercase tracking-widest text-white/30 text-center">Why Premium?</h3>
+          <h3 className="text-xs sm:text-sm font-black uppercase tracking-widest text-white/60 text-center">Why Premium?</h3>
           {[
             { icon: '🎯', title: 'Golden Coin Radar', desc: 'See exactly when the next Golden Coin will drop — 13 to 18 minute countdown timer.' },
             { icon: '🪙', title: '5 Grabs Per Day', desc: 'Maximize all 5 daily grabs with the radar. Normal users miss coins — you won\'t.' },
@@ -339,7 +339,7 @@ const Premium: React.FC = () => {
               </div>
               <div>
                 <h4 className="text-sm font-black text-white">{item.title}</h4>
-                <p className="text-[11px] text-white/40 mt-0.5 leading-relaxed">{item.desc}</p>
+                <p className="text-xs sm:text-sm text-white/40 mt-0.5 leading-relaxed">{item.desc}</p>
               </div>
             </div>
           ))}
@@ -347,7 +347,7 @@ const Premium: React.FC = () => {
 
         {/* FAQ */}
         <div className="space-y-3">
-          <h3 className="text-[10px] font-black uppercase tracking-widest text-white/20 text-center">FAQ</h3>
+          <h3 className="text-xs sm:text-sm font-black uppercase tracking-widest text-white/40 text-center">FAQ</h3>
           {[
             { q: 'When does my premium start?', a: 'Immediately after purchase. If you already have premium, your plan extends from your current expiry date.' },
             { q: 'What happens when it expires?', a: 'The radar timer gets hidden and you return to the free experience. Your coins and AP remain.' },
@@ -355,7 +355,7 @@ const Premium: React.FC = () => {
           ].map((item, i) => (
             <div key={i} className="bg-white/5 border border-white/5 rounded-2xl p-4">
               <p className="text-xs font-black text-white/60">{item.q}</p>
-              <p className="text-[11px] text-white/30 mt-1 leading-relaxed">{item.a}</p>
+              <p className="text-xs sm:text-sm text-white/60 mt-1 leading-relaxed">{item.a}</p>
             </div>
           ))}
         </div>

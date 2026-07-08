@@ -187,7 +187,7 @@ const AddNewQuizForm: React.FC = () => {
           <h2 className="text-xl font-black text-white flex flex-wrap items-center justify-center gap-2">
             🆕 Launch New Quiz
           </h2>
-          <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-1">
+          <p className="text-xs sm:text-sm text-slate-400 uppercase tracking-widest mt-1">
             Specify database tags & metadata details
           </p>
         </div>
@@ -196,7 +196,7 @@ const AddNewQuizForm: React.FC = () => {
           
           {/* Title input */}
           <div className="space-y-1">
-            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Quiz Title</label>
+            <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-2">Quiz Title</label>
             <input
               type="text"
               disabled={isSubmitting}
@@ -213,7 +213,7 @@ const AddNewQuizForm: React.FC = () => {
               }`}
             />
             {validationErrors.title && (
-              <span className="text-[10px] font-bold text-rose-400 px-2 block animate-pulse">
+              <span className="text-xs sm:text-sm font-bold text-rose-400 px-2 block animate-pulse">
                 ⚠️ {validationErrors.title}
               </span>
             )}
@@ -224,7 +224,7 @@ const AddNewQuizForm: React.FC = () => {
             
             {/* Topic ID */}
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Topic ID</label>
+              <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-2">Topic ID</label>
               <input
                 type="text"
                 disabled={isSubmitting}
@@ -241,7 +241,7 @@ const AddNewQuizForm: React.FC = () => {
                 }`}
               />
               {validationErrors.topicId && (
-                <span className="text-[10px] font-bold text-rose-400 px-2 block animate-pulse">
+                <span className="text-xs sm:text-sm font-bold text-rose-400 px-2 block animate-pulse">
                   ⚠️ {validationErrors.topicId}
                 </span>
               )}
@@ -249,7 +249,7 @@ const AddNewQuizForm: React.FC = () => {
 
             {/* Host Username */}
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Host Name</label>
+              <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-2">Host Name</label>
               <input
                 type="text"
                 disabled={isSubmitting}
@@ -266,7 +266,7 @@ const AddNewQuizForm: React.FC = () => {
                 }`}
               />
               {validationErrors.host && (
-                <span className="text-[10px] font-bold text-rose-400 px-2 block animate-pulse">
+                <span className="text-xs sm:text-sm font-bold text-rose-400 px-2 block animate-pulse">
                   ⚠️ {validationErrors.host}
                 </span>
               )}
@@ -276,7 +276,7 @@ const AddNewQuizForm: React.FC = () => {
 
           {/* Description input */}
           <div className="space-y-1">
-            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Short Description</label>
+            <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-2">Short Description</label>
             <textarea
               disabled={isSubmitting}
               value={description}
@@ -289,7 +289,7 @@ const AddNewQuizForm: React.FC = () => {
 
           {/* Status Selection with glowing accent */}
           <div className="space-y-1">
-            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Status Deck</label>
+            <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-2">Status Deck</label>
             <div className={`relative rounded-2xl transition-all duration-350 p-[1.5px] ${
               status === 'Open'
                 ? 'bg-gradient-to-r from-green-500/20 via-green-500/50 to-green-500/20 shadow-[0_0_12px_rgba(34,197,94,0.15)]'
@@ -315,7 +315,7 @@ const AddNewQuizForm: React.FC = () => {
             
             {/* Quiz Type */}
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Quiz Type</label>
+              <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-2">Quiz Type</label>
               <select
                 disabled={isSubmitting}
                 value={quizType}
@@ -330,7 +330,7 @@ const AddNewQuizForm: React.FC = () => {
             {/* Pinned Switch */}
             <div className="flex flex-col justify-between p-3.5 bg-[#090d16] border border-[#1f293d] rounded-2xl text-left h-[68px]">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Pin Deck</span>
+                <span className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest">Pin Deck</span>
                 <button
                   type="button"
                   disabled={isSubmitting}
@@ -344,7 +344,7 @@ const AddNewQuizForm: React.FC = () => {
                   }`} />
                 </button>
               </div>
-              <span className="text-[8px] font-bold text-slate-500 uppercase">Featured at top</span>
+              <span className="text-xs font-bold text-slate-500 uppercase">Featured at top</span>
             </div>
 
           </div>

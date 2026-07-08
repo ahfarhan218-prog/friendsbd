@@ -375,7 +375,7 @@ const Chat: React.FC = () => {
               <h2 className="text-xl font-black italic bg-gradient-to-r from-white via-purple-200 to-indigo-200 bg-clip-text text-transparent">
                 Chats
               </h2>
-              <p className="text-[9px] text-emerald-400 font-black uppercase tracking-widest flex flex-wrap items-center gap-1">
+              <p className="text-xs text-emerald-400 font-black uppercase tracking-widest flex flex-wrap items-center gap-1">
                 <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
                 End-to-End Encrypted
               </p>
@@ -444,7 +444,7 @@ const Chat: React.FC = () => {
                         </>
                       )}
                       {isUnread && (
-                        <span className="absolute -top-1 -right-1 bg-purple-600 text-white text-[9px] w-5 h-5 rounded-full flex items-center justify-center border border-white font-black shadow-md">
+                        <span className="absolute -top-1 -right-1 bg-purple-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center border border-white font-black shadow-md">
                           {conv.unreadCount}
                         </span>
                       )}
@@ -453,9 +453,9 @@ const Chat: React.FC = () => {
                     <div className="flex-1 min-w-0">
                       <div className="flex justify-between items-baseline mb-0.5">
                         <h4 className="text-xs font-black truncate text-white leading-tight">{chatName}</h4>
-                        <span className="text-[8px] font-bold text-white/30 uppercase tracking-widest">{conv.timestamp}</span>
+                        <span className="text-xs font-bold text-white/60 uppercase tracking-widest">{conv.timestamp}</span>
                       </div>
-                      <p className="text-[11px] text-white/50 truncate font-medium flex flex-wrap items-center gap-1">
+                      <p className="text-xs sm:text-sm text-white/50 truncate font-medium flex flex-wrap items-center gap-1">
                         {conv.lastMessage?.startsWith('🔒') && <span className="text-emerald-400/70">🔒</span>}
                         {conv.lastMessage?.replace('🔒 ', '') || 'No messages yet'}
                       </p>
@@ -515,7 +515,7 @@ const Chat: React.FC = () => {
                     <h3 className="text-sm font-black text-white leading-tight">
                       {activeChat.isGroup ? activeChat.groupName : activeChat.participants[0].name}
                     </h3>
-                    <p className="text-[9px] text-emerald-400 font-black uppercase tracking-widest flex flex-wrap items-center gap-1 mt-0.5">
+                    <p className="text-xs text-emerald-400 font-black uppercase tracking-widest flex flex-wrap items-center gap-1 mt-0.5">
                       🔒 End-to-End Encrypted
                     </p>
                   </div>
@@ -525,7 +525,7 @@ const Chat: React.FC = () => {
               {!activeChat.isGroup && (
                 <button
                   onClick={() => navigate(`/profile/${activeChat.participants[0].username}`)}
-                  className="bg-white/5 border border-white/5 px-4 py-2 hover:bg-white/10 rounded-xl text-[10px] font-black uppercase tracking-wider transition-all active:scale-95"
+                  className="bg-white/5 border border-white/5 px-4 py-2 hover:bg-white/10 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider transition-all active:scale-95"
                 >
                   View Profile
                 </button>
@@ -534,7 +534,7 @@ const Chat: React.FC = () => {
 
             {/* E2E Notice Banner */}
             <div className="px-4 py-2 bg-emerald-500/5 border-b border-emerald-500/10 flex flex-wrap items-center justify-center gap-2">
-              <span className="text-[10px] text-emerald-400/70 font-bold">
+              <span className="text-xs sm:text-sm text-emerald-400/70 font-bold">
                 🔒 Messages are end-to-end encrypted. Only you and the recipient can read them.
               </span>
             </div>
@@ -545,7 +545,7 @@ const Chat: React.FC = () => {
                 <div className="flex flex-col items-center justify-center h-full opacity-30 gap-3">
                   <span className="text-4xl">🔒</span>
                   <p className="text-xs font-bold uppercase tracking-widest">No messages yet</p>
-                  <p className="text-[10px] text-center">Send a message to start an encrypted conversation</p>
+                  <p className="text-xs sm:text-sm text-center">Send a message to start an encrypted conversation</p>
                 </div>
               )}
               {messages.map((m, index) => (
@@ -570,9 +570,9 @@ const Chat: React.FC = () => {
                       </div>
                       <div className="flex flex-wrap items-center justify-end gap-1 mt-1.5">
                         {m.isEncrypted && (
-                          <span className="text-[8px] opacity-50" title="End-to-end encrypted">🔒</span>
+                          <span className="text-xs opacity-50" title="End-to-end encrypted">🔒</span>
                         )}
-                        <span className="text-[8px] font-black opacity-30 uppercase tracking-widest">
+                        <span className="text-xs font-black opacity-30 uppercase tracking-widest">
                           {m.time}
                           {m.isMe && (m.isRead ? ' · Read ✓✓' : ' · Sent ✓')}
                         </span>

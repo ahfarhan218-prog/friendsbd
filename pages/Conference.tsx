@@ -252,7 +252,7 @@ const Conference: React.FC = () => {
                   <h2 className="text-lg sm:text-xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">{room.name}</h2>
                   <div className="flex flex-wrap items-center gap-2 mt-1">
                      <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
-                     <p className="text-[8px] sm:text-[10px] font-black uppercase tracking-widest text-emerald-400/80">{room.members.length} Secure Connections</p>
+                     <p className="text-xs sm:text-xs sm:text-sm font-black uppercase tracking-widest text-emerald-400/80">{room.members.length} Secure Connections</p>
                   </div>
                </div>
             </div>
@@ -272,11 +272,11 @@ const Conference: React.FC = () => {
                    <div key={pm.id} className="bg-[#1A1A35]/60 backdrop-blur-md border border-amber-500/20 rounded-2xl p-3 flex flex-wrap items-center gap-3 shadow-[0_0_15px_rgba(245,158,11,0.1)]">
                       <span className="text-amber-400">📌</span>
                       <div className="flex-1 min-w-0">
-                         <p className="text-[10px] font-black text-amber-400 uppercase tracking-widest">{pm.senderName}</p>
-                         <p className="text-[11px] font-medium text-slate-300 truncate">{pm.text}</p>
+                         <p className="text-xs sm:text-sm font-black text-amber-400 uppercase tracking-widest">{pm.senderName}</p>
+                         <p className="text-xs sm:text-sm font-medium text-slate-300 truncate">{pm.text}</p>
                       </div>
                       {(isOwner || isAdmin) && (
-                        <button onClick={() => handlePinMessage(pm.id)} className="text-[8px] font-black text-slate-500 hover:text-white uppercase transition-colors">Unpin</button>
+                        <button onClick={() => handlePinMessage(pm.id)} className="text-xs font-black text-slate-500 hover:text-white uppercase transition-colors">Unpin</button>
                       )}
                    </div>
                  ))}
@@ -291,7 +291,7 @@ const Conference: React.FC = () => {
            <div className="h-full flex flex-col items-center justify-center text-center p-12 opacity-50">
               <div className="text-6xl mb-6 drop-shadow-[0_0_20px_rgba(167,139,250,0.5)]">🛡️</div>
               <h3 className="text-sm font-black uppercase tracking-[0.2em] text-purple-300">Encrypted Tunnel Active</h3>
-              <p className="text-[10px] font-bold text-slate-400 mt-2">All data is ephemeral and secured locally.</p>
+              <p className="text-xs sm:text-sm font-bold text-slate-400 mt-2">All data is ephemeral and secured locally.</p>
            </div>
          ) : messages.map((m) => {
            const isMe = m.senderId === activeUser.id;
@@ -302,8 +302,8 @@ const Conference: React.FC = () => {
                 <div className={`flex flex-col max-w-[85%] sm:max-w-[75%] ${isMe ? 'items-end' : 'items-start'}`}>
                    {/* Name & Time */}
                    <div className={`flex flex-wrap items-center gap-2 mb-1 px-1 ${isMe ? 'flex flex-wrap-row-reverse' : ''}`}>
-                      <p className="text-[10px] font-black text-purple-300/80 uppercase tracking-widest">{isMe ? 'YOU' : m.senderName}</p>
-                      <p className="text-[8px] font-bold text-slate-500 uppercase">{new Date(m.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+                      <p className="text-xs sm:text-sm font-black text-purple-300/80 uppercase tracking-widest">{isMe ? 'YOU' : m.senderName}</p>
+                      <p className="text-xs font-bold text-slate-500 uppercase">{new Date(m.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
                       {m.isEdited && <span className="text-[7px] font-bold text-slate-400 uppercase">Edited</span>}
                    </div>
                    
@@ -313,15 +313,15 @@ const Conference: React.FC = () => {
                      <div className={`absolute -top-8 ${isMe ? 'right-0' : 'left-0'} opacity-0 group-hover:opacity-100 transition-opacity flex flex-wrap gap-1 bg-[#12122A]/90 backdrop-blur-md border border-white/10 p-1 rounded-xl z-20`}>
                         {(isMe || isAdmin) && (
                           <>
-                            <button onClick={() => { setInputText(m.text); setEditingId(m.id); }} className="w-6 h-6 flex items-center justify-center text-[10px] text-slate-400 hover:text-purple-400 transition-colors bg-white/5 rounded-lg">✏️</button>
-                            <button onClick={() => handleDeleteMessage(m.id)} className="w-6 h-6 flex items-center justify-center text-[10px] text-slate-400 hover:text-rose-400 transition-colors bg-white/5 rounded-lg">🗑️</button>
+                            <button onClick={() => { setInputText(m.text); setEditingId(m.id); }} className="w-6 h-6 flex items-center justify-center text-xs sm:text-sm text-slate-400 hover:text-purple-400 transition-colors bg-white/5 rounded-lg">✏️</button>
+                            <button onClick={() => handleDeleteMessage(m.id)} className="w-6 h-6 flex items-center justify-center text-xs sm:text-sm text-slate-400 hover:text-rose-400 transition-colors bg-white/5 rounded-lg">🗑️</button>
                           </>
                         )}
                         {(isOwner || isAdmin) && (
-                          <button onClick={() => handlePinMessage(m.id)} className={`w-6 h-6 flex items-center justify-center text-[10px] transition-colors bg-white/5 rounded-lg ${m.isPinned ? 'text-amber-500' : 'text-slate-400 hover:text-amber-400'}`}>📌</button>
+                          <button onClick={() => handlePinMessage(m.id)} className={`w-6 h-6 flex items-center justify-center text-xs sm:text-sm transition-colors bg-white/5 rounded-lg ${m.isPinned ? 'text-amber-500' : 'text-slate-400 hover:text-amber-400'}`}>📌</button>
                         )}
-                        <button onClick={() => handleReact(m.id, '👍')} className="w-6 h-6 flex items-center justify-center text-[10px] text-slate-400 hover:text-white transition-colors bg-white/5 rounded-lg">👍</button>
-                        <button onClick={() => handleReact(m.id, '❤️')} className="w-6 h-6 flex items-center justify-center text-[10px] text-slate-400 hover:text-white transition-colors bg-white/5 rounded-lg">❤️</button>
+                        <button onClick={() => handleReact(m.id, '👍')} className="w-6 h-6 flex items-center justify-center text-xs sm:text-sm text-slate-400 hover:text-white transition-colors bg-white/5 rounded-lg">👍</button>
+                        <button onClick={() => handleReact(m.id, '❤️')} className="w-6 h-6 flex items-center justify-center text-xs sm:text-sm text-slate-400 hover:text-white transition-colors bg-white/5 rounded-lg">❤️</button>
                      </div>
 
                      {/* Message Content */}
@@ -342,8 +342,8 @@ const Conference: React.FC = () => {
                                return acc;
                              }, {})).map(([emoji, count]) => (
                                <button key={emoji} onClick={() => handleReact(m.id, emoji)} className="bg-black/20 border border-white/10 rounded-lg px-2 py-0.5 flex flex-wrap items-center gap-1.5 hover:bg-black/40 transition-colors">
-                                  <span className="text-[10px]">{emoji}</span>
-                                  <span className="text-[8px] font-black text-white/70">{count}</span>
+                                  <span className="text-xs sm:text-sm">{emoji}</span>
+                                  <span className="text-xs font-black text-white/70">{count}</span>
                                </button>
                              ))}
                           </div>
@@ -386,7 +386,7 @@ const Conference: React.FC = () => {
                  placeholder={editingId ? "Editing message..." : "Type your message..."}
                  className="flex-1 bg-transparent border-none text-sm font-medium py-2.5 text-white outline-none placeholder-slate-500"
                />
-               {editingId && <button onClick={() => { setEditingId(null); setInputText(''); }} className="text-rose-400 hover:text-rose-300 text-[10px] font-black uppercase px-2 transition-colors">Cancel</button>}
+               {editingId && <button onClick={() => { setEditingId(null); setInputText(''); }} className="text-rose-400 hover:text-rose-300 text-xs sm:text-sm font-black uppercase px-2 transition-colors">Cancel</button>}
             </div>
 
             <button 
@@ -408,7 +408,7 @@ const Conference: React.FC = () => {
                <div className="flex items-center justify-between mb-8 sm:mb-10">
                   <div>
                     <h2 className="text-xl font-black italic tracking-tighter text-white">Personnel</h2>
-                    <p className="text-[10px] text-indigo-400/80 font-bold uppercase tracking-widest">Active Operatives</p>
+                    <p className="text-xs sm:text-sm text-indigo-400/80 font-bold uppercase tracking-widest">Active Operatives</p>
                   </div>
                   <button onClick={() => setShowMembers(false)} className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-300 transition-colors">✕</button>
                </div>
@@ -416,7 +416,7 @@ const Conference: React.FC = () => {
                <div className="flex-1 overflow-y-auto space-y-6 custom-scrollbar pr-2">
                   {/* CURRENT MEMBERS */}
                   <div className="space-y-3">
-                     <h3 className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] px-2">Members ({room.members.length})</h3>
+                     <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] px-2">Members ({room.members.length})</h3>
                      {room.members.map(mid => {
                        const mUser = [...allUsers, activeUser].find(u => u?.id === mid);
                        return (
@@ -425,11 +425,11 @@ const Conference: React.FC = () => {
                                <img src={mUser?.avatar || `https://picsum.photos/seed/${mid}/50`} className="w-9 h-9 rounded-xl shadow-md border border-white/10" alt="" />
                                <div>
                                   <p className="text-xs font-black text-white">{mUser?.name || 'Unknown'}</p>
-                                  <p className={`text-[8px] font-bold uppercase ${mid === room.creatorId ? 'text-amber-400' : 'text-indigo-400'}`}>{mid === room.creatorId ? 'Owner' : 'Operative'}</p>
+                                  <p className={`text-xs font-bold uppercase ${mid === room.creatorId ? 'text-amber-400' : 'text-indigo-400'}`}>{mid === room.creatorId ? 'Owner' : 'Operative'}</p>
                                </div>
                             </div>
                             {(isOwner || isAdmin) && mid !== room.creatorId && (
-                              <button onClick={() => handleRemoveMember(mid)} className="w-7 h-7 bg-white/5 hover:bg-rose-500/20 text-[10px] rounded-lg border border-white/10 flex items-center justify-center text-slate-400 hover:text-rose-400 transition-colors">✕</button>
+                              <button onClick={() => handleRemoveMember(mid)} className="w-7 h-7 bg-white/5 hover:bg-rose-500/20 text-xs sm:text-sm rounded-lg border border-white/10 flex items-center justify-center text-slate-400 hover:text-rose-400 transition-colors">✕</button>
                             )}
                          </div>
                        );
@@ -439,7 +439,7 @@ const Conference: React.FC = () => {
                   {/* INVITE SECTION */}
                   {(isOwner || isAdmin) && (
                     <div className="space-y-3">
-                       <h3 className="text-[9px] font-black text-purple-400 uppercase tracking-[0.2em] px-2">Secure Invite</h3>
+                       <h3 className="text-xs font-black text-purple-400 uppercase tracking-[0.2em] px-2">Secure Invite</h3>
                        <div className="space-y-2">
                           {allUsers.filter(f => f.id && !room.members.includes(f.id) && !room.invites.includes(f.id)).map(f => (
                             <button key={f.id} onClick={() => handleInvite(f.id)} className="w-full flex items-center justify-between p-3 sm:p-4 bg-purple-500/10 rounded-2xl border border-purple-500/20 hover:bg-purple-500/20 transition-colors group">
@@ -452,13 +452,13 @@ const Conference: React.FC = () => {
                           ))}
                           {room.invites.length > 0 && (
                             <div className="pt-4 space-y-2 opacity-60">
-                               <p className="text-[8px] font-black uppercase text-slate-400 px-2 tracking-widest">Pending Invites</p>
+                               <p className="text-xs font-black uppercase text-slate-400 px-2 tracking-widest">Pending Invites</p>
                                {room.invites.map(iid => {
                                  const iUser = allUsers.find(u => u.id === iid);
                                  return (
                                    <div key={iid} className="flex flex-wrap items-center gap-3 p-3 border border-dashed border-white/10 rounded-xl grayscale opacity-70">
                                       <img src={iUser?.avatar || `https://picsum.photos/seed/${iid}/30`} className="w-6 h-6 rounded-lg" alt="" />
-                                      <p className="text-[10px] font-bold text-slate-400">{iUser?.name || 'Unknown'}</p>
+                                      <p className="text-xs sm:text-sm font-bold text-slate-400">{iUser?.name || 'Unknown'}</p>
                                    </div>
                                  );
                                })}

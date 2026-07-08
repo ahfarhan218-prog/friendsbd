@@ -154,7 +154,7 @@ const Auth: React.FC<AuthProps> = ({ mode, onAuth }) => {
         </div>
 
         {errorMsg && (
-          <div className="mb-4 p-3.5 bg-rose-500/10 border border-rose-500/20 rounded-xl text-rose-400 text-[11px] font-bold text-center">
+          <div className="mb-4 p-3.5 bg-rose-500/10 border border-rose-500/20 rounded-xl text-rose-400 text-xs sm:text-sm font-bold text-center">
             ⚠️ {errorMsg}
           </div>
         )}
@@ -163,7 +163,7 @@ const Auth: React.FC<AuthProps> = ({ mode, onAuth }) => {
            {mode === 'signup' && (
              <>
                <div className="space-y-1">
-                 <label className="text-[10px] font-bold text-purple-300 uppercase tracking-widest px-2">Full Name</label>
+                 <label className="text-xs sm:text-sm font-bold text-purple-300 uppercase tracking-widest px-2">Full Name</label>
                  <div className="relative">
                    <input 
                      value={fullName}
@@ -177,7 +177,7 @@ const Auth: React.FC<AuthProps> = ({ mode, onAuth }) => {
                </div>
 
                <div className="space-y-1">
-                 <label className="text-[10px] font-bold text-purple-300 uppercase tracking-widest px-2">Choose Username</label>
+                 <label className="text-xs sm:text-sm font-bold text-purple-300 uppercase tracking-widest px-2">Choose Username</label>
                  <div className="relative">
                    <input 
                      value={username}
@@ -190,7 +190,7 @@ const Auth: React.FC<AuthProps> = ({ mode, onAuth }) => {
                  </div>
                </div>
                <div className="space-y-1">
-                 <label className="text-[10px] font-bold text-purple-300 uppercase tracking-widest px-2">Gender</label>
+                 <label className="text-xs sm:text-sm font-bold text-purple-300 uppercase tracking-widest px-2">Gender</label>
                  <div className="relative">
                    <select 
                      value={gender}
@@ -208,7 +208,7 @@ const Auth: React.FC<AuthProps> = ({ mode, onAuth }) => {
            )}
 
            <div className="space-y-1">
-             <label className="text-[10px] font-bold text-purple-300 uppercase tracking-widest px-2">
+             <label className="text-xs sm:text-sm font-bold text-purple-300 uppercase tracking-widest px-2">
                Email Address
              </label>
              <div className="relative">
@@ -224,7 +224,7 @@ const Auth: React.FC<AuthProps> = ({ mode, onAuth }) => {
            </div>
 
            <div className="space-y-1">
-             <label className="text-[10px] font-bold text-purple-300 uppercase tracking-widest px-2">Password</label>
+             <label className="text-xs sm:text-sm font-bold text-purple-300 uppercase tracking-widest px-2">Password</label>
              <div className="relative">
                <input 
                  value={password}
@@ -235,7 +235,7 @@ const Auth: React.FC<AuthProps> = ({ mode, onAuth }) => {
                />
                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400 text-lg">🔒</span>
              </div>
-             {mode === 'signup' && <p className="text-[10px] text-purple-300 px-2">Minimum 6 characters</p>}
+             {mode === 'signup' && <p className="text-xs sm:text-sm text-purple-300 px-2">Minimum 6 characters</p>}
            </div>
 
            <button 

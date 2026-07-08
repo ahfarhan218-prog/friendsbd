@@ -49,7 +49,7 @@ const Timeline: React.FC = () => {
           <div className="space-y-12 relative z-10">
             {events.length === 0 && (
               <div className="text-center py-12">
-                <p className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Loading activities...</p>
+                <p className="text-xs font-black text-gray-500 uppercase tracking-widest">Loading activities...</p>
               </div>
             )}
             {events.map((ev, i) => (
@@ -59,8 +59,8 @@ const Timeline: React.FC = () => {
                 </div>
                 <div className="bg-[#1C1C2E] p-5 rounded-[2rem] flex-1 border border-white/5 shadow-md">
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-[8px] font-black text-cyan-400 uppercase tracking-widest">{ev.type}</span>
-                    <span className="text-[8px] font-black text-gray-500 uppercase tracking-widest">{ev.time}</span>
+                    <span className="text-xs font-black text-cyan-400 uppercase tracking-widest">{ev.type}</span>
+                    <span className="text-xs font-black text-gray-500 uppercase tracking-widest">{ev.time}</span>
                   </div>
                   <p className="text-xs font-bold text-gray-200 leading-relaxed">{ev.msg}</p>
                 </div>
@@ -70,7 +70,7 @@ const Timeline: React.FC = () => {
         </div>
         {events.length > 0 && (
           <div className="text-center py-4">
-            <p className="text-[9px] font-black text-gray-600 uppercase tracking-widest">End of recent updates</p>
+            <p className="text-xs font-black text-gray-600 uppercase tracking-widest">End of recent updates</p>
           </div>
         )}
       </div>

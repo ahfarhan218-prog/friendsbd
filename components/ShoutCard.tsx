@@ -131,7 +131,7 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
 
       {/* Pinned badge */}
       {shout.isPinned && (
-        <div className="absolute -top-3 -right-2 z-20 bg-gradient-to-r from-amber-400 to-orange-500 text-white text-[8px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg shadow-amber-500/30 flex flex-wrap items-center gap-1">
+        <div className="absolute -top-3 -right-2 z-20 bg-gradient-to-r from-amber-400 to-orange-500 text-white text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg shadow-amber-500/30 flex flex-wrap items-center gap-1">
           📌 Pinned
         </div>
       )}
@@ -192,13 +192,13 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
                   {shout.user}
                 </Link>
                 {(shout.userId === 'bot_chatgirl' || shout.username === 'chatgirl' || shout.userId === 1) && (
-                  <span className="text-[8px] bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest border border-purple-500/30">🤖 Bot</span>
+                  <span className="text-xs bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest border border-purple-500/30">🤖 Bot</span>
                 )}
-                {shout.isPremium && <span title="Premium" className="text-[10px] bg-amber-400/20 text-amber-400 px-1.5 py-0.5 rounded-full font-black">👑</span>}
-                {shout.isQuiz && <span className="text-[8px] bg-rose-500/20 text-rose-400 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest">❓ Quiz</span>}
-                {shout.isClosed && <span className="text-[8px] bg-rose-400/20 text-rose-400 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest">{shout.isQuiz ? 'Comments Hidden' : 'Locked'}</span>}
+                {shout.isPremium && <span title="Premium" className="text-xs sm:text-sm bg-amber-400/20 text-amber-400 px-1.5 py-0.5 rounded-full font-black">👑</span>}
+                {shout.isQuiz && <span className="text-xs bg-rose-500/20 text-rose-400 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest">❓ Quiz</span>}
+                {shout.isClosed && <span className="text-xs bg-rose-400/20 text-rose-400 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest">{shout.isQuiz ? 'Comments Hidden' : 'Locked'}</span>}
               </div>
-              <p className="text-[9px] text-white/30 font-bold mt-0.5">
+              <p className="text-xs text-white/60 font-bold mt-0.5">
                 {timeLabel}
                 {shout.pinExpiry && <span className="text-amber-400/70 ml-2">· Expires {new Date(shout.pinExpiry).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>}
               </p>
@@ -220,7 +220,7 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
                   className="absolute top-10 right-0 w-48 bg-[#252540] border border-white/10 rounded-2xl shadow-2xl p-2 z-[60]">
                   {(isOwner || isAdmin) && (
                     <button onClick={() => { onEdit?.(shout); setShowMenu(false); }}
-                      className="w-full text-left px-3 py-2.5 text-[10px] font-black uppercase text-white/60 hover:bg-white/10 hover:text-white rounded-xl transition-all flex flex-wrap items-center gap-3">
+                      className="w-full text-left px-3 py-2.5 text-xs sm:text-sm font-black uppercase text-white/60 hover:bg-white/10 hover:text-white rounded-xl transition-all flex flex-wrap items-center gap-3">
                       ✏️ Edit Shout
                     </button>
                   )}
@@ -228,9 +228,9 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
                     <>
                       <div className="relative">
                         <button onClick={() => shout.isPinned ? (onPin?.(shout.id), setShowMenu(false)) : setShowPinMenu(!showPinMenu)}
-                          className="w-full text-left px-3 py-2.5 text-[10px] font-black uppercase rounded-xl transition-all flex items-center justify-between text-amber-400/70 hover:bg-amber-400/10 hover:text-amber-400">
+                          className="w-full text-left px-3 py-2.5 text-xs sm:text-sm font-black uppercase rounded-xl transition-all flex items-center justify-between text-amber-400/70 hover:bg-amber-400/10 hover:text-amber-400">
                           <span className="flex flex-wrap items-center gap-3">📌 {shout.isPinned ? 'Unpin' : 'Pin Shout'}</span>
-                          {!shout.isPinned && <span className="text-white/20">›</span>}
+                          {!shout.isPinned && <span className="text-white/40">›</span>}
                         </button>
                         <AnimatePresence>
                           {showPinMenu && (
@@ -238,7 +238,7 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
                               className="absolute right-full top-0 mr-2 w-36 bg-[#252540] border border-white/10 rounded-xl shadow-2xl p-1.5 z-50">
                               {PIN_DURATIONS.map(d => (
                                 <button key={d.label} onClick={() => { onPin?.(shout.id, d.value); setShowPinMenu(false); setShowMenu(false); }}
-                                  className="w-full text-left px-3 py-2 text-[9px] font-black uppercase text-white/50 hover:bg-white/10 hover:text-white rounded-lg transition-all">
+                                  className="w-full text-left px-3 py-2 text-xs font-black uppercase text-white/50 hover:bg-white/10 hover:text-white rounded-lg transition-all">
                                   {d.label}
                                 </button>
                               ))}
@@ -247,17 +247,17 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
                         </AnimatePresence>
                       </div>
                       <button onClick={() => { onToggleLock?.(shout.id); setShowMenu(false); }}
-                        className="w-full text-left px-3 py-2.5 text-[10px] font-black uppercase text-white/60 hover:bg-orange-400/10 hover:text-orange-400 rounded-xl transition-all flex flex-wrap items-center gap-3">
+                        className="w-full text-left px-3 py-2.5 text-xs sm:text-sm font-black uppercase text-white/60 hover:bg-orange-400/10 hover:text-orange-400 rounded-xl transition-all flex flex-wrap items-center gap-3">
                         {shout.isClosed ? '🔓 Open Comments' : '🔒 Hide/Close Comments'}
                       </button>
                       <button onClick={() => { onDelete?.(shout.id); setShowMenu(false); }}
-                        className="w-full text-left px-3 py-2.5 text-[10px] font-black uppercase text-rose-400/70 hover:bg-rose-400/10 hover:text-rose-400 rounded-xl transition-all flex flex-wrap items-center gap-3">
+                        className="w-full text-left px-3 py-2.5 text-xs sm:text-sm font-black uppercase text-rose-400/70 hover:bg-rose-400/10 hover:text-rose-400 rounded-xl transition-all flex flex-wrap items-center gap-3">
                         🗑️ Delete
                       </button>
                     </>
                   )}
                   {!isAdmin && !isOwner && (
-                    <button className="w-full text-left px-3 py-2.5 text-[10px] font-black uppercase text-rose-400/70 hover:bg-rose-400/10 hover:text-rose-400 rounded-xl transition-all flex flex-wrap items-center gap-3">
+                    <button className="w-full text-left px-3 py-2.5 text-xs sm:text-sm font-black uppercase text-rose-400/70 hover:bg-rose-400/10 hover:text-rose-400 rounded-xl transition-all flex flex-wrap items-center gap-3">
                       🚩 Report
                     </button>
                   )}
@@ -284,7 +284,7 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
             {Object.entries(reactionCounts).map(([type, count]) => (
               <div key={type} className="flex flex-wrap items-center gap-1 bg-white/5 border border-white/5 px-2 py-0.5 rounded-full">
                 <span className="text-xs">{REACTIONS.find(r => r.type === type)?.icon || '👍'}</span>
-                <span className="text-[9px] font-black text-white/40">{count}</span>
+                <span className="text-xs font-black text-white/40">{count}</span>
               </div>
             ))}
           </div>
@@ -298,7 +298,7 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
             <button
               onClick={() => !shout.isClosed && setShowReactions(!showReactions)}
               disabled={shout.isClosed}
-              className={`flex flex-wrap items-center gap-2 px-4 py-2 rounded-2xl text-[10px] font-black uppercase tracking-wider transition-all active:scale-95 ${
+              className={`flex flex-wrap items-center gap-2 px-4 py-2 rounded-2xl text-xs sm:text-sm font-black uppercase tracking-wider transition-all active:scale-95 ${
                 myReaction
                   ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-900/30'
                   : 'bg-white/5 text-white/40 hover:bg-white/10 hover:text-white'
@@ -326,7 +326,7 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
           {/* Reply Toggle */}
           <button 
             onClick={() => setShowReplies(!showReplies)}
-            className={`flex flex-wrap items-center gap-2 px-4 py-2 rounded-2xl text-[10px] font-black uppercase tracking-wider transition-all active:scale-95 ${
+            className={`flex flex-wrap items-center gap-2 px-4 py-2 rounded-2xl text-xs sm:text-sm font-black uppercase tracking-wider transition-all active:scale-95 ${
               shout.isClosed 
                 ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20 hover:bg-rose-500/20' 
                 : showReplies 
@@ -347,7 +347,7 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
               <div className="p-4 space-y-3">
                 {/* Quiz/Hidden Comments Banner */}
                 {shout.isClosed && (
-                  <div className="text-center py-2 px-3 text-[9px] font-black text-rose-400/80 uppercase tracking-widest bg-rose-500/5 rounded-xl border border-rose-500/10">
+                  <div className="text-center py-2 px-3 text-xs font-black text-rose-400/80 uppercase tracking-widest bg-rose-500/5 rounded-xl border border-rose-500/10">
                     {isSuperAdmin 
                       ? '🔒 Quiz/Private Mode Active (Showing all replies to Admins)' 
                       : '🔒 Quiz Active: Your answers are hidden from other members.'}
@@ -369,11 +369,11 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
                             <div className="flex flex-wrap items-center justify-between gap-2 mb-0.5">
                               <Link 
                                 to={`/profile/${reply.username}`} 
-                                className="text-[10px] font-black text-purple-300/80 hover:text-purple-400 transition-colors"
+                                className="text-xs sm:text-sm font-black text-purple-300/80 hover:text-purple-400 transition-colors"
                               >
                                 {reply.userName}
                               </Link>
-                              <span className="text-[8px] text-white/30 font-bold font-mono">
+                              <span className="text-xs text-white/60 font-bold font-mono">
                                 {new Date(reply.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
                               </span>
                             </div>
@@ -385,7 +385,7 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
                       ))}
                     </div>
                   ) : (
-                    <p className="text-center text-[10px] text-white/20 font-bold uppercase tracking-widest py-2">
+                    <p className="text-center text-xs sm:text-sm text-white/40 font-bold uppercase tracking-widest py-2">
                       {shout.isClosed && !isSuperAdmin ? 'Your answers will appear here' : 'No replies yet'}
                     </p>
                   );
@@ -457,7 +457,7 @@ const ShoutCard: React.FC<Props> = ({ shout, currentUser, onReact, onReply, onDe
                         <img src={u.avatar} className="w-9 h-9 rounded-xl object-cover border border-white/10 shrink-0" alt="" />
                         <div className="min-w-0">
                           <p className="text-xs font-black text-white truncate">{u.name}</p>
-                          <p className="text-[9px] text-purple-400 font-bold">@{u.username}</p>
+                          <p className="text-xs text-purple-400 font-bold">@{u.username}</p>
                         </div>
                       </Link>
                       <span className="text-xl bg-white/5 w-8 h-8 rounded-full flex items-center justify-center border border-white/5 shadow-md">

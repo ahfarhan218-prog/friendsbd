@@ -73,7 +73,7 @@ const PublicRewardHistoryTab: React.FC<PublicRewardHistoryTabProps> = ({ profile
     return (
       <div className="flex flex-col items-center justify-center py-10 space-y-2">
         <div className="w-5 h-5 border-2 border-indigo-500/20 border-t-indigo-500 rounded-full animate-spin" />
-        <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Loading history ledger...</span>
+        <span className="text-xs sm:text-sm text-slate-500 font-bold uppercase tracking-wider">Loading history ledger...</span>
       </div>
     );
   }
@@ -83,7 +83,7 @@ const PublicRewardHistoryTab: React.FC<PublicRewardHistoryTabProps> = ({ profile
       <div className="py-12 bg-slate-900/10 border border-[#1f293d]/50 rounded-[2rem] text-center space-y-2 max-w-sm mx-auto">
         <span className="text-2xl block">🏅</span>
         <h4 className="text-xs font-black text-white">No Point Modifications</h4>
-        <p className="text-[10px] text-slate-400">This member has no recorded point award/deduction history.</p>
+        <p className="text-xs sm:text-sm text-slate-400">This member has no recorded point award/deduction history.</p>
       </div>
     );
   }
@@ -109,21 +109,21 @@ const PublicRewardHistoryTab: React.FC<PublicRewardHistoryTabProps> = ({ profile
               )}
             </div>
 
-            <span className="text-[10px] font-semibold text-slate-500 font-mono">
+            <span className="text-xs sm:text-sm font-semibold text-slate-500 font-mono">
               🕒 {formatTimeAgoDetailed(item.actioned_at || item.created_at)}
             </span>
           </div>
 
           {/* Body block - reason */}
           <div className="py-3">
-            <span className="text-[9px] font-extrabold text-slate-500 uppercase block tracking-widest mb-1.5">Audit Justification</span>
+            <span className="text-xs font-extrabold text-slate-500 uppercase block tracking-widest mb-1.5">Audit Justification</span>
             <blockquote className="text-xs text-slate-300 bg-[#090d16]/40 border-l-2 border-indigo-500/60 pl-3 py-1.5 rounded-r-xl italic leading-relaxed">
               "{item.reason}"
             </blockquote>
           </div>
 
           {/* Footer - quiz link and auditor details */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pt-3 border-t border-[#1f293d]/30 text-[10px]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pt-3 border-t border-[#1f293d]/30 text-xs sm:text-sm">
             <a
               href={item.quiz_link}
               className="text-indigo-400 hover:text-indigo-300 font-bold flex flex-wrap items-center gap-1.5 hover:underline"

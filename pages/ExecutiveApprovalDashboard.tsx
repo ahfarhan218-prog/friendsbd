@@ -254,15 +254,15 @@ const ExecutiveApprovalDashboard: React.FC = () => {
                 <div className="space-y-3 text-left">
                   <div className="flex flex-wrap items-center gap-2.5">
                     {req.transaction_type === 'ADD' ? (
-                      <span className="px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider bg-green-500/10 text-green-400 border border-green-500/20 rounded-md">
+                      <span className="px-2.5 py-0.5 text-xs font-black uppercase tracking-wider bg-green-500/10 text-green-400 border border-green-500/20 rounded-md">
                         + ADD REQUEST
                       </span>
                     ) : (
-                      <span className="px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-md">
+                      <span className="px-2.5 py-0.5 text-xs font-black uppercase tracking-wider bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-md">
                         - DEDUCTION REQUEST
                       </span>
                     )}
-                    <span className="text-[10px] font-mono text-slate-500">ID: {req.id.substring(0, 8).toUpperCase()}</span>
+                    <span className="text-xs sm:text-sm font-mono text-slate-500">ID: {req.id.substring(0, 8).toUpperCase()}</span>
                   </div>
 
                   <div>
@@ -274,7 +274,7 @@ const ExecutiveApprovalDashboard: React.FC = () => {
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-4 text-[10px] font-bold text-slate-400">
+                  <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm font-bold text-slate-400">
                     <span>Initiated by: @{req.requested_by_username}</span>
                     <span className="text-slate-600">•</span>
                     <span>🎯 Quiz: <a href={req.quiz_link} className="text-indigo-400 hover:underline">{req.quiz_title}</a></span>
@@ -284,7 +284,7 @@ const ExecutiveApprovalDashboard: React.FC = () => {
                 {/* Right block - adjustment values & action buttons */}
                 <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center gap-4 min-w-[200px] border-t md:border-t-0 border-[#1f293d]/50 pt-4 md:pt-0">
                   <div className="text-left md:text-right space-y-1">
-                    <span className="text-[9px] font-extrabold text-slate-500 uppercase block tracking-wider">Requested Delta</span>
+                    <span className="text-xs font-extrabold text-slate-500 uppercase block tracking-wider">Requested Delta</span>
                     <h4 className={`text-sm font-black font-mono ${
                       req.transaction_type === 'ADD' ? 'text-green-400' : 'text-rose-400'
                     }`}>

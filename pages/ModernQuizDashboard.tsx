@@ -419,7 +419,7 @@ const ModernQuizDashboard: React.FC = () => {
               className={`bg-[#121824] border border-[#1f293d] p-5 rounded-[2rem] bg-gradient-to-r ${stat.bg} flex items-center justify-between shadow-sm`}
             >
               <div className="text-left space-y-1">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{stat.label}</span>
+                <span className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest">{stat.label}</span>
                 <h3 className={`text-xl font-black font-mono ${stat.color}`}>{stat.value}</h3>
               </div>
               <span className="text-2xl p-3 bg-slate-950/40 border border-[#1f293d]/50 rounded-2xl">{stat.icon}</span>
@@ -583,10 +583,10 @@ const ModernQuizDashboard: React.FC = () => {
               {!quizFinished ? (
                 <div className="space-y-6">
                   <div className="flex items-center justify-between border-b border-[#1f293d] pb-4">
-                    <span className="text-[10px] font-black font-mono uppercase tracking-widest px-3 py-1 bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-full">
+                    <span className="text-xs sm:text-sm font-black font-mono uppercase tracking-widest px-3 py-1 bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-full">
                       Question {currentQuestionStep + 1} of {activePlayingQuiz.questions.length}
                     </span>
-                    <span className="text-[10px] font-black text-slate-400 font-mono">
+                    <span className="text-xs sm:text-sm font-black text-slate-400 font-mono">
                       Current Score: {quizScore * 10} pts
                     </span>
                   </div>
@@ -609,7 +609,7 @@ const ModernQuizDashboard: React.FC = () => {
                         className="w-full text-left p-4 bg-[#090d16] hover:bg-slate-900 border border-[#1f293d] hover:border-indigo-500/50 rounded-2xl text-xs font-bold text-slate-200 hover:text-white transition-all flex justify-between items-center group shadow-sm"
                       >
                         <span>{opt}</span>
-                        <span className="w-5 h-5 rounded-lg border-2 border-slate-700 group-hover:border-indigo-500 group-hover:bg-indigo-500/10 flex items-center justify-center font-mono text-[9px] text-slate-500 group-hover:text-indigo-400 font-bold transition-all">
+                        <span className="w-5 h-5 rounded-lg border-2 border-slate-700 group-hover:border-indigo-500 group-hover:bg-indigo-500/10 flex items-center justify-center font-mono text-xs text-slate-500 group-hover:text-indigo-400 font-bold transition-all">
                           {String.fromCharCode(65 + oIdx)}
                         </span>
                       </button>
@@ -635,13 +635,13 @@ const ModernQuizDashboard: React.FC = () => {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 max-w-sm mx-auto">
                     <div className="bg-[#090d16] border border-[#1f293d] p-4 rounded-2xl text-center space-y-1">
-                      <span className="text-[10px] text-slate-500 uppercase tracking-wider font-extrabold">Final Score</span>
+                      <span className="text-xs sm:text-sm text-slate-500 uppercase tracking-wider font-extrabold">Final Score</span>
                       <h4 className="text-lg font-black text-white font-mono">
                         {quizScore} / {activePlayingQuiz.questions.length}
                       </h4>
                     </div>
                     <div className="bg-[#090d16] border border-[#1f293d] p-4 rounded-2xl text-center space-y-1">
-                      <span className="text-[10px] text-slate-500 uppercase tracking-wider font-extrabold">Points Earned</span>
+                      <span className="text-xs sm:text-sm text-slate-500 uppercase tracking-wider font-extrabold">Points Earned</span>
                       <h4 className="text-lg font-black text-indigo-400 font-mono">
                         {quizScore === activePlayingQuiz.questions.length ? `+${activePlayingQuiz.rewardAp || 50} AP` : '0 AP'}
                       </h4>

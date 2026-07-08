@@ -52,7 +52,7 @@ const TournamentDashboard: React.FC = () => {
       <header className="pt-10 pb-6 px-6 border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md relative overflow-hidden">
         <div className="max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto flex justify-between items-center relative z-10">
           <div>
-            <span className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.3em] block mb-1">Official Game</span>
+            <span className="text-xs sm:text-sm font-black text-indigo-400 uppercase tracking-[0.3em] block mb-1">Official Game</span>
             <h1 className="text-2xl font-black text-white tracking-tight">Forum Cricket Tournament</h1>
           </div>
           <button 

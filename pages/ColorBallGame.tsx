@@ -89,7 +89,7 @@ const ColorBallGame: React.FC = () => {
            </button>
            <div className="text-center">
              <h2 className="text-2xl font-black uppercase tracking-tighter italic text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-amber-400 drop-shadow-[0_0_10px_rgba(251,113,133,0.3)]">Color Ball</h2>
-             <p className="text-[8px] font-black uppercase tracking-widest text-slate-400">Nightly Canvas Event</p>
+             <p className="text-xs font-black uppercase tracking-widest text-slate-400">Nightly Canvas Event</p>
            </div>
            {/* Replace this link with a dedicated leaderboard if created later */}
            <div className="p-3 bg-white/5 text-rose-300 rounded-2xl border border-white/10 shadow-lg">
@@ -136,7 +136,7 @@ const ColorBallGame: React.FC = () => {
                   <div className="py-6 space-y-4">
                      <div className="text-5xl mb-2 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">🌜</div>
                      <h3 className="text-xl font-black text-white italic tracking-tighter uppercase">Studio Closed</h3>
-                     <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest max-w-[200px] mx-auto">
+                     <p className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest max-w-[200px] mx-auto">
                         Color Ball is active daily from 5:00 PM to 12:00 AM. See you later!
                      </p>
                   </div>
@@ -157,18 +157,18 @@ const ColorBallGame: React.FC = () => {
                         <img src={w.avatar} className="w-9 h-9 rounded-xl border border-white/10 shadow-sm group-hover:scale-105 group-hover:border-rose-500/50 transition-transform object-cover" alt="" />
                         <div>
                            <p className="text-xs font-black text-white group-hover:text-rose-300 transition-colors">{w.username}</p>
-                           <p className="text-[8px] font-bold text-slate-500 uppercase">
+                           <p className="text-xs font-bold text-slate-500 uppercase">
                               Claimed in {(w.grabTime/1000).toFixed(2)}s
                            </p>
                         </div>
                      </div>
                      <div className="flex flex-col items-end gap-1">
-                        <span className="text-[10px] font-black text-rose-400 bg-rose-500/10 border border-rose-500/20 px-2 py-0.5 rounded-lg shadow-[0_0_10px_rgba(244,63,94,0.1)]">+{w.pointsWon} Ball</span>
-                        <span className="text-[9px] font-black text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-lg">+5 AP</span>
+                        <span className="text-xs sm:text-sm font-black text-rose-400 bg-rose-500/10 border border-rose-500/20 px-2 py-0.5 rounded-lg shadow-[0_0_10px_rgba(244,63,94,0.1)]">+{w.pointsWon} Ball</span>
+                        <span className="text-xs font-black text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-lg">+5 AP</span>
                      </div>
                   </div>
                )) : (
-                  <p className="text-[10px] text-center text-slate-500 uppercase font-black py-6">No recent activity</p>
+                  <p className="text-xs sm:text-sm text-center text-slate-500 uppercase font-black py-6">No recent activity</p>
                )}
             </div>
          </div>
@@ -177,7 +177,7 @@ const ColorBallGame: React.FC = () => {
          <div className="bg-gradient-to-br from-[#1C1C2E] to-[#110a2a] rounded-[2.5rem] p-8 text-center relative overflow-hidden shadow-2xl border border-white/5">
             <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-rose-600/10 rounded-full blur-3xl pointer-events-none" />
             <div className="relative z-10">
-               <p className="text-[10px] font-black text-rose-400/80 uppercase tracking-[0.3em] mb-3 drop-shadow-md">Protocol Note</p>
+               <p className="text-xs sm:text-sm font-black text-rose-400/80 uppercase tracking-[0.3em] mb-3 drop-shadow-md">Protocol Note</p>
                <p className="text-xs font-medium text-slate-300 leading-relaxed">
                   Color balls spawn randomly every <span className="text-white font-bold">10-15 minutes</span> between <span className="text-rose-300 font-bold">5:00 PM and 12:00 AM</span>. 
                   Be quick to expand your canvas!

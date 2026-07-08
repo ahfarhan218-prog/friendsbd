@@ -226,9 +226,9 @@ const LottoGiftModule: React.FC<LottoGiftModuleProps> = ({ currentUser, onCoinsU
                         <span>Received from <strong className="text-[#0f766e]">@{log.sender_username}</strong></span>
                       )}
                     </p>
-                    <p className="text-[10px] text-slate-400 font-semibold">{formatDate(log.timestamp)}</p>
+                    <p className="text-xs sm:text-sm text-slate-400 font-semibold">{formatDate(log.timestamp)}</p>
                   </div>
-                  <span className={`font-black uppercase tracking-wider text-[10px] px-2 py-0.5 rounded-full ${isOutgoing ? 'text-purple-700 bg-purple-100' : 'text-teal-700 bg-teal-100'}`}>
+                  <span className={`font-black uppercase tracking-wider text-xs sm:text-sm px-2 py-0.5 rounded-full ${isOutgoing ? 'text-purple-700 bg-purple-100' : 'text-teal-700 bg-teal-100'}`}>
                     {isOutgoing ? 'Sent' : 'Received'}
                   </span>
                 </div>

@@ -153,7 +153,7 @@ const CommunityMembers: React.FC = () => {
                 {getHeaderTitle()}
               </h2>
             </div>
-            <p className="text-[9px] font-black uppercase opacity-50 tracking-[0.2em] text-purple-300">
+            <p className="text-xs font-black uppercase opacity-50 tracking-[0.2em] text-purple-300">
               Community Directory
             </p>
           </div>
@@ -164,7 +164,7 @@ const CommunityMembers: React.FC = () => {
       <div className="px-5 space-y-6 -mt-10 relative z-20">
         {/* Search Bar */}
         <div className="bg-[#1C1C2E] border border-white/5 rounded-2xl flex items-center px-4 focus-within:border-purple-500/40 transition-colors shadow-2xl">
-          <svg className="w-5 h-5 text-white/30 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 text-white/60 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <input
@@ -175,7 +175,7 @@ const CommunityMembers: React.FC = () => {
             className="w-full bg-transparent border-none text-sm text-white/80 placeholder-white/20 py-4 outline-none font-medium"
           />
           {searchQuery && (
-            <button onClick={() => setSearchQuery('')} className="text-white/30 hover:text-white transition-colors">
+            <button onClick={() => setSearchQuery('')} className="text-white/60 hover:text-white transition-colors">
               ✕
             </button>
           )}
@@ -192,7 +192,7 @@ const CommunityMembers: React.FC = () => {
             <button
               key={f.id}
               onClick={() => setFilter(f.id)}
-              className={`flex flex-wrap-1 py-3 rounded-[1.5rem] text-[10px] font-black uppercase tracking-widest transition-all flex flex-wrap items-center justify-center gap-1 ${
+              className={`flex flex-wrap-1 py-3 rounded-[1.5rem] text-xs sm:text-sm font-black uppercase tracking-widest transition-all flex flex-wrap items-center justify-center gap-1 ${
                 filter === f.id
                   ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-600/30'
                   : 'text-white/40 hover:text-white/70 hover:bg-white/5'
@@ -203,7 +203,7 @@ const CommunityMembers: React.FC = () => {
               )}
               {f.label}
               {f.count !== null && (
-                <span className={`text-[9px] font-black px-1 py-0 rounded-full ml-0.5 ${filter === f.id ? 'bg-white/20' : 'bg-emerald-500/20 text-emerald-400'}`}>
+                <span className={`text-xs font-black px-1 py-0 rounded-full ml-0.5 ${filter === f.id ? 'bg-white/20' : 'bg-emerald-500/20 text-emerald-400'}`}>
                   {f.count}
                 </span>
               )}
@@ -250,38 +250,38 @@ const CommunityMembers: React.FC = () => {
                             </span>
                           </Link>
                           {u.isPremium && (
-                            <span className="text-[10px] text-emerald-300 font-bold italic">
+                            <span className="text-xs sm:text-sm text-emerald-300 font-bold italic">
                               (Premium User!)
                             </span>
                           )}
-                          {u.isVerified && <span className="text-[10px]">✔️</span>}
+                          {u.isVerified && <span className="text-xs sm:text-sm">✔️</span>}
                           {(u.id === 'bot_chatgirl' || u.username === 'chatgirl' || u.userId === 1) && (
-                            <span className="text-[8px] bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest border border-purple-500/30">
+                            <span className="text-xs bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest border border-purple-500/30">
                               🤖 Bot
                             </span>
                           )}
                           {u.role === 'admin' && (
-                            <span className="text-[8px] bg-red-500/20 text-red-400 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest">
+                            <span className="text-xs bg-red-500/20 text-red-400 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest">
                               🛡️ Admin
                             </span>
                           )}
                           {u.role === 'moderator' && (
-                            <span className="text-[8px] bg-blue-500/20 text-blue-400 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest">
+                            <span className="text-xs bg-blue-500/20 text-blue-400 px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest">
                               🛡️ Mod
                             </span>
                           )}
                         </div>
 
                         {u.isOnline ? (
-                          <div className="text-[11px] text-white/70 font-semibold space-y-0.5 mt-1 font-mono">
+                          <div className="text-xs sm:text-sm text-white/70 font-semibold space-y-0.5 mt-1 font-mono">
                             <p><span className="text-white/40 font-bold">From:</span> {getCountryFlag(u.fromCountry)}</p>
                             <p><span className="text-white/40 font-bold">Where:</span> {((timeTick - (u.lastActiveTime || 0)) > 2 * 60 * 1000) ? 'Ghost Mode' : (u.currentLocation || 'Home Page')}</p>
                             <p><span className="text-white/40 font-bold">Idle For:</span> {formatIdleTime(u.lastActiveTime)}</p>
                           </div>
                         ) : (
                           <>
-                            <p className="text-[10px] text-purple-400/70 font-bold mt-0.5">@{u.username}</p>
-                            <p className="text-[9px] text-white/30 font-bold mt-1 uppercase tracking-wider">
+                            <p className="text-xs sm:text-sm text-purple-400/70 font-bold mt-0.5">@{u.username}</p>
+                            <p className="text-xs text-white/60 font-bold mt-1 uppercase tracking-wider">
                               Level {u.level} • {u.points} XP
                             </p>
                           </>
@@ -306,8 +306,8 @@ const CommunityMembers: React.FC = () => {
                 className="col-span-full py-20 text-center bg-[#1C1C2E] rounded-[2rem] border border-white/5"
               >
                 <span className="text-5xl block mb-4">👥</span>
-                <p className="text-sm font-black text-white/20 uppercase tracking-widest">No members found</p>
-                <p className="text-[10px] text-white/10 font-bold mt-1">Try searching another query</p>
+                <p className="text-sm font-black text-white/40 uppercase tracking-widest">No members found</p>
+                <p className="text-xs sm:text-sm text-white/10 font-bold mt-1">Try searching another query</p>
               </motion.div>
             )}
           </AnimatePresence>

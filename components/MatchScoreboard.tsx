@@ -44,7 +44,7 @@ export const MatchScoreboard: React.FC<{ matchData: MatchState }> = ({ matchData
           
           <div className="text-center flex flex-col items-center justify-center">
             <div className="text-xs font-black text-slate-500 italic mb-2">VS</div>
-            <div className="text-[10px] uppercase font-bold text-yellow-400 bg-yellow-900/30 px-2 py-0.5 rounded border border-yellow-700">
+            <div className="text-xs sm:text-sm uppercase font-bold text-yellow-400 bg-yellow-900/30 px-2 py-0.5 rounded border border-yellow-700">
               {matchData.battingTeam} Batting
             </div>
           </div>

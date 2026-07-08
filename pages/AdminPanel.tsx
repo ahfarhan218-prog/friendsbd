@@ -34,9 +34,9 @@ const StatCard: React.FC<{ icon: string; label: string; value: string | number; 
   <div className={`bg-[#1C1C2E] border border-white/5 rounded-2xl p-4 flex flex-wrap items-center gap-4`}>
     <div className={`w-12 h-12 rounded-2xl ${color} flex items-center justify-center text-2xl shrink-0`}>{icon}</div>
     <div className="min-w-0">
-      <p className="text-[9px] font-black text-white/30 uppercase tracking-widest">{label}</p>
+      <p className="text-xs font-black text-white/60 uppercase tracking-widest">{label}</p>
       <p className="text-xl font-black text-white">{value}</p>
-      {sub && <p className="text-[9px] text-emerald-400 font-bold mt-0.5">{sub}</p>}
+      {sub && <p className="text-xs text-emerald-400 font-bold mt-0.5">{sub}</p>}
     </div>
   </div>
 );
@@ -327,10 +327,10 @@ const AdminPanel: React.FC = () => {
                   <div className="w-9 h-9 bg-purple-600 rounded-xl flex items-center justify-center text-lg">🛡️</div>
                   <div>
                     <h2 className="text-sm font-black text-white">Admin Console</h2>
-                    <p className="text-[9px] text-purple-400/60 font-bold">FriendsBD • v5.0</p>
+                    <p className="text-xs text-purple-400/60 font-bold">FriendsBD • v5.0</p>
                   </div>
                 </div>
-                <p className="text-[9px] text-white/20 font-mono mt-3">{clock.toLocaleTimeString()}</p>
+                <p className="text-xs text-white/40 font-mono mt-3">{clock.toLocaleTimeString()}</p>
               </div>
               <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
                 {TABS.map(tab => (
@@ -341,18 +341,18 @@ const AdminPanel: React.FC = () => {
                     <span className="text-lg">{tab.icon}</span>
                     {tab.label}
                     {tab.id === 'users' && usersList.length > 0 && (
-                      <span className="ml-auto text-[8px] bg-white/10 px-2 py-0.5 rounded-full font-black">{usersList.length}</span>
+                      <span className="ml-auto text-xs bg-white/10 px-2 py-0.5 rounded-full font-black">{usersList.length}</span>
                     )}
                   </button>
                 ))}
               </nav>
               <div className="p-4 border-t border-white/5 space-y-2">
                 <div className={`flex items-center justify-between p-3 rounded-xl ${isLockdown ? 'bg-rose-500/20 border border-rose-500/30' : 'bg-white/5'}`}>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-rose-400">🔒 Lockdown</span>
+                  <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-rose-400">🔒 Lockdown</span>
                   <Toggle value={isLockdown} onChange={() => { setIsLockdown(!isLockdown); }} color="bg-rose-600" />
                 </div>
                 <div className={`flex items-center justify-between p-3 rounded-xl ${isMaintenance ? 'bg-amber-500/20 border border-amber-500/30' : 'bg-white/5'}`}>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-amber-400">🛠️ Maintenance</span>
+                  <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-amber-400">🛠️ Maintenance</span>
                   <Toggle value={isMaintenance} onChange={() => setIsMaintenance(!isMaintenance)} color="bg-amber-500" />
                 </div>
               </div>
@@ -380,9 +380,9 @@ const AdminPanel: React.FC = () => {
 
           {/* Quick status pills */}
           <div className="flex flex-wrap items-center gap-2">
-            {isLockdown && <span className="text-[8px] font-black uppercase bg-rose-500/20 text-rose-400 px-2 py-1 rounded-full border border-rose-500/30">🔒 LOCKDOWN</span>}
-            {isMaintenance && <span className="text-[8px] font-black uppercase bg-amber-500/20 text-amber-400 px-2 py-1 rounded-full border border-amber-500/30">🛠️ MAINT</span>}
-            <span className="text-[9px] font-mono text-white/20 hidden sm:block">{clock.toLocaleTimeString()}</span>
+            {isLockdown && <span className="text-xs font-black uppercase bg-rose-500/20 text-rose-400 px-2 py-1 rounded-full border border-rose-500/30">🔒 LOCKDOWN</span>}
+            {isMaintenance && <span className="text-xs font-black uppercase bg-amber-500/20 text-amber-400 px-2 py-1 rounded-full border border-amber-500/30">🛠️ MAINT</span>}
+            <span className="text-xs font-mono text-white/40 hidden sm:block">{clock.toLocaleTimeString()}</span>
           </div>
 
           <button onClick={() => navigate('/home')} className="w-10 h-10 bg-white/5 hover:bg-white/10 rounded-xl flex items-center justify-center active:scale-90 transition-all text-white/40 hover:text-white">
@@ -399,10 +399,10 @@ const AdminPanel: React.FC = () => {
               <motion.div key="dashboard" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-5">
 
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/5 pb-2">
-                  <h3 className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em]">📊 Overview Statistics</h3>
+                  <h3 className="text-xs sm:text-sm font-black text-white/60 uppercase tracking-[0.3em]">📊 Overview Statistics</h3>
                   <button
                     onClick={() => navigate('/admin/stats')}
-                    className="w-fit text-[10px] font-black uppercase tracking-widest text-indigo-400 hover:text-indigo-300 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1.5 rounded-xl transition-all active:scale-95 shadow-sm"
+                    className="w-fit text-xs sm:text-sm font-black uppercase tracking-widest text-indigo-400 hover:text-indigo-300 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1.5 rounded-xl transition-all active:scale-95 shadow-sm"
                   >
                     View Member Status Engine Stats →
                   </button>
@@ -415,7 +415,7 @@ const AdminPanel: React.FC = () => {
 
                 {/* Game Timers */}
                 <div className="bg-[#1C1C2E] border border-white/5 rounded-2xl p-4">
-                  <h3 className="text-[9px] font-black text-white/30 uppercase tracking-[0.3em] mb-3">🎮 Game Coin Timers</h3>
+                  <h3 className="text-xs font-black text-white/60 uppercase tracking-[0.3em] mb-3">🎮 Game Coin Timers</h3>
                   <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-3">
                     {[
                       { label: 'Gold Coin', value: goldTimeLeft, color: 'text-amber-400', bg: 'border-amber-500/20', type: 'gold' as const, inputVal: goldInput, setInputVal: setGoldInput },
@@ -424,19 +424,19 @@ const AdminPanel: React.FC = () => {
                     ].map(coin => (
                       <div key={coin.label} className={`bg-white/5 rounded-2xl p-4 text-center border ${coin.bg} flex flex-col justify-between`}>
                         <div>
-                          <p className="text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">{coin.label}</p>
+                          <p className="text-xs font-black text-white/60 uppercase tracking-widest mb-1">{coin.label}</p>
                           <p className={`text-2xl font-black font-mono ${coin.color} mb-2`}>{coin.value}</p>
                         </div>
                         <div className="space-y-2.5 mt-3">
                           <button onClick={() => handleDropCoin(coin.type)}
-                            className="w-full text-[9px] font-black uppercase tracking-widest bg-white/10 hover:bg-white/20 py-2 rounded-xl transition-all active:scale-90 border border-white/5">
+                            className="w-full text-xs font-black uppercase tracking-widest bg-white/10 hover:bg-white/20 py-2 rounded-xl transition-all active:scale-90 border border-white/5">
                             Force Drop
                           </button>
                           <div className="flex flex-wrap gap-1">
                             <input type="number" step="any" placeholder="Mins" value={coin.inputVal} onChange={e => coin.setInputVal(e.target.value)}
-                              className="w-[45%] bg-[#0f0f1a]/80 border border-white/10 rounded-lg text-[10px] text-center font-bold outline-none text-white focus:border-purple-500/50" />
+                              className="w-[45%] bg-[#0f0f1a]/80 border border-white/10 rounded-lg text-xs sm:text-sm text-center font-bold outline-none text-white focus:border-purple-500/50" />
                             <button onClick={() => handleSetSpawnTimer(coin.type, coin.inputVal)}
-                              className="flex-1 text-[8px] font-black uppercase tracking-widest bg-purple-600/30 hover:bg-purple-600/50 text-purple-300 py-2 rounded-xl transition-all active:scale-90 border border-purple-500/20">
+                              className="flex-1 text-xs font-black uppercase tracking-widest bg-purple-600/30 hover:bg-purple-600/50 text-purple-300 py-2 rounded-xl transition-all active:scale-90 border border-purple-500/20">
                               Set Timer
                             </button>
                           </div>
@@ -449,35 +449,35 @@ const AdminPanel: React.FC = () => {
                 {/* Traffic Chart */}
                 <div className="bg-[#1C1C2E] border border-white/5 rounded-2xl p-4">
                   <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-[9px] font-black text-white/30 uppercase tracking-[0.3em]">📈 Platform Traffic</h3>
-                    <span className="text-[8px] text-white/20 font-bold uppercase">Last 12 hours</span>
+                    <h3 className="text-xs font-black text-white/60 uppercase tracking-[0.3em]">📈 Platform Traffic</h3>
+                    <span className="text-xs text-white/40 font-bold uppercase">Last 12 hours</span>
                   </div>
                   <div className="h-32 flex flex-wrap items-end gap-1.5 border-b border-white/5 px-2 pb-0">
                     {[20,35,28,60,45,72,55,80,68,92,84,100].map((v, i) => (
                       <div key={i} className="group relative flex-1">
-                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-purple-600 text-white text-[8px] font-bold px-1 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">{v}%</div>
+                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-purple-600 text-white text-xs font-bold px-1 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">{v}%</div>
                         <div className="w-full bg-gradient-to-t from-purple-600/60 to-purple-400/60 rounded-t-lg transition-all hover:from-purple-500 hover:to-purple-300 cursor-pointer" style={{ height: `${v}%` }} />
                       </div>
                     ))}
                   </div>
                   <div className="flex justify-between pt-2 px-2">
                     {['12p','2a','4a','6a','8a','10a','12p','2p','4p','6p','8p','10p'].map(t => (
-                      <span key={t} className="text-[7px] text-white/20 font-mono">{t}</span>
+                      <span key={t} className="text-[7px] text-white/40 font-mono">{t}</span>
                     ))}
                   </div>
                 </div>
 
                 {/* Recent Activity */}
                 <div className="bg-[#1C1C2E] border border-white/5 rounded-2xl p-4">
-                  <h3 className="text-[9px] font-black text-white/30 uppercase tracking-[0.3em] mb-3">🕒 Recent Activity</h3>
+                  <h3 className="text-xs font-black text-white/60 uppercase tracking-[0.3em] mb-3">🕒 Recent Activity</h3>
                   <div className="space-y-2 max-h-48 overflow-y-auto">
                     {activities.slice(0, 8).map((act, i) => (
                       <div key={i} className="flex flex-wrap items-start gap-3 p-2.5 bg-white/5 rounded-xl">
-                        <span className="text-[9px] font-mono text-white/20 bg-white/5 px-2 py-1 rounded-lg shrink-0">{act.time}</span>
+                        <span className="text-xs font-mono text-white/40 bg-white/5 px-2 py-1 rounded-lg shrink-0">{act.time}</span>
                         <p className="text-xs text-white/50"><span className="font-black text-white/70">@{act.username}</span> {act.msg}</p>
                       </div>
                     ))}
-                    {activities.length === 0 && <p className="text-center text-white/20 text-xs py-6">No activity yet</p>}
+                    {activities.length === 0 && <p className="text-center text-white/40 text-xs py-6">No activity yet</p>}
                   </div>
                 </div>
               </motion.div>
@@ -490,12 +490,12 @@ const AdminPanel: React.FC = () => {
                 {/* Search + stats row */}
                 <div className="flex flex-wrap gap-3">
                   <div className="flex flex-wrap-1 bg-[#1C1C2E] border border-white/5 rounded-2xl px-4 flex flex-wrap items-center gap-2 focus-within:border-purple-500/40 transition-colors">
-                    <span className="text-white/30 text-sm">🔍</span>
+                    <span className="text-white/60 text-sm">🔍</span>
                     <input placeholder="Search users..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
                       className="flex-1 bg-transparent border-none text-sm text-white placeholder-white/20 py-3 outline-none font-medium" />
                   </div>
                   <div className="bg-[#1C1C2E] border border-white/5 rounded-2xl px-4 flex items-center text-center">
-                    <span className="text-xs font-black text-white">{usersList.length} <span className="text-white/30 font-bold">total</span></span>
+                    <span className="text-xs font-black text-white">{usersList.length} <span className="text-white/60 font-bold">total</span></span>
                   </div>
                 </div>
 
@@ -513,19 +513,19 @@ const AdminPanel: React.FC = () => {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-1.5 flex-wrap">
                           <span className="text-sm font-black text-white truncate">{u.name}</span>
-                          {u.isVerified && <span className="text-[9px] bg-blue-500/20 text-blue-400 px-1.5 py-0.5 rounded-full font-black">✔ Verified</span>}
-                          {u.isPremium && <span className="text-[9px] bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded-full font-black">👑</span>}
-                          {bannedUsers.includes(u.id) && <span className="text-[9px] bg-rose-500/20 text-rose-400 px-1.5 py-0.5 rounded-full font-black">🚫 BANNED</span>}
-                          {(u as any).isShadowBanned && <span className="text-[9px] bg-purple-500/20 text-purple-400 px-1.5 py-0.5 rounded-full font-black">👻</span>}
+                          {u.isVerified && <span className="text-xs bg-blue-500/20 text-blue-400 px-1.5 py-0.5 rounded-full font-black">✔ Verified</span>}
+                          {u.isPremium && <span className="text-xs bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded-full font-black">👑</span>}
+                          {bannedUsers.includes(u.id) && <span className="text-xs bg-rose-500/20 text-rose-400 px-1.5 py-0.5 rounded-full font-black">🚫 BANNED</span>}
+                          {(u as any).isShadowBanned && <span className="text-xs bg-purple-500/20 text-purple-400 px-1.5 py-0.5 rounded-full font-black">👻</span>}
                         </div>
-                        <p className="text-[9px] text-white/30 font-bold mt-0.5">#{(u as any).userId} · @{u.username} · {u.points || 0} pts · Lv.{u.level || 1} · RP: {(u as any).reputation_points || 0} · 🥇: {(u as any).goldenCoins || 0}</p>
+                        <p className="text-xs text-white/60 font-bold mt-0.5">#{(u as any).userId} · @{u.username} · {u.points || 0} pts · Lv.{u.level || 1} · RP: {(u as any).reputation_points || 0} · 🥇: {(u as any).goldenCoins || 0}</p>
                       </div>
 
                       {/* Actions */}
                       <div className="flex items-center gap-1.5 shrink-0 flex-wrap justify-end">
                         {/* Role selector */}
                         <select value={u.role || 'user'} onChange={e => handleUpdateRole(u.id, e.target.value)}
-                          className="bg-white/5 border border-white/10 rounded-lg text-[9px] font-black text-white/60 py-1.5 px-2 outline-none cursor-pointer appearance-none">
+                          className="bg-white/5 border border-white/10 rounded-lg text-xs font-black text-white/60 py-1.5 px-2 outline-none cursor-pointer appearance-none">
                           {ROLES.map(r => <option key={r} value={r} className="bg-[#1C1C2E]">{r}</option>)}
                         </select>
 
@@ -547,7 +547,7 @@ const AdminPanel: React.FC = () => {
                     </div>
                   ))}
                   {filteredUsers.length === 0 && (
-                    <div className="py-16 text-center text-white/20 text-sm font-bold">No users found.</div>
+                    <div className="py-16 text-center text-white/40 text-sm font-bold">No users found.</div>
                   )}
                 </div>
               </motion.div>
@@ -557,8 +557,8 @@ const AdminPanel: React.FC = () => {
             {activeTab === 'shouts' && (
               <motion.div key="shouts" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <p className="text-[10px] text-white/30 font-bold uppercase tracking-widest">{shouts.length} total shouts</p>
-                  <button onClick={handleClearAllShouts} className="text-[9px] font-black uppercase tracking-widest text-rose-400 bg-rose-400/10 border border-rose-400/20 px-4 py-2 rounded-xl hover:bg-rose-400/20 active:scale-90 transition-all">
+                  <p className="text-xs sm:text-sm text-white/60 font-bold uppercase tracking-widest">{shouts.length} total shouts</p>
+                  <button onClick={handleClearAllShouts} className="text-xs font-black uppercase tracking-widest text-rose-400 bg-rose-400/10 border border-rose-400/20 px-4 py-2 rounded-xl hover:bg-rose-400/20 active:scale-90 transition-all">
                     🗑️ Clear All
                   </button>
                 </div>
@@ -569,25 +569,25 @@ const AdminPanel: React.FC = () => {
                         <img src={shout.avatar} className="w-8 h-8 rounded-xl object-cover shrink-0" alt="" />
                         <div className="flex-1 min-w-0">
                           <p className="text-xs font-black text-white">{shout.user}</p>
-                          <p className="text-[9px] text-white/30 font-bold">{shout.time}</p>
+                          <p className="text-xs text-white/60 font-bold">{shout.time}</p>
                         </div>
-                        {shout.isPinned && <span className="text-[8px] font-black text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded-full border border-amber-400/20">📌 Pinned</span>}
+                        {shout.isPinned && <span className="text-xs font-black text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded-full border border-amber-400/20">📌 Pinned</span>}
                         <div className="flex flex-wrap gap-1.5 shrink-0">
                           <button onClick={() => handleTogglePinShout(shout.id)}
-                            className={`px-3 py-1.5 rounded-xl text-[9px] font-black uppercase transition-all active:scale-90 ${shout.isPinned ? 'bg-amber-400/20 text-amber-400 border border-amber-400/30' : 'bg-white/5 text-white/40 hover:bg-white/10'}`}>
+                            className={`px-3 py-1.5 rounded-xl text-xs font-black uppercase transition-all active:scale-90 ${shout.isPinned ? 'bg-amber-400/20 text-amber-400 border border-amber-400/30' : 'bg-white/5 text-white/40 hover:bg-white/10'}`}>
                             {shout.isPinned ? 'Unpin' : 'Pin'}
                           </button>
                           <button onClick={() => handleDeleteShout(shout.id)}
-                            className="px-3 py-1.5 rounded-xl text-[9px] font-black uppercase bg-rose-500/20 text-rose-400 border border-rose-500/20 hover:bg-rose-500/30 active:scale-90 transition-all">
+                            className="px-3 py-1.5 rounded-xl text-xs font-black uppercase bg-rose-500/20 text-rose-400 border border-rose-500/20 hover:bg-rose-500/30 active:scale-90 transition-all">
                             Delete
                           </button>
                         </div>
                       </div>
                       <p className="text-sm text-white/60 font-medium leading-relaxed">{shout.content}</p>
-                      <p className="text-[9px] text-white/20 font-bold mt-2">{Object.keys(shout.userReactions || {}).length} reactions · {(shout.replies || []).length} replies</p>
+                      <p className="text-xs text-white/40 font-bold mt-2">{Object.keys(shout.userReactions || {}).length} reactions · {(shout.replies || []).length} replies</p>
                     </div>
                   ))}
-                  {shouts.length === 0 && <div className="py-16 text-center text-white/20 text-sm font-bold">No shouts.</div>}
+                  {shouts.length === 0 && <div className="py-16 text-center text-white/40 text-sm font-bold">No shouts.</div>}
                 </div>
               </motion.div>
             )}
@@ -596,9 +596,9 @@ const AdminPanel: React.FC = () => {
             {activeTab === 'forum' && (
               <motion.div key="forum" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <p className="text-[10px] text-white/30 font-bold uppercase tracking-widest">{categories.length} categories</p>
+                  <p className="text-xs sm:text-sm text-white/60 font-bold uppercase tracking-widest">{categories.length} categories</p>
                   <button onClick={() => { setShowCatForm(true); setEditingCategory(null); setCatFormData({ name: '', slug: '', description: '', icon: '💬', color: 'bg-purple-600', isHidden: false, allowedRoles: ROLES }); }}
-                    className="flex flex-wrap items-center gap-2 bg-purple-600 hover:bg-purple-500 text-white text-[10px] font-black uppercase tracking-widest px-4 py-2.5 rounded-xl active:scale-90 transition-all">
+                    className="flex flex-wrap items-center gap-2 bg-purple-600 hover:bg-purple-500 text-white text-xs sm:text-sm font-black uppercase tracking-widest px-4 py-2.5 rounded-xl active:scale-90 transition-all">
                     + New Category
                   </button>
                 </div>
@@ -623,19 +623,19 @@ const AdminPanel: React.FC = () => {
                         <Toggle value={!!catFormData.isHidden} onChange={() => setCatFormData({ ...catFormData, isHidden: !catFormData.isHidden })} />
                       </div>
                       <div>
-                        <p className="text-[9px] font-black text-white/30 uppercase tracking-widest mb-2">Allowed Roles</p>
+                        <p className="text-xs font-black text-white/60 uppercase tracking-widest mb-2">Allowed Roles</p>
                         <div className="flex flex-wrap gap-2">
                           {ROLES.map(r => (
                             <button key={r} onClick={() => setCatFormData(prev => ({ ...prev, allowedRoles: prev.allowedRoles?.includes(r) ? prev.allowedRoles.filter(x => x !== r) : [...(prev.allowedRoles || []), r] }))}
-                              className={`px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all ${catFormData.allowedRoles?.includes(r) ? 'bg-purple-600 text-white' : 'bg-white/5 text-white/30 hover:bg-white/10'}`}>
+                              className={`px-3 py-1.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${catFormData.allowedRoles?.includes(r) ? 'bg-purple-600 text-white' : 'bg-white/5 text-white/60 hover:bg-white/10'}`}>
                               {r}
                             </button>
                           ))}
                         </div>
                       </div>
                       <div className="flex flex-wrap gap-2">
-                        <button onClick={handleSaveCategory} className="flex-1 bg-purple-600 hover:bg-purple-500 text-white py-3 rounded-xl text-[10px] font-black uppercase tracking-widest active:scale-95 transition-all">Save</button>
-                        <button onClick={() => setShowCatForm(false)} className="px-6 bg-white/5 text-white/40 py-3 rounded-xl text-[10px] font-black uppercase hover:bg-white/10 transition-all">Cancel</button>
+                        <button onClick={handleSaveCategory} className="flex-1 bg-purple-600 hover:bg-purple-500 text-white py-3 rounded-xl text-xs sm:text-sm font-black uppercase tracking-widest active:scale-95 transition-all">Save</button>
+                        <button onClick={() => setShowCatForm(false)} className="px-6 bg-white/5 text-white/40 py-3 rounded-xl text-xs sm:text-sm font-black uppercase hover:bg-white/10 transition-all">Cancel</button>
                       </div>
                     </motion.div>
                   )}
@@ -649,9 +649,9 @@ const AdminPanel: React.FC = () => {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
                           <h4 className="text-sm font-black text-white">{cat.name}</h4>
-                          {cat.isHidden && <span className="text-[8px] font-black text-white/30 bg-white/5 px-1.5 py-0.5 rounded-full uppercase">Hidden</span>}
+                          {cat.isHidden && <span className="text-xs font-black text-white/60 bg-white/5 px-1.5 py-0.5 rounded-full uppercase">Hidden</span>}
                         </div>
-                        <p className="text-[9px] text-white/30 font-bold">{cat.allowedRoles?.join(', ') || 'Public'}</p>
+                        <p className="text-xs text-white/60 font-bold">{cat.allowedRoles?.join(', ') || 'Public'}</p>
                       </div>
                       <div className="flex flex-wrap gap-2 shrink-0">
                         <button onClick={() => { setEditingCategory(cat); setCatFormData({ name: cat.name, slug: cat.slug, description: cat.description, icon: cat.icon, color: cat.color, isHidden: cat.isHidden, allowedRoles: cat.allowedRoles || [] }); setShowCatForm(true); }}
@@ -661,7 +661,7 @@ const AdminPanel: React.FC = () => {
                       </div>
                     </div>
                   ))}
-                  {categories.length === 0 && <div className="py-16 text-center text-white/20 text-sm font-bold">No categories yet.</div>}
+                  {categories.length === 0 && <div className="py-16 text-center text-white/40 text-sm font-bold">No categories yet.</div>}
                 </div>
               </motion.div>
             )}
@@ -675,7 +675,7 @@ const AdminPanel: React.FC = () => {
                   <textarea value={broadcastMsg} onChange={e => setBroadcastMsg(e.target.value)} className={inputCls + ' resize-none h-28'} placeholder="Message body..." />
                   <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3">
                     <div>
-                      <p className="text-[9px] font-black text-white/30 uppercase tracking-widest mb-2">Target Audience</p>
+                      <p className="text-xs font-black text-white/60 uppercase tracking-widest mb-2">Target Audience</p>
                       <select value={broadcastTarget} onChange={e => setBroadcastTarget(e.target.value)}
                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white outline-none appearance-none cursor-pointer">
                         <option value="all" className="bg-[#1C1C2E]">All Users</option>
@@ -686,7 +686,7 @@ const AdminPanel: React.FC = () => {
                     </div>
                     <div className="flex items-end">
                       <button onClick={handleSendBroadcast} disabled={!broadcastTitle.trim() || !broadcastMsg.trim()}
-                        className="w-full flex flex-wrap items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 disabled:opacity-30 text-white font-black text-[10px] uppercase tracking-widest py-3 rounded-xl shadow-lg shadow-purple-900/30 active:scale-95 transition-all">
+                        className="w-full flex flex-wrap items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 disabled:opacity-30 text-white font-black text-xs sm:text-sm uppercase tracking-widest py-3 rounded-xl shadow-lg shadow-purple-900/30 active:scale-95 transition-all">
                         📡 Send Broadcast
                       </button>
                     </div>
@@ -697,7 +697,7 @@ const AdminPanel: React.FC = () => {
                 <div className="bg-[#1C1C2E] border border-white/5 rounded-2xl p-5 space-y-3">
                   <h3 className="text-sm font-black text-white">📢 Site Announcement Ticker</h3>
                   <textarea value={announcement} onChange={e => setAnnouncement(e.target.value)} className={inputCls + ' resize-none h-20'} placeholder="Announcement text for marquee ticker..." />
-                  <button onClick={handleUpdateConfig} className="w-full bg-purple-600 hover:bg-purple-500 text-white font-black text-[10px] uppercase tracking-widest py-3 rounded-xl active:scale-95 transition-all">
+                  <button onClick={handleUpdateConfig} className="w-full bg-purple-600 hover:bg-purple-500 text-white font-black text-xs sm:text-sm uppercase tracking-widest py-3 rounded-xl active:scale-95 transition-all">
                     Update Announcement
                   </button>
                 </div>
@@ -718,7 +718,7 @@ const AdminPanel: React.FC = () => {
                         <span className="text-3xl">{g.icon}</span>
                         <div>
                           <h4 className="text-sm font-black text-white">{g.label} Game</h4>
-                          <p className={`text-[9px] font-black text-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-400 uppercase tracking-widest`}>Next drop: {g.timer}</p>
+                          <p className={`text-xs font-black text-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-400 uppercase tracking-widest`}>Next drop: {g.timer}</p>
                         </div>
                       </div>
                       <div className={`text-2xl font-black font-mono text-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-400`}>{g.timer}</div>
@@ -726,11 +726,11 @@ const AdminPanel: React.FC = () => {
                     <div className="space-y-3">
                       <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3">
                         <button onClick={() => handleDropCoin(g.type)}
-                          className={`py-3 bg-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-500/20 border border-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-500/30 text-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-400 font-black text-[10px] uppercase tracking-widest rounded-xl hover:bg-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-500/30 active:scale-95 transition-all`}>
+                          className={`py-3 bg-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-500/20 border border-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-500/30 text-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-400 font-black text-xs sm:text-sm uppercase tracking-widest rounded-xl hover:bg-${g.type === 'gold' ? 'amber' : g.type === 'silver' ? 'slate' : 'rose'}-500/30 active:scale-95 transition-all`}>
                           🪙 Force Drop
                         </button>
                         <button onClick={() => toast(`${g.label} game ended.`)}
-                          className="py-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 font-black text-[10px] uppercase tracking-widest rounded-xl hover:bg-rose-500/20 active:scale-95 transition-all">
+                          className="py-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 font-black text-xs sm:text-sm uppercase tracking-widest rounded-xl hover:bg-rose-500/20 active:scale-95 transition-all">
                           🛑 End Game
                         </button>
                       </div>
@@ -739,7 +739,7 @@ const AdminPanel: React.FC = () => {
                         <input type="number" step="any" placeholder="Enter minutes (e.g. 0.5)" value={g.inputVal} onChange={e => g.setInputVal(e.target.value)}
                           className="flex-1 bg-white/5 border border-white/10 rounded-lg text-xs py-1.5 px-3 outline-none text-white focus:border-purple-500/50" />
                         <button onClick={() => handleSetSpawnTimer(g.type, g.inputVal)}
-                          className="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white text-[9px] font-black uppercase tracking-widest rounded-lg transition-all active:scale-95">
+                          className="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white text-xs font-black uppercase tracking-widest rounded-lg transition-all active:scale-95">
                           Apply
                         </button>
                       </div>
@@ -756,11 +756,11 @@ const AdminPanel: React.FC = () => {
                         <span className="text-sm font-black text-white/40 w-5">#{i + 1}</span>
                         <img src={u.avatar} className="w-7 h-7 rounded-lg object-cover shrink-0" alt="" />
                         <span className="text-xs font-black text-white flex-1">{u.name}</span>
-                        <span className="text-[10px] font-black text-amber-400">🥇 {(u as any).goldenCoins || 0}</span>
-                        <span className="text-[10px] font-black text-slate-400">🥈 {(u as any).silverPoints || 0}</span>
+                        <span className="text-xs sm:text-sm font-black text-amber-400">🥇 {(u as any).goldenCoins || 0}</span>
+                        <span className="text-xs sm:text-sm font-black text-slate-400">🥈 {(u as any).silverPoints || 0}</span>
                       </div>
                     ))}
-                    {usersList.length === 0 && <p className="text-center text-white/20 text-xs py-4">No data</p>}
+                    {usersList.length === 0 && <p className="text-center text-white/40 text-xs py-4">No data</p>}
                   </div>
                 </div>
               </motion.div>
@@ -780,13 +780,13 @@ const AdminPanel: React.FC = () => {
                     <div key={item.label} className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/5">
                       <div>
                         <p className="text-sm font-black text-white">{item.label}</p>
-                        <p className="text-[9px] text-white/30 font-bold mt-0.5">{item.sub}</p>
+                        <p className="text-xs text-white/60 font-bold mt-0.5">{item.sub}</p>
                       </div>
                       <Toggle value={item.value} onChange={item.onChange} color={item.color} />
                     </div>
                   ))}
                   <button onClick={handleUpdateConfig}
-                    className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-black text-[10px] uppercase tracking-widest py-3.5 rounded-xl shadow-lg shadow-purple-900/30 active:scale-95 transition-all">
+                    className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-black text-xs sm:text-sm uppercase tracking-widest py-3.5 rounded-xl shadow-lg shadow-purple-900/30 active:scale-95 transition-all">
                     💾 Save & Broadcast Changes
                   </button>
                 </div>
@@ -797,20 +797,20 @@ const AdminPanel: React.FC = () => {
                     <h3 className="text-sm font-black text-amber-400">🚨 Reports Queue</h3>
                     <button onClick={async () => {
                       try { const r = await fetch(`${API_BASE}/reports?status=pending`); if (r.ok) { const reports = await r.json(); localStorage.setItem('friends_bd_reports', JSON.stringify(reports)); toast(`📋 ${reports.length} pending reports`); } } catch {}
-                    }} className="text-[9px] font-bold text-amber-400/60 hover:text-amber-300 uppercase tracking-widest">Refresh</button>
+                    }} className="text-xs font-bold text-amber-400/60 hover:text-amber-300 uppercase tracking-widest">Refresh</button>
                   </div>
                   {(() => {
                     const reports = JSON.parse(localStorage.getItem('friends_bd_reports') || '[]');
-                    if (reports.length === 0) return <p className="text-xs text-white/30 text-center py-4">No pending reports</p>;
+                    if (reports.length === 0) return <p className="text-xs text-white/60 text-center py-4">No pending reports</p>;
                     return reports.slice(0, 5).map((r: any) => (
                       <div key={r.id} className="flex items-center justify-between p-3 bg-amber-500/5 rounded-xl border border-amber-500/10">
                         <div className="min-w-0">
                           <p className="text-xs font-bold text-white truncate">Report: {r.reason}</p>
-                          <p className="text-[9px] text-white/30">Target: {r.targetName || r.targetId} · by {r.reporterName}</p>
+                          <p className="text-xs text-white/60">Target: {r.targetName || r.targetId} · by {r.reporterName}</p>
                         </div>
                         <div className="flex flex-wrap gap-1 shrink-0">
-                          <button onClick={async () => { try { await fetch(`${API_BASE}/reports/${r.id}`, { method:'PATCH', headers:{'Content-Type':'application/json'}, body:JSON.stringify({status:'resolved', resolvedBy:'admin'}) }); const s=JSON.parse(localStorage.getItem('friends_bd_reports')||'[]'); localStorage.setItem('friends_bd_reports', JSON.stringify(s.filter((x:any)=>x.id!==r.id))); toast('✅ Resolved'); } catch{} }} className="px-2 py-1 bg-emerald-500/20 text-emerald-400 text-[8px] font-black rounded-lg">✅</button>
-                          <button onClick={async () => { try { await fetch(`${API_BASE}/reports/${r.id}`, { method:'PATCH', headers:{'Content-Type':'application/json'}, body:JSON.stringify({status:'dismissed', resolvedBy:'admin'}) }); const s=JSON.parse(localStorage.getItem('friends_bd_reports')||'[]'); localStorage.setItem('friends_bd_reports', JSON.stringify(s.filter((x:any)=>x.id!==r.id))); toast('⛔ Dismissed'); } catch{} }} className="px-2 py-1 bg-rose-500/20 text-rose-400 text-[8px] font-black rounded-lg">⛔</button>
+                          <button onClick={async () => { try { await fetch(`${API_BASE}/reports/${r.id}`, { method:'PATCH', headers:{'Content-Type':'application/json'}, body:JSON.stringify({status:'resolved', resolvedBy:'admin'}) }); const s=JSON.parse(localStorage.getItem('friends_bd_reports')||'[]'); localStorage.setItem('friends_bd_reports', JSON.stringify(s.filter((x:any)=>x.id!==r.id))); toast('✅ Resolved'); } catch{} }} className="px-2 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-black rounded-lg">✅</button>
+                          <button onClick={async () => { try { await fetch(`${API_BASE}/reports/${r.id}`, { method:'PATCH', headers:{'Content-Type':'application/json'}, body:JSON.stringify({status:'dismissed', resolvedBy:'admin'}) }); const s=JSON.parse(localStorage.getItem('friends_bd_reports')||'[]'); localStorage.setItem('friends_bd_reports', JSON.stringify(s.filter((x:any)=>x.id!==r.id))); toast('⛔ Dismissed'); } catch{} }} className="px-2 py-1 bg-rose-500/20 text-rose-400 text-xs font-black rounded-lg">⛔</button>
                         </div>
                       </div>
                     ));
@@ -828,9 +828,9 @@ const AdminPanel: React.FC = () => {
                     <div key={item.label} className="flex items-center justify-between p-4 bg-rose-500/5 rounded-xl border border-rose-500/10">
                       <div>
                         <p className="text-xs font-black text-white">{item.icon} {item.label}</p>
-                        <p className="text-[9px] text-white/30 font-bold">{item.sub}</p>
+                        <p className="text-xs text-white/60 font-bold">{item.sub}</p>
                       </div>
-                      <button onClick={item.action} className="px-4 py-2 bg-rose-500/20 text-rose-400 text-[9px] font-black uppercase tracking-widest rounded-xl hover:bg-rose-500/30 border border-rose-500/20 active:scale-90 transition-all">
+                      <button onClick={item.action} className="px-4 py-2 bg-rose-500/20 text-rose-400 text-xs font-black uppercase tracking-widest rounded-xl hover:bg-rose-500/30 border border-rose-500/20 active:scale-90 transition-all">
                         Execute
                       </button>
                     </div>
@@ -850,7 +850,7 @@ const AdminPanel: React.FC = () => {
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                         <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
                       </span>
-                      <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Live System Logs</span>
+                      <span className="text-xs sm:text-sm font-black text-white/40 uppercase tracking-widest">Live System Logs</span>
                     </div>
                     <div className="flex flex-wrap gap-1.5">
                       {['bg-rose-500', 'bg-amber-500', 'bg-emerald-500'].map(c => <div key={c} className={`w-2 h-2 rounded-full ${c}`} />)}
@@ -858,13 +858,13 @@ const AdminPanel: React.FC = () => {
                   </div>
                   <div className="p-4 space-y-1.5 h-52 overflow-y-auto font-mono">
                     {logs.map(log => (
-                      <div key={log.id} className="text-[10px] flex flex-wrap items-start gap-2">
-                        <span className="text-white/20 shrink-0">[{log.time}]</span>
+                      <div key={log.id} className="text-xs sm:text-sm flex flex-wrap items-start gap-2">
+                        <span className="text-white/40 shrink-0">[{log.time}]</span>
                         <span className={`font-black shrink-0 ${log.type === 'WARN' ? 'text-amber-400' : log.type === 'DANGER' ? 'text-rose-400' : log.type === 'SUCCESS' ? 'text-emerald-400' : 'text-purple-400'}`}>{log.type}:</span>
                         <span className="text-white/50">{log.msg}</span>
                       </div>
                     ))}
-                    {logs.length === 0 && <p className="text-white/20 text-xs">Waiting for events...</p>}
+                    {logs.length === 0 && <p className="text-white/40 text-xs">Waiting for events...</p>}
                     <div ref={logEndRef} />
                   </div>
                 </div>
@@ -872,13 +872,13 @@ const AdminPanel: React.FC = () => {
                 {/* Admin Action Logs */}
                 <div className="bg-[#1C1C2E] border border-white/5 rounded-2xl p-4">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-[9px] font-black text-white/30 uppercase tracking-[0.3em]">🗑️ Deleted Shout Logs</h3>
-                    <span className="text-[9px] text-white/20 font-mono">{adminLogs.filter(l => l.action === 'SHOUT_DELETED').length} entries</span>
+                    <h3 className="text-xs font-black text-white/60 uppercase tracking-[0.3em]">🗑️ Deleted Shout Logs</h3>
+                    <span className="text-xs text-white/40 font-mono">{adminLogs.filter(l => l.action === 'SHOUT_DELETED').length} entries</span>
                   </div>
                   <div className="space-y-2 max-h-64 overflow-y-auto">
                     {adminLogs.filter(l => l.action === 'SHOUT_DELETED').length > 0 ? adminLogs.filter(l => l.action === 'SHOUT_DELETED').map((log, i) => (
                       <div key={log.id || i} className="flex flex-wrap items-start gap-3 p-3 bg-rose-500/5 rounded-xl hover:bg-rose-500/10 transition-colors border border-rose-500/10">
-                        <span className="text-[9px] font-mono text-rose-400/60 bg-rose-500/10 px-2 py-1 rounded-lg shrink-0 mt-0.5">{new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        <span className="text-xs font-mono text-rose-400/60 bg-rose-500/10 px-2 py-1 rounded-lg shrink-0 mt-0.5">{new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                         <div className="flex-1 min-w-0">
                           <p className="text-xs text-rose-300/70 leading-relaxed">
                             <span className="font-black text-rose-400">{log.deletedByName}</span> deleted {log.details}
@@ -886,24 +886,24 @@ const AdminPanel: React.FC = () => {
                         </div>
                       </div>
                     )) : (
-                      <p className="text-center text-white/20 text-xs py-8">No deletion logs yet.</p>
+                      <p className="text-center text-white/40 text-xs py-8">No deletion logs yet.</p>
                     )}
                   </div>
                 </div>
 
                 {/* User activity logs */}
                 <div className="bg-[#1C1C2E] border border-white/5 rounded-2xl p-4">
-                  <h3 className="text-[9px] font-black text-white/30 uppercase tracking-[0.3em] mb-3">👤 User Activity</h3>
+                  <h3 className="text-xs font-black text-white/60 uppercase tracking-[0.3em] mb-3">👤 User Activity</h3>
                   <div className="space-y-2 max-h-64 overflow-y-auto">
                     {activities.length > 0 ? activities.map((act, i) => (
                       <div key={i} className="flex flex-wrap items-start gap-3 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
-                        <span className="text-[9px] font-mono text-white/20 bg-white/5 px-2 py-1 rounded-lg shrink-0 mt-0.5">{act.time}</span>
+                        <span className="text-xs font-mono text-white/40 bg-white/5 px-2 py-1 rounded-lg shrink-0 mt-0.5">{act.time}</span>
                         <p className="text-xs text-white/50 leading-relaxed">
                           <span className="font-black text-white/70">@{act.username}</span> {act.msg}
                         </p>
                       </div>
                     )) : (
-                      <p className="text-center text-white/20 text-xs py-8">No activity logged yet.</p>
+                      <p className="text-center text-white/40 text-xs py-8">No activity logged yet.</p>
                     )}
                   </div>
                 </div>
@@ -927,7 +927,7 @@ const AdminPanel: React.FC = () => {
                 <img src={editingUser.avatar} className="w-12 h-12 rounded-2xl object-cover border-2 border-purple-500/30" alt="" />
                 <div>
                   <h3 className="text-sm font-black text-white">{editingUser.name}</h3>
-                  <p className="text-[10px] text-purple-400/60 font-bold">@{editingUser.username}</p>
+                  <p className="text-xs sm:text-sm text-purple-400/60 font-bold">@{editingUser.username}</p>
                 </div>
               </div>
               <div className="flex-1 overflow-y-auto pr-2 space-y-4">
@@ -948,14 +948,14 @@ const AdminPanel: React.FC = () => {
                   { label: 'Total AP',     key: 'totalAp',      type: 'number' },
                 ].map(field => (
                   <div key={field.key}>
-                    <label className="text-[9px] font-black text-white/30 uppercase tracking-widest block mb-1">{field.label}</label>
+                    <label className="text-xs font-black text-white/60 uppercase tracking-widest block mb-1">{field.label}</label>
                     <input type={field.type} value={(editingUser as any)[field.key] || 0}
                       onChange={e => setEditingUser({ ...editingUser, [field.key]: parseInt(e.target.value) || 0 } as User)}
                       className={inputCls} />
                   </div>
                 ))}
                 <div>
-                  <label className="text-[9px] font-black text-white/30 uppercase tracking-widest block mb-1">Role</label>
+                  <label className="text-xs font-black text-white/60 uppercase tracking-widest block mb-1">Role</label>
                   <select value={editingUser.role || 'user'} onChange={e => setEditingUser({ ...editingUser, role: e.target.value as any })}
                     className={inputCls + ' appearance-none cursor-pointer'}>
                     {ROLES.map(r => <option key={r} value={r} className="bg-[#1C1C2E]">{r}</option>)}
@@ -974,8 +974,8 @@ const AdminPanel: React.FC = () => {
                 </div>
               </div>
               <div className="flex flex-wrap gap-2 mt-5 pt-4 border-t border-white/5 shrink-0">
-                <button onClick={handleSaveUserStats} className="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-xl text-[10px] font-black uppercase tracking-widest active:scale-95 transition-all">Save Changes</button>
-                <button onClick={() => setEditingUser(null)} className="px-6 bg-white/5 text-white/40 py-3 rounded-xl text-[10px] font-black uppercase hover:bg-white/10 transition-all">Cancel</button>
+                <button onClick={handleSaveUserStats} className="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-xl text-xs sm:text-sm font-black uppercase tracking-widest active:scale-95 transition-all">Save Changes</button>
+                <button onClick={() => setEditingUser(null)} className="px-6 bg-white/5 text-white/40 py-3 rounded-xl text-xs sm:text-sm font-black uppercase hover:bg-white/10 transition-all">Cancel</button>
               </div>
               </motion.div>
             </div>

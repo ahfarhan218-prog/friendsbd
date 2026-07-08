@@ -128,13 +128,13 @@ const Shop: React.FC = () => {
             </svg>
           </button>
           <div>
-            <span className="text-[9px] font-black text-purple-400 uppercase tracking-[0.3em] block mb-0.5">Gift Shop</span>
+            <span className="text-xs font-black text-purple-400 uppercase tracking-[0.3em] block mb-0.5">Gift Shop</span>
             <h1 className="text-lg font-black text-white tracking-tight">Virtual items</h1>
           </div>
         </div>
         <div className="bg-[#121824] border border-[#1f293d] px-4 py-2 rounded-2xl text-right flex flex-wrap items-center gap-3">
           <div>
-            <span className="text-[8px] text-slate-500 font-bold uppercase block tracking-wider">Your Points</span>
+            <span className="text-xs text-slate-500 font-bold uppercase block tracking-wider">Your Points</span>
             <span className="text-sm font-black text-yellow-400 font-mono">{activeUser.points || 0} pts</span>
           </div>
         </div>
@@ -151,7 +151,7 @@ const Shop: React.FC = () => {
               <div className="w-16 h-16 rounded-2xl bg-[#090d16] border border-[#1f293d] flex items-center justify-center text-4xl mb-4 group-hover:scale-110 transition-transform">
                 {item.icon}
               </div>
-              <p className="text-[9px] font-black text-purple-400 uppercase tracking-widest mb-1">
+              <p className="text-xs font-black text-purple-400 uppercase tracking-widest mb-1">
                 {item.type}
               </p>
               <h4 className="font-black text-white text-xs mb-4">
@@ -160,7 +160,7 @@ const Shop: React.FC = () => {
               <button
                 onClick={() => handleBuy(item)}
                 disabled={isBuying !== null}
-                className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-[10px] font-black py-3 rounded-xl transition-all active:scale-95 shadow-md shadow-purple-900/10 flex flex-wrap items-center justify-center gap-1.5 disabled:opacity-50"
+                className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs sm:text-sm font-black py-3 rounded-xl transition-all active:scale-95 shadow-md shadow-purple-900/10 flex flex-wrap items-center justify-center gap-1.5 disabled:opacity-50"
               >
                 {isBuying === item.name ? (
                   <div className="w-3 h-3 border-2 border-white/20 border-t-white rounded-full animate-spin" />

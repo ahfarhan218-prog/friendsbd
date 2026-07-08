@@ -87,7 +87,7 @@ const SilverCoinGame: React.FC = () => {
            </button>
            <div className="text-center">
              <h2 className="text-2xl font-black uppercase tracking-tighter italic text-transparent bg-clip-text bg-gradient-to-r from-slate-300 to-cyan-300 drop-shadow-[0_0_10px_rgba(34,211,238,0.3)]">Silver Rush</h2>
-             <p className="text-[8px] font-black uppercase tracking-widest text-slate-400">High Frequency Event</p>
+             <p className="text-xs font-black uppercase tracking-widest text-slate-400">High Frequency Event</p>
            </div>
            <Link to="/silver-leaderboard" className="p-3 bg-white/5 text-cyan-300 rounded-2xl active:scale-90 border border-white/10 hover:bg-white/10 hover:border-cyan-400/30 transition-all shadow-lg">
               <span className="text-sm font-black">🥈</span>
@@ -154,18 +154,18 @@ const SilverCoinGame: React.FC = () => {
                         <img src={w.avatar} className="w-9 h-9 rounded-xl border border-white/10 shadow-sm group-hover:scale-105 group-hover:border-cyan-500/50 transition-transform object-cover" alt="" />
                         <div>
                            <p className="text-xs font-black text-white group-hover:text-cyan-300 transition-colors">{w.username}</p>
-                           <p className="text-[8px] font-bold text-slate-500 uppercase">
+                           <p className="text-xs font-bold text-slate-500 uppercase">
                               Claimed in {(w.grabTime/1000).toFixed(2)}s
                            </p>
                         </div>
                      </div>
                      <div className="flex flex-col items-end gap-1">
-                        <span className="text-[10px] font-black text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 rounded-lg shadow-[0_0_10px_rgba(34,211,238,0.1)]">+{w.pointsWon} Coin</span>
-                        <span className="text-[9px] font-black text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2 py-0.5 rounded-lg">+5 AP</span>
+                        <span className="text-xs sm:text-sm font-black text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 rounded-lg shadow-[0_0_10px_rgba(34,211,238,0.1)]">+{w.pointsWon} Coin</span>
+                        <span className="text-xs font-black text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2 py-0.5 rounded-lg">+5 AP</span>
                      </div>
                   </div>
                )) : (
-                  <p className="text-[10px] text-center text-slate-500 uppercase font-black py-6">No recent activity</p>
+                  <p className="text-xs sm:text-sm text-center text-slate-500 uppercase font-black py-6">No recent activity</p>
                )}
             </div>
          </div>
@@ -174,7 +174,7 @@ const SilverCoinGame: React.FC = () => {
          <div className="bg-gradient-to-br from-[#1C1C2E] to-[#110a2a] rounded-[2.5rem] p-8 text-center relative overflow-hidden shadow-2xl border border-white/5">
             <div className="absolute -top-10 -left-10 w-48 h-48 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
             <div className="relative z-10">
-               <p className="text-[10px] font-black text-cyan-400/80 uppercase tracking-[0.3em] mb-3 drop-shadow-md">Protocol Note</p>
+               <p className="text-xs sm:text-sm font-black text-cyan-400/80 uppercase tracking-[0.3em] mb-3 drop-shadow-md">Protocol Note</p>
                <p className="text-xs font-medium text-slate-300 leading-relaxed">
                   Silver coins spawn randomly every <span className="text-white font-bold">10-15 minutes</span> between <span className="text-cyan-300 font-bold">10:00 AM and 3:00 PM</span>. They are common, but highly competitive. 
                   Maintain low latency for optimal performance.

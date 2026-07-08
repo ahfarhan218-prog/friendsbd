@@ -61,7 +61,7 @@ const Gallery: React.FC = () => {
         )}
 
         {albums.length === 0 ? (
-          <div className="text-center py-20 text-white/30"><p className="text-5xl mb-4">📸</p><p className="font-bold">No albums yet</p></div>
+          <div className="text-center py-20 text-white/60"><p className="text-5xl mb-4">📸</p><p className="font-bold">No albums yet</p></div>
         ) : (
           <div className="space-y-6">
             {albums.map(album => (
@@ -70,7 +70,7 @@ const Gallery: React.FC = () => {
                   <div>
                     <h3 className="text-lg font-black text-white">{album.title}</h3>
                     <p className="text-xs text-white/50">{album.description}</p>
-                    <p className="text-[10px] text-white/30 mt-1">{album.photos?.length || 0} photos</p>
+                    <p className="text-xs sm:text-sm text-white/60 mt-1">{album.photos?.length || 0} photos</p>
                   </div>
                   <button onClick={() => setSelectedAlbum(selectedAlbum === album.id ? null : album.id)} className="pf-btn pf-btn-ghost text-xs">
                     {selectedAlbum === album.id ? 'Close' : '+ Add Photo'}

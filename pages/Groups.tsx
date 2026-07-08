@@ -52,18 +52,18 @@ const Groups: React.FC = () => {
         )}
 
         {groups.length === 0 ? (
-          <div className="text-center py-20 text-white/30"><p className="text-5xl mb-4">👥</p><p className="font-bold">No groups yet</p></div>
+          <div className="text-center py-20 text-white/60"><p className="text-5xl mb-4">👥</p><p className="font-bold">No groups yet</p></div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-1 sm:grid-cols-2 gap-4">
             {groups.map(g => (
               <div key={g.id} className="pf-card p-5">
                 <div className="flex items-start justify-between mb-3">
                   <h3 className="text-lg font-black text-white">{g.name}</h3>
-                  {!g.isPublic && <span className="text-[10px] text-amber-400 px-2 py-1 rounded-full bg-amber-500/10">🔒 Private</span>}
+                  {!g.isPublic && <span className="text-xs sm:text-sm text-amber-400 px-2 py-1 rounded-full bg-amber-500/10">🔒 Private</span>}
                 </div>
                 <p className="text-sm text-white/50 mb-3">{g.description || 'No description'}</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-white/30">👥 {g.members?.length || 0} members</span>
+                  <span className="text-xs text-white/60">👥 {g.members?.length || 0} members</span>
                   {session && g.isPublic && !isMember(g) && (
                     <button onClick={() => handleJoin(g.id)} className="pf-btn pf-btn-primary text-xs">Join</button>
                   )}

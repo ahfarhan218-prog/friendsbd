@@ -27,14 +27,14 @@ const Winners: React.FC = () => {
         <div className="relative z-10">
           <h1 className="text-xs font-black uppercase tracking-[0.5em] text-amber-400 mb-2">Hall of Fame</h1>
           <h2 className="text-4xl font-black italic tracking-tighter uppercase mb-2 text-white">Winners Circle</h2>
-          <p className="text-[10px] text-white/40 font-bold tracking-widest uppercase">The elite of FriendsBD</p>
+          <p className="text-xs sm:text-sm text-white/40 font-bold tracking-widest uppercase">The elite of FriendsBD</p>
         </div>
       </header>
 
       <div className="px-5 space-y-6 mt-12">
-        {loading && <p className="text-center text-[10px] text-gray-500 font-black uppercase tracking-widest">Loading winners...</p>}
+        {loading && <p className="text-center text-xs sm:text-sm text-gray-500 font-black uppercase tracking-widest">Loading winners...</p>}
         {!loading && winners.length === 0 && (
-          <p className="text-center text-[10px] text-gray-600 font-black uppercase tracking-widest py-12">No winners recorded yet</p>
+          <p className="text-center text-xs sm:text-sm text-gray-600 font-black uppercase tracking-widest py-12">No winners recorded yet</p>
         )}
         {winners.map((w, i) => (
           <motion.div key={w.id || i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}
@@ -48,8 +48,8 @@ const Winners: React.FC = () => {
             </div>
             <div className="flex-1">
               <h3 className="text-xl font-black tracking-tighter mb-1 text-white">{w.username || 'Anonymous'}</h3>
-              <p className="text-[9px] font-black text-amber-400 uppercase tracking-widest mb-3">{w.prize_won || 'Prize Won'}</p>
-              <div className="flex flex-wrap items-center gap-2 text-[10px] font-bold text-white/40 uppercase">
+              <p className="text-xs font-black text-amber-400 uppercase tracking-widest mb-3">{w.prize_won || 'Prize Won'}</p>
+              <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-bold text-white/40 uppercase">
                 <span>Won:</span>
                 <span className="text-white text-xs font-black">{w.prize_won || 'N/A'}</span>
               </div>

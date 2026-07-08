@@ -189,7 +189,7 @@ const ForumCreateThread: React.FC = () => {
             </svg>
           </button>
           <div className="text-left">
-            <span className="text-[9px] font-black text-indigo-400 uppercase tracking-[0.3em] block mb-0.5">Forums › Editor</span>
+            <span className="text-xs font-black text-indigo-400 uppercase tracking-[0.3em] block mb-0.5">Forums › Editor</span>
             <h1 className="text-lg font-black text-white tracking-tight">Create Discussion Topic</h1>
           </div>
         </div>
@@ -210,7 +210,7 @@ const ForumCreateThread: React.FC = () => {
 
         {/* CATEGORY SELECTOR */}
         <div className="bg-[#121824] rounded-3xl border border-[#1f293d] p-5 space-y-3 shadow-lg">
-          <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Select category</label>
+          <label className="block text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-2">Select category</label>
           <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-2">
             {categories.map(cat => (
               <button
@@ -225,8 +225,8 @@ const ForumCreateThread: React.FC = () => {
               >
                 <span className="text-xl shrink-0">{cat.icon || '📁'}</span>
                 <div className="min-w-0">
-                  <p className="text-[11px] font-black uppercase tracking-wide truncate">{cat.name}</p>
-                  <p className="text-[9px] text-slate-500 truncate mt-0.5">{cat.description}</p>
+                  <p className="text-xs sm:text-sm font-black uppercase tracking-wide truncate">{cat.name}</p>
+                  <p className="text-xs text-slate-500 truncate mt-0.5">{cat.description}</p>
                 </div>
               </button>
             ))}
@@ -235,7 +235,7 @@ const ForumCreateThread: React.FC = () => {
 
         {/* TITLE */}
         <div className="bg-[#121824] rounded-3xl border border-[#1f293d] p-5 shadow-lg space-y-2">
-          <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Topic Title</label>
+          <label className="block text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-2">Topic Title</label>
           <input
             type="text"
             required
@@ -246,14 +246,14 @@ const ForumCreateThread: React.FC = () => {
             className="w-full bg-[#090d16] border border-[#1f293d] rounded-2xl px-4 py-3 text-xs text-white placeholder-slate-600 font-semibold outline-none focus:border-indigo-500 transition-colors"
           />
           <div className="flex justify-between items-center px-1">
-            <span className="text-[8px] text-slate-500 font-semibold">Make it clear and helpful.</span>
-            <span className="text-[9px] text-slate-500 font-bold font-mono">{title.length}/100</span>
+            <span className="text-xs text-slate-500 font-semibold">Make it clear and helpful.</span>
+            <span className="text-xs text-slate-500 font-bold font-mono">{title.length}/100</span>
           </div>
         </div>
 
         {/* DESCRIPTION + MARKDOWN TOOLBAR */}
         <div className="bg-[#121824] rounded-3xl border border-[#1f293d] p-5 shadow-lg space-y-2">
-          <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Main Post / Description Body</label>
+          <label className="block text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-2">Main Post / Description Body</label>
 
           {/* Markdown Toolbar */}
           <div className="flex flex-wrap gap-1 p-1.5 bg-[#090d16] rounded-2xl border border-[#1f293d]/50">
@@ -271,7 +271,7 @@ const ForumCreateThread: React.FC = () => {
                 type="button"
                 onClick={() => insertMarkdown(t.syntax)}
                 title={t.title}
-                className="h-8 px-3 rounded-xl bg-[#121824] border border-[#1f293d] text-slate-400 hover:text-indigo-400 hover:border-indigo-500/40 active:scale-95 transition-all text-[9px] font-black uppercase tracking-wider"
+                className="h-8 px-3 rounded-xl bg-[#121824] border border-[#1f293d] text-slate-400 hover:text-indigo-400 hover:border-indigo-500/40 active:scale-95 transition-all text-xs font-black uppercase tracking-wider"
               >
                 {t.label}
               </button>
@@ -288,14 +288,14 @@ const ForumCreateThread: React.FC = () => {
             className="w-full bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-2xl px-4 py-3.5 text-xs font-medium resize-y leading-relaxed transition-colors placeholder-slate-600"
           />
           <div className="flex justify-between items-center px-1">
-            <span className="text-[8px] text-slate-500 font-semibold">Write an informative description for other members.</span>
-            <span className="text-[9px] text-slate-500 font-bold font-mono">{content.length} characters</span>
+            <span className="text-xs text-slate-500 font-semibold">Write an informative description for other members.</span>
+            <span className="text-xs text-slate-500 font-bold font-mono">{content.length} characters</span>
           </div>
         </div>
 
         {/* TAGS */}
         <div className="bg-[#121824] rounded-3xl border border-[#1f293d] p-5 shadow-lg space-y-2">
-          <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Tags <span className="text-slate-600 normal-case font-medium">(optional, comma separated)</span></label>
+          <label className="block text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-2">Tags <span className="text-slate-600 normal-case font-medium">(optional, comma separated)</span></label>
           <input
             type="text"
             value={tags}
@@ -306,7 +306,7 @@ const ForumCreateThread: React.FC = () => {
           {tags && (
             <div className="flex flex-wrap gap-1 px-1">
               {tags.split(',').map(t => t.trim()).filter(Boolean).map(tag => (
-                <span key={tag} className="px-2 py-0.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[9px] font-black rounded-lg">#{tag}</span>
+                <span key={tag} className="px-2 py-0.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-black rounded-lg">#{tag}</span>
               ))}
             </div>
           )}

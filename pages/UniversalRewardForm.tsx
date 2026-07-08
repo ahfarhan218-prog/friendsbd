@@ -203,7 +203,7 @@ const UniversalRewardForm: React.FC = () => {
           <h2 className="text-xl font-black text-white flex flex-wrap items-center justify-center gap-2">
             🏆 Point Allocation Form
           </h2>
-          <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-1">
+          <p className="text-xs sm:text-sm text-slate-400 uppercase tracking-widest mt-1">
             Request Plusses & RP changes for validation
           </p>
         </div>
@@ -213,7 +213,7 @@ const UniversalRewardForm: React.FC = () => {
           {/* Target User Details (Disabled/ReadOnly) */}
           <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Member ID</label>
+              <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-2">Member ID</label>
               <input
                 type="text"
                 readOnly
@@ -223,7 +223,7 @@ const UniversalRewardForm: React.FC = () => {
               />
             </div>
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Username</label>
+              <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-2">Username</label>
               <input
                 type="text"
                 readOnly
@@ -235,7 +235,7 @@ const UniversalRewardForm: React.FC = () => {
 
           {/* Operation Toggle Switch */}
           <div className="space-y-1">
-            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Operation Type</label>
+            <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-2">Operation Type</label>
             <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 bg-[#090d16] border border-[#1f293d] p-1 rounded-2xl">
               <button
                 type="button"
@@ -265,7 +265,7 @@ const UniversalRewardForm: React.FC = () => {
           {/* Point Fields Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Plusses</label>
+              <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-2">Plusses</label>
               <input
                 type="number"
                 min={0}
@@ -278,7 +278,7 @@ const UniversalRewardForm: React.FC = () => {
               />
             </div>
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Reputation Points (RP)</label>
+              <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-2">Reputation Points (RP)</label>
               <input
                 type="number"
                 min={0}
@@ -291,7 +291,7 @@ const UniversalRewardForm: React.FC = () => {
               />
             </div>
             {validationErrors.points && (
-              <span className="col-span-2 text-[10px] font-bold text-rose-400 px-2 block animate-pulse">
+              <span className="col-span-2 text-xs sm:text-sm font-bold text-rose-400 px-2 block animate-pulse">
                 ⚠️ {validationErrors.points}
               </span>
             )}
@@ -299,11 +299,11 @@ const UniversalRewardForm: React.FC = () => {
 
           {/* Associated Quiz Fields */}
           <div className="p-4 bg-[#090d16]/60 border border-[#1f293d] rounded-2xl space-y-3">
-            <span className="text-[9px] font-black uppercase text-slate-400 tracking-widest block">Associated Quiz Attributions</span>
+            <span className="text-xs font-black uppercase text-slate-400 tracking-widest block">Associated Quiz Attributions</span>
             
             <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3">
               <div className="space-y-1">
-                <label className="text-[9px] font-bold text-slate-500 uppercase">Quiz Topic ID</label>
+                <label className="text-xs font-bold text-slate-500 uppercase">Quiz Topic ID</label>
                 <input
                   type="text"
                   required
@@ -315,7 +315,7 @@ const UniversalRewardForm: React.FC = () => {
                 />
               </div>
               <div className="space-y-1">
-                <label className="text-[9px] font-bold text-slate-500 uppercase">Quiz Title</label>
+                <label className="text-xs font-bold text-slate-500 uppercase">Quiz Title</label>
                 <input
                   type="text"
                   required
@@ -329,7 +329,7 @@ const UniversalRewardForm: React.FC = () => {
             </div>
 
             <div className="space-y-1">
-              <label className="text-[9px] font-bold text-slate-500 uppercase">Quiz Link</label>
+              <label className="text-xs font-bold text-slate-500 uppercase">Quiz Link</label>
               <input
                 type="text"
                 required
@@ -341,7 +341,7 @@ const UniversalRewardForm: React.FC = () => {
               />
             </div>
             {validationErrors.quizId && (
-              <span className="text-[10px] font-bold text-rose-400 px-1 block animate-pulse">
+              <span className="text-xs sm:text-sm font-bold text-rose-400 px-1 block animate-pulse">
                 ⚠️ Missing quiz configuration credentials.
               </span>
             )}
@@ -349,7 +349,7 @@ const UniversalRewardForm: React.FC = () => {
 
           {/* Mandatory Reason */}
           <div className="space-y-1">
-            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Mandatory Audit Justification</label>
+            <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-2">Mandatory Audit Justification</label>
             <textarea
               required
               disabled={isSubmitting}
@@ -367,7 +367,7 @@ const UniversalRewardForm: React.FC = () => {
               }`}
             />
             {validationErrors.reason && (
-              <span className="text-[10px] font-bold text-rose-400 px-2 block animate-pulse">
+              <span className="text-xs sm:text-sm font-bold text-rose-400 px-2 block animate-pulse">
                 ⚠️ {validationErrors.reason}
               </span>
             )}

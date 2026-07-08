@@ -63,7 +63,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, index, isMainPost, currentUse
     return (
       <div className="bg-[#121824]/50 border border-[#1f293d]/40 rounded-3xl px-5 py-4 flex flex-wrap items-center gap-3">
         <div className="w-9 h-9 rounded-xl bg-slate-800 flex items-center justify-center shrink-0">🗑️</div>
-        <p className="text-[11px] text-slate-600 italic font-medium">This post was deleted.</p>
+        <p className="text-xs sm:text-sm text-slate-600 italic font-medium">This post was deleted.</p>
       </div>
     );
   }
@@ -91,7 +91,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, index, isMainPost, currentUse
             <p className="text-sm text-slate-300 mt-1">
               <strong className="text-indigo-400">{editedBy}</strong> Edited the topic!
             </p>
-            <p className="text-[10px] text-slate-500 font-medium mt-1">
+            <p className="text-xs sm:text-sm text-slate-500 font-medium mt-1">
               {new Date(editTime).toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true, weekday: 'short', day: '2-digit', month: 'short', year: '2-digit' })} <span className="text-emerald-400 font-bold">[+]</span>
             </p>
           </div>
@@ -147,11 +147,11 @@ const PostCard: React.FC<PostCardProps> = ({ post, index, isMainPost, currentUse
               )}
             </div>
             <div className="flex flex-wrap items-center gap-2 mt-0.5">
-              <span className="text-[10px] text-slate-500 font-medium">{timeAgo(post.timestamp)}</span>
+              <span className="text-xs sm:text-sm text-slate-500 font-medium">{timeAgo(post.timestamp)}</span>
               {post.updated_at && post.updated_at > post.timestamp && (
-                <span className="text-[9px] text-emerald-500/70 font-bold italic">· edited {timeAgo(post.updated_at)}</span>
+                <span className="text-xs text-emerald-500/70 font-bold italic">· edited {timeAgo(post.updated_at)}</span>
               )}
-              <span className="text-[10px] text-slate-600">#{index + 1}</span>
+              <span className="text-xs sm:text-sm text-slate-600">#{index + 1}</span>
             </div>
           </div>
 
@@ -179,7 +179,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, index, isMainPost, currentUse
           </div>
 
           {post.editedBy && post.editedAt && (
-            <div className="mt-4 pt-2 border-t border-[#1f293d]/40 flex flex-wrap gap-1 text-[10px] text-slate-500 font-medium italic">
+            <div className="mt-4 pt-2 border-t border-[#1f293d]/40 flex flex-wrap gap-1 text-xs sm:text-sm text-slate-500 font-medium italic">
               <span>Last Edited: {new Date(post.editedAt).toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true, weekday: 'short', day: '2-digit', month: 'short', year: '2-digit' })}</span>
               <span>By: <strong className="text-indigo-400">{post.editedBy}</strong></span>
               <span>({timeAgo(post.editedAt)} ago)</span>
@@ -201,7 +201,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, index, isMainPost, currentUse
                   }`}
                 >
                   <span>{emoji}</span>
-                  <span className="text-[10px]">{count}</span>
+                  <span className="text-xs sm:text-sm">{count}</span>
                 </button>
               ))}
 
@@ -211,7 +211,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, index, isMainPost, currentUse
                   onClick={() => setShowReactions(!showReactions)}
                   className="flex flex-wrap items-center gap-1 px-2.5 py-1 rounded-xl text-xs bg-slate-800/40 border border-slate-700/40 text-slate-500 hover:text-slate-300 hover:border-slate-600 transition-all"
                 >
-                  {userReacted || '😊'} <span className="text-[9px]">+</span>
+                  {userReacted || '😊'} <span className="text-xs">+</span>
                 </button>
 
                 <AnimatePresence>
@@ -239,7 +239,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, index, isMainPost, currentUse
             {/* Quote button */}
             <button
               onClick={() => onQuote(post)}
-              className="flex flex-wrap items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-indigo-400 hover:bg-indigo-500/10 border border-transparent hover:border-indigo-500/20 transition-all"
+              className="flex flex-wrap items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-black uppercase tracking-widest text-slate-500 hover:text-indigo-400 hover:bg-indigo-500/10 border border-transparent hover:border-indigo-500/20 transition-all"
             >
               <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 10h11M3 6h11M3 14h5m5 4l3-3-3-3" />
@@ -497,9 +497,9 @@ const TopicThreadDetails: React.FC = () => {
 
           <div className="flex-1 min-w-0">
             <div className="flex flex-wrap items-center gap-1.5 mb-0.5">
-              <span className="text-[9px] text-indigo-400 font-black uppercase tracking-widest cursor-pointer hover:text-indigo-300" onClick={() => navigate('/forum')}>Forums</span>
-              <span className="text-slate-700 text-[9px]">›</span>
-              <span className="text-[9px] text-slate-500 font-bold truncate">{thread.title}</span>
+              <span className="text-xs text-indigo-400 font-black uppercase tracking-widest cursor-pointer hover:text-indigo-300" onClick={() => navigate('/forum')}>Forums</span>
+              <span className="text-slate-700 text-xs">›</span>
+              <span className="text-xs text-slate-500 font-bold truncate">{thread.title}</span>
             </div>
             <h1 className="text-sm font-black text-white truncate leading-snug">{thread.title}</h1>
           </div>
@@ -514,14 +514,14 @@ const TopicThreadDetails: React.FC = () => {
               <div className="flex flex-wrap items-center gap-1">
                 <button
                   onClick={() => handleUpdateThread({ isPinned: !thread.isPinned })}
-                  className={`px-2.5 py-1.5 rounded-xl text-[9px] font-black uppercase border transition-all ${thread.isPinned ? 'bg-amber-500/20 border-amber-500/40 text-amber-400 hover:bg-amber-500/10' : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-amber-400 hover:border-amber-500/30'}`}
+                  className={`px-2.5 py-1.5 rounded-xl text-xs font-black uppercase border transition-all ${thread.isPinned ? 'bg-amber-500/20 border-amber-500/40 text-amber-400 hover:bg-amber-500/10' : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-amber-400 hover:border-amber-500/30'}`}
                   title={thread.isPinned ? 'Unpin' : 'Pin'}
                 >
                   {thread.isPinned ? '📌 Pinned' : '📌 Pin'}
                 </button>
                 <button
                   onClick={() => handleUpdateThread({ isLocked: !thread.isLocked })}
-                  className={`px-2.5 py-1.5 rounded-xl text-[9px] font-black uppercase border transition-all ${thread.isLocked ? 'bg-rose-500/20 border-rose-500/40 text-rose-400' : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-rose-400 hover:border-rose-500/30'}`}
+                  className={`px-2.5 py-1.5 rounded-xl text-xs font-black uppercase border transition-all ${thread.isLocked ? 'bg-rose-500/20 border-rose-500/40 text-rose-400' : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-rose-400 hover:border-rose-500/30'}`}
                   title={thread.isLocked ? 'Unlock' : 'Lock'}
                 >
                   {thread.isLocked ? '🔒 Locked' : '🔒 Lock'}
@@ -548,22 +548,22 @@ const TopicThreadDetails: React.FC = () => {
           <div className="flex flex-wrap items-center gap-1.5">
             <span className="text-slate-500 text-xs">💬</span>
             <span className="text-xs font-bold text-white">{replies.length}</span>
-            <span className="text-[10px] text-slate-500 font-bold">replies</span>
+            <span className="text-xs sm:text-sm text-slate-500 font-bold">replies</span>
           </div>
           <div className="flex flex-wrap items-center gap-1.5">
             <span className="text-slate-500 text-xs">👁️</span>
             <span className="text-xs font-bold text-white">{thread.views || 0}</span>
-            <span className="text-[10px] text-slate-500 font-bold">views</span>
+            <span className="text-xs sm:text-sm text-slate-500 font-bold">views</span>
           </div>
           <div className="flex flex-wrap items-center gap-1.5">
             <span className="text-slate-500 text-xs">👤</span>
             <span className="text-xs font-bold text-white">{uniquePosters.length}</span>
-            <span className="text-[10px] text-slate-500 font-bold">unique posters</span>
+            <span className="text-xs sm:text-sm text-slate-500 font-bold">unique posters</span>
           </div>
           {(thread.tags || []).length > 0 && (
             <div className="flex items-center gap-1.5 flex-wrap ml-auto">
               {thread.tags!.map(tag => (
-                <span key={tag} className="px-2 py-0.5 bg-slate-800 border border-slate-700 text-slate-400 text-[9px] font-black rounded-lg">#{tag}</span>
+                <span key={tag} className="px-2 py-0.5 bg-slate-800 border border-slate-700 text-slate-400 text-xs font-black rounded-lg">#{tag}</span>
               ))}
             </div>
           )}
@@ -575,7 +575,7 @@ const TopicThreadDetails: React.FC = () => {
             <span className="text-rose-400 text-lg shrink-0">🔒</span>
             <div>
               <p className="text-xs font-black text-rose-400">Topic Locked</p>
-              <p className="text-[10px] text-slate-500 font-medium">New replies are disabled. Only staff can reply.</p>
+              <p className="text-xs sm:text-sm text-slate-500 font-medium">New replies are disabled. Only staff can reply.</p>
             </div>
           </div>
         )}
@@ -585,13 +585,13 @@ const TopicThreadDetails: React.FC = () => {
         <div className="space-y-4">
           {/* Jump controls */}
           <div className="flex items-center justify-between px-2">
-            <span className="text-[10px] text-slate-500 font-bold">{posts.length} post{posts.length !== 1 ? 's' : ''}</span>
+            <span className="text-xs sm:text-sm text-slate-500 font-bold">{posts.length} post{posts.length !== 1 ? 's' : ''}</span>
             <div className="flex flex-wrap gap-2">
               <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="text-[9px] font-black text-indigo-400 hover:text-indigo-300 uppercase tracking-widest transition-colors">↑ First</button>
+                className="text-xs font-black text-indigo-400 hover:text-indigo-300 uppercase tracking-widest transition-colors">↑ First</button>
               <span className="text-slate-700">·</span>
               <button onClick={() => replyRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })}
-                className="text-[9px] font-black text-indigo-400 hover:text-indigo-300 uppercase tracking-widest transition-colors">↓ Reply</button>
+                className="text-xs font-black text-indigo-400 hover:text-indigo-300 uppercase tracking-widest transition-colors">↓ Reply</button>
             </div>
           </div>
 
@@ -635,7 +635,7 @@ const TopicThreadDetails: React.FC = () => {
                   />
                   <div>
                     <span className="text-xs font-black text-white">{currentUser.username}</span>
-                    <p className="text-[9px] text-slate-500 font-bold">Leave a reply</p>
+                    <p className="text-xs text-slate-500 font-bold">Leave a reply</p>
                   </div>
                 </div>
                 <textarea
@@ -648,7 +648,7 @@ const TopicThreadDetails: React.FC = () => {
                   className="w-full bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-2xl px-4 py-3.5 text-sm font-normal resize-none transition-colors placeholder-slate-600 leading-relaxed"
                 />
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] text-slate-600 font-bold">{replyContent.length} chars · +5 AP on submit</span>
+                  <span className="text-xs sm:text-sm text-slate-600 font-bold">{replyContent.length} chars · +5 AP on submit</span>
                   <button
                     onClick={handleSendReply}
                     disabled={sending || !replyContent.trim()}
@@ -686,7 +686,7 @@ const TopicThreadDetails: React.FC = () => {
                   <span className="text-lg shrink-0">{t.isLocked ? '🔒' : t.isPinned ? '📌' : '💬'}</span>
                   <div className="min-w-0">
                     <h4 className="text-xs font-black text-white group-hover:text-indigo-400 transition-colors truncate">{t.title}</h4>
-                    <p className="text-[9px] text-slate-500 font-bold mt-0.5">{t.replyCount || 0} replies</p>
+                    <p className="text-xs text-slate-500 font-bold mt-0.5">{t.replyCount || 0} replies</p>
                   </div>
                 </div>
               ))}
@@ -696,10 +696,10 @@ const TopicThreadDetails: React.FC = () => {
 
         {/* Unique posters footer */}
         <div className="bg-[#121824]/50 border border-[#1f293d]/40 rounded-2xl px-5 py-3">
-          <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mr-2">Posters:</span>
+          <span className="text-xs sm:text-sm text-slate-500 font-bold uppercase tracking-widest mr-2">Posters:</span>
           {uniquePosters.map((name, i) => (
             <React.Fragment key={name}>
-              <span className="text-[10px] text-indigo-400 font-bold cursor-pointer hover:text-indigo-300 transition-colors">@{name}</span>
+              <span className="text-xs sm:text-sm text-indigo-400 font-bold cursor-pointer hover:text-indigo-300 transition-colors">@{name}</span>
               {i < uniquePosters.length - 1 && <span className="text-slate-700 mx-1">·</span>}
             </React.Fragment>
           ))}

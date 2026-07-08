@@ -87,11 +87,11 @@ const Friends: React.FC = () => {
             <h3 className="text-lg font-black text-white mb-4">My Friends</h3>
             <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="bg-[#161b22] rounded-xl p-4 border border-[#30363d]">
-                <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Following</p>
+                <p className="text-xs sm:text-sm text-gray-400 font-bold uppercase tracking-wider">Following</p>
                 <p className="text-3xl font-black text-white mt-1">{friends.length}</p>
               </div>
               <div className="bg-[#161b22] rounded-xl p-4 border border-[#30363d]">
-                <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Online Now</p>
+                <p className="text-xs sm:text-sm text-gray-400 font-bold uppercase tracking-wider">Online Now</p>
                 <p className="text-3xl font-black text-green-400 mt-1">{onlineFriends.length}</p>
               </div>
             </div>
@@ -120,9 +120,9 @@ const Friends: React.FC = () => {
                   <div className="flex flex-wrap items-center gap-2">
                     <h4 className="text-base font-black text-gray-100 truncate">{friend.name}</h4>
                     {friend.isVerified && <span className="text-blue-400 text-xs">✓</span>}
-                    {friend.isPremium && <span className="text-[9px] bg-amber-500/10 text-amber-400 px-1.5 py-0.5 rounded-full font-bold">👑</span>}
+                    {friend.isPremium && <span className="text-xs bg-amber-500/10 text-amber-400 px-1.5 py-0.5 rounded-full font-bold">👑</span>}
                   </div>
-                  <p className="text-[10px] text-gray-500 font-bold">@{friend.username} · Level {friend.level || 1}</p>
+                  <p className="text-xs sm:text-sm text-gray-500 font-bold">@{friend.username} · Level {friend.level || 1}</p>
                 </div>
                 <svg className="w-5 h-5 text-gray-600 group-hover:text-purple-400 transition-colors shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
               </div>
@@ -143,16 +143,16 @@ const Friends: React.FC = () => {
         {suggestions.length > 0 && (
           <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] shadow-xl shadow-purple-900/10 rounded-[2.5rem] p-6 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
-            <h4 className="relative z-10 text-[10px] font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-widest mb-4 flex flex-wrap items-center gap-2">
+            <h4 className="relative z-10 text-xs sm:text-sm font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-widest mb-4 flex flex-wrap items-center gap-2">
               <span className="text-lg">✨</span> People You May Know
             </h4>
             <div className="flex flex-wrap gap-4 overflow-x-auto pb-2 no-scrollbar">
                 {suggestions.map(sug => (
                   <div key={sug.id} className="min-w-[130px] bg-[#1C1C2E] rounded-3xl p-4 flex flex-col items-center text-center border border-white/5 hover:border-purple-500/30 transition-all">
                     <img src={sug.avatar || `https://picsum.photos/seed/${sug.id}/100`} className="w-14 h-14 rounded-2xl mb-3 object-cover border-2 border-purple-500/30" alt="" />
-                    <p className="text-[10px] font-black text-gray-100 truncate w-full mb-3">{sug.name}</p>
+                    <p className="text-xs sm:text-sm font-black text-gray-100 truncate w-full mb-3">{sug.name}</p>
                     <button onClick={() => handleAddFriend(sug.id, sug.name)}
-                      className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[8px] font-black px-4 py-2 rounded-xl hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-purple-900/30">
+                      className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-xs font-black px-4 py-2 rounded-xl hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-purple-900/30">
                       FOLLOW
                     </button>
                   </div>

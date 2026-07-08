@@ -15,7 +15,7 @@ interface PostCardProps {
 const PostCard: React.FC<PostCardProps> = ({ post, currentUser, index, onOptionsOpen }) => {
   if (post.is_deleted) {
     return (
-      <div className="bg-slate-50 border border-dashed border-slate-200 rounded-3xl p-4 text-center italic text-slate-400 text-[10px]">
+      <div className="bg-slate-50 border border-dashed border-slate-200 rounded-3xl p-4 text-center italic text-slate-400 text-xs sm:text-sm">
         Content purged by authority or user.
       </div>
     );
@@ -46,7 +46,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, currentUser, index, onOptions
                 <span className="bg-purple-600 text-white text-[7px] font-black px-2 py-0.5 rounded-full uppercase tracking-tighter shadow-sm shrink-0">Admin</span>
               )}
             </div>
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5 whitespace-nowrap">
+            <p className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest mt-0.5 whitespace-nowrap">
               {new Date(post.timestamp).toLocaleDateString()} • {new Date(post.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
             </p>
           </div>
@@ -72,7 +72,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, currentUser, index, onOptions
              Object.entries(post.reactions).map(([emoji, count]) => (
                <div key={emoji} className="bg-slate-50 border border-slate-100 rounded-xl px-2.5 py-1 flex flex-wrap items-center gap-1.5 shadow-sm">
                  <span className="text-xs">{emoji}</span>
-                 <span className="text-[10px] font-black text-slate-500">{count}</span>
+                 <span className="text-xs sm:text-sm font-black text-slate-500">{count}</span>
                </div>
              ))
            ) : (
@@ -83,7 +83,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, currentUser, index, onOptions
              </div>
            )}
         </div>
-        <div className="text-[11px] font-black text-slate-200 uppercase tracking-widest group-hover:text-purple-200 transition-colors">
+        <div className="text-xs sm:text-sm font-black text-slate-200 uppercase tracking-widest group-hover:text-purple-200 transition-colors">
           #{String(index + 1).padStart(2, '0')}
         </div>
       </div>

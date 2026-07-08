@@ -63,7 +63,7 @@ const NotificationToast: React.FC = () => {
                   alt="" 
                 />
               )}
-              <span className="absolute -bottom-1 -right-1 bg-[#7F00FF] text-white text-[10px] w-6 h-6 rounded-full flex items-center justify-center border-2 border-white shadow-lg">
+              <span className="absolute -bottom-1 -right-1 bg-[#7F00FF] text-white text-xs sm:text-sm w-6 h-6 rounded-full flex items-center justify-center border-2 border-white shadow-lg">
                 {activeToast.type === 'REACTION' ? '🔥' : activeToast.type === 'SYSTEM' ? '🎯' : '🔔'}
               </span>
             </div>
@@ -72,7 +72,7 @@ const NotificationToast: React.FC = () => {
               <p className="text-[12px] text-slate-700 leading-tight">
                 <span className="font-black text-slate-900">{activeToast.senderName}</span> {activeToast.message.replace(/🏆|💎|🥇|✨/g, '')}
               </p>
-              {activeToast.shoutId && <p className="text-[8px] font-black text-[#7F00FF] uppercase tracking-[0.2em] mt-1">Tap to View</p>}
+              {activeToast.shoutId && <p className="text-xs font-black text-[#7F00FF] uppercase tracking-[0.2em] mt-1">Tap to View</p>}
             </div>
 
             <button 

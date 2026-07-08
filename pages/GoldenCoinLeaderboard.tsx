@@ -62,7 +62,7 @@ const GoldenCoinLeaderboard: React.FC = () => {
           </button>
           <div className="text-center">
             <h2 className="text-2xl font-black uppercase tracking-tighter italic text-amber-400">Coin Rankings</h2>
-            <p className="text-[8px] font-black uppercase tracking-widest opacity-60">Global Grab Statistics</p>
+            <p className="text-xs font-black uppercase tracking-widest opacity-60">Global Grab Statistics</p>
           </div>
           <div className="w-12" />
         </div>
@@ -73,7 +73,7 @@ const GoldenCoinLeaderboard: React.FC = () => {
             <button 
               key={f}
               onClick={() => setFilter(f)}
-              className={`flex-1 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
+              className={`flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-black uppercase tracking-widest transition-all ${
                 filter === f ? 'bg-amber-400 text-purple-900 shadow-lg' : 'text-white/60 hover:text-white'
               }`}
             >
@@ -98,7 +98,7 @@ const GoldenCoinLeaderboard: React.FC = () => {
                 <span className="absolute -top-2 -right-2 text-2xl" title="2nd Place">🥈</span>
               </div>
               <div className="w-full bg-slate-100 rounded-t-3xl h-24 flex flex-col items-center justify-center p-2 border-x border-t border-slate-200">
-                <p className="text-[10px] font-black text-slate-800 truncate w-full text-center">{podium[1].username}</p>
+                <p className="text-xs sm:text-sm font-black text-slate-800 truncate w-full text-center">{podium[1].username}</p>
                 <p className="text-xs font-black text-slate-500">{podium[1].totalGrabbed}</p>
                 <p className="text-[7px] font-bold text-slate-400 uppercase">Grabs</p>
               </div>
@@ -121,7 +121,7 @@ const GoldenCoinLeaderboard: React.FC = () => {
                 <p className="text-xs font-black text-amber-600 uppercase tracking-tighter mb-1">Coin King</p>
                 <p className="text-xs font-black text-slate-900 truncate w-full text-center">{podium[0].username}</p>
                 <p className="text-xl font-black text-amber-500">{podium[0].totalGrabbed}</p>
-                <p className="text-[8px] font-black text-amber-600/50 uppercase tracking-widest">Grand Total</p>
+                <p className="text-xs font-black text-amber-600/50 uppercase tracking-widest">Grand Total</p>
               </div>
             </motion.div>
           )}
@@ -138,7 +138,7 @@ const GoldenCoinLeaderboard: React.FC = () => {
                 <span className="absolute -top-2 -right-2 text-2xl" title="3rd Place">🥉</span>
               </div>
               <div className="w-full bg-orange-50/30 rounded-t-3xl h-20 flex flex-col items-center justify-center p-2 border-x border-t border-orange-100">
-                <p className="text-[10px] font-black text-slate-800 truncate w-full text-center">{podium[2].username}</p>
+                <p className="text-xs sm:text-sm font-black text-slate-800 truncate w-full text-center">{podium[2].username}</p>
                 <p className="text-xs font-black text-orange-400">{podium[2].totalGrabbed}</p>
                 <p className="text-[7px] font-bold text-orange-300 uppercase">Grabs</p>
               </div>
@@ -149,8 +149,8 @@ const GoldenCoinLeaderboard: React.FC = () => {
         {/* LIST SECTION */}
         <div className="bg-white rounded-[3rem] p-6 shadow-xl border border-slate-100">
           <div className="flex items-center justify-between mb-6 px-2">
-            <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Global Ranking</h3>
-            <span className="text-[8px] font-black bg-slate-50 text-slate-400 px-3 py-1 rounded-full">{stats.length} Active Players</span>
+            <h3 className="text-xs sm:text-sm font-black text-slate-400 uppercase tracking-[0.3em]">Global Ranking</h3>
+            <span className="text-xs font-black bg-slate-50 text-slate-400 px-3 py-1 rounded-full">{stats.length} Active Players</span>
           </div>
 
           <div className="space-y-3">
@@ -162,7 +162,7 @@ const GoldenCoinLeaderboard: React.FC = () => {
                 className="flex items-center justify-between p-4 bg-slate-50/50 border border-slate-100 rounded-[2rem] hover:bg-white hover:shadow-lg hover:border-purple-100 transition-all group"
               >
                 <div className="flex flex-wrap items-center gap-4">
-                  <span className="w-6 text-center text-[10px] font-black text-slate-300 group-hover:text-purple-400">#{idx + 4}</span>
+                  <span className="w-6 text-center text-xs sm:text-sm font-black text-slate-300 group-hover:text-purple-400">#{idx + 4}</span>
                   <div className="relative">
                     <img src={u.avatar} className="w-10 h-10 rounded-xl border border-white shadow-sm" alt="" />
                     <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white" />
@@ -171,19 +171,19 @@ const GoldenCoinLeaderboard: React.FC = () => {
                     <div className="flex flex-wrap items-center gap-1.5">
                       <p className="text-xs font-black text-slate-800">{u.username}</p>
                       {getBadge(u.totalGrabbed) && (
-                        <span className="text-[10px]" title={getBadge(u.totalGrabbed)?.label}>
+                        <span className="text-xs sm:text-sm" title={getBadge(u.totalGrabbed)?.label}>
                           {getBadge(u.totalGrabbed)?.icon}
                         </span>
                       )}
                     </div>
-                    <p className="text-[8px] font-bold text-slate-400 uppercase">
+                    <p className="text-xs font-bold text-slate-400 uppercase">
                       Fastest: {(u.fastestGrab / 1000).toFixed(2)}s
                     </p>
                   </div>
                 </div>
                 <div className="text-right">
                   <p className="text-xs font-black text-purple-600">{u.totalGrabbed} Grabs</p>
-                  <p className="text-[8px] font-black text-amber-500 uppercase">+{u.totalValue} Pts</p>
+                  <p className="text-xs font-black text-amber-500 uppercase">+{u.totalValue} Pts</p>
                 </div>
               </motion.div>
             )) : !loading && podium.length === 0 && (
@@ -212,13 +212,13 @@ const GoldenCoinLeaderboard: React.FC = () => {
                   #{myRank.rank}
                 </div>
                 <div>
-                  <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">My Progress</p>
+                  <p className="text-xs sm:text-sm font-black text-slate-500 uppercase tracking-widest">My Progress</p>
                   <p className="text-sm font-black italic">Rank Performance</p>
                 </div>
               </div>
               <div className="text-right">
                 <p className="text-sm font-black text-amber-400">{myRank.data.totalGrabbed} Coins</p>
-                <p className="text-[8px] font-bold text-slate-500 uppercase">Top {((myRank.rank / stats.length) * 100).toFixed(0)}% of players</p>
+                <p className="text-xs font-bold text-slate-500 uppercase">Top {((myRank.rank / stats.length) * 100).toFixed(0)}% of players</p>
               </div>
             </div>
           </motion.div>

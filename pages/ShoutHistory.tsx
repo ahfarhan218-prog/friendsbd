@@ -318,7 +318,7 @@ const ShoutHistory: React.FC = () => {
               <h2 className="text-2xl font-black tracking-tight italic bg-gradient-to-r from-white via-purple-200 to-indigo-200 bg-clip-text text-transparent">
                 Feed History
               </h2>
-              <p className="text-[9px] font-black uppercase opacity-50 tracking-[0.2em] text-purple-300">
+              <p className="text-xs font-black uppercase opacity-50 tracking-[0.2em] text-purple-300">
                 Community Archive
               </p>
             </div>
@@ -343,13 +343,13 @@ const ShoutHistory: React.FC = () => {
         >
           {editingShout && (
             <div className="bg-amber-500/10 border-b border-amber-500/20 px-4 py-2 flex items-center justify-between">
-              <span className="text-[9px] font-black uppercase tracking-widest text-amber-400">✏️ Editing Shout</span>
+              <span className="text-xs font-black uppercase tracking-widest text-amber-400">✏️ Editing Shout</span>
               <button
                 onClick={() => {
                   setEditingShout(null);
                   setShoutText('');
                 }}
-                className="text-[9px] font-black text-white/30 hover:text-white uppercase tracking-widest"
+                className="text-xs font-black text-white/60 hover:text-white uppercase tracking-widest"
               >
                 Cancel
               </button>
@@ -359,12 +359,12 @@ const ShoutHistory: React.FC = () => {
           {replyingTo && (
             <div className="bg-purple-950/40 border-b border-purple-500/20 px-4 py-2.5 flex items-center justify-between">
               <div className="min-w-0">
-                <span className="text-[9px] font-black uppercase tracking-widest text-purple-400">↩️ Replying to @{replyingTo.username || replyingTo.user.toLowerCase().replace(/\s+/g, '')}</span>
+                <span className="text-xs font-black uppercase tracking-widest text-purple-400">↩️ Replying to @{replyingTo.username || replyingTo.user.toLowerCase().replace(/\s+/g, '')}</span>
                 <p className="text-xs text-white/50 truncate mt-0.5">{replyingTo.content}</p>
               </div>
               <button
                 onClick={() => setReplyingTo(null)}
-                className="text-[10px] font-black text-white/30 hover:text-white bg-white/5 w-6 h-6 rounded-full flex items-center justify-center transition-all"
+                className="text-xs sm:text-sm font-black text-white/60 hover:text-white bg-white/5 w-6 h-6 rounded-full flex items-center justify-center transition-all"
               >
                 ✕
               </button>
@@ -376,9 +376,9 @@ const ShoutHistory: React.FC = () => {
             <img src={activeUser.avatar} className="w-9 h-9 rounded-xl object-cover border-2 border-white/10 shrink-0" alt="" />
             <div className="flex-1 min-w-0">
               <p className="text-xs font-black text-white">{activeUser.name}</p>
-              <p className="text-[9px] text-white/30 font-bold">Broadcasting to archive stream</p>
+              <p className="text-xs text-white/60 font-bold">Broadcasting to archive stream</p>
             </div>
-            <span className="text-[9px] font-black text-white/20 font-mono">{shoutText.length} characters</span>
+            <span className="text-xs font-black text-white/40 font-mono">{shoutText.length} characters</span>
           </div>
 
           {/* Admin Shout Mode Selector */}
@@ -387,7 +387,7 @@ const ShoutHistory: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShoutType('normal')}
-                className={`flex flex-wrap items-center gap-1.5 px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all ${
+                className={`flex flex-wrap items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${
                   shoutType === 'normal'
                     ? 'bg-purple-600 text-white shadow-lg shadow-purple-900/30'
                     : 'bg-white/5 text-white/40 hover:text-white hover:bg-white/10'
@@ -398,7 +398,7 @@ const ShoutHistory: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShoutType('quiz')}
-                className={`flex flex-wrap items-center gap-1.5 px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all ${
+                className={`flex flex-wrap items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${
                   shoutType === 'quiz'
                     ? 'bg-rose-600 text-white shadow-lg shadow-rose-900/30'
                     : 'bg-white/5 text-white/40 hover:text-white hover:bg-white/10'
@@ -460,7 +460,7 @@ const ShoutHistory: React.FC = () => {
               <button
                 key={f.id}
                 onClick={() => setFilter(f.id as any)}
-                className={`flex-1 py-3 rounded-[1.5rem] text-[10px] font-black uppercase tracking-widest transition-all ${
+                className={`flex-1 py-3 rounded-[1.5rem] text-xs sm:text-sm font-black uppercase tracking-widest transition-all ${
                   filter === f.id
                     ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-600/30'
                     : 'text-white/40 hover:text-white/70 hover:bg-white/5'
@@ -506,7 +506,7 @@ const ShoutHistory: React.FC = () => {
               >
                 <div className="text-5xl mb-4">📜</div>
                 <p className="text-sm font-black text-white/40 uppercase tracking-widest">No entries found</p>
-                <p className="text-[10px] text-white/20 font-bold mt-1">Try changing your filter options</p>
+                <p className="text-xs sm:text-sm text-white/40 font-bold mt-1">Try changing your filter options</p>
               </motion.div>
             )}
           </AnimatePresence>

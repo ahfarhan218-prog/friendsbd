@@ -279,7 +279,7 @@ const LiveTVDashboard: React.FC = () => {
             <h1 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
               Live TV Dashboard
             </h1>
-            <p className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] mt-1">
+            <p className="text-xs sm:text-sm font-bold text-white/60 uppercase tracking-[0.2em] mt-1">
               Stream Seamlessly
             </p>
           </div>
@@ -311,13 +311,13 @@ const LiveTVDashboard: React.FC = () => {
                 <h2 className="text-white font-black text-lg md:text-2xl flex flex-wrap items-center gap-2">
                   {activeChannel.name}
                   {activeChannel.isPremium && (
-                    <span className="text-[10px] bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded-md border border-amber-500/30">
+                    <span className="text-xs sm:text-sm bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded-md border border-amber-500/30">
                       PREMIUM
                     </span>
                   )}
                 </h2>
                 <div className="flex flex-wrap items-center gap-2 mt-1">
-                  <div className="bg-red-500/10 text-red-500 border border-red-500/30 px-2 py-0.5 rounded-md flex flex-wrap items-center gap-1.5 text-[10px] font-bold">
+                  <div className="bg-red-500/10 text-red-500 border border-red-500/30 px-2 py-0.5 rounded-md flex flex-wrap items-center gap-1.5 text-xs sm:text-sm font-bold">
                     <span className="relative flex h-1.5 w-1.5">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
@@ -395,7 +395,7 @@ const LiveTVDashboard: React.FC = () => {
                   }}
                   className="w-7 h-7 bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center text-white/70 hover:text-white border border-white/10 hover:bg-black/80 transition-all"
                 >
-                  <i className="fas fa-expand text-[10px]"></i>
+                  <i className="fas fa-expand text-xs sm:text-sm"></i>
                 </button>
                 <button 
                   onClick={(e) => {
@@ -408,7 +408,7 @@ const LiveTVDashboard: React.FC = () => {
                   }}
                   className="w-7 h-7 bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center text-white/70 hover:text-red-400 border border-white/10 hover:bg-black/80 transition-all"
                 >
-                  <i className="fas fa-times text-[10px]"></i>
+                  <i className="fas fa-times text-xs sm:text-sm"></i>
                 </button>
               </div>
             )}
@@ -464,7 +464,7 @@ const LiveTVDashboard: React.FC = () => {
               </div>
             </>
           ) : (
-            <div className="flex flex-col items-center justify-center h-full bg-gradient-to-br from-[#0a0a1a] to-[#1a1a2e] text-white/30 space-y-4">
+            <div className="flex flex-col items-center justify-center h-full bg-gradient-to-br from-[#0a0a1a] to-[#1a1a2e] text-white/60 space-y-4">
               <div className="w-24 h-24 rounded-3xl bg-white/5 flex items-center justify-center mb-4">
                 <span className="text-6xl animate-pulse">📺</span>
               </div>
@@ -481,7 +481,7 @@ const LiveTVDashboard: React.FC = () => {
           
           {/* Search */}
           <div className="relative">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30">🔍</span>
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/60">🔍</span>
             <input 
               type="text" 
               placeholder="Search Channels..." 
@@ -504,7 +504,7 @@ const LiveTVDashboard: React.FC = () => {
                 }`}
               >
                 {category}
-                <span className={`px-1.5 py-0.5 rounded-md text-[10px] ${
+                <span className={`px-1.5 py-0.5 rounded-md text-xs sm:text-sm ${
                   selectedCategory === category
                     ? 'bg-white/20 text-white'
                     : 'bg-black/20 text-white/40'
@@ -561,14 +561,14 @@ const LiveTVDashboard: React.FC = () => {
                           {channel.name}
                         </h3>
                         {channel.isPremium && (
-                          <span className="text-[10px] bg-amber-500/20 text-amber-400 px-1.5 rounded-md border border-amber-500/30">
+                          <span className="text-xs sm:text-sm bg-amber-500/20 text-amber-400 px-1.5 rounded-md border border-amber-500/30">
                             🔒
                           </span>
                         )}
                       </div>
                       <div className="flex items-center gap-1.5 flex-wrap">
                         {channel.category.map((cat, idx) => (
-                          <span key={idx} className="text-[9px] font-bold text-white/40 uppercase tracking-wider bg-white/5 px-2 py-0.5 rounded-full">
+                          <span key={idx} className="text-xs font-bold text-white/40 uppercase tracking-wider bg-white/5 px-2 py-0.5 rounded-full">
                             {cat}
                           </span>
                         ))}
@@ -580,7 +580,7 @@ const LiveTVDashboard: React.FC = () => {
                       onClick={(e) => toggleFavorite(e, channel._id)}
                       className="w-10 h-10 rounded-xl flex items-center justify-center transition-all flex-shrink-0"
                     >
-                      <span className={`text-xl ${isFav ? 'text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]' : 'text-white/20 hover:text-white/50'}`}>
+                      <span className={`text-xl ${isFav ? 'text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]' : 'text-white/40 hover:text-white/50'}`}>
                         {isFav ? '❤️' : '🤍'}
                       </span>
                     </button>
@@ -588,7 +588,7 @@ const LiveTVDashboard: React.FC = () => {
                 );
               })
             ) : (
-              <div className="col-span-full py-8 text-center text-white/30 text-xs font-bold uppercase tracking-widest">
+              <div className="col-span-full py-8 text-center text-white/60 text-xs font-bold uppercase tracking-widest">
                 No channels found
               </div>
             )}

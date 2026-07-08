@@ -215,7 +215,7 @@ const TopicListView: React.FC = () => {
                   </span>
                 )}
                 <div>
-                  <span className="text-[9px] font-black text-indigo-400 uppercase tracking-[0.3em] block">Forums › Category</span>
+                  <span className="text-xs font-black text-indigo-400 uppercase tracking-[0.3em] block">Forums › Category</span>
                   <h1 className="text-base font-black text-white tracking-tight leading-tight">{categoryName}</h1>
                 </div>
               </div>
@@ -223,7 +223,7 @@ const TopicListView: React.FC = () => {
           </div>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black text-[10px] uppercase tracking-widest rounded-2xl shadow-lg shadow-indigo-600/25 transition-all active:scale-[0.97] flex flex-wrap items-center gap-1.5"
+            className="px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black text-xs sm:text-sm uppercase tracking-widest rounded-2xl shadow-lg shadow-indigo-600/25 transition-all active:scale-[0.97] flex flex-wrap items-center gap-1.5"
           >
             <span className="text-sm leading-none">+</span> New Topic
           </button>
@@ -236,25 +236,25 @@ const TopicListView: React.FC = () => {
         {category?.description && (
           <div className="bg-[#121824]/60 border border-[#1f293d]/40 rounded-2xl px-4 py-3 flex flex-wrap items-center gap-3">
             <span className="text-indigo-400 text-sm shrink-0">ℹ️</span>
-            <p className="text-[11px] text-slate-400 font-medium">{category.description}</p>
+            <p className="text-xs sm:text-sm text-slate-400 font-medium">{category.description}</p>
           </div>
         )}
 
         {/* Controls bar */}
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[10px] text-slate-500 font-bold">
+            <span className="text-xs sm:text-sm text-slate-500 font-bold">
               {loading ? '...' : `${sortedThreads.length} topic${sortedThreads.length !== 1 ? 's' : ''}`}
             </span>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[10px] text-slate-500 font-bold uppercase">Sort:</span>
+            <span className="text-xs sm:text-sm text-slate-500 font-bold uppercase">Sort:</span>
             <div className="flex flex-wrap gap-1">
               {(['newest', 'oldest', 'mostReplies', 'pinned'] as SortMode[]).map(mode => (
                 <button
                   key={mode}
                   onClick={() => setSortMode(mode)}
-                  className={`px-3 py-1.5 text-[9px] font-black uppercase tracking-widest rounded-xl transition-all ${
+                  className={`px-3 py-1.5 text-xs font-black uppercase tracking-widest rounded-xl transition-all ${
                     sortMode === mode
                       ? 'bg-indigo-600/30 border border-indigo-500/40 text-indigo-400'
                       : 'bg-[#121824] border border-[#1f293d] text-slate-500 hover:text-slate-300'
@@ -333,15 +333,15 @@ const TopicListView: React.FC = () => {
                         {thread.title}
                       </h4>
                       <div className="flex flex-wrap items-center gap-2 mt-1">
-                        <p className="text-[10px] text-slate-500 font-semibold">
+                        <p className="text-xs sm:text-sm text-slate-500 font-semibold">
                           by <span className="text-slate-400">@{thread.authorName}</span>
                         </p>
                         <span className="text-slate-700">·</span>
-                        <p className="text-[10px] text-slate-500 font-semibold">{timeAgo(thread.lastActivity || thread.createdAt)}</p>
+                        <p className="text-xs sm:text-sm text-slate-500 font-semibold">{timeAgo(thread.lastActivity || thread.createdAt)}</p>
                         {thread.lastPostAuthor && thread.lastPostAuthor !== thread.authorName && (
                           <>
                             <span className="text-slate-700">·</span>
-                            <p className="text-[10px] text-slate-500 font-semibold">last by <span className="text-slate-400">@{thread.lastPostAuthor}</span></p>
+                            <p className="text-xs sm:text-sm text-slate-500 font-semibold">last by <span className="text-slate-400">@{thread.lastPostAuthor}</span></p>
                           </>
                         )}
                       </div>
@@ -352,11 +352,11 @@ const TopicListView: React.FC = () => {
                   <div className="flex flex-wrap items-center gap-4 shrink-0">
                     <div className="text-center hidden sm:block">
                       <span className="text-xs font-black text-white block">{thread.views || 0}</span>
-                      <span className="text-[8px] font-bold text-slate-600 uppercase tracking-wider">Views</span>
+                      <span className="text-xs font-bold text-slate-600 uppercase tracking-wider">Views</span>
                     </div>
                     <div className="text-center min-w-[40px]">
                       <span className="text-xs font-black text-indigo-400 block">{thread.replyCount || 0}</span>
-                      <span className="text-[8px] font-bold text-slate-600 uppercase tracking-wider">Replies</span>
+                      <span className="text-xs font-bold text-slate-600 uppercase tracking-wider">Replies</span>
                     </div>
                     <svg className="w-4 h-4 text-slate-700 group-hover:text-indigo-400 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
@@ -391,7 +391,7 @@ const TopicListView: React.FC = () => {
               <div className="sticky top-0 bg-[#121824] border-b border-[#1f293d]/60 px-6 py-4 flex items-center justify-between">
                 <div>
                   <h3 className="text-base font-black text-white">🚀 New Discussion Topic</h3>
-                  <p className="text-[10px] text-indigo-400 font-bold mt-0.5">in {categoryName}</p>
+                  <p className="text-xs sm:text-sm text-indigo-400 font-bold mt-0.5">in {categoryName}</p>
                 </div>
                 <button onClick={() => !isSubmitting && setIsModalOpen(false)}
                   className="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-400 hover:text-white transition-all text-sm">✕</button>
@@ -400,25 +400,25 @@ const TopicListView: React.FC = () => {
               <form onSubmit={handleCreateTopic} className="p-6 space-y-4">
                 {/* Title */}
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Topic Title *</label>
+                  <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest">Topic Title *</label>
                   <input
                     type="text" required maxLength={100} disabled={isSubmitting}
                     value={newTitle} onChange={e => setNewTitle(e.target.value)}
                     placeholder="Enter a clear and descriptive topic title..."
                     className="bg-[#090d16] border border-[#1f293d] text-white focus:outline-none focus:border-indigo-500 rounded-2xl p-3.5 w-full text-sm font-semibold transition-colors placeholder-slate-600"
                   />
-                  <div className="text-right text-[9px] text-slate-600 font-bold pr-1">{newTitle.length}/100</div>
+                  <div className="text-right text-xs text-slate-600 font-bold pr-1">{newTitle.length}/100</div>
                 </div>
 
                 {/* Markdown toolbar + content */}
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Content *</label>
+                  <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest">Content *</label>
                   <div className="flex flex-wrap gap-1 p-1.5 bg-[#090d16] rounded-t-2xl border border-b-0 border-[#1f293d]">
                     {TOOLBAR_ACTIONS.map(action => (
                       <button key={action.label} type="button"
                         onClick={() => insertFormat(action.wrap, action.sample)}
                         title={action.title}
-                        className="h-7 px-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-[#1f293d] text-slate-400 hover:text-white active:scale-95 transition-all text-[10px] font-black"
+                        className="h-7 px-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-[#1f293d] text-slate-400 hover:text-white active:scale-95 transition-all text-xs sm:text-sm font-black"
                       >{action.label}</button>
                     ))}
                   </div>
@@ -429,12 +429,12 @@ const TopicListView: React.FC = () => {
                     placeholder="Write your post content here... Markdown formatting supported: **bold**, *italic*, > quote, `code`, [link](url)"
                     className="w-full bg-[#090d16] border border-[#1f293d] rounded-b-2xl text-white focus:outline-none focus:border-indigo-500 px-4 py-3 text-xs font-medium resize-none leading-relaxed transition-colors placeholder-slate-600"
                   />
-                  <div className="text-right text-[9px] text-slate-600 font-bold pr-1">{newContent.length} chars</div>
+                  <div className="text-right text-xs text-slate-600 font-bold pr-1">{newContent.length} chars</div>
                 </div>
 
                 {/* Tags */}
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Tags <span className="text-slate-600 normal-case">(optional, comma separated)</span></label>
+                  <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest">Tags <span className="text-slate-600 normal-case">(optional, comma separated)</span></label>
                   <input
                     type="text" disabled={isSubmitting}
                     value={newTags} onChange={e => setNewTags(e.target.value)}
@@ -444,7 +444,7 @@ const TopicListView: React.FC = () => {
                   {newTags && (
                     <div className="flex flex-wrap gap-1 px-1">
                       {newTags.split(',').map(t => t.trim()).filter(Boolean).map(tag => (
-                        <span key={tag} className="px-2 py-0.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[9px] font-black rounded-lg">#{tag}</span>
+                        <span key={tag} className="px-2 py-0.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-black rounded-lg">#{tag}</span>
                       ))}
                     </div>
                   )}
@@ -454,7 +454,7 @@ const TopicListView: React.FC = () => {
                 {isStaff && (
                   <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3 bg-[#090d16] border border-amber-500/20 p-4 rounded-2xl">
                     <label className="flex items-center justify-between cursor-pointer">
-                      <span className="text-[10px] font-bold text-amber-400 uppercase flex flex-wrap items-center gap-1.5">📌 Pin Topic</span>
+                      <span className="text-xs sm:text-sm font-bold text-amber-400 uppercase flex flex-wrap items-center gap-1.5">📌 Pin Topic</span>
                       <div
                         onClick={() => setIsPinned(!isPinned)}
                         className={`w-10 h-6 rounded-full transition-all cursor-pointer relative ${isPinned ? 'bg-amber-500' : 'bg-slate-700'}`}
@@ -463,7 +463,7 @@ const TopicListView: React.FC = () => {
                       </div>
                     </label>
                     <label className="flex items-center justify-between cursor-pointer">
-                      <span className="text-[10px] font-bold text-rose-400 uppercase flex flex-wrap items-center gap-1.5">🔒 Lock Topic</span>
+                      <span className="text-xs sm:text-sm font-bold text-rose-400 uppercase flex flex-wrap items-center gap-1.5">🔒 Lock Topic</span>
                       <div
                         onClick={() => setIsLocked(!isLocked)}
                         className={`w-10 h-6 rounded-full transition-all cursor-pointer relative ${isLocked ? 'bg-rose-500' : 'bg-slate-700'}`}

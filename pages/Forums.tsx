@@ -30,13 +30,13 @@ const Forums: React.FC = () => {
 
       <div className="px-5 -mt-12 space-y-4 pb-24">
         <div className="bg-[#1C1C2E] p-4 rounded-2xl flex flex-wrap items-center gap-3 border border-white/5 focus-within:border-purple-500/30 transition-colors">
-          <span className="text-white/30">🔍</span>
+          <span className="text-white/60">🔍</span>
           <input placeholder="Search topics..." className="w-full bg-transparent border-none text-xs font-bold outline-none text-white/80 placeholder-white/20" />
         </div>
 
         {categories.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Loading forums...</p>
+            <p className="text-xs font-black text-gray-500 uppercase tracking-widest">Loading forums...</p>
           </div>
         )}
 
@@ -51,13 +51,13 @@ const Forums: React.FC = () => {
               </div>
               <div className="flex-1 min-w-0">
                 <h3 className="text-sm font-black text-white">{cat.name}</h3>
-                <p className="text-[10px] text-white/50 font-bold truncate">{cat.description}</p>
+                <p className="text-xs sm:text-sm text-white/50 font-bold truncate">{cat.description}</p>
                 <div className="mt-2 flex flex-wrap items-center gap-2">
-                  <span className="text-[8px] font-black bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full uppercase tracking-widest">Active</span>
-                  <span className="text-[8px] font-black text-white/20 uppercase tracking-widest">• OPEN</span>
+                  <span className="text-xs font-black bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full uppercase tracking-widest">Active</span>
+                  <span className="text-xs font-black text-white/40 uppercase tracking-widest">• OPEN</span>
                 </div>
               </div>
-              <span className="text-white/20 group-hover:text-purple-400 transition-colors">→</span>
+              <span className="text-white/40 group-hover:text-purple-400 transition-colors">→</span>
             </motion.button>
           );
         })}
@@ -65,8 +65,8 @@ const Forums: React.FC = () => {
         <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] shadow-xl shadow-purple-900/10 rounded-[2.5rem] p-8 text-white relative overflow-hidden">
           <div className="absolute top-0 right-0 p-16 bg-purple-500/10 rounded-full blur-3xl" />
           <h4 className="text-xs font-black uppercase tracking-widest mb-2 relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Start a Thread</h4>
-          <p className="text-[10px] text-white/50 leading-relaxed mb-6 relative z-10">Have something interesting to share with the whole community? Create your own public thread now.</p>
-          <button onClick={() => navigate('/forum/create')} className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-black py-4 rounded-2xl text-[10px] uppercase tracking-widest shadow-xl shadow-purple-900/40 relative z-10 hover:opacity-90 transition-all active:scale-[0.98]">New Discussion 🚀</button>
+          <p className="text-xs sm:text-sm text-white/50 leading-relaxed mb-6 relative z-10">Have something interesting to share with the whole community? Create your own public thread now.</p>
+          <button onClick={() => navigate('/forum/create')} className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-black py-4 rounded-2xl text-xs sm:text-sm uppercase tracking-widest shadow-xl shadow-purple-900/40 relative z-10 hover:opacity-90 transition-all active:scale-[0.98]">New Discussion 🚀</button>
         </div>
       </div>
     </div>

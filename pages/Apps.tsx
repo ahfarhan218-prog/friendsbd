@@ -111,12 +111,12 @@ const Apps: React.FC = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search apps or categories..."
-            className="w-full bg-[#110a2a]/60 backdrop-blur-xl border border-white/10 focus:border-purple-500/50 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] rounded-2xl py-3.5 px-5 pl-12 text-sm text-white font-medium transition-all outline-none placeholder:text-white/30"
+            className="w-full bg-[#110a2a]/60 backdrop-blur-xl border border-white/10 focus:border-purple-500/50 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] rounded-2xl py-3.5 px-5 pl-12 text-sm text-white font-medium transition-all outline-none placeholder:text-white/60"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute inset-y-0 right-0 pr-4 flex items-center text-white/40 hover:text-white text-[10px] font-black uppercase tracking-widest transition-colors"
+              className="absolute inset-y-0 right-0 pr-4 flex items-center text-white/40 hover:text-white text-xs sm:text-sm font-black uppercase tracking-widest transition-colors"
             >
               ✕ Clear
             </button>
@@ -130,7 +130,7 @@ const Apps: React.FC = () => {
           <div className="bg-[#1C1C2E]/60 backdrop-blur-xl border border-white/5 rounded-[2rem] p-12 text-center space-y-3 shadow-xl max-w-md mx-auto">
             <span className="text-5xl block drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">🔍</span>
             <h4 className="font-black text-sm text-white">No Apps Match Your Search</h4>
-            <p className="text-[11px] text-white/40 font-medium leading-relaxed max-w-xs mx-auto">
+            <p className="text-xs sm:text-sm text-white/40 font-medium leading-relaxed max-w-xs mx-auto">
               We couldn't find any tools matching "{searchQuery}". Try double-checking your spelling.
             </p>
           </div>
@@ -150,10 +150,10 @@ const Apps: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="font-black text-base text-white tracking-tight">{section.name}</h3>
-                    <p className="text-[10px] text-white/40 font-bold uppercase tracking-widest mt-1">{section.desc}</p>
+                    <p className="text-xs sm:text-sm text-white/40 font-bold uppercase tracking-widest mt-1">{section.desc}</p>
                   </div>
                 </div>
-                <span className="text-[10px] font-black text-purple-300 bg-purple-500/20 border border-purple-500/30 px-3 py-1 rounded-full shadow-[0_0_10px_rgba(168,85,247,0.2)]">
+                <span className="text-xs sm:text-sm font-black text-purple-300 bg-purple-500/20 border border-purple-500/30 px-3 py-1 rounded-full shadow-[0_0_10px_rgba(168,85,247,0.2)]">
                   {section.apps.length} {section.apps.length === 1 ? 'App' : 'Apps'}
                 </span>
               </div>
@@ -174,13 +174,13 @@ const Apps: React.FC = () => {
 
                       {/* Pill Badge */}
                       {app.badge && (
-                        <span className="absolute -top-2 -right-2 bg-gradient-to-r from-rose-500 to-pink-500 text-white text-[9px] font-black px-2 py-0.5 rounded-full border border-rose-400 shadow-[0_0_10px_rgba(244,63,94,0.5)] z-10">
+                        <span className="absolute -top-2 -right-2 bg-gradient-to-r from-rose-500 to-pink-500 text-white text-xs font-black px-2 py-0.5 rounded-full border border-rose-400 shadow-[0_0_10px_rgba(244,63,94,0.5)] z-10">
                           {app.badge}
                         </span>
                       )}
                     </div>
 
-                    <span className="text-[10px] font-black text-white/60 mt-3 text-center leading-tight truncate w-full px-1 group-hover/app:text-purple-300 transition-colors duration-300">
+                    <span className="text-xs sm:text-sm font-black text-white/60 mt-3 text-center leading-tight truncate w-full px-1 group-hover/app:text-purple-300 transition-colors duration-300">
                       {app.name}
                     </span>
                   </button>

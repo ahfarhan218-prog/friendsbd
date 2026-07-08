@@ -102,13 +102,13 @@ const StaffForum: React.FC = () => {
             <h1 className="text-xl font-black text-white tracking-tight flex flex-wrap items-center gap-2">
               <span className="text-amber-500">🛡️</span> STAFF FORUM
             </h1>
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Private Discussion Area</p>
+            <p className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest">Private Discussion Area</p>
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <div className="hidden md:block text-right">
             <p className="text-xs font-bold text-white">{currentUser.name}</p>
-            <p className="text-[10px] text-amber-500 font-bold uppercase">{currentUser.role}</p>
+            <p className="text-xs sm:text-sm text-amber-500 font-bold uppercase">{currentUser.role}</p>
           </div>
           <img src={currentUser.avatar} alt="You" className="w-10 h-10 rounded-xl border border-[#30363d] shadow-lg" />
         </div>
@@ -142,7 +142,7 @@ const StaffForum: React.FC = () => {
                     <Link to={`/profile/${post.authorName}`} className="text-xs font-bold text-slate-300 hover:text-amber-400 hover:underline transition-colors">
                       {post.authorName}
                     </Link>
-                    <span className="text-[9px] font-medium text-slate-500 uppercase tracking-wider">
+                    <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">
                       {new Date(post.timestamp).toLocaleString([], { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' })}
                     </span>
                   </div>
@@ -202,7 +202,7 @@ const StaffForum: React.FC = () => {
               <svg className="w-5 h-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
             </button>
           </div>
-          <p className="text-center mt-2 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+          <p className="text-center mt-2 text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-widest">
             Press <kbd className="bg-[#1a1f27] px-1.5 py-0.5 rounded border border-[#30363d]">Enter</kbd> to send
           </p>
         </div>

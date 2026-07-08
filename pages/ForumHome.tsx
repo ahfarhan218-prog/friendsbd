@@ -217,12 +217,12 @@ const ForumHome: React.FC = () => {
                 <span className="text-lg">💬</span>
                 <h1 className="text-base font-black text-white tracking-tight">Discussion Forums</h1>
               </div>
-              <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">Explore topics & discussions</p>
+              <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-0.5">Explore topics & discussions</p>
             </div>
           </div>
           <button
             onClick={() => navigate('/forum/create')}
-            className="px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black text-[10px] uppercase tracking-widest rounded-2xl shadow-lg shadow-indigo-600/25 transition-all active:scale-[0.97] flex flex-wrap items-center gap-1.5"
+            className="px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black text-xs sm:text-sm uppercase tracking-widest rounded-2xl shadow-lg shadow-indigo-600/25 transition-all active:scale-[0.97] flex flex-wrap items-center gap-1.5"
           >
             <span className="text-sm leading-none">+</span> New Topic
           </button>
@@ -253,9 +253,9 @@ const ForumHome: React.FC = () => {
             >
               <div className="flex items-start justify-between">
                 <div className="min-w-0 flex-1">
-                  <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest block">{stat.label}</span>
+                  <span className="text-xs font-black text-slate-500 uppercase tracking-widest block">{stat.label}</span>
                   <p className={`text-sm font-black mt-1 truncate ${stat.color}`}>{loading ? '...' : stat.value}</p>
-                  <span className="text-[9px] text-slate-600 font-bold">{stat.sub}</span>
+                  <span className="text-xs text-slate-600 font-bold">{stat.sub}</span>
                 </div>
                 <span className="text-2xl opacity-20 select-none group-hover:opacity-30 transition-opacity">{stat.icon}</span>
               </div>
@@ -273,7 +273,7 @@ const ForumHome: React.FC = () => {
           >
             <span className="text-indigo-400 text-base shrink-0">🕒</span>
             <div className="min-w-0 flex-1">
-              <span className="text-[9px] font-black text-indigo-500 uppercase tracking-widest">Last Activity</span>
+              <span className="text-xs font-black text-indigo-500 uppercase tracking-widest">Last Activity</span>
               <p className="text-xs font-bold text-indigo-300 group-hover:text-indigo-200 truncate transition-colors">{stats.lastPost}</p>
             </div>
             <svg className="w-4 h-4 text-indigo-500 group-hover:text-indigo-300 group-hover:translate-x-1 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -287,12 +287,12 @@ const ForumHome: React.FC = () => {
           <div className="flex items-center justify-between px-1">
             <div className="flex flex-wrap items-center gap-3">
               <h2 className="text-xs font-black text-slate-400 uppercase tracking-widest">Forum Categories</h2>
-              <span className="px-2 py-0.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[9px] font-black rounded-lg">{categories.length}</span>
+              <span className="px-2 py-0.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-black rounded-lg">{categories.length}</span>
             </div>
             {isAdmin && (
               <button
                 onClick={() => setIsAddCatModalOpen(true)}
-                className="px-3 py-1.5 bg-indigo-600/20 hover:bg-indigo-600/40 border border-indigo-500/30 text-indigo-400 text-[9px] font-black uppercase tracking-widest rounded-xl transition-all"
+                className="px-3 py-1.5 bg-indigo-600/20 hover:bg-indigo-600/40 border border-indigo-500/30 text-indigo-400 text-xs font-black uppercase tracking-widest rounded-xl transition-all"
               >
                 + Add Category
               </button>
@@ -335,9 +335,9 @@ const ForumHome: React.FC = () => {
                               <span className="px-1.5 py-0.5 text-[7px] font-black uppercase bg-slate-800 border border-slate-700 rounded text-slate-400">Hidden</span>
                             )}
                           </div>
-                          <p className="text-[10px] text-slate-400 mt-1 truncate">{cat.description}</p>
+                          <p className="text-xs sm:text-sm text-slate-400 mt-1 truncate">{cat.description}</p>
                           <div className="flex flex-wrap items-center gap-2 mt-2">
-                            <span className="inline-flex flex-wrap items-center gap-1 px-2 py-0.5 text-[9px] font-black uppercase bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-lg">
+                            <span className="inline-flex flex-wrap items-center gap-1 px-2 py-0.5 text-xs font-black uppercase bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-lg">
                               🎯 {topicsCount} topics
                             </span>
                           </div>
@@ -374,7 +374,7 @@ const ForumHome: React.FC = () => {
             {isSearching && (
               <button
                 onClick={() => { setIsSearching(false); setSearchText(''); setSearchResults([]); }}
-                className="text-[10px] font-bold text-rose-400 hover:text-rose-300 transition-colors"
+                className="text-xs sm:text-sm font-bold text-rose-400 hover:text-rose-300 transition-colors"
               >
                 Clear ✕
               </button>
@@ -397,7 +397,7 @@ const ForumHome: React.FC = () => {
                 <select
                   value={searchSort}
                   onChange={e => setSearchSort(e.target.value as any)}
-                  className="bg-[#090d16] border border-[#1f293d] text-white text-[10px] font-black uppercase tracking-widest rounded-2xl px-3 py-3 outline-none cursor-pointer appearance-none"
+                  className="bg-[#090d16] border border-[#1f293d] text-white text-xs sm:text-sm font-black uppercase tracking-widest rounded-2xl px-3 py-3 outline-none cursor-pointer appearance-none"
                 >
                   <option value="newest">Newest</option>
                   <option value="oldest">Oldest</option>
@@ -405,7 +405,7 @@ const ForumHome: React.FC = () => {
                 <button
                   type="submit"
                   disabled={searchingDb || !searchText.trim()}
-                  className="px-5 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-black text-[10px] uppercase tracking-widest rounded-2xl transition-all shadow-lg active:scale-95 shrink-0"
+                  className="px-5 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-black text-xs sm:text-sm uppercase tracking-widest rounded-2xl transition-all shadow-lg active:scale-95 shrink-0"
                 >
                   {searchingDb ? '...' : 'Search'}
                 </button>
@@ -429,7 +429,7 @@ const ForumHome: React.FC = () => {
                   <div className="py-10 text-center text-slate-500 text-xs font-bold">No results found for "{searchText}"</div>
                 ) : (
                   <div className="space-y-2">
-                    <p className="text-[10px] text-slate-500 font-bold mb-3">{sortedSearchResults.length} result(s) found</p>
+                    <p className="text-xs sm:text-sm text-slate-500 font-bold mb-3">{sortedSearchResults.length} result(s) found</p>
                     {sortedSearchResults.map(t => (
                       <motion.div
                         key={t.id}
@@ -443,7 +443,7 @@ const ForumHome: React.FC = () => {
                         </span>
                         <div className="min-w-0 flex-1">
                           <h4 className="text-xs font-black text-white group-hover:text-indigo-400 transition-colors truncate">{t.title}</h4>
-                          <p className="text-[9px] text-slate-500 font-bold mt-0.5">
+                          <p className="text-xs text-slate-500 font-bold mt-0.5">
                             by @{t.authorName} · {t.replyCount || 0} replies · {new Date(t.lastActivity || t.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: '2-digit' })}
                           </p>
                         </div>
@@ -467,7 +467,7 @@ const ForumHome: React.FC = () => {
           >
             <span className="text-2xl block mb-2">✍️</span>
             <h4 className="text-xs font-black text-white group-hover:text-indigo-400 transition-colors">Create Topic</h4>
-            <p className="text-[9px] text-slate-500 font-bold mt-1">Start a new discussion</p>
+            <p className="text-xs text-slate-500 font-bold mt-1">Start a new discussion</p>
           </button>
           <div
             onClick={() => navigate('/staff')}
@@ -475,7 +475,7 @@ const ForumHome: React.FC = () => {
           >
             <span className="text-2xl block mb-2">🛡️</span>
             <h4 className="text-xs font-black text-white group-hover:text-amber-400 transition-colors">Staff Forum</h4>
-            <p className="text-[9px] text-slate-500 font-bold mt-1">Moderator discussions</p>
+            <p className="text-xs text-slate-500 font-bold mt-1">Moderator discussions</p>
           </div>
         </section>
       </main>
@@ -499,12 +499,12 @@ const ForumHome: React.FC = () => {
             >
               <div>
                 <h3 className="text-base font-black text-white flex flex-wrap items-center gap-2">📁 Create New Category</h3>
-                <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Admin only</p>
+                <p className="text-xs sm:text-sm text-slate-400 uppercase tracking-widest mt-1">Admin only</p>
               </div>
 
               <form onSubmit={handleAddCategory} className="space-y-4">
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">Category Name</label>
+                  <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-1">Category Name</label>
                   <input
                     type="text" required maxLength={30} disabled={isSubmittingCat}
                     value={newCatName} onChange={e => setNewCatName(e.target.value)}
@@ -513,7 +513,7 @@ const ForumHome: React.FC = () => {
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">Description</label>
+                  <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-1">Description</label>
                   <input
                     type="text" required maxLength={100} disabled={isSubmittingCat}
                     value={newCatDesc} onChange={e => setNewCatDesc(e.target.value)}
@@ -523,7 +523,7 @@ const ForumHome: React.FC = () => {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-3">
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">Icon Emoji</label>
+                    <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-1">Icon Emoji</label>
                     <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 gap-1 bg-[#090d16] border border-[#1f293d] rounded-2xl p-2">
                       {EMOJI_OPTIONS.map(em => (
                         <button key={em} type="button" onClick={() => setNewCatIcon(em)}
@@ -533,7 +533,7 @@ const ForumHome: React.FC = () => {
                     </div>
                   </div>
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">Color Theme</label>
+                    <label className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest px-1">Color Theme</label>
                     <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4 gap-1">
                       {Object.entries(colorMap).map(([color, gradient]) => (
                         <button key={color} type="button" onClick={() => setNewCatColor(color)}
@@ -541,7 +541,7 @@ const ForumHome: React.FC = () => {
                         />
                       ))}
                     </div>
-                    <p className="text-[9px] text-slate-500 text-center pt-1 capitalize">{newCatColor}</p>
+                    <p className="text-xs text-slate-500 text-center pt-1 capitalize">{newCatColor}</p>
                   </div>
                 </div>
 
@@ -552,7 +552,7 @@ const ForumHome: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-xs font-black text-white">{newCatName || 'Category Name'}</p>
-                    <p className="text-[9px] text-slate-500">{newCatDesc || 'Description...'}</p>
+                    <p className="text-xs text-slate-500">{newCatDesc || 'Description...'}</p>
                   </div>
                 </div>
 

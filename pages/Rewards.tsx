@@ -77,7 +77,7 @@ const Rewards: React.FC = () => {
             </button>
             <div>
               <h2 className="text-2xl font-bold">Rewards Hub</h2>
-              <p className="text-[10px] opacity-70 uppercase tracking-widest font-bold">Earn & Redeem Points</p>
+              <p className="text-xs sm:text-sm opacity-70 uppercase tracking-widest font-bold">Earn & Redeem Points</p>
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -101,7 +101,7 @@ const Rewards: React.FC = () => {
           </div>
           <button onClick={handleCheckIn} disabled={checkedIn}
             className={`w-full py-4 rounded-2xl font-black text-sm flex flex-wrap items-center justify-center gap-2 transition-all shadow-lg ${
-              checkedIn ? 'bg-[#161b22] text-white/30 shadow-none cursor-not-allowed border border-white/5' : 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-900/30 hover:opacity-90 active:scale-[0.98]'}`}>
+              checkedIn ? 'bg-[#161b22] text-white/60 shadow-none cursor-not-allowed border border-white/5' : 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-900/30 hover:opacity-90 active:scale-[0.98]'}`}>
             {checkedIn ? 'CHECKED IN TODAY' : 'CLAIM DAILY +20 COINS'}
           </button>
         </div>
@@ -124,7 +124,7 @@ const Rewards: React.FC = () => {
             <div className="space-y-6">
               <div className="flex items-center justify-between mb-2">
                 <h4 className="text-xs font-black text-white/50 uppercase tracking-widest">Available Tasks</h4>
-                <span className="text-[10px] text-white/30">Refreshes Daily</span>
+                <span className="text-xs sm:text-sm text-white/60">Refreshes Daily</span>
               </div>
               <div className="space-y-5">
                 {earnTasks.map((task) => (
@@ -135,7 +135,7 @@ const Rewards: React.FC = () => {
                       </div>
                       <div>
                         <h5 className="font-bold text-white text-sm leading-tight">{task.label}</h5>
-                        <p className="text-[10px] text-white/50 mt-0.5">{task.desc}</p>
+                        <p className="text-xs sm:text-sm text-white/50 mt-0.5">{task.desc}</p>
                       </div>
                     </div>
                     <div className="bg-[#161b22] px-3 py-1 rounded-full border border-white/5">
@@ -150,8 +150,8 @@ const Rewards: React.FC = () => {
               <div className="flex items-center justify-between mb-2">
                 <h4 className="text-xs font-black text-white/50 uppercase tracking-widest">Redeem Rewards</h4>
                 <div className="flex flex-wrap items-center gap-1">
-                  <span className="text-[10px] text-white/40">Balance:</span>
-                  <span className="text-[10px] font-black text-amber-500">💰 {user.points}</span>
+                  <span className="text-xs sm:text-sm text-white/40">Balance:</span>
+                  <span className="text-xs sm:text-sm font-black text-amber-500">💰 {user.points}</span>
                 </div>
               </div>
               <div className="grid grid-cols-1 gap-4">
@@ -166,12 +166,12 @@ const Rewards: React.FC = () => {
                         </div>
                         <div>
                           <h5 className="font-bold text-white text-sm">{item.label}</h5>
-                          <p className="text-[10px] text-white/50">{item.desc}</p>
+                          <p className="text-xs sm:text-sm text-white/50">{item.desc}</p>
                         </div>
                       </div>
                       <button onClick={() => handleRedeem(item.id, item.cost)} disabled={isOwned || !canAfford}
-                        className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-tighter transition-all ${
-                          isOwned ? 'bg-emerald-500/10 text-emerald-400 cursor-default' : canAfford ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-900/30 hover:opacity-90 active:scale-95' : 'bg-[#161b22] text-white/30 cursor-not-allowed border border-white/5'}`}>
+                        className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-black uppercase tracking-tighter transition-all ${
+                          isOwned ? 'bg-emerald-500/10 text-emerald-400 cursor-default' : canAfford ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-900/30 hover:opacity-90 active:scale-95' : 'bg-[#161b22] text-white/60 cursor-not-allowed border border-white/5'}`}>
                         {isOwned ? 'OWNED' : `REDEEM ${item.cost}`}
                       </button>
                     </div>
@@ -188,7 +188,7 @@ const Rewards: React.FC = () => {
           <div className="relative z-10">
             <div className="flex justify-between items-end mb-4">
               <div>
-                <p className="text-[10px] font-black uppercase tracking-widest opacity-60">Level Progress</p>
+                <p className="text-xs sm:text-sm font-black uppercase tracking-widest opacity-60">Level Progress</p>
                 <h4 className="text-xl font-black">Level {user.level} <span className="text-sm opacity-50 ml-1">→ Level {(user.level || 1) + 1}</span></h4>
               </div>
               <p className="text-xs font-bold">{user.points}/5000 XP</p>

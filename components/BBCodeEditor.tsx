@@ -60,15 +60,15 @@ const BBCodeEditor: React.FC<BBCodeEditorProps> = ({ initialValue = "", onPublis
             <button 
               key={btn.label}
               onClick={() => insertTag(btn.tag, btn.value)}
-              className="w-10 h-10 shrink-0 bg-white border border-slate-200 rounded-xl flex items-center justify-center text-[11px] font-black text-slate-600 hover:border-purple-400 hover:text-purple-600 transition-all active:scale-90 shadow-sm"
+              className="w-10 h-10 shrink-0 bg-white border border-slate-200 rounded-xl flex items-center justify-center text-xs sm:text-sm font-black text-slate-600 hover:border-purple-400 hover:text-purple-600 transition-all active:scale-90 shadow-sm"
             >
               {btn.icon}
             </button>
           ))}
         </div>
         <div className="flex bg-white rounded-xl p-1 border border-slate-200 shadow-inner ml-4 shrink-0">
-          <button onClick={() => setView('write')} className={`px-4 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all ${view === 'write' ? 'bg-slate-900 text-white' : 'text-slate-400'}`}>Write</button>
-          <button onClick={() => setView('preview')} className={`px-4 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all ${view === 'preview' ? 'bg-slate-900 text-white' : 'text-slate-400'}`}>Preview</button>
+          <button onClick={() => setView('write')} className={`px-4 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${view === 'write' ? 'bg-slate-900 text-white' : 'text-slate-400'}`}>Write</button>
+          <button onClick={() => setView('preview')} className={`px-4 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${view === 'preview' ? 'bg-slate-900 text-white' : 'text-slate-400'}`}>Preview</button>
         </div>
       </div>
 
@@ -102,13 +102,13 @@ const BBCodeEditor: React.FC<BBCodeEditorProps> = ({ initialValue = "", onPublis
       {/* FOOTER */}
       <div className="p-6 bg-slate-900 border-t border-white/5 flex items-center justify-between">
         <div>
-          <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Character Metrics</p>
+          <p className="text-xs sm:text-sm font-black text-slate-500 uppercase tracking-widest">Character Metrics</p>
           <p className="text-xs font-mono text-purple-400 font-black">{content.length} chars</p>
         </div>
         <button 
           onClick={() => onPublish(content)}
           disabled={!content.trim()}
-          className="bg-[#7F00FF] text-white px-10 py-4 rounded-2xl font-black text-[11px] uppercase tracking-[0.2em] shadow-xl active:scale-95 disabled:opacity-30 transition-all"
+          className="bg-[#7F00FF] text-white px-10 py-4 rounded-2xl font-black text-xs sm:text-sm uppercase tracking-[0.2em] shadow-xl active:scale-95 disabled:opacity-30 transition-all"
         >
           Publish 🚀
         </button>

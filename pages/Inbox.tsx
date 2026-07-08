@@ -411,7 +411,7 @@ const Inbox: React.FC = () => {
               <h2 className="text-2xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400 flex flex-wrap items-center gap-2">
                 Inbox Hub
               </h2>
-              <p className="text-[9px] text-indigo-300/60 font-black uppercase tracking-widest mt-0.5">
+              <p className="text-xs text-indigo-300/60 font-black uppercase tracking-widest mt-0.5">
                 Level {currentUser?.level || 1} • {currentUser?.points || 0} pts
               </p>
             </div>
@@ -455,7 +455,7 @@ const Inbox: React.FC = () => {
           >
             👥 Invites
             {requests.length > 0 && (
-              <span className="absolute -top-1 -right-1 bg-rose-500 text-white text-[9px] font-black px-2 py-0.5 rounded-full border border-rose-400 shadow-[0_0_8px_rgba(244,63,94,0.6)]">
+              <span className="absolute -top-1 -right-1 bg-rose-500 text-white text-xs font-black px-2 py-0.5 rounded-full border border-rose-400 shadow-[0_0_8px_rgba(244,63,94,0.6)]">
                 {requests.length}
               </span>
             )}
@@ -475,7 +475,7 @@ const Inbox: React.FC = () => {
               <span className="text-xs font-black text-purple-300/60 uppercase tracking-wider">Start a discussion</span>
               <button 
                 onClick={() => setIsComposing(true)}
-                className="bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/30 text-purple-300 font-black px-4 py-2.5 rounded-xl text-[10px] uppercase tracking-widest flex flex-wrap items-center gap-1.5 transition-all active:scale-95 shadow-[0_0_15px_rgba(147,51,234,0.1)]"
+                className="bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/30 text-purple-300 font-black px-4 py-2.5 rounded-xl text-xs sm:text-sm uppercase tracking-widest flex flex-wrap items-center gap-1.5 transition-all active:scale-95 shadow-[0_0_15px_rgba(147,51,234,0.1)]"
               >
                 <span>➕ New Message</span>
               </button>
@@ -490,7 +490,7 @@ const Inbox: React.FC = () => {
               </div>
             ) : (
               <div className="bg-[#1A1A35]/40 backdrop-blur-md rounded-[2.5rem] p-4 shadow-xl border border-purple-500/20 space-y-1">
-                <p className="text-[10px] font-extrabold uppercase text-purple-400/80 tracking-widest pl-4 py-3 border-b border-purple-500/10">Active Threads</p>
+                <p className="text-xs sm:text-sm font-extrabold uppercase text-purple-400/80 tracking-widest pl-4 py-3 border-b border-purple-500/10">Active Threads</p>
                 {conversations.map(conv => {
                   const isUnread = conv.unreadCount > 0;
                   return (
@@ -521,7 +521,7 @@ const Inbox: React.FC = () => {
                         )}
                         
                         {isUnread && (
-                          <span className="absolute -top-1 -right-1 bg-pink-500 text-white text-[9px] w-5.5 h-5.5 rounded-full flex items-center justify-center border-2 border-[#1A1A35] font-black shadow-[0_0_10px_rgba(236,72,153,0.8)] animate-pulse">
+                          <span className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs w-5.5 h-5.5 rounded-full flex items-center justify-center border-2 border-[#1A1A35] font-black shadow-[0_0_10px_rgba(236,72,153,0.8)] animate-pulse">
                             {conv.unreadCount}
                           </span>
                         )}
@@ -534,7 +534,7 @@ const Inbox: React.FC = () => {
                           }`}>
                             {conv.isGroup ? conv.groupName : conv.participants[0].name}
                           </h4>
-                          <span className={`text-[9px] uppercase tracking-widest ${
+                          <span className={`text-xs uppercase tracking-widest ${
                             isUnread ? 'text-purple-400 font-extrabold' : 'text-purple-300/40 font-extrabold'
                           }`}>{conv.timestamp}</span>
                         </div>
@@ -557,7 +557,7 @@ const Inbox: React.FC = () => {
           <div className="space-y-4">
             
             <div className="bg-[#1A1A35]/40 backdrop-blur-md rounded-[2.5rem] p-5 shadow-xl border border-purple-500/20 space-y-3">
-              <p className="text-[10px] font-extrabold uppercase text-purple-400/80 tracking-widest pl-2 mb-2">My Community Mailbox</p>
+              <p className="text-xs sm:text-sm font-extrabold uppercase text-purple-400/80 tracking-widest pl-2 mb-2">My Community Mailbox</p>
               
               {letters.length === 0 ? (
                 <div className="text-center py-12">
@@ -585,10 +585,10 @@ const Inbox: React.FC = () => {
 
                     <div className="flex-1 min-w-0 space-y-1">
                       <div className="flex justify-between items-baseline">
-                        <span className="text-[9px] font-black bg-purple-500/20 text-purple-300 uppercase tracking-wider px-2 py-0.5 rounded-md border border-purple-500/30">
+                        <span className="text-xs font-black bg-purple-500/20 text-purple-300 uppercase tracking-wider px-2 py-0.5 rounded-md border border-purple-500/30">
                           {letter.sender}
                         </span>
-                        <span className="text-[8px] font-extrabold uppercase tracking-widest text-purple-300/60">
+                        <span className="text-xs font-extrabold uppercase tracking-widest text-purple-300/60">
                           {letter.timestamp}
                         </span>
                       </div>
@@ -597,7 +597,7 @@ const Inbox: React.FC = () => {
                         {letter.title}
                       </h4>
                       
-                      <p className="text-[11px] text-purple-300/60 line-clamp-1 font-medium select-none">
+                      <p className="text-xs sm:text-sm text-purple-300/60 line-clamp-1 font-medium select-none">
                         {letter.content}
                       </p>
 
@@ -605,17 +605,17 @@ const Inbox: React.FC = () => {
                       {(letter.pointsReward || letter.coinsReward) && (
                         <div className="flex flex-wrap gap-2 pt-1">
                           {letter.pointsReward && (
-                            <span className="text-[9px] bg-emerald-500/10 text-emerald-400 font-black px-2 py-0.5 rounded-lg flex flex-wrap items-center gap-0.5 border border-emerald-500/20 shadow-[0_0_10px_rgba(52,211,153,0.1)]">
+                            <span className="text-xs bg-emerald-500/10 text-emerald-400 font-black px-2 py-0.5 rounded-lg flex flex-wrap items-center gap-0.5 border border-emerald-500/20 shadow-[0_0_10px_rgba(52,211,153,0.1)]">
                               🎁 +{letter.pointsReward} Points
                             </span>
                           )}
                           {letter.coinsReward && (
-                            <span className="text-[9px] bg-amber-500/10 text-amber-300 font-black px-2 py-0.5 rounded-lg flex flex-wrap items-center gap-0.5 border border-amber-500/20 shadow-[0_0_10px_rgba(251,191,36,0.1)]">
+                            <span className="text-xs bg-amber-500/10 text-amber-300 font-black px-2 py-0.5 rounded-lg flex flex-wrap items-center gap-0.5 border border-amber-500/20 shadow-[0_0_10px_rgba(251,191,36,0.1)]">
                               👑 +{letter.coinsReward} Coins
                             </span>
                           )}
                           {letter.isClaimed && (
-                            <span className="text-[9px] text-emerald-400/80 font-black uppercase tracking-wider flex flex-wrap items-center gap-1">
+                            <span className="text-xs text-emerald-400/80 font-black uppercase tracking-wider flex flex-wrap items-center gap-1">
                               ✓ Claimed
                             </span>
                           )}
@@ -633,7 +633,7 @@ const Inbox: React.FC = () => {
         {activeTab === 'requests' && (
           <div className="space-y-4">
             <div className="bg-[#1A1A35]/40 backdrop-blur-md rounded-[2.5rem] p-5 shadow-xl border border-purple-500/20 space-y-4">
-              <p className="text-[10px] font-extrabold uppercase text-purple-400/80 tracking-widest pl-2">Pending Requests</p>
+              <p className="text-xs sm:text-sm font-extrabold uppercase text-purple-400/80 tracking-widest pl-2">Pending Requests</p>
               
               <AnimatePresence mode="popLayout">
                 {requests.length > 0 ? (
@@ -649,7 +649,7 @@ const Inbox: React.FC = () => {
                       <img src={req.avatar} className="w-13 h-13 rounded-2xl object-cover shadow-[0_0_15px_rgba(168,85,247,0.2)] border-2 border-purple-500/30 group-hover:border-purple-400 shrink-0 transition-all" alt="" />
                       
                       <div className="flex-1 min-w-0">
-                        <span className="text-[9px] font-black text-pink-400 uppercase tracking-widest block mb-0.5">
+                        <span className="text-xs font-black text-pink-400 uppercase tracking-widest block mb-0.5">
                           {req.type}
                         </span>
                         
@@ -657,7 +657,7 @@ const Inbox: React.FC = () => {
                           {req.name}
                         </h4>
                         
-                        <p className="text-[9px] text-purple-300/60 font-black uppercase tracking-wider">
+                        <p className="text-xs text-purple-300/60 font-black uppercase tracking-wider">
                           {req.mutual} {typeof req.mutual === 'number' ? 'Mutual Mates' : 'Activity'}
                         </p>
                       </div>
@@ -713,7 +713,7 @@ const Inbox: React.FC = () => {
                   <img src={activeLetter.senderAvatar} className="w-11 h-11 rounded-xl object-cover shadow-[0_0_15px_rgba(168,85,247,0.2)] border-2 border-purple-500/30" alt="" />
                   <div>
                     <h4 className="text-sm font-black text-white">{activeLetter.sender}</h4>
-                    <p className="text-[9px] text-purple-400 font-extrabold uppercase tracking-widest">{activeLetter.senderRole}</p>
+                    <p className="text-xs text-purple-400 font-extrabold uppercase tracking-widest">{activeLetter.senderRole}</p>
                   </div>
                 </div>
                 
@@ -739,7 +739,7 @@ const Inbox: React.FC = () => {
                 {(activeLetter.pointsReward || activeLetter.coinsReward) && (
                   <div className="p-4 rounded-2xl bg-gradient-to-tr from-[#1A1A35] to-purple-900/30 border border-purple-500/30 flex items-center justify-between shadow-[0_0_20px_rgba(147,51,234,0.1)]">
                     <div>
-                      <p className="text-[10px] font-black uppercase text-purple-400 tracking-widest mb-1">Enclosed Gifts</p>
+                      <p className="text-xs sm:text-sm font-black uppercase text-purple-400 tracking-widest mb-1">Enclosed Gifts</p>
                       <div className="flex flex-wrap gap-2">
                         {activeLetter.pointsReward && (
                           <span className="text-xs font-black text-emerald-400">✨ {activeLetter.pointsReward} Points</span>
@@ -753,7 +753,7 @@ const Inbox: React.FC = () => {
                     <button
                       onClick={() => handleClaimReward(activeLetter)}
                       disabled={activeLetter.isClaimed}
-                      className={`text-[10px] font-black uppercase tracking-widest px-4 py-2.5 rounded-xl text-white transition-all shadow-[0_0_15px_rgba(168,85,247,0.3)] ${
+                      className={`text-xs sm:text-sm font-black uppercase tracking-widest px-4 py-2.5 rounded-xl text-white transition-all shadow-[0_0_15px_rgba(168,85,247,0.3)] ${
                         activeLetter.isClaimed 
                           ? 'bg-purple-900/50 shadow-none cursor-default text-purple-300/50 border border-purple-500/20' 
                           : 'bg-emerald-500 hover:bg-emerald-400 hover:scale-105 active:scale-95'
@@ -768,7 +768,7 @@ const Inbox: React.FC = () => {
               <div className="mt-6 flex justify-end">
                 <button 
                   onClick={() => setActiveLetter(null)}
-                  className="bg-[#1A1A35] border border-purple-500/30 text-purple-300 hover:text-white font-black px-6 py-3.5 rounded-xl text-[10px] uppercase tracking-widest hover:bg-purple-600/30 transition-all text-center w-full"
+                  className="bg-[#1A1A35] border border-purple-500/30 text-purple-300 hover:text-white font-black px-6 py-3.5 rounded-xl text-xs sm:text-sm uppercase tracking-widest hover:bg-purple-600/30 transition-all text-center w-full"
                 >
                   Close Letter
                 </button>
@@ -816,7 +816,7 @@ const Inbox: React.FC = () => {
                       <h4 className="text-sm font-black tracking-tight truncate max-w-[200px] text-white">
                         {activeChat.isGroup ? activeChat.groupName : activeChat.participants[0].name}
                       </h4>
-                      <p className="text-[8px] text-purple-300/80 font-bold uppercase tracking-widest flex flex-wrap items-center gap-1">
+                      <p className="text-xs text-purple-300/80 font-bold uppercase tracking-widest flex flex-wrap items-center gap-1">
                         <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse"></span>
                         Secure PM
                       </p>
@@ -828,7 +828,7 @@ const Inbox: React.FC = () => {
                   onClick={() => {
                     navigate('/chat');
                   }}
-                  className="bg-purple-600/20 hover:bg-purple-600/40 font-black text-purple-300 text-[9px] uppercase tracking-wider px-3 py-1.5 rounded-lg border border-purple-500/30 transition-all shadow-[0_0_10px_rgba(147,51,234,0.1)]"
+                  className="bg-purple-600/20 hover:bg-purple-600/40 font-black text-purple-300 text-xs uppercase tracking-wider px-3 py-1.5 rounded-lg border border-purple-500/30 transition-all shadow-[0_0_10px_rgba(147,51,234,0.1)]"
                 >
                   Full View
                 </button>
@@ -843,7 +843,7 @@ const Inbox: React.FC = () => {
                         ? 'bg-gradient-to-br from-purple-600 to-indigo-600 text-white rounded-br-sm border border-purple-400/30'
                         : 'bg-[#1A1A35]/80 text-white rounded-bl-sm border border-purple-500/20'
                     }`}>
-                      <p className={`font-black text-[9px] mb-0.5 block select-none uppercase tracking-wider ${msg.isMe ? 'text-purple-200' : 'text-purple-400'}`}>
+                      <p className={`font-black text-xs mb-0.5 block select-none uppercase tracking-wider ${msg.isMe ? 'text-purple-200' : 'text-purple-400'}`}>
                         {msg.sender}
                       </p>
                       <p className="font-bold text-[13px] leading-snug">{msg.displayText || msg.text}</p>
@@ -883,7 +883,7 @@ const Inbox: React.FC = () => {
               {/* Chat Textbar */}
               <div className="p-4 bg-[#12122A]/80 backdrop-blur-md border-t border-purple-500/20 shrink-0 relative z-10">
                 <div className="flex flex-wrap items-center gap-1 mb-2">
-                  <span className="text-[9px] text-emerald-400 font-black flex flex-wrap items-center gap-1 uppercase tracking-widest">
+                  <span className="text-xs text-emerald-400 font-black flex flex-wrap items-center gap-1 uppercase tracking-widest">
                     🔒 End-to-end encrypted
                   </span>
                 </div>
@@ -958,7 +958,7 @@ const Inbox: React.FC = () => {
               </div>
 
               <div className="flex-1 overflow-y-auto p-4 space-y-2 no-scrollbar bg-transparent relative z-10">
-                <p className="text-[9px] font-black uppercase text-purple-400/80 tracking-widest pl-2 mb-2">My Friends List</p>
+                <p className="text-xs font-black uppercase text-purple-400/80 tracking-widest pl-2 mb-2">My Friends List</p>
                 {filteredFriends.length === 0 ? (
                   <div className="text-center py-8">
                     <p className="text-xs font-bold text-purple-300/60">No matching friends list</p>
@@ -973,9 +973,9 @@ const Inbox: React.FC = () => {
                       <img src={friend.avatar} className="w-10 h-10 rounded-xl object-cover shadow-[0_0_15px_rgba(168,85,247,0.1)] border border-purple-500/30 group-hover:border-purple-400 shrink-0 transition-all" alt="" />
                       <div className="flex-1 min-w-0">
                         <h4 className="font-extrabold text-xs text-white truncate">{friend.name}</h4>
-                        <p className="text-[10px] text-purple-300/60 font-bold">@{friend.username}</p>
+                        <p className="text-xs sm:text-sm text-purple-300/60 font-bold">@{friend.username}</p>
                       </div>
-                      <span className="text-[10px] font-black text-purple-300 bg-purple-500/20 px-2.5 py-1 rounded-lg border border-purple-500/30 group-hover:bg-purple-600/30 group-hover:text-white transition-all">
+                      <span className="text-xs sm:text-sm font-black text-purple-300 bg-purple-500/20 px-2.5 py-1 rounded-lg border border-purple-500/30 group-hover:bg-purple-600/30 group-hover:text-white transition-all">
                         Chat
                       </span>
                     </button>

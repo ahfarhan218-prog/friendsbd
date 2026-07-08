@@ -118,13 +118,13 @@ const SiteStatsDashboard: React.FC = () => {
             </svg>
           </button>
           <div>
-            <span className="text-[9px] font-black text-indigo-400 uppercase tracking-[0.3em] block mb-0.5">Admin Analytics</span>
+            <span className="text-xs font-black text-indigo-400 uppercase tracking-[0.3em] block mb-0.5">Admin Analytics</span>
             <h1 className="text-lg font-black text-white tracking-tight">Member Status Engine</h1>
           </div>
         </div>
 
         <div className="bg-[#121824] border border-[#1f293d] px-4 py-2 rounded-2xl text-right">
-          <span className="text-[9px] text-slate-500 font-bold uppercase block tracking-wider">Total Members</span>
+          <span className="text-xs text-slate-500 font-bold uppercase block tracking-wider">Total Members</span>
           <span className="text-sm font-black text-indigo-400">{totalMembers} users</span>
         </div>
       </header>
@@ -139,7 +139,7 @@ const SiteStatsDashboard: React.FC = () => {
           <div className="space-y-4">
             <div className="flex items-center justify-between border-b border-[#1f293d]/50 pb-2">
               <h2 className="text-xs font-black text-slate-400 uppercase tracking-widest">Plusses Status Tiers List</h2>
-              <span className="text-[9px] text-slate-600 font-bold uppercase">Dynamic Aggregation</span>
+              <span className="text-xs text-slate-600 font-bold uppercase">Dynamic Aggregation</span>
             </div>
 
             <div className="space-y-3">
@@ -163,7 +163,7 @@ const SiteStatsDashboard: React.FC = () => {
                           <span className={`text-xs font-black uppercase tracking-wider ${tier.color.split(' ')[0]}`}>
                             {tier.title}
                           </span>
-                          <span className="px-1.5 py-0.5 text-[8px] font-bold font-mono bg-[#090d16] border border-[#1f293d] rounded-md text-slate-500">
+                          <span className="px-1.5 py-0.5 text-xs font-bold font-mono bg-[#090d16] border border-[#1f293d] rounded-md text-slate-500">
                             {tier.min} - {tier.max === Infinity ? '∞' : tier.max} Plusses
                           </span>
                         </div>
@@ -184,7 +184,7 @@ const SiteStatsDashboard: React.FC = () => {
                       </div>
 
                       <div className="shrink-0 flex flex-wrap items-center gap-2">
-                        <div className="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider shrink-0 shadow-sm shadow-indigo-500/5">
+                        <div className="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider shrink-0 shadow-sm shadow-indigo-500/5">
                           {count} {count === 1 ? 'Member' : 'Members'}
                         </div>
                         <svg
@@ -207,7 +207,7 @@ const SiteStatsDashboard: React.FC = () => {
                           className="border-t border-[#1f293d]/40 bg-[#090d16]/30 overflow-hidden"
                         >
                           {membersList.length === 0 ? (
-                            <div className="py-4 text-center text-slate-600 text-[10px] font-bold uppercase tracking-wider">
+                            <div className="py-4 text-center text-slate-600 text-xs sm:text-sm font-bold uppercase tracking-wider">
                               No members currently in this status tier.
                             </div>
                           ) : (
@@ -225,11 +225,11 @@ const SiteStatsDashboard: React.FC = () => {
                                   />
                                   <div className="min-w-0 flex-1">
                                     <div className="flex flex-wrap items-center gap-1">
-                                      <span className="text-[11px] font-bold text-white group-hover:text-indigo-400 transition-colors truncate">
+                                      <span className="text-xs sm:text-sm font-bold text-white group-hover:text-indigo-400 transition-colors truncate">
                                         @{u.username}
                                       </span>
                                     </div>
-                                    <p className="text-[9px] font-mono text-slate-500 mt-0.5">
+                                    <p className="text-xs font-mono text-slate-500 mt-0.5">
                                       {u.plusses} plusses
                                     </p>
                                   </div>

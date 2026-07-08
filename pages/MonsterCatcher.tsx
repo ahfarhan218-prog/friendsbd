@@ -336,15 +336,15 @@ const MonsterCatcher: React.FC = () => {
       {/* Stats Bar */}
       <div className="px-4 py-3 bg-slate-800/50 flex justify-around border-b border-slate-700/50">
         <div className="text-center">
-          <p className="text-[10px] text-slate-400 font-bold uppercase">Stamina</p>
+          <p className="text-xs sm:text-sm text-slate-400 font-bold uppercase">Stamina</p>
           <p className="font-black text-amber-400 flex flex-wrap items-center justify-center gap-1 text-sm">⚡ {stamina}/{maxStamina}</p>
         </div>
         <div className="text-center">
-          <p className="text-[10px] text-slate-400 font-bold uppercase">Balls</p>
+          <p className="text-xs sm:text-sm text-slate-400 font-bold uppercase">Balls</p>
           <p className="font-black text-emerald-400 flex flex-wrap items-center justify-center gap-1 text-sm">🎨 {colorBalls} | 🌟 {goldenBalls}</p>
         </div>
         <div className="text-center">
-          <p className="text-[10px] text-slate-400 font-bold uppercase">Plusses</p>
+          <p className="text-xs sm:text-sm text-slate-400 font-bold uppercase">Plusses</p>
           <p className="font-black text-cyan-400 flex flex-wrap items-center justify-center gap-1 text-sm">➕ {plusses}</p>
         </div>
       </div>
@@ -446,7 +446,7 @@ const MonsterCatcher: React.FC = () => {
                     <span className="absolute -top-2 -right-2 bg-slate-900 text-white text-xs font-black w-6 h-6 rounded-full flex items-center justify-center border border-slate-700 shadow-lg">x{m.count}</span>
                     <img src={`https://robohash.org/${m.monsterName}?set=set2&size=100x100`} alt={m.monsterName} className="w-16 h-16 mb-2 drop-shadow-lg" />
                     <span className="font-black text-sm text-white">{m.monsterName}</span>
-                    <span className="text-[10px] uppercase tracking-widest mt-1 opacity-80 font-bold">{m.rarity} • {m.element}</span>
+                    <span className="text-xs sm:text-sm uppercase tracking-widest mt-1 opacity-80 font-bold">{m.rarity} • {m.element}</span>
                   </div>
                 ))}
               </div>
@@ -503,7 +503,7 @@ const MonsterCatcher: React.FC = () => {
                        <img src={`https://robohash.org/${m.monsterName}?set=set2&size=60x60`} alt={m.monsterName} className="w-10 h-10" />
                        <div>
                          <p className="font-black text-white">{m.monsterName}</p>
-                         <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Available: {m.count}</p>
+                         <p className="text-xs sm:text-sm text-slate-400 font-bold uppercase tracking-widest">Available: {m.count}</p>
                        </div>
                      </div>
                      <button onClick={() => handleFuse(m.monsterName)} className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-black text-xs uppercase tracking-widest rounded-lg shadow-lg active:scale-95 transition">
@@ -603,7 +603,7 @@ const MonsterCatcher: React.FC = () => {
                         <img src={`https://robohash.org/${item.monsterName}?set=set2&size=40x40`} alt={item.monsterName} className="w-8 h-8" />
                         <div>
                           <p className="font-black text-white text-sm">{item.monsterName}</p>
-                          <p className="text-[10px] text-slate-400 font-bold uppercase">{item.rarity} • {item.element}</p>
+                          <p className="text-xs sm:text-sm text-slate-400 font-bold uppercase">{item.rarity} • {item.element}</p>
                         </div>
                       </div>
                       <div className="flex flex-wrap items-center gap-3">

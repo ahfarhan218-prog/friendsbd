@@ -30,7 +30,7 @@ const Inventory: React.FC = () => {
         <p className="text-sm text-white/40 mb-6">{items.length} items owned</p>
 
         {items.length === 0 ? (
-          <div className="text-center py-20 text-white/30">
+          <div className="text-center py-20 text-white/60">
             <p className="text-5xl mb-4">🎒</p>
             <p className="font-bold">Your inventory is empty</p>
             <p className="text-sm mt-1">Visit the shop or marketplace to get items!</p>
@@ -40,12 +40,12 @@ const Inventory: React.FC = () => {
             {items.map(item => (
               <div key={item.id} className="pf-card p-5">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-[10px] font-bold text-purple-400 uppercase tracking-wider px-2 py-1 rounded-full bg-purple-500/10">{item.itemType}</span>
-                  {item.equipped && <span className="text-[10px] font-bold text-emerald-400 px-2 py-1 rounded-full bg-emerald-500/10">✅ Equipped</span>}
+                  <span className="text-xs sm:text-sm font-bold text-purple-400 uppercase tracking-wider px-2 py-1 rounded-full bg-purple-500/10">{item.itemType}</span>
+                  {item.equipped && <span className="text-xs sm:text-sm font-bold text-emerald-400 px-2 py-1 rounded-full bg-emerald-500/10">✅ Equipped</span>}
                 </div>
                 <h3 className="text-lg font-black text-white">{item.itemName || item.itemId}</h3>
                 <p className="text-sm text-white/50 mt-1">Qty: {item.quantity}</p>
-                <p className="text-[10px] text-white/20 mt-2">Acquired {new Date(item.acquiredAt).toLocaleDateString()}</p>
+                <p className="text-xs sm:text-sm text-white/40 mt-2">Acquired {new Date(item.acquiredAt).toLocaleDateString()}</p>
                 <button onClick={() => handleEquip(item.id)} className={`pf-btn w-full mt-3 ${item.equipped ? 'pf-btn-ghost' : 'pf-btn-primary'}`}>
                   {item.equipped ? 'Unequip' : 'Equip'}
                 </button>

@@ -256,7 +256,7 @@ const EliteUpgradeDashboard: React.FC = () => {
         {/* Elite Status Banner */}
         <div className="bg-white border border-[#cbd5e1] rounded-2xl p-5 shadow-sm flex items-center justify-between">
           <div className="space-y-1">
-            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Membership Tier</p>
+            <p className="text-xs sm:text-sm text-slate-400 font-bold uppercase tracking-wider">Membership Tier</p>
             <h3 className="font-extrabold text-base text-black">FriendsBD Elite Status</h3>
           </div>
           <span className={`font-black text-xs px-3.5 py-1 rounded-full uppercase tracking-wider ${getEliteExpiryText().startsWith('Active') ? 'text-[#0f766e] bg-[#0f766e]/10 border border-[#0f766e]/20' : 'text-slate-500 bg-slate-100 border border-slate-200'}`}>
@@ -288,12 +288,12 @@ const EliteUpgradeDashboard: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="bg-white border border-[#cbd5e1] rounded-2xl p-4 shadow-sm text-center">
             <span className="text-lg block mb-1">🏅</span>
-            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Reputation Points</p>
+            <p className="text-xs sm:text-sm text-slate-400 font-bold uppercase tracking-wider">Reputation Points</p>
             <p className="font-extrabold text-sm text-[#000000] mt-1">{getRpBalance(user)} RP</p>
           </div>
           <div className="bg-white border border-[#cbd5e1] rounded-2xl p-4 shadow-sm text-center">
             <span className="text-lg block mb-1">💵</span>
-            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Wallet Balance</p>
+            <p className="text-xs sm:text-sm text-slate-400 font-bold uppercase tracking-wider">Wallet Balance</p>
             <p className="font-extrabold text-sm text-[#000000] mt-1">৳{getTakaBalance(user)}</p>
           </div>
         </div>
@@ -316,7 +316,7 @@ const EliteUpgradeDashboard: React.FC = () => {
                   className={`border-2 rounded-xl p-3 text-center transition-all flex flex-col items-center justify-center ${selectedRpTier === idx ? 'bg-[#6d28d9]/5 border-[#6d28d9] text-[#6d28d9]' : 'border-[#cbd5e1] hover:border-slate-400 text-slate-600'}`}
                 >
                   <span className="text-xs font-black">{tier.days} Days</span>
-                  <span className="text-[10px] font-bold mt-1 text-slate-400">{tier.cost} RP</span>
+                  <span className="text-xs sm:text-sm font-bold mt-1 text-slate-400">{tier.cost} RP</span>
                 </button>
               ))}
             </div>
@@ -345,7 +345,7 @@ const EliteUpgradeDashboard: React.FC = () => {
                   className={`border-2 rounded-xl p-3 text-center transition-all flex flex-col items-center justify-center ${selectedTakaTier === idx ? 'bg-[#6d28d9]/5 border-[#6d28d9] text-[#6d28d9]' : 'border-[#cbd5e1] hover:border-slate-400 text-slate-600'}`}
                 >
                   <span className="text-xs font-black">{tier.days} Days</span>
-                  <span className="text-[10px] font-bold mt-1 text-slate-400">৳{tier.cost}</span>
+                  <span className="text-xs sm:text-sm font-bold mt-1 text-slate-400">৳{tier.cost}</span>
                 </button>
               ))}
             </div>

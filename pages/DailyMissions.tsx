@@ -126,7 +126,7 @@ const DailyMissions: React.FC = () => {
                    
                    {/* Visual Progress Bar */}
                    <div className="mt-3">
-                     <div className="flex justify-between text-[10px] font-bold text-slate-400 tracking-wider mb-1.5 uppercase">
+                     <div className="flex justify-between text-xs sm:text-sm font-bold text-slate-400 tracking-wider mb-1.5 uppercase">
                        <span>Status</span>
                        <span>{isCompleted ? '1' : '0'} / 1</span>
                      </div>
@@ -146,7 +146,7 @@ const DailyMissions: React.FC = () => {
                      <span className="font-bold text-sm">+{mission.rewardAmount}</span>
                    </div>
                    {!isCompleted && mission.id !== 'daily_login' && (
-                      <button className="mt-3 text-[10px] font-bold text-indigo-600 bg-indigo-50 px-3 py-1.5 rounded-full uppercase tracking-wider hover:bg-indigo-100 transition-colors">
+                      <button className="mt-3 text-xs sm:text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1.5 rounded-full uppercase tracking-wider hover:bg-indigo-100 transition-colors">
                         Go
                       </button>
                    )}

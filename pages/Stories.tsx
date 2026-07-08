@@ -304,7 +304,7 @@ const Stories: React.FC = () => {
         </div>
 
         {feed.length === 0 ? (
-          <div className="text-center py-20 text-white/30">
+          <div className="text-center py-20 text-white/60">
             <p className="text-5xl mb-4">📖</p>
             <p className="font-bold">No stories right now</p>
           </div>
@@ -369,7 +369,7 @@ const Stories: React.FC = () => {
                   )}
 
                   {!newStoryFile && !newStoryText && (
-                    <p className="text-white/30 text-sm font-medium">Type something or upload a file</p>
+                    <p className="text-white/60 text-sm font-medium">Type something or upload a file</p>
                   )}
                 </div>
 
@@ -532,11 +532,11 @@ const Stories: React.FC = () => {
                   {activeStory.reactions?.map((r, i) => i < 3 ? (
                     <div key={i} className="relative z-10 w-8 h-8 rounded-full border-2 border-[#111] overflow-hidden">
                       <img src={r.userAvatar} className="w-full h-full object-cover" title={`${r.userName} reacted ${r.emoji}`} alt="" />
-                      <div className="absolute bottom-[-4px] right-[-4px] text-[10px] bg-black rounded-full">{r.emoji}</div>
+                      <div className="absolute bottom-[-4px] right-[-4px] text-xs sm:text-sm bg-black rounded-full">{r.emoji}</div>
                     </div>
                   ) : null)}
                   {activeStory.reactions && activeStory.reactions.length > 3 && (
-                    <div className="z-0 w-8 h-8 rounded-full border-2 border-[#111] bg-gray-800 flex items-center justify-center text-[10px] text-white">
+                    <div className="z-0 w-8 h-8 rounded-full border-2 border-[#111] bg-gray-800 flex items-center justify-center text-xs sm:text-sm text-white">
                       +{activeStory.reactions.length - 3}
                     </div>
                   )}

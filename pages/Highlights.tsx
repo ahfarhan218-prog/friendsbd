@@ -183,7 +183,7 @@ const Highlights: React.FC = () => {
           </button>
           <div>
             <h1 className="text-2xl font-black tracking-tight italic text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Today's Highlights</h1>
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-purple-300 mt-1">Daily 24H Activities & Trends</p>
+            <p className="text-xs sm:text-sm font-black uppercase tracking-[0.2em] text-purple-300 mt-1">Daily 24H Activities & Trends</p>
           </div>
         </div>
       </header>
@@ -200,7 +200,7 @@ const Highlights: React.FC = () => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-5 py-3 rounded-2xl text-[11px] font-black uppercase tracking-wider shrink-0 transition-all ${
+              className={`px-5 py-3 rounded-2xl text-xs sm:text-sm font-black uppercase tracking-wider shrink-0 transition-all ${
                 activeTab === tab.id 
                   ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg' 
                   : 'text-slate-400 hover:text-white hover:bg-[#30363d]'
@@ -225,7 +225,7 @@ const Highlights: React.FC = () => {
             >
               <div className="bg-[#161b22]/80 backdrop-blur-md rounded-[2.5rem] p-6 border border-[#30363d] shadow-xl text-left">
                 <h3 className="text-base font-black text-white leading-none">📢 Today's Shouter Stats</h3>
-                <p className="text-[10px] text-purple-300 font-bold uppercase tracking-wider mt-1 mb-5">Members who shouted most today</p>
+                <p className="text-xs sm:text-sm text-purple-300 font-bold uppercase tracking-wider mt-1 mb-5">Members who shouted most today</p>
 
                 {shouters.length === 0 ? (
                   <div className="text-center py-6 text-slate-500 text-sm font-medium italic">No shouts yet today. Be the first!</div>
@@ -240,7 +240,7 @@ const Highlights: React.FC = () => {
                           <img src={sh.avatar} className="w-10 h-10 rounded-xl object-cover shrink-0 border border-[#30363d]" alt="" />
                           <div>
                             <p className="text-xs font-black text-white">{sh.user}</p>
-                            <p className="text-[9px] text-purple-400 font-bold uppercase tracking-wider">Today Rank {idx + 1}</p>
+                            <p className="text-xs text-purple-400 font-bold uppercase tracking-wider">Today Rank {idx + 1}</p>
                           </div>
                         </div>
                         <div className="flex flex-wrap items-center gap-3">
@@ -267,8 +267,8 @@ const Highlights: React.FC = () => {
                         <div className="min-w-0 flex-1">
                           <div className="flex flex-wrap items-center gap-1.5 mb-1">
                             <span className="text-xs font-black text-white truncate">{s.user}</span>
-                            {s.isPremium && <span className="text-[10px]" title="Premium">👑</span>}
-                            <span className="text-[8px] font-bold font-mono text-slate-500 ml-auto">{s.time}</span>
+                            {s.isPremium && <span className="text-xs sm:text-sm" title="Premium">👑</span>}
+                            <span className="text-xs font-bold font-mono text-slate-500 ml-auto">{s.time}</span>
                           </div>
                           <p className="text-xs text-slate-300 leading-relaxed font-bold">{s.content}</p>
                         </div>
@@ -292,7 +292,7 @@ const Highlights: React.FC = () => {
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <h3 className="text-base font-black text-white leading-none">👑 Today's Elite Leaderboard</h3>
-                    <p className="text-[10px] text-purple-300 font-bold uppercase tracking-wider mt-1">Based on Today's 24H XP Activity</p>
+                    <p className="text-xs sm:text-sm text-purple-300 font-bold uppercase tracking-wider mt-1">Based on Today's 24H XP Activity</p>
                   </div>
                   <span className="text-2xl animate-pulse">🏆</span>
                 </div>
@@ -315,15 +315,15 @@ const Highlights: React.FC = () => {
                           <div className="min-w-0">
                             <div className="flex flex-wrap items-center gap-1">
                               <p className="text-xs font-black text-white truncate group-hover:text-purple-400 transition-colors">{usr.name}</p>
-                              {usr.isVerified && <span className="text-[10px]">✔️</span>}
-                              {usr.isPremium && <span className="text-[10px]">👑</span>}
+                              {usr.isVerified && <span className="text-xs sm:text-sm">✔️</span>}
+                              {usr.isPremium && <span className="text-xs sm:text-sm">👑</span>}
                             </div>
-                            <p className="text-[8px] font-black text-pink-400 uppercase tracking-widest mt-0.5">Today's XP: {getTodayXP(usr)}</p>
+                            <p className="text-xs font-black text-pink-400 uppercase tracking-widest mt-0.5">Today's XP: {getTodayXP(usr)}</p>
                           </div>
                         </div>
 
                         <div className="text-right shrink-0">
-                          <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block">
+                          <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block">
                             Global Lv. {usr.level || 1}
                           </span>
                         </div>
@@ -345,7 +345,7 @@ const Highlights: React.FC = () => {
             >
               <div className="bg-[#161b22]/80 backdrop-blur-md rounded-[2.5rem] p-6 border border-[#30363d] shadow-xl text-left">
                 <h3 className="text-base font-black text-white leading-none">⚡ Today's Online Status</h3>
-                <p className="text-[10px] text-purple-300 font-bold uppercase tracking-wider mt-1 mb-5">Members active on FriendsBD today</p>
+                <p className="text-xs sm:text-sm text-purple-300 font-bold uppercase tracking-wider mt-1 mb-5">Members active on FriendsBD today</p>
 
                 {activeUsersToday.length === 0 ? (
                   <div className="text-center py-6 text-slate-500 text-sm font-medium italic">No members active today yet!</div>
@@ -364,9 +364,9 @@ const Highlights: React.FC = () => {
                           <div>
                             <div className="flex flex-wrap items-center gap-1">
                               <span className="text-xs font-black text-white">{usr.name}</span>
-                              {usr.isPremium && <span className="text-[10px]">👑</span>}
+                              {usr.isPremium && <span className="text-xs sm:text-sm">👑</span>}
                             </div>
-                            <p className="text-[9px] text-slate-400 font-bold">
+                            <p className="text-xs text-slate-400 font-bold">
                               {usr.isOnline ? 'Active now' : 'Active earlier today'}
                             </p>
                           </div>
@@ -376,7 +376,7 @@ const Highlights: React.FC = () => {
                           <button
                             onClick={() => handleWave(usr.username)}
                             disabled={wavedUsers[usr.username]}
-                            className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider border transition-all ${
+                            className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider border transition-all ${
                               wavedUsers[usr.username]
                                 ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 cursor-not-allowed'
                                 : 'bg-[#161b22] hover:bg-[#30363d] border-[#30363d] text-slate-300 active:scale-95'
@@ -404,7 +404,7 @@ const Highlights: React.FC = () => {
               {/* Image Upload Box */}
               <div className="bg-[#161b22]/80 backdrop-blur-md rounded-[2.5rem] p-6 border border-[#30363d] shadow-xl text-left">
                 <h3 className="text-base font-black text-white leading-none mb-1">📸 Upload Today's Photo</h3>
-                <p className="text-[10px] text-purple-300 font-bold uppercase tracking-wider mb-4">Share a moment from today (resets at midnight!)</p>
+                <p className="text-xs sm:text-sm text-purple-300 font-bold uppercase tracking-wider mb-4">Share a moment from today (resets at midnight!)</p>
 
                 <form onSubmit={handlePhotoUpload} className="space-y-3">
                   <div className="flex flex-wrap gap-2">
@@ -413,7 +413,7 @@ const Highlights: React.FC = () => {
                       placeholder="Image URL (optional)"
                       value={newPhotoUrl}
                       onChange={(e) => setNewPhotoUrl(e.target.value)}
-                      className="flex-1 bg-[#090d16] p-3 rounded-2xl text-[11px] font-bold text-white placeholder-slate-500 border border-[#30363d] focus:outline-none focus:border-purple-500"
+                      className="flex-1 bg-[#090d16] p-3 rounded-2xl text-xs sm:text-sm font-bold text-white placeholder-slate-500 border border-[#30363d] focus:outline-none focus:border-purple-500"
                     />
                   </div>
                   <div className="flex flex-wrap gap-3">
@@ -423,11 +423,11 @@ const Highlights: React.FC = () => {
                       value={newCaption}
                       onChange={(e) => setNewCaption(e.target.value)}
                       required
-                      className="flex-1 bg-[#090d16] p-3 rounded-2xl text-[11px] font-bold text-white placeholder-slate-500 border border-[#30363d] focus:outline-none focus:border-purple-500"
+                      className="flex-1 bg-[#090d16] p-3 rounded-2xl text-xs sm:text-sm font-bold text-white placeholder-slate-500 border border-[#30363d] focus:outline-none focus:border-purple-500"
                     />
                     <button
                       type="submit"
-                      className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-[10px] font-black uppercase tracking-wider px-5 rounded-2xl transition-all active:scale-95 shadow-[0_0_15px_rgba(168,85,247,0.3)]"
+                      className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-xs sm:text-sm font-black uppercase tracking-wider px-5 rounded-2xl transition-all active:scale-95 shadow-[0_0_15px_rgba(168,85,247,0.3)]"
                     >
                       Share
                     </button>
@@ -437,7 +437,7 @@ const Highlights: React.FC = () => {
 
               {/* Photo grid */}
               <div className="bg-[#161b22]/80 backdrop-blur-md rounded-[2.5rem] p-6 border border-[#30363d] shadow-xl text-left">
-                <p className="text-[10px] font-black text-purple-300 uppercase tracking-wider mb-4">Today's Gallery (Resets at midnight)</p>
+                <p className="text-xs sm:text-sm font-black text-purple-300 uppercase tracking-wider mb-4">Today's Gallery (Resets at midnight)</p>
                 {todayPhotos.length === 0 ? (
                   <div className="text-center py-6 text-slate-500 text-sm font-medium italic">No photos uploaded today. Share the first one!</div>
                 ) : (
@@ -451,11 +451,11 @@ const Highlights: React.FC = () => {
                         <img referrerPolicy="no-referrer" src={p.url} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" alt="" />
                         
                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3 text-white">
-                          <p className="text-[8px] font-black uppercase tracking-wide text-purple-300">📸 @{p.uploadedBy}</p>
-                          <p className="text-[9px] font-bold truncate">{p.caption}</p>
+                          <p className="text-xs font-black uppercase tracking-wide text-purple-300">📸 @{p.uploadedBy}</p>
+                          <p className="text-xs font-bold truncate">{p.caption}</p>
                         </div>
 
-                        <div className="absolute top-2 right-2 bg-[#090d16]/60 backdrop-blur-md text-white border border-[#30363d] rounded-full px-2 py-0.5 text-[8px] font-black flex flex-wrap items-center gap-1 uppercase">
+                        <div className="absolute top-2 right-2 bg-[#090d16]/60 backdrop-blur-md text-white border border-[#30363d] rounded-full px-2 py-0.5 text-xs font-black flex flex-wrap items-center gap-1 uppercase">
                           ❤️ {p.likes}
                         </div>
                       </div>
@@ -501,11 +501,11 @@ const Highlights: React.FC = () => {
                 <div className="flex flex-wrap items-center justify-between gap-4 mb-3">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981] animate-pulse" />
-                    <p className="text-[9px] text-purple-400 font-black uppercase tracking-widest leading-none">Shared By @{selectedPhoto.uploadedBy}</p>
+                    <p className="text-xs text-purple-400 font-black uppercase tracking-widest leading-none">Shared By @{selectedPhoto.uploadedBy}</p>
                   </div>
                   <button 
                     onClick={(e) => handleLikePhoto(selectedPhoto.id, e)}
-                    className="flex flex-wrap items-center gap-1 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 text-rose-400 px-3.5 py-1.5 rounded-2xl text-[10px] font-black uppercase tracking-wider transition-colors active:scale-95"
+                    className="flex flex-wrap items-center gap-1 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 text-rose-400 px-3.5 py-1.5 rounded-2xl text-xs sm:text-sm font-black uppercase tracking-wider transition-colors active:scale-95"
                   >
                     ❤️ {selectedPhoto.likes} Likes
                   </button>
@@ -520,11 +520,11 @@ const Highlights: React.FC = () => {
                     type="text"
                     disabled
                     placeholder="Comments disabled for this public highlight"
-                    className="flex-1 bg-[#090d16] p-3 rounded-2xl text-[10px] font-bold text-slate-500 placeholder-slate-600 border border-[#30363d] outline-none"
+                    className="flex-1 bg-[#090d16] p-3 rounded-2xl text-xs sm:text-sm font-bold text-slate-500 placeholder-slate-600 border border-[#30363d] outline-none"
                   />
                   <button
                     disabled
-                    className="bg-[#30363d] text-slate-500 text-[9px] font-black uppercase tracking-wider px-4 rounded-2xl transition-all"
+                    className="bg-[#30363d] text-slate-500 text-xs font-black uppercase tracking-wider px-4 rounded-2xl transition-all"
                   >
                     Post
                   </button>

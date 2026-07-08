@@ -91,7 +91,7 @@ const MysteryCastle: React.FC = () => {
            </button>
            <div className="text-center">
              <h2 className="text-2xl font-black uppercase tracking-tighter italic text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 drop-shadow-[0_0_10px_rgba(129,140,248,0.3)]">Mystery Castle</h2>
-             <p className="text-[8px] font-black uppercase tracking-widest text-slate-400">Daily Exploration Protocol</p>
+             <p className="text-xs font-black uppercase tracking-widest text-slate-400">Daily Exploration Protocol</p>
            </div>
            <div className="w-12" />
         </div>
@@ -100,9 +100,9 @@ const MysteryCastle: React.FC = () => {
       <div className="px-5 mt-8 space-y-12 max-w-lg mx-auto">
          {/* ATTEMPTS CARD */}
          <div className="bg-[#161b22]/80 backdrop-blur-xl border border-[#30363d] p-8 rounded-[3rem] text-center shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 bg-indigo-500/20 px-4 py-2 rounded-bl-3xl border-b border-l border-indigo-500/30 text-[9px] font-black uppercase text-indigo-300 tracking-widest shadow-[0_0_15px_rgba(99,102,241,0.2)]">Level 1: Outer Wall</div>
+            <div className="absolute top-0 right-0 bg-indigo-500/20 px-4 py-2 rounded-bl-3xl border-b border-l border-indigo-500/30 text-xs font-black uppercase text-indigo-300 tracking-widest shadow-[0_0_15px_rgba(99,102,241,0.2)]">Level 1: Outer Wall</div>
             
-            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 mt-2">Attempts Remaining</p>
+            <p className="text-xs sm:text-sm font-black text-slate-400 uppercase tracking-widest mb-3 mt-2">Attempts Remaining</p>
             <div className="flex flex-wrap items-center justify-center gap-2">
                <h3 className="text-5xl font-black text-white italic tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">{attempts}</h3>
                <span className="text-xl font-black text-slate-600 self-end mb-2">/ 5</span>
@@ -126,7 +126,7 @@ const MysteryCastle: React.FC = () => {
               >
                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-6">
                     <span className="text-5xl grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-100 group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] transition-all duration-300 transform group-hover:scale-110">🚪</span>
-                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest group-hover:text-indigo-300 transition-colors">Door {i+1}</span>
+                    <span className="text-xs sm:text-sm font-black text-slate-500 uppercase tracking-widest group-hover:text-indigo-300 transition-colors">Door {i+1}</span>
                  </div>
 
                  <AnimatePresence>
@@ -148,7 +148,7 @@ const MysteryCastle: React.FC = () => {
                            {result === 'win' ? '🏺' : (result === 'trap' ? '💀' : (result === 'lose' ? '💨' : '⌛'))}
                          </motion.span>
                          {result && (
-                           <span className="text-[10px] font-black text-white uppercase tracking-widest">
+                           <span className="text-xs sm:text-sm font-black text-white uppercase tracking-widest">
                               {result === 'win' ? '+25 Points' : (result === 'trap' ? '-5 Points' : 'Empty')}
                            </span>
                          )}
@@ -162,7 +162,7 @@ const MysteryCastle: React.FC = () => {
          {/* LEGEND */}
          <div className="bg-gradient-to-br from-[#1C1C2E] to-[#110a2a] border border-white/5 p-8 rounded-[3rem] text-center shadow-xl relative overflow-hidden">
             <div className="absolute -top-10 -left-10 w-48 h-48 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
-            <h4 className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.2em] mb-4 relative z-10 drop-shadow-md">Legend of the Vault</h4>
+            <h4 className="text-xs sm:text-sm font-black text-indigo-400 uppercase tracking-[0.2em] mb-4 relative z-10 drop-shadow-md">Legend of the Vault</h4>
             <p className="text-xs font-medium text-slate-300 leading-relaxed italic px-4 relative z-10">
                "Three doors stand between you and the ancient silver vaults. One holds <span className="text-amber-400 font-bold">fortune</span>, one holds wind, and one... a <span className="text-rose-400 font-bold">deadly trap</span> for the unwary."
             </p>

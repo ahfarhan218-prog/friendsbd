@@ -79,7 +79,7 @@ const Calendar: React.FC = () => {
         )}
 
         {events.length === 0 ? (
-          <div className="text-center py-20 text-white/30">
+          <div className="text-center py-20 text-white/60">
             <p className="text-5xl mb-4">📅</p>
             <p className="font-bold">No events scheduled</p>
           </div>
@@ -92,16 +92,16 @@ const Calendar: React.FC = () => {
                   {dayEvents.map(e => (
                     <div key={e.id} className="pf-card p-5">
                       <div className="flex items-center justify-between mb-2">
-                        <span className={`text-[10px] font-bold px-2 py-1 rounded-full ${e.status === 'ongoing' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-purple-500/10 text-purple-400'}`}>
+                        <span className={`text-xs sm:text-sm font-bold px-2 py-1 rounded-full ${e.status === 'ongoing' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-purple-500/10 text-purple-400'}`}>
                           {e.status === 'ongoing' ? '🔴 Live' : '📅 Upcoming'}
                         </span>
-                        <span className="text-[10px] text-white/30">{e.type}</span>
+                        <span className="text-xs sm:text-sm text-white/60">{e.type}</span>
                       </div>
                       <h3 className="text-lg font-black text-white">{e.title}</h3>
                       <p className="text-sm text-white/50 mt-1">{e.description}</p>
                       {e.prize && <p className="text-xs text-amber-400 mt-2">🎁 Prize: {e.prize}</p>}
                       <div className="flex items-center justify-between mt-3">
-                        <span className="text-xs text-white/30">👥 {e.participants?.length || 0}{e.maxParticipants ? ` / ${e.maxParticipants}` : ''}</span>
+                        <span className="text-xs text-white/60">👥 {e.participants?.length || 0}{e.maxParticipants ? ` / ${e.maxParticipants}` : ''}</span>
                         {e.status === 'upcoming' && session && (
                           <button onClick={() => handleRegister(e.id)} className="pf-btn pf-btn-primary text-xs">Register</button>
                         )}

@@ -235,7 +235,7 @@ Commentary: [clr=F39C12]${comment}[/clr]`;
           <div className="flex flex-col gap-6">
             <div className="bg-[#090d16]/90 backdrop-blur-xl border border-[#30363d] rounded-[2.5rem] p-8 text-center shadow-2xl relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
-              <p className="text-[10px] uppercase font-black tracking-[0.3em] text-slate-500 mb-2">CURRENT SCORE</p>
+              <p className="text-xs sm:text-sm uppercase font-black tracking-[0.3em] text-slate-500 mb-2">CURRENT SCORE</p>
               <h2 className="text-6xl md:text-7xl font-black text-white m-0 mb-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                 {gameState.runs} <span className="text-slate-600 text-5xl font-light mx-2">/</span> <span className="text-rose-500 drop-shadow-[0_0_15px_rgba(244,63,94,0.3)]">{gameState.wickets}</span>
               </h2>

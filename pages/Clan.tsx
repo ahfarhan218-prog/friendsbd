@@ -58,7 +58,7 @@ const Clan: React.FC = () => {
         )}
 
         {clans.length === 0 ? (
-          <div className="text-center py-20 text-white/30">
+          <div className="text-center py-20 text-white/60">
             <p className="text-5xl mb-4">⚔️</p>
             <p className="font-bold">No clans yet</p>
           </div>
@@ -69,12 +69,12 @@ const Clan: React.FC = () => {
                 <div className="flex items-start justify-between mb-3">
                   <div>
                     <h3 className="text-lg font-black text-white">{c.name}</h3>
-                    <span className="text-[10px] font-bold text-purple-400 px-2 py-1 rounded-full bg-purple-500/10">[{c.tag}]</span>
+                    <span className="text-xs sm:text-sm font-bold text-purple-400 px-2 py-1 rounded-full bg-purple-500/10">[{c.tag}]</span>
                   </div>
-                  <span className="text-xs text-white/30">Lv.{c.level}</span>
+                  <span className="text-xs text-white/60">Lv.{c.level}</span>
                 </div>
                 <p className="text-sm text-white/50 mb-3">{c.description || 'No description'}</p>
-                <div className="flex items-center justify-between text-xs text-white/30 mb-3">
+                <div className="flex items-center justify-between text-xs text-white/60 mb-3">
                   <span>👥 {c.members?.length || 0} members</span>
                   <span>👑 {c.leaderName}</span>
                 </div>

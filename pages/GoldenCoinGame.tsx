@@ -219,7 +219,7 @@ const GoldenCoinGame: React.FC = () => {
            </button>
            <div className="text-center">
              <h2 className="text-2xl font-black uppercase tracking-tighter italic text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.3)]">Golden Coin</h2>
-             <p className="text-[8px] font-black uppercase tracking-widest text-slate-400">Real-Time Event Hub</p>
+             <p className="text-xs font-black uppercase tracking-widest text-slate-400">Real-Time Event Hub</p>
            </div>
            <Link to="/coin-leaderboard" className="p-3 bg-white/5 text-amber-400 rounded-2xl active:scale-90 border border-white/10 hover:bg-white/10 hover:border-amber-400/30 transition-all shadow-lg group relative">
               <span className="text-sm font-black">🏆</span>
@@ -235,7 +235,7 @@ const GoldenCoinGame: React.FC = () => {
                  <p className="text-xs text-slate-400 font-medium">Golden Coins drop daily from 5:00 PM to 12:00 AM BDT.</p>
                  
                  <div className="mt-6 p-4 bg-black/40 rounded-2xl border border-white/5">
-                    <p className="text-[10px] font-black uppercase tracking-widest text-amber-400/70 mb-1">Opens In</p>
+                    <p className="text-xs sm:text-sm font-black uppercase tracking-widest text-amber-400/70 mb-1">Opens In</p>
                     <p className="text-2xl font-black tracking-widest text-white drop-shadow-md">
                        {(() => {
                          const bdNow = getDhakaDate();
@@ -256,7 +256,7 @@ const GoldenCoinGame: React.FC = () => {
               </div>
             ) : (
               <div className="bg-[#161b22]/80 rounded-3xl p-5 sm:p-6 backdrop-blur-xl border border-[#30363d] shadow-2xl shadow-purple-900/20 text-center w-full max-w-[400px]">
-              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">Network Status</p>
+              <p className="text-xs sm:text-sm font-black uppercase tracking-widest text-slate-400 mb-4">Network Status</p>
               
               {/* Daily Grab Counter */}
               <div className="flex flex-wrap items-center justify-center gap-2 mb-5">
@@ -268,14 +268,14 @@ const GoldenCoinGame: React.FC = () => {
                     className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-black border-2 transition-all ${
                       i < todayGrabs
                         ? 'bg-amber-400 border-amber-300 text-white shadow-[0_0_15px_rgba(251,191,36,0.5)]'
-                        : 'bg-white/5 border-white/10 text-white/20'
+                        : 'bg-white/5 border-white/10 text-white/40'
                     }`}
                   >
                     {i < todayGrabs ? '🪙' : '○'}
                   </motion.div>
                 ))}
               </div>
-              <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-5">
+              <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-5">
                 {limitReached ? '⛔ Daily Limit Reached' : `${remaining} grab${remaining !== 1 ? 's' : ''} remaining today`}
               </p>
               
@@ -290,8 +290,8 @@ const GoldenCoinGame: React.FC = () => {
                   >
                     <div className="text-5xl drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">🔒</div>
                     <h3 className="text-lg font-black text-amber-400 italic tracking-tighter drop-shadow-lg">LIMIT REACHED</h3>
-                    <p className="text-[10px] font-bold text-slate-400 leading-relaxed">You've grabbed 5 coins today.<br/>Come back tomorrow for more!</p>
-                    <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Resets at 12:00 AM BDT</p>
+                    <p className="text-xs sm:text-sm font-bold text-slate-400 leading-relaxed">You've grabbed 5 coins today.<br/>Come back tomorrow for more!</p>
+                    <p className="text-xs font-black text-slate-500 uppercase tracking-widest">Resets at 12:00 AM BDT</p>
                   </motion.div>
                 ) : isActive ? (
                   <motion.div 
@@ -320,7 +320,7 @@ const GoldenCoinGame: React.FC = () => {
                        )}
                      </AnimatePresence>
                      <h3 className="text-2xl font-black text-amber-400 italic tracking-tighter drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]">COIN DETECTED!</h3>
-                     <p className="text-[10px] font-bold text-white/80 bg-amber-500/20 border border-amber-500/30 px-3 py-1.5 rounded-xl">FIRST USER TO GRAB WINS 1 COIN & 10 AP</p>
+                     <p className="text-xs sm:text-sm font-bold text-white/80 bg-amber-500/20 border border-amber-500/30 px-3 py-1.5 rounded-xl">FIRST USER TO GRAB WINS 1 COIN & 10 AP</p>
                      <button 
                        onClick={handleGrab}
                        disabled={isClaiming}
@@ -348,7 +348,7 @@ const GoldenCoinGame: React.FC = () => {
                      <button 
                        onClick={startSearch}
                        disabled={status === 'SEARCHING'}
-                       className="text-[10px] font-black uppercase tracking-widest text-purple-400 border-b border-purple-500/50 pb-1 disabled:opacity-30 transition-all hover:text-purple-300 hover:border-purple-400"
+                       className="text-xs sm:text-sm font-black uppercase tracking-widest text-purple-400 border-b border-purple-500/50 pb-1 disabled:opacity-30 transition-all hover:text-purple-300 hover:border-purple-400"
                      >
                         {status === 'SEARCHING' ? 'Searching...' : 'Search for coin'}
                      </button>
@@ -364,13 +364,13 @@ const GoldenCoinGame: React.FC = () => {
          {/* PREMIUM RADAR TOOL */}
          {isOpen && (
            <div className="bg-[#161b22]/80 backdrop-blur-xl p-6 rounded-[2.5rem] shadow-xl border border-[#30363d]">
-              <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 flex flex-wrap items-center gap-2">
+              <h4 className="text-xs sm:text-sm font-black text-slate-400 uppercase tracking-widest mb-4 flex flex-wrap items-center gap-2">
                  <span className="text-lg drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">📡</span> Premium Radar
               </h4>
               {isPremium ? (
                  <div className="p-5 bg-gradient-to-r from-purple-900/50 to-indigo-900/50 rounded-2xl border border-purple-500/30 shadow-[0_0_20px_rgba(168,85,247,0.15)] text-white flex items-center justify-between">
                     <div>
-                       <p className="text-[10px] font-black uppercase text-amber-400/80 mb-1">Next Drop In</p>
+                       <p className="text-xs sm:text-sm font-black uppercase text-amber-400/80 mb-1">Next Drop In</p>
                        <p className="text-2xl font-black tracking-widest text-white drop-shadow-md">
                           {isActive ? (
                             <span className="text-amber-400 font-bold animate-pulse text-sm">COIN ACTIVE NOW!</span>
@@ -381,7 +381,7 @@ const GoldenCoinGame: React.FC = () => {
                             return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
                           })() : 'Calculating...'}
                         </p>
-                        <p className="text-[9px] text-purple-300/70 mt-1">Drops every 13–18 min</p>
+                        <p className="text-xs text-purple-300/70 mt-1">Drops every 13–18 min</p>
                     </div>
                     <div className="text-3xl animate-pulse drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]">🎯</div>
                  </div>
@@ -389,7 +389,7 @@ const GoldenCoinGame: React.FC = () => {
                  <div className="p-5 bg-black/30 rounded-2xl border border-white/5 text-center space-y-3">
                     <div className="text-2xl drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">🔒</div>
                     <p className="text-xs font-bold text-slate-400">Upgrade to Premium to see exactly when the next coin drops!</p>
-                    <button onClick={() => navigate('/premium')} className="text-[10px] font-black uppercase tracking-widest text-white bg-purple-600 px-5 py-2.5 rounded-xl hover:bg-purple-500 transition-colors shadow-[0_0_15px_rgba(147,51,234,0.4)] border border-purple-400">
+                    <button onClick={() => navigate('/premium')} className="text-xs sm:text-sm font-black uppercase tracking-widest text-white bg-purple-600 px-5 py-2.5 rounded-xl hover:bg-purple-500 transition-colors shadow-[0_0_15px_rgba(147,51,234,0.4)] border border-purple-400">
                        Unlock Radar Now
                     </button>
                  </div>
@@ -401,7 +401,7 @@ const GoldenCoinGame: React.FC = () => {
          <div className="bg-[#161b22]/80 backdrop-blur-xl p-8 rounded-[3rem] shadow-xl border border-[#30363d] space-y-6">
             <div className="flex justify-between items-center px-2">
                <h4 className="text-sm font-black text-white uppercase tracking-tighter italic">Last Coin Gainers</h4>
-               <Link to="/coin-leaderboard" className="text-[9px] font-black text-purple-400 uppercase tracking-widest bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20 hover:bg-purple-500/20 transition-colors">Full Ranks →</Link>
+               <Link to="/coin-leaderboard" className="text-xs font-black text-purple-400 uppercase tracking-widest bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20 hover:bg-purple-500/20 transition-colors">Full Ranks →</Link>
             </div>
 
             <div className="space-y-3">
@@ -416,19 +416,19 @@ const GoldenCoinGame: React.FC = () => {
                         <img src={w.avatar} className="w-9 h-9 rounded-xl border border-white/10 shadow-sm group-hover:scale-105 group-hover:border-purple-500/50 transition-transform object-cover" alt="" />
                         <div>
                            <p className="text-xs font-black text-white group-hover:text-purple-300 transition-colors">{w.username}</p>
-                           <p className="text-[8px] font-bold text-slate-500 uppercase">
+                           <p className="text-xs font-bold text-slate-500 uppercase">
                               {new Date(w.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                            </p>
                         </div>
                      </div>
                      <div className="flex flex-col items-end gap-1">
-                       <span className="text-[10px] font-black text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-lg shadow-[0_0_10px_rgba(251,191,36,0.1)]">+1 Coin</span>
-                       <span className="text-[9px] font-black text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2 py-0.5 rounded-lg">+10 AP</span>
+                       <span className="text-xs sm:text-sm font-black text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-lg shadow-[0_0_10px_rgba(251,191,36,0.1)]">+1 Coin</span>
+                       <span className="text-xs font-black text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2 py-0.5 rounded-lg">+10 AP</span>
                      </div>
                   </motion.div>
                )) : (
                   <div className="py-10 text-center opacity-40">
-                     <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white">No history detected</p>
+                     <p className="text-xs sm:text-sm font-black uppercase tracking-[0.2em] text-white">No history detected</p>
                   </div>
                )}
             </div>
@@ -436,7 +436,7 @@ const GoldenCoinGame: React.FC = () => {
             <div className="pt-4 border-t border-white/5">
                 <button 
                 onClick={() => navigate('/coin-leaderboard')}
-                className="w-full py-2 text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-purple-400 transition-colors flex flex-wrap items-center justify-center gap-2 group"
+                className="w-full py-2 text-xs sm:text-sm font-black uppercase tracking-widest text-slate-500 hover:text-purple-400 transition-colors flex flex-wrap items-center justify-center gap-2 group"
                 >
                 <span>View All-Time Rankings</span>
                 <span className="group-hover:translate-x-1 group-hover:drop-shadow-[0_0_10px_rgba(251,191,36,0.8)] transition-all">🏆</span>
@@ -459,13 +459,13 @@ const GoldenCoinGame: React.FC = () => {
                  ].map((item, i) => (
                    <div key={i} className="flex flex-wrap items-start gap-3">
                      <span className="text-lg shrink-0 drop-shadow-md">{item.icon}</span>
-                     <p className="text-[11px] text-slate-300 leading-relaxed font-medium">{item.text}</p>
+                     <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">{item.text}</p>
                    </div>
                  ))}
                </div>
                <button 
                  onClick={() => navigate('/premium')}
-                 className="mt-6 w-full text-[10px] font-black uppercase tracking-widest text-amber-400 hover:text-amber-300 transition-colors border border-amber-400/30 rounded-xl px-4 py-3 hover:bg-amber-400/10 shadow-[0_0_15px_rgba(251,191,36,0.1)]"
+                 className="mt-6 w-full text-xs sm:text-sm font-black uppercase tracking-widest text-amber-400 hover:text-amber-300 transition-colors border border-amber-400/30 rounded-xl px-4 py-3 hover:bg-amber-400/10 shadow-[0_0_15px_rgba(251,191,36,0.1)]"
                >
                  ✨ Get Premium — See Next Drop Time
                </button>

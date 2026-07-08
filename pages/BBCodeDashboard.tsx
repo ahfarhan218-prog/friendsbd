@@ -30,7 +30,7 @@ const BBCodeDashboard: React.FC = () => {
           </button>
           <div className="text-center">
             <h1 className="text-2xl font-black italic tracking-tighter">BB DASHBOARD</h1>
-            <p className="text-[9px] font-black uppercase tracking-widest text-white/50">Formatted Social Feed</p>
+            <p className="text-xs font-black uppercase tracking-widest text-white/50">Formatted Social Feed</p>
           </div>
           <button onClick={() => navigate('/bb-editor')} className="p-3 bg-black/20 rounded-2xl border border-white/10 backdrop-blur-sm active:scale-90 transition-all">✍️</button>
         </div>
@@ -40,7 +40,7 @@ const BBCodeDashboard: React.FC = () => {
         <div className="flex flex-wrap gap-3 overflow-x-auto pb-2 no-scrollbar">
           {['All Posts', 'Shouts', 'Announcements', 'Forum'].map((cat) => (
             <button key={cat} onClick={() => setFilter(cat)}
-              className={`whitespace-nowrap px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all ${filter === cat ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-xl shadow-purple-900/30' : 'bg-[#1C1C2E] text-white/40 border border-white/5'}`}>
+              className={`whitespace-nowrap px-6 py-3 rounded-2xl text-xs sm:text-sm font-black uppercase tracking-widest transition-all ${filter === cat ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-xl shadow-purple-900/30' : 'bg-[#1C1C2E] text-white/40 border border-white/5'}`}>
               {cat}
             </button>
           ))}
@@ -51,7 +51,7 @@ const BBCodeDashboard: React.FC = () => {
             <div className="py-20 text-center"><div className="w-10 h-10 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto"></div></div>
           ) : filtered.length === 0 ? (
             <div className="bg-[#1C1C2E] rounded-[2.5rem] p-12 text-center border border-white/5">
-              <p className="text-[10px] font-black text-white/40 uppercase tracking-widest">No posts yet. Create one!</p>
+              <p className="text-xs sm:text-sm font-black text-white/40 uppercase tracking-widest">No posts yet. Create one!</p>
             </div>
           ) : (
             filtered.map((post) => (
@@ -62,11 +62,11 @@ const BBCodeDashboard: React.FC = () => {
                   <div className="flex-1">
                     <div className="flex justify-between items-start">
                       <h3 className="text-sm font-black text-white">{post.authorName || post.author}</h3>
-                      <span className={`text-[8px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest ${(post.tags || []).includes('announcement') ? 'bg-amber-500/10 text-amber-400' : 'bg-blue-500/10 text-blue-400'}`}>
+                      <span className={`text-xs font-black px-2 py-0.5 rounded-full uppercase tracking-widest ${(post.tags || []).includes('announcement') ? 'bg-amber-500/10 text-amber-400' : 'bg-blue-500/10 text-blue-400'}`}>
                         {post.tags?.[0] || 'post'}
                       </span>
                     </div>
-                    <p className="text-[9px] font-bold text-gray-500 uppercase tracking-tighter">
+                    <p className="text-xs font-bold text-gray-500 uppercase tracking-tighter">
                       {new Date(post.publishedAt || post.createdAt || post.timestamp).toLocaleString([], { hour: '2-digit', minute: '2-digit', day: 'numeric', month: 'short' })}
                     </p>
                   </div>
@@ -82,14 +82,14 @@ const BBCodeDashboard: React.FC = () => {
                   <div className="flex flex-wrap gap-4">
                     <button className="flex flex-wrap items-center gap-1.5 text-white/40 hover:text-purple-400 transition-colors">
                       <span className="text-lg">👍</span>
-                      <span className="text-[10px] font-black">{post.likes || 0}</span>
+                      <span className="text-xs sm:text-sm font-black">{post.likes || 0}</span>
                     </button>
                     <button className="flex flex-wrap items-center gap-1.5 text-white/40 hover:text-purple-400 transition-colors">
                       <span className="text-lg">💬</span>
-                      <span className="text-[10px] font-black">{post.views || 0}</span>
+                      <span className="text-xs sm:text-sm font-black">{post.views || 0}</span>
                     </button>
                   </div>
-                  <button className="text-[10px] font-black text-purple-400 uppercase tracking-widest hover:text-purple-300 transition-colors">Share 🔗</button>
+                  <button className="text-xs sm:text-sm font-black text-purple-400 uppercase tracking-widest hover:text-purple-300 transition-colors">Share 🔗</button>
                 </div>
               </motion.div>
             ))

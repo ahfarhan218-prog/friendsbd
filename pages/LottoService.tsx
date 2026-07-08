@@ -170,7 +170,7 @@ const LottoService: React.FC = () => {
 
       <div className="max-w-md mx-auto px-4 mt-6 space-y-6">
         <div className="overflow-hidden w-full relative whitespace-nowrap bg-[#0f766e]/10 text-[#0f766e] border border-[#0f766e]/20 py-2.5 px-4 rounded-xl font-bold text-xs flex flex-wrap items-center gap-4">
-          <span className="shrink-0 font-bold bg-[#0f766e] text-white px-2.5 py-1 rounded-lg uppercase tracking-wider text-[8px] z-10">
+          <span className="shrink-0 font-bold bg-[#0f766e] text-white px-2.5 py-1 rounded-lg uppercase tracking-wider text-xs z-10">
             Live Winners
           </span>
           <div className="animate-marquee-wrapper overflow-hidden w-full relative flex">
@@ -186,7 +186,7 @@ const LottoService: React.FC = () => {
 
         <div className="bg-white border border-[#cbd5e1] rounded-2xl p-5 shadow-sm flex items-center justify-between">
           <div className="space-y-1">
-            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Subscription Status</p>
+            <p className="text-xs sm:text-sm text-slate-400 font-bold uppercase tracking-wider">Subscription Status</p>
             <h3 className="font-extrabold text-base text-black">Golden Lotto</h3>
           </div>
           <span className={`font-black text-xs px-3.5 py-1 rounded-full uppercase tracking-wider ${getLottoStatusText().startsWith('Active') ? 'text-[#0f766e] bg-[#0f766e]/10 border border-[#0f766e]/20' : 'text-slate-500 bg-slate-100 border border-slate-200'}`}>
@@ -255,7 +255,7 @@ const LottoService: React.FC = () => {
                 <div className="border border-[#cbd5e1] bg-[#f8fafc] rounded-2xl p-5 flex justify-between items-center">
                   <div className="space-y-1">
                     <p className="text-xs font-extrabold text-black">Package 1 (Standard)</p>
-                    <p className="text-[10px] text-slate-400 font-bold uppercase">7 Days Boost Subscription</p>
+                    <p className="text-xs sm:text-sm text-slate-400 font-bold uppercase">7 Days Boost Subscription</p>
                   </div>
                   <div className="text-right">
                     <p className="text-sm font-black text-[#6d28d9]">15 Golden Coins</p>

@@ -77,7 +77,7 @@ const Challenges: React.FC = () => {
             <div className="flex justify-between items-start mb-4">
               <div>
                 <h3 className="font-black text-slate-800 text-sm">{task.title}</h3>
-                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{task.desc}</p>
+                <p className="text-xs sm:text-sm text-slate-400 font-bold uppercase tracking-widest">{task.desc}</p>
               </div>
               <div className="flex flex-wrap items-center gap-2">
                 <button 
@@ -92,7 +92,7 @@ const Challenges: React.FC = () => {
             </div>
 
             <div className="space-y-3">
-              <div className="flex justify-between items-center text-[10px] font-black text-slate-400 uppercase">
+              <div className="flex justify-between items-center text-xs sm:text-sm font-black text-slate-400 uppercase">
                 <span>Progress</span>
                 <span>{task.progress}/{task.total}</span>
               </div>
@@ -108,7 +108,7 @@ const Challenges: React.FC = () => {
             <button 
               disabled={task.progress < task.total || task.claimed}
               onClick={() => handleClaim(task.id, task.reward)}
-              className={`w-full mt-5 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
+              className={`w-full mt-5 py-3 rounded-xl text-xs sm:text-sm font-black uppercase tracking-widest transition-all ${
                 task.claimed ? 'bg-emerald-50 text-emerald-500' : 
                 task.progress >= task.total ? 'bg-orange-600 text-white shadow-lg shadow-orange-100 active:scale-95' : 
                 'bg-slate-50 text-slate-300'

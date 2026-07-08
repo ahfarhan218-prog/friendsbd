@@ -56,7 +56,7 @@ const Support: React.FC = () => {
           <h2 className="text-xl font-bold">Help & Support</h2>
           <div className="flex flex-wrap items-center gap-1">
             <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
-            <p className="text-[10px] opacity-70">AI Assistant Online</p>
+            <p className="text-xs sm:text-sm opacity-70">AI Assistant Online</p>
           </div>
         </div>
       </header>

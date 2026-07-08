@@ -42,7 +42,7 @@ const APLeaderboard: React.FC = () => {
            </button>
            <div>
              <h2 className="text-2xl font-bold">AP Board ⚡</h2>
-             <p className="text-[10px] opacity-70">Top community contributors</p>
+             <p className="text-xs sm:text-sm opacity-70">Top community contributors</p>
            </div>
          </div>
       </header>
@@ -106,8 +106,8 @@ const APLeaderboard: React.FC = () => {
                       </div>
                       <div className={`w-full ${displayConfig.bg} rounded-t-3xl ${displayConfig.h} flex flex-col items-center justify-center text-white p-2`}>
                          <p className="text-xs font-black uppercase text-blue-50 drop-shadow-sm">{displayConfig.rank}</p>
-                         <p className="text-[10px] font-bold text-center truncate w-full px-1 drop-shadow-sm">{displayUser.name.split(' ')[0]}</p>
-                         <p className="text-[10px] font-black opacity-90 drop-shadow-sm">{mode === 'daily' ? displayUser.ap || 0 : displayUser.totalAp || 0}</p>
+                         <p className="text-xs sm:text-sm font-bold text-center truncate w-full px-1 drop-shadow-sm">{displayUser.name.split(' ')[0]}</p>
+                         <p className="text-xs sm:text-sm font-black opacity-90 drop-shadow-sm">{mode === 'daily' ? displayUser.ap || 0 : displayUser.totalAp || 0}</p>
                       </div>
                    </motion.div>
                  );
@@ -117,7 +117,7 @@ const APLeaderboard: React.FC = () => {
 
         {/* List Rankings */}
         <div className="bg-white rounded-[2.5rem] p-4 shadow-sm border border-slate-50">
-           <div className="flex flex-wrap items-center gap-2 px-4 mb-4 text-blue-700 font-bold uppercase text-[10px] tracking-widest bg-blue-50 py-2 rounded-xl">
+           <div className="flex flex-wrap items-center gap-2 px-4 mb-4 text-blue-700 font-bold uppercase text-xs sm:text-sm tracking-widest bg-blue-50 py-2 rounded-xl">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
               Community Rankings
            </div>
@@ -143,12 +143,12 @@ const APLeaderboard: React.FC = () => {
                       <div className="flex flex-wrap items-center gap-2">
                         <h4 className="font-bold text-slate-800 text-xs truncate max-w-[120px]">{rank.name} {rank.id === currentUserId && '(You)'}</h4>
                         {badge && (
-                          <div title={`${rank.ap} Points: ${badge.label}`} className={`flex flex-wrap items-center gap-1 ${badge.bg} ${badge.text} px-1.5 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest border border-white/20 shadow-sm shrink-0`}>
+                          <div title={`${rank.ap} Points: ${badge.label}`} className={`flex flex-wrap items-center gap-1 ${badge.bg} ${badge.text} px-1.5 py-0.5 rounded-full text-xs font-black uppercase tracking-widest border border-white/20 shadow-sm shrink-0`}>
                              <span>{badge.icon}</span> <span className="hidden sm:inline">{badge.label}</span>
                           </div>
                         )}
                       </div>
-                      <p className="text-[10px] text-slate-500 font-medium mt-0.5">{mode === 'daily' ? rank.ap || 0 : rank.totalAp || 0} AP</p>
+                      <p className="text-xs sm:text-sm text-slate-500 font-medium mt-0.5">{mode === 'daily' ? rank.ap || 0 : rank.totalAp || 0} AP</p>
                     </div>
                   </div>
                   <div className="flex flex-col items-end gap-1">

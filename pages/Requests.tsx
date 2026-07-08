@@ -51,9 +51,9 @@ const Requests: React.FC = () => {
               className="bg-[#1C1C2E] p-5 rounded-[2.5rem] border border-white/5 flex flex-wrap items-center gap-4 shadow-md hover:border-purple-500/30 transition-all">
               <img src={r.senderAvatar || `https://i.pravatar.cc/100?img=${Math.floor(Math.random() * 70)}`} className="w-14 h-14 rounded-2xl border-2 border-purple-500/30 object-cover" alt="" />
               <div className="flex-1 min-w-0">
-                <p className="text-[10px] font-black text-purple-400 uppercase tracking-widest mb-1">{r.type === 'FRIEND_REQ' ? 'Friend Request' : r.type}</p>
+                <p className="text-xs sm:text-sm font-black text-purple-400 uppercase tracking-widest mb-1">{r.type === 'FRIEND_REQ' ? 'Friend Request' : r.type}</p>
                 <h3 className="text-sm font-black text-white truncate">{r.senderName}</h3>
-                <p className="text-[9px] text-white/40 font-bold uppercase truncate">{r.message}</p>
+                <p className="text-xs text-white/40 font-bold uppercase truncate">{r.message}</p>
               </div>
               <div className="flex flex-col gap-2">
                 <button onClick={() => handleAction(r.id)} className="w-9 h-9 bg-emerald-600 text-white rounded-xl shadow-lg shadow-emerald-900/30 flex items-center justify-center hover:bg-emerald-500 transition-all active:scale-90">✓</button>

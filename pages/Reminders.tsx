@@ -88,7 +88,7 @@ const Reminders: React.FC = () => {
         </div>
 
         <div className="relative z-10 text-center space-y-2">
-           <p className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-200">Temporal Protocols</p>
+           <p className="text-xs sm:text-sm font-black uppercase tracking-[0.4em] text-indigo-200">Temporal Protocols</p>
            <h3 className="text-4xl font-black italic tracking-tighter drop-shadow-lg">SESSION TIMERS</h3>
         </div>
       </header>
@@ -117,7 +117,7 @@ const Reminders: React.FC = () => {
                     className="w-full bg-slate-50 border-none rounded-2xl p-4 text-xs font-bold outline-none focus:ring-2 ring-indigo-200 resize-none h-24"
                   />
                   <div className="space-y-2">
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2">Due Date & Time</p>
+                    <p className="text-xs sm:text-sm font-black text-slate-400 uppercase tracking-widest px-2">Due Date & Time</p>
                     <input 
                       type="datetime-local" 
                       value={time} 
@@ -126,8 +126,8 @@ const Reminders: React.FC = () => {
                     />
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    <button onClick={handleAddReminder} className="flex-1 bg-indigo-600 text-white font-black py-4 rounded-2xl uppercase text-[10px] tracking-widest shadow-xl shadow-indigo-100">Establish</button>
-                    <button onClick={() => setShowForm(false)} className="px-6 bg-slate-100 text-slate-400 font-black py-4 rounded-2xl uppercase text-[10px] tracking-widest">Abort</button>
+                    <button onClick={handleAddReminder} className="flex-1 bg-indigo-600 text-white font-black py-4 rounded-2xl uppercase text-xs sm:text-sm tracking-widest shadow-xl shadow-indigo-100">Establish</button>
+                    <button onClick={() => setShowForm(false)} className="px-6 bg-slate-100 text-slate-400 font-black py-4 rounded-2xl uppercase text-xs sm:text-sm tracking-widest">Abort</button>
                   </div>
                </div>
             </motion.div>
@@ -149,12 +149,12 @@ const Reminders: React.FC = () => {
                  </div>
                  <div className="flex-1 min-w-0">
                     <h4 className="text-sm font-black text-slate-800 tracking-tight truncate">{rem.title}</h4>
-                    <p className="text-[10px] text-slate-400 font-bold uppercase mt-0.5 truncate">{rem.description || 'No notes added'}</p>
+                    <p className="text-xs sm:text-sm text-slate-400 font-bold uppercase mt-0.5 truncate">{rem.description || 'No notes added'}</p>
                     <div className="flex flex-wrap items-center gap-2 mt-2">
-                       <span className={`text-[8px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest ${isPast ? 'bg-rose-50 text-rose-500' : 'bg-emerald-50 text-emerald-600'}`}>
+                       <span className={`text-xs font-black px-2 py-0.5 rounded-full uppercase tracking-widest ${isPast ? 'bg-rose-50 text-rose-500' : 'bg-emerald-50 text-emerald-600'}`}>
                           {isPast ? 'EXPIRED' : 'ACTIVE'}
                        </span>
-                       <span className="text-[8px] font-black text-slate-400 uppercase">{new Date(rem.dueTime).toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
+                       <span className="text-xs font-black text-slate-400 uppercase">{new Date(rem.dueTime).toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
                     </div>
                  </div>
                  <button onClick={() => deleteReminder(rem.id)} className="w-10 h-10 bg-slate-50 text-slate-300 rounded-xl flex items-center justify-center hover:bg-rose-50 hover:text-rose-500 transition-colors">
@@ -166,7 +166,7 @@ const Reminders: React.FC = () => {
              <div className="py-20 text-center bg-white rounded-[3rem] border border-dashed border-slate-200">
                 <div className="text-5xl mb-4 grayscale opacity-20">⏰</div>
                 <p className="text-xs font-black text-slate-400 uppercase tracking-widest">No temporal protocols active</p>
-                <button onClick={() => setShowForm(true)} className="mt-4 text-indigo-600 font-black text-[10px] uppercase tracking-widest underline underline-offset-4">Establish Alert</button>
+                <button onClick={() => setShowForm(true)} className="mt-4 text-indigo-600 font-black text-xs sm:text-sm uppercase tracking-widest underline underline-offset-4">Establish Alert</button>
              </div>
            )}
         </div>
@@ -175,7 +175,7 @@ const Reminders: React.FC = () => {
            <div className="absolute -top-10 -right-10 w-48 h-48 bg-indigo-600/10 rounded-full blur-3xl" />
            <div className="relative z-10">
               <h3 className="text-xs font-black uppercase tracking-[0.3em] text-indigo-400 mb-4">Neural Link Note</h3>
-              <p className="text-[11px] text-slate-400 leading-relaxed font-medium">
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-medium">
                 Establish session timers for your community duties. The system will broadcast a neural toast as soon as the scheduled interval is reached. Ephemeral storage only.
               </p>
            </div>

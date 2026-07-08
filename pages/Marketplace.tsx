@@ -74,7 +74,7 @@ const Marketplace: React.FC = () => {
         )}
 
         {items.length === 0 ? (
-          <div className="text-center py-20 text-white/30">
+          <div className="text-center py-20 text-white/60">
             <p className="text-5xl mb-4">🏪</p>
             <p className="font-bold">No items listed yet</p>
             <p className="text-sm mt-1">Be the first to sell something!</p>
@@ -84,8 +84,8 @@ const Marketplace: React.FC = () => {
             {items.map(item => (
               <div key={item.id} className="pf-card p-5">
                 <div className="flex items-start justify-between mb-3">
-                  <span className="text-[10px] font-bold text-purple-400 uppercase tracking-wider px-2 py-1 rounded-full bg-purple-500/10">{item.type}</span>
-                  <span className="text-[10px] text-white/30">{new Date(item.createdAt).toLocaleDateString()}</span>
+                  <span className="text-xs sm:text-sm font-bold text-purple-400 uppercase tracking-wider px-2 py-1 rounded-full bg-purple-500/10">{item.type}</span>
+                  <span className="text-xs sm:text-sm text-white/60">{new Date(item.createdAt).toLocaleDateString()}</span>
                 </div>
                 <h3 className="text-lg font-black text-white mb-1">{item.title}</h3>
                 <p className="text-sm text-white/50 mb-4 line-clamp-2">{item.description || 'No description'}</p>
@@ -99,7 +99,7 @@ const Marketplace: React.FC = () => {
                     )}
                   </div>
                 </div>
-                <p className="text-[10px] text-white/20 mt-2">by {item.sellerName}</p>
+                <p className="text-xs sm:text-sm text-white/40 mt-2">by {item.sellerName}</p>
               </div>
             ))}
           </div>

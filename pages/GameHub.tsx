@@ -35,7 +35,7 @@ const GameHub: React.FC<GameHubProps> = ({ game, icon, color }) => {
           </button>
           <div className="text-center">
             <h2 className="text-2xl font-black uppercase tracking-tighter italic">{game}</h2>
-            <p className="text-[8px] font-black uppercase tracking-widest text-white/50">Multiplayer Session</p>
+            <p className="text-xs font-black uppercase tracking-widest text-white/50">Multiplayer Session</p>
           </div>
           <button className="p-3 bg-black/20 rounded-2xl border border-white/10 backdrop-blur-sm">⚙️</button>
         </div>
@@ -45,7 +45,7 @@ const GameHub: React.FC<GameHubProps> = ({ game, icon, color }) => {
           </div>
           <div className="flex flex-wrap items-center gap-2 bg-black/20 px-4 py-1.5 rounded-full backdrop-blur-sm">
             <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
-            <span className="text-[10px] font-black text-white uppercase tracking-widest">{onlineCount.toLocaleString()} Players Online</span>
+            <span className="text-xs sm:text-sm font-black text-white uppercase tracking-widest">{onlineCount.toLocaleString()} Players Online</span>
           </div>
         </div>
       </header>
@@ -54,7 +54,7 @@ const GameHub: React.FC<GameHubProps> = ({ game, icon, color }) => {
         <div className="bg-[#1C1C2E] p-8 rounded-[3rem] border border-white/5 shadow-lg space-y-8">
           <div className="text-center">
             <h3 className="text-lg font-black text-white uppercase tracking-tighter mb-1">Ready to start?</h3>
-            <p className="text-[10px] text-white/50 font-bold tracking-widest uppercase">Select your game mode below</p>
+            <p className="text-xs sm:text-sm text-white/50 font-bold tracking-widest uppercase">Select your game mode below</p>
           </div>
           <div className="space-y-4">
             <button className="w-full bg-[#161b22] p-5 rounded-2xl flex items-center justify-between group hover:bg-[#1C1C2E] transition-all border border-white/5 active:scale-[0.99] hover:border-purple-500/30">
@@ -62,41 +62,41 @@ const GameHub: React.FC<GameHubProps> = ({ game, icon, color }) => {
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center text-xl text-white shadow-lg bg-gradient-to-br from-purple-600 to-indigo-600">🎮</div>
                 <div className="text-left">
                   <p className="text-xs font-black text-white">Ranked Match</p>
-                  <p className="text-[8px] font-bold text-white/40 uppercase">Competitive · 50 Coins Entry</p>
+                  <p className="text-xs font-bold text-white/40 uppercase">Competitive · 50 Coins Entry</p>
                 </div>
               </div>
-              <span className="text-white/20 group-hover:text-purple-400 transition-colors">→</span>
+              <span className="text-white/40 group-hover:text-purple-400 transition-colors">→</span>
             </button>
             <button className="w-full bg-[#161b22] p-5 rounded-2xl flex items-center justify-between group hover:bg-[#1C1C2E] transition-all border border-white/5 active:scale-[0.99] hover:border-purple-500/30">
               <div className="flex flex-wrap items-center gap-4">
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center text-xl text-white shadow-lg bg-gradient-to-br from-purple-600 to-indigo-600">👥</div>
                 <div className="text-left">
                   <p className="text-xs font-black text-white">Play with Friends</p>
-                  <p className="text-[8px] font-bold text-white/40 uppercase">Private Room · Custom Rules</p>
+                  <p className="text-xs font-bold text-white/40 uppercase">Private Room · Custom Rules</p>
                 </div>
               </div>
-              <span className="text-white/20 group-hover:text-purple-400 transition-colors">→</span>
+              <span className="text-white/40 group-hover:text-purple-400 transition-colors">→</span>
             </button>
           </div>
-          <button className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-black py-5 rounded-[2rem] shadow-2xl shadow-purple-900/30 uppercase tracking-widest text-[11px] hover:opacity-90 active:scale-[0.98] transition-all">
+          <button className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-black py-5 rounded-[2rem] shadow-2xl shadow-purple-900/30 uppercase tracking-widest text-xs sm:text-sm hover:opacity-90 active:scale-[0.98] transition-all">
             Quick Play Now ⚡
           </button>
         </div>
 
         <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] shadow-xl shadow-purple-900/10 rounded-[3rem] p-8 text-white relative overflow-hidden">
           <div className="flex justify-between items-center mb-6">
-            <h4 className="text-[10px] font-black uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Global Leaderboard</h4>
-            <span className="text-[8px] font-black bg-[#161b22] px-3 py-1 rounded-full border border-white/5 text-white/40">Weekly</span>
+            <h4 className="text-xs sm:text-sm font-black uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Global Leaderboard</h4>
+            <span className="text-xs font-black bg-[#161b22] px-3 py-1 rounded-full border border-white/5 text-white/40">Weekly</span>
           </div>
           <div className="space-y-4">
             {topPlayers.map((p, i) => (
               <div key={i} className="flex items-center justify-between px-2">
                 <div className="flex flex-wrap items-center gap-4">
-                  <span className="text-xs font-black text-white/30">#0{i + 1}</span>
+                  <span className="text-xs font-black text-white/60">#0{i + 1}</span>
                   <img src={`https://picsum.photos/seed/p${i + 10}/50`} className="w-8 h-8 rounded-lg border border-purple-500/30" alt="" />
                   <span className="text-xs font-bold text-white/80">{p.name}</span>
                 </div>
-                <span className="text-[10px] font-black text-emerald-400">{p.xp}</span>
+                <span className="text-xs sm:text-sm font-black text-emerald-400">{p.xp}</span>
               </div>
             ))}
           </div>

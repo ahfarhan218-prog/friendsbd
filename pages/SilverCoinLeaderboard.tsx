@@ -48,16 +48,16 @@ const SilverCoinLeaderboard: React.FC = () => {
                   className="flex items-center justify-between p-4 bg-slate-50/50 rounded-[2rem] mb-2 border border-slate-100"
                >
                   <div className="flex flex-wrap items-center gap-4">
-                     <span className="w-6 text-[10px] font-black text-slate-400">#{idx + 1}</span>
+                     <span className="w-6 text-xs sm:text-sm font-black text-slate-400">#{idx + 1}</span>
                      <img src={u.avatar} className="w-10 h-10 rounded-xl shadow-sm border border-white" alt="" />
                      <div>
                         <p className="text-xs font-black text-slate-800">{u.username}</p>
-                        <p className="text-[8px] font-bold text-slate-400 uppercase">Fastest: {(u.fastestGrab/1000).toFixed(2)}s</p>
+                        <p className="text-xs font-bold text-slate-400 uppercase">Fastest: {(u.fastestGrab/1000).toFixed(2)}s</p>
                      </div>
                   </div>
                   <div className="text-right">
                      <p className="text-xs font-black text-slate-500">{u.totalGrabbed} Grabs</p>
-                     <p className="text-[8px] font-black text-blue-500 uppercase">+{u.totalValue} Silver</p>
+                     <p className="text-xs font-black text-blue-500 uppercase">+{u.totalValue} Silver</p>
                   </div>
                </motion.div>
             )) : (

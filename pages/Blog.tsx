@@ -32,7 +32,7 @@ const Blog: React.FC = () => {
         </div>
 
         {posts.length === 0 ? (
-          <div className="text-center py-20 text-white/30">
+          <div className="text-center py-20 text-white/60">
             <p className="text-5xl mb-4">📝</p>
             <p className="font-bold">No blog posts yet</p>
           </div>
@@ -44,7 +44,7 @@ const Blog: React.FC = () => {
                   <img src={post.authorAvatar} className="w-10 h-10 rounded-full object-cover border-2 border-purple-500/30" alt="" />
                   <div>
                     <p className="text-sm font-bold text-white">{post.authorName}</p>
-                    <p className="text-[10px] text-white/30">{new Date(post.publishedAt).toLocaleDateString()} · {post.views || 0} views</p>
+                    <p className="text-xs sm:text-sm text-white/60">{new Date(post.publishedAt).toLocaleDateString()} · {post.views || 0} views</p>
                   </div>
                 </div>
                 <h2 className="text-xl font-black text-white mb-2">{post.title}</h2>
@@ -52,7 +52,7 @@ const Blog: React.FC = () => {
                 {post.tags?.length > 0 && (
                   <div className="flex flex-wrap gap-2 mt-3">
                     {post.tags.map((tag: string) => (
-                      <span key={tag} className="text-[10px] text-purple-400 px-2 py-1 rounded-full bg-purple-500/10">#{tag}</span>
+                      <span key={tag} className="text-xs sm:text-sm text-purple-400 px-2 py-1 rounded-full bg-purple-500/10">#{tag}</span>
                     ))}
                   </div>
                 )}

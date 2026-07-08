@@ -78,16 +78,16 @@ const ModernQuizCard: React.FC<ModernQuizCardProps> = ({
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[10px] font-black font-mono px-2 py-0.5 bg-[#090d16] text-[#6366f1] border border-[#1f293d] rounded-lg">
+            <span className="text-xs sm:text-sm font-black font-mono px-2 py-0.5 bg-[#090d16] text-[#6366f1] border border-[#1f293d] rounded-lg">
               ID: {quiz.id?.substring(0, 5).toUpperCase() || 'NEW'}
             </span>
             {quiz.type === 'live' ? (
-              <span className="flex flex-wrap items-center gap-1 text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-md animate-pulse">
+              <span className="flex flex-wrap items-center gap-1 text-xs font-extrabold uppercase tracking-wider px-2 py-0.5 bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-md animate-pulse">
                 <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
                 Live Deck
               </span>
             ) : (
-              <span className="text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 bg-slate-800 text-slate-400 rounded-md">
+              <span className="text-xs font-extrabold uppercase tracking-wider px-2 py-0.5 bg-slate-800 text-slate-400 rounded-md">
                 Standard
               </span>
             )}
@@ -167,7 +167,7 @@ const ModernQuizCard: React.FC<ModernQuizCardProps> = ({
 
       {/* ── CARD FOOTER ── */}
       <div className="mt-5 space-y-4 pt-3 border-t border-[#1f293d]/50">
-        <div className="flex items-center justify-between text-[10px]">
+        <div className="flex items-center justify-between text-xs sm:text-sm">
           {/* Creator Profile */}
           <div className="flex flex-wrap items-center gap-1.5">
             <img
@@ -188,17 +188,17 @@ const ModernQuizCard: React.FC<ModernQuizCardProps> = ({
           {/* Status Badges */}
           <div className="flex flex-wrap items-center gap-1.5">
             {quiz.isClosed ? (
-              <span className="px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-lg">
+              <span className="px-2.5 py-0.5 text-xs font-black uppercase tracking-wider bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-lg">
                 Closed
               </span>
             ) : (
-              <span className="px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider bg-green-500/10 text-green-400 border border-green-500/20 rounded-lg">
+              <span className="px-2.5 py-0.5 text-xs font-black uppercase tracking-wider bg-green-500/10 text-green-400 border border-green-500/20 rounded-lg">
                 Open
               </span>
             )}
 
             {isCompleted && (
-              <span className="px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-lg flex flex-wrap items-center gap-0.5">
+              <span className="px-2.5 py-0.5 text-xs font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-lg flex flex-wrap items-center gap-0.5">
                 ✓ Passed
               </span>
             )}

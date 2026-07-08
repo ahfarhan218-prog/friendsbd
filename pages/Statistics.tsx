@@ -47,7 +47,7 @@ const Statistics: React.FC = () => {
       <div className="flex flex-wrap items-center gap-3">
         <span className="text-lg font-black text-white">{typeof value === 'number' ? formatLargeNumber(value) : value}</span>
         {onClick && (
-          <span className="text-white/20 group-hover:text-purple-400 group-hover:translate-x-1 transition-all">
+          <span className="text-white/40 group-hover:text-purple-400 group-hover:translate-x-1 transition-all">
             ➜
           </span>
         )}
@@ -76,7 +76,7 @@ const Statistics: React.FC = () => {
             <h1 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">
               Statistics Dashboard
             </h1>
-            <p className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] mt-1">
+            <p className="text-xs sm:text-sm font-bold text-white/60 uppercase tracking-[0.2em] mt-1">
               Global Platform Analytics
             </p>
           </div>
