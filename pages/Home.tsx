@@ -330,37 +330,35 @@ const Home: React.FC = () => {
   const formattedDate = currentTime.toLocaleDateString([], { weekday: 'long', month: 'short', day: 'numeric' });
 
   if (isMaintenance && !isAdmin) return (
-    <div className="min-h-screen bg-transparent flex flex-col items-center justify-center p-6 text-center text-white">
-      <div className="text-6xl mb-4 animate-bounce">🛠️</div>
-      <h1 className="text-3xl font-black uppercase tracking-tight mb-2">Maintenance Mode</h1>
-      <p className="text-white/30 text-sm max-w-xs">We are performing server updates. Check back soon!</p>
+    <div className="min-h-screen bg-transparent flex flex-col items-center justify-center p-4 text-center text-white">
+      <div className="text-5xl mb-4 animate-bounce">🛠️</div>
+      <h1 className="text-2xl font-black uppercase tracking-tight mb-2">Maintenance Mode</h1>
+      <p className="text-white/30 text-xs max-w-xs">We are performing server updates. Check back soon!</p>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-transparent pb-28 font-inter">
-      <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] pt-12 pb-32 px-5">
+    <div className="min-h-screen bg-transparent pb-28 font-inter w-full overflow-x-hidden">
+      <header className="relative overflow-hidden bg-gradient-to-br from-[#110a2a] via-[#1d0d4a] to-[#0d1a6b] pt-10 pb-28 px-4 sm:px-6">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_0%,_#7c3aed33,_transparent_70%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#0F0F1A] to-transparent" />
-        <div className="absolute top-8 right-4 w-32 h-32 bg-purple-600/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-12 left-8 w-24 h-24 bg-indigo-600/10 rounded-full blur-2xl" />
 
-        <div className="relative z-10">
-          <div className="flex items-center justify-between mb-6">
+        <div className="relative z-10 max-w-5xl mx-auto">
+          <div className="flex items-center justify-between mb-5">
             <div>
-              <h1 className="text-3xl font-black text-white tracking-tight">
+              <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
                 friends <span className="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">bd</span>
               </h1>
             </div>
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex items-center gap-2">
               {isAdmin && (
                 <button onClick={() => navigate('/admin')}
-                  className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-2xl flex items-center justify-center border border-white/10 active:scale-90 transition-all">
+                  className="w-9 h-9 sm:w-10 sm:h-10 bg-white/10 hover:bg-white/20 rounded-xl sm:rounded-2xl flex items-center justify-center border border-white/10 active:scale-90 transition-all text-sm">
                   ⚙️
                 </button>
               )}
               <button onClick={() => navigate('/notifications')}
-                className="relative w-10 h-10 bg-white/10 hover:bg-white/20 rounded-2xl flex items-center justify-center border border-white/10 active:scale-90 transition-all">
+                className="relative w-9 h-9 sm:w-10 sm:h-10 bg-white/10 hover:bg-white/20 rounded-xl sm:rounded-2xl flex items-center justify-center border border-white/10 active:scale-90 transition-all text-sm">
                 🔔
               </button>
             </div>
@@ -379,22 +377,23 @@ const Home: React.FC = () => {
             const displayName = activeUser.name?.split(' ')[0] || activeUser.username || 'Friend';
             return (
               <div className={`relative mb-4 rounded-2xl bg-gradient-to-br ${g.bg} border ${g.border} backdrop-blur-sm overflow-hidden`}>
-                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                <div className="px-4 py-3.5 flex flex-wrap items-center justify-between gap-3">
+                <div className="px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
                   <div className="flex-1 min-w-0">
-                    <p className="text-[10px] font-bold text-white/40 uppercase tracking-[0.15em] mb-0.5 truncate">{displayName}</p>
-                    <p className="text-xl font-black text-white leading-tight tracking-tight">
+                    <p className="text-[9px] font-bold text-white/40 uppercase tracking-[0.15em] mb-0.5 truncate">{displayName}</p>
+                    <p className="text-lg sm:text-xl font-black text-white leading-tight tracking-tight">
                       {g.msg} <span className="inline-block">{g.emoji}</span>
                     </p>
                     <p className="text-[11px] text-white/50 font-medium mt-0.5">{g.sub}</p>
                   </div>
-                  <div className="text-right shrink-0">
-                    <p className="text-lg font-black text-white font-mono tabular-nums tracking-tight">{formattedTime}</p>
-                    <p className="text-[9px] text-white/35 font-bold mt-0.5">{formattedDate}</p>
-                    <span className="inline-flex flex-wrap items-center gap-1 mt-1 text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full bg-white/10">
-                      <span className={`inline-block w-1.5 h-1.5 rounded-full ${g.dot} animate-pulse`} />
-                      Live
-                    </span>
+                  <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center border-t border-white/5 sm:border-none pt-2 sm:pt-0 shrink-0">
+                    <p className="text-base sm:text-lg font-black text-white font-mono tabular-nums tracking-tight">{formattedTime}</p>
+                    <div className="text-right sm:mt-0.5">
+                      <p className="text-[9px] text-white/35 font-bold hidden sm:block">{formattedDate}</p>
+                      <span className="inline-flex items-center gap-1 text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full bg-white/10">
+                        <span className={`inline-block w-1.5 h-1.5 rounded-full ${g.dot} animate-pulse`} />
+                        Live
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -402,209 +401,155 @@ const Home: React.FC = () => {
           })()}
 
           {announcement && (
-            <div className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl px-4 py-2.5 flex flex-wrap items-center gap-3 overflow-hidden">
-              <span className="text-[8px] font-black uppercase tracking-widest text-purple-300 bg-purple-500/30 px-2 py-1 rounded-lg shrink-0">📢 News</span>
+            <div className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl px-3 py-2 flex items-center gap-3 overflow-hidden">
+              <span className="text-[8px] font-black uppercase tracking-widest text-purple-300 bg-purple-500/30 px-2 py-0.5 rounded shrink-0">📢 News</span>
               <div className="flex-1 overflow-hidden">
-                <div className="whitespace-nowrap animate-marquee text-[11px] text-white/70 font-medium">{announcement}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{announcement}</div>
+                <div className="whitespace-nowrap animate-marquee text-[11px] text-white/70 font-medium">{announcement}</div>
               </div>
             </div>
           )}
 
-          <div className="flex flex-wrap items-center gap-2 mt-4">
-            <span className="relative flex h-2.5 w-2.5">
+          <div className="flex items-center gap-2 mt-3.5">
+            <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
             </span>
-            <span className="text-[10px] text-white/40 font-bold uppercase tracking-widest">{totalOnline} online now</span>
+            <span className="text-[9px] text-white/40 font-bold uppercase tracking-widest">{totalOnline} online now</span>
           </div>
         </div>
       </header>
 
-      <div className="px-4 -mt-16 space-y-5 relative z-10">
+      <div className="px-3 sm:px-4 -mt-14 space-y-4 relative z-10 max-w-5xl mx-auto w-full">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           onClick={() => navigate('/profile/' + activeUser.username)}
-          className="bg-[#1C1C2E] border border-white/5 rounded-[2rem] p-4 flex flex-wrap items-center gap-4 cursor-pointer hover:border-purple-500/30 active:scale-[0.98] transition-all shadow-xl">
-          <div className="relative shrink-0">
-            <img src={activeUser.avatar} className="w-14 h-14 rounded-2xl object-cover border-2 border-purple-500/30" alt="" />
-            <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-400 border-2 border-[#1C1C2E] rounded-full" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-1.5 flex-wrap">
-              <span className="text-sm font-black text-white">{activeUser.name}</span>
-              {activeUser.isVerified && <span className="text-[10px]">✔️</span>}
-              {activeUser.isPremium && <span className="text-[8px] bg-amber-400/20 text-amber-400 px-1.5 py-0.5 rounded-full font-black">👑 Premium</span>}
+          className="bg-[#1C1C2E] border border-white/5 rounded-2xl sm:rounded-[2rem] p-3.5 flex flex-col sm:flex-row items-center sm:items-center gap-3.5 cursor-pointer hover:border-purple-500/30 active:scale-[0.99] transition-all shadow-xl w-full">
+          <div className="flex items-center gap-3.5 w-full sm:w-auto flex-1 min-w-0">
+            <div className="relative shrink-0">
+              <img src={activeUser.avatar} className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl object-cover border-2 border-purple-500/30" alt="" />
+              <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-400 border-2 border-[#1C1C2E] rounded-full" />
             </div>
-            <p className="text-[10px] text-purple-400/70 font-bold mt-0.5">@{activeUser.username}</p>
-            <p className="text-[9px] text-emerald-400 font-black flex flex-wrap items-center gap-1 mt-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-2.5 py-0.5 w-fit">
-              🟢 Today: {formatOnlineTime(activeUser.todayOnlineTime)}
-            </p>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="text-sm font-black text-white truncate break-all">{activeUser.name}</span>
+                {activeUser.isVerified && <span className="text-[10px]">✔️</span>}
+                {activeUser.isPremium && <span className="text-[8px] bg-amber-400/20 text-amber-400 px-1.5 py-0.5 rounded-full font-black">👑</span>}
+              </div>
+              <p className="text-[10px] text-purple-400/70 font-bold">@{activeUser.username}</p>
+              <p className="text-[9px] text-emerald-400 font-black flex items-center gap-1 mt-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-2 py-0.5 w-fit">
+                🟢 {formatOnlineTime(activeUser.todayOnlineTime)}
+              </p>
+            </div>
           </div>
-          <div className="flex flex-wrap gap-4 text-center shrink-0">
-            <div>
-              <p className="text-lg font-black text-white">{activeUser.points || 0}</p>
+          <div className="flex items-center justify-around sm:justify-end gap-6 border-t border-white/5 sm:border-none pt-3 sm:pt-0 w-full sm:w-auto shrink-0">
+            <div className="text-center">
+              <p className="text-base sm:text-lg font-black text-white">{activeUser.points || 0}</p>
               <p className="text-[8px] text-white/30 font-bold uppercase tracking-widest">XP</p>
             </div>
-            <div className="w-px bg-white/10" />
-            <div>
-              <p className="text-lg font-black text-white">Lv.{activeUser.level || 1}</p>
+            <div className="w-px h-6 bg-white/10" />
+            <div className="text-center">
+              <p className="text-base sm:text-lg font-black text-white">Lv.{activeUser.level || 1}</p>
               <p className="text-[8px] text-white/30 font-bold uppercase tracking-widest">Level</p>
             </div>
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+        <div className="grid grid-cols-3 gap-2 sm:gap-3 w-full">
           {[
-            { icon: '🟢', label: 'Online', value: totalOnline, filter: 'online', color: 'from-emerald-600/20 to-emerald-700/20 border-emerald-500/20 hover:border-emerald-500/40 hover:shadow-emerald-950/20' },
-            { icon: '👑', label: 'Premium', value: premiumCount, filter: 'premium', color: 'from-amber-500/20 to-orange-600/20 border-amber-500/20 hover:border-amber-500/40 hover:shadow-amber-950/20' },
-            { icon: '🛡️', label: 'Staff', value: staffCount, filter: 'staff', color: 'from-blue-600/20 to-indigo-600/20 border-blue-500/20 hover:border-blue-500/40 hover:shadow-blue-950/20' },
+            { icon: '🟢', label: 'Online', value: totalOnline, filter: 'online', color: 'from-emerald-600/20 to-emerald-700/20 border-emerald-500/20' },
+            { icon: '👑', label: 'Premium', value: premiumCount, filter: 'premium', color: 'from-amber-500/20 to-orange-600/20 border-amber-500/20' },
+            { icon: '🛡️', label: 'Staff', value: staffCount, filter: 'staff', color: 'from-blue-600/20 to-indigo-600/20 border-blue-500/20' },
           ].map(s => (
-            <button
-              key={s.label}
-              onClick={() => navigate(`/members?filter=${s.filter}`)}
-              className={`bg-gradient-to-br ${s.color} border rounded-2xl p-3 text-center transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] hover:shadow-xl cursor-pointer outline-none`}
-            >
-              <span className="text-xl block mb-1">{s.icon}</span>
-              <p className="text-lg font-black text-white">{s.value}</p>
-              <p className="text-[8px] text-white/30 font-bold uppercase tracking-widest">{s.label}</p>
+            <button key={s.label} onClick={() => navigate(`/members?filter=${s.filter}`)}
+              className={`bg-gradient-to-br ${s.color} border rounded-xl sm:rounded-2xl p-2 sm:p-3 text-center active:scale-[0.95] transition-all cursor-pointer outline-none min-w-0`}>
+              <span className="text-lg sm:text-xl block mb-0.5">{s.icon}</span>
+              <p className="text-sm sm:text-lg font-black text-white truncate">{s.value}</p>
+              <p className="text-[8px] sm:text-[9px] text-white/30 font-bold uppercase tracking-wider truncate">{s.label}</p>
             </button>
           ))}
         </div>
 
         <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-          className={`bg-[#1C1C2E] border rounded-[2rem] overflow-hidden transition-colors ${editingShout ? 'border-amber-500/30' : 'border-white/5 focus-within:border-purple-500/30'}`}>
+          className={`bg-[#1C1C2E] border rounded-2xl sm:rounded-[2rem] overflow-hidden transition-colors ${editingShout ? 'border-amber-500/30' : 'border-white/5 focus-within:border-purple-500/30'} w-full`}>
           {editingShout && (
-            <div className="bg-amber-500/10 border-b border-amber-500/20 px-4 py-2 flex items-center justify-between">
-              <span className="text-[9px] font-black uppercase tracking-widest text-amber-400">✏️ Editing Shout</span>
-              <button onClick={() => { setEditingShout(null); setShoutText(''); }}
-                className="text-[9px] font-black text-white/30 hover:text-white uppercase tracking-widest">Cancel</button>
+            <div className="bg-amber-500/10 border-b border-amber-500/20 px-3 py-1.5 flex items-center justify-between">
+              <span className="text-[9px] font-black uppercase tracking-widest text-amber-400">✏️ Editing</span>
+              <button onClick={() => { setEditingShout(null); setShoutText(''); }} className="text-[9px] font-black text-white/30 hover:text-white uppercase">Cancel</button>
             </div>
           )}
 
           {replyingTo && (
-            <div className="bg-purple-950/40 border-b border-purple-500/20 px-4 py-2.5 flex items-center justify-between">
-              <div className="min-w-0">
-                <span className="text-[9px] font-black uppercase tracking-widest text-purple-400">↩️ Replying to @{replyingTo.username || replyingTo.user.toLowerCase().replace(/\s+/g, '')}</span>
+            <div className="bg-purple-950/40 border-b border-purple-500/20 px-3 py-2 flex items-center justify-between">
+              <div className="min-w-0 flex-1 mr-2">
+                <span className="text-[9px] font-black uppercase tracking-widest text-purple-400">↩️ Reply to @{replyingTo.username || replyingTo.user.toLowerCase().replace(/\s+/g, '')}</span>
                 <p className="text-xs text-white/50 truncate mt-0.5">{replyingTo.content}</p>
               </div>
-              <button onClick={() => setReplyingTo(null)}
-                className="text-[10px] font-black text-white/30 hover:text-white bg-white/5 w-6 h-6 rounded-full flex items-center justify-center transition-all">✕</button>
+              <button onClick={() => setReplyingTo(null)} className="text-[10px] font-black text-white/30 bg-white/5 w-5 h-5 rounded-full flex items-center justify-center shrink-0">✕</button>
             </div>
           )}
 
-          <div className="flex flex-wrap items-center gap-3 px-4 pt-4">
-            <img src={activeUser.avatar} className="w-9 h-9 rounded-xl object-cover border-2 border-white/10 shrink-0" alt="" />
+          <div className="flex items-center gap-2.5 px-3 pt-3.5">
+            <img src={activeUser.avatar} className="w-8 h-8 rounded-lg object-cover border border-white/10 shrink-0" alt="" />
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-black text-white">{activeUser.name}</p>
-              <p className="text-[9px] text-white/30 font-bold">Broadcasting to all members</p>
+              <p className="text-xs font-black text-white truncate">{activeUser.name}</p>
             </div>
-            <span className="text-[9px] font-black text-white/20 font-mono">{shoutText.length} characters</span>
+            <span className="text-[8px] font-black text-white/25 font-mono">{shoutText.length} ch</span>
           </div>
 
           {['admin', 'moderator'].includes(activeUser.role || '') && (
-            <div className="flex flex-wrap gap-2 px-4 pt-3 pb-1 border-t border-white/5 bg-white/[0.02]">
-              <button
-                type="button"
-                onClick={() => setShoutType('normal')}
-                className={`flex flex-wrap items-center gap-1.5 px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all ${
-                  shoutType === 'normal'
-                    ? 'bg-purple-600 text-white shadow-lg shadow-purple-900/30'
-                    : 'bg-white/5 text-white/40 hover:text-white hover:bg-white/10'
-                }`}
-              >
-                📢 Normal Shout
+            <div className="flex gap-1.5 px-3 pt-2.5 pb-1 overflow-x-auto no-scrollbar">
+              <button type="button" onClick={() => setShoutType('normal')}
+                className={`px-2.5 py-1 rounded-lg text-[8px] font-black uppercase tracking-wider shrink-0 transition-all ${shoutType === 'normal' ? 'bg-purple-600 text-white' : 'bg-white/5 text-white/40'}`}>
+                📢 Normal
               </button>
-              <button
-                type="button"
-                onClick={() => setShoutType('quiz')}
-                className={`flex flex-wrap items-center gap-1.5 px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all ${
-                  shoutType === 'quiz'
-                    ? 'bg-rose-600 text-white shadow-lg shadow-rose-900/30'
-                    : 'bg-white/5 text-white/40 hover:text-white hover:bg-white/10'
-                }`}
-              >
-                ❓ Quiz Shout (3m Lock)
+              <button type="button" onClick={() => setShoutType('quiz')}
+                className={`px-2.5 py-1 rounded-lg text-[8px] font-black uppercase tracking-wider shrink-0 transition-all ${shoutType === 'quiz' ? 'bg-rose-600 text-white' : 'bg-white/5 text-white/40'}`}>
+                ❓ Quiz (3m)
               </button>
             </div>
           )}
 
-          <div className="px-4 pt-2 pb-3">
-            <textarea
-              ref={textareaRef}
-              value={shoutText}
-              onChange={e => setShoutText(e.target.value)}
-              disabled={isLockdown}
-              placeholder={isLockdown ? '🔒 Posting is locked by administration' : "What's on your mind?"}
-              rows={3}
-              className="w-full bg-transparent border-none text-sm text-white/80 placeholder-white/20 outline-none resize-none font-medium leading-relaxed"
-            />
+          <div className="px-3 pt-2 pb-1.5">
+            <textarea ref={textareaRef} value={shoutText} onChange={e => setShoutText(e.target.value)} disabled={isLockdown}
+              placeholder={isLockdown ? '🔒 Posting is locked' : "What's on your mind?"} rows={3}
+              className="w-full bg-transparent border-none text-sm text-white/80 placeholder-white/20 outline-none resize-none font-medium leading-normal" />
           </div>
 
-          <div className="flex items-center justify-between px-4 pb-4 border-t border-white/5 pt-3">
-            <div className="flex gap-1 flex-wrap">
-              {QUICK_EMOJIS.map(e => (
-                <button key={e} onClick={() => !isLockdown && setShoutText(prev => prev + e)}
-                  disabled={isLockdown}
-                  className="w-8 h-8 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center text-sm active:scale-90 transition-all disabled:opacity-30">
-                  {e}
-                </button>
-              ))}
+          <div className="flex flex-col gap-2.5 px-3 pb-3 border-t border-white/5 pt-2.5">
+            <div className="flex items-center justify-between gap-2 w-full">
+              <div className="flex gap-1 overflow-x-auto py-0.5 no-scrollbar flex-1 max-w-[70%] sm:max-w-none">
+                {QUICK_EMOJIS.map(e => (
+                  <button key={e} onClick={() => !isLockdown && setShoutText(prev => prev + e)} disabled={isLockdown}
+                    className="w-7 h-7 shrink-0 rounded-lg bg-white/5 flex items-center justify-center text-xs active:scale-90 transition-all">
+                    {e}
+                  </button>
+                ))}
+              </div>
+              <button onClick={handleAddShout} disabled={!shoutText.trim() || isLockdown}
+                className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-black text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl shrink-0 active:scale-95 transition-all disabled:opacity-30">
+                {editingShout ? 'Update' : 'Shout'}
+              </button>
             </div>
-            <button onClick={handleAddShout} disabled={!shoutText.trim() || isLockdown}
-              className="flex flex-wrap items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 disabled:opacity-30 disabled:cursor-not-allowed text-white font-black text-xs uppercase tracking-widest px-5 py-2.5 rounded-2xl shadow-lg shadow-purple-900/40 active:scale-95 transition-all">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-              </svg>
-              {editingShout ? 'Update' : 'Shout'}
-            </button>
           </div>
         </motion.div>
 
-        <div>
-          <div className="flex flex-wrap items-center gap-2 mb-3 px-1">
-            <span className="relative flex h-2.5 w-2.5">
+        <div className="w-full">
+          <div className="flex items-center gap-1.5 mb-2.5 px-1">
+            <span className="relative flex h-1.5 w-1.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-purple-600" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-purple-600" />
             </span>
-            <h3 className="text-[10px] font-black text-white/40 uppercase tracking-[0.3em]">Live Shout Stream</h3>
+            <h3 className="text-[9px] font-black text-white/40 uppercase tracking-[0.2em]">Live Shout Stream</h3>
           </div>
 
           <AnimatePresence mode="popLayout">
             {sortedShouts.length > 0 ? (
-              <div className="space-y-4">
+              <div className="space-y-3 w-full">
                 {sortedShouts.slice(0, 3).map(s => (
-                  <ShoutCard
-                    key={s.id}
-                    shout={s}
-                    currentUser={activeUser}
-                    onReact={handleReact}
-                    onReply={handleReply}
+                  <ShoutCard key={s.id} shout={s} currentUser={activeUser} onReact={handleReact} onReply={handleReply}
                     onDelete={id => {
                       const shoutToDelete = shouts.find(x => x.id === id);
                       if (shoutToDelete) {
-                        apTransactionService.adjustUserAP(shoutToDelete.userId, 'SHOUT_DELETED')
-                          .then(({ newBalance }) => {
-                            if (shoutToDelete.userId === activeUser.id) {
-                              const saved = localStorage.getItem('user_session');
-                              if (saved) {
-                                const parsed = JSON.parse(saved);
-                                parsed.balance_ap = newBalance;
-                                localStorage.setItem('user_session', JSON.stringify(parsed));
-                                window.dispatchEvent(new Event('storage'));
-                              }
-                            }
-                          })
-                          .catch(e => console.warn('Failed to deduct shout AP:', e));
-                        const preview = (shoutToDelete.content || '').replace(/\[.*?\]/g, '').trim().substring(0, 80);
-                        mongoService.addAdminLog({
-                          id: 'log_' + Date.now(),
-                          action: 'SHOUT_DELETED',
-                          targetId: id,
-                          targetType: 'shout',
-                          deletedBy: activeUser.id,
-                          deletedByName: activeUser.name,
-                          details: `"${preview}" by @${shoutToDelete.username}`,
-                          timestamp: Date.now()
-                        }).catch(e => console.warn('Failed to log deletion:', e));
+                        apTransactionService.adjustUserAP(shoutToDelete.userId, 'SHOUT_DELETED').catch(e => console.warn(e));
                       }
                       mongoService.deleteShout(id);
                       setShouts(shouts.filter(x => x.id !== id));
@@ -616,58 +561,42 @@ const Home: React.FC = () => {
                   />
                 ))}
 
-                <motion.button
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  onClick={() => navigate('/shouts')}
-                  className="w-full flex items-center justify-between bg-[#1C1C2E] border border-white/8 hover:border-purple-500/40 rounded-[2rem] px-5 py-4 group active:scale-[0.98] transition-all"
-                >
-                  <div className="flex flex-wrap items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-purple-500/20 flex items-center justify-center text-lg">
-                      📣
-                    </div>
-                    <div className="text-left">
+                <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} onClick={() => navigate('/shouts')}
+                  className="w-full flex items-center justify-between bg-[#1C1C2E] border border-white/5 rounded-2xl p-3.5 group active:scale-[0.99] transition-all">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center text-sm shrink-0">📣</div>
+                    <div className="text-left min-w-0">
                       <p className="text-xs font-black text-white">See All Shouts</p>
-                      <p className="text-[9px] text-white/30 font-bold mt-0.5">
-                        {shouts.length > 3 ? `${shouts.length - 3} more shouts in history` : 'View full shout history'}
+                      <p className="text-[9px] text-white/30 font-bold truncate mt-0.5">
+                        {shouts.length > 3 ? `${shouts.length - 3} more shouts in history` : 'View history'}
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-wrap items-center gap-1 text-purple-400 group-hover:translate-x-1 transition-transform">
-                    <span className="text-[10px] font-black uppercase tracking-widest">History</span>
-                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7"/>
-                    </svg>
-                  </div>
+                  <span className="text-purple-400 text-[9px] font-black uppercase tracking-wider shrink-0">→</span>
                 </motion.button>
               </div>
             ) : (
-              <div className="py-20 text-center bg-[#1C1C2E] rounded-[2rem] border border-white/5">
-                <span className="text-5xl block mb-4">📣</span>
-                <p className="text-sm font-black text-white/20 uppercase tracking-widest">No shouts yet</p>
-                <p className="text-[10px] text-white/10 font-bold mt-1">Be the first to broadcast!</p>
+              <div className="py-12 text-center bg-[#1C1C2E] rounded-2xl border border-white/5 w-full">
+                <span className="text-3xl block mb-2">📣</span>
+                <p className="text-xs font-black text-white/20 uppercase tracking-widest">No shouts yet</p>
               </div>
             )}
           </AnimatePresence>
         </div>
 
         {activities.length > 0 && (
-          <div className="bg-[#1C1C2E] border border-white/5 rounded-[2rem] p-5">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-[9px] font-black text-purple-400/70 uppercase tracking-[0.3em]">🕒 Recent Activity</h3>
-              <button onClick={() => navigate('/timeline')} className="text-[9px] font-black text-white/30 hover:text-white uppercase tracking-widest transition-colors">View All →</button>
+          <div className="bg-[#1C1C2E] border border-white/5 rounded-2xl p-4 w-full">
+            <div className="flex items-center justify-between mb-3.5">
+              <h3 className="text-[9px] font-black text-purple-400/70 uppercase tracking-[0.2em]">🕒 Recent Activity</h3>
+              <button onClick={() => navigate('/timeline')} className="text-[9px] font-black text-white/30 hover:text-white uppercase tracking-wider">All →</button>
             </div>
-            <div className="space-y-3">
+            <div className="space-y-2.5">
               {activities.slice(0, 5).map((act, i) => (
-                <div key={act.id || i} className="flex flex-wrap items-start gap-3">
-                  <span className="text-[9px] font-mono text-white/20 bg-white/5 px-2 py-1 rounded-lg shrink-0 mt-0.5">{act.time}</span>
-                  <p className="text-xs text-white/50 leading-relaxed">
-                    <span onClick={() => navigate(`/profile/${act.username}`)} className="font-black text-white/70 cursor-pointer hover:text-purple-300 transition-colors">{act.username}</span>{' '}
-                    {act.isTopic ? (
-                      <><span className="text-white/30">posted topic</span>{' '}
-                      <span onClick={() => navigate('/forum')} className="text-purple-400 cursor-pointer font-bold hover:underline">"{act.topicTitle}"</span></>
-                    ) : act.msg}
+                <div key={act.id || i} className="flex items-start gap-2 min-w-0">
+                  <span className="text-[8px] font-mono text-white/20 bg-white/5 px-1.5 py-0.5 rounded shrink-0 mt-0.5">{act.time}</span>
+                  <p className="text-xs text-white/50 leading-normal truncate flex-1 min-w-0 break-all">
+                    <span onClick={() => navigate(`/profile/${act.username}`)} className="font-black text-white/70 cursor-pointer">{act.username}</span>{' '}
+                    {act.isTopic ? `posted "${act.topicTitle}"` : act.msg}
                   </p>
                 </div>
               ))}
@@ -675,45 +604,30 @@ const Home: React.FC = () => {
           </div>
         )}
 
-        <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] shadow-xl shadow-purple-900/10 rounded-[2rem] p-5 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="flex items-center justify-between mb-4 relative z-10">
-            <h3 className="text-[10px] font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-[0.2em] flex flex-wrap items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]" />
-              Today's Highlights
+        <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] shadow-xl rounded-2xl p-4 w-full relative overflow-hidden">
+          <div className="flex items-center justify-between mb-3.5">
+            <h3 className="text-[9px] font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-[0.2em] flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              Highlights
             </h3>
-            <span className="text-[8px] font-bold text-slate-500 uppercase tracking-widest bg-[#161b22] px-2 py-0.5 rounded-full border border-[#30363d]">Live 24H</span>
+            <span className="text-[8px] font-bold text-slate-500 bg-[#161b22] px-2 py-0.5 rounded-full border border-[#30363d]">24H</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 relative z-10">
+          <div className="flex flex-col gap-2 w-full">
             {[
-              { 
-                icon: '🏆', label: 'Top Shouter', value: topShouter.name, 
-                sub: `${topShouter.count} shouts today`, onClick: () => navigate('/highlights?tab=shouter'),
-                bg: 'hover:bg-purple-500/10 hover:border-purple-500/30' 
-              },
-              { 
-                icon: '👥', label: 'Newest Member', value: newestUser.username || newestUser.name, 
-                sub: 'Just joined us!', onClick: () => navigate(`/profile/${newestUser.username}`),
-                bg: 'hover:bg-blue-500/10 hover:border-blue-500/30'
-              },
-              { 
-                icon: '📸', label: 'Today\'s Gallery', value: `${todayPhotos.length} photos`, 
-                sub: 'View highlights', onClick: () => navigate('/highlights?tab=photos'),
-                bg: 'hover:bg-pink-500/10 hover:border-pink-500/30'
-              },
+              { icon: '🏆', label: 'Top Shouter', value: topShouter.name, sub: `${topShouter.count} shouts`, onClick: () => navigate('/highlights?tab=shouter') },
+              { icon: '👥', label: 'Newest Member', value: newestUser.username || newestUser.name, sub: 'Just joined!', onClick: () => navigate(`/profile/${newestUser.username}`) },
+              { icon: '📸', label: 'Gallery', value: `${todayPhotos.length} photos`, sub: 'View photos', onClick: () => navigate('/highlights?tab=photos') },
             ].map(item => (
               <button key={item.label} onClick={item.onClick}
-                className={`w-full flex flex-wrap items-center gap-3 p-3.5 rounded-2xl bg-[#161b22]/50 border border-[#30363d] transition-all duration-300 ${item.bg} text-left group`}>
-                <span className="text-2xl shrink-0 group-hover:scale-110 transition-transform">{item.icon}</span>
+                className="w-full flex items-center gap-3 p-3 rounded-xl bg-[#161b22]/50 border border-[#30363d] text-left min-w-0 active:bg-white/[0.02]">
+                <span className="text-xl shrink-0">{item.icon}</span>
                 <div className="flex-1 min-w-0">
-                  <p className="text-[8px] text-slate-400 font-bold uppercase tracking-widest mb-0.5">{item.label}</p>
-                  <p className="text-sm font-black text-white truncate group-hover:text-purple-300 transition-colors">{item.value}</p>
-                  <p className="text-[9px] text-slate-500 font-bold truncate mt-0.5">{item.sub}</p>
+                  <p className="text-[8px] text-slate-400 font-bold uppercase tracking-wider">{item.label}</p>
+                  <p className="text-xs font-black text-white truncate break-all">{item.value}</p>
+                  <p className="text-[9px] text-slate-500 font-medium truncate">{item.sub}</p>
                 </div>
-                <span className="text-slate-600 group-hover:text-purple-400 transition-colors shrink-0">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
-                </span>
+                <span className="text-slate-600 text-xs shrink-0">→</span>
               </button>
             ))}
           </div>
@@ -725,13 +639,13 @@ const Home: React.FC = () => {
           const suggested = usersList.filter(u => u.id !== s.id && !following.includes(u.id) && !u.isBot).slice(0, 5);
           if (suggested.length === 0) return null;
           return (
-            <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] rounded-[2rem] p-5">
-              <h3 className="text-[10px] font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-[0.2em] mb-4">👥 Suggested Users</h3>
-              <div className="flex flex-wrap gap-3 overflow-x-auto pb-2">
+            <div className="bg-[#090d16]/80 backdrop-blur-xl border border-[#30363d] rounded-2xl p-4 w-full">
+              <h3 className="text-[9px] font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 uppercase tracking-[0.2em] mb-3">👥 Suggested</h3>
+              <div className="flex gap-2.5 overflow-x-auto pb-1.5 no-scrollbar w-full">
                 {suggested.map(u => (
-                  <button key={u.id} onClick={() => navigate(`/profile/${u.username}`)} className="w-28 p-3 text-center shrink-0 bg-[#1C1C2E] border border-white/5 rounded-2xl hover:border-purple-500/30 transition-all">
-                    <img src={u.avatar} className="w-12 h-12 rounded-full mx-auto border-2 border-purple-500/30 mb-2 object-cover" alt="" />
-                    <p className="text-xs font-bold text-white truncate">{u.name}</p>
+                  <button key={u.id} onClick={() => navigate(`/profile/${u.username}`)} className="w-24 p-2.5 text-center shrink-0 bg-[#1C1C2E] border border-white/5 rounded-xl min-w-0">
+                    <img src={u.avatar} className="w-10 h-10 rounded-full mx-auto border border-purple-500/30 mb-1.5 object-cover" alt="" />
+                    <p className="text-[11px] font-bold text-white truncate">{u.name}</p>
                     <p className="text-[9px] text-white/30 truncate">@{u.username}</p>
                   </button>
                 ))}
@@ -740,13 +654,6 @@ const Home: React.FC = () => {
           );
         })()}
       </div>
-
-      <style>{`
-        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        .animate-marquee { display: inline-block; animation: marquee 30s linear infinite; }
-        .pf-card { background:#1C1C2E; border:1px solid rgba(255,255,255,0.06); border-radius:20px; transition:all .3s; }
-        .pf-card:hover { border-color:rgba(168,85,247,0.15); }
-      `}</style>
     </div>
   );
 };
