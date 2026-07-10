@@ -93,6 +93,6 @@ const userSchema = new mongoose.Schema({
   lastDailyReset: String,
   lastWeeklyReset: String,
   favoriteChannels: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Channel' }]
-}, { _id: false });
+});
 
 module.exports = mongoose.model('User', userSchema);

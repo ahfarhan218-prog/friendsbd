@@ -134,6 +134,7 @@ router.post('/login', async (req, res) => {
 
     const passwordMatch = await bcrypt.compare(password, user.passwordHash);
     if (!passwordMatch) {
+      console.log(`🔐 Login FAIL for ${email} — hash length: ${user.passwordHash?.length || 0}, hash prefix: ${user.passwordHash?.substring(0, 7) || 'N/A'}`);
       return res.status(401).json({ error: 'Incorrect password.' });
     }
 

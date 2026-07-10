@@ -122,13 +122,21 @@ const seedIfEmpty = async () => {
     const Activity = require('./models/Activity');
 
     const userCount = await User.countDocuments();
+    const bcrypt = require('bcryptjs');
+    const seedHash = bcrypt.hashSync('admin123', 10);
+    const now = Date.now();
+
+    // Re-seed password hashes for existing users that are missing them, and re-verify all seed user hashes
+    const usersWithoutPass = await User.find({ email: { $exists: true }, passwordHash: { $exists: false } }).lean();
+    for (const u of usersWithoutPass) {
+      await User.findOneAndUpdate({ id: u.id }, { $set: { passwordHash: seedHash } });
+      console.log(`🔑 Set password for ${u.email || u.username}`);
+    }
+
     if (userCount === 0) {
       console.log('🌱 Seeding initial data...');
-      const now = Date.now();
 
-      const bcrypt = require('bcryptjs');
-      const seedHash = bcrypt.hashSync('admin123', 10);
-      const users = [
+      const seedUsers = [
         { id: 'bot_chatgirl', userId: 1, name: 'Chatgirl', username: 'chatgirl', avatar: 'https://picsum.photos/seed/chatgirl/200', level: 99, points: 9999, silverPoints: 9999, goldenCoins: 999, plusses: 999, isOnline: true, isPremium: false, isVerified: true, isBot: true, fromCountry: 'India', currentLocation: 'Home Page', lastActiveTime: now - 1000, bio: 'Hello! I am Chatgirl, the official assistant bot of FriendsBD 🇧🇩', createdAt: now },
         { id: 'admin_user', userId: 10, name: 'System Admin', username: 'admin', email: 'admin@friendsbd.com', passwordHash: seedHash, avatar: 'https://picsum.photos/seed/admin/200', level: 15, points: 1250, silverPoints: 450, goldenCoins: 25, plusses: 85, isOnline: true, isPremium: true, isVerified: true, role: 'admin', user_role: 'admin', createdAt: now },
         { id: 'user_shahriar', userId: 11, name: 'Shahriar Rahman', username: 'shahriar', email: 'shahriar@friendsbd.com', passwordHash: seedHash, avatar: 'https://picsum.photos/seed/shahriar/200', level: 13, points: 940, silverPoints: 310, goldenCoins: 12, plusses: 45, isOnline: true, isPremium: false, isVerified: true, role: 'admin', user_role: 'admin', createdAt: now },
@@ -137,36 +145,35 @@ const seedIfEmpty = async () => {
         { id: 'user_mahim', userId: 3, name: 'Mahim Ahmed', username: 'mahim_sis', email: 'mahim@friendsbd.com', passwordHash: seedHash, avatar: 'https://picsum.photos/seed/mahim/200', level: 9, points: 720, silverPoints: 180, goldenCoins: 5, plusses: 23, isOnline: false, isPremium: true, isVerified: false, role: 'user', createdAt: now },
         { id: 'user_tanvir', userId: 5, name: 'Tanvir Hossain', username: 'tanvir', email: 'tanvir@friendsbd.com', passwordHash: seedHash, avatar: 'https://picsum.photos/seed/tanvir/200', level: 5, points: 410, silverPoints: 95, goldenCoins: 2, plusses: 10, isOnline: false, isPremium: false, isVerified: false, role: 'user', createdAt: now },
       ];
-
-      for (const u of users) {
+      for (const u of seedUsers) {
         await User.findOneAndUpdate({ id: u.id }, { $set: u }, { upsert: true });
       }
 
-      const shouts = [
+      const seedShouts = [
         { id: 'sh1', displayId: 101, user: 'System Admin', userId: 'admin_user', avatar: 'https://picsum.photos/seed/admin/200', content: 'Cricket match tournament registrations are closing soon! Register today 🏏', time: '1h ago', timestamp: now - 3600000, userReactions: {}, replies: [], isPremium: true, isPinned: true, isClosed: false },
         { id: 'sh2', displayId: 102, user: 'shahriar', userId: 'user_shahriar', avatar: 'https://picsum.photos/seed/shahriar/200', content: 'What a game! Completed the quiz tournament with full score! 🥇🏆', time: '3h ago', timestamp: now - 10800000, userReactions: {}, replies: [], isPremium: false, isPinned: false, isClosed: false },
         { id: 'sh3', displayId: 103, user: 'mahim_sis', userId: 'user_mahim', avatar: 'https://picsum.photos/seed/mahim/200', content: 'Just uploaded our meetup pictures in the forum. Check them out under General lounge.', time: '5h ago', timestamp: now - 18000000, userReactions: {}, replies: [], isPremium: true, isPinned: false, isClosed: false },
       ];
-      for (const s of shouts) {
+      for (const s of seedShouts) {
         await Shout.findOneAndUpdate({ id: s.id }, { $set: s }, { upsert: true });
       }
 
-      const photos = [
+      const seedPhotos = [
         { id: 'p1', url: 'https://picsum.photos/seed/cricket1/600/400', caption: 'Lords Ground Champions Team Cup celebration! 🏆🏏', uploadedBy: 'shahriar', likes: 24, timestamp: now - 14400000 },
         { id: 'p2', url: 'https://picsum.photos/seed/tech/600/400', caption: 'Our setup workspace and custom community avatars display.', uploadedBy: 'mahim_sis', likes: 18, timestamp: now - 18000000 },
         { id: 'p3', url: 'https://picsum.photos/seed/sunset/600/400', caption: 'A beautiful afternoon in Dhaka after a friendly game 🌅', uploadedBy: 'system', likes: 12, timestamp: now - 25200000 },
         { id: 'p4', url: 'https://picsum.photos/seed/gaming/600/400', caption: 'Mystery Castle cleared on stage 10. Ultimate badge obtained!', uploadedBy: 'admin', likes: 35, timestamp: now - 32400000 },
       ];
-      for (const ph of photos) {
+      for (const ph of seedPhotos) {
         await Photo.findOneAndUpdate({ id: ph.id }, { $set: ph }, { upsert: true });
       }
 
-      const activities = [
+      const seedActivities = [
         { id: 'act1', time: '11:11 PM', username: 'shahriar', msg: 'Updated their profile information.', timestamp: now - 600000 },
         { id: 'act2', time: '04:41 PM', username: 'shahriar', isTopic: true, topicTitle: 'Community Update', msg: 'Created By shahriar', timestamp: now - 14400000 },
         { id: 'act3', time: '08:22 PM', username: 'mahim_sis', msg: 'Changed their profile picture.', timestamp: now - 43200000 },
       ];
-      for (const act of activities) {
+      for (const act of seedActivities) {
         await Activity.findOneAndUpdate({ id: act.id }, { $set: act }, { upsert: true });
       }
 
