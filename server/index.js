@@ -126,11 +126,21 @@ const seedIfEmpty = async () => {
     const seedHash = bcrypt.hashSync('admin123', 10);
     const now = Date.now();
 
-    // Re-seed password hashes for existing users that are missing them, and re-verify all seed user hashes
-    const usersWithoutPass = await User.find({ email: { $exists: true }, passwordHash: { $exists: false } }).lean();
-    for (const u of usersWithoutPass) {
-      await User.findOneAndUpdate({ id: u.id }, { $set: { passwordHash: seedHash } });
-      console.log(`🔑 Set password for ${u.email || u.username}`);
+    // Force re-seed ALL password hashes on every restart (fixes corrupted hashes from _id:false bug)
+    const seedEmails = ['admin@friendsbd.com','shahriar@friendsbd.com','smsumon@friendsbd.com','taaj@friendsbd.com','mahim@friendsbd.com','tanvir@friendsbd.com'];
+    for (const se of seedEmails) {
+      const existing = await User.findOne({ email: se }).lean();
+      if (existing) {
+        let needsReseed = true;
+        try {
+          needsReseed = !bcrypt.compareSync('admin123', existing.passwordHash || '');
+        } catch { /* invalid hash, needs re-seed */ }
+        if (needsReseed) {
+          const newHash = bcrypt.hashSync('admin123', 10);
+          await User.findOneAndUpdate({ email: se }, { $set: { passwordHash: newHash } });
+          console.log(`🔑 Re-seeded password for ${se}`);
+        }
+      }
     }
 
     if (userCount === 0) {

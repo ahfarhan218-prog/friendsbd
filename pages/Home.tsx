@@ -451,7 +451,7 @@ const Home: React.FC = () => {
               </p>
             </div>
           </div>
-          <div className="flex items-center justify-around sm:justify-end gap-6 border-t border-white/5 sm:border-none pt-3 sm:pt-0 w-full sm:w-auto shrink-0">
+            <div className="flex items-center justify-around sm:justify-end gap-3 border-t border-white/5 sm:border-none pt-3 sm:pt-0 w-full sm:w-auto shrink-0">
             <div className="text-center">
               <p className="text-base sm:text-lg font-black text-white">{activeUser.points || 0}</p>
               <p className="text-sm text-white/60 font-bold uppercase tracking-widest">XP</p>
@@ -461,6 +461,11 @@ const Home: React.FC = () => {
               <p className="text-base sm:text-lg font-black text-white">Lv.{activeUser.level || 1}</p>
               <p className="text-sm text-white/60 font-bold uppercase tracking-widest">Level</p>
             </div>
+            <div className="w-px h-6 bg-white/10" />
+            <button onClick={() => { localStorage.removeItem('auth_token'); localStorage.removeItem('user_session'); localStorage.removeItem('user'); navigate('/login'); window.location.reload(); }}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-rose-500/10 border border-rose-500/20 hover:bg-rose-500/20 transition-all text-rose-400 text-sm font-black uppercase tracking-wider">
+              🚪 Sign Out
+            </button>
           </div>
         </motion.div>
 
