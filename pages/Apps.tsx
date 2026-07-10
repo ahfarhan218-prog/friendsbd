@@ -1,13 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { APP_DRAWER_DATA } from '../constants';
 import { triggerToast } from '../components/NotificationToast';
+import { mongoService, API_BASE } from '../services/mongoService';
 
 const Apps: React.FC = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
+  const [unreadNotifs, setUnreadNotifs] = useState(0);
+  const [unreadMsgs, setUnreadMsgs] = useState(0);
+  const [onlineUsers, setOnlineUsers] = useState<number>(0);
+  const [totalUsers, setTotalUsers] = useState<number>(0);
 
   // Define valid routes configured in App.tsx
+  const currentUserId = useCallback(() => {
+    try { return JSON.parse(localStorage.getItem('user_session') || '{}').id; } catch { return null; }
+  }, [])();
+
+  useEffect(() => {
+    const uid = currentUserId;
+    if (!uid) return;
+    const unsub = mongoService.listenUserNotifications(uid, (notifs) => {
+      setUnreadNotifs(notifs.filter(n => !n.isRead && n.type !== 'MESSAGE').length);
+      setUnreadMsgs(notifs.filter(n => !n.isRead && n.type === 'MESSAGE').length);
+    });
+    return () => unsub();
+  }, [currentUserId]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const r = await fetch(`${API_BASE}/users`);
+        if (r.ok) {
+          const data = await r.json();
+          setTotalUsers(data.length);
+          setOnlineUsers(data.filter((u: any) => u.isOnline).length);
+        }
+      } catch {}
+    };
+    fetchUsers();
+    const interval = setInterval(fetchUsers, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
   const VALID_ROUTES = new Set([
     'tournament',
     'coin-game',
@@ -172,12 +207,23 @@ const Apps: React.FC = () => {
                         <span className="drop-shadow-md select-none group-hover/app:animate-bounce">{app.icon}</span>
                       </div>
 
-                      {/* Pill Badge */}
-                      {app.badge && (
-                        <span className="absolute -top-2 -right-2 bg-gradient-to-r from-rose-500 to-pink-500 text-white text-sm font-black px-2 py-0.5 rounded-full border border-rose-400 shadow-[0_0_10px_rgba(244,63,94,0.5)] z-10">
-                          {app.badge}
-                        </span>
-                      )}
+                      {/* Pill Badge (real data overrides mock) */}
+                      {(() => {
+                        const badgeMap: Record<string, string> = {
+                          'inbox': `${unreadMsgs}`,
+                          'notifications': `${unreadNotifs}`,
+                          'conference': `${onlineUsers}`,
+                          'friends': (() => { try { const s = JSON.parse(localStorage.getItem('user_session') || '{}'); const fol = (s.following || []).length; return `${Math.min(fol, onlineUsers)}/${fol}`; } catch { return app.badge; } })(),
+                        };
+                        const realBadge = badgeMap[app.id];
+                        const showBadge = realBadge !== undefined ? (realBadge !== '0' && realBadge !== '0/0') : !!app.badge;
+                        if (!showBadge) return null;
+                        return (
+                          <span className="absolute -top-2 -right-2 bg-gradient-to-r from-rose-500 to-pink-500 text-white text-[10px] sm:text-xs font-black px-1.5 py-0.5 rounded-full border border-rose-400 shadow-[0_0_10px_rgba(244,63,94,0.5)] z-10 whitespace-nowrap">
+                            {realBadge !== undefined ? realBadge : app.badge}
+                          </span>
+                        );
+                      })()}
                     </div>
 
                     <span className="text-xs sm:text-sm font-black text-white/60 mt-3 text-center leading-tight truncate w-full px-1 group-hover/app:text-purple-300 transition-colors duration-300">
