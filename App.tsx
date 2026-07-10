@@ -44,6 +44,7 @@ import GoldenCoinLeaderboard from './pages/GoldenCoinLeaderboard';
 import SilverCoinGame from './pages/SilverCoinGame';
 import SilverCoinLeaderboard from './pages/SilverCoinLeaderboard';
 import ColorBallGame from './pages/ColorBallGame';
+import ColorBallLeaderboard from './pages/ColorBallLeaderboard';
 import LottoService from './pages/LottoService';
 import MysteryCastle from './pages/MysteryCastle';
 import Reminders from './pages/Reminders';
@@ -422,6 +423,7 @@ const AppContent: React.FC = () => {
           <Route path="/ludo"              element={protect(<GameHub game="Ludo" icon="🎲" color="bg-orange-500" />)} />
           <Route path="/football"          element={protect(<GameHub game="Football" icon="⚽" color="bg-emerald-800" />)} />
           <Route path="/colorball"         element={protect(<ColorBallGame />)} />
+          <Route path="/color-ball-leaderboard" element={protect(<ColorBallLeaderboard />)} />
           <Route path="/monster-catcher"   element={protect(<MonsterCatcher />)} />
 
           {/* BBCode System Routes */}

@@ -1,232 +1,187 @@
-
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { gameService } from '../services/gameService';
-import { CoinStats } from '../types';
+import { motion } from 'framer-motion';
 import { mongoService } from '../services/mongoService';
+
+const TABS = [
+  { key: 'alltime', label: 'All Time', icon: '🏆' },
+  { key: 'weekly', label: 'This Week', icon: '📅' },
+  { key: 'daily', label: 'Today', icon: '☀️' },
+];
 
 const GoldenCoinLeaderboard: React.FC = () => {
   const navigate = useNavigate();
-  const [filter, setFilter] = useState<'all' | 'weekly' | 'daily'>('all');
-  const [stats, setStats] = useState<CoinStats[]>([]);
+  const [period, setPeriod] = useState<'alltime' | 'daily' | 'weekly'>('alltime');
+  const [users, setUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(true);
-    const unsubscribe = mongoService.listenUsers((dbUsers) => {
-      const activeUsers = dbUsers.filter(u => (u.goldenCoins || 0) > 0);
-      const coinStatsList: CoinStats[] = activeUsers.map(u => ({
-        userId: u.id,
-        username: u.username || u.name,
-        avatar: u.avatar,
-        totalGrabbed: u.goldenCoins || 0,
-        totalValue: u.goldenCoins || 0,
-        fastestGrab: 0,
-        lastWin: 0
-      }));
-
-      coinStatsList.sort((a, b) => b.totalGrabbed - a.totalGrabbed);
-      setStats(coinStatsList);
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }, [filter]);
-
-  const podium = useMemo(() => stats.slice(0, 3), [stats]);
-  const others = useMemo(() => stats.slice(3), [stats]);
   const currentUserId = (() => {
     try { return JSON.parse(localStorage.getItem('user_session') || '{}').id; }
     catch { return null; }
   })();
 
-  const myRank = useMemo(() => {
-    if (!currentUserId) return null;
-    const index = stats.findIndex(s => s.userId === currentUserId);
-    return index !== -1 ? { rank: index + 1, data: stats[index] } : null;
-  }, [stats, currentUserId]);
+  useEffect(() => {
+    setLoading(true);
+    const unsub = mongoService.listenUsers((dbUsers) => {
+      const sorted = dbUsers
+        .filter(u => (u.goldenCoins || 0) > 0)
+        .sort((a: any, b: any) => (b.goldenCoins || 0) - (a.goldenCoins || 0));
+      setUsers(sorted);
+      setLoading(false);
+    });
+    return () => unsub();
+  }, [period]);
 
-  const getBadge = (grabbed: number) => {
-    if (grabbed >= 50) return { label: 'Coin Hunter', icon: '🏹' };
-    if (grabbed >= 10) return { label: 'Fast Fingers', icon: '⚡' };
-    return null;
-  };
+  const podium = useMemo(() => users.slice(0, 3), [users]);
+  const others = useMemo(() => users.slice(3), [users]);
 
   return (
-    <div className="min-h-screen bg-transparent font-inter pb-40">
-      <header className="bg-gradient-to-br from-[#7F00FF] to-[#4F0099] text-white p-4 sm:p-6 pb-20 rounded-b-[4rem] shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 p-32 bg-amber-400/10 rounded-full blur-3xl -mr-16 -mt-16" />
-        <div className="relative z-10 flex justify-between items-center mb-8 flex-wrap gap-3">
-          <button onClick={() => navigate('/coin-game')} className="p-3 bg-white/10 rounded-2xl active:scale-90 border border-white/10">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7"/></svg>
-          </button>
-          <div className="text-center">
-            <h2 className="text-2xl font-black uppercase tracking-tighter italic text-amber-400">Coin Rankings</h2>
-            <p className="text-sm font-black uppercase tracking-widest opacity-60">Global Grab Statistics</p>
-          </div>
-          <div className="w-12" />
-        </div>
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] pb-20">
+      <style>{`
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+        .lb-card { background:#1C1C2E; border:1px solid rgba(255,255,255,0.06); border-radius:20px; transition:all .3s; }
+        .lb-card:hover { border-color:rgba(251,191,36,0.15); }
+        .custom-scrollbar::-webkit-scrollbar { width: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #30363d; border-radius: 10px; }
+      `}</style>
 
-        {/* Tab Selection */}
-        <div className="relative z-10 bg-white/10 backdrop-blur-md rounded-2xl p-1.5 flex flex-wrap gap-1 border border-white/10">
-          {(['all', 'weekly', 'daily'] as const).map(f => (
-            <button 
-              key={f}
-              onClick={() => setFilter(f)}
-              className={`flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-black uppercase tracking-widest transition-all ${
-                filter === f ? 'bg-amber-400 text-purple-900 shadow-lg' : 'text-white/60 hover:text-white'
-              }`}
-            >
-              {f}
+      <header className="bg-gradient-to-r from-amber-700 via-amber-600 to-yellow-500 text-white p-4 sm:p-6 pb-16 sm:pb-20 rounded-b-[2rem] sm:rounded-b-[3rem] shadow-lg shadow-amber-900/30">
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <div className="flex items-center gap-4">
+            <button onClick={() => navigate(-1)} className="p-2 bg-white/10 rounded-full active:scale-90 transition-transform backdrop-blur-sm">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
             </button>
-          ))}
+            <div>
+              <h2 className="text-2xl font-black italic">Coin Leaderboard 🪙</h2>
+              <p className="text-xs sm:text-sm opacity-70 font-bold uppercase tracking-wider">Top coin grabbers</p>
+            </div>
+          </div>
         </div>
       </header>
 
-      <div className="px-5 -mt-10 space-y-8 relative z-10">
-        {/* PODIUM SECTION */}
-        <div className="flex flex-wrap items-end justify-center gap-2 h-72 pb-4">
-          {/* 2nd Place */}
-          {podium[1] && (
-            <motion.div 
-              initial={{ opacity: 0, y: 50 }} 
-              animate={{ opacity: 1, y: 0 }}
-              className="flex flex-col items-center flex-1 max-w-[100px]"
+      <div className="px-4 -mt-16 flex flex-col gap-6 mb-24 max-w-4xl mx-auto">
+        <div className="lb-card p-1.5 flex gap-1">
+          {TABS.map(tab => (
+            <button
+              key={tab.key}
+              onClick={() => setPeriod(tab.key as any)}
+              className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-black uppercase tracking-wider transition-all ${
+                period === tab.key
+                  ? 'bg-gradient-to-r from-amber-600 to-yellow-500 text-white shadow-lg shadow-amber-900/40 scale-105'
+                  : 'text-white/40 hover:text-white/80 hover:bg-white/5'
+              }`}
             >
-              <div className="relative mb-3">
-                <img src={podium[1].avatar} className="w-14 h-14 rounded-full border-4 border-slate-300 shadow-lg" alt="" />
-                <span className="absolute -top-2 -right-2 text-2xl" title="2nd Place">🥈</span>
-              </div>
-              <div className="w-full bg-slate-100 rounded-t-3xl h-24 flex flex-col items-center justify-center p-2 border-x border-t border-slate-200">
-                <p className="text-xs sm:text-sm font-black text-slate-800 truncate w-full text-center">{podium[1].username}</p>
-                <p className="text-sm font-black text-slate-500">{podium[1].totalGrabbed}</p>
-                <p className="text-[7px] font-bold text-slate-400 uppercase">Grabs</p>
-              </div>
-            </motion.div>
-          )}
-
-          {/* 1st Place */}
-          {podium[0] && (
-            <motion.div 
-              initial={{ opacity: 0, y: 70 }} 
-              animate={{ opacity: 1, y: 0 }}
-              className="flex flex-col items-center flex-1 max-w-[120px] relative z-20"
-            >
-              <div className="relative mb-4 group">
-                <div className="absolute -inset-2 bg-amber-400/20 rounded-full blur group-hover:bg-amber-400/40 transition-all" />
-                <img src={podium[0].avatar} className="w-20 h-20 rounded-full border-4 border-amber-400 shadow-2xl relative z-10" alt="" />
-                <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-4xl animate-bounce" title="Coin King">👑</div>
-              </div>
-              <div className="w-full bg-gradient-to-t from-amber-50 to-white rounded-t-[2.5rem] h-36 flex flex-col items-center justify-center p-3 border-x border-t border-amber-200 shadow-[0_-15px_30px_rgba(251,191,36,0.1)]">
-                <p className="text-sm font-black text-amber-600 uppercase tracking-tighter mb-1">Coin King</p>
-                <p className="text-sm font-black text-slate-900 truncate w-full text-center">{podium[0].username}</p>
-                <p className="text-xl font-black text-amber-500">{podium[0].totalGrabbed}</p>
-                <p className="text-sm font-black text-amber-600/50 uppercase tracking-widest">Grand Total</p>
-              </div>
-            </motion.div>
-          )}
-
-          {/* 3rd Place */}
-          {podium[2] && (
-            <motion.div 
-              initial={{ opacity: 0, y: 50 }} 
-              animate={{ opacity: 1, y: 0 }}
-              className="flex flex-col items-center flex-1 max-w-[100px]"
-            >
-              <div className="relative mb-3">
-                <img src={podium[2].avatar} className="w-14 h-14 rounded-full border-4 border-orange-200 shadow-lg" alt="" />
-                <span className="absolute -top-2 -right-2 text-2xl" title="3rd Place">🥉</span>
-              </div>
-              <div className="w-full bg-orange-50/30 rounded-t-3xl h-20 flex flex-col items-center justify-center p-2 border-x border-t border-orange-100">
-                <p className="text-xs sm:text-sm font-black text-slate-800 truncate w-full text-center">{podium[2].username}</p>
-                <p className="text-sm font-black text-orange-400">{podium[2].totalGrabbed}</p>
-                <p className="text-[7px] font-bold text-orange-300 uppercase">Grabs</p>
-              </div>
-            </motion.div>
-          )}
+              <span>{tab.icon}</span>
+              <span className="hidden sm:inline">{tab.label}</span>
+            </button>
+          ))}
         </div>
 
-        {/* LIST SECTION */}
-        <div className="bg-white rounded-[3rem] p-4 sm:p-6 shadow-xl border border-slate-100">
-          <div className="flex items-center justify-between mb-6 px-2">
-            <h3 className="text-xs sm:text-sm font-black text-slate-400 uppercase tracking-[0.3em]">Global Ranking</h3>
-            <span className="text-sm font-black bg-slate-50 text-slate-400 px-3 py-1 rounded-full">{stats.length} Active Players</span>
+        {loading ? (
+          <div className="flex items-center justify-center py-20">
+            <div className="w-10 h-10 border-2 border-amber-500/30 border-t-amber-500 rounded-full animate-spin" />
           </div>
-
-          <div className="space-y-3">
-            {others.length > 0 ? others.map((u, idx) => (
-              <motion.div 
-                key={u.userId}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="flex items-center justify-between p-4 bg-slate-50/50 border border-slate-100 rounded-[2rem] hover:bg-white hover:shadow-lg hover:border-purple-100 transition-all group"
-              >
-                <div className="flex flex-wrap items-center gap-4">
-                  <span className="w-6 text-center text-xs sm:text-sm font-black text-slate-300 group-hover:text-purple-400">#{idx + 4}</span>
-                  <div className="relative">
-                    <img src={u.avatar} className="w-10 h-10 rounded-xl border border-white shadow-sm" alt="" />
-                    <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white" />
-                  </div>
-                  <div>
-                    <div className="flex flex-wrap items-center gap-1.5">
-                      <p className="text-sm font-black text-slate-800">{u.username}</p>
-                      {getBadge(u.totalGrabbed) && (
-                        <span className="text-xs sm:text-sm" title={getBadge(u.totalGrabbed)?.label}>
-                          {getBadge(u.totalGrabbed)?.icon}
-                        </span>
-                      )}
+        ) : (
+          <>
+            <div className="lb-card p-4 sm:p-6 flex flex-col items-center">
+              <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-4xl mb-3">🪙</motion.div>
+              <p className="text-xs font-bold text-white/40 uppercase tracking-widest mb-4">{period === 'daily' ? "Today's" : period === 'weekly' ? "This Week's" : 'All Time'} Top Coiners</p>
+              <div className="flex items-end justify-center gap-3 sm:gap-6 w-full min-h-[200px]">
+                {podium[1] && (
+                  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="flex flex-col items-center flex-1 max-w-[120px]">
+                    <div className="relative mb-2">
+                      <img src={podium[1].avatar} className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-amber-400/30 object-cover shadow-lg" alt="" />
+                      <span className="absolute -top-2 -right-2 text-xl">🥈</span>
                     </div>
-                    <p className="text-sm font-bold text-slate-400 uppercase">
-                      Fastest: {(u.fastestGrab / 1000).toFixed(2)}s
-                    </p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <p className="text-sm font-black text-purple-600">{u.totalGrabbed} Grabs</p>
-                  <p className="text-sm font-black text-amber-500 uppercase">+{u.totalValue} Pts</p>
-                </div>
-              </motion.div>
-            )) : !loading && podium.length === 0 && (
-              <div className="py-20 text-center opacity-30">
-                <div className="text-5xl mb-4">🏆</div>
-                <p className="text-sm font-black uppercase tracking-widest leading-relaxed">
-                  No records yet.<br/>Be the first to claim a coin!
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* MY RANK STICKY FOOTER */}
-      <AnimatePresence>
-        {myRank && (
-          <motion.div 
-            initial={{ y: 100 }}
-            animate={{ y: 0 }}
-            className="fixed bottom-28 md:bottom-8 left-0 md:left-72 right-0 max-w-md mx-auto px-3 sm:px-6 z-[60]"
-          >
-            <div className="bg-slate-900 text-white rounded-[2rem] p-5 shadow-2xl border border-white/10 flex items-center justify-between">
-              <div className="flex flex-wrap items-center gap-4">
-                <div className="bg-amber-400 text-purple-900 w-10 h-10 rounded-xl flex items-center justify-center font-black text-sm shadow-lg">
-                  #{myRank.rank}
-                </div>
-                <div>
-                  <p className="text-xs sm:text-sm font-black text-slate-500 uppercase tracking-widest">My Progress</p>
-                  <p className="text-sm font-black italic">Rank Performance</p>
-                </div>
-              </div>
-              <div className="text-right">
-                <p className="text-sm font-black text-amber-400">{myRank.data.totalGrabbed} Coins</p>
-                <p className="text-sm font-bold text-slate-500 uppercase">Top {((myRank.rank / stats.length) * 100).toFixed(0)}% of players</p>
+                    <div className="w-full bg-gradient-to-t from-amber-700/40 to-amber-500/20 rounded-t-3xl h-20 sm:h-24 flex flex-col items-center justify-center p-2 text-center border-t border-amber-500/20">
+                      <p className="text-xs font-black uppercase text-amber-300">2nd</p>
+                      <p className="text-xs font-bold text-white truncate w-full px-1">{podium[1].name?.split(' ')[0]}</p>
+                      <p className="text-xs font-medium text-amber-200">{podium[1].goldenCoins || 0} coins</p>
+                    </div>
+                  </motion.div>
+                )}
+                {podium[0] && (
+                  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0 }} className="flex flex-col items-center flex-1 max-w-[140px]" style={{ animation: 'float 4s ease-in-out infinite' }}>
+                    <div className="relative mb-2">
+                      <img src={podium[0].avatar} className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-amber-400/50 object-cover shadow-xl shadow-amber-900/30" alt="" />
+                      <span className="absolute -top-3 -right-2 text-2xl">👑</span>
+                    </div>
+                    <div className="w-full bg-gradient-to-t from-amber-600 to-amber-400/30 rounded-t-3xl h-28 sm:h-32 flex flex-col items-center justify-center p-2 text-center border-t border-amber-400/30 shadow-lg shadow-amber-900/20">
+                      <p className="text-xs font-black uppercase text-amber-300">#1</p>
+                      <p className="text-xs sm:text-sm font-black text-white truncate w-full px-1">{podium[0].name?.split(' ')[0]}</p>
+                      <p className="text-xs sm:text-sm font-bold text-amber-200">{podium[0].goldenCoins || 0} coins</p>
+                    </div>
+                  </motion.div>
+                )}
+                {podium[2] && (
+                  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="flex flex-col items-center flex-1 max-w-[120px]">
+                    <div className="relative mb-2">
+                      <img src={podium[2].avatar} className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-amber-400/20 object-cover shadow-lg" alt="" />
+                      <span className="absolute -top-2 -right-2 text-xl">🥉</span>
+                    </div>
+                    <div className="w-full bg-gradient-to-t from-amber-800/40 to-amber-600/20 rounded-t-3xl h-16 sm:h-20 flex flex-col items-center justify-center p-2 text-center border-t border-amber-500/10">
+                      <p className="text-xs font-black uppercase text-amber-400">3rd</p>
+                      <p className="text-xs font-bold text-white truncate w-full px-1">{podium[2].name?.split(' ')[0]}</p>
+                      <p className="text-xs font-medium text-amber-300">{podium[2].goldenCoins || 0} coins</p>
+                    </div>
+                  </motion.div>
+                )}
               </div>
             </div>
-          </motion.div>
+
+            <div className="lb-card p-4">
+              <div className="flex items-center gap-2 px-3 mb-4 text-amber-400 font-black uppercase text-xs tracking-widest">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                Rankings ({users.length})
+              </div>
+              <div className="space-y-1.5 max-h-[500px] overflow-y-auto pr-1 custom-scrollbar">
+                {others.length === 0 && users.length === 0 && (
+                  <p className="text-center text-sm text-white/40 py-8">No users found.</p>
+                )}
+                {others.map((rank, index) => {
+                  const globalIndex = index + 4;
+                  const isSelf = rank.id === currentUserId;
+                  return (
+                    <motion.div
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      key={rank.id}
+                      className={`flex items-center gap-3 p-3 rounded-2xl transition-all ${
+                        isSelf
+                          ? 'bg-amber-500/10 border border-amber-500/30 shadow-md'
+                          : 'bg-[#161b22]/50 border border-transparent hover:bg-[#161b22] hover:border-white/5'
+                      }`}
+                    >
+                      <div className={`w-7 h-7 rounded-full flex items-center justify-center font-black text-xs ${
+                        globalIndex <= 10 ? 'bg-amber-500/20 text-amber-400' : 'bg-[#30363d]/50 text-white/40'
+                      }`}>
+                        {globalIndex}
+                      </div>
+                      <div className="flex items-center gap-3 flex-1 min-w-0">
+                        <img src={rank.avatar} alt="" className="w-9 h-9 rounded-xl object-cover border border-white/10 shrink-0"
+                          onError={e => { (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${rank.id}/100`; }} />
+                        <div className="min-w-0">
+                          <h4 className="font-bold text-sm text-white truncate">
+                            {rank.name} {isSelf && <span className="text-amber-400 text-xs">(You)</span>}
+                            {rank.isVerified && <span className="ml-1 text-blue-400">✓</span>}
+                          </h4>
+                          <p className="text-xs text-white/40 font-medium">Level {rank.level || 1}</p>
+                        </div>
+                      </div>
+                      <div className="text-right shrink-0">
+                        <p className="text-sm font-black text-amber-400">{rank.goldenCoins?.toLocaleString() || 0}</p>
+                        <p className="text-xs text-white/30">coins</p>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          </>
         )}
-      </AnimatePresence>
+      </div>
     </div>
   );
 };
 
 export default GoldenCoinLeaderboard;
-
