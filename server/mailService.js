@@ -12,7 +12,8 @@ const transporter = nodemailer.createTransport({
 const FROM = process.env.SMTP_FROM || 'noreply@friendsbd.com';
 
 async function sendVerificationEmail(email, token, name) {
-  const link = `${process.env.CLIENT_URL || 'http://localhost:3000'}/verify-email?token=${token}`;
+  const baseUrl = (process.env.CLIENT_URL || 'http://localhost:3000').replace(/^http:/, 'https:');
+  const link = `${baseUrl}/verify-email?token=${token}`;
   try {
     await transporter.sendMail({
       from: FROM,
@@ -27,7 +28,8 @@ async function sendVerificationEmail(email, token, name) {
 }
 
 async function sendPasswordResetEmail(email, token) {
-  const link = `${process.env.CLIENT_URL || 'http://localhost:3000'}/reset-password?token=${token}`;
+  const baseUrl = (process.env.CLIENT_URL || 'http://localhost:3000').replace(/^http:/, 'https:');
+  const link = `${baseUrl}/reset-password?token=${token}`;
   try {
     await transporter.sendMail({
       from: FROM,

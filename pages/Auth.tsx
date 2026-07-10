@@ -46,8 +46,12 @@ const Auth: React.FC<AuthProps> = ({ mode, onAuth }) => {
         }
 
         const user = data.user as User;
+        const authToken = data.token;
 
-        // Mint a new session token
+        // Store JWT token
+        localStorage.setItem('auth_token', authToken);
+
+        // Legacy session for backward compatibility
         const { sessionToken, sessionExpiry } = await createSession(user.id);
         (user as any).sessionToken = sessionToken;
         (user as any).sessionExpiry = sessionExpiry;
@@ -103,8 +107,12 @@ const Auth: React.FC<AuthProps> = ({ mode, onAuth }) => {
         }
 
         const user = data.user as User;
+        const authToken = data.token;
 
-        // Mint session token
+        // Store JWT token
+        localStorage.setItem('auth_token', authToken);
+
+        // Legacy session for backward compatibility
         const { sessionToken, sessionExpiry } = await createSession(user.id);
         (user as any).sessionToken = sessionToken;
         (user as any).sessionExpiry = sessionExpiry;

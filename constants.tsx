@@ -10,49 +10,16 @@ export const COLORS = {
   bg: '#f8fafc',
 };
 
-// Seed initial system admin user if not already initialized
+// Legacy auth DB initialization (migrated to server-side JWT auth)
+// Kept for backward compatibility — no hardcoded credentials stored
 export const initializeAuthDB = () => {
   const usersKey = 'friends_bd_users';
   const existing = localStorage.getItem(usersKey);
-  const adminAccount: User = {
-    id: 'admin_user',
-    name: 'System Admin',
-    username: 'admin',
-    avatar: 'https://picsum.photos/seed/admin/200',
-    level: 15,
-    points: 1250,
-    silverPoints: 450,
-    goldenCoins: 25,
-    plusses: 85,
-    ap: 1420,
-    totalAp: 1420,
-    lastApReset: Date.now(),
-    isOnline: true,
-    isPremium: true,
-    isVerified: true,
-    role: 'admin',
-    email: 'admin@friendsbd.com',
-    password: 'admin123' // Password for login: admin123
-  } as any;
-
   if (!existing) {
-    const initialUsers = [adminAccount];
-    localStorage.setItem(usersKey, JSON.stringify(initialUsers));
-  } else {
-    try {
-      const parsed = JSON.parse(existing);
-      const admin = parsed.find((u: any) => u.id === 'admin_user');
-      if (admin && admin.password === 'admin') {
-        admin.password = 'admin123';
-        localStorage.setItem(usersKey, JSON.stringify(parsed));
-      }
-    } catch (e) {
-      localStorage.setItem(usersKey, JSON.stringify([adminAccount]));
-    }
+    localStorage.setItem(usersKey, JSON.stringify([]));
   }
 };
 
-// Call initialization immediately
 initializeAuthDB();
 
 // Fetch live users list (excluding current) helper to update references

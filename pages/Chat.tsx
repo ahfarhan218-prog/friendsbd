@@ -523,12 +523,21 @@ const Chat: React.FC = () => {
               </div>
 
               {!activeChat.isGroup && (
-                <button
-                  onClick={() => navigate(`/profile/${activeChat.participants[0].username}`)}
-                  className="bg-white/5 border border-white/5 px-4 py-2 hover:bg-white/10 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider transition-all active:scale-95"
-                >
-                  View Profile
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => navigate(`/video-call/${activeChat.participants[0].id}`)}
+                    className="bg-emerald-600/20 border border-emerald-500/30 px-3 py-2 hover:bg-emerald-600/30 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider transition-all active:scale-95 text-emerald-400"
+                    title="Video Call"
+                  >
+                    📹
+                  </button>
+                  <button
+                    onClick={() => navigate(`/profile/${activeChat.participants[0].username}`)}
+                    className="bg-white/5 border border-white/5 px-4 py-2 hover:bg-white/10 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider transition-all active:scale-95"
+                  >
+                    View Profile
+                  </button>
+                </div>
               )}
             </header>
 

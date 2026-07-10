@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const { Meta } = require('../models/ApTransaction');
 const crypto = require('crypto');
 const { sendVerificationEmail, sendPasswordResetEmail } = require('../mailService');
+const { generateToken } = require('../middleware/auth');
 
-const hashPassword = (pwd) => crypto.createHash('sha256').update(pwd + 'friends_bd_salt').digest('hex');
+const SALT_ROUNDS = 12;
 
 const getNextUserId = async () => {
   const meta = await Meta.findOneAndUpdate(
@@ -15,6 +17,16 @@ const getNextUserId = async () => {
   );
   return meta.count;
 };
+
+const SENSITIVE_FIELDS = ['passwordHash', 'verificationToken', 'resetToken', 'resetTokenExpiry', 'sessionToken', 'sessionExpiry'];
+
+function sanitizeUser(user) {
+  const safe = { ...user };
+  for (const field of SENSITIVE_FIELDS) {
+    delete safe[field];
+  }
+  return safe;
+}
 
 // POST /api/auth/register
 router.post('/register', async (req, res) => {
@@ -26,6 +38,9 @@ router.post('/register', async (req, res) => {
     }
     if (password.length < 6) {
       return res.status(400).json({ error: 'Password must be at least 6 characters.' });
+    }
+    if (password.length > 128) {
+      return res.status(400).json({ error: 'Password too long (max 128 characters).' });
     }
 
     const restrictedKeywords = ['admin', 'moderator', 'staff', 'hasu', 'shahriar', 'hasmot'];
@@ -54,35 +69,35 @@ router.post('/register', async (req, res) => {
     const serialUserId = await getNextUserId();
     const now = Date.now();
 
-    const isSystemAdmin = email === 'admin@friendsbd.com' || username === 'admin' || username === 'hasu' || username === 'shahriar';
-
+    const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
     const verificationToken = crypto.randomBytes(32).toString('hex');
 
     const newUser = {
       id: userId,
       email: email.toLowerCase().trim(),
-      passwordHash: hashPassword(password),
+      passwordHash,
       name: fullName.trim(),
       username: username.toLowerCase().trim(),
-      avatar: isSystemAdmin ? 'https://picsum.photos/seed/admin/200' : `https://picsum.photos/seed/${userId}/200`,
-      level: isSystemAdmin ? 15 : 1,
-      points: isSystemAdmin ? 1250 : 100,
-      silverPoints: isSystemAdmin ? 450 : 30,
-      goldenCoins: isSystemAdmin ? 25 : 5,
-      ap: isSystemAdmin ? 1420 : 0,
-      plusses: isSystemAdmin ? 85 : 0,
+      avatar: `https://picsum.photos/seed/${userId}/200`,
+      level: 1,
+      points: 100,
+      silverPoints: 30,
+      goldenCoins: 5,
+      ap: 0,
+      plusses: 0,
       isOnline: true,
-      isPremium: isSystemAdmin,
-      isVerified: isSystemAdmin,
-      role: isSystemAdmin ? 'admin' : 'user',
-      bio: isSystemAdmin ? 'System Admin of FriendsBD 🇧🇩' : 'Hey there! I am using FriendsBD 🇧🇩',
+      isPremium: false,
+      isVerified: false,
+      role: 'user',
+      user_role: 'user',
+      bio: 'Hey there! I am using FriendsBD 🇧🇩',
       gender: gender,
       createdAt: now,
       userId: serialUserId,
       fromCountry: 'Bangladesh',
       currentLocation: 'Home Page',
       lastActiveTime: now,
-      verificationToken: isSystemAdmin ? undefined : verificationToken
+      verificationToken
     };
 
     await User.findOneAndUpdate(
@@ -91,12 +106,11 @@ router.post('/register', async (req, res) => {
       { upsert: true, new: true }
     );
 
-    if (!isSystemAdmin) {
-      sendVerificationEmail(email, verificationToken, fullName.trim());
-    }
+    sendVerificationEmail(email, verificationToken, fullName.trim());
 
-    const { passwordHash, verificationToken: vt, ...safeUser } = newUser;
-    res.json({ success: true, user: safeUser, emailVerified: isSystemAdmin });
+    const token = generateToken({ id: userId, role: 'user', user_role: 'user' });
+    const safeUser = sanitizeUser(newUser);
+    res.json({ success: true, user: safeUser, token, emailVerified: false });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -115,12 +129,9 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'No account found with this email. Please sign up first.' });
     }
 
-    const hashed = hashPassword(password);
-    if (user.passwordHash !== hashed) {
-      const isAdminShortcut = (email === 'admin@friendsbd.com' && (password === 'admin' || password === 'admin123'));
-      if (!isAdminShortcut) {
-        return res.status(401).json({ error: 'Incorrect password.' });
-      }
+    const passwordMatch = await bcrypt.compare(password, user.passwordHash);
+    if (!passwordMatch) {
+      return res.status(401).json({ error: 'Incorrect password.' });
     }
 
     await User.findOneAndUpdate(
@@ -128,13 +139,33 @@ router.post('/login', async (req, res) => {
       { $set: { isOnline: !user.ghostMode, lastActiveTime: Date.now() } }
     );
 
-    const { passwordHash, verificationToken, ...safeUser } = user;
+    const token = generateToken({ id: user.id, role: user.role, user_role: user.user_role });
+    const safeUser = sanitizeUser(user);
     safeUser.isOnline = !user.ghostMode;
     safeUser.lastActiveTime = Date.now();
 
-    res.json({ success: true, user: safeUser });
+    res.json({ success: true, user: safeUser, token });
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /api/auth/me - Get current user from token
+router.get('/me', async (req, res) => {
+  try {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    if (!token) {
+      return res.status(401).json({ error: 'No token provided' });
+    }
+    const jwt = require('jsonwebtoken');
+    const { JWT_SECRET } = require('../middleware/auth');
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const user = await User.findOne({ id: decoded.id }).lean();
+    if (!user) return res.status(404).json({ error: 'User not found' });
+    res.json(sanitizeUser(user));
+  } catch (err) {
+    res.status(401).json({ error: 'Invalid or expired token' });
   }
 });
 
@@ -187,8 +218,9 @@ router.post('/reset-password', async (req, res) => {
     if (newPassword.length < 6) return res.status(400).json({ error: 'Password must be at least 6 characters.' });
     const user = await User.findOne({ resetToken: token, resetTokenExpiry: { $gt: Date.now() } });
     if (!user) return res.status(400).json({ error: 'Invalid or expired token.' });
+    const newHash = await bcrypt.hash(newPassword, SALT_ROUNDS);
     await User.findOneAndUpdate({ id: user.id }, {
-      $set: { passwordHash: hashPassword(newPassword) },
+      $set: { passwordHash: newHash },
       $unset: { resetToken: '', resetTokenExpiry: '' }
     });
     res.json({ success: true, message: 'Password reset successfully!' });

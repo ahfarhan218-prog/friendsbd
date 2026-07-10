@@ -13,6 +13,6 @@ const eventSchema = new mongoose.Schema({
   status: { type: String, enum: ['upcoming', 'ongoing', 'completed'], default: 'upcoming' },
   createdBy: String,
   createdAt: { type: Number, default: () => Date.now() }
-}, { _id: false });
+});
 
 module.exports = mongoose.model('Event', eventSchema);

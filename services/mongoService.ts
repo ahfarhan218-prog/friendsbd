@@ -15,11 +15,29 @@ export const API_BASE = apiBase;
 
 // ── HTTP Helpers ──────────────────────────────────────────────────────────────
 
+export function getAuthHeaders(): Record<string, string> {
+  const token = localStorage.getItem('auth_token');
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+  return headers;
+}
+
 async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
-    headers: { 'Content-Type': 'application/json' },
+    headers: getAuthHeaders(),
     ...options
   });
+  if (res.status === 401) {
+    // Token expired — clear session and redirect to login
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('user_session');
+    if (window.location.pathname !== '/login') {
+      window.location.href = '/login';
+    }
+    throw new Error('Session expired. Please log in again.');
+  }
   if (!res.ok) {
     const errText = await res.text();
     throw new Error(`API Error [${res.status}] ${path}: ${errText}`);
@@ -316,6 +334,18 @@ export const mongoService = {
       callback,
       5000
     );
+  },
+
+  // --- Leaderboard ---
+  getLeaderboard: (period: 'alltime' | 'daily' | 'weekly' = 'alltime') => get<{ period: string; users: any[] }>(`/leaderboard?period=${period}`),
+  awardPoints: async (points: number): Promise<boolean> => {
+    try {
+      const session = JSON.parse(localStorage.getItem('user_session') || 'null');
+      if (!session) return false;
+      const headers = getAuthHeaders();
+      const res = await fetch(`${API_BASE}/users/${session.id}/award-points`, { method: 'POST', headers, body: JSON.stringify({ points }) });
+      return res.ok;
+    } catch { return false; }
   },
 
   // --- Statistics ---

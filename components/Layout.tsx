@@ -7,6 +7,7 @@ import { PageWrapper } from './PageWrapper';
 import { gameService } from '../services/gameService';
 import { triggerToast } from './NotificationToast';
 import { mongoService } from '../services/mongoService';
+import { getSocket } from '../services/socketService';
 import FriendsBDLogo from './FriendsBDLogo';
 
 
@@ -69,6 +70,11 @@ const getPageLocationLabel = (pathname: string): string => {
   if (pathname === '/inventory') return 'Inventory';
   if (pathname.startsWith('/blog')) return 'Blog';
   if (pathname === '/clan') return 'Clans';
+  if (pathname === '/clan-wars') return 'Clan Wars';
+  if (pathname === '/wallet') return 'Wallet';
+  if (pathname === '/cricket-multiplayer') return 'Cricket PvP';
+  if (pathname === '/referrals') return 'Referrals';
+  if (pathname === '/video-call') return 'Video Call';
   if (pathname === '/calendar') return 'Events';
   if (pathname === '/groups') return 'Groups';
   if (pathname === '/live-tv') return 'Live TV';
@@ -85,6 +91,7 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout }) => {
   const [goldActive, setGoldActive] = useState(false);
   const [silverActive, setSilverActive] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [onlineCount, setOnlineCount] = useState<number>(0);
 
 
   const lastActivityRef = useRef<number>(Date.now());
@@ -159,6 +166,24 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout }) => {
         mongoService.incrementUserOnlineTime(user.id, accumulatedSeconds, dateStr);
       }
     };
+  }, [user.id]);
+
+  useEffect(() => {
+    const socket = getSocket();
+    if (socket) {
+      socket.on('user:online', () => {
+        setOnlineCount(prev => prev + 1);
+      });
+      socket.emit('users:count', null, (count: number) => {
+        if (typeof count === 'number') setOnlineCount(count);
+      });
+    }
+    const interval = setInterval(() => {
+      fetch(`${import.meta.env.VITE_API_BASE || 'http://localhost:5000/api'}/users`).then(r => r.json()).then(u => {
+        setOnlineCount(u.filter((x: any) => x.isOnline).length);
+      }).catch(() => {});
+    }, 30000);
+    return () => { clearInterval(interval); if (socket) { socket.off('user:online'); } };
   }, [user.id]);
 
   useEffect(() => {
@@ -245,7 +270,7 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout }) => {
           </button>
         </div>
 
-        {/* User card */}
+          {/* User card */}
         {!sidebarCollapsed && (
           <div className="sidebar-user-card" onClick={() => navigate('/profile')}>
             <div className="user-avatar-wrap">
@@ -262,10 +287,21 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout }) => {
             {user.role === 'admin' && <span className="admin-badge">ADM</span>}
           </div>
         )}
+        {!sidebarCollapsed && (
+          <div className="px-3 pb-2 flex items-center gap-2 text-xs text-emerald-400/70 font-bold">
+            <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+            {onlineCount} online
+          </div>
+        )}
         {sidebarCollapsed && (
           <div className="collapsed-avatar-wrap" onClick={() => navigate('/profile')}>
             <img src={user.avatar} alt="" className="user-avatar" />
             <span className="user-online-dot" />
+          </div>
+        )}
+        {sidebarCollapsed && (
+          <div className="text-center pb-2 text-xs text-emerald-400/70 font-bold">
+            <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse inline-block" />
           </div>
         )}
 
@@ -293,6 +329,22 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout }) => {
               </button>
             );
           })}
+          {!sidebarCollapsed && <span className="nav-section-label mt-3">Features</span>}
+          {[
+            { id: 'clan-wars', label: 'Clan Wars', path: '/clan-wars', emoji: '⚔️' },
+            { id: 'wallet', label: 'Wallet', path: '/wallet', emoji: '💰' },
+            { id: 'cricket-multiplayer', label: 'Cricket PvP', path: '/cricket-multiplayer', emoji: '🏏' },
+            { id: 'referrals', label: 'Referrals', path: '/referrals', emoji: '🤝' },
+          ].map(item => {
+            const active = isActive(item.path);
+            return (
+              <button key={item.id} onClick={() => navigate(item.path)} className={`sidebar-nav-item ${active ? 'nav-item-active' : ''} ${sidebarCollapsed ? 'nav-item-collapsed' : ''}`} title={sidebarCollapsed ? item.label : undefined}>
+                {active && <span className="nav-active-bar" />}
+                <span className="nav-emoji">{item.emoji}</span>
+                {!sidebarCollapsed && <span className="nav-label">{item.label}</span>}
+              </button>
+            );
+          })}
         </nav>
 
         {/* Bottom actions */}
@@ -301,6 +353,10 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout }) => {
             <span className="action-icon">🔔</span>
             {!sidebarCollapsed && <span className="action-label">Notifications</span>}
             {unreadNotifs > 0 && <span className={`notif-indicator ${sidebarCollapsed ? 'notif-dot' : 'notif-pill'}`}>{sidebarCollapsed ? '' : unreadNotifs}</span>}
+          </button>
+          <button className="sidebar-action-btn" onClick={() => navigate('/settings')}>
+            <span className="action-icon">⚙️</span>
+            {!sidebarCollapsed && <span className="action-label">Settings</span>}
           </button>
           <button className="sidebar-action-btn sidebar-logout" onClick={onLogout}>
             <span className="action-icon">🚪</span>

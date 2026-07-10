@@ -5,24 +5,48 @@ const Activity = require('../models/Activity');
 const AdminLog = require('../models/AdminLog');
 const { Meta } = require('../models/ApTransaction');
 
-// GET all users
+const { authenticateToken, optionalAuth } = require('../middleware/auth');
+
+const SENSITIVE_FIELDS = ['passwordHash', 'verificationToken', 'resetToken', 'resetTokenExpiry', 'sessionToken', 'sessionExpiry'];
+
+function sanitizeUser(user, includeEmail = false) {
+  if (!user) return user;
+  const safe = { ...user };
+  for (const field of SENSITIVE_FIELDS) {
+    delete safe[field];
+  }
+  if (!includeEmail) {
+    delete safe.email;
+  }
+  return safe;
+}
+
+// GET all users (public, no auth required)
 router.get('/', async (req, res) => {
   try {
     const users = await User.find({}).lean();
-    res.json(users);
+    // Strip email from public listing
+    res.json(users.map(u => sanitizeUser(u, false)));
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
 // GET single user by id field
-router.get('/:userId', async (req, res) => {
+router.get('/:userId', optionalAuth, async (req, res) => {
   try {
     const user = await User.findOne({ 
       $or: [ { id: req.params.userId }, { username: req.params.userId } ] 
     }).lean();
     if (!user) return res.status(404).json({ error: 'User not found' });
-    res.json(user);
+    // Include email only if viewing own profile
+    const showEmail = req.user && req.user.id === user.id;
+    const safe = sanitizeUser(user, showEmail);
+    if (req.user && req.user.id !== user.id) {
+      delete safe.sessionToken;
+      delete safe.sessionExpiry;
+    }
+    res.json(safe);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -32,19 +56,28 @@ router.get('/:userId', async (req, res) => {
 router.get('/by-username/:username', async (req, res) => {
   try {
     const users = await User.find({ username: req.params.username }).lean();
-    res.json(users);
+    res.json(users.map(sanitizeUser));
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// POST create/upsert user
-router.post('/', async (req, res) => {
+// POST create/upsert user (authenticated users only)
+router.post('/', authenticateToken, async (req, res) => {
   try {
-    const { sessionToken, sessionExpiry, ...safeUser } = req.body;
+    const allowedFields = ['name', 'username', 'avatar', 'bio', 'gender', 'fromCountry', 'currentLocation', 'customStatus'];
+    const safeData = {};
+    for (const key of allowedFields) {
+      if (req.body[key] !== undefined) safeData[key] = req.body[key];
+    }
+    safeData.id = req.body.id;
+    if (!safeData.id) return res.status(400).json({ error: 'User ID required' });
+    if (safeData.id !== req.user.id) {
+      return res.status(403).json({ error: 'Cannot create/modify another user' });
+    }
     await User.findOneAndUpdate(
-      { id: safeUser.id },
-      { $set: safeUser },
+      { id: safeData.id },
+      { $set: safeData },
       { upsert: true, new: true, setDefaultsOnInsert: true }
     );
     res.json({ success: true });
@@ -53,25 +86,35 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PATCH update user
-router.patch('/:userId', async (req, res) => {
+// PATCH update user (own profile only, field whitelist)
+router.patch('/:userId', authenticateToken, async (req, res) => {
   try {
-    const { sessionToken, sessionExpiry, ...safeData } = req.body;
+    if (req.params.userId !== req.user.id) {
+      return res.status(403).json({ error: 'You can only update your own profile.' });
+    }
+    const ALLOWED_UPDATE_FIELDS = ['name', 'username', 'avatar', 'bio', 'gender', 'fromCountry', 'currentLocation', 'customStatus', 'ghostMode', 'hiddenVisit', 'education', 'work'];
+    const safeData = {};
+    for (const key of ALLOWED_UPDATE_FIELDS) {
+      if (req.body[key] !== undefined) safeData[key] = req.body[key];
+    }
     const updated = await User.findOneAndUpdate(
       { id: req.params.userId },
       { $set: safeData },
       { new: true }
     ).lean();
     if (!updated) return res.status(404).json({ error: 'User not found' });
-    res.json(updated);
+    res.json(sanitizeUser(updated));
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// PATCH update session token
-router.patch('/:userId/session', async (req, res) => {
+// PATCH update session token (legacy, maintained for compatibility - JWT replaces this)
+router.patch('/:userId/session', authenticateToken, async (req, res) => {
   try {
+    if (req.params.userId !== req.user.id) {
+      return res.status(403).json({ error: 'Not authorized.' });
+    }
     const { sessionToken, sessionExpiry } = req.body;
     await User.findOneAndUpdate(
       { id: req.params.userId },
@@ -84,8 +127,11 @@ router.patch('/:userId/session', async (req, res) => {
 });
 
 // PATCH increment online time
-router.patch('/:userId/online-time', async (req, res) => {
+router.patch('/:userId/online-time', authenticateToken, async (req, res) => {
   try {
+    if (req.params.userId !== req.user.id) {
+      return res.status(403).json({ error: 'Not authorized.' });
+    }
     const { seconds, dateStr } = req.body;
     const user = await User.findOne({ id: req.params.userId }).lean();
     if (!user) return res.status(404).json({ error: 'User not found' });
@@ -110,9 +156,39 @@ router.patch('/:userId/online-time', async (req, res) => {
   }
 });
 
-// DELETE /api/users/:userId - Delete user permanently
-router.delete('/:userId', async (req, res) => {
+// POST /api/users/:userId/award-points - Increment points (daily/weekly/all-time)
+router.post('/:userId/award-points', authenticateToken, async (req, res) => {
   try {
+    if (req.params.userId !== req.user.id) {
+      return res.status(403).json({ error: 'Not authorized.' });
+    }
+    const { points } = req.body;
+    if (!points || typeof points !== 'number' || points <= 0) {
+      return res.status(400).json({ error: 'Invalid points value' });
+    }
+    const bd = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Dhaka' });
+    const weekKey = (() => { const d = new Date(); const day = d.getDay(); const diff = d.getDate() - day + (day === 0 ? -6 : 1); const m = new Date(d.setDate(diff)); return m.toLocaleDateString('en-CA', { timeZone: 'Asia/Dhaka' }); })();
+    const user = await User.findOne({ id: req.params.userId }).lean();
+    const update = { $inc: { points, dailyPoints: points, weeklyPoints: points } };
+    if (user.lastDailyReset !== bd) { update.$set = { lastDailyReset: bd }; update.$inc.dailyPoints = points; }
+    if (user.lastWeeklyReset !== weekKey) { if (!update.$set) update.$set = {}; update.$set.lastWeeklyReset = weekKey; update.$inc.weeklyPoints = points; }
+    const updated = await User.findOneAndUpdate({ id: req.params.userId }, update, { new: true }).lean();
+    if (global.__socketEmitter) {
+      global.__socketEmitter.emitToRoom('users', 'user:points', { userId: req.params.userId, points: updated?.points, dailyPoints: updated?.dailyPoints, weeklyPoints: updated?.weeklyPoints });
+    }
+    res.json({ success: true, points });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// DELETE /api/users/:userId - Delete user permanently (own account or admin only)
+router.delete('/:userId', authenticateToken, async (req, res) => {
+  try {
+    const user = await User.findOne({ id: req.user.id }).lean();
+    if (req.params.userId !== req.user.id && (!user || user.role !== 'admin')) {
+      return res.status(403).json({ error: 'Not authorized to delete this user.' });
+    }
     const deleted = await User.findOneAndDelete({ id: req.params.userId });
     if (!deleted) return res.status(404).json({ error: 'User not found' });
     res.json({ success: true });
@@ -136,10 +212,9 @@ router.get('/meta/next-user-id', async (req, res) => {
 });
 
 // POST /api/users/:id/follow - Follow a user
-router.post('/:id/follow', async (req, res) => {
+router.post('/:id/follow', authenticateToken, async (req, res) => {
   try {
-    const { followerId } = req.body;
-    if (!followerId) return res.status(400).json({ error: 'followerId required' });
+    const followerId = req.user.id;
     if (followerId === req.params.id) return res.status(400).json({ error: 'Cannot follow yourself' });
 
     const target = await User.findOne({ id: req.params.id });
@@ -165,10 +240,9 @@ router.post('/:id/follow', async (req, res) => {
 });
 
 // DELETE /api/users/:id/follow - Unfollow a user
-router.delete('/:id/follow', async (req, res) => {
+router.delete('/:id/follow', authenticateToken, async (req, res) => {
   try {
-    const { followerId } = req.body;
-    if (!followerId) return res.status(400).json({ error: 'followerId required' });
+    const followerId = req.user.id;
 
     const target = await User.findOne({ id: req.params.id });
     const follower = await User.findOne({ id: followerId });
@@ -200,7 +274,7 @@ router.get('/:id/suggested', async (req, res) => {
       .filter(u => u.id !== req.params.id && !following.includes(u.id) && !u.isBot)
       .sort(() => Math.random() - 0.5)
       .slice(0, 10)
-      .map(({ passwordHash, ...safe }) => safe);
+      .map(u => sanitizeUser(u));
 
     res.json(suggested);
   } catch (err) {
@@ -208,46 +282,62 @@ router.get('/:id/suggested', async (req, res) => {
   }
 });
 // POST /api/users/:userId/admin-update - Admin only update
-router.post('/:userId/admin-update', async (req, res) => {
+router.post('/:userId/admin-update', authenticateToken, async (req, res) => {
   try {
-    const { reason, adminId, adminName, updates } = req.body;
-    if (!reason || !adminId) return res.status(400).json({ error: 'Missing reason or admin info' });
+    const adminUser = await User.findOne({ id: req.user.id }).lean();
+    if (!adminUser || adminUser.role !== 'admin') {
+      return res.status(403).json({ error: 'Admin access required.' });
+    }
+
+    const { reason, updates } = req.body;
+    if (!reason) return res.status(400).json({ error: 'Reason is required' });
     
     // Auto 7-day ban trigger
     if (updates.strikes >= 3) {
       updates.isBanned = true;
     }
 
+    // Only allow specific fields for admin update
+    const ALLOWED_ADMIN_UPDATES = ['role', 'user_role', 'isPremium', 'isBanned', 'isShadowBanned', 'pmBan', 'shoutBan', 'chatBan', 'strikes', 'isVerified', 'level', 'points', 'silverPoints', 'goldenCoins', 'ap', 'plusses', 'balance_ap', 'balance_taka'];
+    const safeUpdates = {};
+    for (const key of ALLOWED_ADMIN_UPDATES) {
+      if (updates[key] !== undefined) safeUpdates[key] = updates[key];
+    }
+
     const updated = await User.findOneAndUpdate(
       { id: req.params.userId },
-      { $set: updates },
+      { $set: safeUpdates },
       { new: true }
     ).lean();
     if (!updated) return res.status(404).json({ error: 'User not found' });
 
-    // Create Audit Log
-    const actionDesc = Object.keys(updates).map(k => `${k} -> ${updates[k]}`).join(', ');
+    const actionDesc = Object.keys(safeUpdates).map(k => `${k} -> ${safeUpdates[k]}`).join(', ');
     await AdminLog.create({
       id: `audit_${Date.now()}_${Math.floor(Math.random()*1000)}`,
       action: `Admin Update: ${actionDesc}`,
       targetId: req.params.userId,
       targetType: 'user',
-      deletedBy: adminId,
-      deletedByName: adminName || 'System Admin',
+      deletedBy: req.user.id,
+      deletedByName: adminUser.name || 'System Admin',
       details: reason
     });
 
-    res.json(updated);
+    res.json(sanitizeUser(updated));
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
 // POST /api/users/:userId/force-logout
-router.post('/:userId/force-logout', async (req, res) => {
+router.post('/:userId/force-logout', authenticateToken, async (req, res) => {
   try {
-    const { reason, adminId, adminName } = req.body;
-    if (!reason || !adminId) return res.status(400).json({ error: 'Missing reason or admin info' });
+    const adminUser = await User.findOne({ id: req.user.id }).lean();
+    if (!adminUser || adminUser.role !== 'admin') {
+      return res.status(403).json({ error: 'Admin access required.' });
+    }
+
+    const { reason } = req.body;
+    if (!reason) return res.status(400).json({ error: 'Reason is required' });
 
     const updated = await User.findOneAndUpdate(
       { id: req.params.userId },
@@ -256,14 +346,13 @@ router.post('/:userId/force-logout', async (req, res) => {
     ).lean();
     if (!updated) return res.status(404).json({ error: 'User not found' });
 
-    // Create Audit Log
     await AdminLog.create({
       id: `audit_${Date.now()}_${Math.floor(Math.random()*1000)}`,
       action: 'Force Logout All Devices',
       targetId: req.params.userId,
       targetType: 'user',
-      deletedBy: adminId,
-      deletedByName: adminName || 'System Admin',
+      deletedBy: req.user.id,
+      deletedByName: adminUser.name || 'System Admin',
       details: reason
     });
 

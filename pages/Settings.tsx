@@ -213,16 +213,50 @@ const Settings: React.FC = () => {
           </div>
         </div>
 
-        {/* ── Notifications ── */}
+        {/* ── Referrals ── */}
+        <div className="bg-[#1C1C2E] rounded-[2.5rem] shadow-sm overflow-hidden border border-[#30363d]">
+          <div className="p-4 px-3 sm:px-6 text-white bg-gradient-to-r from-emerald-600 to-teal-600 rounded-b-[2rem]">
+            <h3 className="text-sm font-black flex flex-wrap items-center gap-2 uppercase tracking-widest">Referrals</h3>
+            <p className="text-xs sm:text-sm opacity-70">Invite friends and earn rewards</p>
+          </div>
+          <div className="bg-[#161b22] m-2 rounded-2xl p-4 space-y-3">
+            <p className="text-xs font-bold text-white/60 uppercase tracking-widest">Your Referral Link</p>
+            <div className="bg-[#1C1C2E] border border-[#30363d] rounded-xl p-3 text-sm text-white/60 break-all">
+              {currentUser ? `${window.location.origin}/signup?ref=${currentUser.id}` : 'Login to get your link'}
+            </div>
+            <button onClick={() => { if (currentUser) { navigator.clipboard.writeText(`${window.location.origin}/signup?ref=${currentUser.id}`); showToast('✅ Referral link copied!'); } }} className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-2.5 rounded-xl text-sm">Copy Referral Link</button>
+            <button onClick={() => navigate('/referrals')} className="w-full bg-[#1C1C2E] border border-[#30363d] text-white font-bold py-2.5 rounded-xl text-sm">View Referrals</button>
+          </div>
+        </div>
+
+        {/* ── Notifications & Push ── */}
         <div className="bg-[#1C1C2E] rounded-[2.5rem] shadow-sm overflow-hidden border border-[#30363d]">
           <div className="p-4 px-3 sm:px-6 text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-b-[2rem]">
-            <h3 className="text-sm font-black flex flex-wrap items-center gap-2 uppercase tracking-widest">Notifications</h3>
+            <h3 className="text-sm font-black flex flex-wrap items-center gap-2 uppercase tracking-widest">Notifications & Push</h3>
             <p className="text-xs sm:text-sm opacity-70">Manage notification preferences</p>
           </div>
           <div className="bg-[#161b22] m-2 rounded-2xl p-4 space-y-5">
             <ToggleRow label="Push Notifications" desc="Receive push notifications" value={pushNotifications} onChange={(v) => { setPushNotifications(v); savePreferences('pushNotifications', v); }} />
             <ToggleRow label="Sound Effects" desc="Play sounds for notifications" value={soundEffects} onChange={(v) => { setSoundEffects(v); savePreferences('soundEffects', v); }} />
             <ToggleRow label="Email Notifications" desc="Receive email updates" value={emailNotifications} onChange={(v) => { setEmailNotifications(v); savePreferences('emailNotifications', v); }} />
+            <div className="bg-[#1C1C2E] border border-[#30363d] rounded-xl p-3 flex items-center justify-between">
+              <div>
+                <p className="text-sm font-black text-gray-100">Push Subscription</p>
+                <p className="text-xs text-gray-400">{'Notification' in window ? (Notification.permission === 'granted' ? '✅ Active' : Notification.permission === 'denied' ? '❌ Denied' : '🔕 Not requested') : '❌ Not supported'}</p>
+              </div>
+              <button onClick={async () => {
+                try {
+                  if ('Notification' in window && Notification.permission === 'default') {
+                    const perm = await Notification.requestPermission();
+                    showToast(perm === 'granted' ? '✅ Push notifications enabled' : '❌ Permission denied');
+                  } else if (Notification.permission === 'granted') {
+                    showToast('✅ Push notifications are already active');
+                  } else {
+                    showToast('⚠️ Push notifications are blocked. Enable in browser settings.');
+                  }
+                } catch (e) { showToast('❌ Failed to request permission'); }
+              }} className="px-4 py-2 bg-purple-600 text-white font-bold rounded-xl text-sm">Request</button>
+            </div>
           </div>
         </div>
 

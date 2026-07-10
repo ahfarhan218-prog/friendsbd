@@ -9,6 +9,6 @@ const adminLogSchema = new mongoose.Schema({
   deletedByName: String,
   details: String,
   timestamp: { type: Number, default: Date.now }
-}, { _id: false });
+});
 
 module.exports = mongoose.model('AdminLog', adminLogSchema);

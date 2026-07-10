@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GoogleGenAI } from "@google/genai";
+import { API_BASE } from '../services/mongoService';
 
 const Support: React.FC = () => {
   const navigate = useNavigate();
@@ -25,19 +25,13 @@ const Support: React.FC = () => {
     setLoading(true);
 
     try {
-      // Use the API key from environment variables and initialize a fresh GoogleGenAI instance for the request
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      // Selecting 'gemini-3-flash-preview' for basic text/Q&A tasks as per guidelines
-      const response = await ai.models.generateContent({
-        model: 'gemini-3-flash-preview',
-        contents: userMsg,
-        config: {
-          systemInstruction: "You are a friendly and helpful customer support agent for 'FriendsBD', a social gaming platform for users in Bangladesh. You help with cricket tournaments, points, rewards, and technical issues. Be concise and polite.",
-        },
+      const res = await fetch(`${API_BASE}/ai/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userMsg })
       });
-
-      // Extract text output from response.text (property access)
-      const aiText = response.text || "I'm sorry, I couldn't process that. Please try again.";
+      const data = await res.json();
+      const aiText = data.text || "I'm sorry, I couldn't process that. Please try again.";
       setMessages(prev => [...prev, { role: 'ai', text: aiText }]);
     } catch (err) {
       setMessages(prev => [...prev, { role: 'ai', text: "Error connecting to service. Please try again later." }]);

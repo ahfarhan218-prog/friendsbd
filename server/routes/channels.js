@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Channel = require('../models/Channel');
 const User = require('../models/User');
+const { optionalAuth, authenticateToken } = require('../middleware/auth');
 
 const activeViewers = {}; // { channelId: { userIdOrIp: timestamp } }
 
@@ -17,20 +18,22 @@ router.get('/', async (req, res) => {
 });
 
 // GET /api/channels/:id/stream - Secure stream access validation
-router.get('/:id/stream', async (req, res) => {
+router.get('/:id/stream', optionalAuth, async (req, res) => {
   try {
     const channel = await Channel.findById(req.params.id);
     if (!channel) return res.status(404).json({ error: 'Channel not found' });
 
-    // Premium Check - Skip backend check for now since UI handles it, or use req.query.userId if provided.
-    if (channel.isPremium && req.query.userId) {
-      const user = await User.findOne({ id: req.query.userId });
+    // Premium channels require authentication + premium status
+    if (channel.isPremium) {
+      if (!req.user) {
+        return res.status(401).json({ error: 'Authentication required for premium content.' });
+      }
+      const user = await User.findOne({ id: req.user.id }).lean();
       if (!user || !user.isPremium) {
         return res.status(403).json({ error: 'Premium Subscription Required' });
       }
     }
 
-    // Return the secure stream URL
     res.json({ streamUrl: channel.streamUrl });
   } catch (error) {
     console.error('Error fetching stream URL:', error);
@@ -39,10 +42,9 @@ router.get('/:id/stream', async (req, res) => {
 });
 
 // POST /api/channels/:id/favorite - Toggle favorite status
-router.post('/:id/favorite', async (req, res) => {
+router.post('/:id/favorite', authenticateToken, async (req, res) => {
   try {
-    const userId = req.body.userId || 'admin_user'; // Fallback to admin if not provided
-    const user = await User.findOne({ id: userId });
+    const user = await User.findOne({ id: req.user.id });
     if (!user) return res.status(404).json({ error: 'User not found' });
 
     const channel = await Channel.findById(req.params.id);

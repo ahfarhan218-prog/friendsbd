@@ -6,6 +6,7 @@ import ShoutCard from '../components/ShoutCard';
 import { triggerToast } from '../components/NotificationToast';
 import { mongoService } from '../services/mongoService';
 import { apTransactionService } from '../services/apTransactionService';
+import { getSocket } from '../services/socketService';
 
 const QUICK_EMOJIS = ['🔥', '💯', '🇧🇩', '🏏', '😂', '❤️', '👀', '✨'];
 
@@ -66,6 +67,18 @@ const Home: React.FC = () => {
     const unsubShouts = mongoService.listenShouts(s => {
       setShouts(s);
     });
+    const socket = getSocket();
+    if (socket) {
+      socket.on('shout:updated', (s: ShoutEntry) => {
+        setShouts(prev => { const i = prev.findIndex(x => x.id === s.id); if (i >= 0) { const c = [...prev]; c[i] = s; return c; } return [s, ...prev]; });
+      });
+      socket.on('shout:deleted', (id: string) => {
+        setShouts(prev => prev.filter(x => x.id !== id));
+      });
+      socket.on('shout:reacted', (data: { id: string; userReactions: any }) => {
+        setShouts(prev => prev.map(s => s.id === data.id ? { ...s, userReactions: data.userReactions } : s));
+      });
+    }
     const unsubPhotos = mongoService.listenPhotos(p => {
       setPhotos(p);
     });
@@ -137,6 +150,7 @@ const Home: React.FC = () => {
       window.removeEventListener('storage', handleStorage);
       window.removeEventListener('beforeunload', markOffline);
       unsubUsers(); unsubShouts(); unsubPhotos(); unsubActs();
+      if (socket) { socket.off('shout:updated'); socket.off('shout:deleted'); socket.off('shout:reacted'); }
       clearInterval(cleanupInterval);
       clearInterval(presenceInterval);
       markOffline();
@@ -184,6 +198,8 @@ const Home: React.FC = () => {
       };
       setShouts(prev => [newShout, ...prev]);
       mongoService.addShout(JSON.parse(JSON.stringify(newShout)));
+      const socket = getSocket();
+      if (socket) socket.emit('shout:created', newShout);
       
       apTransactionService.adjustUserAP(activeUser.id, 'SHOUT_POSTED')
         .then(({ newBalance }) => {

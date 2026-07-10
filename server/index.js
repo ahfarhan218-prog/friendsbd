@@ -27,23 +27,33 @@ global.__socketEmitter = { emitToUser, emitToRoom, getOnlineUsers };
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 
-const limiter = rateLimit({
+// Global rate limiter: 200 req/min per IP
+const globalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100000,
+  max: 3000,
   message: { error: 'Too many requests, please try again later.' }
+});
+
+// Strict auth rate limiter: 10 attempts per 15 min
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  message: { error: 'Too many login attempts. Please try again later.' }
 });
 
 app.use(cors({
   origin: CORS_ORIGINS,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 }));
-app.use(helmet({ 
-  contentSecurityPolicy: false,
-  crossOriginResourcePolicy: false 
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: 'same-origin' }
 }));
-app.use('/api/', limiter);
-app.use(express.json({ limit: '10mb' }));
+app.use('/api/', globalLimiter);
+app.use('/api/auth/login', authLimiter);
+app.use('/api/auth/register', authLimiter);
+app.use(express.json({ limit: '1mb' }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // ── Connect to MongoDB ──────────────────────────────
@@ -88,6 +98,15 @@ app.use('/api/monster',          require('./routes/monster'));
 app.use('/api/stats',            require('./routes/stats'));
 app.use('/api/proxy',            require('./routes/proxy'));
 app.use('/api/channels',         require('./routes/channels'));
+app.use('/api/ai',               require('./routes/ai'));
+app.use('/api/clan-wars',        require('./routes/clanWars'));
+app.use('/api/wallet',           require('./routes/wallet'));
+app.use('/api/referrals',        require('./routes/referrals'));
+app.use('/api/cricket-multiplayer', require('./routes/cricketMultiplayer'));
+app.use('/api/moderation',       require('./routes/moderation'));
+app.use('/api/push',             require('./routes/push'));
+app.use('/api/visitor-messages', require('./routes/visitorMessages'));
+app.use('/api/leaderboard',      require('./routes/leaderboard'));
 
 // ── Health Check ────────────────────────────────────
 app.get('/api/health', (req, res) => {
@@ -107,14 +126,16 @@ const seedIfEmpty = async () => {
       console.log('🌱 Seeding initial data...');
       const now = Date.now();
 
+      const bcrypt = require('bcryptjs');
+      const seedHash = bcrypt.hashSync('admin123', 10);
       const users = [
-        { id: 'bot_chatgirl', userId: 1, name: 'Chatgirl', username: 'chatgirl', avatar: 'https://picsum.photos/seed/chatgirl/200', level: 99, points: 9999, silverPoints: 9999, goldenCoins: 999, plusses: 999, isOnline: true, isPremium: false, isVerified: true, role: 'user', isBot: true, fromCountry: 'India', currentLocation: 'Home Page', lastActiveTime: now - 1000, bio: 'Hello! I am Chatgirl, the official assistant bot of FriendsBD 🇧🇩', createdAt: now },
-        { id: 'admin_user', userId: 10, name: 'System Admin', username: 'admin', avatar: 'https://picsum.photos/seed/admin/200', level: 15, points: 1250, silverPoints: 450, goldenCoins: 25, plusses: 85, isOnline: true, isPremium: true, isVerified: true, role: 'admin', createdAt: now },
-        { id: 'user_shahriar', userId: 11, name: 'Shahriar Rahman', username: 'shahriar', avatar: 'https://picsum.photos/seed/shahriar/200', level: 13, points: 940, silverPoints: 310, goldenCoins: 12, plusses: 45, isOnline: true, isPremium: false, isVerified: true, role: 'admin', createdAt: now },
-        { id: 'user_smsumonhossain', userId: 2, name: 'smsumonhossain', username: 'smsumonhossain', avatar: 'https://picsum.photos/seed/smsumon/200', level: 8, points: 650, silverPoints: 120, goldenCoins: 4, plusses: 15, isOnline: false, isPremium: true, isVerified: true, role: 'user', fromCountry: 'Bangladesh', createdAt: now },
-        { id: 'user_taaj', userId: 4, name: 'Taaj', username: 'Taaj', avatar: 'https://picsum.photos/seed/taaj/200', level: 12, points: 1100, silverPoints: 240, goldenCoins: 9, plusses: 38, isOnline: false, isPremium: true, isVerified: true, role: 'user', fromCountry: 'Bangladesh', createdAt: now },
-        { id: 'user_mahim', userId: 3, name: 'Mahim Ahmed', username: 'mahim_sis', avatar: 'https://picsum.photos/seed/mahim/200', level: 9, points: 720, silverPoints: 180, goldenCoins: 5, plusses: 23, isOnline: false, isPremium: true, isVerified: false, role: 'user', createdAt: now },
-        { id: 'user_tanvir', userId: 5, name: 'Tanvir Hossain', username: 'tanvir', avatar: 'https://picsum.photos/seed/tanvir/200', level: 5, points: 410, silverPoints: 95, goldenCoins: 2, plusses: 10, isOnline: false, isPremium: false, isVerified: false, role: 'user', createdAt: now },
+        { id: 'bot_chatgirl', userId: 1, name: 'Chatgirl', username: 'chatgirl', avatar: 'https://picsum.photos/seed/chatgirl/200', level: 99, points: 9999, silverPoints: 9999, goldenCoins: 999, plusses: 999, isOnline: true, isPremium: false, isVerified: true, isBot: true, fromCountry: 'India', currentLocation: 'Home Page', lastActiveTime: now - 1000, bio: 'Hello! I am Chatgirl, the official assistant bot of FriendsBD 🇧🇩', createdAt: now },
+        { id: 'admin_user', userId: 10, name: 'System Admin', username: 'admin', email: 'admin@friendsbd.com', passwordHash: seedHash, avatar: 'https://picsum.photos/seed/admin/200', level: 15, points: 1250, silverPoints: 450, goldenCoins: 25, plusses: 85, isOnline: true, isPremium: true, isVerified: true, role: 'admin', user_role: 'admin', createdAt: now },
+        { id: 'user_shahriar', userId: 11, name: 'Shahriar Rahman', username: 'shahriar', email: 'shahriar@friendsbd.com', passwordHash: seedHash, avatar: 'https://picsum.photos/seed/shahriar/200', level: 13, points: 940, silverPoints: 310, goldenCoins: 12, plusses: 45, isOnline: true, isPremium: false, isVerified: true, role: 'admin', user_role: 'admin', createdAt: now },
+        { id: 'user_smsumonhossain', userId: 2, name: 'smsumonhossain', username: 'smsumonhossain', email: 'smsumon@friendsbd.com', passwordHash: seedHash, avatar: 'https://picsum.photos/seed/smsumon/200', level: 8, points: 650, silverPoints: 120, goldenCoins: 4, plusses: 15, isOnline: false, isPremium: true, isVerified: true, role: 'user', fromCountry: 'Bangladesh', createdAt: now },
+        { id: 'user_taaj', userId: 4, name: 'Taaj', username: 'Taaj', email: 'taaj@friendsbd.com', passwordHash: seedHash, avatar: 'https://picsum.photos/seed/taaj/200', level: 12, points: 1100, silverPoints: 240, goldenCoins: 9, plusses: 38, isOnline: false, isPremium: true, isVerified: true, role: 'user', fromCountry: 'Bangladesh', createdAt: now },
+        { id: 'user_mahim', userId: 3, name: 'Mahim Ahmed', username: 'mahim_sis', email: 'mahim@friendsbd.com', passwordHash: seedHash, avatar: 'https://picsum.photos/seed/mahim/200', level: 9, points: 720, silverPoints: 180, goldenCoins: 5, plusses: 23, isOnline: false, isPremium: true, isVerified: false, role: 'user', createdAt: now },
+        { id: 'user_tanvir', userId: 5, name: 'Tanvir Hossain', username: 'tanvir', email: 'tanvir@friendsbd.com', passwordHash: seedHash, avatar: 'https://picsum.photos/seed/tanvir/200', level: 5, points: 410, silverPoints: 95, goldenCoins: 2, plusses: 10, isOnline: false, isPremium: false, isVerified: false, role: 'user', createdAt: now },
       ];
 
       for (const u of users) {
@@ -369,6 +390,28 @@ const seedChannelsIfEmpty = async () => {
 // Run seed after DB connects
 setTimeout(seedIfEmpty, 2000);
 setTimeout(seedChannelsIfEmpty, 5000);
+
+// ── Start Automated Events Scheduler ────────────────
+const { startScheduler } = require('./eventScheduler');
+setTimeout(startScheduler, 10000);
+
+// ── Daily/Weekly Leaderboard Reset Scheduler ─────────
+const resetLeaderboardPoints = async () => {
+  try {
+    const User = require('./models/User');
+    const bd = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Dhaka' });
+    const day = new Date().getDay();
+    // Reset dailyPoints if date changed
+    await User.updateMany({ lastDailyReset: { $ne: bd } }, { $set: { dailyPoints: 0, lastDailyReset: bd } });
+    // Reset weeklyPoints on Monday
+    if (day === 1) {
+      const weekKey = (() => { const d = new Date(); const diff = d.getDate() - 1; const m = new Date(d.setDate(diff)); return m.toLocaleDateString('en-CA', { timeZone: 'Asia/Dhaka' }); })();
+      await User.updateMany({ lastWeeklyReset: { $ne: weekKey } }, { $set: { weeklyPoints: 0, lastWeeklyReset: weekKey } });
+    }
+  } catch (e) { console.warn('Leaderboard reset error:', e.message); }
+};
+setInterval(resetLeaderboardPoints, 60000); // Check every minute
+resetLeaderboardPoints();
 
 // ── Start Server ────────────────────────────────────
 const PORT = process.env.PORT || 5000;

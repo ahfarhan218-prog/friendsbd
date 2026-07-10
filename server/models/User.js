@@ -88,6 +88,10 @@ const userSchema = new mongoose.Schema({
   lastStaminaUpdate: { type: Number, default: () => Date.now() },
   goldenBalls: { type: Number, default: 0 },
   dailyStreakCount: { type: Number, default: 0 },
+  dailyPoints: { type: Number, default: 0 },
+  weeklyPoints: { type: Number, default: 0 },
+  lastDailyReset: String,
+  lastWeeklyReset: String,
   favoriteChannels: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Channel' }]
 }, { _id: false });
 

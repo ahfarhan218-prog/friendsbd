@@ -31,11 +31,16 @@ export async function createSession(userId: string): Promise<{ sessionToken: str
   const sessionToken = generateSessionToken();
   const sessionExpiry = Date.now() + SESSION_DURATION_MS;
 
-  // Write to MongoDB via API
+  // Write to MongoDB via API (include JWT if available)
   try {
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+    const jwtToken = localStorage.getItem('auth_token');
+    if (jwtToken) {
+      headers['Authorization'] = `Bearer ${jwtToken}`;
+    }
     await fetch(`${API_BASE}/users/${userId}/session`, {
       method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({ sessionToken, sessionExpiry })
     });
   } catch (err: any) {
@@ -61,9 +66,29 @@ export async function createSession(userId: string): Promise<{ sessionToken: str
  * Returns a reason string if invalid, or null if valid.
  */
 export async function validateSession(): Promise<'no_session' | 'expired' | 'other_device' | null> {
+  // First check JWT token
+  const jwtToken = localStorage.getItem('auth_token');
   const raw = localStorage.getItem(SESSION_KEY);
-  if (!raw) return 'no_session';
+  if (!jwtToken && !raw) return 'no_session';
 
+  // If JWT exists, verify it via API
+  if (jwtToken) {
+    try {
+      const res = await fetch(`${API_BASE}/auth/me`, {
+        headers: { 'Authorization': `Bearer ${jwtToken}` }
+      });
+      if (!res.ok) {
+        localStorage.removeItem('auth_token');
+        return 'expired';
+      }
+      return null; // JWT is valid
+    } catch (_) {
+      // Offline — fall back to local check
+    }
+  }
+
+  // Legacy session fallback
+  if (!raw) return 'no_session';
   let session: any;
   try {
     session = JSON.parse(raw);
@@ -71,35 +96,23 @@ export async function validateSession(): Promise<'no_session' | 'expired' | 'oth
     return 'no_session';
   }
 
-  // 1. Expiry check (fast — no network)
   if (!session.sessionExpiry || Date.now() > session.sessionExpiry) {
     return 'expired';
   }
-
-  // 2. Single-device check (API read)
   if (!session.id || !session.sessionToken) return 'no_session';
 
-  try {
-    const res = await fetch(`${API_BASE}/users/${session.id}`);
-    if (!res.ok) return 'no_session';
-    const data = await res.json();
-    if (data.sessionToken && data.sessionToken !== session.sessionToken) {
-      return 'other_device';
-    }
-  } catch (err) {
-    console.warn('[sessionService] MongoDB validation failed (offline?):', err);
-  }
-
-  return null; // All good
+  return null;
 }
 
 /** Remove local session data (called on logout) */
 export function clearLocalSession(): void {
   localStorage.removeItem(SESSION_KEY);
+  localStorage.removeItem('auth_token');
 }
 
 /** Invalidate the MongoDB session token on explicit logout so other devices see it immediately */
 export async function invalidateSession(userId: string): Promise<void> {
+  localStorage.removeItem('auth_token');
   try {
     await fetch(`${API_BASE}/users/${userId}/session`, {
       method: 'PATCH',

@@ -89,6 +89,13 @@ import Gallery from './pages/Gallery';
 import Stories from './pages/Stories';
 import VerifyEmail from './pages/VerifyEmail';
 
+// New Feature Pages
+import ClanWars from './pages/ClanWars';
+import Wallet from './pages/Wallet';
+import Referrals from './pages/Referrals';
+import VideoCall from './pages/VideoCall';
+import CricketMultiplayer from './pages/CricketMultiplayer';
+
 // Components
 import Layout from './components/Layout';
 import NotificationToast from './components/NotificationToast';
@@ -96,6 +103,7 @@ import { triggerToast } from './components/NotificationToast';
 import ProtectedRoute from './components/ProtectedRoute';
 import { apTransactionService } from './services/apTransactionService';
 import { mongoService } from './services/mongoService';
+import { registerServiceWorker } from './services/pushService';
 
 const isLottoActive = (userData: any) => {
   if (!userData?.lotto_active_until) return false;
@@ -193,6 +201,9 @@ const AppContent: React.FC = () => {
     };
 
     loadUser();
+
+    // Register PWA service worker
+    registerServiceWorker();
 
     const handleStorage = () => {
       const saved = localStorage.getItem('user_session');
@@ -387,6 +398,13 @@ const AppContent: React.FC = () => {
           <Route path="/missions"          element={protect(<DailyMissions />)} />
           <Route path="/ap-leaderboard"    element={protect(<APLeaderboard />)} />
           <Route path="/members"           element={protect(<CommunityMembers />)} />
+
+          {/* New Feature Routes */}
+          <Route path="/clan-wars"         element={protect(<ClanWars />)} />
+          <Route path="/wallet"            element={protect(<Wallet />)} />
+          <Route path="/referrals"         element={protect(<Referrals />)} />
+          <Route path="/cricket-multiplayer" element={protect(<CricketMultiplayer />)} />
+          <Route path="/video-call/:userId" element={protect(<VideoCall />)} />
 
           {/* New Routes */}
           <Route path="/highlights"        element={protect(<Highlights />)} />
