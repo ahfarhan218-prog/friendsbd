@@ -121,12 +121,15 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      return res.status(400).json({ error: 'Email and password are required.' });
+      return res.status(400).json({ error: 'Email or username and password are required.' });
     }
 
-    const user = await User.findOne({ email: email.toLowerCase().trim() }).lean();
+    const query = email.includes('@')
+      ? { email: email.toLowerCase().trim() }
+      : { $or: [{ username: email.toLowerCase().trim() }, { name: email.trim() }] };
+    const user = await User.findOne(query).lean();
     if (!user) {
-      return res.status(401).json({ error: 'No account found with this email. Please sign up first.' });
+      return res.status(401).json({ error: 'No account found with this email/username. Please sign up first.' });
     }
 
     const passwordMatch = await bcrypt.compare(password, user.passwordHash);

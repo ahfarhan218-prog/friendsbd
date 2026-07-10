@@ -23,6 +23,11 @@ const Auth: React.FC<AuthProps> = ({ mode, onAuth }) => {
   const [gender, setGender] = useState('Male');
   const [errorMsg, setErrorMsg] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showForgot, setShowForgot] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState('');
+  const [forgotMsg, setForgotMsg] = useState('');
+  const [forgotLoading, setForgotLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -157,7 +162,7 @@ const Auth: React.FC<AuthProps> = ({ mode, onAuth }) => {
         <div className="text-center mb-6">
            <h2 className="text-2xl font-bold text-white">{mode === 'login' ? 'Welcome Back!' : 'Create Account'}</h2>
            <p className="text-sm text-purple-200 mt-1">
-             {mode === 'login' ? 'Login via Email' : 'Join FriendsBD community today'}
+             {mode === 'login' ? 'Login via Email or Username' : 'Join FriendsBD community today'}
            </p>
         </div>
 
@@ -232,19 +237,27 @@ const Auth: React.FC<AuthProps> = ({ mode, onAuth }) => {
            </div>
 
            <div className="space-y-1">
-             <label className="text-xs sm:text-sm font-bold text-purple-300 uppercase tracking-widest px-2">Password</label>
-             <div className="relative">
-               <input 
-                 value={password}
-                 onChange={(e) => setPassword(e.target.value)}
-                 type="password" 
-                 placeholder={mode === 'login' ? "Enter your password" : "Create a strong password"} 
-                 className="w-full bg-[#161b22] border-2 border-[#30363d] rounded-2xl py-3.5 px-12 focus:border-purple-500 text-white text-sm outline-none transition-all placeholder:text-slate-500" 
-               />
-               <span className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400 text-lg">🔒</span>
-             </div>
-             {mode === 'signup' && <p className="text-xs sm:text-sm text-purple-300 px-2">Minimum 6 characters</p>}
-           </div>
+              <label className="text-xs sm:text-sm font-bold text-purple-300 uppercase tracking-widest px-2">Password</label>
+              <div className="relative">
+                <input 
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  type={showPassword ? 'text' : 'password'}
+                  id="password-input"
+                  placeholder={mode === 'login' ? "Enter your password" : "Create a strong password"} 
+                  className="w-full bg-[#161b22] border-2 border-[#30363d] rounded-2xl py-3.5 px-12 focus:border-purple-500 text-white text-sm outline-none transition-all placeholder:text-slate-500" 
+                />
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400 text-lg">🔒</span>
+                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-purple-400 hover:text-purple-300 transition-colors text-lg focus:outline-none">
+                  {showPassword ? '🙈' : '👁️'}
+                </button>
+              </div>
+              {mode === 'signup' ? (
+                <p className="text-xs sm:text-sm text-purple-300 px-2">Minimum 6 characters</p>
+              ) : (
+                <button type="button" onClick={() => setShowForgot(true)} className="text-xs text-purple-400 hover:text-pink-400 px-2 mt-1 transition-colors">Forgot Password?</button>
+              )}
+            </div>
 
            <button 
              type="submit" 
@@ -263,6 +276,67 @@ const Auth: React.FC<AuthProps> = ({ mode, onAuth }) => {
           )}
         </div>
       </div>
+
+      {/* Forgot Password Modal */}
+      {showForgot && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" onClick={() => { setShowForgot(false); setForgotMsg(''); }}>
+          <div className="bg-[#0F0F1A] border border-purple-500/30 rounded-[2rem] p-6 sm:p-8 w-full max-w-md shadow-2xl" onClick={e => e.stopPropagation()}>
+            <h3 className="text-xl font-bold text-white text-center mb-2">Reset Password</h3>
+            <p className="text-sm text-purple-300 text-center mb-6">Enter your email and we'll send you a reset link.</p>
+
+            {forgotMsg && (
+              <div className={`mb-4 p-3 rounded-xl text-xs sm:text-sm font-bold text-center ${forgotMsg.includes('✅') ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400' : 'bg-rose-500/10 border border-rose-500/20 text-rose-400'}`}>
+                {forgotMsg}
+              </div>
+            )}
+
+            <div className="space-y-1 mb-4">
+              <label className="text-xs font-bold text-purple-300 uppercase tracking-widest px-2">Email Address</label>
+              <div className="relative">
+                <input
+                  value={forgotEmail}
+                  onChange={e => setForgotEmail(e.target.value)}
+                  type="email"
+                  placeholder="your.email@example.com"
+                  className="w-full bg-[#161b22] border-2 border-[#30363d] rounded-2xl py-3.5 px-12 focus:border-purple-500 text-white text-sm outline-none transition-all placeholder:text-slate-500"
+                />
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400 text-lg">📧</span>
+              </div>
+            </div>
+
+            <button
+              onClick={async () => {
+                if (!forgotEmail.trim()) return;
+                setForgotLoading(true);
+                setForgotMsg('');
+                try {
+                  const res = await fetch(`${API_BASE}/auth/forgot-password`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: forgotEmail.trim() })
+                  });
+                  const data = await res.json();
+                  if (res.ok) {
+                    setForgotMsg('✅ Reset link sent! Check your email.');
+                  } else {
+                    setForgotMsg(`❌ ${data.error || 'Something went wrong.'}`);
+                  }
+                } catch {
+                  setForgotMsg('❌ Network error. Try again.');
+                } finally {
+                  setForgotLoading(false);
+                }
+              }}
+              disabled={forgotLoading}
+              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-3.5 rounded-[2rem] shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] transition-all text-sm uppercase tracking-widest disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {forgotLoading ? '⏳ Sending...' : 'Send Reset Link'}
+            </button>
+
+            <button onClick={() => { setShowForgot(false); setForgotMsg(''); }} className="w-full text-center text-sm text-purple-400 hover:text-pink-400 mt-4 transition-colors">Cancel</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
