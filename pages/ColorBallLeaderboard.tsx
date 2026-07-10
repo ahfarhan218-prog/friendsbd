@@ -19,18 +19,26 @@ const ColorBallLeaderboard: React.FC = () => {
     catch { return null; }
   })();
 
+  const getField = () => {
+    if (period === 'daily') return 'dailyColorBalls';
+    if (period === 'weekly') return 'weeklyColorBalls';
+    return 'colorBalls';
+  };
+
   useEffect(() => {
     setLoading(true);
+    const field = getField();
     const unsub = mongoService.listenUsers((dbUsers) => {
       const sorted = dbUsers
-        .filter(u => (u.colorBalls || 0) > 0)
-        .sort((a: any, b: any) => (b.colorBalls || 0) - (a.colorBalls || 0));
+        .filter(u => (u[field] || 0) > 0)
+        .sort((a: any, b: any) => (b[field] || 0) - (a[field] || 0));
       setUsers(sorted);
       setLoading(false);
     });
     return () => unsub();
   }, [period]);
 
+  const field = getField();
   const podium = useMemo(() => users.slice(0, 3), [users]);
   const others = useMemo(() => users.slice(3), [users]);
 
@@ -96,7 +104,7 @@ const ColorBallLeaderboard: React.FC = () => {
                     <div className="w-full bg-gradient-to-t from-fuchsia-700/40 to-pink-500/20 rounded-t-3xl h-20 sm:h-24 flex flex-col items-center justify-center p-2 text-center border-t border-fuchsia-500/20">
                       <p className="text-xs font-black uppercase text-fuchsia-300">2nd</p>
                       <p className="text-xs font-bold text-white truncate w-full px-1">{podium[1].name?.split(' ')[0]}</p>
-                      <p className="text-xs font-medium text-pink-200">{podium[1].colorBalls || 0} balls</p>
+                      <p className="text-xs font-medium text-pink-200">{podium[1][field] || 0} balls</p>
                     </div>
                   </motion.div>
                 )}
@@ -109,7 +117,7 @@ const ColorBallLeaderboard: React.FC = () => {
                     <div className="w-full bg-gradient-to-t from-fuchsia-600 to-pink-400/30 rounded-t-3xl h-28 sm:h-32 flex flex-col items-center justify-center p-2 text-center border-t border-pink-400/30 shadow-lg shadow-fuchsia-900/20">
                       <p className="text-xs font-black uppercase text-pink-300">#1</p>
                       <p className="text-xs sm:text-sm font-black text-white truncate w-full px-1">{podium[0].name?.split(' ')[0]}</p>
-                      <p className="text-xs sm:text-sm font-bold text-pink-200">{podium[0].colorBalls || 0} balls</p>
+                      <p className="text-xs sm:text-sm font-bold text-pink-200">{podium[0][field] || 0} balls</p>
                     </div>
                   </motion.div>
                 )}
@@ -122,7 +130,7 @@ const ColorBallLeaderboard: React.FC = () => {
                     <div className="w-full bg-gradient-to-t from-fuchsia-800/40 to-fuchsia-600/20 rounded-t-3xl h-16 sm:h-20 flex flex-col items-center justify-center p-2 text-center border-t border-fuchsia-500/10">
                       <p className="text-xs font-black uppercase text-fuchsia-400">3rd</p>
                       <p className="text-xs font-bold text-white truncate w-full px-1">{podium[2].name?.split(' ')[0]}</p>
-                      <p className="text-xs font-medium text-fuchsia-300">{podium[2].colorBalls || 0} balls</p>
+                      <p className="text-xs font-medium text-fuchsia-300">{podium[2][field] || 0} balls</p>
                     </div>
                   </motion.div>
                 )}
@@ -169,7 +177,7 @@ const ColorBallLeaderboard: React.FC = () => {
                         </div>
                       </div>
                       <div className="text-right shrink-0">
-                        <p className="text-sm font-black text-pink-400">{rank.colorBalls?.toLocaleString() || 0}</p>
+                        <p className="text-sm font-black text-pink-400">{rank[field]?.toLocaleString() || 0}</p>
                         <p className="text-xs text-white/30">balls</p>
                       </div>
                     </motion.div>

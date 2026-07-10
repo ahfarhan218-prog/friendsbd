@@ -418,12 +418,28 @@ const resetLeaderboardPoints = async () => {
     const User = require('./models/User');
     const bd = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Dhaka' });
     const day = new Date().getDay();
-    // Reset dailyPoints if date changed
-    await User.updateMany({ lastDailyReset: { $ne: bd } }, { $set: { dailyPoints: 0, lastDailyReset: bd } });
-    // Reset weeklyPoints on Monday
+    // Reset daily fields if date changed
+    await User.updateMany({ lastDailyReset: { $ne: bd } }, {
+      $set: {
+        dailyPoints: 0,
+        dailyGoldenCoins: 0,
+        dailySilverPoints: 0,
+        dailyColorBalls: 0,
+        lastDailyReset: bd
+      }
+    });
+    // Reset weekly fields on Monday
     if (day === 1) {
       const weekKey = (() => { const d = new Date(); const diff = d.getDate() - 1; const m = new Date(d.setDate(diff)); return m.toLocaleDateString('en-CA', { timeZone: 'Asia/Dhaka' }); })();
-      await User.updateMany({ lastWeeklyReset: { $ne: weekKey } }, { $set: { weeklyPoints: 0, lastWeeklyReset: weekKey } });
+      await User.updateMany({ lastWeeklyReset: { $ne: weekKey } }, {
+        $set: {
+          weeklyPoints: 0,
+          weeklyGoldenCoins: 0,
+          weeklySilverPoints: 0,
+          weeklyColorBalls: 0,
+          lastWeeklyReset: weekKey
+        }
+      });
     }
   } catch (e) { console.warn('Leaderboard reset error:', e.message); }
 };

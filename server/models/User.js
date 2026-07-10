@@ -90,6 +90,12 @@ const userSchema = new mongoose.Schema({
   dailyStreakCount: { type: Number, default: 0 },
   dailyPoints: { type: Number, default: 0 },
   weeklyPoints: { type: Number, default: 0 },
+  dailyGoldenCoins: { type: Number, default: 0 },
+  weeklyGoldenCoins: { type: Number, default: 0 },
+  dailySilverPoints: { type: Number, default: 0 },
+  weeklySilverPoints: { type: Number, default: 0 },
+  dailyColorBalls: { type: Number, default: 0 },
+  weeklyColorBalls: { type: Number, default: 0 },
   lastDailyReset: String,
   lastWeeklyReset: String,
   favoriteChannels: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Channel' }]

@@ -19,18 +19,26 @@ const GoldenCoinLeaderboard: React.FC = () => {
     catch { return null; }
   })();
 
+  const getField = () => {
+    if (period === 'daily') return 'dailyGoldenCoins';
+    if (period === 'weekly') return 'weeklyGoldenCoins';
+    return 'goldenCoins';
+  };
+
   useEffect(() => {
     setLoading(true);
+    const field = getField();
     const unsub = mongoService.listenUsers((dbUsers) => {
       const sorted = dbUsers
-        .filter(u => (u.goldenCoins || 0) > 0)
-        .sort((a: any, b: any) => (b.goldenCoins || 0) - (a.goldenCoins || 0));
+        .filter(u => (u[field] || 0) > 0)
+        .sort((a: any, b: any) => (b[field] || 0) - (a[field] || 0));
       setUsers(sorted);
       setLoading(false);
     });
     return () => unsub();
   }, [period]);
 
+  const field = getField();
   const podium = useMemo(() => users.slice(0, 3), [users]);
   const others = useMemo(() => users.slice(3), [users]);
 
@@ -96,7 +104,7 @@ const GoldenCoinLeaderboard: React.FC = () => {
                     <div className="w-full bg-gradient-to-t from-amber-700/40 to-amber-500/20 rounded-t-3xl h-20 sm:h-24 flex flex-col items-center justify-center p-2 text-center border-t border-amber-500/20">
                       <p className="text-xs font-black uppercase text-amber-300">2nd</p>
                       <p className="text-xs font-bold text-white truncate w-full px-1">{podium[1].name?.split(' ')[0]}</p>
-                      <p className="text-xs font-medium text-amber-200">{podium[1].goldenCoins || 0} coins</p>
+                      <p className="text-xs font-medium text-amber-200">{podium[1][field] || 0} coins</p>
                     </div>
                   </motion.div>
                 )}
@@ -109,7 +117,7 @@ const GoldenCoinLeaderboard: React.FC = () => {
                     <div className="w-full bg-gradient-to-t from-amber-600 to-amber-400/30 rounded-t-3xl h-28 sm:h-32 flex flex-col items-center justify-center p-2 text-center border-t border-amber-400/30 shadow-lg shadow-amber-900/20">
                       <p className="text-xs font-black uppercase text-amber-300">#1</p>
                       <p className="text-xs sm:text-sm font-black text-white truncate w-full px-1">{podium[0].name?.split(' ')[0]}</p>
-                      <p className="text-xs sm:text-sm font-bold text-amber-200">{podium[0].goldenCoins || 0} coins</p>
+                      <p className="text-xs sm:text-sm font-bold text-amber-200">{podium[0][field] || 0} coins</p>
                     </div>
                   </motion.div>
                 )}
@@ -122,7 +130,7 @@ const GoldenCoinLeaderboard: React.FC = () => {
                     <div className="w-full bg-gradient-to-t from-amber-800/40 to-amber-600/20 rounded-t-3xl h-16 sm:h-20 flex flex-col items-center justify-center p-2 text-center border-t border-amber-500/10">
                       <p className="text-xs font-black uppercase text-amber-400">3rd</p>
                       <p className="text-xs font-bold text-white truncate w-full px-1">{podium[2].name?.split(' ')[0]}</p>
-                      <p className="text-xs font-medium text-amber-300">{podium[2].goldenCoins || 0} coins</p>
+                      <p className="text-xs font-medium text-amber-300">{podium[2][field] || 0} coins</p>
                     </div>
                   </motion.div>
                 )}
@@ -169,7 +177,7 @@ const GoldenCoinLeaderboard: React.FC = () => {
                         </div>
                       </div>
                       <div className="text-right shrink-0">
-                        <p className="text-sm font-black text-amber-400">{rank.goldenCoins?.toLocaleString() || 0}</p>
+                        <p className="text-sm font-black text-amber-400">{rank[field]?.toLocaleString() || 0}</p>
                         <p className="text-xs text-white/30">coins</p>
                       </div>
                     </motion.div>
