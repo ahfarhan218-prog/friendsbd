@@ -3,9 +3,12 @@ import { mongoService } from '../services/mongoService';
 import { triggerToast } from '../components/NotificationToast';
 
 export const DAILY_MISSIONS: DailyMission[] = [
-  { id: 'daily_login', title: 'Daily Check-in', description: 'Log in to the app today', rewardType: 'points', rewardAmount: 50 },
-  { id: 'visit_forum', title: 'Community Citizen', description: 'Visit the community forums', rewardType: 'silverPoints', rewardAmount: 10 },
-  { id: 'play_game', title: 'Gamer', description: 'Play any game (Golden Coin, Silver Rush)', rewardType: 'goldenCoins', rewardAmount: 2 }
+  { id: 'daily_login',   title: 'Daily Check-in',     description: 'Log in to the app today',                        rewardType: 'points',       rewardAmount: 50  },
+  { id: 'visit_forum',   title: 'Community Citizen',   description: 'Visit the community forums and explore topics',  rewardType: 'silverPoints', rewardAmount: 10  },
+  { id: 'play_game',     title: 'Gamer',               description: 'Play any game (Golden Coin, Silver Rush)',       rewardType: 'goldenCoins',  rewardAmount: 2   },
+  { id: 'send_message',  title: 'Social Butterfly',    description: 'Send a message to a friend today',               rewardType: 'silverPoints', rewardAmount: 15  },
+  { id: 'visit_profile', title: 'Profile Visitor',     description: 'Visit your own profile page',                    rewardType: 'points',       rewardAmount: 25  },
+  { id: 'watch_live_tv', title: 'TV Watcher',          description: 'Open the Live TV section and watch any channel', rewardType: 'points',       rewardAmount: 30  },
 ];
 
 export const checkMissionCompletion = async (user: User, missionId: string) => {
