@@ -182,6 +182,66 @@ router.post('/:userId/award-points', authenticateToken, async (req, res) => {
   }
 });
 
+// POST /api/users/:userId/claim-coin - Claim game coin and update daily/weekly leaderboards
+router.post('/:userId/claim-coin', authenticateToken, async (req, res) => {
+  try {
+    if (req.params.userId !== req.user.id) {
+      return res.status(403).json({ error: 'Not authorized.' });
+    }
+    const { type, spawnTime, newDailyGrabs, bdDateKey } = req.body;
+    
+    const user = await User.findOne({ id: req.params.userId }).lean();
+    if (!user) return res.status(404).json({ error: 'User not found' });
+
+    const bd = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Dhaka' });
+    const weekKey = (() => { const d = new Date(); const day = d.getDay(); const diff = d.getDate() - day + (day === 0 ? -6 : 1); const m = new Date(d.setDate(diff)); return m.toLocaleDateString('en-CA', { timeZone: 'Asia/Dhaka' }); })();
+
+    const update = { $inc: {}, $set: {} };
+    
+    // Reset daily logic for all coins
+    if (user.lastDailyReset !== bd) { 
+        update.$set.lastDailyReset = bd; 
+        update.$set.dailyGoldenCoins = 0;
+        update.$set.dailySilverPoints = 0;
+        update.$set.dailyColorBalls = 0;
+        // Keep old dailyGrabs as they are tracked separately, or we could reset it here.
+    }
+    // Reset weekly logic for all coins
+    if (user.lastWeeklyReset !== weekKey) { 
+        update.$set.lastWeeklyReset = weekKey; 
+        update.$set.weeklyGoldenCoins = 0;
+        update.$set.weeklySilverPoints = 0;
+        update.$set.weeklyColorBalls = 0;
+    }
+
+    if (type === 'golden') {
+        update.$inc.goldenCoins = 1;
+        update.$inc.dailyGoldenCoins = 1;
+        update.$inc.weeklyGoldenCoins = 1;
+        if (bdDateKey && newDailyGrabs !== undefined) {
+           update.$set[`dailyGrabs.${bdDateKey}`] = newDailyGrabs;
+        }
+    } else if (type === 'silver') {
+        update.$inc.silverPoints = 1;
+        update.$inc.dailySilverPoints = 1;
+        update.$inc.weeklySilverPoints = 1;
+    } else if (type === 'color') {
+        update.$inc.colorBalls = 1;
+        update.$inc.dailyColorBalls = 1;
+        update.$inc.weeklyColorBalls = 1;
+    }
+
+    if (spawnTime) {
+       update.$set.lastClaimId = `${type}_coin_${spawnTime}`;
+    }
+
+    const updated = await User.findOneAndUpdate({ id: req.params.userId }, update, { new: true }).lean();
+    res.json({ success: true, updated });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // DELETE /api/users/:userId - Delete user permanently (own account or admin only)
 router.delete('/:userId', authenticateToken, async (req, res) => {
   try {

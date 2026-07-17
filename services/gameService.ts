@@ -1,6 +1,6 @@
 import { triggerToast } from '../components/NotificationToast';
 import { GameLog, CoinStats } from '../types';
-import { mongoService, API_BASE } from './mongoService';
+import { mongoService, API_BASE, getAuthHeaders } from './mongoService';
 import { apService } from './apService';
 
 /**
@@ -38,7 +38,7 @@ const getDhakaDate = (): Date => {
 
 const apiFetch = async <T>(path: string, options?: RequestInit): Promise<T> => {
   const res = await fetch(`${API_BASE}${path}`, {
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
     ...options
   });
   if (!res.ok) throw new Error(`Game API ${path} failed: ${res.status}`);
@@ -392,15 +392,13 @@ export const gameService = {
       // Update user rewards
       const newBalanceAp = (userData.balance_ap || 0) + 10;
       const newDailyGrabs = todayGrabs + 1;
-      await apiFetch(`/users/${userId}`, {
-        method: 'PATCH',
+      await apiFetch(`/users/${userId}/claim-coin`, {
+        method: 'POST',
         body: JSON.stringify({
-          goldenCoins: (userData.goldenCoins || 0) + 1,
-          ap: (userData.ap || 0) + 10,
-          totalAp: (userData.totalAp || 0) + 10,
-          balance_ap: newBalanceAp,
-          lastClaimId: `golden_coin_${gameData.spawnTime}`,
-          dailyGrabs: { ...dailyGrabData, [bdDateKey]: newDailyGrabs }
+          type: 'golden',
+          spawnTime: gameData.spawnTime,
+          newDailyGrabs: newDailyGrabs,
+          bdDateKey: bdDateKey
         })
       });
 
@@ -471,14 +469,11 @@ export const gameService = {
       });
 
       const newBalanceAp = (userData.balance_ap || 0) + 5;
-      await apiFetch(`/users/${userId}`, {
-        method: 'PATCH',
+      await apiFetch(`/users/${userId}/claim-coin`, {
+        method: 'POST',
         body: JSON.stringify({
-          silverPoints: (userData.silverPoints || 0) + 1,
-          ap: (userData.ap || 0) + 5,
-          totalAp: (userData.totalAp || 0) + 5,
-          balance_ap: newBalanceAp,
-          lastClaimId: `silver_coin_${gameData.spawnTime}`
+          type: 'silver',
+          spawnTime: gameData.spawnTime
         })
       });
 
@@ -532,14 +527,11 @@ export const gameService = {
       });
 
       const newBalanceAp = (userData.balance_ap || 0) + 5;
-      await apiFetch(`/users/${userId}`, {
-        method: 'PATCH',
+      await apiFetch(`/users/${userId}/claim-coin`, {
+        method: 'POST',
         body: JSON.stringify({
-          colorBalls: (userData.colorBalls || 0) + 1,
-          ap: (userData.ap || 0) + 5,
-          totalAp: (userData.totalAp || 0) + 5,
-          balance_ap: newBalanceAp,
-          lastClaimId: `color_ball_${gameData.spawnTime}`
+          type: 'color',
+          spawnTime: gameData.spawnTime
         })
       });
 
