@@ -221,6 +221,7 @@ router.post('/claim', async (req, res) => {
     user.ap = (user.ap || 0) + apReward;
     user.balance_ap = (user.balance_ap || 0) + apReward;
     user.totalAp = (user.totalAp || 0) + apReward;
+    user.weeklyAp = (user.weeklyAp || 0) + apReward;
     user.plusses = (user.plusses || 0) + plussesReward;
 
     if (!user.monsters) user.monsters = [];
@@ -393,6 +394,7 @@ router.post('/arena/battle', async (req, res) => {
       user.ap = (user.ap || 0) + 50;
       user.balance_ap = (user.balance_ap || 0) + 50;
       user.totalAp = (user.totalAp || 0) + 50;
+      user.weeklyAp = (user.weeklyAp || 0) + 50;
       logs.push(`💎 You earned +50 AP!`);
       await user.save();
     } else {

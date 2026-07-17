@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
   magicPoints: { type: Number, default: 0 },
   plusses: { type: Number, default: 0 },
   ap: { type: Number, default: 0 },
+  weeklyAp: { type: Number, default: 0 },
   totalAp: { type: Number, default: 0 },
   balance_ap: { type: Number, default: 0 },
   balance_taka: { type: Number, default: 0 },

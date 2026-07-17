@@ -23,6 +23,7 @@ export interface User {
   colorBalls?: number;
   magicPoints?: number;
   ap?: number;
+  weeklyAp?: number;
   totalAp?: number;
   lastApReset?: number; // Active Points
   balance_ap?: number;

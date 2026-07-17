@@ -425,6 +425,7 @@ const resetLeaderboardPoints = async () => {
         dailyGoldenCoins: 0,
         dailySilverPoints: 0,
         dailyColorBalls: 0,
+        ap: 0,
         lastDailyReset: bd
       }
     });
@@ -437,6 +438,7 @@ const resetLeaderboardPoints = async () => {
           weeklyGoldenCoins: 0,
           weeklySilverPoints: 0,
           weeklyColorBalls: 0,
+          weeklyAp: 0,
           lastWeeklyReset: weekKey
         }
       });

@@ -154,7 +154,7 @@ router.post('/threads', async (req, res) => {
     if (userId) {
       await User.findOneAndUpdate(
         { id: userId },
-        { $set: { ap: (currentAp || 0) + 15, totalAp: (currentTotalAp || 0) + 15, lastClaimId: `thread_${thread.id}` } }
+        { $inc: { ap: 15, weeklyAp: 15, totalAp: 15 }, $set: { lastClaimId: `thread_${thread.id}` } }
       );
     }
 
@@ -293,7 +293,7 @@ router.post('/posts', async (req, res) => {
     if (author.id) {
       await User.findOneAndUpdate(
         { id: author.id },
-        { $set: { ap: (currentAp || 0) + 5, totalAp: (currentTotalAp || 0) + 5, lastClaimId: `post_${newPost.id}` } }
+        { $inc: { ap: 5, weeklyAp: 5, totalAp: 5 }, $set: { lastClaimId: `post_${newPost.id}` } }
       );
     }
 
