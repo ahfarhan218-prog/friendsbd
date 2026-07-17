@@ -131,7 +131,7 @@ const Settings: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0B1A] relative pb-20">
+    <div className="min-h-screen bg-[#0B0B1A] relative pb-20 overflow-x-hidden">
       {toast && (
         <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[100] px-3 sm:px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white text-sm font-bold shadow-lg shadow-purple-900/50 animate-pulse">
           {toast}

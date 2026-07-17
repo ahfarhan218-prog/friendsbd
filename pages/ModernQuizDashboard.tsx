@@ -355,7 +355,7 @@ const ModernQuizDashboard: React.FC = () => {
   const liveArenaCount = quizzes.filter(q => q.type === 'live' && !q.isClosed).length;
 
   return (
-    <div className="min-h-screen bg-transparent text-[#f8fafc] font-sans antialiased pb-24 relative">
+    <div className="min-h-screen bg-transparent text-[#f8fafc] font-sans antialiased pb-24 relative overflow-x-hidden">
       <div className="absolute top-0 right-0 w-full max-w-[400px] h-[400px] bg-indigo-600/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-20 left-10 w-[300px] h-[300px] bg-purple-600/5 rounded-full blur-[100px] pointer-events-none" />
 

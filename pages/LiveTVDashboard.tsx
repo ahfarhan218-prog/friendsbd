@@ -267,7 +267,7 @@ const LiveTVDashboard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] font-sans pb-20 pt-6 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] font-sans pb-20 pt-6 px-4 overflow-x-hidden">
       <div className="max-w-full max-w-4xl mx-auto px-4 sm:px-6 mx-auto space-y-6">
         
         {/* Header */}

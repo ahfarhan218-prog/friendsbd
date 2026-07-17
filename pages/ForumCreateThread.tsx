@@ -182,7 +182,7 @@ const ForumCreateThread: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative">
+    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative overflow-x-hidden">
       {/* Decorative Orbs */}
       <div className="absolute top-0 right-10 w-full max-w-[20rem] sm:w-80 h-80 bg-indigo-600/5 rounded-full blur-[110px] pointer-events-none" />
       <div className="absolute bottom-20 left-10 w-full max-w-[20rem] sm:w-80 h-80 bg-purple-600/5 rounded-full blur-[110px] pointer-events-none" />

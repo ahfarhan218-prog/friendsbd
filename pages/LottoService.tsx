@@ -160,7 +160,7 @@ const LottoService: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent font-sans pb-32">
+    <div className="min-h-screen bg-transparent font-sans pb-32 overflow-x-hidden">
       <div className="max-w-md mx-auto px-4 pt-6 flex justify-between items-center">
         <button 
           onClick={() => navigate('/apps')} 

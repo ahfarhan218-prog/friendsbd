@@ -194,7 +194,7 @@ const ForumHome: React.FC = () => {
   const isStaff = isAdmin || currentUser?.role === 'moderator';
 
   return (
-    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative">
+    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative overflow-x-hidden">
       {/* Glow orbs */}
       <div className="absolute top-0 left-10 w-full max-w-sm h-96 bg-indigo-600/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-40 right-10 w-full max-w-sm h-96 bg-purple-600/5 rounded-full blur-[120px] pointer-events-none" />

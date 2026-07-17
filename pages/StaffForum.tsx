@@ -84,7 +84,7 @@ const StaffForum: React.FC = () => {
   if (!currentUser) return null;
 
   return (
-    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative flex flex-col">
+    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative flex flex-col overflow-x-hidden">
       {/* Background Glow */}
       <div className="absolute top-0 left-10 w-full max-w-sm h-96 bg-amber-600/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-40 right-10 w-full max-w-sm h-96 bg-red-600/5 rounded-full blur-[120px] pointer-events-none" />

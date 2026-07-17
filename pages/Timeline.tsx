@@ -47,7 +47,7 @@ const Timeline: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#090d16] font-inter pb-24">
+    <div className="min-h-screen bg-[#090d16] font-inter pb-24 overflow-x-hidden">
       <header className="relative bg-[#090d16]/80 backdrop-blur-xl border-b border-[#30363d] pt-12 pb-24 px-3 sm:px-6 rounded-b-[4rem] shadow-xl overflow-hidden shrink-0">
         <div className="absolute top-0 right-0 p-32 bg-fuchsia-500/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
         <div className="absolute bottom-0 left-0 p-24 bg-purple-500/10 rounded-full blur-2xl -ml-16 pointer-events-none" />

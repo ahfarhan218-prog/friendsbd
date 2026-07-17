@@ -75,10 +75,10 @@ const ClanWars: React.FC = () => {
   const userClan = clans.find(c => c.members?.some((m: any) => m.userId === session?.id));
   const isLeader = userClan && userClan.members?.some((m: any) => m.userId === session?.id && (m.role === 'leader' || m.role === 'co-leader'));
 
-  if (loading) return <div className="min-h-screen bg-[#0a0a1a] flex items-center justify-center"><div className="w-10 h-10 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" /></div>;
+  if (loading) return <div className="min-h-screen bg-[#0a0a1a] flex items-center justify-center overflow-x-hidden"><div className="w-10 h-10 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" /></div>;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6 overflow-x-hidden">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-2xl font-black text-white mb-2">⚔️ Clan Wars</h1>
         <p className="text-sm text-white/40 mb-6">Challenge rival clans to battle</p>

@@ -68,7 +68,7 @@ const CommunityMembers: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] pb-24 font-inter">
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] pb-24 font-inter overflow-x-hidden">
       <style>{`
         @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.4} }
         .mb-card { background:#1C1C2E; border:1px solid rgba(255,255,255,0.06); border-radius:20px; transition:all .3s; }

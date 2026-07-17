@@ -87,7 +87,7 @@ const ColorBallGame: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#1a0a2e] to-[#0a0a1a] pb-32">
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#1a0a2e] to-[#0a0a1a] pb-32 overflow-x-hidden">
       <style>{`
         @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
         @keyframes shimmer { 0%{background-position:-200%} 100%{background-position:200%} }
@@ -168,7 +168,7 @@ const ColorBallGame: React.FC = () => {
 
       <div className="px-5 -mt-16 space-y-6 relative z-10 max-w-lg mx-auto">
         {/* STATS ROW */}
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
           {[
             { icon: '🎨', label: 'My Balls', value: currentUser?.colorBalls || 0, color: 'from-fuchsia-600/20 to-rose-600/20 border-fuchsia-500/20' },
             { icon: '🏆', label: 'Rank', value: '#—', color: 'from-amber-600/20 to-orange-600/20 border-amber-500/20' },

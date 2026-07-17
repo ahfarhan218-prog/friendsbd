@@ -27,6 +27,7 @@ const GoldenCoinGame: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [nextSpawn, setNextSpawn] = useState<number | null>(null);
   const [isPremium, setIsPremium] = useState(false);
+  const [hasReveal, setHasReveal] = useState(false);
   const [todayGrabs, setTodayGrabs] = useState(0);
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [justGrabbed, setJustGrabbed] = useState(false);
@@ -50,6 +51,7 @@ const GoldenCoinGame: React.FC = () => {
         uid = u.id || '';
         checkMissionCompletion(u, 'play_game').catch(() => {});
         setIsPremium(!!u.isPremium);
+        setHasReveal(!!(u.goldenRevealUntil && u.goldenRevealUntil > Date.now()));
         refreshTodayGrabs(uid);
       }
     } catch (e) {}
@@ -115,6 +117,7 @@ const GoldenCoinGame: React.FC = () => {
         const u = JSON.parse(saved);
         refreshTodayGrabs(u.id || '');
         setIsPremium(!!u.isPremium);
+        setHasReveal(!!(u.goldenRevealUntil && u.goldenRevealUntil > Date.now()));
       }
     };
 
@@ -217,7 +220,7 @@ const GoldenCoinGame: React.FC = () => {
   const limitReached = todayGrabs >= DAILY_LIMIT;
 
   return (
-    <div className="min-h-screen bg-transparent font-inter pb-32">
+    <div className="min-h-screen bg-transparent font-inter pb-32 overflow-x-hidden">
       {/* HEADER SECTION */}
       <header className="relative bg-[#090d16]/80 backdrop-blur-xl border-b border-[#30363d] pt-12 pb-24 px-3 sm:px-6 rounded-b-[4rem] shadow-xl overflow-hidden shrink-0">
         <div className="absolute top-0 right-0 p-32 bg-amber-500/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
@@ -371,14 +374,14 @@ const GoldenCoinGame: React.FC = () => {
       </header>
 
       <div className="px-5 -mt-8 space-y-6 relative z-10 max-w-lg mx-auto">
-         {/* PREMIUM RADAR TOOL */}
+         {/* REVEAL RADAR */}
          {isOpen && (
            <div className="bg-[#161b22]/80 backdrop-blur-xl p-4 sm:p-6 rounded-[2.5rem] shadow-xl border border-[#30363d]">
               <h4 className="text-xs sm:text-sm font-black text-slate-400 uppercase tracking-widest mb-4 flex flex-wrap items-center gap-2">
-                 <span className="text-lg drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">📡</span> Premium Radar
+                 <span className="text-lg drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">📡</span> {isPremium || hasReveal ? 'Live Countdown' : 'Coin Drop Radar'}
               </h4>
-              {isPremium ? (
-                 <div className="p-5 bg-gradient-to-r from-purple-900/50 to-indigo-900/50 rounded-2xl border border-purple-500/30 shadow-[0_0_20px_rgba(168,85,247,0.15)] text-white flex items-center justify-between">
+              {isPremium || hasReveal ? (
+                 <div className="p-5 bg-gradient-to-r from-amber-900/40 to-purple-900/40 rounded-2xl border border-amber-500/30 shadow-[0_0_20px_rgba(251,191,36,0.15)] text-white flex items-center justify-between">
                     <div>
                        <p className="text-xs sm:text-sm font-black uppercase text-amber-400/80 mb-1">Next Drop In</p>
                        <p className="text-2xl font-black tracking-widest text-white drop-shadow-md">
@@ -391,17 +394,22 @@ const GoldenCoinGame: React.FC = () => {
                             return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
                           })() : 'Calculating...'}
                         </p>
-                        <p className="text-sm text-purple-300/70 mt-1">Drops every 13–18 min</p>
+                        <p className="text-sm text-amber-300/70 mt-1">Drops every 13–18 min</p>
                     </div>
-                    <div className="text-3xl animate-pulse drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]">🎯</div>
+                    <div className="text-3xl animate-pulse drop-shadow-[0_0_15px_rgba(251,191,36,0.5)]">🎯</div>
                  </div>
               ) : (
                  <div className="p-5 bg-black/30 rounded-2xl border border-white/5 text-center space-y-3">
                     <div className="text-2xl drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">🔒</div>
-                    <p className="text-sm font-bold text-slate-400">Upgrade to Premium to see exactly when the next coin drops!</p>
-                    <button onClick={() => navigate('/premium')} className="text-xs sm:text-sm font-black uppercase tracking-widest text-white bg-purple-600 px-5 py-2.5 rounded-xl hover:bg-purple-500 transition-colors shadow-[0_0_15px_rgba(147,51,234,0.4)] border border-purple-400">
-                       Unlock Radar Now
-                    </button>
+                    <p className="text-sm font-bold text-slate-400">See the countdown timer for the next Golden Coin drop!</p>
+                    <div className="flex flex-col sm:flex-row gap-2 justify-center">
+                      <button onClick={() => navigate('/shop')} className="text-xs sm:text-sm font-black uppercase tracking-widest text-amber-400 bg-amber-500/10 px-5 py-2.5 rounded-xl hover:bg-amber-500/20 transition-colors border border-amber-500/30">
+                         🎁 Subscribe w/ Plusses
+                      </button>
+                      <button onClick={() => navigate('/premium')} className="text-xs sm:text-sm font-black uppercase tracking-widest text-white bg-purple-600 px-5 py-2.5 rounded-xl hover:bg-purple-500 transition-colors shadow-[0_0_15px_rgba(147,51,234,0.4)] border border-purple-400">
+                         👑 Get Premium
+                      </button>
+                    </div>
                  </div>
               )}
            </div>
@@ -465,7 +473,7 @@ const GoldenCoinGame: React.FC = () => {
                    { icon: '🎲', text: 'Coins drop randomly every 13–18 minutes' },
                    { icon: '🚀', text: 'First user to tap GRAB wins +1 Coin & +10 AP' },
                    { icon: '🔒', text: 'Max 5 grabs per user per day' },
-                   { icon: '👑', text: 'Premium users see the countdown timer' },
+                   { icon: '👑', text: 'Premium & Reveal subscribers see the countdown timer' },
                  ].map((item, i) => (
                    <div key={i} className="flex flex-wrap items-start gap-3">
                      <span className="text-lg shrink-0 drop-shadow-md">{item.icon}</span>
@@ -473,12 +481,12 @@ const GoldenCoinGame: React.FC = () => {
                    </div>
                  ))}
                </div>
-               <button 
-                 onClick={() => navigate('/premium')}
-                 className="mt-6 w-full text-xs sm:text-sm font-black uppercase tracking-widest text-amber-400 hover:text-amber-300 transition-colors border border-amber-400/30 rounded-xl px-4 py-3 hover:bg-amber-400/10 shadow-[0_0_15px_rgba(251,191,36,0.1)]"
-               >
-                 ✨ Get Premium — See Next Drop Time
-               </button>
+                <button 
+                  onClick={() => navigate('/shop')}
+                  className="mt-4 w-full text-xs sm:text-sm font-black uppercase tracking-widest text-amber-400 hover:text-amber-300 transition-colors border border-amber-400/30 rounded-xl px-4 py-3 hover:bg-amber-400/10 shadow-[0_0_15px_rgba(251,191,36,0.1)]"
+                >
+                  🎁 Get Reveal Subscription — See Next Drop Time
+                </button>
             </div>
          </div>
       </div>

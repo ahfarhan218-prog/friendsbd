@@ -41,7 +41,7 @@ const Support: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-120px)] md:h-[calc(100vh-64px)] bg-slate-50 w-full max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto md:rounded-3xl md:border md:border-slate-100 md:shadow-sm">
+    <div className="flex flex-col h-[calc(100vh-120px)] md:h-[calc(100vh-64px)] bg-slate-50 w-full max-w-5xl mx-auto px-4 sm:px-6 overflow-x-hidden md:rounded-3xl md:border md:border-slate-100 md:shadow-sm">
       <header className="bg-purple-700 text-white p-4 sm:p-6 pb-12 rounded-b-[3rem] flex flex-wrap items-center gap-4 shrink-0">
         <button onClick={() => navigate(-1)} className="p-2 bg-purple-600 rounded-full">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>

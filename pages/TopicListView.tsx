@@ -191,7 +191,7 @@ const TopicListView: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative">
+    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative overflow-x-hidden">
       <div className="absolute top-0 right-0 w-full max-w-sm h-96 bg-indigo-600/4 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-20 left-0 w-full max-w-[20rem] sm:w-80 h-80 bg-purple-600/4 rounded-full blur-[100px] pointer-events-none" />
 

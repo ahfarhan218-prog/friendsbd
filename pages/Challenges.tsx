@@ -55,7 +55,7 @@ const Challenges: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent font-inter">
+    <div className="min-h-screen bg-transparent font-inter overflow-x-hidden">
       <header className="bg-orange-600 text-white p-4 sm:p-6 pb-16 sm:pb-20 rounded-b-[2rem] sm:rounded-b-[3rem] flex items-center justify-between flex-wrap gap-2">
         <div className="flex flex-wrap items-center gap-4">
           <button onClick={() => navigate(-1)} className="p-2 bg-orange-500 rounded-full active:scale-90">

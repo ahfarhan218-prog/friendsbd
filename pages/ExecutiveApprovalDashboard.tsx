@@ -181,7 +181,7 @@ const ExecutiveApprovalDashboard: React.FC = () => {
 
   if (!isAuthorized && !loading) {
     return (
-      <div className="min-h-screen bg-transparent flex flex-col items-center justify-center p-4 sm:p-6 text-center">
+      <div className="min-h-screen bg-transparent flex flex-col items-center justify-center p-4 sm:p-6 text-center overflow-x-hidden">
         <span className="text-4xl">🛡️</span>
         <h2 className="text-lg font-black text-rose-400 mt-2">Access Restrained</h2>
         <p className="text-sm text-slate-400 max-w-xs mt-1">
@@ -198,7 +198,7 @@ const ExecutiveApprovalDashboard: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-24 relative">
+    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-24 relative overflow-x-hidden">
       {/* Decorative Orbs */}
       <div className="absolute top-0 right-0 w-full max-w-[400px] h-[400px] bg-indigo-600/5 rounded-full blur-[110px] pointer-events-none" />
       <div className="absolute bottom-20 left-10 w-[300px] h-[300px] bg-purple-600/5 rounded-full blur-[95px] pointer-events-none" />

@@ -147,7 +147,7 @@ const Auth: React.FC<AuthProps> = ({ mode, onAuth }) => {
 
   return (
     <div 
-      className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 w-full max-w-lg md:max-w-xl mx-auto font-inter text-[#e2e8f0]"
+      className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 w-full max-w-lg md:max-w-xl mx-auto font-inter text-[#e2e8f0] overflow-x-hidden"
       style={{
         background: '#0F0F1A',
         backgroundImage: 'radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, 0.15) 0%, transparent 70%), linear-gradient(135deg, #110a2a 0%, #1d0d4a 50%, #0d1a6b 100%)'

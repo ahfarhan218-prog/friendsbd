@@ -22,7 +22,7 @@ const VerifyEmail: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] flex items-center justify-center p-4 sm:p-8">
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] flex items-center justify-center p-4 sm:p-8 overflow-x-hidden">
       <div className="pf-card p-4 sm:p-8 max-w-md w-full text-center">
         {status === 'verifying' && <><div className="w-10 h-10 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin mx-auto mb-4" /><p className="text-white/70">Verifying your email...</p></>}
         {status === 'success' && <><p className="text-5xl mb-4">✅</p><h2 className="text-xl font-black text-white mb-2">Email Verified!</h2><p className="text-white/50 mb-6">{message}</p><button onClick={() => navigate('/home')} className="pf-btn pf-btn-primary">Go to Home</button></>}

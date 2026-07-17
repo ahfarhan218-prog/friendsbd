@@ -121,7 +121,7 @@ const Apps: React.FC = () => {
   }).filter((section) => section.apps.length > 0);
 
   return (
-    <div className="min-h-screen bg-transparent font-inter pb-32">
+    <div className="min-h-screen bg-transparent font-inter pb-32 overflow-x-hidden">
       {/* Header Accent */}
       <div className="w-full flex justify-center pt-5 pb-3">
         <div className="w-16 h-1 bg-white/20 rounded-full shadow-[0_0_10px_rgba(255,255,255,0.2)]"></div>

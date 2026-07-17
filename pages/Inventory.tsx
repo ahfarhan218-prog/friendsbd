@@ -21,10 +21,10 @@ const Inventory: React.FC = () => {
     try { await fetch(`${API_BASE}/inventory/${itemId}/equip`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: '{}' }); loadItems(); } catch (e) { console.warn(e); }
   };
 
-  if (loading) return <div className="min-h-screen bg-[#0a0a1a] flex items-center justify-center"><div className="w-10 h-10 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" /></div>;
+  if (loading) return <div className="min-h-screen bg-[#0a0a1a] flex items-center justify-center overflow-x-hidden"><div className="w-10 h-10 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" /></div>;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6 overflow-x-hidden">
       <div className="max-w-full max-w-4xl mx-auto px-4 sm:px-6 mx-auto">
         <h1 className="text-2xl font-black text-white mb-2">🎒 Inventory</h1>
         <p className="text-sm text-white/40 mb-6">{items.length} items owned</p>

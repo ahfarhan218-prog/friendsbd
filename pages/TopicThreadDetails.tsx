@@ -482,14 +482,14 @@ const TopicThreadDetails: React.FC = () => {
 
   // --- Loading / Error states ---
   if (loading) return (
-    <div className="min-h-screen bg-transparent flex flex-col items-center justify-center gap-4">
+    <div className="min-h-screen bg-transparent flex flex-col items-center justify-center gap-4 overflow-x-hidden">
       <div className="w-10 h-10 border-2 border-indigo-500/20 border-t-indigo-500 rounded-full animate-spin" />
       <span className="text-sm text-slate-500 font-bold uppercase tracking-widest">Loading thread...</span>
     </div>
   );
 
   if (error || !thread) return (
-    <div className="min-h-screen bg-transparent flex flex-col items-center justify-center gap-4 text-center px-4 sm:px-8">
+    <div className="min-h-screen bg-transparent flex flex-col items-center justify-center gap-4 text-center px-4 sm:px-8 overflow-x-hidden">
       <span className="text-4xl">💬</span>
       <h2 className="text-base font-black text-white">{error || 'Topic Not Found'}</h2>
       <p className="text-sm text-slate-500">This topic may have been deleted or moved.</p>
@@ -503,7 +503,7 @@ const TopicThreadDetails: React.FC = () => {
   const uniquePosters = Array.from(new Set(posts.map(p => p.authorName)));
 
   return (
-    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative">
+    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 relative overflow-x-hidden">
       {/* Ambient glows */}
       <div className="absolute top-0 right-0 w-full max-w-sm h-96 bg-indigo-600/4 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-20 left-0 w-full max-w-[20rem] sm:w-80 h-80 bg-purple-600/4 rounded-full blur-[100px] pointer-events-none" />

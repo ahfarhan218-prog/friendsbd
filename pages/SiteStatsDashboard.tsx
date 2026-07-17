@@ -86,7 +86,7 @@ const SiteStatsDashboard: React.FC = () => {
 
   if (!isAdminOrStaff && !loading) {
     return (
-      <div className="min-h-screen bg-transparent text-[#e1e1e1] flex flex-col items-center justify-center p-4 sm:p-8">
+      <div className="min-h-screen bg-transparent text-[#e1e1e1] flex flex-col items-center justify-center p-4 sm:p-8 overflow-x-hidden">
         <span className="text-6xl mb-6">🔒</span>
         <h2 className="text-lg font-black uppercase tracking-wider text-rose-500">Access Restricted</h2>
         <p className="text-slate-500 text-sm font-bold uppercase tracking-widest mt-2 max-w-sm text-center">
@@ -103,7 +103,7 @@ const SiteStatsDashboard: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-transparent text-white font-sans antialiased pb-32 relative text-left">
+    <div className="min-h-screen bg-transparent text-white font-sans antialiased pb-32 relative text-left overflow-x-hidden">
       <div className="absolute top-0 right-10 w-full max-w-sm h-96 bg-indigo-600/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-20 left-10 w-full max-w-sm h-96 bg-purple-600/5 rounded-full blur-[120px] pointer-events-none" />
 

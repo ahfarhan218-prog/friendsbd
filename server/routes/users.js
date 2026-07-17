@@ -374,4 +374,46 @@ router.get('/:userId/audit', async (req, res) => {
   }
 });
 
+// POST /api/users/:userId/subscribe-reveal — Subscribe to Golden Coin Reveal Service
+router.post('/:userId/subscribe-reveal', authenticateToken, async (req, res) => {
+  try {
+    if (req.params.userId !== req.user.id) {
+      return res.status(403).json({ error: 'Not authorized.' });
+    }
+    const { pkg } = req.body; // 1 or 2
+    const PRICES = { 1: { cost: 30, days: 2 }, 2: { cost: 60, days: 5 } };
+    const plan = PRICES[pkg];
+    if (!plan) {
+      return res.status(400).json({ error: 'Invalid package. Choose 1 (30 plusses / 2 days) or 2 (60 plusses / 5 days).' });
+    }
+
+    const user = await User.findOne({ id: req.params.userId }).lean();
+    if (!user) return res.status(404).json({ error: 'User not found' });
+
+    if ((user.plusses || 0) < plan.cost) {
+      return res.status(400).json({ error: `Insufficient plusses. You need ${plan.cost} plusses but have ${user.plusses || 0}.` });
+    }
+
+    const now = Date.now();
+    // If already subscribed, extend the current expiry; otherwise set new
+    const currentUntil = user.goldenRevealUntil || 0;
+    const newUntil = Math.max(currentUntil, now) + plan.days * 24 * 60 * 60 * 1000;
+
+    const updated = await User.findOneAndUpdate(
+      { id: req.params.userId },
+      { $set: { goldenRevealUntil: newUntil }, $inc: { plusses: -plan.cost } },
+      { new: true }
+    ).lean();
+
+    res.json({
+      success: true,
+      newPlusses: updated.plusses,
+      goldenRevealUntil: newUntil,
+      message: `Subscribed! Golden Coin Reveal active until ${new Date(newUntil).toLocaleString()} (${plan.days} days).`,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;

@@ -250,18 +250,18 @@ const UserProfile: React.FC = () => {
   };
 
   if (loading) return (
-    <div className="min-h-screen bg-[#0a0a1a] flex items-center justify-center">
+    <div className="min-h-screen bg-[#0a0a1a] flex items-center justify-center overflow-x-hidden">
       <div className="w-10 h-10 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" />
     </div>
   );
   if (notFound) return (
-    <div className="min-h-screen bg-[#0a0a1a] flex flex-col items-center justify-center gap-4 p-4 sm:p-8">
+    <div className="min-h-screen bg-[#0a0a1a] flex flex-col items-center justify-center gap-4 p-4 sm:p-8 overflow-x-hidden">
       <p className="text-red-400 font-bold text-sm">User not found.</p>
       <button onClick={() => navigate('/')} className="bg-purple-600 text-white font-bold text-sm px-3 sm:px-6 py-3 rounded-xl hover:bg-purple-500">Go Home</button>
     </div>
   );
   if (authErr || !profile) return (
-    <div className="min-h-screen bg-[#0a0a1a] flex flex-col items-center justify-center gap-4 p-4 sm:p-8">
+    <div className="min-h-screen bg-[#0a0a1a] flex flex-col items-center justify-center gap-4 p-4 sm:p-8 overflow-x-hidden">
       <p className="text-red-400 font-bold text-sm">{authErr || 'Profile not found.'}</p>
       <button onClick={() => navigate('/login')} className="bg-purple-600 text-white font-bold text-sm px-3 sm:px-6 py-3 rounded-xl hover:bg-purple-500">Go to Login</button>
     </div>
@@ -295,7 +295,7 @@ const UserProfile: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] font-sans pb-20">
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] font-sans pb-20 overflow-x-hidden">
       <style>{`
         @keyframes gradient-shift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
         @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }

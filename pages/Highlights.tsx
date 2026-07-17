@@ -167,7 +167,7 @@ const Highlights: React.FC = () => {
   const shouters = getShouterStats();
 
   return (
-    <div className="min-h-screen bg-transparent flex flex-col pb-24 font-inter text-[#e2e8f0]">
+    <div className="min-h-screen bg-transparent flex flex-col pb-24 font-inter text-[#e2e8f0] overflow-x-hidden">
       {/* Dark Theme Modern Header */}
       <header className="relative bg-[#090d16]/80 backdrop-blur-xl border-b border-[#30363d] p-4 sm:p-6 pb-20 shrink-0 overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl" />

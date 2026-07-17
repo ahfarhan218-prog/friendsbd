@@ -108,7 +108,7 @@ const Notifications: React.FC = () => {
   };
 
   return (
-    <div className="notif-page">
+    <div className="notif-page overflow-x-hidden">
 
       {/* ── HEADER ─────────────────────────────────────────── */}
       <header className="notif-header">

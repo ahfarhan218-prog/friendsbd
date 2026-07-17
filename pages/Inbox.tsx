@@ -388,7 +388,7 @@ const Inbox: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#0F0F1A] text-white relative flex flex-col font-inter" style={{ backgroundImage: 'radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, 0.15) 0%, transparent 70%), linear-gradient(135deg, #110a2a 0%, #1d0d4a 50%, #0d1a6b 100%)' }}>
+    <div className="min-h-screen bg-[#0F0F1A] text-white relative flex flex-col font-inter overflow-x-hidden" style={{ backgroundImage: 'radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, 0.15) 0%, transparent 70%), linear-gradient(135deg, #110a2a 0%, #1d0d4a 50%, #0d1a6b 100%)' }}>
       
       {/* Background ambient glows */}
       <div className="absolute top-[-10%] left-[-10%] w-full max-w-sm h-96 bg-purple-600/30 blur-[100px] rounded-full pointer-events-none" />

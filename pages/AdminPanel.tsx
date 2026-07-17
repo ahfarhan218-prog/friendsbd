@@ -317,7 +317,7 @@ const AdminPanel: React.FC = () => {
   const inputCls = 'w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white outline-none focus:border-purple-500/50 transition-colors font-medium placeholder-white/20';
 
   return (
-    <div className="min-h-screen bg-transparent flex font-inter text-white">
+    <div className="min-h-screen bg-transparent flex font-inter text-white overflow-x-hidden">
 
       {/* ── SIDEBAR ── */}
       <AnimatePresence>

@@ -48,7 +48,7 @@ const TournamentDashboard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32">
+    <div className="min-h-screen bg-transparent text-[#e1e1e1] font-sans antialiased pb-32 overflow-x-hidden">
       <header className="pt-10 pb-6 px-3 sm:px-6 border-b border-[#1f293d]/50 bg-slate-950/20 backdrop-blur-md relative overflow-hidden">
         <div className="max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto flex justify-between items-center relative z-10">
           <div>

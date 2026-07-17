@@ -34,7 +34,7 @@ const Referrals: React.FC = () => {
   const referralLink = session ? `${window.location.origin}/signup?ref=${session.id}` : '';
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6 overflow-x-hidden">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-2xl font-black text-white mb-2">🤝 Referrals</h1>
         <p className="text-sm text-white/40 mb-6">Invite friends and earn rewards together</p>

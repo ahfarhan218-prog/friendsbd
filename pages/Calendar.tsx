@@ -34,7 +34,7 @@ const Calendar: React.FC = () => {
     try { const r = await fetch(`${API_BASE}/events/${eventId}/register`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: session.id }) }); if (r.ok) { setMsg('✅ Registered!'); loadEvents(); } else { const e = await r.json(); setMsg('❌ ' + (e.error || 'Failed')); } } catch (e: any) { setMsg('❌ ' + e.message); }
   };
 
-  if (loading) return <div className="min-h-screen bg-[#0a0a1a] flex items-center justify-center"><div className="w-10 h-10 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" /></div>;
+  if (loading) return <div className="min-h-screen bg-[#0a0a1a] flex items-center justify-center overflow-x-hidden"><div className="w-10 h-10 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" /></div>;
 
   const grouped: Record<string, any[]> = {};
   events.forEach(e => {
@@ -44,7 +44,7 @@ const Calendar: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6 overflow-x-hidden">
       <div className="max-w-full max-w-4xl mx-auto px-4 sm:px-6 mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div>

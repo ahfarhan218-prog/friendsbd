@@ -20,9 +20,9 @@ const BlogViewer: React.FC = () => {
     })();
   }, [id]);
 
-  if (loading) return <div className="min-h-screen bg-[#0a0a1a] flex items-center justify-center"><div className="w-10 h-10 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" /></div>;
+  if (loading) return <div className="min-h-screen bg-[#0a0a1a] flex items-center justify-center overflow-x-hidden"><div className="w-10 h-10 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" /></div>;
   if (!post) return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6 overflow-x-hidden">
       <div className="max-w-full max-w-3xl mx-auto px-4 sm:px-6 mx-auto text-center py-20 text-white/60">
         <p className="text-5xl mb-4">📝</p>
         <p className="font-bold">Post not found</p>
@@ -33,7 +33,7 @@ const BlogViewer: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#0a0a1a] p-4 sm:p-6 overflow-x-hidden">
       <div className="max-w-full max-w-3xl mx-auto px-4 sm:px-6 mx-auto">
         <button onClick={() => navigate('/blog')} className="pf-btn pf-btn-ghost mb-4">← Back to Blog</button>
 

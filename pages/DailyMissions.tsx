@@ -90,7 +90,7 @@ const DailyMissions: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#080818] via-[#0d0d22] to-[#080818] pb-24 font-sans">
+    <div className="min-h-screen bg-gradient-to-b from-[#080818] via-[#0d0d22] to-[#080818] pb-24 font-sans overflow-x-hidden">
 
       {/* ── Hero Header ─────────────────────────────────────────────────── */}
       <div className="relative overflow-hidden px-4 pt-6 pb-32">
@@ -126,7 +126,7 @@ const DailyMissions: React.FC = () => {
           </div>
 
           {/* ── Stats Row ─────────────────────────────────────────────── */}
-          <div className="mt-6 grid grid-cols-3 gap-3">
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
             {[
               { label: 'Completed',  value: totalCompleted,                icon: '✅', color: 'text-emerald-400' },
               { label: 'Pending',    value: totalMissions - totalCompleted, icon: '⏳', color: 'text-amber-400'  },
@@ -446,7 +446,7 @@ const DailyMissions: React.FC = () => {
                 <div className="text-white/40 text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2">
                   <span>🏅</span> Achievement Badges
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {BADGES.map((badge, idx) => (
                     <motion.div
                       key={badge.id}

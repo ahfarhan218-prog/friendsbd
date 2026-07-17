@@ -145,7 +145,7 @@ const VideoCall: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black relative">
+    <div className="min-h-screen bg-black relative overflow-x-hidden">
       {msg && <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 bg-purple-900/80 text-white text-sm px-4 py-2 rounded-xl">{msg}</div>}
 
       <div className="relative h-screen flex flex-col">

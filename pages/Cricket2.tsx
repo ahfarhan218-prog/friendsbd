@@ -167,7 +167,7 @@ Commentary: [clr=F39C12]${comment}[/clr]`;
   };
 
   return (
-    <div className="min-h-screen bg-transparent p-5 md:p-8 font-sans pb-32 max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto">
+    <div className="min-h-screen bg-transparent p-5 md:p-8 font-sans pb-32 max-w-full max-w-5xl mx-auto px-4 sm:px-6 mx-auto overflow-x-hidden">
       
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 pb-6 border-b border-[#30363d] gap-4">

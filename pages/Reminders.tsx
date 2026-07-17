@@ -74,7 +74,7 @@ const Reminders: React.FC = () => {
   const sortedReminders = [...reminders].sort((a, b) => a.dueTime - b.dueTime);
 
   return (
-    <div className="min-h-screen bg-transparent font-inter pb-32">
+    <div className="min-h-screen bg-transparent font-inter pb-32 overflow-x-hidden">
       <header className="bg-indigo-600 text-white p-4 sm:p-6 pb-20 rounded-b-[4rem] shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 right-0 p-32 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16" />
             <div className="relative z-10 flex justify-between items-center mb-8 flex-wrap gap-3">

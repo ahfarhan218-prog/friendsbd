@@ -100,7 +100,7 @@ const Welcome: React.FC = () => {
   }, []);
 
   return (
-    <div className="welcome-root">
+    <div className="welcome-root overflow-x-hidden">
       {/* Particle canvas */}
       <canvas ref={canvasRef} className="welcome-canvas" />
 

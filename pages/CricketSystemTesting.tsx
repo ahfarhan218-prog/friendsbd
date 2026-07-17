@@ -285,7 +285,7 @@ const MatchListPage: React.FC<{
   };
 
   return (
-    <div style={{ padding: '16px 14px 32px' }}>
+    <div style={{ padding: '16px 14px 32px', overflowX: 'hidden' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
         <div>
           <h2 style={{ fontSize: 20, fontWeight: 900, color: '#fff', margin: 0, letterSpacing: '-0.02em' }}>🏏 Cricket Matches</h2>

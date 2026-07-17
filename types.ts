@@ -37,6 +37,7 @@ export interface User {
     completed: string[];
   };
   premiumExpiry?: number;
+  goldenRevealUntil?: number;
   premiumPlan?: string;
   userId?: number;
   ghostMode?: boolean;

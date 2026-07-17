@@ -98,7 +98,8 @@ const userSchema = new mongoose.Schema({
   weeklyColorBalls: { type: Number, default: 0 },
   lastDailyReset: String,
   lastWeeklyReset: String,
-  favoriteChannels: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Channel' }]
+  favoriteChannels: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Channel' }],
+  goldenRevealUntil: { type: Number, default: 0 }
 });
 
 module.exports = mongoose.model('User', userSchema);
