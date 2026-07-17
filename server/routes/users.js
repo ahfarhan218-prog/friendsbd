@@ -235,6 +235,9 @@ router.post('/:userId/claim-coin', authenticateToken, async (req, res) => {
        update.$set.lastClaimId = `${type}_coin_${spawnTime}`;
     }
 
+    if (Object.keys(update.$inc).length === 0) delete update.$inc;
+    if (Object.keys(update.$set).length === 0) delete update.$set;
+
     const updated = await User.findOneAndUpdate({ id: req.params.userId }, update, { new: true }).lean();
     res.json({ success: true, updated });
   } catch (err) {

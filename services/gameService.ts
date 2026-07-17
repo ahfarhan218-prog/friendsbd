@@ -37,12 +37,16 @@ const getDhakaDate = (): Date => {
 };
 
 const apiFetch = async <T>(path: string, options?: RequestInit): Promise<T> => {
-  const res = await fetch(`${API_BASE}${path}`, {
-    headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
-    ...options
-  });
-  if (!res.ok) throw new Error(`Game API ${path} failed: ${res.status}`);
-  return res.json();
+  try {
+    const res = await fetch(`${API_BASE}${path}`, {
+      headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+      ...options
+    });
+    if (!res.ok) throw new Error(`Game API ${path} failed: ${res.status}`);
+    return res.json();
+  } catch (err: any) {
+    throw new Error(`FetchError (${path}): ${err.message}`);
+  }
 };
 
 // Fetch game state from API
