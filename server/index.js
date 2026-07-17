@@ -9,11 +9,11 @@ const app = express();
 const server = http.createServer(app);
 const CORS_ORIGINS = process.env.CORS_ORIGIN
   ? process.env.CORS_ORIGIN.split(',').map(s => s.trim())
-  : ['http://localhost:5173', 'http://localhost:3000'];
+  : '*';
 
 const io = new Server(server, {
   cors: {
-    origin: CORS_ORIGINS,
+    origin: true,
     methods: ['GET', 'POST']
   }
 });
@@ -42,7 +42,7 @@ const authLimiter = rateLimit({
 });
 
 app.use(cors({
-  origin: CORS_ORIGINS,
+  origin: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
