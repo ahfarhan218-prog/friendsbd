@@ -1719,15 +1719,16 @@ const LiveTVDashboard: React.FC = () => {
 
     if (Hls.isSupported()) {
       const hls = new Hls({
-        maxBufferLength: 60,
-        maxMaxBufferLength: 120,
-        liveSyncDuration: 3,
-        liveMaxLatencyDuration: 10,
+        maxBufferLength: 120,
+        maxMaxBufferLength: 240,
+        liveSyncDuration: 15,
+        liveMaxLatencyDuration: 60,
         enableWorker: true,
-        lowLatencyMode: true,
-        manifestLoadingMaxRetry: 3,
-        levelLoadingMaxRetry: 3,
-        fragLoadingMaxRetry: 3,
+        lowLatencyMode: false,
+        manifestLoadingMaxRetry: 5,
+        levelLoadingMaxRetry: 5,
+        fragLoadingMaxRetry: 5,
+        capLevelToPlayerSize: true,
       });
       hlsRef.current = hls;
       hls.loadSource(url);
