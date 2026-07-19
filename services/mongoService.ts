@@ -66,7 +66,11 @@ async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
     const errText = await res.text();
     throw new Error(`API Error [${res.status}] ${path}: ${errText}`);
   }
-  return res.json() as Promise<T>;
+  const responseText = await res.text();
+  if (!responseText) {
+    return {} as T;
+  }
+  return JSON.parse(responseText) as T;
 }
 
 const get = <T>(path: string) => apiFetch<T>(path, { method: 'GET' });
