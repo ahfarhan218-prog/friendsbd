@@ -48,7 +48,7 @@ app.use(cors({
   credentials: true
 }));
 app.use(helmet({
-  crossOriginResourcePolicy: { policy: 'same-origin' }
+  crossOriginResourcePolicy: { policy: 'cross-origin' }
 }));
 app.use('/api/', globalLimiter);
 app.use('/api/auth/login', authLimiter);
