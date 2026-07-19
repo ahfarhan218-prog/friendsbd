@@ -58,17 +58,24 @@ router.delete('/:shoutId', async (req, res) => {
 router.patch('/:id/react', async (req, res) => {
   try {
     const { userId, reaction } = req.body;
+    if (!userId || !reaction) return res.status(400).json({ error: 'userId and reaction required' });
+
     const shout = await Shout.findOne({ id: req.params.id });
-    if (!shout) return res.status(404).json({error: 'Not found'});
-    
-    let userReactions = shout.userReactions || {};
+    if (!shout) return res.status(404).json({ error: 'Shout not found' });
+
+    // Work with plain object (Mixed type)
+    const userReactions = { ...(shout.userReactions || {}) };
     if (userReactions[userId] === reaction) {
-      delete userReactions[userId];
+      delete userReactions[userId]; // toggle off same reaction
     } else {
       userReactions[userId] = reaction;
     }
-    
-    await Shout.findOneAndUpdate({ id: req.params.id }, { $set: { userReactions: userReactions } });
+
+    // Must use markModified for Mixed type fields
+    shout.userReactions = userReactions;
+    shout.markModified('userReactions');
+    await shout.save();
+
     if (global.__socketEmitter) {
       global.__socketEmitter.emitToRoom('shouts', 'shout:reacted', { id: req.params.id, userReactions });
     }
@@ -77,6 +84,7 @@ router.patch('/:id/react', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 module.exports = router;
 

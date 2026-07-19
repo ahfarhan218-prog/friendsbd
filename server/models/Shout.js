@@ -19,13 +19,13 @@ const shoutSchema = new mongoose.Schema({
   content: String,
   time: String,
   timestamp: { type: Number, index: true },
-  userReactions: { type: Map, of: String, default: {} },
+  userReactions: { type: mongoose.Schema.Types.Mixed, default: {} },
   replies: [shoutReplySchema],
   isPremium: { type: Boolean, default: false },
   isPinned: { type: Boolean, default: false },
   isClosed: { type: Boolean, default: false },
   pinExpiry: Number,
   isQuiz: Boolean
-}, { _id: false });
+});
 
 module.exports = mongoose.model('Shout', shoutSchema);

@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ShoutEntry, SiteNotification, User } from '../types';
 import ShoutCard from '../components/ShoutCard';
 import { triggerToast } from '../components/NotificationToast';
-import { mongoService } from '../services/mongoService';
+import { mongoService, API_BASE, getAuthHeaders } from '../services/mongoService';
 import { apTransactionService } from '../services/apTransactionService';
 import { getSocket } from '../services/socketService';
 
@@ -251,10 +251,45 @@ const Home: React.FC = () => {
     setShoutText('');
   };
 
-  const handleReact = (id: string, type: string) => {
+  const handleReact = async (id: string, type: string) => {
     if (isLockdown || !activeUser) return;
     const shout = shouts.find(s => s.id === id);
-    if (shout && activeUser.id !== shout.userId) {
+    if (!shout) return;
+
+    // Optimistic UI update immediately
+    const prevReactions = shout.userReactions || {};
+    const isSameReaction = prevReactions[activeUser.id] === type;
+    const optimisticReactions = { ...prevReactions };
+    if (isSameReaction) {
+      delete optimisticReactions[activeUser.id]; // toggle off
+    } else {
+      optimisticReactions[activeUser.id] = type;
+    }
+    setShouts(prev => prev.map(s => s.id === id ? { ...s, userReactions: optimisticReactions } : s));
+
+    // Persist to server via PATCH /shouts/:id/react
+    try {
+      const res = await fetch(`${API_BASE}/shouts/${id}/react`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+        body: JSON.stringify({ userId: activeUser.id, reaction: type })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        // Confirm with server's authoritative reaction state
+        setShouts(prev => prev.map(s => s.id === id ? { ...s, userReactions: data.userReactions } : s));
+      } else {
+        // Rollback optimistic update on failure
+        setShouts(prev => prev.map(s => s.id === id ? { ...s, userReactions: prevReactions } : s));
+      }
+    } catch (err) {
+      // Rollback optimistic update on network error
+      setShouts(prev => prev.map(s => s.id === id ? { ...s, userReactions: prevReactions } : s));
+      console.warn('Reaction failed:', err);
+    }
+
+    // Send notification to shout owner (only if reacting to someone else's shout)
+    if (!isSameReaction && activeUser.id !== shout.userId) {
       import('../services/notificationService').then(({ notificationService }) => {
         notificationService.sendNotification(
           shout.userId,
@@ -264,7 +299,6 @@ const Home: React.FC = () => {
           `/shouts?id=${shout.id}`
         );
       }).catch(err => console.warn('Reaction notification error:', err));
-      pushShoutUpdate({ ...shout, userReactions: { ...shout.userReactions, [activeUser.id]: type } });
     }
   };
 
