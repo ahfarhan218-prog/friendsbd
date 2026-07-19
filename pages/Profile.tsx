@@ -86,7 +86,7 @@ const Profile: React.FC = () => {
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
   const [avatarShoutId, setAvatarShoutId] = useState<string | null>(null);
   const [showShoutModal, setShowShoutModal] = useState<string | null>(null);
-  const [visitorMessages, setVisitorMessages] = useState<any[]>([]);
+
 
   const saveAboutMe = async () => {
     if (!profile) return;
@@ -163,9 +163,8 @@ const Profile: React.FC = () => {
         // One-off fetch for forum data (no listeners in mongoService)
         if (active) {
           try {
-            const [threadsRes, postsRes, vmRes] = await Promise.all([
-              fetch(`${API_BASE}/forum/threads`), fetch(`${API_BASE}/forum/posts`),
-              fetch(`${API_BASE}/visitor-messages/${targetUid}`)
+            const [threadsRes, postsRes] = await Promise.all([
+              fetch(`${API_BASE}/forum/threads`), fetch(`${API_BASE}/forum/posts`)
             ]);
             if (threadsRes.ok) {
               const threadsData = await threadsRes.json();
@@ -174,10 +173,6 @@ const Profile: React.FC = () => {
             if (postsRes.ok) {
               const postsData = await postsRes.json();
               if (active) setUserPosts(postsData.filter((p: any) => p.authorId === targetUid && !p.is_deleted));
-            }
-            if (vmRes.ok) {
-              const vmData = await vmRes.json();
-              if (active) setVisitorMessages(vmData);
             }
           } catch (e) { }
         }
@@ -690,57 +685,7 @@ const Profile: React.FC = () => {
               )}
             </div>
 
-            {/* Visitor Messages */}
-            <div className="pf-card p-5">
-              <h2 className="text-lg font-black text-white mb-4 flex items-center gap-2">💬 Visitor Messages</h2>
-              <div className="space-y-3 mb-4 max-h-60 overflow-y-auto pr-1 custom-scrollbar">
-                {visitorMessages.length === 0 ? (
-                  <p className="text-white/40 text-sm text-center py-4">No messages yet. Leave one below!</p>
-                ) : (
-                  visitorMessages.slice(0, 10).map((vm: any) => (
-                    <div key={vm.id} className="flex items-start gap-3 bg-[#161b22] rounded-xl p-3">
-                      <img src={vm.authorAvatar} alt="" className="w-8 h-8 rounded-lg object-cover" />
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs font-bold text-purple-400">{vm.authorName}</p>
-                        <p className="text-sm text-white/80">{vm.message}</p>
-                        <p className="text-xs text-white/40 mt-1">{new Date(vm.createdAt).toLocaleDateString()}</p>
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  placeholder="Write a message..."
-                  className="flex-1 bg-[#161b22] border border-[#30363d] rounded-xl px-3 py-2 text-sm text-white outline-none focus:border-purple-500/40"
-                  onKeyDown={e => {
-                    if (e.key === 'Enter') {
-                      const input = e.target as HTMLInputElement;
-                      const msg = input.value.trim();
-                      if (!msg) return;
-                      const session = JSON.parse(localStorage.getItem('user_session') || 'null');
-                      if (!session) return;
-                      fetch(`${API_BASE}/visitor-messages`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                          id: `vm_${Date.now()}`,
-                          profileUserId: profile.id,
-                          authorId: session.id,
-                          authorName: session.name,
-                          authorAvatar: session.avatar,
-                          message: msg
-                        })
-                      }).then(() => {
-                        input.value = '';
-                        setVisitorMessages(prev => [{ id: `vm_${Date.now()}`, authorId: session.id, authorName: session.name, authorAvatar: session.avatar, message: msg, createdAt: Date.now() }, ...prev]);
-                      }).catch(err => console.warn(err));
-                    }
-                  }}
-                />
-              </div>
-            </div>
+
 
             {/* Premium Tools */}
             {isPremiumActive && (
