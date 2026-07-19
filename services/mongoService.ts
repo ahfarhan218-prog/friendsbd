@@ -230,8 +230,13 @@ export const mongoService = {
   },
 
   addShout: async (s: ShoutEntry): Promise<void> => {
-    await post('/shouts', s);
+    try {
+      await post('/shouts', s);
+    } catch (err: any) {
+      console.error('[addShout] Failed to save shout:', err?.message || err);
+    }
   },
+
 
   deleteShout: async (shoutId: string): Promise<void> => {
     await del(`/shouts/${shoutId}`);

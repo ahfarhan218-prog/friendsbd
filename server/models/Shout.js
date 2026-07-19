@@ -26,6 +26,6 @@ const shoutSchema = new mongoose.Schema({
   isClosed: { type: Boolean, default: false },
   pinExpiry: Number,
   isQuiz: Boolean
-});
+}, { _id: false });
 
 module.exports = mongoose.model('Shout', shoutSchema);

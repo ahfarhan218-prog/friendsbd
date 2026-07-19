@@ -60,7 +60,7 @@ router.patch('/:id/react', async (req, res) => {
     const { userId, reaction } = req.body;
     if (!userId || !reaction) return res.status(400).json({ error: 'userId and reaction required' });
 
-    const shout = await Shout.findOne({ id: req.params.id });
+    const shout = await Shout.findOne({ id: req.params.id }).lean();
     if (!shout) return res.status(404).json({ error: 'Shout not found' });
 
     // Work with plain object (Mixed type)
@@ -71,10 +71,11 @@ router.patch('/:id/react', async (req, res) => {
       userReactions[userId] = reaction;
     }
 
-    // Must use markModified for Mixed type fields
-    shout.userReactions = userReactions;
-    shout.markModified('userReactions');
-    await shout.save();
+    // Use findOneAndUpdate — save() does not work with _id:false schema
+    await Shout.findOneAndUpdate(
+      { id: req.params.id },
+      { $set: { userReactions } }
+    );
 
     if (global.__socketEmitter) {
       global.__socketEmitter.emitToRoom('shouts', 'shout:reacted', { id: req.params.id, userReactions });
@@ -84,6 +85,7 @@ router.patch('/:id/react', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 
 module.exports = router;
