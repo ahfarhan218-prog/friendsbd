@@ -7,11 +7,29 @@
 import { User, ShoutEntry, HighlightPhoto } from '../types';
 
 // ── Configuration ──────────────────────────────────────────────────────────────
-let apiBase = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
-if (apiBase.includes('localhost') && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-  apiBase = apiBase.replace('localhost', window.location.hostname);
-}
-export const API_BASE = apiBase;
+// Priority order for API base URL:
+//   1. window.__API_BASE__  — runtime override injected into index.html (best for production)
+//   2. VITE_API_BASE        — baked in at Vite build time (set in Vercel env vars)
+//   3. http://localhost:5000/api — local dev fallback
+//
+// To set the production URL without rebuilding, add this to your index.html <head>:
+//   <script>window.__API_BASE__ = "https://your-app.up.railway.app/api";</script>
+//
+// Or set VITE_API_BASE in Vercel / Netlify / your CI environment variables.
+const rawBase: string =
+  (window as any).__API_BASE__ ||
+  import.meta.env.VITE_API_BASE ||
+  'http://localhost:5000/api';
+
+const isLocalhostBase = rawBase.includes('localhost') || rawBase.includes('127.0.0.1');
+const isOnLAN = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
+  && /^(192\.168\.|10\.|172\.(1[6-9]|2\d|3[01])\.)/.test(window.location.hostname);
+
+// Only swap localhost→LAN IP for local-network access (e.g. phone on same WiFi).
+// Never replace localhost with a cloud hostname (Vercel, Railway, etc.).
+export const API_BASE: string = (isLocalhostBase && isOnLAN)
+  ? rawBase.replace(/localhost|127\.0\.0\.1/, window.location.hostname)
+  : rawBase;
 
 // ── HTTP Helpers ──────────────────────────────────────────────────────────────
 
@@ -25,10 +43,16 @@ export function getAuthHeaders(): Record<string, string> {
 }
 
 async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
-  const res = await fetch(`${API_BASE}${path}`, {
-    headers: getAuthHeaders(),
-    ...options
-  });
+  let res: Response;
+  try {
+    res = await fetch(`${API_BASE}${path}`, {
+      headers: getAuthHeaders(),
+      ...options
+    });
+  } catch (err: any) {
+    // Network-level failure (server unreachable, CORS preflight blocked, DNS error, etc.)
+    throw new Error(`Network error on ${path}: ${err?.message || 'Failed to fetch'}`);
+  }
   if (res.status === 401) {
     // Token expired — clear session and redirect to login
     localStorage.removeItem('auth_token');
