@@ -9,6 +9,6 @@ const gameSchema = new mongoose.Schema({
   claimedByName: String,
   claimedByAvatar: String,
   nextSpawnTime: Number
-}, { _id: false });
+});
 
 module.exports = mongoose.model('Game', gameSchema);
