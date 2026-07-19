@@ -43,7 +43,8 @@ const Auth: React.FC<AuthProps> = ({ mode, onAuth }) => {
           body: JSON.stringify({ email: email.trim(), password })
         });
 
-        const data = await res.json();
+        const resText = await res.text();
+        const data = resText ? (resText.startsWith('{') ? JSON.parse(resText) : { error: resText }) : {};
         if (!res.ok) {
           setErrorMsg(data.error || 'Login failed.');
           setLoading(false);
@@ -104,7 +105,8 @@ const Auth: React.FC<AuthProps> = ({ mode, onAuth }) => {
           })
         });
 
-        const data = await res.json();
+        const resText = await res.text();
+        const data = resText ? (resText.startsWith('{') ? JSON.parse(resText) : { error: resText }) : {};
         if (!res.ok) {
           setErrorMsg(data.error || 'Registration failed.');
           setLoading(false);
@@ -315,7 +317,8 @@ const Auth: React.FC<AuthProps> = ({ mode, onAuth }) => {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: forgotEmail.trim() })
                   });
-                  const data = await res.json();
+                  const resText = await res.text();
+                  const data = resText ? (resText.startsWith('{') ? JSON.parse(resText) : { error: resText }) : {};
                   if (res.ok) {
                     setForgotMsg('✅ Reset link sent! Check your email.');
                   } else {
