@@ -135,14 +135,14 @@ const Home: React.FC = () => {
       mongoService.updateUser(presenceUserId, {
         isOnline,
         lastActiveTime: Date.now()
-      });
+      }).catch(() => {});
     };
     updatePresence();
     const presenceInterval = setInterval(updatePresence, 60000);
 
     const markOffline = () => {
       if (!presenceUserId) return;
-      mongoService.updateUser(presenceUserId, { isOnline: false });
+      mongoService.updateUser(presenceUserId, { isOnline: false }).catch(() => {});
     };
     window.addEventListener('beforeunload', markOffline);
 

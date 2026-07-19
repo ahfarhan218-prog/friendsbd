@@ -184,7 +184,13 @@ export const mongoService = {
 
   updateUser: async (userId: string, data: Partial<User>): Promise<void> => {
     if (Object.keys(data).length === 0) return;
-    await patch(`/users/${userId}`, data);
+    try {
+      await patch(`/users/${userId}`, data);
+    } catch (err: any) {
+      // Swallow network errors (server unreachable, CORS, etc.) so fire-and-forget
+      // callers (presence, heartbeat, etc.) never surface as uncaught promise rejections
+      console.warn(`[updateUser] Failed to update user ${userId}:`, err?.message || err);
+    }
   },
 
   deleteUser: async (userId: string): Promise<void> => {

@@ -92,7 +92,21 @@ router.patch('/:userId', authenticateToken, async (req, res) => {
     if (req.params.userId !== req.user.id) {
       return res.status(403).json({ error: 'You can only update your own profile.' });
     }
-    const ALLOWED_UPDATE_FIELDS = ['name', 'username', 'avatar', 'bio', 'gender', 'fromCountry', 'currentLocation', 'customStatus', 'ghostMode', 'hiddenVisit', 'education', 'work'];
+    const ALLOWED_UPDATE_FIELDS = [
+      // Profile fields
+      'name', 'username', 'avatar', 'bio', 'gender', 'fromCountry', 'currentLocation',
+      'customStatus', 'ghostMode', 'hiddenVisit', 'education', 'work',
+      // Presence & activity
+      'isOnline', 'lastActiveTime',
+      // Social
+      'following', 'followers',
+      // Economy
+      'plusses', 'points',
+      // Security
+      'e2ePublicKey',
+      // Premium/subscription
+      'isPremium', 'goldenRevealUntil',
+    ];
     const safeData = {};
     for (const key of ALLOWED_UPDATE_FIELDS) {
       if (req.body[key] !== undefined) safeData[key] = req.body[key];
